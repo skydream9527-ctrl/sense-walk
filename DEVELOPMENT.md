@@ -975,3 +975,7 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 ### 21.1 用户确认的交付方式
 
 功能开发由 ZCode 按阶段实现，代码提交 GitHub；编译、测试和 APK 打包由 GitHub Actions 执行。工作流位于 `.github/workflows/android.yml`，产生 APK、检查报告和完整源码交接 ZIP。需要稳定下载链接时，在 main 手动触发 `publish_release` 创建 GitHub 预发布版本。用户不需要先完善本地 JDK/SDK/Android Studio 或模拟器。实体设备与真人验证保留待验证清单，不阻塞不依赖它们的功能开发；最终体验验收仍需真实证据。
+
+### 21.2 云端打包基线修复
+
+首次 GitHub Actions 编译发现 `domain/scene/Scene.kt` 的 KDoc 中 `scenes/*.json` 被 Kotlin 识别为嵌套注释起点，导致未闭合注释和 Scene/Phase/Layer 连锁解析失败。已仅调整这行注释，不改变应用行为；后续以新的云端构建结果确认。

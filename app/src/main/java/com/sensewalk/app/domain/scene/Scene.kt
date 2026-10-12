@@ -1,7 +1,7 @@
 package com.sensewalk.app.domain.scene
 
 /**
- * Scene loaded from assets/scenes/*.json (see DEVELOPMENT.md schema).
+ * Scene loaded from JSON files in assets/scenes (see DEVELOPMENT.md schema).
  */
 data class Scene(
     val id: String,
