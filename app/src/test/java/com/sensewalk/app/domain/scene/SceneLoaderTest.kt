@@ -121,7 +121,7 @@ class SceneLoaderTest {
 
     // ---- 目录枚举异常：可解释、可重试，不静默变成空列表 ----
 
-    private class FlakyDirectorySource(private var fail: Boolean) : SceneSource {
+    private class FlakyDirectorySource(var fail: Boolean) : SceneSource {
         override fun availableSceneIds(): List<String> {
             if (fail) throw RuntimeException("assets 目录不可读 (模拟 IO 异常)")
             return listOf("forest")
