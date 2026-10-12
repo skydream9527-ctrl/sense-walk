@@ -45,7 +45,9 @@ class ProgressAccumulator(val requiredDistanceMeters: Float) {
         fun fromSnapshot(snapshot: ProgressSnapshot): ProgressAccumulator {
             val acc = ProgressAccumulator(snapshot.requiredDistanceMeters)
             acc.sPos = snapshot.sPos.coerceAtLeast(0f)
-            acc.sBest = snapshot.sBest.coerceIn(0f, acc.sPos)
+            // 不变量 s_best ≥ s_pos：合法回退快照 s_best 大于 s_pos；
+            // 损坏快照（s_best < s_pos）按当前所在位置抬高 s_best，宁可少计不可多计
+            acc.sBest = kotlin.math.max(snapshot.sBest, acc.sPos).coerceAtLeast(0f)
             acc.meters = snapshot.meters.coerceIn(0f, acc.requiredDistanceMeters)
             return acc
         }

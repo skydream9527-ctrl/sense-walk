@@ -84,20 +84,16 @@ class ComfortStickMapperTest {
 
     @Test
     fun `整条曲线先升后降`() {
-        // [0, 0.55] 非递减；[0.55, 1] 非递增
-        var d = 0f
+        // 按索引采样（i×0.005）避免浮点累加漂移；峰值点切线为 0，允许 1e-4 容差
         var prev = mapper.targetSpeed(0f)
-        while (d < 0.55f) {
-            d += 0.005f
-            val v = mapper.targetSpeed(d)
-            assertTrue("上升段在 d=$d 出现下降", v >= prev - 1e-6f)
+        for (i in 1..110) { // [0, 0.55] 非递减
+            val v = mapper.targetSpeed(i * 0.005f)
+            assertTrue("上升段在 d=${i * 0.005f} 出现下降", v >= prev - 1e-4f)
             prev = v
         }
-        prev = mapper.targetSpeed(0.55f)
-        while (d < 1f) {
-            d += 0.005f
-            val v = mapper.targetSpeed(d)
-            assertTrue("下降段在 d=$d 出现上升", v <= prev + 1e-6f)
+        for (i in 111..200) { // (0.55, 1.0] 非递增
+            val v = mapper.targetSpeed(i * 0.005f)
+            assertTrue("下降段在 d=${i * 0.005f} 出现上升", v <= prev + 1e-4f)
             prev = v
         }
     }

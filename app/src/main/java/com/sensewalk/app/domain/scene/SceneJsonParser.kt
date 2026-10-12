@@ -221,7 +221,7 @@ object SceneJsonParser {
      */
     private fun JsonObject.reqFiniteNumber(key: String, path: String): Double {
         val el = get(key) ?: throw SceneConfigParseException("$path.$key 缺失")
-        if (el !is JsonPrimitive || el.isString) {
+        if (el !is JsonPrimitive || el.isString || el.content == "true" || el.content == "false") {
             throw SceneConfigParseException("$path.$key 必须是数值，实际为${el.describeKind()}")
         }
         val d = el.content.toDoubleOrNull()

@@ -77,7 +77,7 @@ class SessionStateMachineTest {
         assertEquals(DispatchOutcome.ABSORBED_TERMINAL, sm.dispatch(SessionEvent.Complete))
         assertEquals(DispatchOutcome.ABSORBED_TERMINAL, sm.dispatch(SessionEvent.Pause))
         assertEquals(DispatchOutcome.ABSORBED_TERMINAL, sm.dispatch(SessionEvent.FirstForward))
-        assertEquals(2, sm.absorbedLateEventCount)
+        assertEquals(3, sm.absorbedLateEventCount)
         assertEquals("终态不可被迟到事件改变", SessionState.COMPLETED, sm.state)
     }
 
