@@ -87,8 +87,11 @@ object SceneValidator {
                         errors.add("audio 相位 '${p.id}' 引用的层 '${p.layer}' 未在 layers 中定义")
                     }
                     val v = p.toVolume
-                    if (v == null) errors.add("audio 相位 '${p.id}' 缺少 toVolume")
-                    else if (v < 0f || v > 1f) errors.add("audio 相位 '${p.id}' toVolume=$v 超出 [0,1]")
+                    when {
+                        v == null -> errors.add("audio 相位 '${p.id}' 缺少 toVolume")
+                        !v.isFinite() -> errors.add("audio 相位 '${p.id}' toVolume=$v 非有限数值")
+                        v < 0f || v > 1f -> errors.add("audio 相位 '${p.id}' toVolume=$v 超出 [0,1]")
+                    }
                     if (p.fadeMs != null && p.fadeMs < 0) errors.add("audio 相位 '${p.id}' fadeMs=${p.fadeMs} 不能为负")
                 }
                 PhaseChannel.VISUAL -> {
@@ -97,8 +100,11 @@ object SceneValidator {
                         errors.add("visual 相位 '${p.id}' 引用的层 '${p.layer}' 未在 visualLayers 中定义")
                     }
                     val o = p.toOpacity
-                    if (o == null) errors.add("visual 相位 '${p.id}' 缺少 toOpacity")
-                    else if (o < 0f || o > 1f) errors.add("visual 相位 '${p.id}' toOpacity=$o 超出 [0,1]")
+                    when {
+                        o == null -> errors.add("visual 相位 '${p.id}' 缺少 toOpacity")
+                        !o.isFinite() -> errors.add("visual 相位 '${p.id}' toOpacity=$o 非有限数值")
+                        o < 0f || o > 1f -> errors.add("visual 相位 '${p.id}' toOpacity=$o 超出 [0,1]")
+                    }
                     val fade = p.fadeMeters ?: 0
                     if (fade < 0) errors.add("visual 相位 '${p.id}' fadeMeters=$fade 不能为负")
                     if (p.atMeters + fade > required) {
@@ -114,9 +120,17 @@ object SceneValidator {
             }
         }
 
-        // 起点黑幕：必须有 atMeters=0 的 visual 相位
-        val hasVoid = phases.any { it.channel == PhaseChannel.VISUAL && it.atMeters == 0 }
-        if (!hasVoid) errors.add("缺少 atMeters=0 的 visual 黑幕相位（会话必须从黑幕起笔）")
+        // 起点黑幕（§12.4）：必须有 atMeters=0、引用 solid 类型 void 层的视觉相位，
+        // 不能用任意 atMeters=0 的视觉相位替代
+        val hasVoid = phases.any { p ->
+            p.channel == PhaseChannel.VISUAL &&
+                p.atMeters == 0 &&
+                p.layer == "void" &&
+                config.visualLayers["void"] is VisualLayerDef.Solid
+        }
+        if (!hasVoid) {
+            errors.add("缺少 atMeters=0 的 void 黑幕视觉相位（须引用 visualLayers 中 solid 类型的 void 层）")
+        }
     }
 
     private fun validatePathProfile(config: SceneConfig, errors: MutableList<String>) {
@@ -136,8 +150,9 @@ object SceneValidator {
         }
         segments.forEach { s ->
             if (s.from >= s.to) errors.add("pathProfile 段 [${s.from},${s.to}] 长度必须为正")
-            if (s.grade != null && (s.grade <= 0f || s.grade > 0.2f)) {
-                errors.add("pathProfile 段 [${s.from},${s.to}] grade=${s.grade} 超出 (0, 0.2]")
+            val g = s.grade
+            if (g != null && (!g.isFinite() || g <= 0f || g > 0.2f)) {
+                errors.add("pathProfile 段 [${s.from},${s.to}] grade=$g 非有限或超出 (0, 0.2]")
             }
         }
         if (segments.last().to != required) {
@@ -201,8 +216,8 @@ object SceneValidator {
                     def.asset?.let { asset ->
                         if (!locator.exists(asset)) errors.add("视觉层 '$name' 引用的素材不存在: $asset")
                     }
-                    if (def.parallax < 0f || def.parallax > 1f) {
-                        errors.add("视觉层 '$name' parallax=${def.parallax} 超出 [0,1]")
+                    if (!def.parallax.isFinite() || def.parallax < 0f || def.parallax > 1f) {
+                        errors.add("视觉层 '$name' parallax=${def.parallax} 非有限或超出 [0,1]")
                     }
                     def.placeholder?.let { placeholders.add("visualLayers.$name → $it") }
                 }

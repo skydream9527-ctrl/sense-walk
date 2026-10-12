@@ -241,4 +241,65 @@ class SceneValidatorTest {
         assertTrue("意外错误: ${result.errors}", result.valid)
         assertTrue(result.placeholders.isEmpty())
     }
+
+    // ---- 直接构造领域模型的 finite 检查（不经过 JSON，NaN/Infinity 也要拦截）----
+
+    @Test
+    fun `模型直接构造 toVolume 为 NaN 被拒绝`() {
+        val phases = TestScenes.defaultPhases().map {
+            if (it.id == "steps") it.copy(toVolume = Float.NaN) else it
+        }
+        val result = validate(TestScenes.validConfig(phases = phases))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("toVolume") && it.contains("非有限") })
+    }
+
+    @Test
+    fun `模型直接构造 toOpacity 为 Infinity 被拒绝`() {
+        val phases = TestScenes.defaultPhases().map {
+            if (it.id == "outline") it.copy(toOpacity = Float.POSITIVE_INFINITY) else it
+        }
+        val result = validate(TestScenes.validConfig(phases = phases))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("toOpacity") && it.contains("非有限") })
+    }
+
+    @Test
+    fun `模型直接构造 grade 为 NaN 被拒绝`() {
+        val segments = listOf(PathSegment(0, 500, TerrainKind.SLOPE_UP, Float.NaN), PathSegment(500, 1000, TerrainKind.FLAT))
+        val result = validate(TestScenes.validConfig(segments = segments))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("grade") && it.contains("非有限") })
+    }
+
+    @Test
+    fun `模型直接构造 parallax 为 NaN 被拒绝`() {
+        val visualLayers = TestScenes.defaultVisualLayers().toMutableMap()
+        visualLayers["outline"] = VisualLayerDef.Parallax(asset = "visual/test_outline.webp", parallax = Float.NaN)
+        val result = validate(TestScenes.validConfig(visualLayers = visualLayers))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("parallax") && it.contains("非有限") })
+    }
+
+    // ---- void 黑幕相位严格化 ----
+
+    @Test
+    fun `atMeters 0 的视觉相位引用非 void 层不能充当黑幕`() {
+        // 黑幕相位改成引用 outline 层：atMeters=0 但不是主计划定义的 void 黑幕
+        val phases = TestScenes.defaultPhases().map {
+            if (it.id == "void") it.copy(layer = "outline") else it
+        }
+        val result = validate(TestScenes.validConfig(phases = phases))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("void 黑幕视觉相位") })
+    }
+
+    @Test
+    fun `void 层不是 solid 类型被拒绝`() {
+        val visualLayers = TestScenes.defaultVisualLayers().toMutableMap()
+        visualLayers["void"] = VisualLayerDef.Parallax(placeholder = "dev_silhouette:void")
+        val result = validate(TestScenes.validConfig(visualLayers = visualLayers))
+        assertFalse(result.valid)
+        assertTrue(result.errors.any { it.contains("void 黑幕视觉相位") && it.contains("solid") })
+    }
 }

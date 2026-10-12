@@ -118,4 +118,35 @@ class SceneLoaderTest {
         assertTrue("重试后应 Ready: $second", second is SceneLoadState.Ready)
         assertEquals(1, (second as SceneLoadState.Ready).scenes.size)
     }
+
+    // ---- 目录枚举异常：可解释、可重试，不静默变成空列表 ----
+
+    private class FlakyDirectorySource(private var fail: Boolean) : SceneSource {
+        override fun availableSceneIds(): List<String> {
+            if (fail) throw RuntimeException("assets 目录不可读 (模拟 IO 异常)")
+            return listOf("forest")
+        }
+
+        override fun readScene(sceneId: String): String = TestScenes.VALID_JSON
+    }
+
+    @Test
+    fun `目录枚举异常转为可解释 Error`() {
+        val state = SceneLoader(FlakyDirectorySource(fail = true), TestScenes.locator).loadAll()
+        assertTrue(state is SceneLoadState.Error)
+        val diagnostics = (state as SceneLoadState.Error).diagnostics
+        assertTrue(diagnostics.any { it.contains("场景目录读取失败") && it.contains("模拟 IO 异常") })
+    }
+
+    @Test
+    fun `目录枚举失败修复后重试成功`() {
+        val source = FlakyDirectorySource(fail = true)
+        val loader = SceneLoader(source, TestScenes.locator)
+        assertTrue(loader.loadAll() is SceneLoadState.Error)
+
+        source.fail = false
+        val second = loader.loadAll()
+        assertTrue("重试后应 Ready: $second", second is SceneLoadState.Ready)
+        assertEquals(1, (second as SceneLoadState.Ready).scenes.size)
+    }
 }

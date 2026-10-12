@@ -183,4 +183,115 @@ class SceneJsonParserTest {
         val config = SceneJsonParser.parse(json)
         assertEquals("json_scene", config.id)
     }
+
+    // ---- 严格类型边界：区分缺失 / null / 字符串 / 布尔 / 对象 / 数组 ----
+
+    @Test
+    fun `数值字段不接受字符串冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"toVolume\": 0.25", "\"toVolume\": \"0.25\"")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!, e.message!!.contains("必须是数值"))
+            assertTrue(e.message!!.contains("字符串"))
+            assertTrue(e.message!!.contains("0.25"))
+        }
+    }
+
+    @Test
+    fun `数值字段不接受对象冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"toVolume\": 0.35", "\"toVolume\": { \"v\": 1 }")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是数值"))
+            assertTrue(e.message!!.contains("对象"))
+        }
+    }
+
+    @Test
+    fun `数值字段不接受数组冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"atMeters\": 100,", "\"atMeters\": [100],")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是数值"))
+            assertTrue(e.message!!.contains("数组"))
+        }
+    }
+
+    @Test
+    fun `数值字段不接受布尔冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"requiredDistanceMeters\": 1000", "\"requiredDistanceMeters\": true")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是数值"))
+            assertTrue(e.message!!.contains("布尔"))
+        }
+    }
+
+    @Test
+    fun `溢出为 Infinity 的数值被拒绝`() {
+        val json = TestScenes.VALID_JSON.replace("\"toVolume\": 0.25", "\"toVolume\": 1e999")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("有限数值"))
+        }
+    }
+
+    @Test
+    fun `整数字段不接受小数`() {
+        val json = TestScenes.VALID_JSON.replace("\"schemaVersion\": 2", "\"schemaVersion\": 2.5")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是整数"))
+        }
+    }
+
+    @Test
+    fun `字符串字段不接受数字冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"name\": \"JSON 场景\"", "\"name\": 42")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是字符串"))
+        }
+    }
+
+    @Test
+    fun `字符串字段不接受布尔冒充`() {
+        val json = TestScenes.VALID_JSON.replace("\"name\": \"JSON 场景\"", "\"name\": true")
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("必须是字符串"))
+            assertTrue(e.message!!.contains("布尔"))
+        }
+    }
+
+    @Test
+    fun `stepOneShot 的 files 元素必须是字符串`() {
+        val json = TestScenes.VALID_JSON.replace(
+            "\"footsteps\": { \"type\": \"stepOneShot\", \"placeholder\": \"dev_tone_variants:test_step\" }",
+            "\"footsteps\": { \"type\": \"stepOneShot\", \"files\": [\"audio/a.ogg\", 5] }",
+        )
+        try {
+            SceneJsonParser.parse(json)
+            fail("应当抛出解析异常")
+        } catch (e: SceneConfigParseException) {
+            assertTrue(e.message!!.contains("files[1]"))
+            assertTrue(e.message!!.contains("必须是字符串"))
+        }
+    }
 }

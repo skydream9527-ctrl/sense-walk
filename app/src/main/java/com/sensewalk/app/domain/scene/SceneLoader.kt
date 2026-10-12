@@ -30,7 +30,12 @@ class SceneLoader(
     fun loadAll(policy: SceneValidator.AssetsPolicy = SceneValidator.AssetsPolicy.ALLOW_PLACEHOLDERS): SceneLoadState {
         val diagnostics = mutableListOf<String>()
         val scenes = mutableListOf<SceneConfig>()
-        val ids = source.availableSceneIds()
+        val ids = try {
+            source.availableSceneIds()
+        } catch (e: Exception) {
+            // 目录枚举失败（存储/IO 异常）也要可解释、可重试，不静默变成空列表
+            return SceneLoadState.Error(listOf("场景目录读取失败：${e.message ?: e.javaClass.simpleName}"))
+        }
         if (ids.isEmpty()) {
             return SceneLoadState.Error(listOf("场景目录为空：没有可加载的 scenes 配置"))
         }

@@ -112,9 +112,12 @@ object SceneJsonParser {
             val obj = el.asObject(path)
             when (val type = obj.reqString("type", path)) {
                 "stepOneShot" -> {
-                    val files = (obj.get("files") as? JsonArray)
-                        ?.mapIndexed { i, f -> f.asPrimitive("$path.files[$i]").content }
-                        .orEmpty()
+                    val files = (obj.get("files") as? JsonArray)?.mapIndexed { i, f ->
+                        if (f !is JsonPrimitive || !f.isString) {
+                            throw SceneConfigParseException("$path.files[$i] 必须是字符串，实际为${f.describeKind()}")
+                        }
+                        f.content
+                    }.orEmpty()
                     val placeholder = obj.optNotBlankString("placeholder", path)
                     if (files.isEmpty() && placeholder == null) {
                         throw SceneConfigParseException("$path: stepOneShot 需要 files（≥1 个变体）或显式 placeholder")
@@ -194,43 +197,84 @@ object SceneJsonParser {
             else -> throw SceneConfigParseException("\$.pathProfile.segments[$index].kind: 未知地形 '$raw'（支持 flat / slope_up / slope_down / gap_hop / uneven）")
         }
 
-    // ---- 带路径的基础提取 ----
+    // ---- 带路径的基础提取（严格类型：缺失/null/类型冒充分别诊断）----
 
     private fun JsonObject.has(key: String): Boolean = get(key) != null && get(key) !is JsonNull
 
     private fun JsonElement.asObject(path: String): JsonObject =
         this as? JsonObject ?: throw SceneConfigParseException("$path 必须是对象")
 
-    private fun JsonElement.asPrimitive(path: String): JsonPrimitive =
-        this as? JsonPrimitive ?: throw SceneConfigParseException("$path 必须是字符串")
+    private fun JsonElement.describeKind(): String = when (this) {
+        is JsonNull -> "null"
+        is JsonPrimitive -> when {
+            isString -> "字符串 '$content'"
+            content == "true" || content == "false" -> "布尔值 $content"
+            else -> "数值 $content"
+        }
+        is JsonArray -> "数组"
+        is JsonObject -> "对象"
+    }
+
+    /**
+     * 数值字段：只接受 JSON number（字符串/布尔/对象/数组冒充一律拒绝），且必须有限
+     * （NaN / Infinity / 1e999 溢出均拒绝）。
+     */
+    private fun JsonObject.reqFiniteNumber(key: String, path: String): Double {
+        val el = get(key) ?: throw SceneConfigParseException("$path.$key 缺失")
+        if (el !is JsonPrimitive || el.isString) {
+            throw SceneConfigParseException("$path.$key 必须是数值，实际为${el.describeKind()}")
+        }
+        val d = el.content.toDoubleOrNull()
+        if (d == null || !d.isFinite()) {
+            throw SceneConfigParseException("$path.$key 必须是有限数值，实际为 '${el.content}'")
+        }
+        return d
+    }
 
     private fun JsonObject.reqInt(key: String, path: String): Int {
-        val p = primitive(key, path)
-        return p.content.toIntOrNull()
-            ?: throw SceneConfigParseException("$path.$key 必须是整数，实际为 '${p.content}'")
+        val d = reqFiniteNumber(key, path)
+        if (d != kotlin.math.floor(d) || d < Int.MIN_VALUE.toDouble() || d > Int.MAX_VALUE.toDouble()) {
+            throw SceneConfigParseException("$path.$key 必须是整数，实际为 '$d'")
+        }
+        return d.toInt()
     }
 
     private fun JsonObject.optInt(key: String, path: String): Int? {
-        val p = optPrimitive(key) ?: return null
-        return p.content.toIntOrNull()
-            ?: throw SceneConfigParseException("$path.$key 必须是整数，实际为 '${p.content}'")
+        if (!has(key)) return null
+        return reqInt(key, path)
     }
 
     private fun JsonObject.optFloat(key: String, path: String): Float? {
-        val p = optPrimitive(key) ?: return null
-        return p.content.toFloatOrNull()
-            ?: throw SceneConfigParseException("$path.$key 必须是数值，实际为 '${p.content}'")
+        if (!has(key)) return null
+        return reqFloat(key, path)
+    }
+
+    private fun JsonObject.reqFloat(key: String, path: String): Float {
+        val d = reqFiniteNumber(key, path)
+        if (d > Float.MAX_VALUE.toDouble() || d < -Float.MAX_VALUE.toDouble()) {
+            throw SceneConfigParseException("$path.$key 超出 Float 表示范围，实际为 '$d'")
+        }
+        return d.toFloat()
+    }
+
+    /** 字符串字段：只接受 JSON string（数字/布尔冒充拒绝） */
+    private fun JsonObject.reqStringElement(key: String, path: String): String {
+        val el = get(key) ?: throw SceneConfigParseException("$path.$key 缺失")
+        if (el !is JsonPrimitive || !el.isString) {
+            throw SceneConfigParseException("$path.$key 必须是字符串，实际为${el.describeKind()}")
+        }
+        return el.content
     }
 
     private fun JsonObject.reqString(key: String, path: String): String {
-        val value = optNotBlankString(key, path)
-        return value ?: throw SceneConfigParseException("$path.$key 缺失或为空白字符串")
+        val value = reqStringElement(key, path).trim()
+        if (value.isEmpty()) throw SceneConfigParseException("$path.$key 缺失或为空白字符串")
+        return value
     }
 
     private fun JsonObject.optNotBlankString(key: String, path: String): String? {
-        val p = optPrimitive(key) ?: return null
-        val v = p.content.trim()
-        return v.ifEmpty { null }
+        if (!has(key)) return null
+        return reqStringElement(key, path).trim().ifEmpty { null }
     }
 
     private fun JsonObject.reqArray(key: String, path: String): JsonArray =
@@ -238,13 +282,4 @@ object SceneJsonParser {
 
     private fun JsonObject.reqObject(key: String, path: String): JsonObject =
         get(key) as? JsonObject ?: throw SceneConfigParseException("$path.$key 必须是对象")
-
-    private fun JsonObject.primitive(key: String, path: String): JsonPrimitive =
-        optPrimitive(key) ?: throw SceneConfigParseException("$path.$key 缺失")
-
-    private fun JsonObject.optPrimitive(key: String): JsonPrimitive? {
-        val el = get(key) ?: return null
-        if (el is JsonNull) return null
-        return el as? JsonPrimitive
-    }
 }
