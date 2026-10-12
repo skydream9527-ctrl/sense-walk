@@ -1,53 +1,48 @@
 # 慢行 · SenseWalk
 
-帮助人找回感知与耐心的 Android 应用：从静默开始，再逐步加入脚步声、虫鸣与振动。场景包括森林漫步、沙漠独行、夜径，操作极简。
+帮助人找回感知与耐心的 Android 应用：**走满关卡距离才能通关**——手机里控角色走，或户外真的走。路上感官由静默逐渐回到脚步、环境音与振动。不可跳过、不可加速、不可提前通关。
 
 ## 产品计划（推荐先看）
 
 **[打开可视化计划页 →](./docs/plan.html)**（单文件 HTML，可双击离线打开，支持深/浅色）
 
-完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（v0.2，与计划页同步）。
+完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.3**：距离门禁 + 双模式行走）。
 
-## Week 1 骨架（当前）
+## 核心规则（v0.3）
+
+- **双模式**：手机控角色（虚走）或户外实走（计步 / 可选 GPS）
+- **距离门禁**：进度 = 有效距离；未满要求米数不能通关
+- **长按 = 放弃**（不通关），不是「提前完成」
+- 感官层随 **路程**（`atMeters`）展开，不是用时间刷完
+
+## Week 1 骨架（当前代码）
 
 Kotlin + Jetpack Compose 单模块工程，可在 Android Studio 中打开并运行：
 
-- **首页**：三张场景卡片（森林漫步 / 沙漠独行 / 夜径）→ 点选 →「开始」
-- **会话**：近黑沉浸；纯静默计时；轻触显示/隐藏已用时间；**长按 1 秒**结束
-- **结束页**：一句「你安静地走了 X 分钟」+「再走一次」/「回首页」
-- **设置**：静默秒数（默认 60）、振动总开关（DataStore）；音效/振动引擎为 stub，静默会话可独立跑通
-- **场景配置**：`app/src/main/assets/scenes/*.json`（与 DEVELOPMENT.md schema 一致）
+- **首页**：三张场景卡片 →「开始」
+- **会话**：近黑沉浸；纯静默计时；轻触显隐时间；长按结束（**计划将改为「放弃」**）
+- **结束页 / 设置 / 场景 JSON**：见仓库；音效与振动为 stub
 
-> Week 2 原「声音层」编码已延后；下一周聚焦 PhaseScheduler 与会话 UX。详见计划页里程碑。
+> 下一周（计划）：距离引擎、虚走、CompletionGate。音频仍延后到 Week 3。详见计划页。
 
 ## 在 Android Studio 中打开
 
-1. 安装 [Android Studio](https://developer.android.com/studio)（建议 Ladybug / 2024.2+ 或更新），并安装 SDK 35 与对应 Build-Tools。
-2. **File → Open**，选择本仓库根目录（含 `settings.gradle.kts` 的文件夹）。
-3. 仓库已包含 `gradlew` 与 `gradle/wrapper`（Gradle 8.9）。首次打开请让 Android Studio 完成 Gradle Sync。
-4. 等待 Gradle Sync 完成，选择模拟器或真机，点击 Run。
+1. 安装 [Android Studio](https://developer.android.com/studio)（建议 Ladybug / 2024.2+），安装 SDK 35。
+2. **File → Open** 本仓库根目录（含 `settings.gradle.kts`）。
+3. Gradle Sync 后选模拟器或真机 Run。
 
-**包名**：`com.sensewalk.app`  
-**显示名**：慢行  
-**minSdk 26** · **target/compileSdk 35** · Compose BOM `2024.10.01`
+**包名**：`com.sensewalk.app` · **显示名**：慢行 · **minSdk 26** · **targetSdk 35**
 
 ## 工程结构（摘要）
 
 ```
-app/src/main/
-  java/com/sensewalk/app/
-    MainActivity.kt
-    SenseWalkApp.kt / SenseWalkViewModel.kt
-    ui/home|session|settings|theme|navigation/
-    domain/scene|audio|haptics/
-    data/SceneRepository.kt / SettingsRepository.kt
-  assets/scenes/{forest,desert,night_path}.json
-  res/…
-docs/
-  plan.html          ← 可视化产品/开发计划
-  plan-preview.png   ← 计划页预览截图
+app/src/main/java/com/sensewalk/app/   # Week 1 骨架
+app/src/main/assets/scenes/            # forest / desert / night_path
+docs/plan.html                         # 可视化计划 v0.3
+docs/plan-preview.png
+DEVELOPMENT.md                         # 方案源码真理
 ```
 
 ## 后续周次
 
-见 [docs/plan.html](./docs/plan.html) 或 DEVELOPMENT.md：Week 2 调度+UX、Week 3 声音+振动、Week 4 打磨发布。
+见 [docs/plan.html](./docs/plan.html)：Week 2 距离门禁 + 虚走 → Week 3 实走 + 音频/振动 → Week 4 打磨发布。
