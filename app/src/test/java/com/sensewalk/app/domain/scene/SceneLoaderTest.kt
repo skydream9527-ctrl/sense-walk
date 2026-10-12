@@ -28,6 +28,7 @@ class SceneLoaderTest {
     fun `全部合法时进入 Ready 并按距离升序`() {
         // 把 1000m 基准整体缩放为 700m（相位/地形同步缩放，保持里程碑与终点合法）
         val short = TestScenes.VALID_JSON
+            .replace("\"id\": \"json_scene\"", "\"id\": \"json_short\"")
             .replace("\"requiredDistanceMeters\": 1000", "\"requiredDistanceMeters\": 700")
             .replace("\"atMeters\": 100,", "\"atMeters\": 70,")
             .replace("\"atMeters\": 100 ", "\"atMeters\": 70 ")
