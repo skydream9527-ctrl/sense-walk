@@ -767,7 +767,7 @@ stateDiagram-v2
 
 ### M1 — 单景虚走完整闭环（P0，原 Week 2 拆分）
 
-- [ ] 纯 Kotlin 领域：`ComfortStickMapper` + 惯性、`ProgressAccumulator`、`CompletionGate`、`PhaseScheduler`、`SessionStateMachine`；对应 S1–S4 / S6 / S9
+- [x] 纯 Kotlin 领域：`ComfortStickMapper` + 惯性、`ProgressAccumulator`、`CompletionGate`、`PhaseScheduler`、`SessionStateMachine`；对应 S1–S4 / S6 / S9（T03：comfort_v1 Fritsch–Carlson 保形 Hermite、s_pos/s_best 会计、六状态状态机与可注入时钟；S9 恢复/计步部分按范围保留待 T06/T07；143 个 JVM 测试见 §20.7）
 - [ ] Home → 模式选择 → 虚走开始；记住上次选择，未实现的实走清楚标注状态
 - [ ] `SessionViewModel` 持有会话；UI 只输入/渲染；后台暂停并清零输入，回前台不自动行走
 - [ ] 森林 VisualShell 用渐变/剪影按 `fadeMeters` 展开；首版平地 + 缓坡，自动跳随后接入
@@ -980,6 +980,23 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 - **占位策略**：音频/视觉素材当前全部为显式开发占位（`placeholder: "dev_*"`）；开发策略下合法并列入占位清单，`REQUIRE_REAL_ASSETS` 发布策略下三景全部不放行（有测试锁定该边界，防止把占位当成素材齐备）。
 - **加载状态**：`SceneRepository` 静默吞错改为 `SceneLoadState`（任一场景解析/校验失败 → 汇总 Error，不静默丢场景）；首页渲染 Loading/Error（诊断明细+重试）/Ready；错误态不出现无解释空列表。会话仍是静默计时骨架——本阶段只完成配置契约，未实现行走功能。
 - **测试**：53 个 JVM 单测（解析 13、校验 23、时长 3、加载/重试 7、真实三景集成 7），含坏 JSON、未知 schema、旧 v1 拒绝、重复 ID、越界相位、错误引用、路径断裂/重叠/未覆盖、前 10% gap_hop、缺素材、占位双策略、时长校准（13/19/11 分钟与 §6.1 一致）、修复后重试恢复。证据以推送后 GitHub Actions 实际运行为准。
+
+### 20.7 T02 校验边界补齐与 T03 领域规则记录（2026-10-12）
+
+**T02 边界补齐**：
+- 解析器严格类型：数值字段拒绝字符串/布尔/对象/数组冒充，字符串字段拒绝数字/布尔冒充，`files[]` 元素必须为字符串；所有浮点显式 `isFinite`（NaN / Infinity / `1e999` 溢出均拒绝）；整数字段拒绝小数。JSON 输入与直接构造模型（SceneValidator 对 toVolume/toOpacity/grade/parallax 的 finite 检查）双侧覆盖。
+- void 黑幕严格化：`atMeters=0` 的视觉相位必须引用 `visualLayers` 中 **solid 类型的 void 层**，任意 atMeters=0 视觉相位不再充当黑幕；场景视觉颜色未改动。
+- `SceneSource.availableSceneIds()` 枚举异常转为 `SceneLoadState.Error`（"场景目录读取失败" + 原因），可重试；测试覆盖枚举失败与修复后重试。
+
+**T03 领域规则**（`domain/stick|progress|phase|session`，纯 Kotlin，不依赖 Android/Compose/Service）：
+- `CurveSpec`/`ComfortStickMapper`：comfort_v1 十个控制点，Fritsch–Carlson 保形三次 Hermite——单调段内不过冲端点，峰值严格 1.18 m/s（< 1.4 硬顶），极值点切线为 0；左推为 0，NaN 输入返回 0 不污染状态，偏转钳制 [0,1]。
+- `VelocityInertia`：v ← v + (v_tgt−v)(1−e^(−dt/τ))；τ 加速 0.60/减速 0.35/松手 0.25 s；dt 负/NaN/Infinity 无效步进不改变速度，单步上限 0.05 s（大 dt 不追补后台时间）；时间由调用方注入。
+- `ProgressAccumulator`：s_pos 可回退（钳制 ≥0）、s_best 单调包络、meters 只累计超越历史最远的增量并钳到门禁；NaN/Infinity 增量忽略；`ProgressSnapshot`/`fromSnapshot` 为 T07 恢复预留（含 s_best，防回退恢复重复计距）。
+- `CompletionGate`：满距只触发一次；重复/迟到/NaN 事件不再通关。
+- `PhaseScheduler`：按 atMeters 触发、配置顺序输出，phase id 唯一触发；同距离多通道同次处理；单次跨多阈值按序全触发；初始化触发 atMeters=0 黑幕；`SensoryState` 输出视觉 opacity（smoothstep(fadeMeters) 米数纯函数，meters 不变则不变）、音频目标（toVolume+fadeMs，T05 引擎消费）与振动规则（everyNSteps）；`preFiredPhaseIds` 构造支持恢复静态目标不重播。
+- `SessionStateMachine`：Ready/Walking/Paused/Completed/Abandoned/Interrupted；显式事件 + `DispatchOutcome`（ACCEPTED/REJECTED/ABSORBED_TERMINAL）；终态吸收一切迟到事件；暂停/中断/终态清零输入与速度，恢复回 Ready 等待新输入；`elapsedActiveMs` 只累计 Walking（可注入 `MonotonicClock`）。
+- **测试**：143 个 JVM 单测（T02 53 + 边界 17 + T03 73），覆盖 S1（密集采样间距 0.002 的连续性、分段无过冲、硬顶、拉满<甜点、先升后降）、S2（回退/重走/反复来回不刷距）、S3（唯一触发、边界、迟到）、S4（opacity 纯函数、米数不变输出不变）、S6（既有三景校验）、S9 部分（终态吸收、批量相位、s_best 快照往返）与异常输入（NaN/负 dt/Infinity/非法构造）。证据以 GitHub Actions 实际运行为准。
+- **T04 接入点**：SessionViewModel 组合上述组件为唯一状态来源；Compose 帧循环调 `updateInput` + 受限 dt 的 `frame` 等价逻辑；摇杆 UI 产出 d = |向量|×max(0,cosθ) 后交给 mapper，不自行换算速度。
 
 ---
 
