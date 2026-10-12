@@ -78,18 +78,19 @@ class ForestFullWalkTest {
         val clock = FakeClock()
         val controller = VirtualWalkController(config, clock)
         controller.onStick(0.55f)
-        repeat(600) { clock.now += 50; controller.frame() } // 30s ≈ 30m
+        repeat(2_000) { clock.now += 50; controller.frame() } // 100s ≈ 110m（已越过 80m 脚步/轮廓树）
 
         val walked = controller.snapshot().meters
-        assertTrue("应走了几十米，实际 $walked", walked in 15f..60f)
+        assertTrue("应走了约百米，实际 $walked", walked in 80f..160f)
         assertTrue(walked < 800f)
 
         controller.abandon()
         assertEquals(SessionState.ABANDONED, controller.snapshot().session)
         assertTrue(!controller.gate.isCompleted)
-        // 已触发的相位保留（脚步/轮廓树），但后续相位不再触发
+        // 已触发的相位保留（脚步/轮廓树在 80m 已解锁），后续相位不再触发
         val fired = controller.scheduler.firedPhaseIds
         assertTrue(fired.containsAll(listOf("void", "steps", "tree_outline")))
+        assertTrue("240m 相位不应触发", !fired.contains("ambience"))
         assertTrue(!fired.contains("clearing"))
     }
 
