@@ -26,7 +26,19 @@ class SceneLoaderTest {
 
     @Test
     fun `全部合法时进入 Ready 并按距离升序`() {
-        val short = TestScenes.VALID_JSON.replace("\"requiredDistanceMeters\": 1000", "\"requiredDistanceMeters\": 700")
+        // 把 1000m 基准整体缩放为 700m（相位/地形同步缩放，保持里程碑与终点合法）
+        val short = TestScenes.VALID_JSON
+            .replace("\"requiredDistanceMeters\": 1000", "\"requiredDistanceMeters\": 700")
+            .replace("\"atMeters\": 100,", "\"atMeters\": 70,")
+            .replace("\"atMeters\": 100 ", "\"atMeters\": 70 ")
+            .replace("\"atMeters\": 300,", "\"atMeters\": 200,")
+            .replace("\"atMeters\": 300 ", "\"atMeters\": 200 ")
+            .replace("\"atMeters\": 500,", "\"atMeters\": 350,")
+            .replace("\"atMeters\": 500 ", "\"atMeters\": 350 ")
+            .replace("\"atMeters\": 750,", "\"atMeters\": 525,")
+            .replace("\"atMeters\": 750 ", "\"atMeters\": 525 ")
+            .replace("\"atMeters\": 950,", "\"atMeters\": 665,")
+            .replace("\"to\": 1000", "\"to\": 700")
         val source = MapSceneSource(mapOf("night" to short, "forest" to TestScenes.VALID_JSON))
         val state = SceneLoader(source, TestScenes.locator).loadAll()
         assertTrue("意外状态: $state", state is SceneLoadState.Ready)

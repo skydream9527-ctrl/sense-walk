@@ -93,8 +93,8 @@ class SceneJsonParserTest {
             SceneJsonParser.parse(legacy)
             fail("应当抛出解析异常")
         } catch (e: SceneConfigParseException) {
-            assertTrue(e.message!!.contains("不受支持"))
             assertTrue(e.message!!.contains("旧 v1 格式"))
+            assertTrue(e.message!!.contains("迁移"))
         }
     }
 
@@ -113,7 +113,7 @@ class SceneJsonParserTest {
 
     @Test
     fun `未知地形给出带路径诊断`() {
-        val json = TestScenes.VALID_JSON.replace("\"kind\": \"flat\"", "\"kind\": \"lava\"}")
+        val json = TestScenes.VALID_JSON.replace("\"kind\": \"flat\"", "\"kind\": \"lava\"")
         try {
             SceneJsonParser.parse(json)
             fail("应当抛出解析异常")
@@ -125,7 +125,7 @@ class SceneJsonParserTest {
 
     @Test
     fun `未知音频层类型给出诊断`() {
-        val json = TestScenes.VALID_JSON.replace("\"type\": \"loop\"", "\"type\": \"chorus\"}")
+        val json = TestScenes.VALID_JSON.replace("\"type\": \"loop\"", "\"type\": \"chorus\"")
         try {
             SceneJsonParser.parse(json)
             fail("应当抛出解析异常")

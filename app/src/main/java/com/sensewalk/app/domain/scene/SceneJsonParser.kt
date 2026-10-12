@@ -25,14 +25,27 @@ object SceneJsonParser {
     private val json = Json { ignoreUnknownKeys = true }
 
     fun parse(text: String): SceneConfig {
-        val root = try {
-            json.parseToJsonElement(text).jsonObject
-        } catch (e: IllegalArgumentException) {
-            throw SceneConfigParseException("JSON 根元素必须是对象: ${e.message}")
+        val element = try {
+            json.parseToJsonElement(text)
         } catch (e: Exception) {
             throw SceneConfigParseException("JSON 语法错误: ${e.message}")
         }
+        val root = try {
+            element.jsonObject
+        } catch (e: IllegalArgumentException) {
+            throw SceneConfigParseException("JSON 根元素必须是对象")
+        }
 
+        if (!root.has("schemaVersion")) {
+            val legacy = root.has("atSec") || root.has("suggestedMinutes")
+            throw SceneConfigParseException(
+                if (legacy) {
+                    "schemaVersion 缺失：文件是旧 v1 格式（atSec / suggestedMinutes），需按 §12.4 迁移为距离相位"
+                } else {
+                    "schemaVersion 缺失（本版本仅支持 $SUPPORTED_SCHEMA_VERSION）"
+                },
+            )
+        }
         val schemaVersion = root.reqInt("schemaVersion", "\$")
         if (schemaVersion != SUPPORTED_SCHEMA_VERSION) {
             val legacy = schemaVersion <= 1 || root.has("suggestedMinutes") || root.has("atSec")
