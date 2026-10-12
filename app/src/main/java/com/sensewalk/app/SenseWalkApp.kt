@@ -15,8 +15,9 @@ import androidx.navigation.navArgument
 import com.sensewalk.app.domain.scene.SceneConfig
 import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.ui.home.HomeScreen
+import com.sensewalk.app.ui.mode.ModeScreen
 import com.sensewalk.app.ui.navigation.NavRoutes
-import com.sensewalk.app.ui.session.EndScreen
+import com.sensewalk.app.ui.session.ResultScreen
 import com.sensewalk.app.ui.session.SessionScreen
 import com.sensewalk.app.ui.settings.SettingsScreen
 import com.sensewalk.app.ui.theme.SenseBlack
@@ -44,9 +45,10 @@ fun SenseWalkApp(
             composable(NavRoutes.HOME) {
                 HomeScreen(
                     state = sceneState,
+                    lastSceneId = settings.lastSceneId,
                     onRetry = viewModel::retrySceneLoad,
-                    onStart = { scene ->
-                        navController.navigate(NavRoutes.session(scene.id))
+                    onSelectScene = { sceneId ->
+                        navController.navigate(NavRoutes.mode(sceneId))
                     },
                     onOpenSettings = {
                         navController.navigate(NavRoutes.SETTINGS)
@@ -57,45 +59,76 @@ fun SenseWalkApp(
             composable(NavRoutes.SETTINGS) {
                 SettingsScreen(
                     settings = settings,
-                    onSilenceSecondsChange = viewModel::setSilenceSeconds,
                     onVibrationChange = viewModel::setVibrationEnabled,
+                    onRhythmHintChange = viewModel::setRhythmHint,
+                    onReduceMotionChange = viewModel::setReduceMotion,
+                    onHoldToWalkChange = viewModel::setHoldToWalk,
                     onBack = { navController.popBackStack() },
                 )
             }
 
             composable(
-                route = NavRoutes.SESSION,
+                route = NavRoutes.MODE,
                 arguments = listOf(navArgument("sceneId") { type = NavType.StringType }),
             ) { entry ->
-                val sceneId = entry.arguments?.getString("sceneId") ?: return@composable
-                val scene = findScene(sceneId) ?: return@composable
-                SessionScreen(
-                    scene = scene,
-                    silenceSeconds = settings.silenceSeconds,
-                    vibrationEnabled = settings.vibrationEnabled,
-                    onEnd = { elapsed ->
-                        navController.navigate(NavRoutes.end(sceneId, elapsed)) {
-                            popUpTo(NavRoutes.session(sceneId)) { inclusive = true }
-                        }
+                val sceneId = entry.arguments?.getString("sceneId") ?: ""
+                ModeScreen(
+                    scene = findScene(sceneId),
+                    sceneLoadError = sceneState is SceneLoadState.Error,
+                    lastMode = settings.lastMode,
+                    onBack = { navController.popBackStack() },
+                    onStart = { sid, mode ->
+                        viewModel.setLastSelection(sid, mode)
+                        navController.navigate(NavRoutes.session(sid, mode))
                     },
                 )
             }
 
             composable(
-                route = NavRoutes.END,
+                route = NavRoutes.SESSION,
                 arguments = listOf(
                     navArgument("sceneId") { type = NavType.StringType },
-                    navArgument("elapsedSeconds") { type = NavType.LongType },
+                    navArgument("mode") { type = NavType.StringType },
                 ),
             ) { entry ->
                 val sceneId = entry.arguments?.getString("sceneId") ?: return@composable
-                val elapsed = entry.arguments?.getLong("elapsedSeconds") ?: 0L
-                val sceneName = findScene(sceneId)?.name ?: ""
-                EndScreen(
-                    sceneName = sceneName,
-                    elapsedSeconds = elapsed,
+                val mode = entry.arguments?.getString("mode") ?: return@composable
+                SessionScreen(
+                    sceneId = sceneId,
+                    mode = mode,
+                    onFinished = { outcome, meters, elapsedMs ->
+                        navController.navigate(
+                            NavRoutes.result(sceneId, outcome, meters, elapsedMs),
+                        ) {
+                            popUpTo(NavRoutes.session(sceneId, mode)) { inclusive = true }
+                        }
+                    },
+                    onBack = { navController.popBackStack() },
+                )
+            }
+
+            composable(
+                route = NavRoutes.RESULT,
+                arguments = listOf(
+                    navArgument("sceneId") { type = NavType.StringType },
+                    navArgument("outcome") { type = NavType.StringType },
+                    navArgument("meters") { type = NavType.IntType },
+                    navArgument("elapsedMs") { type = NavType.LongType },
+                ),
+            ) { entry ->
+                val sceneId = entry.arguments?.getString("sceneId") ?: ""
+                val outcome = entry.arguments?.getString("outcome") ?: NavRoutes.Outcome.ABANDONED
+                val meters = entry.arguments?.getInt("meters") ?: 0
+                val elapsedMs = entry.arguments?.getLong("elapsedMs") ?: 0L
+                val scene = findScene(sceneId)
+                ResultScreen(
+                    sceneName = scene?.name ?: "",
+                    requiredDistanceMeters = scene?.requiredDistanceMeters ?: 0,
+                    outcome = outcome,
+                    meters = meters,
+                    elapsedMs = elapsedMs,
                     onWalkAgain = {
-                        navController.navigate(NavRoutes.session(sceneId)) {
+                        navController.navigate(NavRoutes.session(sceneId, NavRoutes.Mode.VIRTUAL)) {
                             popUpTo(NavRoutes.HOME)
                         }
                     },

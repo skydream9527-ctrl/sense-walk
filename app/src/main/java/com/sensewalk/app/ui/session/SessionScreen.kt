@@ -1,143 +1,421 @@
 package com.sensewalk.app.ui.session
 
+import android.app.Application
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.waitForUpOrCancellation
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sensewalk.app.domain.audio.AudioMixer
-import com.sensewalk.app.domain.haptics.HapticEngine
-import com.sensewalk.app.domain.scene.AudioLayerDef
-import com.sensewalk.app.domain.scene.SceneConfig
-import com.sensewalk.app.domain.scene.SessionClock
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import com.sensewalk.app.domain.session.SessionState
+import com.sensewalk.app.domain.stick.ComfortStickMapper
+import com.sensewalk.app.session.SessionViewModel
+import com.sensewalk.app.ui.navigation.NavRoutes
+import com.sensewalk.app.ui.theme.AccentSoft
 import com.sensewalk.app.ui.theme.SenseBlack
 import com.sensewalk.app.ui.theme.SenseMuted
 import com.sensewalk.app.ui.theme.SenseOnSurface
-import com.sensewalk.app.ui.theme.sceneTint
-import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.coroutines.delay
 
+/**
+ * 虚走会话页（T04）：
+ * - 会话状态唯一来源是 SessionViewModel 持有的 VirtualWalkController；
+ * - 本页只提交输入、渲染快照；一个 LaunchedEffect 帧循环驱动 controller.frame；
+ * - 上半区轻触查看米数、右上角长按 1.5s 放弃、系统返回出继续/放弃确认；
+ * - 下半区 45% 为浮动摇杆；按住前进（无障碍）开启时显示按住按钮；
+ * - 视觉由 ForestShell 按 SensoryState 绘制，从黑幕起，米数不变揭示不变。
+ */
 @Composable
 fun SessionScreen(
-    scene: SceneConfig,
-    silenceSeconds: Int,
-    vibrationEnabled: Boolean,
-    onEnd: (elapsedSeconds: Long) -> Unit,
+    sceneId: String,
+    mode: String,
+    onFinished: (outcome: String, meters: Int, elapsedMs: Long) -> Unit,
+    onBack: () -> Unit,
 ) {
-    val scope = rememberCoroutineScope()
-    val clock = remember(silenceSeconds) {
-        SessionClock(scope = scope, silenceSeconds = silenceSeconds)
+    val vm: SessionViewModel = viewModel(
+        key = "session-$sceneId-$mode",
+        factory = viewModelFactory {
+            initializer {
+                SessionViewModel(this[APPLICATION_KEY] as Application, sceneId)
+            }
+        },
+    )
+    val uiState by vm.uiState.collectAsStateWithLifecycle()
+    val walk by vm.walk.collectAsStateWithLifecycle()
+    val settings by vm.settings.collectAsStateWithLifecycle()
+
+    when (val state = uiState) {
+        is SessionViewModel.UiState.Loading -> Box(
+            Modifier
+                .fillMaxSize()
+                .background(SenseBlack),
+            contentAlignment = Alignment.Center,
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                CircularProgressIndicator(color = AccentSoft)
+                Text("正在准备场景…", color = SenseMuted, modifier = Modifier.padding(top = 16.dp))
+            }
+        }
+
+        is SessionViewModel.UiState.Error -> Column(
+            Modifier
+                .fillMaxSize()
+                .background(SenseBlack)
+                .padding(28.dp),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text("暂时走不了", style = MaterialTheme.typography.titleLarge, color = SenseOnSurface)
+            Text(
+                text = state.message,
+                style = MaterialTheme.typography.bodySmall,
+                color = SenseMuted,
+                modifier = Modifier.padding(vertical = 12.dp),
+            )
+            Button(onClick = onBack) { Text("返回") }
+        }
+
+        is SessionViewModel.UiState.Ready -> {
+            val session = walk?.session ?: SessionState.READY
+            if (mode != NavRoutes.Mode.VIRTUAL) {
+                // 双保险：导航参数异常时不进入会话
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .background(SenseBlack)
+                        .padding(28.dp),
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Text("这个模式还没有开放", style = MaterialTheme.typography.titleLarge, color = SenseOnSurface)
+                    Text(
+                        "实走（计步）在后续版本开放。可以回首页选择虚走。",
+                        color = SenseMuted,
+                        modifier = Modifier.padding(vertical = 12.dp),
+                    )
+                    Button(onClick = onBack) { Text("返回") }
+                }
+                return
+            }
+            SessionContent(
+                vm = vm,
+                walk = walk,
+                reduceMotion = settings.reduceMotion,
+                rhythmHint = settings.rhythmHint,
+                holdToWalk = settings.holdToWalk,
+                onFinished = onFinished,
+            )
+        }
     }
-    val audioMixer = remember { AudioMixer() }
-    val hapticEngine = remember(vibrationEnabled) { HapticEngine(enabled = vibrationEnabled) }
-    val currentOnEnd by rememberUpdatedState(onEnd)
+}
 
-    val elapsed by clock.elapsedSeconds.collectAsStateWithLifecycle()
-    val clockVisible by clock.clockVisible.collectAsStateWithLifecycle()
+@Composable
+private fun SessionContent(
+    vm: SessionViewModel,
+    walk: com.sensewalk.app.domain.walk.VirtualWalkController.Snapshot?,
+    reduceMotion: Boolean,
+    rhythmHint: Boolean,
+    holdToWalk: Boolean,
+    onFinished: (outcome: String, meters: Int, elapsedMs: Long) -> Unit,
+) {
+    val session = walk?.session ?: SessionState.READY
+    val sessionActive = session == SessionState.READY || session == SessionState.WALKING || session == SessionState.PAUSED
 
-    LaunchedEffect(clock) {
-        scene.layers.forEach { (id, def) ->
-            // 音频仍是日志 stub（T05 接真实素材）；占位标记原样传入便于日志核对
-            when (def) {
-                is AudioLayerDef.Loop ->
-                    audioMixer.prepare(id, def.file ?: def.placeholder.orEmpty(), true)
-                is AudioLayerDef.StepOneShot -> {
-                    val path = def.files.firstOrNull() ?: def.placeholder.orEmpty()
-                    audioMixer.prepare(id, path, false)
+    // 单帧循环：全页唯一的帧驱动，重组不会新增循环
+    LaunchedEffect(vm) {
+        while (true) {
+            withFrameNanos { vm.onFrame() }
+        }
+    }
+
+    // 生命周期：后台清输入+暂停；回前台重置基线等待新输入
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner, vm) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_STOP -> vm.onAppBackground()
+                Lifecycle.Event.ON_START -> vm.onAppForeground()
+                else -> Unit
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
+    // 系统返回：暂停 + 继续/放弃确认（确认期间不累计）
+    var showConfirm by remember { mutableStateOf(false) }
+    BackHandler(enabled = sessionActive && !showConfirm) {
+        vm.pauseForDialog()
+        showConfirm = true
+    }
+
+    if (showConfirm && sessionActive) {
+        AlertDialog(
+            onDismissRequest = {
+                vm.resumeFromDialog()
+                showConfirm = false
+            },
+            title = { Text("要放弃这段路吗？") },
+            text = { Text("现在停下来，这一局就到这里了。想走的时候随时再来。") },
+            confirmButton = {
+                TextButton(onClick = {
+                    vm.resumeFromDialog()
+                    showConfirm = false
+                }) { Text("继续走") }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    vm.abandon()
+                    showConfirm = false
+                }) { Text("放弃这段路") }
+            },
+        )
+    }
+
+    // 终态只导航一次
+    var navigated by remember { mutableStateOf(false) }
+    LaunchedEffect(session) {
+        if (!navigated && (session == SessionState.COMPLETED || session == SessionState.ABANDONED)) {
+            navigated = true
+            val snapshot = walk ?: return@LaunchedEffect
+            onFinished(
+                if (session == SessionState.COMPLETED) NavRoutes.Outcome.COMPLETED else NavRoutes.Outcome.ABANDONED,
+                snapshot.meters.toInt(),
+                snapshot.elapsedActiveMs,
+            )
+        }
+    }
+
+    // 首局说明（I02）：短暂可关闭，首次输入后消失
+    var showIntro by remember { mutableStateOf(true) }
+    LaunchedEffect(Unit) {
+        delay(8_000)
+        showIntro = false
+    }
+    LaunchedEffect(walk?.deflection) {
+        if ((walk?.deflection ?: 0f) > 0.05f) showIntro = false
+    }
+
+    // 轻触查看米数（可信米数 = 领域累计值）
+    var showMeters by remember { mutableStateOf(false) }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(SenseBlack),
+    ) {
+        // 森林视觉：黑幕起，按 SensoryState 揭示
+        ForestShell(
+            sensory = walk?.sensory ?: com.sensewalk.app.domain.phase.SensoryState(emptyMap(), emptyMap(), emptyList()),
+            sPos = walk?.sPos ?: 0f,
+            velocity = walk?.velocity ?: 0f,
+            terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
+            reduceMotion = reduceMotion,
+        )
+
+        // 上半区：轻触查看米数 + 放弃/暂停控件
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.55f)
+                .pointerInput(Unit) {
+                    detectTapGestures { showMeters = !showMeters }
+                },
+        ) {
+            Column(
+                Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 64.dp)
+                    .semantics { contentDescription = if (showMeters) "已走 ${walk?.meters?.toInt() ?: 0} 米" else "轻触查看已走米数" },
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                if (showMeters && walk != null) {
+                    Text(
+                        text = "${walk.meters.toInt()} m",
+                        style = MaterialTheme.typography.displayMedium,
+                        fontWeight = FontWeight.Light,
+                        color = SenseOnSurface.copy(alpha = 0.9f),
+                    )
+                    Text(
+                        text = "已走",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = SenseMuted,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                } else {
+                    Text(
+                        text = "轻触查看米数",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = SenseMuted.copy(alpha = 0.5f),
+                    )
+                }
+            }
+
+            Column(
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(top = 48.dp, end = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                AbandonControl(
+                    enabled = sessionActive,
+                    onAbandon = { vm.abandon() },
+                    onOpenConfirmDialog = {
+                        vm.pauseForDialog()
+                        showConfirm = true
+                    },
+                )
+                PauseButton(enabled = session == SessionState.WALKING) {
+                    vm.pauseForDialog()
+                    showConfirm = true
                 }
             }
         }
-        clock.start()
-    }
 
-    DisposableEffect(Unit) {
-        onDispose {
-            clock.stop()
-            audioMixer.release()
-            hapticEngine.stop()
+        // 下半区 45%：浮动摇杆
+        JoystickZone(
+            bottomAreaFraction = 0.45f,
+            rhythmHint = rhythmHint,
+            onDeflection = vm::onStick,
+            onReleased = vm::onStickReleased,
+        )
+
+        // 按住前进（无障碍，开放决策 #12）：持续按住才走，同一曲线与门禁
+        if (holdToWalk) {
+            Box(
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 48.dp),
+            ) {
+                HoldToWalkButton(
+                    enabled = sessionActive,
+                    onHold = { vm.onStick(ComfortStickMapper.SWEET_SPOT_DEFLECTION) },
+                    onRelease = { vm.onStickReleased() },
+                )
+            }
         }
-    }
 
-    fun endSession() {
-        val secs = clock.elapsedSeconds.value
-        clock.stop()
-        audioMixer.release()
-        hapticEngine.stop()
-        currentOnEnd(secs)
-    }
+        // 说明卡片
+        if (showIntro && sessionActive) {
+            Column(
+                Modifier
+                    .align(Alignment.Center)
+                    .padding(horizontal = 36.dp)
+                    .background(Color.White.copy(alpha = 0.06f), RoundedCornerShape(16.dp))
+                    .clickable { showIntro = false }
+                    .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "推满不会更快。\n松一点，找舒服的节奏。",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = SenseOnSurface,
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    text = "走着走着，声音和风景会慢慢出现。\n（轻点此处关闭）",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = SenseMuted,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 8.dp),
+                )
+            }
+        }
 
-    val bg = blend(SenseBlack.copy(alpha = 0.95f), sceneTint(scene.id).copy(alpha = 0.15f))
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(bg)
-            .pointerInput(Unit) {
-                awaitEachGesture {
-                    awaitFirstDown(requireUnconsumed = false)
-                    val upBeforeTimeout = withTimeoutOrNull(1_000L) {
-                        waitForUpOrCancellation()
-                    }
-                    if (upBeforeTimeout == null) {
-                        // Held ≥ 1s → end session, then wait for finger up
-                        endSession()
-                        waitForUpOrCancellation()
-                    } else {
-                        clock.toggleClockVisibility()
-                    }
-                }
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        if (clockVisible) {
+        // 放弃进度期间与终态的轻提示
+        if (session == SessionState.PAUSED && !showConfirm) {
             Text(
-                text = formatElapsed(elapsed),
-                style = MaterialTheme.typography.displayMedium,
-                color = SenseOnSurface.copy(alpha = 0.85f),
-                fontWeight = FontWeight.Light,
+                text = "已暂停 · 摇一摇摇杆继续",
+                style = MaterialTheme.typography.labelMedium,
+                color = SenseMuted,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 140.dp),
             )
         }
-
-        Text(
-            text = if (clockVisible) "长按结束" else "轻触显示时间 · 长按结束",
-            style = MaterialTheme.typography.labelMedium,
-            color = SenseMuted.copy(alpha = 0.55f),
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 48.dp),
-        )
     }
 }
 
-private fun formatElapsed(totalSeconds: Long): String {
-    val m = totalSeconds / 60
-    val s = totalSeconds % 60
-    return "%d:%02d".format(m, s)
+@Composable
+private fun PauseButton(enabled: Boolean, onClick: () -> Unit) {
+    Box(
+        Modifier
+            .semantics { contentDescription = "暂停：打开继续或放弃确认" }
+            .background(Color.White.copy(alpha = 0.06f), RoundedCornerShape(20.dp))
+            .clickable(enabled = enabled, onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+    ) {
+        Text("暂停", style = MaterialTheme.typography.labelMedium, color = SenseMuted)
+    }
 }
 
-private fun blend(over: Color, under: Color): Color {
-    val a = over.alpha
-    return Color(
-        red = over.red * a + under.red * (1 - a),
-        green = over.green * a + under.green * (1 - a),
-        blue = over.blue * a + under.blue * (1 - a),
-        alpha = 1f,
-    )
+/** 按住前进：只在按住期间以甜点偏转前进，松开即停；不做自动行走 */
+@Composable
+private fun HoldToWalkButton(
+    enabled: Boolean,
+    onHold: () -> Unit,
+    onRelease: () -> Unit,
+) {
+    Box(
+        Modifier
+            .semantics {
+                contentDescription = "按住前进：按住期间以舒适区速度前进，松开即停"
+            }
+            .pointerInput(enabled) {
+                awaitEachGesture {
+                    val down = awaitFirstDown(requireUnconsumed = false)
+                    if (!enabled) return@awaitEachGesture
+                    down.consume()
+                    onHold()
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        val change = event.changes.firstOrNull { it.id == down.id } ?: break
+                        if (!change.pressed) break
+                        change.consume()
+                    }
+                    onRelease()
+                }
+            }
+            .background(Color.White.copy(alpha = 0.10f), RoundedCornerShape(24.dp))
+            .padding(horizontal = 28.dp, vertical = 16.dp),
+    ) {
+        Text("按住前进", style = MaterialTheme.typography.titleMedium, color = SenseOnSurface)
+    }
 }

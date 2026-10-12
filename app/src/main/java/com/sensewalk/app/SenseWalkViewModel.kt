@@ -8,10 +8,10 @@ import com.sensewalk.app.data.SettingsRepository
 import com.sensewalk.app.data.UserSettings
 import com.sensewalk.app.domain.scene.SceneLoadState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
 
 class SenseWalkViewModel(application: Application) : AndroidViewModel(application) {
@@ -41,11 +41,23 @@ class SenseWalkViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun setSilenceSeconds(seconds: Int) {
-        viewModelScope.launch { settingsRepository.setSilenceSeconds(seconds) }
-    }
-
     fun setVibrationEnabled(enabled: Boolean) {
         viewModelScope.launch { settingsRepository.setVibrationEnabled(enabled) }
+    }
+
+    fun setRhythmHint(enabled: Boolean) {
+        viewModelScope.launch { settingsRepository.setRhythmHint(enabled) }
+    }
+
+    fun setReduceMotion(enabled: Boolean) {
+        viewModelScope.launch { settingsRepository.setReduceMotion(enabled) }
+    }
+
+    fun setHoldToWalk(enabled: Boolean) {
+        viewModelScope.launch { settingsRepository.setHoldToWalk(enabled) }
+    }
+
+    fun setLastSelection(sceneId: String, mode: String) {
+        viewModelScope.launch { settingsRepository.setLastSelection(sceneId, mode) }
     }
 }

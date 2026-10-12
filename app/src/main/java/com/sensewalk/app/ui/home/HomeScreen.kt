@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -40,6 +41,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.sensewalk.app.domain.scene.SceneConfig
@@ -51,22 +54,26 @@ import com.sensewalk.app.ui.theme.SenseMuted
 import com.sensewalk.app.ui.theme.SenseOnSurface
 import com.sensewalk.app.ui.theme.sceneTint
 
+/** T04 已开放的虚走场景（其余场景如实标注暂未开放，不进入假会话） */
+private val OPEN_VIRTUAL_SCENES = setOf("forest")
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: SceneLoadState,
+    lastSceneId: String?,
     onRetry: () -> Unit,
-    onStart: (SceneConfig) -> Unit,
+    onSelectScene: (sceneId: String) -> Unit,
     onOpenSettings: () -> Unit,
 ) {
     var selectedId by remember { mutableStateOf<String?>(null) }
     val scenes = (state as? SceneLoadState.Ready)?.scenes.orEmpty()
-    LaunchedEffect(scenes) {
-        if (selectedId == null && scenes.isNotEmpty()) {
-            selectedId = scenes.first().id
+    LaunchedEffect(scenes, lastSceneId) {
+        if (selectedId == null || scenes.none { it.id == selectedId }) {
+            // 恢复上次可用选择；失效时回退到第一个可用场景
+            selectedId = scenes.firstOrNull { it.id == lastSceneId }?.id ?: scenes.firstOrNull()?.id
         }
     }
-    val selected = scenes.find { it.id == selectedId }
 
     Scaffold(
         containerColor = SenseBlack,
@@ -181,8 +188,10 @@ fun HomeScreen(
                     contentPadding = PaddingValues(bottom = 16.dp),
                 ) {
                     items(scenes, key = { it.id }) { scene ->
+                        val open = scene.id in OPEN_VIRTUAL_SCENES
                         SceneCard(
                             scene = scene,
+                            open = open,
                             selected = scene.id == selectedId,
                             onClick = { selectedId = scene.id },
                         )
@@ -190,8 +199,8 @@ fun HomeScreen(
                 }
 
                 Button(
-                    onClick = { selected?.let(onStart) },
-                    enabled = selected != null,
+                    onClick = { selectedId?.let(onSelectScene) },
+                    enabled = selectedId != null,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 24.dp)
@@ -204,7 +213,7 @@ fun HomeScreen(
                     shape = RoundedCornerShape(14.dp),
                 ) {
                     Text(
-                        text = "开始",
+                        text = "下一步 · 怎么走",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -217,17 +226,19 @@ fun HomeScreen(
 @Composable
 private fun SceneCard(
     scene: SceneConfig,
+    open: Boolean,
     selected: Boolean,
     onClick: () -> Unit,
 ) {
     val tint = sceneTint(scene.id)
     val shape = RoundedCornerShape(16.dp)
+    val minutes = SceneDurationEstimator.estimatedVirtualMinutes(scene)
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(110.dp)
             .clip(shape)
-            .background(tint.copy(alpha = 0.55f))
+            .background(if (open) tint.copy(alpha = 0.55f) else tint.copy(alpha = 0.25f))
             .then(
                 if (selected) {
                     Modifier.border(2.dp, AccentSoft, shape)
@@ -236,21 +247,39 @@ private fun SceneCard(
                 }
             )
             .clickable(onClick = onClick)
+            .semantics {
+                contentDescription = "${scene.name}，${scene.requiredDistanceMeters} 米，约 $minutes 分钟" +
+                    if (open) "，可以走" else "，暂未开放"
+            }
             .padding(20.dp),
         contentAlignment = Alignment.BottomStart,
     ) {
         Column {
-            Text(
-                text = scene.name,
-                style = MaterialTheme.typography.titleLarge,
-                color = SenseOnSurface,
-                fontWeight = FontWeight.Medium,
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = scene.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = if (open) SenseOnSurface else SenseMuted,
+                    fontWeight = FontWeight.Medium,
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = if (open) "可虚走" else "暂未开放",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = if (open) AccentSoft else SenseMuted,
+                    modifier = Modifier
+                        .background(
+                            if (open) AccentSoft.copy(alpha = 0.15f) else SenseMuted.copy(alpha = 0.12f),
+                            RoundedCornerShape(6.dp),
+                        )
+                        .padding(horizontal = 6.dp, vertical = 2.dp),
+                )
+            }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "${scene.requiredDistanceMeters} m · 约 ${SceneDurationEstimator.estimatedVirtualMinutes(scene)} 分钟",
+                text = "${scene.requiredDistanceMeters} m · 约 $minutes 分钟",
                 style = MaterialTheme.typography.bodySmall,
-                color = SenseOnSurface.copy(alpha = 0.7f),
+                color = if (open) SenseOnSurface.copy(alpha = 0.7f) else SenseMuted.copy(alpha = 0.7f),
             )
         }
     }
