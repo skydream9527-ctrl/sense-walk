@@ -164,9 +164,9 @@ app/
 ## 7. 里程碑与排期（建议 4 周 MVP）
 
 ### Week 1 — 骨架与静默会话
-- [ ] 建仓、Compose 空壳、Home / Session 导航
-- [ ] SessionClock + 纯静默可跑通「开始 → 计时 → 结束」
-- [ ] 设置页：静默秒数、振动总开关
+- [x] 建仓、Compose 空壳、Home / Session 导航
+- [x] SessionClock + 纯静默可跑通「开始 → 计时 → 结束」
+- [x] 设置页：静默秒数、振动总开关
 
 ### Week 2 — 声音层
 - [ ] 场景 JSON 加载

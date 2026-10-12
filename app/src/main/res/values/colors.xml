@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#1A1A1A</color>
+    <color name="sensewalk_black">#0A0A0A</color>
+    <color name="sensewalk_forest">#2D4A3E</color>
+    <color name="sensewalk_desert">#8B7355</color>
+    <color name="sensewalk_night">#1A1F3A</color>
+</resources>

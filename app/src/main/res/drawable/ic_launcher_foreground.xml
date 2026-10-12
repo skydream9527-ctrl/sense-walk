@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Simple footpath / walk mark -->
+    <path
+        android:fillColor="#E8E4D9"
+        android:pathData="M54,28c-2,8 -4,16 -4,24c0,8 2,16 4,24c2,-8 4,-16 4,-24c0,-8 -2,-16 -4,-24z" />
+    <path
+        android:fillColor="#A8C5A0"
+        android:pathData="M40,70c4,-6 10,-10 14,-10s10,4 14,10c-4,2 -9,3 -14,3s-10,-1 -14,-3z" />
+</vector>

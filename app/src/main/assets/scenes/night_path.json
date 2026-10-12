@@ -1,0 +1,15 @@
+{
+  "id": "night_path",
+  "name": "夜径",
+  "suggestedMinutes": 12,
+  "phases": [
+    { "atSec": 0, "action": "silence" },
+    { "atSec": 40, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.22, "fadeMs": 8000 },
+    { "atSec": 100, "action": "fadeIn", "layer": "ambience", "toVolume": 0.28, "fadeMs": 12000 },
+    { "atSec": 160, "action": "haptics", "pattern": "pulse_slow", "intervalMs": 700 }
+  ],
+  "layers": {
+    "footsteps": { "file": "audio/night_steps.ogg", "loop": true },
+    "ambience": { "file": "audio/night_insects.ogg", "loop": true }
+  }
+}

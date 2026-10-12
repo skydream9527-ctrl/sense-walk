@@ -1,0 +1,15 @@
+{
+  "id": "desert",
+  "name": "沙漠独行",
+  "suggestedMinutes": 15,
+  "phases": [
+    { "atSec": 0, "action": "silence" },
+    { "atSec": 60, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.2, "fadeMs": 10000 },
+    { "atSec": 150, "action": "fadeIn", "layer": "ambience", "toVolume": 0.3, "fadeMs": 15000 },
+    { "atSec": 210, "action": "haptics", "pattern": "footstep_sand", "intervalMs": 900 }
+  ],
+  "layers": {
+    "footsteps": { "file": "audio/desert_steps.ogg", "loop": true },
+    "ambience": { "file": "audio/desert_wind.ogg", "loop": true }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "forest",
+  "name": "森林漫步",
+  "suggestedMinutes": 15,
+  "phases": [
+    { "atSec": 0, "action": "silence" },
+    { "atSec": 45, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.25, "fadeMs": 8000 },
+    { "atSec": 120, "action": "fadeIn", "layer": "ambience", "toVolume": 0.35, "fadeMs": 12000 },
+    { "atSec": 180, "action": "haptics", "pattern": "footstep_soft", "intervalMs": 650 }
+  ],
+  "layers": {
+    "footsteps": { "file": "audio/forest_steps.ogg", "loop": true },
+    "ambience": { "file": "audio/forest_insects.ogg", "loop": true }
+  }
+}
