@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>选景 · 慢行设计稿</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="page">
+  <a class="back" href="index.html">← 演示入口</a>
+  <div class="eyebrow">Screen · Home</div>
+  <h1>场景选择</h1>
+  <p class="lead">先选场景。卡片只有名称、短情绪词、要求距离与极弱主题色——完整风景只在会话里按路程长出。</p>
+  <div class="nav-links">
+    <a href="index.html">入口</a>
+    <a class="active" href="home-scene-picker.html">选景</a>
+    <a href="mode-select.html">选模式</a>
+    <a href="session-walk.html">会话</a>
+    <a href="clear-abandon.html">通关/放弃</a>
+  </div>
+  <div class="stage">
+    <div class="phone">
+      <div class="phone-bar"><span>9:41</span><span>慢行</span></div>
+      <div class="settings-dot" title="设置">⚙</div>
+      <div class="phone-body">
+        <div class="home-title">慢行</div>
+        <div class="home-sub">选一个想慢慢走的地方</div>
+        <div class="scene-grid">
+          <a class="scene-card rain" href="mode-select.html" style="text-decoration:none;color:inherit">
+            <h3>雨林</h3>
+            <div class="mood">潮湿 · 呼吸</div>
+            <div class="dist">450 m</div>
+          </a>
+          <div class="scene-card forest">
+            <h3>森林</h3>
+            <div class="mood">树荫 · 清爽</div>
+            <div class="dist">400 m</div>
+          </div>
+          <div class="scene-card desert">
+            <h3>沙漠</h3>
+            <div class="mood">空旷 · 风</div>
+            <div class="dist">600 m</div>
+          </div>
+          <div class="scene-card city">
+            <h3>城市</h3>
+            <div class="mood">夜色 · 远灯</div>
+            <div class="dist">500 m</div>
+          </div>
+          <div class="scene-card night">
+            <div>
+              <h3>夜径</h3>
+              <div class="mood">可选 · 小心 · 星空</div>
+            </div>
+            <div class="dist">350 m</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="side-notes">
+      <h2>设计要点</h2>
+      <ul>
+        <li><span class="tag">P0</span>大卡片一屏可见；默认可记上次场景</li>
+        <li>无完整风景预览、无星级难度</li>
+        <li>夜径虚线/弱化，MVP 可藏「更多」</li>
+        <li>点卡片 → 模式页（演示：点雨林）</li>
+      </ul>
+      <h2>文案</h2>
+      <ul>
+        <li>标题区强调「慢慢走」，非「挑战自我」</li>
+        <li>距离用米，不用「关卡 Lv.」</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="demo-foot">home-scene-picker.html</footer>
+</div>
+</body>
+</html>

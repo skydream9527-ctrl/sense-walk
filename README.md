@@ -8,6 +8,9 @@
 
 完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.6**：耐心/减压定位 + 舒适节奏摇杆 + 地形动作 + 景色层层展开 + 多场景声音身份 + 距离门禁 + 双模式）。
 
+**完整设计包（PRD 级）**见 [`design/`](./design/)：场景与地形 → 角色 → PRD → [交互演示](./design/04-interaction-mockups/demo/index.html)。阅读顺序以 `design/README.md` 为准。
+
+
 ## 核心规则
 
 - **耐心与减压**：用慢感官行走练习放松，而非刷关或冲刺
@@ -31,5 +34,6 @@ Android Studio 打开仓库根目录 · 包名 `com.sensewalk.app` · minSdk 26 
 ```
 docs/plan.html          # 可视化计划 v0.6
 DEVELOPMENT.md          # 方案源码真理
+design/                 # PRD 级设计包（场景→角色→PRD→演示）
 app/src/main/assets/scenes/
 ```

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>选模式 · 慢行设计稿</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="page">
+  <a class="back" href="index.html">← 演示入口</a>
+  <div class="eyebrow">Screen · Mode</div>
+  <h1>模式选择</h1>
+  <p class="lead">选景之后的独立一步。会话开始后不可更换场景或模式。</p>
+  <div class="nav-links">
+    <a href="index.html">入口</a>
+    <a href="home-scene-picker.html">选景</a>
+    <a class="active" href="mode-select.html">选模式</a>
+    <a href="session-walk.html">会话</a>
+    <a href="clear-abandon.html">通关/放弃</a>
+  </div>
+  <div class="stage">
+    <div class="phone">
+      <div class="phone-bar"><span>9:41</span><span>模式</span></div>
+      <div class="phone-body">
+        <div class="mode-scene">← <b>雨林</b> · 450 m</div>
+        <div class="mode-q">你想怎么走？</div>
+        <div class="mode-option selected" id="m1">
+          <strong>手机控角色 · 虚走</strong>
+          <span>摇杆找舒适节奏。拉满并不会更快。</span>
+        </div>
+        <div class="mode-option" id="m2">
+          <strong>户外实走</strong>
+          <span>用真实脚步走完距离。无摇杆；过快仅轻提示。</span>
+        </div>
+        <a class="btn-primary" href="session-walk.html" style="text-align:center;display:block;text-decoration:none">开始</a>
+      </div>
+    </div>
+    <div class="side-notes">
+      <h2>设计要点</h2>
+      <ul>
+        <li>默认选中虚走，降低决策负担</li>
+        <li>文案诚实写出「拉满≠更快」</li>
+        <li>实走权限在点开始后按需请求</li>
+        <li>冷启动到开步计入点击预算</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="demo-foot">mode-select.html</footer>
+</div>
+<script>
+  const m1 = document.getElementById('m1'), m2 = document.getElementById('m2');
+  m1.onclick = () => { m1.classList.add('selected'); m2.classList.remove('selected'); };
+  m2.onclick = () => { m2.classList.add('selected'); m1.classList.remove('selected'); };
+</script>
+</body>
+</html>

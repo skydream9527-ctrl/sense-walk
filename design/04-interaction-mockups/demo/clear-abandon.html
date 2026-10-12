@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>通关 / 放弃 · 慢行设计稿</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="page">
+  <a class="back" href="index.html">← 演示入口</a>
+  <div class="eyebrow">Screen · Clear / Abandon</div>
+  <h1>通关与放弃</h1>
+  <p class="lead">唯一完成态是满距通关。放弃文案温和、不评判操作分。无星级、无排行、无强制分享。</p>
+  <div class="nav-links">
+    <a href="index.html">入口</a>
+    <a href="home-scene-picker.html">选景</a>
+    <a href="mode-select.html">选模式</a>
+    <a href="session-walk.html">会话</a>
+    <a class="active" href="clear-abandon.html">通关/放弃</a>
+  </div>
+  <div class="stage">
+    <div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:8px">通关页</div>
+      <div class="phone" style="margin-bottom:20px">
+        <div class="phone-bar"><span>9:41</span><span>通关</span></div>
+        <div class="phone-body" style="background:radial-gradient(ellipse at 50% 40%, rgba(30,61,54,0.45), var(--void) 70%)">
+          <div class="end-center">
+            <div style="font-size:0.75rem;letter-spacing:0.14em;color:var(--muted)">COMPLETED</div>
+            <h2>这段路，走完了</h2>
+            <div class="meta"><b>雨林</b> · 450 m</div>
+            <div class="meta">用时 15:42</div>
+            <a class="btn-primary" href="home-scene-picker.html" style="margin-top:18px;text-align:center;display:block;text-decoration:none;width:100%">回去</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:8px">放弃确认</div>
+      <div class="phone">
+        <div class="phone-bar"><span>9:41</span><span>暂停</span></div>
+        <div class="phone-body">
+          <div class="end-center">
+            <h2>这段路还没走完，下次再续。</h2>
+            <div class="meta">已走 128 / 450 m · 不发通关</div>
+            <div class="btn-row" style="width:100%">
+              <a class="btn-ghost" href="home-scene-picker.html" style="text-align:center;text-decoration:none;display:block">离开</a>
+              <a class="btn-primary" href="session-walk.html" style="text-align:center;text-decoration:none;display:block">继续走</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="side-notes" style="margin-top:18px;max-width:none">
+        <h2>文案与规则</h2>
+        <ul>
+          <li>通关：场景名 + 米数 + 用时；SessionClock 仅展示</li>
+          <li>放弃：温和；首版不续同局（确认后回 Home）</li>
+          <li>演示中的「继续走」仅便于预览会话稿</li>
+          <li>不出现「操作评分」「再快一点就能…」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="demo-foot">clear-abandon.html</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>会话 · 慢行设计稿</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="page">
+  <a class="back" href="index.html">← 演示入口</a>
+  <div class="eyebrow">Screen · Session</div>
+  <h1>会话行走（虚走示意）</h1>
+  <p class="lead">必须看见：黑幕起笔 → 景色层层展开、非平坦路径、摇杆甜点区（最大偏转 ≠ 最快）。下方按钮模拟路程阶段（设计保真，非真实计距引擎）。</p>
+  <div class="nav-links">
+    <a href="index.html">入口</a>
+    <a href="home-scene-picker.html">选景</a>
+    <a href="mode-select.html">选模式</a>
+    <a class="active" href="session-walk.html">会话</a>
+    <a href="clear-abandon.html">通关/放弃</a>
+  </div>
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="session-canvas">
+        <div class="layer mist" id="lyMist"></div>
+        <div class="layer trees" id="lyTrees"></div>
+        <div class="layer detail" id="lyDetail"></div>
+        <div class="path" aria-hidden="true">
+          <svg viewBox="0 0 280 90" preserveAspectRatio="none">
+            <!-- uneven terrain silhouette -->
+            <path d="M0,70 C40,68 55,40 80,42 C100,44 110,58 130,55 C150,52 160,28 185,30 C210,32 220,58 245,60 C260,62 270,55 280,52 L280,90 L0,90 Z"
+              fill="rgba(40,60,52,0.55)" stroke="rgba(196,212,168,0.35)" stroke-width="1.5"/>
+            <path d="M0,70 C40,68 55,40 80,42 C100,44 110,58 130,55 C150,52 160,28 185,30 C210,32 220,58 245,60 C260,62 270,55 280,52"
+              fill="none" stroke="rgba(212,184,150,0.5)" stroke-width="1" stroke-dasharray="4 4"/>
+          </svg>
+        </div>
+        <div class="traveler" id="traveler">
+          <div class="head"></div>
+          <div class="body"></div>
+        </div>
+      </div>
+      <div class="hud">
+        <div>
+          <div class="meters" id="meters">0 / 450 m</div>
+          <div style="font-size:0.68rem;color:var(--muted);margin-top:2px">雨林 · 虚走</div>
+        </div>
+        <div class="hint" id="hint">节奏正好</div>
+      </div>
+      <div class="stick-wrap">
+        <div class="stick" title="舒适摇杆示意">
+          <div class="stick-sweet"></div>
+          <div class="stick-knob" id="knob"></div>
+          <div class="stick-labels">
+            <span class="max-l">拉满 · 更慢</span>
+            <span class="sweet-l">甜点区</span>
+          </div>
+        </div>
+        <div class="stick-caption">推到最大 ≠ 走得最快 · 松一点更稳</div>
+      </div>
+      <div class="abandon">长按放弃</div>
+    </div>
+    <div class="side-notes">
+      <h2>阶段模拟</h2>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:8px">点击切换路程，观察黑幕→雾→树冠→光斑，以及旅人在起伏路径上的位置。</p>
+      <div class="phase-controls">
+        <button type="button" class="on" data-p="0">0 m 黑幕</button>
+        <button type="button" data-p="45">45 m 雾</button>
+        <button type="button" data-p="135">135 m 树</button>
+        <button type="button" data-p="225">225 m 细节</button>
+        <button type="button" data-p="450">450 m 满距</button>
+      </div>
+      <h2 style="margin-top:18px">设计要点</h2>
+      <ul>
+        <li><span class="tag">黑幕</span>会话从虚空起笔</li>
+        <li><span class="tag">地形</span>虚线标出非平路径</li>
+        <li><span class="tag">摇杆</span>虚线圈 = 甜点；顶端标注拉满更慢</li>
+        <li><span class="tag">HUD</span>极简米数；「节奏正好」可短暂出现</li>
+        <li>放弃为长按，低对比，防误触</li>
+      </ul>
+      <p style="margin-top:12px"><a href="clear-abandon.html">查看通关 / 放弃页 →</a></p>
+    </div>
+  </div>
+  <footer class="demo-foot">session-walk.html · 雨林示意</footer>
+</div>
+<script>
+(function () {
+  const mist = document.getElementById('lyMist');
+  const trees = document.getElementById('lyTrees');
+  const detail = document.getElementById('lyDetail');
+  const meters = document.getElementById('meters');
+  const hint = document.getElementById('hint');
+  const traveler = document.getElementById('traveler');
+  const knob = document.getElementById('knob');
+  const buttons = document.querySelectorAll('.phase-controls button');
+
+  function setPhase(p) {
+    mist.classList.toggle('on', p >= 45);
+    trees.classList.toggle('on', p >= 135);
+    detail.classList.toggle('on', p >= 225);
+    meters.textContent = p + ' / 450 m';
+    hint.classList.toggle('show', p >= 45 && p < 450);
+    // move traveler along path roughly
+    const t = Math.min(1, p / 450);
+    traveler.style.left = (18 + t * 55) + '%';
+    // knob: at mid phases sit in sweet; at end still sweet (never imply max=fast)
+    if (p === 0) {
+      knob.style.transform = 'translate(0, 0)';
+      hint.classList.remove('show');
+    } else if (p >= 450) {
+      knob.style.transform = 'translate(0, -20px)';
+      hint.textContent = '可以通关了';
+      hint.classList.add('show');
+    } else {
+      knob.style.transform = 'translate(0, -22px)';
+      hint.textContent = '节奏正好';
+    }
+    buttons.forEach(b => b.classList.toggle('on', Number(b.dataset.p) === p));
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setPhase(Number(b.dataset.p))));
+  const params = new URLSearchParams(location.search);
+  const initial = Number(params.get('p') || '0');
+  setPhase(Number.isFinite(initial) ? initial : 0);
+})();
+</script>
+</body>
+</html>

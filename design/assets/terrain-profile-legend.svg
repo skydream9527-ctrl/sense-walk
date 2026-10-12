@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120" viewBox="0 0 480 120">
+  <rect width="480" height="120" fill="#0c0e10"/>
+  <text x="16" y="24" fill="#8a938a" font-family="sans-serif" font-size="12">地形剖面示意（通用）</text>
+  <path d="M20,90 C60,88 80,50 120,52 C150,54 170,70 200,66 C230,62 250,30 290,34 C330,38 350,72 390,74 C420,76 450,60 460,58"
+    fill="none" stroke="#d4b896" stroke-width="2"/>
+  <text x="70" y="110" fill="#c4d4a8" font-family="sans-serif" font-size="10">坡</text>
+  <text x="180" y="110" fill="#c4d4a8" font-family="sans-serif" font-size="10">不平</text>
+  <text x="270" y="110" fill="#c4d4a8" font-family="sans-serif" font-size="10">跳</text>
+  <text x="360" y="110" fill="#c4d4a8" font-family="sans-serif" font-size="10">喘息平地</text>
+</svg>
