@@ -6,7 +6,9 @@
 
 **[打开可视化计划页 →](./docs/plan.html)**（单文件 HTML，可双击离线打开，支持深/浅色）
 
-完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.6**：耐心/减压定位 + 舒适节奏摇杆 + 地形动作 + 景色层层展开 + 多场景声音身份 + 距离门禁 + 双模式）。
+完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.8**）：[当前代码进度](./DEVELOPMENT.md#0-当前进度仓库核查2026-10-12)、[分阶段交付与验收](./DEVELOPMENT.md#13-里程碑)、[完善与改进建议](./DEVELOPMENT.md#20-完善与改进v08)。产品规则保留 v0.7，进度以源码与验证记录为准。
+
+**交给 ZCode 开发**：见 [开发任务与可复制提示词](./docs/zcode-handoff.md)（总提示词 + T01–T09 分阶段提示词 + 验收清单）。
 
 **完整设计包（PRD 级）**见 [`design/`](./design/)：场景与地形 → 角色 → PRD → [交互演示](./design/04-interaction-mockups/demo/index.html)。阅读顺序以 `design/README.md` 为准。
 
@@ -22,17 +24,24 @@
 - **距离门禁**：进度 = 有效距离；未满要求米数不能通关；长按 = 放弃
 - 感官与视觉层随 **`atMeters`** 展开；耳目同程、不可加速揭示
 
-## Week 1 骨架（当前代码）
+## 当前状态（2026-10-12）
 
-Kotlin + Jetpack Compose：首页三景卡片、静默会话、设置、stub 音效/振动。  
-计划下周：距离门禁、选景→选模式流程、舒适摇杆曲线 stub、地形路径占位、补雨林/城市配置、会话内黑幕起笔的 VisualShell stub。详见计划页。
+Kotlin + Jetpack Compose：森林/沙漠/夜径卡片、静默计时会话、设置和音效/振动 stub 已有源码。距离门禁、模式选择、摇杆、计步、分层景色和真实音频均待实现；HTML demo 是设计原型。
 
-## 打开工程
+接下来按验收推进：M0 工程与 schema v2 → M1 森林 800 m 虚走闭环 → M2 实走、前台服务和恢复 → M3 四景内容与内测。GPS 辅助等放后续。具体任务及构建验证状态见开发计划。
+
+## GitHub 云端打包
+
+本地无需准备完整 Android 环境。代码提交后由 [GitHub Actions](https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml) 执行测试/lint/构建，提供 APK、报告与源码交接 ZIP（Artifacts 保留 30 天）。
+
+在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前 APK 仍为 Week 1 骨架，后续按 T02–T09 开发。
+
+## 打开工程（可选，本地开发时）
 
 Android Studio 打开仓库根目录 · 包名 `com.sensewalk.app` · minSdk 26 · targetSdk 35
 
 ```
-docs/plan.html          # 可视化计划 v0.6
+docs/plan.html          # 可视化计划 v0.8
 DEVELOPMENT.md          # 方案源码真理
 design/                 # PRD 级设计包（场景→角色→PRD→演示）
 app/src/main/assets/scenes/

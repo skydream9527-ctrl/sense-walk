@@ -1,9 +1,9 @@
 # 慢行 · SenseWalk — 完整设计包
 
-> 与仓库真理文档 **v0.6**（[`DEVELOPMENT.md`](../DEVELOPMENT.md)、[`docs/plan.html`](../docs/plan.html)）对齐的 **PRD 级设计包**。  
+> 与仓库真理文档 **v0.8**（[`DEVELOPMENT.md`](../DEVELOPMENT.md)、[`docs/plan.html`](../docs/plan.html)）对齐的 **PRD 级设计包**。  
 > 本目录只含设计与交互稿，**不修改** `app/` 业务代码。
 
-**版本**：design-pack · 2026-10-11 · 约束源：产品规则 v0.6  
+**版本**：design-pack · 2026-10-12 · 约束源：产品规则 v0.8  
 **语言**：简体中文
 
 ---
@@ -25,7 +25,7 @@
 
 ## 硬约束（不可矛盾）
 
-本包所有文档必须服从 v0.6：
+本包所有文档必须服从 DEVELOPMENT.md v0.8：
 
 - **距离门禁**：通关 ⟺ 有效距离 ≥ `requiredDistanceMeters`；不可跳过 / 加速 / 提前通关
 - **双模式**：虚走（舒适摇杆）/ 实走（计步）；会话中途不可换景或换模式
@@ -53,8 +53,10 @@ design/
 
 ## 演示入口
 
+HTML demo 是设计原型，旧截图不代表 Android 已实现；交付状态与本轮改进见 DEVELOPMENT.md §0 / §13 / §20。
+
 本地打开：[`04-interaction-mockups/demo/index.html`](./04-interaction-mockups/demo/index.html)
 
 ---
 
-*设计包服从 DEVELOPMENT.md v0.6；若冲突，以 DEVELOPMENT.md 为准。*
+*设计包服从 DEVELOPMENT.md v0.8；若冲突，以 DEVELOPMENT.md 为准。*

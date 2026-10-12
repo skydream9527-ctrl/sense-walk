@@ -10,66 +10,78 @@
 | 相对进度 | 听觉 / 触觉 | 景色（视觉） |
 | --- | --- | --- |
 | 0% | 静默 | **黑幕 / 虚空** |
-| ~10% | 该场景脚步淡入 | 第一层氛围形 |
+| ~10% | 该场景脚步淡入（步频同步） | 第一层氛围形 |
 | ~30% | 该场景环境淡入 | 主体景物 |
-| ~50% | 该场景振动 | 细节丰富 |
+| ~50% | 该场景振动（步频同步） | 细节丰富 |
+| ~75%（v0.7） | 深层远音（远雷/远鸟/风沙/钟声/夜风） | 远景生命与透光变化 |
+| ~95%（v0.7） | 环境层轻轻收窄（抵达前宁静） | 终点意象隐现（幽径/空地/绿洲/长椅/石阶） |
 | 100% | 可通关 | 景色保持完整（不切屏炫技） |
 
-停走 → 进度停。淡入用 `fadeMs` / opacity 插值，避免一步跳变。
+停走 → 进度停。淡入用 `fadeMs`（音）/ `fadeMeters`（视）插值，避免一步跳变。
 
 ---
 
 ## 2. 分场景绝对米数表
 
-### 雨林 450 m
+### 雨林 900 m
 
 | atMeters | 音/振 | 视觉 layer |
 | --- | --- | --- |
 | 0 | silence | void |
-| 45 | footsteps 0.24 | mist |
-| 135 | ambience 0.36 | trunks_canopy |
-| 225 | haptics drip_soft | vines_light |
-| 450 | 通关门禁 | 保持 |
+| 90 | footsteps 0.24 | mist |
+| 270 | ambience 0.36 | trunks_canopy |
+| 450 | haptics drip_soft | vines_light |
+| 675 | deep_thunder 0.20 | deep_canopy_light |
+| 855 | 环境收窄 | clearing_light |
+| 900 | 通关门禁 | 保持 |
 
-### 森林 400 m
-
-| atMeters | 音/振 | 视觉 |
-| --- | --- | --- |
-| 0 | silence | void |
-| 40 | footsteps | 轮廓树木 |
-| 120 | ambience | 树干/林间光 |
-| 200 | haptics footstep_soft | 落叶/路径细节 |
-| 400 | 通关 | 保持 |
-
-### 沙漠 600 m
+### 森林 800 m
 
 | atMeters | 音/振 | 视觉 |
 | --- | --- | --- |
 | 0 | silence | void |
-| 60 | footsteps | 天际线 |
-| 180 | ambience 风沙 | 沙丘轮廓 |
-| 300 | haptics footstep_sand | 沙纹/热浪感 |
-| 600 | 通关 | 保持 |
+| 80 | footsteps 0.25 | 轮廓树木 |
+| 240 | ambience 0.35 | 树干/林间光 |
+| 400 | haptics footstep_soft | 落叶/路径细节 |
+| 600 | deep_birds 0.20 | 飞鸟剪影/透光光柱 |
+| 760 | 环境收窄 | 林间空地微光 |
+| 800 | 通关 | 保持 |
 
-### 城市 500 m
-
-| atMeters | 音/振 | 视觉 |
-| --- | --- | --- |
-| 0 | silence | void |
-| 50 | footsteps | 远景轮廓 |
-| 150 | ambience 低通车流 | 街灯/建筑剪影 |
-| 250 | haptics curb_tap | 近景街道 |
-| 500 | 通关 | 保持 |
-
-### 夜径 350 m（可选）
+### 沙漠 1200 m
 
 | atMeters | 音/振 | 视觉 |
 | --- | --- | --- |
 | 0 | silence | void |
-| 35 | footsteps | 微弱路径 |
-| 100 | ambience 夜虫 | 月光/远灯 |
-| 175 | haptics pulse_slow | 夜景层次 |
-| 350 | 通关 | 保持 |
+| 120 | footsteps | 天际线 |
+| 360 | ambience 风沙 | 沙丘轮廓 |
+| 600 | haptics footstep_sand | 沙纹/热浪感 |
+| 900 | deep_wind 渐退 | 星光微显/沙波定型 |
+| 1140 | 环境渐息（静） | 远方绿洲轮廓 |
+| 1200 | 通关 | 保持 |
+
+### 城市 1000 m
+
+| atMeters | 音/振 | 视觉 |
+| --- | --- | --- |
+| 0 | silence | void |
+| 100 | footsteps | 远景轮廓 |
+| 300 | ambience 低通车流 | 街灯/建筑剪影 |
+| 500 | haptics curb_tap | 近景街道 |
+| 750 | deep_bell 远钟微露 | 远景天际微明 |
+| 950 | 环境音微敛 | 街角长椅灯晕 |
+| 1000 | 通关 | 保持 |
+
+### 夜径 700 m（可选）
+
+| atMeters | 音/振 | 视觉 |
+| --- | --- | --- |
+| 0 | silence | void |
+| 70 | footsteps | 微弱路径 |
+| 200 | ambience 夜虫 | 月光/远灯 |
+| 350 | haptics pulse_slow | 夜景层次 |
+| 525 | deep_breeze 夜风 | 星光密布/树稍微明 |
+| 665 | 环境音微收 | 石阶尽头微明 |
+| 700 | 通关 | 保持 |
 
 ---
 
