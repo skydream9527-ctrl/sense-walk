@@ -292,7 +292,7 @@ private fun SessionContent(
                 Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 48.dp, end = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 AbandonControl(
                     enabled = sessionActive,
