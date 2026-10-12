@@ -14,7 +14,7 @@ object SceneDurationEstimator {
     /** 地形速度系数（§5.7）；gap_hop 采用「站稳再跳」的保守近似，待 T07 实装后校准 */
     fun terrainSpeedFactor(kind: TerrainKind, grade: Float?): Double = when (kind) {
         TerrainKind.FLAT -> 1.00
-        TerrainKind.SLOPE_UP -> (1.0 - 1.5 * (grade ?: 0.08)).coerceAtLeast(0.80)
+        TerrainKind.SLOPE_UP -> (1.0 - 1.5 * (grade?.toDouble() ?: 0.08)).coerceAtLeast(0.80)
         TerrainKind.SLOPE_DOWN -> 0.95
         TerrainKind.GAP_HOP -> 0.90
         TerrainKind.UNEVEN -> 0.95
