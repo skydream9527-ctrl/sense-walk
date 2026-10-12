@@ -26,7 +26,7 @@
 
 ## 当前状态（2026-10-12）
 
-Kotlin + Jetpack Compose：森林/沙漠/夜径卡片、静默计时会话、设置和音效/振动 stub 已有源码。距离门禁、模式选择、摇杆、计步、分层景色和真实音频均待实现；HTML demo 是设计原型。
+Kotlin + Jetpack Compose：森林/沙漠/夜径卡片、静默计时会话、设置和音效/振动 stub 已有源码。**T02 已完成**：场景配置迁移到 schema v2（距离相位 + pathProfile + 显式开发占位）、解析与 SceneValidator 校验、可观察加载状态（错误可诊断可重试）、时长按距离推导，53 个 JVM 单测在 CI 执行。距离门禁、模式选择、摇杆、计步、分层景色渲染和真实音频仍待实现；HTML demo 是设计原型。
 
 接下来按验收推进：M0 工程与 schema v2 → M1 森林 800 m 虚走闭环 → M2 实走、前台服务和恢复 → M3 四景内容与内测。GPS 辅助等放后续。具体任务及构建验证状态见开发计划。
 
@@ -34,7 +34,7 @@ Kotlin + Jetpack Compose：森林/沙漠/夜径卡片、静默计时会话、设
 
 本地无需准备完整 Android 环境。代码提交后由 [GitHub Actions](https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml) 执行测试/lint/构建，提供 APK、报告与源码交接 ZIP（Artifacts 保留 30 天）。
 
-在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前 APK 仍为 Week 1 骨架，后续按 T02–T09 开发。
+在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前 APK 仍为 Week 1 骨架，后续按 T02–T09 开发。版本矩阵、本地构建步骤与已知网络问题见 [docs/BUILD.md](./docs/BUILD.md)。
 
 ## 打开工程（可选，本地开发时）
 

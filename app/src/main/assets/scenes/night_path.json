@@ -1,15 +1,44 @@
 {
+  "schemaVersion": 2,
   "id": "night_path",
   "name": "夜径",
-  "suggestedMinutes": 12,
+  "mood": "小心、星空、安静",
+  "themeColor": "#1A1F3A",
+  "requiredDistanceMeters": 700,
+  "stickCurveId": "comfort_v1",
   "phases": [
-    { "atSec": 0, "action": "silence" },
-    { "atSec": 40, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.22, "fadeMs": 8000 },
-    { "atSec": 100, "action": "fadeIn", "layer": "ambience", "toVolume": 0.28, "fadeMs": 12000 },
-    { "atSec": 160, "action": "haptics", "pattern": "pulse_slow", "intervalMs": 700 }
+    { "id": "void", "atMeters": 0, "channel": "visual", "layer": "void", "toOpacity": 1.0 },
+    { "id": "steps", "atMeters": 70, "channel": "audio", "layer": "footsteps", "toVolume": 0.25, "fadeMs": 8000 },
+    { "id": "faint_path", "atMeters": 70, "channel": "visual", "layer": "faint_path", "toOpacity": 0.5, "fadeMeters": 15 },
+    { "id": "crickets", "atMeters": 200, "channel": "audio", "layer": "ambience", "toVolume": 0.3, "fadeMs": 12000 },
+    { "id": "moonlight", "atMeters": 200, "channel": "visual", "layer": "moonlight", "toOpacity": 0.6, "fadeMeters": 20 },
+    { "id": "haptic_pulse", "atMeters": 350, "channel": "haptic", "pattern": "pulse_slow", "everyNSteps": 2 },
+    { "id": "night_layers", "atMeters": 350, "channel": "visual", "layer": "night_layers", "toOpacity": 0.7, "fadeMeters": 20 },
+    { "id": "deep_breeze", "atMeters": 525, "channel": "audio", "layer": "deep_breeze", "toVolume": 0.15, "fadeMs": 10000 },
+    { "id": "star_glimmer", "atMeters": 525, "channel": "visual", "layer": "star_glimmer", "toOpacity": 0.5, "fadeMeters": 25 },
+    { "id": "stair_end", "atMeters": 665, "channel": "visual", "layer": "stair_end", "toOpacity": 0.8, "fadeMeters": 25 }
   ],
+  "pathProfile": {
+    "segments": [
+      { "from": 0, "to": 120, "kind": "flat" },
+      { "from": 120, "to": 220, "kind": "uneven" },
+      { "from": 220, "to": 250, "kind": "gap_hop" },
+      { "from": 250, "to": 400, "kind": "slope_up", "grade": 0.06 },
+      { "from": 400, "to": 560, "kind": "flat" },
+      { "from": 560, "to": 700, "kind": "uneven" }
+    ]
+  },
   "layers": {
-    "footsteps": { "file": "audio/night_steps.ogg", "loop": true },
-    "ambience": { "file": "audio/night_insects.ogg", "loop": true }
+    "footsteps": { "type": "stepOneShot", "placeholder": "dev_tone_variants:stone_step" },
+    "ambience": { "type": "loop", "placeholder": "dev_tone:night_crickets" },
+    "deep_breeze": { "type": "loop", "placeholder": "dev_tone:night_breeze" }
+  },
+  "visualLayers": {
+    "void": { "type": "solid", "color": "#05060A" },
+    "faint_path": { "type": "parallax", "placeholder": "dev_silhouette:night_faint_path", "parallax": 0.6 },
+    "moonlight": { "type": "parallax", "placeholder": "dev_gradient:night_moonlight", "parallax": 0.1 },
+    "night_layers": { "type": "parallax", "placeholder": "dev_silhouette:night_tree_lines", "parallax": 0.3 },
+    "star_glimmer": { "type": "overlay", "placeholder": "dev_gradient:night_stars" },
+    "stair_end": { "type": "overlay", "placeholder": "dev_gradient:night_stair_end" }
   }
 }

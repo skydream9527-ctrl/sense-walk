@@ -1,74 +1,48 @@
 package com.sensewalk.app.data
 
 import android.content.Context
-import com.sensewalk.app.domain.scene.Layer
-import com.sensewalk.app.domain.scene.Phase
-import com.sensewalk.app.domain.scene.Scene
-import org.json.JSONObject
+import com.sensewalk.app.domain.scene.SceneLoadState
+import com.sensewalk.app.domain.scene.SceneLoader
+import com.sensewalk.app.domain.scene.SceneSource
+import com.sensewalk.app.domain.scene.SceneValidator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
- * Loads scene JSON from assets/scenes/.
+ * 场景配置仓库：assets 适配层。
+ *
+ * 解析与校验在纯 Kotlin 的 [SceneLoader] 中完成（JVM 可测）；
+ * 本类只提供 assets 数据源与素材定位器，并在 IO 线程执行读取。
  */
-class SceneRepository(private val context: Context) {
+class SceneRepository(context: Context) {
 
-    fun loadAll(): List<Scene> {
-        val ids = listOf("forest", "desert", "night_path")
-        return ids.mapNotNull { id ->
-            runCatching { load(id) }.getOrNull()
-        }
+    private val appContext = context.applicationContext
+
+    private val source = object : SceneSource {
+        override fun availableSceneIds(): List<String> =
+            appContext.assets.list(SCENES_DIR)
+                ?.filter { it.endsWith(".json") }
+                ?.map { it.removeSuffix(".json") }
+                .orEmpty()
+                .sorted()
+
+        override fun readScene(sceneId: String): String =
+            appContext.assets.open("$SCENES_DIR/$sceneId.json").bufferedReader().use { it.readText() }
     }
 
-    fun load(sceneId: String): Scene {
-        val path = "scenes/$sceneId.json"
-        val text = context.assets.open(path).bufferedReader().use { it.readText() }
-        return parseScene(text)
+    private val assetLocator = SceneValidator.AssetLocator { path ->
+        val dir = path.substringBeforeLast('/', "")
+        val name = path.substringAfterLast('/', "")
+        appContext.assets.list(dir)?.contains(name) == true
     }
 
-    companion object {
-        fun parseScene(jsonText: String): Scene {
-            val root = JSONObject(jsonText)
-            val phasesJson = root.getJSONArray("phases")
-            val phases = buildList {
-                for (i in 0 until phasesJson.length()) {
-                    val p = phasesJson.getJSONObject(i)
-                    add(
-                        Phase(
-                            atSec = p.getInt("atSec"),
-                            action = p.getString("action"),
-                            layer = p.optionalString("layer"),
-                            toVolume = if (p.has("toVolume")) p.getDouble("toVolume").toFloat() else null,
-                            fadeMs = if (p.has("fadeMs")) p.getInt("fadeMs") else null,
-                            pattern = p.optionalString("pattern"),
-                            intervalMs = if (p.has("intervalMs")) p.getInt("intervalMs") else null,
-                        )
-                    )
-                }
-            }
-            val layersObj = root.getJSONObject("layers")
-            val layers = buildMap {
-                val keys = layersObj.keys()
-                while (keys.hasNext()) {
-                    val key = keys.next()
-                    val layerJson = layersObj.getJSONObject(key)
-                    put(
-                        key,
-                        Layer(
-                            file = layerJson.getString("file"),
-                            loop = layerJson.optBoolean("loop", true),
-                        )
-                    )
-                }
-            }
-            return Scene(
-                id = root.getString("id"),
-                name = root.getString("name"),
-                suggestedMinutes = root.getInt("suggestedMinutes"),
-                phases = phases,
-                layers = layers,
-            )
-        }
+    private val loader = SceneLoader(source, assetLocator)
 
-        private fun JSONObject.optionalString(key: String): String? =
-            if (has(key) && !isNull(key)) getString(key) else null
+    suspend fun loadAll(): SceneLoadState = withContext(Dispatchers.IO) {
+        loader.loadAll()
+    }
+
+    private companion object {
+        const val SCENES_DIR = "scenes"
     }
 }

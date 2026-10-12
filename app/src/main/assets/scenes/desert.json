@@ -1,15 +1,46 @@
 {
+  "schemaVersion": 2,
   "id": "desert",
-  "name": "沙漠独行",
-  "suggestedMinutes": 15,
+  "name": "沙漠",
+  "mood": "空旷、风、孤独、热意退后的静",
+  "themeColor": "#2A2418",
+  "requiredDistanceMeters": 1200,
+  "stickCurveId": "comfort_v1",
   "phases": [
-    { "atSec": 0, "action": "silence" },
-    { "atSec": 60, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.2, "fadeMs": 10000 },
-    { "atSec": 150, "action": "fadeIn", "layer": "ambience", "toVolume": 0.3, "fadeMs": 15000 },
-    { "atSec": 210, "action": "haptics", "pattern": "footstep_sand", "intervalMs": 900 }
+    { "id": "void", "atMeters": 0, "channel": "visual", "layer": "void", "toOpacity": 1.0 },
+    { "id": "steps", "atMeters": 120, "channel": "audio", "layer": "footsteps", "toVolume": 0.25, "fadeMs": 8000 },
+    { "id": "horizon", "atMeters": 120, "channel": "visual", "layer": "horizon", "toOpacity": 0.5, "fadeMeters": 20 },
+    { "id": "wind", "atMeters": 360, "channel": "audio", "layer": "ambience", "toVolume": 0.35, "fadeMs": 12000 },
+    { "id": "dune_ridges", "atMeters": 360, "channel": "visual", "layer": "dune_ridges", "toOpacity": 0.7, "fadeMeters": 25 },
+    { "id": "haptic_sand", "atMeters": 600, "channel": "haptic", "pattern": "footstep_sand", "everyNSteps": 3 },
+    { "id": "sand_ripples", "atMeters": 600, "channel": "visual", "layer": "sand_ripples", "toOpacity": 0.8, "fadeMeters": 25 },
+    { "id": "deep_wind", "atMeters": 900, "channel": "audio", "layer": "deep_wind", "toVolume": 0.18, "fadeMs": 10000 },
+    { "id": "stars", "atMeters": 900, "channel": "visual", "layer": "stars", "toOpacity": 0.55, "fadeMeters": 30 },
+    { "id": "oasis", "atMeters": 1140, "channel": "visual", "layer": "oasis", "toOpacity": 0.85, "fadeMeters": 30 }
   ],
+  "pathProfile": {
+    "segments": [
+      { "from": 0, "to": 180, "kind": "flat" },
+      { "from": 180, "to": 360, "kind": "slope_up", "grade": 0.10 },
+      { "from": 360, "to": 480, "kind": "flat" },
+      { "from": 480, "to": 680, "kind": "slope_up", "grade": 0.08 },
+      { "from": 680, "to": 720, "kind": "gap_hop" },
+      { "from": 720, "to": 960, "kind": "uneven" },
+      { "from": 960, "to": 1080, "kind": "flat" },
+      { "from": 1080, "to": 1200, "kind": "slope_down" }
+    ]
+  },
   "layers": {
-    "footsteps": { "file": "audio/desert_steps.ogg", "loop": true },
-    "ambience": { "file": "audio/desert_wind.ogg", "loop": true }
+    "footsteps": { "type": "stepOneShot", "placeholder": "dev_tone_variants:desert_step" },
+    "ambience": { "type": "loop", "placeholder": "dev_tone:desert_wind" },
+    "deep_wind": { "type": "loop", "placeholder": "dev_tone:desert_far_wind" }
+  },
+  "visualLayers": {
+    "void": { "type": "solid", "color": "#0A0806" },
+    "horizon": { "type": "parallax", "placeholder": "dev_silhouette:desert_horizon", "parallax": 0.1 },
+    "dune_ridges": { "type": "parallax", "placeholder": "dev_silhouette:desert_dunes", "parallax": 0.3 },
+    "sand_ripples": { "type": "parallax", "placeholder": "dev_silhouette:desert_sand_ripples", "parallax": 0.6 },
+    "stars": { "type": "overlay", "placeholder": "dev_gradient:desert_stars" },
+    "oasis": { "type": "overlay", "placeholder": "dev_gradient:desert_oasis" }
   }
 }

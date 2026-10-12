@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sensewalk.app.domain.audio.AudioMixer
 import com.sensewalk.app.domain.haptics.HapticEngine
-import com.sensewalk.app.domain.scene.Scene
+import com.sensewalk.app.domain.scene.AudioLayerDef
+import com.sensewalk.app.domain.scene.SceneConfig
 import com.sensewalk.app.domain.scene.SessionClock
 import com.sensewalk.app.ui.theme.SenseBlack
 import com.sensewalk.app.ui.theme.SenseMuted
@@ -35,7 +36,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 
 @Composable
 fun SessionScreen(
-    scene: Scene,
+    scene: SceneConfig,
     silenceSeconds: Int,
     vibrationEnabled: Boolean,
     onEnd: (elapsedSeconds: Long) -> Unit,
@@ -52,8 +53,16 @@ fun SessionScreen(
     val clockVisible by clock.clockVisible.collectAsStateWithLifecycle()
 
     LaunchedEffect(clock) {
-        scene.layers.forEach { (id, layer) ->
-            audioMixer.prepare(id, layer.file, layer.loop)
+        scene.layers.forEach { (id, def) ->
+            // 音频仍是日志 stub（T05 接真实素材）；占位标记原样传入便于日志核对
+            when (def) {
+                is AudioLayerDef.Loop ->
+                    audioMixer.prepare(id, def.file ?: def.placeholder.orEmpty(), true)
+                is AudioLayerDef.StepOneShot -> {
+                    val path = def.files.firstOrNull() ?: def.placeholder.orEmpty()
+                    audioMixer.prepare(id, path, false)
+                }
+            }
         }
         clock.start()
     }

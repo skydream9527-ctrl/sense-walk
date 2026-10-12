@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.sensewalk.app.domain.scene.SceneConfig
+import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.ui.home.HomeScreen
 import com.sensewalk.app.ui.navigation.NavRoutes
 import com.sensewalk.app.ui.session.EndScreen
@@ -26,8 +28,11 @@ fun SenseWalkApp(
 ) {
     SenseWalkTheme {
         val navController = rememberNavController()
-        val scenes by viewModel.scenes.collectAsStateWithLifecycle()
+        val sceneState by viewModel.sceneState.collectAsStateWithLifecycle()
         val settings by viewModel.settings.collectAsStateWithLifecycle()
+
+        fun findScene(sceneId: String): SceneConfig? =
+            (sceneState as? SceneLoadState.Ready)?.scenes?.find { it.id == sceneId }
 
         NavHost(
             navController = navController,
@@ -38,7 +43,8 @@ fun SenseWalkApp(
         ) {
             composable(NavRoutes.HOME) {
                 HomeScreen(
-                    scenes = scenes,
+                    state = sceneState,
+                    onRetry = viewModel::retrySceneLoad,
                     onStart = { scene ->
                         navController.navigate(NavRoutes.session(scene.id))
                     },
@@ -62,7 +68,7 @@ fun SenseWalkApp(
                 arguments = listOf(navArgument("sceneId") { type = NavType.StringType }),
             ) { entry ->
                 val sceneId = entry.arguments?.getString("sceneId") ?: return@composable
-                val scene = scenes.find { it.id == sceneId } ?: return@composable
+                val scene = findScene(sceneId) ?: return@composable
                 SessionScreen(
                     scene = scene,
                     silenceSeconds = settings.silenceSeconds,
@@ -84,9 +90,9 @@ fun SenseWalkApp(
             ) { entry ->
                 val sceneId = entry.arguments?.getString("sceneId") ?: return@composable
                 val elapsed = entry.arguments?.getLong("elapsedSeconds") ?: 0L
-                val scene = scenes.find { it.id == sceneId }
+                val sceneName = findScene(sceneId)?.name ?: ""
                 EndScreen(
-                    sceneName = scene?.name ?: "",
+                    sceneName = sceneName,
                     elapsedSeconds = elapsed,
                     onWalkAgain = {
                         navController.navigate(NavRoutes.session(sceneId)) {

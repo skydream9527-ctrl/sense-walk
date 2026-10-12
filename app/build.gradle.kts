@@ -66,6 +66,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
+    // 场景配置 schema v2 解析（JsonElement，纯 JVM 可测，T02）
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    testImplementation("junit:junit:4.13.2")
 }

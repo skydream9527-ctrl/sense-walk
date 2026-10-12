@@ -758,10 +758,10 @@ stateDiagram-v2
 ### M0 — 工程基线与配置契约（P0，原 Week 2 前置）
 
 - [x] 源码已有 Compose 导航、静默计时、三个旧 JSON、DataStore、感官 stub（只确认源码存在）
-- [ ] GitHub Actions 云端构建：使用 JDK 17 / SDK 35、仓库 Wrapper 跑测试、lint 和 debug 打包；本地环境不作为前置
-- [ ] 确定 `SceneConfig` v2、森林 800 m 配置与 `SceneValidator`；一次迁移旧 JSON，避免长期双读
-- [ ] 复用 `.github/workflows/android.yml` 执行领域单测、JSON 校验与 debug 构建；上传 APK/报告/源码 ZIP，需要时生成 GitHub 测试预发布版本
-- [ ] `SceneRepository` 改为可观察的加载成功/失败；非法场景显示错误和重试，不静默吞掉
+- [x] GitHub Actions 云端构建：使用 JDK 17 / SDK 35、仓库 Wrapper 跑测试、lint 和 debug 打包；本地环境不作为前置（证据：run 38223104937 于 f8e606b 全绿——`testDebugUnitTest`+`lintDebug`+`assembleDebug` 通过，lint 0 errors / 20 warnings，APK 工件约 16.9 MB，预发布 `build-4-f8e606b`；记录见 §20.4）
+- [x] 确定 `SceneConfig` v2、森林 800 m 配置与 `SceneValidator`；一次迁移旧 JSON，避免长期双读（T02：三景迁移为距离相位，旧 atSec 读取逻辑已删除；53 个 JVM 单测见 §20.6）
+- [x] 复用 `.github/workflows/android.yml` 执行领域单测、JSON 校验与 debug 构建；上传 APK/报告/源码 ZIP，需要时生成 GitHub 测试预发布版本（T02 起 `testDebugUnitTest` 有真实测试：解析/校验/时长/加载/三景集成共 53 例，含对仓库实际 JSON 的校验；行走领域规则测试属 T03）
+- [x] `SceneRepository` 改为可观察的加载成功/失败；非法场景显示错误和重试，不静默吞掉（T02：`SceneLoadState` Loading/Ready/Error + 首页错误诊断与重试入口；JVM 测试覆盖坏 JSON/读取失败/重试恢复）
 
 **退出条件**：GitHub Actions 可构建并提供下载包；所有已迁移配置通过校验；缺失资源有显式占位/报错；首页不会因加载失败成为无解释空屏。
 
@@ -963,6 +963,23 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 - 本轮只整理文档与计划页，不实现 app 功能；已有未提交修改在原基础上保留，未提交或发布。
 - Android 构建：尝试 `./gradlew :app:assembleDebug --console=plain`，Gradle 8.9 分发包下载约 8 分钟仍未完成，本轮主动停止下载。未进入编译阶段，不能判断源码编译是否通过；也未运行 lint / Android 测试。下一步 M0 先完成构建基线。
 - 计划页：已通过 HTML ID/章节锚点/本地链接和 schema v2 示例 JSON 引用检查；Playwright 检查 1440×960、390×844 均无横向溢出，深浅色切换与改进章节导航正常，并检查截图。浏览器仅有本地服务缺 favicon 的 404，无页面脚本异常；Android 实走、声景、耗电和真机生命周期未验证。
+
+### 20.5 T01 工程与构建基线记录（2026-10-12）
+
+- 交付方式（用户确认）：编译、测试与 APK 打包全部由 GitHub Actions 执行；本地不要求完整 Android 环境。工作流沿用 `.github/workflows/android.yml`（935f127 引入），本阶段未改动。
+- 环境核查（本机实测）：JDK 仅 Temurin 21.0.12.1（兼容 JVM 17 目标，CI 用 Temurin 17）；Android SDK 位于 Homebrew `/opt/homebrew/share/android-commandlinetools`（platforms 34/35/36、build-tools 34/35/36、许可已接受）；已写本机 `local.properties`（gitignore 排除，未提交）。工具链：AGP 8.7.3 / Kotlin 2.0.21 / Wrapper 8.9 / compileSdk 35 / minSdk 26，组合互相兼容，无需升降级。
+- CI 首跑（935f127，run 38222463696）失败：`Scene.kt` KDoc 中 `scenes/*.json` 的 `/*` 被 Kotlin 嵌套块注释规则当作新注释开头，单一 `*/` 只闭合内层，`Scene`/`Phase`/`Layer` 全部被吞，产生 66 个级联编译错误。属真实源码缺陷（此前从未编译过）。修复见 f8e606b（仅改一行注释，用户提交）；全仓扫描确认无同类陷阱。
+- 复验（f8e606b，run 38223104937）：`testDebugUnitTest`+`lintDebug`+`assembleDebug` 全部通过，用时 3m02s；lint 0 errors / 20 warnings（UnusedResources 7、GradleDependency 7、MonochromeLauncherIcon 2、OldTargetApi/ObsoleteSdkInt/LockedOrientationActivity/DiscouragedApi 各 1，均为信息级，T01 不做无关升级故保留）；APK 工件 16.9 MB、检查报告与源码 ZIP 已上传，预发布 `build-4-f8e606b` 可下载。`testDebugUnitTest` 无测试源，为空集通过，不构成行为覆盖（T02/T03 补真实测试）。
+- 本机构建：按用户决定不作为前置。分发包 `services.gradle.org` 经 Java HTTPS 在本机网络不稳（SSL 中断，与 §20.4 记录一致）；如需本地构建，按 `docs/BUILD.md` 的 curl 断点续传方法完成一次下载即可。
+- 环境与复现说明：`docs/BUILD.md`（版本矩阵、云端/本地两条路径、已知网络问题与规避）。
+
+### 20.6 T02 配置契约与加载记录（2026-10-12）
+
+- **schema v2 落地**：`domain/scene/` 新增 `SceneConfig`（模型）、`SceneJsonParser`（kotlinx.serialization JsonElement 手写提取，带字段路径诊断，纯 JVM 无 org.json 依赖）、`SceneValidator`（数值/唯一性/排序/边界/层引用/淡入不越终/pathProfile 连续覆盖/前 10% 无 gap_hop/起点黑幕/叙事里程碑 ±5%/素材存在性）、`SceneDurationEstimator`（§6.1 时长推导，`suggestedMinutes` 删除）、`SceneLoader` + `SceneSource`（可注入数据源，Loading/Ready/Error）。新增依赖仅 `kotlinx-serialization-json:1.7.3`（运行时库，无 codegen 插件）与测试用 `junit:4.13.2`。
+- **三景迁移**：森林 800 m（相位 0/80/240/400/600/760，gap_hop 于 240–270 m）、沙漠 1200 m（0/120/360/600/900/1140）、夜径 700 m（0/70/200/350/525/665）；相位与地形剖面按各场景设计单页，不是 atSec×步速。旧 v1 读取（atSec/action/intervalMs/suggestedMinutes）已全部移除，无长期双读。
+- **占位策略**：音频/视觉素材当前全部为显式开发占位（`placeholder: "dev_*"`）；开发策略下合法并列入占位清单，`REQUIRE_REAL_ASSETS` 发布策略下三景全部不放行（有测试锁定该边界，防止把占位当成素材齐备）。
+- **加载状态**：`SceneRepository` 静默吞错改为 `SceneLoadState`（任一场景解析/校验失败 → 汇总 Error，不静默丢场景）；首页渲染 Loading/Error（诊断明细+重试）/Ready；错误态不出现无解释空列表。会话仍是静默计时骨架——本阶段只完成配置契约，未实现行走功能。
+- **测试**：53 个 JVM 单测（解析 13、校验 23、时长 3、加载/重试 7、真实三景集成 7），含坏 JSON、未知 schema、旧 v1 拒绝、重复 ID、越界相位、错误引用、路径断裂/重叠/未覆盖、前 10% gap_hop、缺素材、占位双策略、时长校准（13/19/11 分钟与 §6.1 一致）、修复后重试恢复。证据以推送后 GitHub Actions 实际运行为准。
 
 ---
 

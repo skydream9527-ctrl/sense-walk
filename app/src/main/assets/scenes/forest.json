@@ -1,15 +1,46 @@
 {
+  "schemaVersion": 2,
   "id": "forest",
-  "name": "森林漫步",
-  "suggestedMinutes": 15,
+  "name": "森林",
+  "mood": "树荫、清爽、生命感",
+  "themeColor": "#1F2A22",
+  "requiredDistanceMeters": 800,
+  "stickCurveId": "comfort_v1",
   "phases": [
-    { "atSec": 0, "action": "silence" },
-    { "atSec": 45, "action": "fadeIn", "layer": "footsteps", "toVolume": 0.25, "fadeMs": 8000 },
-    { "atSec": 120, "action": "fadeIn", "layer": "ambience", "toVolume": 0.35, "fadeMs": 12000 },
-    { "atSec": 180, "action": "haptics", "pattern": "footstep_soft", "intervalMs": 650 }
+    { "id": "void", "atMeters": 0, "channel": "visual", "layer": "void", "toOpacity": 1.0 },
+    { "id": "steps", "atMeters": 80, "channel": "audio", "layer": "footsteps", "toVolume": 0.25, "fadeMs": 8000 },
+    { "id": "tree_outline", "atMeters": 80, "channel": "visual", "layer": "tree_outline", "toOpacity": 0.6, "fadeMeters": 20 },
+    { "id": "ambience", "atMeters": 240, "channel": "audio", "layer": "ambience", "toVolume": 0.35, "fadeMs": 12000 },
+    { "id": "tree_trunks", "atMeters": 240, "channel": "visual", "layer": "tree_trunks", "toOpacity": 0.7, "fadeMeters": 25 },
+    { "id": "haptic_steps", "atMeters": 400, "channel": "haptic", "pattern": "footstep_soft", "everyNSteps": 2 },
+    { "id": "leaf_path", "atMeters": 400, "channel": "visual", "layer": "leaf_path", "toOpacity": 0.8, "fadeMeters": 25 },
+    { "id": "deep_birds", "atMeters": 600, "channel": "audio", "layer": "deep_birds", "toVolume": 0.2, "fadeMs": 10000 },
+    { "id": "light_shows", "atMeters": 600, "channel": "visual", "layer": "light_shows", "toOpacity": 0.65, "fadeMeters": 30 },
+    { "id": "clearing", "atMeters": 760, "channel": "visual", "layer": "clearing", "toOpacity": 0.9, "fadeMeters": 25 }
   ],
+  "pathProfile": {
+    "segments": [
+      { "from": 0, "to": 140, "kind": "flat" },
+      { "from": 140, "to": 240, "kind": "slope_up", "grade": 0.07 },
+      { "from": 240, "to": 270, "kind": "gap_hop" },
+      { "from": 270, "to": 400, "kind": "uneven" },
+      { "from": 400, "to": 520, "kind": "flat" },
+      { "from": 520, "to": 620, "kind": "slope_up", "grade": 0.05 },
+      { "from": 620, "to": 720, "kind": "uneven" },
+      { "from": 720, "to": 800, "kind": "flat" }
+    ]
+  },
   "layers": {
-    "footsteps": { "file": "audio/forest_steps.ogg", "loop": true },
-    "ambience": { "file": "audio/forest_insects.ogg", "loop": true }
+    "footsteps": { "type": "stepOneShot", "placeholder": "dev_tone_variants:forest_step" },
+    "ambience": { "type": "loop", "placeholder": "dev_tone:forest_insects" },
+    "deep_birds": { "type": "loop", "placeholder": "dev_tone:forest_birds" }
+  },
+  "visualLayers": {
+    "void": { "type": "solid", "color": "#060806" },
+    "tree_outline": { "type": "parallax", "placeholder": "dev_silhouette:forest_tree_outline", "parallax": 0.3 },
+    "tree_trunks": { "type": "parallax", "placeholder": "dev_silhouette:forest_trunks", "parallax": 0.3 },
+    "leaf_path": { "type": "parallax", "placeholder": "dev_silhouette:forest_leaf_path", "parallax": 0.6 },
+    "light_shows": { "type": "overlay", "placeholder": "dev_gradient:forest_light_shows" },
+    "clearing": { "type": "overlay", "placeholder": "dev_gradient:forest_clearing" }
   }
 }

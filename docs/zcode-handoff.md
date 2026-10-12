@@ -10,13 +10,13 @@
 4. T01–T08 是可由开发工具执行的工作；T09 还包含真人内测和实体手机验证。无法实际执行的部分必须标记「待验证」，不能据此宣称最终 MVP 已验收。
 5. 本地只需能编辑源码和提交代码；JDK、SDK、Gradle、测试和 APK 打包由 GitHub Actions 执行。本地缺 SDK/模拟器不阻塞开发；云端失败按日志修复。日历工期等 T04 跑通闭环后再估算。
 
-## 当前基线
+## 当前基线（2026-10-12，T02 后）
 
-- 技术栈：Kotlin、Jetpack Compose、Navigation、DataStore；minSdk 26，compileSdk / targetSdk 35。
-- 已有：首页三景（森林/沙漠/夜径）、静默计时、设置、结束页；音频/振动只是日志 stub。
-- 待做：schema v2、有效距离、摇杆、模式选择、相位、地形、真实素材、计步、前台服务、中断恢复和测试。
-- 已有 HTML 是设计原型，不能当 Android 功能完成的证据。
-- 最近构建尝试在 Gradle 8.9 下载阶段停止，未进入编译；不是已知编译通过，也不是已确认源码编译失败。
+- 技术栈：Kotlin、Jetpack Compose、Navigation、DataStore、kotlinx-serialization-json；minSdk 26，compileSdk / targetSdk 35。
+- 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`），自 f8e606b 起构建全绿；本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
+- 已有：首页三景（森林/沙漠/夜径）、静默计时、设置、结束页；音频/振动仍是日志 stub；**SceneConfig schema v2、解析器、SceneValidator、时长推导、Loading/Ready/Error 加载状态与 53 个 JVM 单测已落地（T02）**。
+- 待做：有效距离、摇杆、模式选择、相位执行、地形、真实素材（当前全部为显式开发占位）、计步、前台服务、中断恢复。
+- 已有 HTML 是设计原型，不能当 Android 功能完成的证据；会话行为仍是静默计时骨架，T02 只完成配置契约，不代表行走功能已实现。
 
 ## 开发计划
 
