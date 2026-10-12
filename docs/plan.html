@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>慢行 · SenseWalk — 产品 / 开发计划 v0.5</title>
+<title>慢行 · SenseWalk — 产品 / 开发计划 v0.6</title>
 <style>
   :root, [data-theme="dark"] {
     --bg: #0c0e10; --bg-elev: #14181c; --bg-card: #1a2026;
@@ -13,6 +13,7 @@
     --city: #2c3340; --night: #2a3348;
     --silence: #3a3f45; --foot: #6b8f71; --ambi: #8fa87a; --haptic: #c9a66b;
     --visual: #7a9eb8; --void: #0a0a0c;
+    --comfort: #a8c4d4; --terrain: #d4b896;
     --warn: #d4a574; --shadow: 0 8px 32px rgba(0,0,0,0.4);
     --toc-w: 228px; --radius: 14px;
     --font: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
@@ -26,6 +27,7 @@
     --city: #d9dee8; --night: #d8dde8;
     --silence: #c8cdc8; --foot: #4a7a52; --ambi: #6a8a4a; --haptic: #a67c3a;
     --visual: #3a6a8a; --void: #1a1a1e;
+    --comfort: #3a6a8a; --terrain: #8a6a3a;
     --warn: #8a5a28; --shadow: 0 8px 28px rgba(40,50,40,0.1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -73,6 +75,8 @@
   .chip.done { background: rgba(107,143,113,0.2); color: var(--foot); }
   .chip.rule { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
   .chip.vis { background: color-mix(in srgb, var(--visual) 22%, transparent); color: var(--visual); border-color: color-mix(in srgb, var(--visual) 45%, transparent); }
+  .chip.comfort { background: color-mix(in srgb, var(--comfort) 22%, transparent); color: var(--comfort); border-color: color-mix(in srgb, var(--comfort) 45%, transparent); }
+  .chip.terrain { background: color-mix(in srgb, var(--terrain) 22%, transparent); color: var(--terrain); border-color: color-mix(in srgb, var(--terrain) 45%, transparent); }
   section { margin-bottom: 52px; scroll-margin-top: 72px; }
   section > h2 { font-size: 1.4rem; font-weight: 560; margin-bottom: 8px; }
   .section-lead { color: var(--muted); margin-bottom: 22px; max-width: 46em; }
@@ -119,6 +123,8 @@
     border-left: 3px solid var(--visual); border-radius: 0 var(--radius) var(--radius) 0;
     padding: 14px 18px; font-size: 0.95rem; margin: 0 0 20px; color: var(--text); max-width: 48em;
   }
+  .quote.comfort-q { background: color-mix(in srgb, var(--comfort) 12%, var(--bg-card)); border-left-color: var(--comfort); }
+  .quote.terrain-q { background: color-mix(in srgb, var(--terrain) 12%, var(--bg-card)); border-left-color: var(--terrain); }
   .quote cite { display: block; margin-top: 8px; font-size: 0.78rem; color: var(--muted); font-style: normal; }
   .scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
   .scene-card {
@@ -139,6 +145,7 @@
   .scene-meta { font-size: 0.8rem; color: var(--text); margin-bottom: 10px; line-height: 1.5; }
   .scene-meta b { color: var(--accent); font-weight: 560; }
   .scene-meta .vis-label { color: var(--visual); }
+  .scene-meta .ter-label { color: var(--terrain); }
   .scene-phases { list-style: none; margin: 0; padding: 0; font-size: 0.8rem; }
   .scene-phases li {
     display: grid; grid-template-columns: 60px 1fr; gap: 8px; padding: 4px 0;
@@ -150,9 +157,8 @@
     display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 6px;
     background: var(--accent-dim); color: var(--accent); margin-top: 12px; margin-right: 6px;
   }
-  .badge.vis {
-    background: color-mix(in srgb, var(--visual) 20%, transparent); color: var(--visual);
-  }
+  .badge.vis { background: color-mix(in srgb, var(--visual) 20%, transparent); color: var(--visual); }
+  .badge.ter { background: color-mix(in srgb, var(--terrain) 20%, transparent); color: var(--terrain); }
   .timeline {
     background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 26px 22px 18px; box-shadow: var(--shadow);
@@ -173,7 +179,6 @@
   .t-phase.a .t-dot { background: var(--ambi); color: var(--ambi); }
   .t-phase.h .t-dot { background: var(--haptic); color: var(--haptic); }
   .t-phase.g .t-dot { background: var(--accent); color: var(--accent); }
-  .t-phase.v .t-dot { background: var(--visual); color: var(--visual); }
   .t-time { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); margin-bottom: 4px; }
   .t-label { font-weight: 560; font-size: 0.88rem; margin-bottom: 4px; }
   .t-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
@@ -221,6 +226,45 @@
   .vis-body { padding: 10px 12px 14px; font-size: 0.8rem; }
   .vis-body strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
   .vis-body span { color: var(--muted); font-size: 0.76rem; line-height: 1.4; }
+  /* comfort curve diagram */
+  .curve-panel {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; margin: 16px 0; box-shadow: var(--shadow);
+  }
+  .curve-bars {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; align-items: end;
+    height: 160px; margin: 8px 0 12px; padding: 0 4px;
+  }
+  .curve-col { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 8px; }
+  .curve-bar {
+    width: 100%; max-width: 48px; border-radius: 8px 8px 4px 4px;
+    background: linear-gradient(180deg, var(--comfort), color-mix(in srgb, var(--comfort) 40%, var(--bg)));
+  }
+  .curve-col.peak .curve-bar {
+    background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 45%, var(--bg)));
+    box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .curve-col.max .curve-bar {
+    background: linear-gradient(180deg, var(--warn), color-mix(in srgb, var(--warn) 40%, var(--bg)));
+  }
+  .curve-col span { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.3; }
+  .curve-col strong { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
+  .curve-note { font-size: 0.85rem; color: var(--muted); }
+  .terrain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0; }
+  .terrain-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+  }
+  .terrain-card strong { display: block; color: var(--terrain); margin-bottom: 6px; font-size: 0.92rem; }
+  .terrain-card span { font-size: 0.84rem; color: var(--muted); }
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0;
+  }
+  .compare > div {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+  }
+  .compare h4 { margin: 0 0 10px; font-size: 0.9rem; color: var(--comfort); }
+  .compare.terrain-cmp h4 { color: var(--terrain); }
+  .compare ul { margin: 0 0 0 1.1em; font-size: 0.86rem; max-width: none; }
   .weeks { display: flex; flex-direction: column; gap: 14px; }
   .week { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
   .week.done { border-color: color-mix(in srgb, var(--foot) 50%, var(--border)); background: color-mix(in srgb, var(--foot) 8%, var(--bg-card)); }
@@ -263,15 +307,16 @@
     .flow { grid-template-columns: 1fr; }
     .timeline-track { grid-template-columns: 1fr 1fr; gap: 16px 8px; }
     .timeline-track::before { display: none; }
-    .dual-track { grid-template-columns: 1fr; }
+    .dual-track, .compare { grid-template-columns: 1fr; }
     .vis-stack { grid-template-columns: 1fr 1fr; }
+    .curve-bars { grid-template-columns: repeat(5, 1fr); height: 120px; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
-    <div class="topbar-brand">慢行 <span>SenseWalk · 计划 v0.5</span></div>
+    <div class="topbar-brand">慢行 <span>SenseWalk · 计划 v0.6</span></div>
     <div class="topbar-actions">
       <button class="btn" id="themeToggle" type="button">浅色</button>
       <a class="btn btn-link" href="https://github.com/skydream9527-ctrl/sense-walk" target="_blank" rel="noopener">GitHub ↗</a>
@@ -283,44 +328,49 @@
     <a href="#vision">1. 产品愿景</a>
     <a href="#home">2. 开局流程</a>
     <a href="#modes">3. 双模式行走</a>
-    <a href="#gates">4. 距离门禁</a>
-    <a href="#scenery">5. 景色层层展开</a>
-    <a href="#scenes">6. 场景目录</a>
-    <a href="#timeline">7. 耳目同程时间轴</a>
-    <a href="#honesty">8. 诚实原则</a>
-    <a href="#arch">9. 架构与里程碑</a>
-    <a href="#success">10. 验收与决策</a>
+    <a href="#comfort">4. 舒适节奏摇杆</a>
+    <a href="#terrain">5. 地形动作</a>
+    <a href="#gates">6. 距离门禁</a>
+    <a href="#scenery">7. 景色层层展开</a>
+    <a href="#scenes">8. 场景目录</a>
+    <a href="#timeline">9. 耳目同程时间轴</a>
+    <a href="#honesty">10. 诚实原则</a>
+    <a href="#arch">11. 架构与里程碑</a>
+    <a href="#success">12. 验收与决策</a>
   </nav>
 
   <main>
     <header class="hero">
-      <div class="hero-eyebrow">Product &amp; Engineering Plan · v0.5</div>
+      <div class="hero-eyebrow">Product &amp; Engineering Plan · v0.6</div>
       <h1>慢行<em>SenseWalk</em></h1>
       <p class="hero-lead">
-        先选场景——雨林、森林、沙漠、城市……各有<strong style="color:var(--text);font-weight:560">声音与景色身份</strong>。
-        关卡从<strong style="color:var(--text);font-weight:560">一片黑幕</strong>开始，脚步、环境音、振动与风景随路程一步步丰富。
-        虚走或实走，满距才通关：不可跳过，不可加速，不可提前通关。
+        帮助人<strong style="color:var(--text);font-weight:560">培养耐心、缓解压力</strong>。
+        先选场景——雨林、森林、沙漠、城市……各有声音与景色身份。
+        虚走摇杆教你找<strong style="color:var(--text);font-weight:560">舒适节奏</strong>（拉满≠最快）；
+        路径有起伏，角色随地形爬坡、跳跃。
+        关卡从一片黑幕开始，感官与风景随路程展开。满距才通关：不可跳过，不可加速。
       </p>
       <div class="hero-meta">
         <span class="chip done">Week 1 已完成</span>
         <span class="chip rule">进度 = 距离</span>
+        <span class="chip comfort">舒适节奏摇杆</span>
+        <span class="chip terrain">地形动作</span>
         <span class="chip vis">景色层层展开</span>
-        <span class="chip">多场景音色</span>
         <span class="chip">虚走 · 实走</span>
-        <span class="chip">文档 v0.5</span>
+        <span class="chip">文档 v0.6</span>
       </div>
     </header>
 
     <section id="vision">
       <h2>1. 产品愿景</h2>
-      <p class="section-lead">选景定耳目，走路开锁层，满距才通关。换场景不换规则；听见与看见同一路程。</p>
+      <p class="section-lead">用慢感官行走练习耐心与放松。选景定耳目，走路开锁层，满距才通关。急推摇杆、冲地形都帮不了你更快清关。</p>
       <div class="principles">
+        <div class="principle"><strong>耐心 · 减压</strong><span>产品目的：培养耐心、缓解压力，而非刷关冲刺。</span></div>
         <div class="principle"><strong>先选场景</strong><span>大卡片进入；各景声音与景色身份不同。</span></div>
+        <div class="principle"><strong>舒适节奏</strong><span>摇杆甜点区最快；拉满变钝，教你放松。</span></div>
+        <div class="principle"><strong>地形联动</strong><span>路有起伏；爬坡、跳跃贴合场景，宽松不焦虑。</span></div>
         <div class="principle"><strong>黑幕起笔</strong><span>会话从虚空开始，风景按距长出。</span></div>
-        <div class="principle"><strong>距离即通关</strong><span>未满要求米数不能完成。</span></div>
-        <div class="principle"><strong>不可跳过 / 加速</strong><span>无快进、跳关；视觉也不可跳过。</span></div>
-        <div class="principle"><strong>耳目同程</strong><span>音 / 振 / 视共用 atMeters 轴。</span></div>
-        <div class="principle"><strong>双模式</strong><span>手机控角色或户外实走。</span></div>
+        <div class="principle"><strong>距离即通关</strong><span>未满要求米数不能完成；不可跳过/加速。</span></div>
       </div>
     </section>
 
@@ -352,43 +402,130 @@
         <article class="mode-card">
           <h3>手机控角色</h3>
           <span class="tag">Virtual Walk</span>
-          <p style="font-size:0.9rem;color:var(--muted);margin:0 0 8px">按住前进，松手即停；速度硬顶 ≈ 5 km/h。</p>
+          <p style="font-size:0.9rem;color:var(--muted);margin:0 0 8px">屏幕虚拟摇杆；舒适甜点曲线；硬顶 ≤ 1.4 m/s。</p>
           <ul>
-            <li>无冲刺、无加速条</li>
-            <li>角色走在随距展开的景色上</li>
-            <li>适合室内 / 先熟悉关卡</li>
+            <li><strong>拉满 ≠ 最快</strong>——中段偏转才是舒适步速</li>
+            <li>无冲刺、无加速条、无倍速</li>
+            <li>角色走在随距展开的景色与起伏路径上</li>
+            <li>适合室内 / 先熟悉关卡节奏</li>
           </ul>
         </article>
         <article class="mode-card">
           <h3>户外实走</h3>
           <span class="tag">Real Walk</span>
-          <p style="font-size:0.9rem;color:var(--muted);margin:0 0 8px">计步 × 步长为主；可选 GPS；车载暂停。</p>
+          <p style="font-size:0.9rem;color:var(--muted);margin:0 0 8px">计步 × 步长为主；可选 GPS；车载暂停。<strong>无摇杆</strong>。</p>
           <ul>
             <li><code>STEP_COUNTER</code> 主路径</li>
+            <li>「舒适节奏」→ 可选过快平静提示（不惩罚通关）</li>
             <li>景色规则相同（可少层，仍从黑幕起）</li>
-            <li>屏幕更空，少盯手机</li>
+            <li>地形仅作氛围，不要求户外做跳跃操作</li>
           </ul>
         </article>
       </div>
     </section>
 
+    <section id="comfort">
+      <h2>4. 舒适节奏摇杆 · v0.6</h2>
+      <p class="section-lead">虚走核心手感：摇杆→速度<strong>非单调</strong>。中段是甜点；推满反而变慢——用机制教耐心与放松。</p>
+      <blockquote class="quote comfort-q">
+        屏幕上有一个虚拟摇杆，摇杆拉到最大并不是角色走得最快的时候；玩家需要学会放松，找到一个舒适的节奏。
+        <cite>— 用户需求（忠实并入本版）</cite>
+      </blockquote>
+
+      <h3>摇杆偏转 → 速度（示意）</h3>
+      <div class="curve-panel">
+        <div class="curve-bars" aria-hidden="true">
+          <div class="curve-col"><div class="curve-bar" style="height:8%"></div><strong>0</strong><span>静立</span></div>
+          <div class="curve-col"><div class="curve-bar" style="height:48%"></div><strong>~0.3</strong><span>缓行<br>~0.7 m/s</span></div>
+          <div class="curve-col peak"><div class="curve-bar" style="height:92%"></div><strong>~0.55</strong><span>甜点<br>~1.15 m/s</span></div>
+          <div class="curve-col"><div class="curve-bar" style="height:62%"></div><strong>~0.85</strong><span>紧张<br>~0.95 m/s</span></div>
+          <div class="curve-col max"><div class="curve-bar" style="height:38%"></div><strong>1.0</strong><span>拉满<br>~0.65 m/s</span></div>
+        </div>
+        <p class="curve-note">峰值落在偏转 ≈ 0.45–0.65；任意点硬顶 ≤ <code>1.4 m/s</code>。曲线连续插值，禁止阶跃。不常驻「最佳角度」数值准星，避免变成竞技瞄准。</p>
+      </div>
+
+      <div class="rules">
+        <div class="rule"><strong>非单调</strong><span>v(满) &lt; v(甜点)；急推对自己不利。</span></div>
+        <div class="rule"><strong>硬顶不变</strong><span>瞬时 ≤ ~1.4 m/s 步行感；无倍速作弊。</span></div>
+        <div class="rule"><strong>教学文案</strong><span>「推满不会更快。松一点，找舒服的节奏。」</span></div>
+        <div class="rule"><strong>门禁仍在</strong><span>再放松也不能快于距离门禁下界。</span></div>
+      </div>
+
+      <h3>虚走 vs 实走</h3>
+      <div class="compare">
+        <div>
+          <h4>虚走 · 有摇杆</h4>
+          <ul>
+            <li>甜点区 = 舒适步行峰值</li>
+            <li>拉满 = 紧绷变慢</li>
+            <li>可选短暂「节奏正好」提示（可关）</li>
+          </ul>
+        </div>
+        <div>
+          <h4>实走 · 无摇杆</h4>
+          <ul>
+            <li>真实步伐累计距离</li>
+            <li>过快步频 → 可选极轻提示「放慢一点」</li>
+            <li>不惩罚通关资格；车载仍暂停累计</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="terrain">
+      <h2>5. 地形动作 · v0.6</h2>
+      <p class="section-lead">背景路径<strong>不是平的</strong>。角色动作贴合地形（爬坡、跳跃等）；难度服务正念慢走，不做高压平台闯关。</p>
+      <blockquote class="quote terrain-q">
+        角色移动的节奏要和地形挂钩：风景里的路不是平的；支持跳跃、爬坡等与地形相关的动作。
+        <cite>— 用户需求（忠实并入本版）</cite>
+      </blockquote>
+
+      <div class="terrain-grid">
+        <div class="terrain-card"><strong>缓坡 / 沙丘</strong><span>上坡攀爬动画 + 自然降速；与「别急」同向。</span></div>
+        <div class="terrain-card"><strong>浅沟 / 路缘</strong><span>轻跳 / 抬脚越过；时间窗宽松。</span></div>
+        <div class="terrain-card"><strong>不平地面</strong><span>步态微调；湿根、落叶、砖缝各景不同。</span></div>
+        <div class="terrain-card"><strong>失败很温柔</strong><span>无扣命；短暂停步后重试；不轰炸失败弹窗。</span></div>
+      </div>
+
+      <h3>有效距离会计</h3>
+      <div class="formula">有效进度 = 沿路径向前的有效位移（单调前向；卡点/坠落/重试不刷米）</div>
+      <div class="rules">
+        <div class="rule"><strong>计入</strong><span>沿路径前进；成功过坡/跳后的前进段。</span></div>
+        <div class="rule"><strong>不计入</strong><span>原地踏步、来回刷同一坎、倒走、偏离路径。</span></div>
+        <div class="rule"><strong>减压优先</strong><span>地形鼓励慢看路，不诱发挫败焦虑。</span></div>
+        <div class="rule"><strong>实走简化</strong><span>户外不要求跳跃操作；起伏可作氛围剪影。</span></div>
+      </div>
+
+      <h3>分场景气质</h3>
+      <table>
+        <thead><tr><th>场景</th><th>地形元素</th><th>典型动作</th></tr></thead>
+        <tbody>
+          <tr><td>雨林</td><td>湿根、缓坡、浅沟</td><td>攀湿坡、轻跃小沟</td></tr>
+          <tr><td>森林</td><td>土坎、落叶坡</td><td>上坡、越矮坎</td></tr>
+          <tr><td>沙漠</td><td>沙丘起伏、软沙</td><td>费力上坡（自然降速）</td></tr>
+          <tr><td>城市</td><td>路缘、缓坡道</td><td>上台阶感轻跳</td></tr>
+          <tr><td>夜径</td><td>石板落差</td><td>慢步抬脚</td></tr>
+        </tbody>
+      </table>
+    </section>
+
     <section id="gates">
-      <h2>4. 距离门禁（不变）</h2>
+      <h2>6. 距离门禁（不变）</h2>
       <div class="formula">通关 ⟺ 有效距离 ≥ requiredDistanceMeters</div>
       <div class="rules">
         <div class="rule"><strong>不可跳过</strong><span>无跳关；视觉层也不可跳过揭示。</span></div>
-        <div class="rule"><strong>不可加速</strong><span>虚走速度帽；景色不可快进铺满。</span></div>
+        <div class="rule"><strong>不可加速</strong><span>虚走速度帽 + 甜点曲线；景色不可快进。</span></div>
         <div class="rule"><strong>不可提前通关</strong><span>未满距结束 = 放弃。</span></div>
-        <div class="rule"><strong>时间≠进度</strong><span>完成态只认米数。</span></div>
+        <div class="rule"><strong>时间≠进度</strong><span>完成态只认有效米数。</span></div>
       </div>
     </section>
 
     <section id="scenery">
-      <h2>5. 景色层层展开 · v0.5</h2>
+      <h2>7. 景色层层展开 · 继承 v0.5</h2>
       <p class="section-lead">视觉与音效 / 振动平行解锁：同一距离时间轴，从黑幕到场景风景，一步步丰富。</p>
       <blockquote class="quote">
         景色方面也应该层层展开：从一片黑幕开始，然后逐渐有适应场景的风景，比如森林场景的树木、沙漠环境的沙丘等等，一步步逐渐丰富。
-        <cite>— 用户需求（忠实并入本版）</cite>
+        <cite>— 用户需求（忠实保留）</cite>
       </blockquote>
 
       <h3>会话内四拍（示意）</h3>
@@ -420,10 +557,10 @@
     </section>
 
     <section id="scenes">
-      <h2>6. 场景目录 · 声音 + 景色身份</h2>
+      <h2>8. 场景目录 · 声音 + 景色 + 地形</h2>
       <div class="identity">
-        <strong>同一套渐解锁，不同的耳目记忆。</strong>
-        换场景 = 换脚步、环境、振动与<strong>景色层序列</strong>；门禁与「静/黑 → 响/形 → 振/细节 → 通关」弧线保持一致。
+        <strong>同一套渐解锁，不同的耳目与地形记忆。</strong>
+        换场景 = 换脚步、环境、振动、景色层与路径起伏；门禁与「静/黑 → 响/形 → 振/细节 → 通关」弧线保持一致。摇杆甜点曲线全局共用。
       </div>
       <div class="scenes">
         <article class="scene-card rain">
@@ -437,7 +574,8 @@
               <b>脚步</b> 软泥 / 湿叶，闷黏<br>
               <b>环境</b> 密虫鸣、滴水、阔叶<br>
               <b>振动</b> drip_soft 不规则微幅<br>
-              <b class="vis-label">景色</b> 黑幕 → 雾/湿气 → 树干树冠 → 藤蔓光斑
+              <b class="vis-label">景色</b> 黑幕 → 雾/湿气 → 树干树冠 → 藤蔓光斑<br>
+              <b class="ter-label">地形</b> 湿根、缓坡、浅沟
             </p>
             <ul class="scene-phases">
               <li><span class="sec">0 m</span><span>silence · 黑幕</span></li>
@@ -448,6 +586,7 @@
             </ul>
             <span class="badge">门禁 450 m</span>
             <span class="badge vis">视觉相位</span>
+            <span class="badge ter">地形</span>
           </div>
         </article>
         <article class="scene-card forest">
@@ -461,7 +600,8 @@
               <b>脚步</b> 落叶土路，干爽<br>
               <b>环境</b> 虫鸣、远鸟<br>
               <b>振动</b> footstep_soft · 650ms<br>
-              <b class="vis-label">景色</b> 黑幕 → 轮廓树 → 树干/林光 → 落叶路径
+              <b class="vis-label">景色</b> 黑幕 → 轮廓树 → 树干/林光 → 落叶路径<br>
+              <b class="ter-label">地形</b> 土坎、落叶坡
             </p>
             <ul class="scene-phases">
               <li><span class="sec">0 m</span><span>silence · 黑幕</span></li>
@@ -472,6 +612,7 @@
             </ul>
             <span class="badge">门禁 400 m</span>
             <span class="badge vis">视觉相位</span>
+            <span class="badge ter">地形</span>
           </div>
         </article>
         <article class="scene-card desert">
@@ -485,7 +626,8 @@
               <b>脚步</b> 沙地闷声<br>
               <b>环境</b> 风沙、空响<br>
               <b>振动</b> footstep_sand · 900ms<br>
-              <b class="vis-label">景色</b> 黑幕 → 天际线 → 沙丘轮廓 → 沙纹/热浪
+              <b class="vis-label">景色</b> 黑幕 → 天际线 → 沙丘轮廓 → 沙纹/热浪<br>
+              <b class="ter-label">地形</b> 沙丘起伏；上坡自然降速
             </p>
             <ul class="scene-phases">
               <li><span class="sec">0 m</span><span>silence · 黑幕</span></li>
@@ -496,6 +638,7 @@
             </ul>
             <span class="badge">门禁 600 m</span>
             <span class="badge vis">视觉相位</span>
+            <span class="badge ter">地形</span>
           </div>
         </article>
         <article class="scene-card city">
@@ -509,7 +652,8 @@
               <b>脚步</b> 砖石 / 柏油，短促<br>
               <b>环境</b> 远车流低通（克制）<br>
               <b>振动</b> curb_tap 短而干净<br>
-              <b class="vis-label">景色</b> 黑幕 → 远景轮廓 → 街灯剪影 → 近景街道
+              <b class="vis-label">景色</b> 黑幕 → 远景轮廓 → 街灯剪影 → 近景街道<br>
+              <b class="ter-label">地形</b> 路缘、缓坡道
             </p>
             <ul class="scene-phases">
               <li><span class="sec">0 m</span><span>silence · 黑幕</span></li>
@@ -520,6 +664,7 @@
             </ul>
             <span class="badge">门禁 500 m</span>
             <span class="badge vis">视觉相位</span>
+            <span class="badge ter">地形</span>
           </div>
         </article>
         <article class="scene-card night optional">
@@ -533,7 +678,8 @@
               <b>脚步</b> 石板<br>
               <b>环境</b> 夜虫、远犬吠极轻<br>
               <b>振动</b> pulse_slow · 700ms<br>
-              <b class="vis-label">景色</b> 黑幕 → 微弱路径 → 月光/远灯 → 夜景层次
+              <b class="vis-label">景色</b> 黑幕 → 微弱路径 → 月光/远灯 → 夜景层次<br>
+              <b class="ter-label">地形</b> 石板落差；慢步抬脚
             </p>
             <ul class="scene-phases">
               <li><span class="sec">0 m</span><span>silence · 黑幕</span></li>
@@ -545,15 +691,16 @@
             <span class="badge">门禁 350 m</span>
             <span class="badge">MVP 可后置</span>
             <span class="badge vis">视觉相位</span>
+            <span class="badge ter">地形</span>
           </div>
         </article>
       </div>
-      <p style="margin-top:16px;color:var(--muted);font-size:0.9rem">更远：海边、雨巷、雪山、竹林——仍复用距离门禁与景色层层展开，只换 layers / 视觉元素。</p>
+      <p style="margin-top:16px;color:var(--muted);font-size:0.9rem">更远：海边、雨巷、雪山、竹林——仍复用距离门禁、舒适摇杆与景色层层展开，只换 layers / 视觉 / pathProfile。</p>
     </section>
 
     <section id="timeline">
-      <h2>7. 耳目同程时间轴</h2>
-      <p class="section-lead">相对要求距离的百分比弧线；音/振与景色并列表。各场景只替换音色、视觉元素与绝对米数。</p>
+      <h2>9. 耳目同程时间轴</h2>
+      <p class="section-lead">相对要求距离的百分比弧线；音/振与景色并列表。各场景只替换音色、视觉元素、地形事件与绝对米数。</p>
       <div class="timeline">
         <div class="timeline-track">
           <div class="t-phase s"><div class="t-dot"></div><div class="t-time">0%</div><div class="t-label">静 / 黑</div><div class="t-desc">无声 · 黑幕</div></div>
@@ -584,30 +731,32 @@
             </ul>
           </div>
         </div>
-        <p class="timeline-note">停走则进度停。fadeMs / opacity 插值避免一步跳变。无「显示全部景色」、无视觉快进。城市声严格低通与响度帽。</p>
+        <p class="timeline-note">停走则进度停。fadeMs / opacity 插值避免一步跳变。无「显示全部景色」、无视觉快进。路径起伏可读性随景色层增强。</p>
       </div>
     </section>
 
     <section id="honesty">
-      <h2>8. 诚实原则</h2>
+      <h2>10. 诚实原则</h2>
       <table>
         <thead><tr><th>策略</th><th>做法</th></tr></thead>
         <tbody>
-          <tr><td>速度帽</td><td>虚走 / 实走限制最大折合速度</td></tr>
+          <tr><td>速度帽</td><td>虚走 / 实走限制最大折合速度（≤ ~1.4 m/s）</td></tr>
+          <tr><td>摇杆诚实</td><td>拉满变慢是设计，不是隐藏惩罚梗；不包装「加急高级玩法」</td></tr>
           <tr><td>车载检测</td><td>暂停累计，轻提示「好像不是在走」</td></tr>
-          <tr><td>文案</td><td>「还需要再走约 N 米」——不说作弊</td></tr>
+          <tr><td>文案</td><td>「还需要再走约 N 米」——不说作弊；通关不打操作分</td></tr>
           <tr><td>隐私</td><td>最小权限；位置可选；数据默认本地</td></tr>
-          <tr><td>视觉诚实</td><td>不走路则景色不长；满距才是通关，景色丰满只是过程</td></tr>
+          <tr><td>视觉诚实</td><td>不走路则景色不长；满距才是通关</td></tr>
+          <tr><td>地形诚实</td><td>有效前进才计距；重试不刷米</td></tr>
         </tbody>
       </table>
     </section>
 
     <section id="arch">
-      <h2>9. 架构与里程碑</h2>
-      <p class="section-lead">SceneRepository 扩展音 + 视相位；VisualShell 从场景色壳升级为黑幕→分层合成。</p>
+      <h2>11. 架构与里程碑</h2>
+      <p class="section-lead">新增 ComfortStickMapper 与 TerrainMotor；SceneRepository 扩展 pathProfile / stickCurveId。本轮 docs only，不改 Android 业务代码。</p>
       <div class="callout">
-        <strong>Week 2 重点：</strong>距离引擎 + 虚走 + CompletionGate；Home「大卡片选景 → 模式 → 开始」；
-        写入 <code>rainforest</code> / <code>city</code> 配置（含 visual 占位）；VisualShell stub：会话起黑幕，按距抬 opacity。真音频与可读剪影景色 Week 3。
+        <strong>Week 2 重点：</strong>距离引擎 + 虚走舒适摇杆 stub + CompletionGate；Home「大卡片选景 → 模式 → 开始」；
+        写入 <code>rainforest</code> / <code>city</code>（含 visual / pathProfile 占位）；VisualShell 黑幕 stub；上坡降速占位。真音频、可读景色与跳跃 Week 3。
       </div>
       <div class="weeks">
         <div class="week done">
@@ -615,40 +764,42 @@
           <ul><li><span class="check on">✓</span>Compose · SessionClock · forest/desert/night_path · stub 引擎</li></ul>
         </div>
         <div class="week">
-          <div class="week-head"><h3>Week 2 — 门禁 + 选景 + 虚走 + 黑幕 stub</h3><span class="week-tag">下一周</span></div>
+          <div class="week-head"><h3>Week 2 — 门禁 + 选景 + 舒适摇杆 + 黑幕 stub</h3><span class="week-tag">下一周</span></div>
           <ul>
             <li><span class="check"></span>requiredDistanceMeters / atMeters · CompletionGate</li>
-            <li><span class="check"></span>VirtualWalker 速度帽</li>
+            <li><span class="check"></span>VirtualWalker + ComfortStickMapper（甜点曲线、1.4 m/s 硬顶）</li>
             <li><span class="check"></span>Home：场景大卡片 → 模式 → 开始</li>
-            <li><span class="check"></span>rainforest.json / city.json（含 visual 相位占位）</li>
-            <li><span class="check"></span>VisualShell：黑幕起笔，stub 相位抬 opacity</li>
+            <li><span class="check"></span>rainforest.json / city.json（visual + pathProfile 占位）</li>
+            <li><span class="check"></span>VisualShell：黑幕起笔；上坡降速 stub</li>
           </ul>
         </div>
         <div class="week">
-          <div class="week-head"><h3>Week 3 — 实走 + 分景音视</h3><span class="week-tag">传感 + 素材</span></div>
+          <div class="week-head"><h3>Week 3 — 实走 + 分景音视 + 地形动作</h3><span class="week-tag">传感 + 素材</span></div>
           <ul>
-            <li><span class="check"></span>计步实走 + 可选 GPS</li>
-            <li><span class="check"></span>至少 2 场景可听完</li>
-            <li><span class="check"></span>分场景 haptic；至少 2 景可读分层景色</li>
+            <li><span class="check"></span>计步实走 + 可选 GPS；可选过快平静提示</li>
+            <li><span class="check"></span>至少 2 场景可听完；分场景 haptic</li>
+            <li><span class="check"></span>至少 2 景可读分层景色；爬坡 / 轻跳 + 有效前进会计</li>
           </ul>
         </div>
         <div class="week">
           <div class="week-head"><h3>Week 4 — 打磨</h3><span class="week-tag">收尾</span></div>
-          <ul><li><span class="check"></span>4 主场景耳目手感；夜径可选；ASSETS.md；内测包</li></ul>
+          <ul><li><span class="check"></span>4 主场景耳目 + 摇杆甜点手感；夜径可选；ASSETS.md；内测包</li></ul>
         </div>
       </div>
     </section>
 
     <section id="success">
-      <h2>10. 验收与开放决策</h2>
+      <h2>12. 验收与开放决策</h2>
       <h3>MVP 验收</h3>
       <ol>
         <li>选景 → 选模式 → 开始 ≤ 4 次点击。</li>
-        <li>至少雨林 / 森林 / 沙漠 / 城市 四个场景可选，音+视配置身份独立。</li>
+        <li>至少雨林 / 森林 / 沙漠 / 城市 四个场景可选，音+视+地形气质独立。</li>
         <li>未满距不可通关；无加速 / 跳过（含视觉揭示）。</li>
-        <li>虚走速度帽；实走可步数通一关。</li>
+        <li>虚走：甜点曲线成立（拉满慢于甜点）；硬顶 ≤ 1.4 m/s；实走可步数通一关。</li>
         <li>各场景层解锁逻辑一致（atMeters）；音色与景色元素不同。</li>
         <li>会话起于黑幕；景色按路程层层丰富，与音/振同一时间轴。</li>
+        <li>地形：至少平地 + 坡 + 一种轻跳/越坎；有效前进不刷距。</li>
+        <li>文案体现耐心与减压定位。</li>
       </ol>
       <h3>开放决策</h3>
       <table>
@@ -656,18 +807,20 @@
         <tbody>
           <tr><td>1</td><td>MVP 是否露出夜径</td><td>配置保留；可藏「更多」或 Week 4</td></tr>
           <tr><td>2</td><td>模式：独立页 vs 抽屉</td><td>独立一步更清晰</td></tr>
-          <tr><td>3</td><td>虚走操作</td><td>按住前进</td></tr>
+          <tr><td>3</td><td>虚走操作</td><td>摇杆（含甜点曲线）；按住可作降级</td></tr>
           <tr><td>4</td><td>实走强制 GPS</td><td>否</td></tr>
           <tr><td>5</td><td>放弃后续走</td><td>首版不续，重开清零</td></tr>
-          <tr><td>6</td><td>视觉与音频是否强制同表</td><td>同 atMeters 轴即可；单表或双列皆可</td></tr>
+          <tr><td>6</td><td>视觉与音频是否强制同表</td><td>同 atMeters 轴即可</td></tr>
           <tr><td>7</td><td>实走景色层数</td><td>可少层，必须仍从黑幕起</td></tr>
+          <tr><td>8</td><td>甜点「正好」提示</td><td>默认短暂一次；设置可关</td></tr>
+          <tr><td>9</td><td>跳跃：自动 vs 轻点</td><td>首版偏自动 / 宽窗轻点</td></tr>
         </tbody>
       </table>
     </section>
 
     <footer>
       <div>源码 <a href="../DEVELOPMENT.md">DEVELOPMENT.md</a> · <a href="https://github.com/skydream9527-ctrl/sense-walk">GitHub</a></div>
-      <div>v0.5 · 景色层层展开 · 耳目同程 · 距离门禁不变</div>
+      <div>v0.6 · 耐心与减压 · 舒适节奏摇杆 · 地形动作 · 距离门禁不变</div>
     </footer>
   </main>
 </div>
