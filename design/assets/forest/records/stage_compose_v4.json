@@ -1,0 +1,84 @@
+[
+  {
+    "meters": 0,
+    "layers": [],
+    "opacities": {},
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_000m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_000m_540x960.jpg"
+  },
+  {
+    "meters": 100,
+    "layers": [
+      "tree_outline"
+    ],
+    "opacities": {
+      "tree_outline": 0.6
+    },
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_100m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_100m_540x960.jpg"
+  },
+  {
+    "meters": 265,
+    "layers": [
+      "tree_outline",
+      "tree_trunks"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7
+    },
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_265m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_265m_540x960.jpg"
+  },
+  {
+    "meters": 425,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8
+    },
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_425m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_425m_540x960.jpg"
+  },
+  {
+    "meters": 630,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path",
+      "light_shows"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8,
+      "light_shows": 0.5
+    },
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_630m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_630m_540x960.jpg"
+  },
+  {
+    "meters": 785,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path",
+      "light_shows",
+      "clearing"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8,
+      "light_shows": 0.5,
+      "clearing": 0.9
+    },
+    "full": "design/assets/forest/candidates/v4/stage_compose/stage_785m_full.png",
+    "small": "design/assets/forest/candidates/v4/stage_compose/stage_785m_540x960.jpg"
+  }
+]

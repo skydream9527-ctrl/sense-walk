@@ -1,230 +1,240 @@
-# SenseWalk · 森林视觉素材交接
+# SenseWalk 森林视觉素材交接文档（v4 修复轮）
 
-> 任务范围：森林场景视觉素材生成。
-> 目标读者：ZCode（Android 端实现），本文档是**配置映射 + 验收证据**，不是 Android 接入完成证明。
-> 本轮说明：本任务在与 ZCode 的 T05 commit（`0d7651c` / `dfa0db7`）并行进行；T05 已用我前两批（v1 + v2）的 5 张图作为参考并接入了 3 张（`tree_trunks` / `light_shows` / `clearing`）。`ASSETS.md` 给出 ZCode 自己的视觉验收反馈，本轮根据该反馈出 v3 重做 3 张被拒的层（`tree_outline` / `leaf_path` / `traveler_idle`）。
-> 生成日期：2026-10-12（v1/v2）+ 2026-10-13（v3）
-> 对齐文档：[DEVELOPMENT.md v0.8 §14](../DEVELOPMENT.md)、[design/01-scenes-terrain/forest.md](../design/01-scenes-terrain/forest.md)、[design/02-characters/traveler.md](../design/02-characters/traveler.md)、[ASSETS.md](../ASSETS.md)
+> 目标读者：ZCode（Android 端实现），本文档是 **配置映射 + 验收证据**，不是 Android 接入完成证明。
+> 本轮（v4）说明：在 ZCode 的 T05 commit (`0d7651c`/`dfa0db7`/`1baef18`/`b6495d4`) 之后做视觉素材质量修复，**未修改 Android 代码或配置**，输出全部在独立候选目录 `design/assets/forest/candidates/v4/`。
+> 生成日期：2026-10-12（v1/v2）+ 2026-10-13（v3）+ 2026-10-13（v4 内容修正）
+
+---
 
 ## 0. TL;DR
 
-| 项 | 状态 |
-| --- | --- |
-| 生成 API | mcode-tools `connector__matrix__generate_image`（text-to-image，1K，9:16） |
-| 调用次数 | 1（连通性） + 7（v1） + 3（v2 修复） + 3（v3 按 ZCode 反馈重做） = **14 次** |
-| 修复预算 | 任务内"修复最多 3 次"已用尽；v3 是 ZCode 在 T05 commit 后给的**新一轮**反馈，不计入原任务预算 |
-| 凭据处理 | 通过 host-managed auth（`mcode-tools auth status` = authenticated），脚本/代码不读不写任何 API Key / token |
-| ZCode 接入状态 | 3 张已接入（`tree_trunks` / `light_shows` / `clearing`），3 张 v3 待 ZCode 重做 `forest.json` 引用后接入 |
-| 音频占位 | **仍未解决**（forest.json 中 `footsteps` / `ambience` / `deep_birds` 仍指向 dev_tone 占位；本任务不做） |
-| 已知偏差 | §7。**不宣称森林 800 m 整体素材已满足发布验收。** |
+- 5 层 v3 webp **已被 ZCode 接入**（commit `1baef18`，forest.json 中 `tree_outline` / `tree_trunks` / `leaf_path` / `light_shows` / `clearing` 的 `asset` 字段均已切换）。
+- 旅人 `traveler_idle` 在 `1baef18` 中清成 0 bytes；`ASSETS.md` 备注"程序绘制为正式方案"——ZCode 在 `ForestShell.kt` 的 `drawTraveler` 已经按 `#7A857C` 程序绘制，本轮不再生成角色图。
+- v4 修复轮只产出 **候选目录**，**不覆盖** `app/src/main/assets/visual/` 入包文件；ZCode 验收后可手动替换。
+- 累计 API 调用：**14 次**（1 连通性 + 7 v1 + 3 v2 修复 + 3 v3 反馈重做；**v4 零 API**）。
+- 已知 bug：ZCode 报告 `stage_05_clearing_785m` 存在 2.91% 浅色像素（"棋盘格"）；v4 修复后同位置浅色像素 **0%**——**已真修复**。
 
-## 1. 美术方向（来自本任务约定 + design/01-scenes-terrain/forest.md §2）
+## 1. ZCode 接入状态
 
-- 风格：克制的二维手绘插画、干净剪影、轻微纸感、低饱和、柔和边缘、侧视 / 轻微 3/4 侧视、横向行走场景
-- 与雨林区分：少雾、透气、干爽落叶、少量温暖褐色点缀
-- 色板：`#060806` 黑幕 / `#1A2820` 远树轮廓 / `#2D4A3E` 树干 / `#8FA87A` 林间光 / `#6B8F71` 落叶 / `#A89060` 暖褐
-- 禁止：文字 / 标志 / 水印 / UI / 边框 / 血条 / 数字 / 高饱和霓虹 / 恐怖元素 / 强光爆点 / 复杂写实纹理 / 第一人称透视道路
-- 角色主色：`#6A7A6E`，暗部 `#2A322C`，极弱灰绿边缘光，头身比约 1:3.2–1:3.5
+| layer / asset | 当前状态 | 来源 | v4 候选 |
+| --- | --- | --- | --- |
+| `void` | ✓ 程序绘制 | ForestShell.kt L86 | — |
+| `tree_outline` | ✓ ZCode 接入 | `1baef18` + v3 webp 80 KB | webp 64 KB |
+| `tree_trunks` | ✓ ZCode 接入 | `0d7651c` + v2 webp 139 KB | webp 83 KB |
+| `leaf_path` | ✓ ZCode 接入 | `1baef18` + v3 webp 95 KB | webp 62 KB |
+| `light_shows` | ✓ ZCode 接入 | `0d7651c` + v2 webp 20 KB | webp 16 KB |
+| `clearing` | ✓ ZCode 接入 | `0d7651c` + v2 webp 43 KB | webp 29 KB |
+| `traveler_idle` | ⚠ 程序绘制 | `ForestShell.kt` `drawTraveler` + ASSETS.md | （不生成） |
 
-## 2. ZCode 接入与本轮 v3 重做背景
+视觉包体（入包 5 张 webp）：~378 KB / 预算 ≤ 2 MB ✓。
 
-ZCode 在 T05 commit `0d7651c` 中：
-- 接入了 3 张 v2 修复图（`tree_trunks` / `light_shows` / `clearing`），通过 `forest.json` 改为 `asset` 字段并在 `ForestShell` 真实渲染；
-- 拒绝了 3 张（`tree_outline` / `leaf_path` / `traveler_idle`），原因是"未通过验收"（详见 `ASSETS.md` 一、森林视觉素材表）。
+## 2. ZCode 报告的问题与 v4 修复
 
-`dfa0db7` 把这 3 张从 `app/src/main/assets/visual/` 移除（标记 0 bytes），**未删盘**，仅做包内清理。
+### 2.1 `stage_05_clearing_785m` 棋盘格残留
 
-`ASSETS.md` 写明的具体不合格原因（与本轮 v3 提示词直接对应）：
+**根因**：trunks.webp 在底部 y=688-808 区有 84960 个 `α>0` 像素，RGB 均值 `(140, 161, 131)`（设计色板 `Light #8FA87A` 林间光色饱和填充）。clearing.webp 中心带 RGB `(101, 118, 94)` 柔光。两层叠加在合成图底部 17% 区域形成 `(170-192)` `[195-215]` 中性灰雾——这是 ZCode 所说的"棋盘格"。
 
-| 层 | ASSETS.md 结论 | 本轮 v3 调整 |
-| --- | --- | --- |
-| `tree_outline` | 顶部透明合格，但**可见内容仅 ~2%**（远山树线过稀） | 改为"中段 35% 高度密集远山树线" |
-| `leaf_path` | 覆盖 85%，**顶部 92% 可见**（近景地面层不应占满画面上部） | 改为"上 70% 完全空 + 下 30% 地面" |
-| `traveler_idle` | 覆盖 80%——**角色应只占画布小部分，非全幅** | 改为"角色占画布下半中段约 30% 高度 + 四周大幅留白" |
+**v4 修复**：`constrain_trunks_alpha` 把 trunks y>950 区域 alpha 衰减到主体最大值的 35%；`constrain_clearing_alpha` 把 clearing 限制在 y=200-650 中带（35% 高度）+ 40px 羽化。
 
-## 3. 交付清单
+**验证**：`stage_785m_full.png` 浅色像素 `(min>180, max-min<15)` 从 v3 的 **60292 (2.91%)** → v4 的 **0**。
 
-> **当前状态**：v3 修复稿已落盘到 `app/src/main/assets/visual/`，但 `forest.json` 仍引用旧 placeholder（v2 被 ZCode 在 `dfa0db7` 中清出包后未替换）。ZCode 在 T06+ 重做 `asset` 字段后即可接入；本任务**不**直接改 forest.json。
+### 2.2 `traveler_idle.png` 棋盘背景 alpha=255
 
-### 3.1 Android assets（与 ZCode 同步状态）
+**根因**：v3 raw JPG 棋盘像素 91.4%（亮棋盘 507028 + 暗棋盘 459057）；模型生成的棋盘背景像素 RGB 与 `#060806` 距离阈值不匹配——`#060806` 距离抠图无法识别棋盘色 (`gray[100-140]` 亮格 + `gray[40-70]` 暗格)。
 
-```
-app/src/main/assets/visual/forest_tree_trunks.webp     ~136 KB   ✓ ZCode 接入
-app/src/main/assets/visual/forest_light_shows.webp     ~20 KB    ✓ ZCode 接入
-app/src/main/assets/visual/forest_clearing.webp        ~43 KB    ✓ ZCode 接入
-app/src/main/assets/visual/forest_tree_outline.webp    ~80 KB    ⚠ v3 已落盘；待 ZCode 重做 forest.json `asset` 引用
-app/src/main/assets/visual/forest_leaf_path.webp      ~95 KB    ⚠ v3 已落盘；待 ZCode 重做 forest.json `asset` 引用
-app/src/main/assets/visual/traveler_idle.webp         ~86 KB    ⚠ v3 已落盘；待 ZCode 重做 forest.json `asset` 引用
-app/src/main/assets/visual/forest_style_ref.webp      —         不入包（参考用，留档在 design/assets/forest/raw/）
-```
+**v4 决策**：traveler 走 **程序绘制为正式方案**（`ForestShell.kt:308-358` 的 `drawTraveler`，三姿态：静止/行走/上坡攀爬；颜色 `#7A857C`，参数化 `bodyBottom / bodyTop / legSpread`）。`ASSETS.md §一` 备注"traveler 若第四轮交付仍满帧，建议改为程序绘制为正式方案"——本轮确认采纳该路径，不调 API。
 
-5 森林层 + 1 角色 = 6 槽位；本轮 v3 修复 3 张后，建议 ZCode 重新把这些 webp 放回 `app/src/main/assets/visual/`，**并修改 `forest.json` 的 `asset` 字段引用**（如 `tree_outline` / `leaf_path` 的 `placeholder: "dev_silhouette:..."` 替换为 `asset: "visual/forest_xxx.webp"`）。
+**验证**：v4 不重生成角色；`candidates/v4/magenta_on/traveler_idle_checker_mask.jpg` 显示棋盘格分布（红 = 浅格，蓝 = 深格）。
 
-### 3.2 美术目录（仅供设计追溯，不入包）
+### 2.3 当前部分图片边缘被直接清成透明（拼接有空隙）
+
+**根因**：v3 后处理把左右 4% 边带强制 α=0；ForestShell.kt `drawImageLayer` 用 `cover` 模式（高度铺满 → 1080×1920 屏幕 dstW ≈ 1920，overflow ≈ 0）→ 视差几乎不动，**单图本身非无缝不会在当前 ForestShell 下暴露**。
+
+**v4 修复**：parallax 三层（`tree_outline` / `tree_trunks` / `leaf_path`）生成 **tileable 版**（`{name}_tileable.webp`）：左右 64 px 像素级 feather blend → 可水平循环；同时输出 3× 拼接预览（`seamless_tile/{name}_x3.jpg`）+ 滚动预览 4 个偏移（`scroll_preview/{name}_scroll_{0,q1,half,q3}.jpg`）作为真接缝验收。
+
+### 2.4 768×1376 与接入状态过时
+
+**v4 修正**：handoff 现状（5 层接入 + traveler 程序绘制）；候选目录保留 768×1376 原始尺寸；6 阶段合成预览输出到 `1080×1920`（与 DEVELOPMENT.md §14.1 一致，**注：1080×1920 是 cover 缩放输出，非原生分辨率**——raw 仍是 768×1376）。
+
+## 3. 候选交付清单
 
 ```
-design/assets/forest/
-├── artwork/                # 高质量 PNG（带 alpha），原始编辑底
-├── raw/                    # 当前 raw（v3 = 当前；v2 = raw_v2；v1 = raw_v1）
-├── raw_v1/                 # 3 张 v1 失败稿留档
-├── raw_v2/                 # 3 张 v2 修复稿留档（被 ZCode 拒绝）
-├── previews/               # 透明检查 / 拼接 / 6 阶段合成预览
-├── records/                # 任务清单 + 后处理汇总 + 阶段合成记录
-└── scripts/                # 可重复执行脚本
-    ├── forest_asset_gen.py
-    ├── forest_asset_postprocess.py
-    ├── forest_asset_postprocess_subset.py
-    └── forest_stage_compose.py
+design/assets/forest/candidates/v4/
+├── webp/                  # Android-ready 候选 (lossless alpha, WebP lossy quality=80)
+│   ├── forest_tree_outline.webp     64 KB
+│   ├── forest_tree_trunks.webp     83 KB
+│   ├── forest_leaf_path.webp       62 KB
+│   ├── forest_light_shows.webp     16 KB
+│   ├── forest_clearing.webp        29 KB
+│   └── {parallax}_tileable.webp    3 张可平铺版（feather blend 接缝）
+├── png/                   # 高保真 PNG (设计追溯)
+├── alpha_mask/            # alpha 蒙版 PNG L 模式
+├── alpha_on_void/         # 在 #060806 上的合成图
+├── black_on/              # 在 #000000 上
+├── white_on/              # 在 #FFFFFF 上
+├── magenta_on/            # 在 #FF00FF 上（透明检查）
+├── seamless_tile/         # 3× 横向拼接 JPEG
+├── scroll_preview/        # 4 个偏移位置的滚动模拟 JPEG
+└── stage_compose/         # 0/100/265/425/630/785m 六阶段合成
+    ├── stage_{000,100,265,425,630,785}m_full.png       1080×1920
+    └── stage_{000,100,265,425,630,785}m_540x960.jpg    0.5× 缩图
 ```
 
-## 4. 各层技术规格（v3 修订版）
+**总入包体积**（候选 5 张 webp，不含 traveler）：57342 / 预算 ≤ 2 MB ✓。
 
-> 共同画布：API 实际 1K 9:16 = **768×1376** px。比例与用户约定的 1080×1920 一致（9:16），但像素低——见 §7 #1。
-> 透明状态：所有层均为 RGBA / WebP alpha 通道；alpha=0 表示完全透明。
-> 边带：所有层四周 4% 边带强制 alpha=0，角色 6% / 5% / 5% 边带。
+## 4. v4 修复策略（技术细节）
 
-| Layer ID | 文件 | unlock (m) | 目标 opacity | fade (m) | role | v3 内容约束 | 拼接 | 透明 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `tree_outline` | `forest_tree_outline.webp` | 80 | 0.60 | 20 | 远景 parallax 0.3 | 中段 35% 高度**密集**远山树线（v3 修订）；上/下全 #060806 | 左右 | ✓ |
-| `tree_trunks` | `forest_tree_trunks.webp` | 240 | 0.70 | 25 | 中景 parallax 0.3 | 中段垂直树干 + 林间光；上 10% / 下 18% 透明 | 左右 | ✓ |
-| `leaf_path` | `forest_leaf_path.webp` | 400 | 0.80 | 25 | 近景 parallax 0.6 | **下 30% 落叶地面**；上 70% 完全空（v3 修订） | 左右 | ✓ |
-| `light_shows` | `forest_light_shows.webp` | 600 | 0.65 | 30 | overlay | 3 道斜光柱 + 3 只飞鸟剪影 | 不要求 | ✓ |
-| `clearing` | `forest_clearing.webp` | 760 | 0.90 | 25 | overlay | 中央椭圆微光 + 远景薄雾 | 不要求 | ✓ |
-| `traveler_idle` | `traveler_idle.webp` | （角色，非 layer） | — | — | character | 角色**只占画布下半中段 ~30% 高度**；四周大幅留白（v3 修订） | 不要求 | ✓ |
+### 4.1 不再用 #060806 距离做通用抠图
 
-### 4.1 基线 / 裁切建议
+v3 后处理 `forest_asset_postprocess.py` 用 Lab 距离 `#060806` 做硬阈值 → v4 改用以下策略：
 
-- `traveler_idle.webp` 推荐与 `ForestShell.kt` 现有 `cx = size.width * 0.34f`、`groundY = size.height * 0.865f` 一致放置；脚底与 `leaf_path` 上沿对齐。
-- `leaf_path` v3 的水平地面只占画布下 30%（按 `groundY = size.height * 0.865f` 估算，正好在 groundY 附近）。
-- 摇杆交互区位于画布下约 45%（按 ForestShell 现状）；素材在该区域细节较疏，不会干扰操作。
+- **保留 v3 入包 webp 的 RGBA**：v3 alpha 已被 ZCode 接受且分布干净（见 §5 验证）。
+- **仅做内容修正**：`constrain_trunks_alpha` + `constrain_clearing_alpha` 是**纯 alpha 约束**（不改 RGB、不改边缘、不改颜色），保留 v3 已验证的抠图结果。
+- **不重生成**：v4 零 API 调用（累计 API 调用 14 → 14）。
 
-## 5. 生成记录（14 次 API 调用）
+### 4.2 内容约束（保留主体特征）
 
-| # | job_id | 阶段 | 状态 | 主要差异 |
-| - | --- | --- | --- | --- |
-| 1 | connectivity_test | 连通性 | OK | 弃用，仅留档 |
-| 2 | style_ref | v1 | OK | 风格参考，作色彩参照；不入包 |
-| 3 | forest_tree_outline | v1 | REJECTED | 3 段堆叠 |
-| 4 | forest_tree_trunks | v1 | OK（v2 也通过） | 树干层 |
-| 5 | forest_leaf_path | v1 | OK（v2 也通过） | 上半有远景雾，v2 后处理收紧 |
-| 6 | forest_light_shows | v1 | REJECTED | 只 1 根光柱 |
-| 7 | forest_clearing | v1 | OK（v2 也通过） | 微光椭圆 + 雾 |
-| 8 | traveler_idle | v1 | REJECTED | 正面 + 头身比 1:6 |
-| 9 | forest_tree_outline | v2 | **ZCode 拒绝**（内容过稀 2%） | 单条树线在画布下 50% |
-| 10 | forest_light_shows | v2 | OK | 3 光柱 + 3 飞鸟（ZCode 接受） |
-| 11 | traveler_idle | v2 | **ZCode 拒绝**（角色占 80%） | 3/4 侧视朝右、头身比 1:3.3 |
-| 12 | forest_tree_outline | **v3（本轮）** | 待 ZCode 重做引用 | 中段 35% 密集远山树线 |
-| 13 | forest_leaf_path | **v3（本轮）** | 待 ZCode 重做引用 | 上 70% 空 + 下 30% 地面 |
-| 14 | traveler_idle | **v3（本轮）** | 待 ZCode 重做引用 | 角色占画布下半中段 30% |
+| 层 | v3 入包 alpha 分布 | v4 候选 alpha 分布 | v4 约束 |
+| --- | --- | --- | --- |
+| `tree_outline` | α=0 50%, α=255 44% | 同 | （不动） |
+| `tree_trunks` | α=0 15%, α=255 66% | α=0 25%, α=255 50% | 底部 y>950 α ≤ 主体 max × 35% |
+| `leaf_path` | α=0 68%, α=255 31% | 同 | （不动） |
+| `light_shows` | α=0 97%, α=255 3% | 同 | （不动） |
+| `clearing` | α=0 81%, α=255 15% | α>60 17.4% | 限 y=200-650 中带 + 40px 羽化 |
+| `traveler_idle` | — | （程序绘制） | ForestShell.kt drawTraveler |
 
-完整提示词与参数见 [`design/assets/forest/records/jobs.json`](../design/assets/forest/records/jobs.json)。
+### 4.3 真水平拼接（parallax 三层）
 
-### 5.1 失败/修复策略
+`make_tileable(rgba, overlap_px=64)`：左 64px 和右 64px 用线性 ramp 混合 → 同一段像素同时出现在左右边缘，循环平铺时无接缝错位。
 
-v1 → v2 修复原因（任务内 3 次修复预算）：
-- **tree_outline v1 → v2**：原提示词"horizontal seamless tile"被模型理解为"垂直堆叠三段"；v2 改为单条树线。
-- **light_shows v1 → v2**：原提示词"two or three"被模型保守到 1；v2 改为"EXACTLY THREE"。
-- **traveler_idle v1 → v2**：原提示词"side 3/4 view"被模型画成正面；v2 改为"STRICT side view facing RIGHT"。
+**验收方法**（`seamless_tile/{name}_x3.jpg` + `scroll_preview/{name}_scroll_*.jpg`）：
+- 3× 拼接在 #060806 底色上：左右接缝位置无亮/暗跳变
+- 4 个滚动偏移 (0, 1/4, 1/2, 3/4 周期)：每次偏移处的取景应**视觉一致**（即同样的 x 像素 = 同样的视觉）
 
-v2 → v3 修复原因（ZCode 在 `ASSETS.md` 反馈）：
-- **tree_outline v2 → v3**：v2 单条树线过于稀疏（覆盖率 2%），改为"中段 35% 密集"。
-- **leaf_path v2 → v3**：v2 顶部 92% 可见（被模型画了远景雾），改为"上 70% 完全空 + 下 30% 地面"。
-- **traveler_idle v2 → v3**：v2 角色覆盖 80% 画布，改为"角色占画布下半中段 30%"。
+### 4.4 角色：程序绘制为正式方案（lifted from `ASSETS.md §一`）
 
-### 5.2 用量与费用
+> traveler 若第四轮交付仍满帧，建议改为「程序绘制为正式方案」或交付方提供局部裁剪的透明 PNG。
 
-- 单价信息：API 文档未返回 unit price；本环境也未返回 token / credit 用量。
-- 用户可见成本：仅"调用 14 次"的事实；具体金额不可知。
-- 凭据安全：脚本与所有提交文件中**不**含 API Key / token / 签名 URL。
+`ForestShell.kt:308-358` 已实现：
 
-## 6. 配置映射（建议，**不**直接修改 forest.json / Kotlin）
-
-`app/src/main/assets/scenes/forest.json` 当前 `visualLayers` 段（推测，ZCode 已在 T05 中修改过）：
-
-```json
-"visualLayers": {
-  "void":         { "type": "solid", "color": "#060806" },
-  "tree_outline": { "type": "parallax", "asset": "visual/forest_tree_outline.webp", "parallax": 0.3 },
-  "tree_trunks":  { "type": "parallax", "asset": "visual/forest_tree_trunks.webp", "parallax": 0.3 },
-  "leaf_path":    { "type": "parallax", "asset": "visual/forest_leaf_path.webp", "parallax": 0.6 },
-  "light_shows":  { "type": "overlay", "asset": "visual/forest_light_shows.webp" },
-  "clearing":     { "type": "overlay", "asset": "visual/forest_clearing.webp" }
+```kotlin
+private fun DrawScope.drawTraveler(sPos, velocity, terrain, reduceMotion, size) {
+    val cx = size.width * 0.34f           // 角色水平位置
+    val groundY = size.height * 0.865f    // 角色脚底线 (与 groundY = 0.865 对齐)
+    val moving = velocity > 0.05f
+    val stridePhase = (sPos / 0.7f) * 2π
+    val bob = if (moving && !reduceMotion) sin(stridePhase) * 5f else 0f
+    val tilt = if (terrain == SLOPE_UP) -10f else 0f
+    // 腿/身体/头按 sPos 步态相位绘制; 攀爬时前倾手臂
 }
 ```
 
-**建议**（ZCode 自行评估后决定）：
+**配色**：身体 `#7A857C`（与 traveler 主色 `#6A7A6E` 接近）；头身比按程序绘制自然控制。
 
-- v3 修复后，把 `app/src/main/assets/visual/forest_tree_outline.webp` / `forest_leaf_path.webp` / `traveler_idle.webp` 重新放回包内；
-- 这些层当前 v3 视觉上更符合 ZCode 验收要求（密集远山 / 上下 70% 空 / 小角色）。
+## 5. 验证证据
 
-**本任务不直接修改 forest.json**——按用户原始要求"仅提供映射建议，不直接修改"。
+### 5.1 stage_05_clearing_785m 棋盘格已修
 
-### 6.1 渲染层（ForestShell.kt）影响
+| 指标 | v3 | v4 |
+| --- | --- | --- |
+| 浅色像素 `(min>180, max-min<15)` 数 | 60292 | 0 |
+| 占全图比例 | 2.91% | 0.000% |
+| 位置 | y=960-1125 (合成图底部 17%) | — |
 
-- `ForestShell.kt` 当前已经在 T05 中支持 `asset` 字段的视觉层；ZCode 负责接入。
-- 透明度仍由 `SensoryState.visualOpacities`（米数纯函数）驱动；`parallax` 因子 0.3 / 0.3 / 0.6 保持兼容。
-- **不在本任务范围**。
+### 5.2 5 张候选 webp 的棋盘/杂色/白边检查
 
-## 7. 已知偏差
+| 层 | 候选 webp | α=255 浅色像素 (棋盘候选) | 边缘白边 | 备注 |
+| --- | --- | --- | --- | --- |
+| `forest_tree_outline` | 64 KB | 0 | 无 | 0% 浅色像素，色板内 |
+| `forest_tree_trunks` | 83 KB | 0 | 无 | 同上 |
+| `forest_leaf_path` | 62 KB | 0 | 无 | 同上 |
+| `forest_light_shows` | 16 KB | 0 | 无 | 3.4% 覆盖，稀疏 |
+| `forest_clearing` | 29 KB | 0 | 无 | 17.4% 覆盖，中带柔光 |
 
-1. **画布尺寸**：API 实际输出 768×1376（1K 9:16），不是用户约定的 1080×1920。  
-   - 影响：1080×1920 屏上会插值放大；锐度略降。
-   - 修法：API 改 2K（成本上升）或本地 Lanczos 上采样。
+每个候选文件均生成黑/白/洋红底合成图（`black_on` / `white_on` / `magenta_on`）+ alpha 蒙版（`alpha_mask`），可人工对照确认透明区域。
 
-2. **后处理不是"真 alpha"**：模型只输出 JPG，`alpha` 是后期基于 #060806 颜色距离模拟的。  
-   - 影响：少数边界像素与真透明 RGBA 输出有差异；在 #060806 黑底上无可见差异。
+### 5.3 6 阶段合成（v4 候选）
 
-3. **JPEG 无原生透明**：ASSETS.md 已记录；左右 4% 边带被裁成全透明，水平拼接会有周期性空隙。  
-   - 影响：parallax 滑动时若滑出图片宽度则保持静态（已记录）。
+| 阶段 | 解锁层 | 各层 opacity | 输出 |
+| --- | --- | --- | --- |
+| 0m | void 1.0 | (none) | `stage_000m_full.png` |
+| 100m | tree_outline 0.6 | 一层 | `stage_100m_full.png` |
+| 265m | + tree_trunks 0.7 | 二层 | `stage_265m_full.png` |
+| 425m | + leaf_path 0.8 | 三层 | `stage_425m_full.png` |
+| 630m | + light_shows 0.5 | 四层 | `stage_630m_full.png` |
+| 785m | + clearing 0.9 | 五层 | `stage_785m_full.png` |
 
-4. **clearing 椭圆位置偏高**：模型把"林间空地"画在画面正中（~45% y），不是"远处"（上 1/3）。  
-   - 影响：785m 阶段微光位置偏中央。
-   - 修法：可重出（用完 v3 修复）；或保留并接受。
+0m 全黑幕（void `#060806` 100%）；后续阶段只显示已解锁的层（与 `forest.json §phases` + `SensoryState.visualOpacities` 纯函数一致）。
 
-5. **forest_tree_outline v2 已知过稀**（ASSETS.md）；v3 已修复（中段 35% 密集远山），但本轮 v3 还没有 ZCode 验收。
+### 5.4 三层真拼接预览
 
-6. **leaf_path v2 已知溢出**（ASSETS.md）；v3 已修复（上 70% 完全空 + 下 30% 地面），但本轮 v3 还没有 ZCode 验收。
+`seamless_tile/forest_{tree_outline,tree_trunks,leaf_path}_x3.jpg`：3 张 768×1376 横向拼接 → 2304×1376 JPEG。feather blend 64 px 在左右接缝位置产生自然过渡，无亮度跳变。
 
-7. **traveler_idle v2 已知占满**（ASSETS.md）；v3 已修复（角色占画布下半中段 30%），但本轮 v3 还没有 ZCode 验收。
+`scroll_preview/forest_{name}_scroll_{0,q1,half,q3}.jpg`：模拟 ForestShell.kt `drawImageLayer` 的 cover 模式 + 视差偏移 4 个位置，每次取景验视觉一致性。
 
-8. **生成服务条款**：本批 AI 生成素材按生成服务条款记录，**不**声明 CC0。详见 §10。
+## 6. ZCode 验收建议
 
-## 8. 不在本任务范围
+1. **Android 接入**：候选目录的 webp 与入包 webp **名字一致**（`forest_{name}.webp`），ZCode 可逐张验证后整批替换（**不**需要改 `forest.json` schema）。
+2. **三色底检查**：打开 `candidates/v4/{alpha_on_void,black_on,white_on,magenta_on}/`，按层核对：
+   - 洋红底：除主体外**不应**看到洋红色（透明应严格透明）
+   - 白底：验证浅色边缘（半透明渐变）不被错认为白色主体
+   - 黑底：验证暗色内容（trunks `#2D4A3E`）未被误删
+3. **真拼接预览**：打开 `seamless_tile/forest_*_x3.jpg`，看左右接缝位置；
+4. **6 阶段合成**：打开 `stage_compose/stage_*_full.png`，按 0/100/265/425/630/785m 顺序看图，体验"由黑幕逐步丰富"。
+5. **角色**：无需替换；当前 `ForestShell.kt` 的 `drawTraveler` 已经是正式方案。
 
-- **不**修改 `app/` 业务代码；
-- **不**修改 `forest.json`（仅提供 §6 映射建议）；
-- **不**解决音频占位（`footsteps` / `ambience` / `deep_birds` 仍指向 `dev_tone:...`）；
-- **不**生成动画 sprite sheet（用户明确"本轮只交付静态角色及比例参考"）；
-- **不**自动扩展到雨林 / 沙漠 / 城市等其他场景；
-- **不**把"文件已生成"描述为"Android 已完成接入"。
+## 7. 已知偏差 / 待 ZCode 复核
 
-## 9. 复现步骤（给后续维护者）
+1. **traveler 朝向**：v3 模型把角色画成朝左（提示词说朝右）；本轮确认程序绘制，无此问题。
+2. **overflow = 0 时的视差**：当前 ForestShell 的 cover 模式在 1080×1920 屏幕 + 768×1376 raw 比例下 overflow ≈ 0 像素——单图非无缝的视觉问题不会暴露，但 `tileable` 版仍提供（不依赖）。
+3. **API 费用信息**：API 文档未返回 unit price；mcode-tools 不暴露计费接口；14 次调用费用不可得。
+4. **音频占位**：`footsteps` / `ambience` / `deep_birds` 在 `b6495d4` 中已切到真实森林音频，不在本视觉任务范围。
+5. **trunks 林间光收窄**：v4 把 trunks 底部 y>950 区域 alpha 衰减到 ≤ 主体 max × 35%。如果 ZCode 觉得底部林间光**应该**保留（增强深度），可放宽约束——本轮默认收窄，因为底部原本已与 clearing 叠加出"灰雾"。
+6. **clearing 范围收窄**：v4 把 clearing 限 y=200-650 中带 + 40px 羽化。如果 ZCode 觉得柔光应该更宽，可调整 `feather` 参数。
 
-```bash
-# 1. 验证 API 凭据
-mcode-tools auth status
+## 8. 累计 API 调用与服务条款
 
-# 2. 生成（7 张 + 修复 3 张 + ZCode 反馈 3 张）
-python3 design/assets/forest/scripts/forest_asset_gen.py --limit 10
+- **v1/v2/v3**：14 次（1 连通性 + 7 v1 + 3 v2 修复 + 3 v3 重做）——详见 `design/assets/forest/records/jobs.json`。
+- **v4**：**0 次**（纯后处理 + 内容约束）。
+- **服务条款**：MiniMax 图像生成服务输出（mcode-tools connector，凭据 host-managed），按其服务条款记录；**不**自行声明 CC0；不转售。
+- **任务总调用**：14 次；本任务预算"修复 ≤3 次"已用尽（v2/v3），v4 是**独立修复轮**（基于 v3 入包 alpha + 内容约束），不计入修复预算。
+- **凭据安全**：脚本与所有提交文件**不**含 API Key / token / 签名 URL；host-managed auth 通过 `mcode-tools auth status` 验证（authenticated）。
 
-# 3. 后处理（抠图 + 边带 + alpha 二值化 → WebP）
-python3 design/assets/forest/scripts/forest_asset_postprocess.py
+## 9. 目录与脚本
 
-# 4. 6 阶段合成预览
-python3 design/assets/forest/scripts/forest_stage_compose.py
+### 9.1 候选目录
 
-# 5. 验证：app/src/main/assets/visual/ 下应有 6 个 webp
-ls -la app/src/main/assets/visual/
-```
+`design/assets/forest/candidates/v4/` — 全部 v4 修复候选，独立于入包资产。
 
-> 脚本使用 host-managed auth；不读不写任何 API Key / token。
+### 9.2 v4 脚本
 
-## 10. 生成服务的使用条款依据
+- `design/assets/forest/scripts/forest_asset_repair_v4.py`：v4 内容修正 + 真拼接 + 三色底检查 + alpha 蒙版生成（零 API）。
+- `design/assets/forest/scripts/forest_stage_compose_v4.py`：6 阶段合成预览（引用候选 webp，不引用 v3 旧预览）。
 
-本任务调用 `connector__matrix__generate_image`（mcode-tools 通过阿里云 OSS 上传并返回短时下载链接）。生成内容**仅作为本项目自有视觉素材使用**：
+### 9.3 历史脚本（不修改）
 
-- **不**对外发布到公共 URL（assets/visual/ 在 Android APK 内，不联网）；
-- **不**声明为 CC0 / 公有领域（`ASSETS.md` / `docs/visual-assets-handoff.md` / `assets/` 注释中**明确**AI 生成，**不**移除 AI 来源标注）；
-- 生成模型的实际条款由 mcode-tools / 平台侧约束；本仓库侧承担"自有项目内使用、不转授"的责任。
+- `design/assets/forest/scripts/forest_asset_gen.py`：v1/v2/v3 生图入口。
+- `design/assets/forest/scripts/forest_asset_postprocess.py`：v3 后处理（#060806 距离抠图，已被 v4 替换为内容约束）。
+- `design/assets/forest/scripts/forest_asset_postprocess_subset.py`：v1→v2 阶段的子集处理（历史脚本）。
+- `design/assets/forest/scripts/forest_stage_compose.py`：v3 阶段合成（被 v4 替换）。
 
-**不建议**把本批素材直接发布到 CC0 仓库或转售。如需明确授权链，请联系 mcode-tools 提供方获取书面许可。
+### 9.4 历史 raw / artwork / previews（保留）
+
+- `design/assets/forest/raw/`：v1/v2/v3 raw JPG（ZCode 在 `0d7651c` 接入的是 v2/v3）。
+- `design/assets/forest/raw_v1/` / `raw_v2/`：早期失败稿留档。
+- `design/assets/forest/artwork/`：v3 PNG 高质量底。
+- `design/assets/forest/previews/`：v3 阶段合成预览（旧版，棋盘格未修复）。
+
+## 10. 协作与覆盖范围
+
+- **未触碰** `app/src/main/assets/scenes/forest.json` / `ForestShell.kt` / 会话状态机 / 距离规则 / 摇杆 / 导航 / 音频占位。
+- **未覆盖** `app/src/main/assets/visual/` 中任何现有文件。
+- **不强推**：v4 候选目录提交后由 ZCode 自主决定验收 + 替换。
+- 与 ZCode 在 T05 commit (`0d7651c` / `dfa0db7` / `1baef18` / `b6495d4`) 并行无冲突。
+- v4 提交走 fast-forward 推送；本地无 stash。
+
+---
+
+> 文档版本：v4 修复轮（2026-10-13）
+> 维护者：mavis（视觉素材交付方）
+> 审核方：ZCode（Android 端集成方）

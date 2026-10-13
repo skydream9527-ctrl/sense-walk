@@ -1,0 +1,67 @@
+[
+  {
+    "name": "forest_tree_outline",
+    "role": "parallax",
+    "src": "app/src/main/assets/visual/forest_tree_outline.webp",
+    "out_png": "design/assets/forest/candidates/v4/png/forest_tree_outline.png",
+    "out_webp": "design/assets/forest/candidates/v4/webp/forest_tree_outline.webp",
+    "size_kb_png": 284.1,
+    "size_kb_webp": 64.1,
+    "alpha_coverage": 48.2,
+    "alpha_255_ratio": 44.3
+  },
+  {
+    "name": "forest_tree_trunks",
+    "role": "parallax",
+    "src": "app/src/main/assets/visual/forest_tree_trunks.webp",
+    "out_png": "design/assets/forest/candidates/v4/png/forest_tree_trunks.png",
+    "out_webp": "design/assets/forest/candidates/v4/webp/forest_tree_trunks.webp",
+    "size_kb_png": 538.5,
+    "size_kb_webp": 82.6,
+    "alpha_coverage": 62.8,
+    "alpha_255_ratio": 49.7
+  },
+  {
+    "name": "forest_leaf_path",
+    "role": "parallax",
+    "src": "app/src/main/assets/visual/forest_leaf_path.webp",
+    "out_png": "design/assets/forest/candidates/v4/png/forest_leaf_path.png",
+    "out_webp": "design/assets/forest/candidates/v4/webp/forest_leaf_path.webp",
+    "size_kb_png": 543.7,
+    "size_kb_webp": 61.8,
+    "alpha_coverage": 32.1,
+    "alpha_255_ratio": 31.4
+  },
+  {
+    "name": "forest_light_shows",
+    "role": "overlay",
+    "src": "app/src/main/assets/visual/forest_light_shows.webp",
+    "out_png": "design/assets/forest/candidates/v4/png/forest_light_shows.png",
+    "out_webp": "design/assets/forest/candidates/v4/webp/forest_light_shows.webp",
+    "size_kb_png": 133.4,
+    "size_kb_webp": 16.2,
+    "alpha_coverage": 3.4,
+    "alpha_255_ratio": 2.6
+  },
+  {
+    "name": "forest_clearing",
+    "role": "overlay",
+    "src": "app/src/main/assets/visual/forest_clearing.webp",
+    "out_png": "design/assets/forest/candidates/v4/png/forest_clearing.png",
+    "out_webp": "design/assets/forest/candidates/v4/webp/forest_clearing.webp",
+    "size_kb_png": 278.7,
+    "size_kb_webp": 29.0,
+    "alpha_coverage": 17.4,
+    "alpha_255_ratio": 13.5
+  },
+  {
+    "name": "traveler_idle",
+    "role": "character",
+    "src": "design/assets/forest/raw/traveler_idle.jpg",
+    "decision": "程序绘制为正式方案 (ForestShell.kt drawTraveler + ASSETS.md)",
+    "v3_webp_in_assets": "0 bytes (ZCode 已在 1baef18 移除)",
+    "v3_raw_checker_bright_pixels": 507028,
+    "v3_raw_checker_dark_pixels": 459057,
+    "v3_raw_checker_total_ratio": 91.4
+  }
+]
