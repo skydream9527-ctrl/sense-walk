@@ -224,16 +224,18 @@ def forest_jobs() -> list[JobSpec]:
         job_id="forest_tree_outline",
         label="forest_tree_outline",
         prompt=(
-            "A SINGLE horizontal distant forest treeline silhouette in 2D hand-drawn style, "
-            "placed at the LOWER 30 percent of the canvas. Above the treeline the canvas is "
-            "completely empty dark void color #060806 (no patterns, no other tree rows, no "
-            "stacking, no repeating). Trees are distant dark greenish-black silhouettes "
-            "around #1A2820, sparse and natural, only one row across the bottom. Below the "
-            "treeline is also dark void #060806 (no ground drawn here, no leaves, no path). "
-            "No midground, no foreground, no character, no birds, no light beams, no text, no "
-            "UI, no logos, no watermarks. The treeline must be ONE single row, not three."
+            "A horizontal DISTANT forest treeline silhouette in 2D hand-drawn style. "
+            "Trees are DENSE, naturally varying heights, filling the entire middle band of "
+            "the canvas (roughly the central 35 percent of the height, NOT a sparse row). "
+            "Tree silhouettes are dark greenish-black #1A2820. Above and below the treeline "
+            "band, the canvas is COMPLETELY EMPTY dark void color #060806 (no patterns, no "
+            "shapes, no other tree rows, no other elements). The treeline should look like a "
+            "real distant forest horizon, with many overlapping tree shapes from small to "
+            "medium height, dark and dense. Plain dark teal-green background #060806 that "
+            "will be made transparent. No midground, no foreground, no character, no birds, "
+            "no light beams, no text, no UI, no logos, no watermarks."
         ),
-        notes="parallax 远景；要求画布下方 1 行树线，其余画布 #060806。",
+        notes="parallax 远景；要求画布中段 35% 一条密远山树线（不是稀一行），其余画布 #060806。",
     )
 
     trunks = JobSpec(
@@ -253,14 +255,15 @@ def forest_jobs() -> list[JobSpec]:
         job_id="forest_leaf_path",
         label="forest_leaf_path",
         prompt=(
-            "A horizontal seamless 2D hand-drawn ground layer of dry leaves, soft earth path "
-            "edge, small warm brown accents #A89060, muted green #6B8F71 leaf specks, low and "
-            "flat (no strong perspective road vanishing into the distance). Top half completely "
-            "empty / transparent area. Plain dark teal-green background (#060806) to be removed. "
-            "No character, no birds, no sky details, no text, no UI. The ground baseline must be "
-            "horizontally flat (no slope)."
+            "A horizontal 2D hand-drawn ground layer of dry leaves, soft earth path edge, "
+            "small warm brown accents #A89060, muted green #6B8F71 leaf specks. This layer "
+            "occupies ONLY THE LOWER 30 PERCENT of the canvas. The UPPER 70 PERCENT of the "
+            "canvas is COMPLETELY EMPTY dark void color #060806 (no fog, no clouds, no sky "
+            "details, no trees, no birds, no shapes, no patterns). The ground itself is "
+            "horizontally flat (no slope). Plain dark teal-green background #060806 that "
+            "will be made transparent. No character, no text, no UI, no logos."
         ),
-        notes="parallax 近景地面；与角色脚底基线对齐；不带坡度。",
+        notes="parallax 近景地面；下 30% 落叶地面 + 上 70% 完全空（按 ZCode 验收要求）。",
     )
 
     light_shows = JobSpec(
@@ -296,17 +299,19 @@ def forest_jobs() -> list[JobSpec]:
         job_id="traveler_idle",
         label="traveler_idle",
         prompt=(
-            "A single still 2D hand-drawn character sprite, STRICT side view facing RIGHT, "
-            "transparent background, body proportions head-to-height about 1 to 3.3 (chubby, "
-            "compact, NOT slim, NOT elongated). Neutral adult, medium-length coat or light "
-            "cloak, loose pants, simple travel boots. NO facial features drawn, no eyes, no "
-            "mouth, no nose. Main color muted gray-green #6A7A6E, dark shadows #2A322C, very "
-            "faint pale green rim light. Relaxed idle pose, both feet flat on the same "
-            "horizontal baseline, no walking motion, complete body shown left to right with "
-            "the head rightmost, no scenery, no trees, no ground, no shadow on ground, no "
-            "text, no UI, no logo."
+            "A single SMALL 2D hand-drawn character sprite, side 3/4 view facing right, "
+            "transparent background, occupying only the LOWER HALF of the canvas. The "
+            "character should be SMALL relative to the canvas, standing in the bottom-center "
+            "area, with WIDE empty space on left, right, and TOP (upper half of canvas is "
+            "completely transparent / empty). Body proportions head-to-height about 1 to "
+            "3.3. Neutral adult, medium-length coat or light cloak, loose pants, simple "
+            "travel boots. NO facial features drawn. Main color muted gray-green #6A7A6E, "
+            "dark shadows #2A322C, very faint pale green rim light. Both feet flat on the "
+            "same horizontal baseline. No scenery, no trees, no ground, no shadow on ground, "
+            "no text, no UI, no logo. The character must NOT fill the canvas — leave large "
+            "margins on all four sides."
         ),
-        notes="默认旅人；只静态帧；脚底基线齐平；四周完全透明。",
+        notes="默认旅人；小角色占画布下半中段 30% 区域；按 ZCode 验收要求（角色不抢戏）。",
     )
 
     return [style, outline, trunks, leaf_path, light_shows, clearing, traveler]

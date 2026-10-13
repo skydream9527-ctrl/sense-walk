@@ -40,6 +40,9 @@ LAYER_FILES = {
     "traveler_idle": ("traveler_idle", "character"),
 }
 
+# 不放入 app/src/main/assets/visual/ 的层（仅留 design 留档）
+SKIP_ANDROID_PUBLISH = {"style_ref"}
+
 
 def _color_distance(rgb, target):
     diff = rgb.astype(np.float32) - target[None, None, :]

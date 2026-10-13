@@ -27,13 +27,13 @@
     "alpha_on_void": "design/assets/forest/previews/forest_tree_outline_alpha_on_void.jpg",
     "alpha_mask": "design/assets/forest/previews/forest_tree_outline_alpha_mask.png",
     "tile_preview": "design/assets/forest/previews/forest_tree_outline_tile_x2.jpg",
-    "raw_bytes": 138099,
-    "png_bytes": 222701,
-    "webp_bytes": 14030,
+    "raw_bytes": 385689,
+    "png_bytes": 805287,
+    "webp_bytes": 81592,
     "width": 768,
     "height": 1376,
-    "alpha_zero_pct": 97.72580168968024,
-    "alpha_full_pct": 1.9289948219476742
+    "alpha_zero_pct": 50.51203291545543,
+    "alpha_full_pct": 44.35902676841085
   },
   {
     "job_id": "forest_tree_trunks",
@@ -63,13 +63,13 @@
     "alpha_on_void": "design/assets/forest/previews/forest_leaf_path_alpha_on_void.jpg",
     "alpha_mask": "design/assets/forest/previews/forest_leaf_path_alpha_mask.png",
     "tile_preview": "design/assets/forest/previews/forest_leaf_path_tile_x2.jpg",
-    "raw_bytes": 826083,
-    "png_bytes": 1269160,
-    "webp_bytes": 119272,
+    "raw_bytes": 545686,
+    "png_bytes": 1098738,
+    "webp_bytes": 96928,
     "width": 768,
     "height": 1376,
-    "alpha_zero_pct": 22.55178052325581,
-    "alpha_full_pct": 42.408835241036826
+    "alpha_zero_pct": 67.63158990431202,
+    "alpha_full_pct": 31.396200490552324
   },
   {
     "job_id": "forest_light_shows",
@@ -117,12 +117,12 @@
     "alpha_on_void": "design/assets/forest/previews/traveler_idle_alpha_on_void.jpg",
     "alpha_mask": "design/assets/forest/previews/traveler_idle_alpha_mask.png",
     "tile_preview": null,
-    "raw_bytes": 464840,
-    "png_bytes": 885816,
-    "webp_bytes": 114484,
+    "raw_bytes": 628182,
+    "png_bytes": 900334,
+    "webp_bytes": 87744,
     "width": 768,
     "height": 1376,
-    "alpha_zero_pct": 19.747191436531008,
-    "alpha_full_pct": 75.20174721414729
+    "alpha_zero_pct": 19.377100744912788,
+    "alpha_full_pct": 79.64434956395348
   }
 ]
