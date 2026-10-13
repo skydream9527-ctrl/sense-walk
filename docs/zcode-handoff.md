@@ -10,13 +10,14 @@
 4. T01–T08 是可由开发工具执行的工作；T09 还包含真人内测和实体手机验证。无法实际执行的部分必须标记「待验证」，不能据此宣称最终 MVP 已验收。
 5. 本地只需能编辑源码和提交代码；JDK、SDK、Gradle、测试和 APK 打包由 GitHub Actions 执行。本地缺 SDK/模拟器不阻塞开发；云端失败按日志修复。日历工期等 T04 跑通闭环后再估算。
 
-## 当前基线（2026-10-13，T05 机制后）
+## 当前基线（2026-10-13，T05 收尾后）
 
 - 技术栈：Kotlin、Jetpack Compose、Navigation、DataStore、kotlinx-serialization-json；minSdk 26，compileSdk / targetSdk 35。
-- 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`）；T04 边界修复绿跑 [run 38338455403](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38338455403)（`0a7165f`）。本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
-- **T01–T04 已完成**（T04 含边界修复：地形速度系数 §5.7、指针清理、摇杆实体区域、终态清理）；**T05 感官机制已完成**：SensoryCoordinator（步伐节奏/停走冻结/everyNSteps/终态释放，11 个可注入单测）+ SoundPool/MediaPlayer/Vibrator 真实引擎 + 音频焦点与耳机断连暂停。**T05/M1 未完成的部分：真实音频素材未取得（占位层静默跳过）；MiniMax 视觉素材 3 层（trunks/light_shows/clearing）已验收接入，其余层程序降级待重生成（见 ASSETS.md）。**
-- 待做：合格森林音频与视觉素材入库并替换占位（T05 收尾）；T06 计步/前台服务、T07 快照恢复/地形/雨林、T08 四景、T09 真机与内测。标准 800 m 手动验收与真机音频焦点/耳机断连验证仍为待验证项。
-- 已有 HTML 是设计原型，不能当 Android 功能完成的证据。下一阶段视素材情况发送 **T05 收尾** 或 **T06** 阶段提示词；不要重做 T01–T04。
+- 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`）；T05 收尾绿跑见 DEVELOPMENT.md §20.9（最新提交与 run 号以该节为准）。本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
+- **T01–T04 已完成**（T04 含边界修复：地形速度系数 §5.7、指针清理、摇杆实体区域、终态清理）；**T05 机制与收尾均已完成**：SensoryCoordinator + SoundPool/MediaPlayer/Vibrator 真实引擎 + 中断播放边界（prepareAsync 异步就绪、加载失败诊断、焦点重申请、暂停停活跃脚步流不补播、终态吸收迟到回调，13 个可注入单测）；**森林真实音频已入库**（落叶脚步 ×6 + 虫鸣/远鸟无缝循环，CC0/CC BY 授权可查，`REQUIRE_REAL_ASSETS` 放行，处理记录见 ASSETS.md）；**视觉五层为 v4 修复版，ZCode 程序化复验合格（棋盘格/白边/矩形底/层重复四项）并替换入包 260 KB**，旅人为程序绘制正式方案，复验数据见 ASSETS.md §一；模拟器 800 m 全程走查通过（含来电中断「已暂停」新交互与通关三播放器即时释放，证据见 DEVELOPMENT.md §20.9）。
+- **M1 不宣布完成**：标准 800 m 真人手动验收、真机实体耳机/来电焦点、锁屏返回、脚步振动（模拟器无 HAL）、v4 视觉真人走查仍为待验证项。
+- 待做：T06 计步/前台服务、T07 快照恢复/地形/雨林、T08 四景、T09 真机与内测；以及上述 M1 待验证清单。
+- 已有 HTML 是设计原型，不能当 Android 功能完成的证据。下一阶段发送 **T06** 阶段提示词（或先补 M1 待验证项）；不要重做 T01–T05。
 
 ## 开发计划
 

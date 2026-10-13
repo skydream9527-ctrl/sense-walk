@@ -13,23 +13,23 @@
 
 ---
 
-## 0. 当前进度（仓库核查，2026-10-12 · T04 后）
+## 0. 当前进度（仓库核查，2026-10-12 · T05 收尾后）
 
-**结论：T01–T04 已合入 main（最新核查 commit `808d872`，Actions 全绿）。** 森林 800 m 虚走可通关/放弃；实走与其他场景诚实标「暂未开放」。音频/振动仍为 stub，真实森林感官属 **T05**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
+**结论：T01–T05 已合入 main（最新核查见 §20.8 T05 记录，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与视觉复验未执行前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
 
 | 模块 | 已有内容 / 源码证据 | 与目标的差距 |
 | --- | --- | --- |
 | 工程与导航 | Home → 模式选择 → 会话 → 结果；Navigation / DataStore / SessionViewModel | 实走入口未开放；雨林/城市未进主流程 |
-| 场景 | schema v2 JSON（森林/沙漠/夜径）；SceneValidator；Loading/Ready/Error | 雨林/城市配置与入口未齐；素材多为显式开发占位 |
-| 会话 | `VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔；后台暂停不偷跑 | 真实音视未接；地形越坎属 T07 |
+| 场景 | schema v2 JSON（森林/沙漠/夜径）；SceneValidator；Loading/Ready/Error | 雨林/城市配置与入口未齐；森林素材已真实化，沙漠/夜径仍显式占位 |
+| 会话 | `VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔；后台暂停不偷跑 | 地形越坎属 T07 |
 | 结果页 | Completed / Abandoned，展示实际米数 | 用时折叠等打磨可继续 |
-| 感官 | 相位调度已跑；`AudioMixer` / `HapticEngine` 仍日志 stub | **T05**：真实 loop/脚步/振动与生命周期 |
-| 设置 | 振动、节奏提示、减少动效、按住前进、手动暂停等已接入偏好 | 步长/GPS 等属后续；静默秒数旧机制已移除 |
-| 实走与生命周期 | T04 不进入假计步会话 | **T06**：计步、权限、前台服务 |
-| 验证 | JVM 单测覆盖领域与虚走集成；GitHub Actions 打包/lint/test | 真机满距手测与耳机/来电属 T05/T09「待验证」 |
+| 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点/耳机断连中断边界 + 可注入单测 | 振动待真机验证（模拟器无 HAL）；视觉五层待 MiniMax 修复批次复验 |
+| 设置 | 振动、节奏提示、减少动效、按住前进、手动暂停等已接入偏好 | 步长/GPS 等属后续 |
+| 实走与生命周期 | T04 起不进入假计步会话 | **T06**：计步、权限、前台服务 |
+| 验证 | JVM 单测覆盖领域、虚走集成与播放边界；GitHub Actions 打包/lint/test；模拟器 800 m 全程走查通过 | 真人标准 800 m 手动验收与真机耳机/来电属「待验证」 |
 | 设计包 | `design/` PRD 级设计 + HTML demo | demo 不接 Android 距离引擎；验收以本文件 + design 为准 |
 
-**下一交付物**：T05 森林真实音视素材与感官生命周期（达成 M1 可听体验）。其后 T06 实走、T07 恢复/地形/雨林、T08 四景、T09 真机与内测。
+**下一交付物**：T06 实走（计步、权限、前台服务）。T05 遗留待办：标准 800 m 手动验收、真机耳机/来电验证、MiniMax 修复批次视觉复验（见 ASSETS.md）。
 
 ---
 
@@ -773,7 +773,7 @@ stateDiagram-v2
 - [x] 森林 VisualShell 用渐变/剪影按 `fadeMeters` 展开；首版平地 + 缓坡，自动跳随后接入（T04+边界修复：程序剪影/渐变六层，opacity 严格来自 SensoryState；§5.7 地形速度系数含 1.5m 过渡已接入；gap_hop 按 T07 降级；MiniMax 第二批 3 层（tree_trunks/light_shows/clearing）验收合格已接入，其余层程序降级，见 ASSETS.md）
 - [x] 通关/放弃分结果；独立长按区 1.5 s + 取消反馈；返回键确认；米数可信、用时折叠（T04+边界修复：长按用单调帧时间、完成后松手不弹框、无障碍点击动作；模拟器实测放弃流程与结果页）
 - [x] 删除静默秒数设置；振动、节奏提示、减少动效、按住前进优先接入（T04：silenceSeconds/SessionClock 已删；四开关入设置页；按住前进持续按住同曲线同门禁）
-- [ ] 先保留音频 stub 验规则，再接森林真实环境 loop、步伐同步音效/振动；补音频焦点与耳机断连处理（T05：**机制已完成**——SensoryCoordinator 步伐节奏/停走冻结/everyNSteps/终态释放 + SoundPool/MediaPlayer/Vibrator 真实引擎 + 音频焦点与耳机断连暂停（不自动恢复行走），可注入单测；**真实音频素材未取得**，占位层静默跳过，见 ASSETS.md——素材入库前不算完成）
+- [ ] 先保留音频 stub 验规则，再接森林真实环境 loop、步伐同步音效/振动；补音频焦点与耳机断连处理（T05+收尾：**机制与素材均已完成**——SensoryCoordinator 步伐节奏/停走冻结/everyNSteps/终态释放 + SoundPool/MediaPlayer/Vibrator 真实引擎；播放边界可注入单测（焦点被拒不得恢复、中断后重申请、暂停停活跃脚步流、加载失败诊断、终态吸收迟到回调等 13 项）；森林真实素材入库：落叶脚步 ×6 + 虫鸣/远鸟无缝循环，CC0/CC BY 授权与 §14.1 处理记录见 ASSETS.md，`REQUIRE_REAL_ASSETS` 放行；音频焦点/耳机断连暂停且不自动恢复行走，模拟器来电实测「已暂停 + 继续走」新交互。**此条暂不勾选**：脚步振动模拟器无 HAL 待真机验证，且 M1 退出条件要求的标准 800 m 真人手动验收未执行——证据齐备前不宣布完成）
 - [x] 建 `ASSETS.md`：路径、来源、授权、处理规格与占位状态（T05：已建，含 MiniMax 首批视觉素材逐层验证记录与音频素材需求规格）
 
 **退出条件**：普通用户能完成一次森林 800 m 虚走；停走不涨距、不长景色；拉满慢于中段；未满结束为放弃；通关只触发一次；首页/后台返回不丢失或偷跑。至少有一版完整可听的森林体验供 M2 前体验访谈。
@@ -977,7 +977,7 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 
 - **schema v2 落地**：`domain/scene/` 新增 `SceneConfig`（模型）、`SceneJsonParser`（kotlinx.serialization JsonElement 手写提取，带字段路径诊断，纯 JVM 无 org.json 依赖）、`SceneValidator`（数值/唯一性/排序/边界/层引用/淡入不越终/pathProfile 连续覆盖/前 10% 无 gap_hop/起点黑幕/叙事里程碑 ±5%/素材存在性）、`SceneDurationEstimator`（§6.1 时长推导，`suggestedMinutes` 删除）、`SceneLoader` + `SceneSource`（可注入数据源，Loading/Ready/Error）。新增依赖仅 `kotlinx-serialization-json:1.7.3`（运行时库，无 codegen 插件）与测试用 `junit:4.13.2`。
 - **三景迁移**：森林 800 m（相位 0/80/240/400/600/760，gap_hop 于 240–270 m）、沙漠 1200 m（0/120/360/600/900/1140）、夜径 700 m（0/70/200/350/525/665）；相位与地形剖面按各场景设计单页，不是 atSec×步速。旧 v1 读取（atSec/action/intervalMs/suggestedMinutes）已全部移除，无长期双读。
-- **占位策略**：音频/视觉素材当前全部为显式开发占位（`placeholder: "dev_*"`）；开发策略下合法并列入占位清单，`REQUIRE_REAL_ASSETS` 发布策略下三景全部不放行（有测试锁定该边界，防止把占位当成素材齐备）。
+- **占位策略**：音频/视觉素材当前全部为显式开发占位（`placeholder: "dev_*"`）；开发策略下合法并列入占位清单，`REQUIRE_REAL_ASSETS` 发布策略下三景全部不放行（有测试锁定该边界，防止把占位当成素材齐备）。（T05 收尾更新：森林已全真实素材并在 `REQUIRE_REAL_ASSETS` 下放行，沙漠/夜径仍按此占位策略约束，见 §20.9。）
 - **加载状态**：`SceneRepository` 静默吞错改为 `SceneLoadState`（任一场景解析/校验失败 → 汇总 Error，不静默丢场景）；首页渲染 Loading/Error（诊断明细+重试）/Ready；错误态不出现无解释空列表。会话仍是静默计时骨架——本阶段只完成配置契约，未实现行走功能。
 - **测试**：53 个 JVM 单测（解析 13、校验 23、时长 3、加载/重试 7、真实三景集成 7），含坏 JSON、未知 schema、旧 v1 拒绝、重复 ID、越界相位、错误引用、路径断裂/重叠/未覆盖、前 10% gap_hop、缺素材、占位双策略、时长校准（13/19/11 分钟与 §6.1 一致）、修复后重试恢复。证据以推送后 GitHub Actions 实际运行为准。
 
@@ -1010,16 +1010,44 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 
 **T05 感官机制**（本提交）：
 - `domain/sensory/SensoryCoordinator`（纯 Kotlin，可注入随机源）：脚步由**有效距离**按 0.7 m 步幅积累触发（不按渲染帧、不靠时间）；环境 loop 相位触发后开始、每层只启动一次、按 fadeMs 淡入且**只在有新增有效距离时推进**（§8.2 停走冻结增益）；暂停冻结恢复继续不重启轨道；振动按 everyNSteps 跟步伐、尊重 vibrationEnabled；终态 release 后一切后端调用停止。
-- `engine/sensory/AndroidSensoryBackend`（真实引擎）：SoundPool 脚步变体（随机音高 0.97–1.03、音量 ±10% 由协调器决定）+ MediaPlayer 逐层环境循环（音量=淡入增益）+ Vibrator 波形模式表。**当前场景音频层全部为显式占位（无 file）：引擎跳过并在日志说明，不伪造声音**——素材入库后无需改代码即可播放。
+- `engine/sensory/AndroidSensoryBackend`（真实引擎）：SoundPool 脚步变体（随机音高 0.97–1.03、音量 ±10% 由协调器决定）+ MediaPlayer 逐层环境循环（音量=淡入增益）+ Vibrator 波形模式表。（当时占位层静默跳过属实；T05 收尾起森林已接入真实文件并重写为 prepareAsync/异步加载/暂停停流实现，见 §20.9。）
 - `SessionViewModel` 集成：每帧 `controller.frame() → drainPhaseEvents → coordinator.onFrame(dt, metersDelta, walking)`；音频焦点丢失（来电/切音乐/闪避）与耳机断连（ACTION_AUDIO_BECOMING_NOISY）→ 暂停会话与播放，**恢复不自动行走**（等待用户新输入）；终态/VM 销毁释放全部音频与振动资源。删除被取代的 `AudioMixer`/`HapticEngine` 日志 stub。
 - **测试**：SensoryCoordinatorTest 11 个（解锁前静默、步伐非帧率、静止/暂停无脚步、变体与音量范围、停走冻结、fadeMs=0 立即满增益、重复相位不重启、暂停恢复不重置、everyNSteps 与开关、终态释放后无声）。焦点/耳机断连为 Android 组件接线，**待真机验证**。
-- **素材**：MiniMax 视觉素材两批交付——第二批 3 层（tree_trunks/light_shows/clearing）验收合格并接入 forest.json/ForestShell（139+20+43 KB，opacity 仍由 SensoryState 驱动、视差滑动钳制在图片溢出宽度内，单图非无缝为已知限制）；tree_outline（过稀）/leaf_path（内容溢出）/traveler（构图全幅）不合格待重生成，保持程序降级。真实音频素材未取得，ASSETS.md 记录需求规格与来源要求。
-- **M1 状态**：除「森林真实环境 loop/脚步素材」待素材入库外，M1 其余项均已完成并有证据；**M1 尚未达成**（退出条件要求完整可听的森林体验）。
+- **素材**：MiniMax 视觉素材两批交付——第二批 3 层（tree_trunks/light_shows/clearing）验收合格并接入 forest.json/ForestShell（139+20+43 KB，opacity 仍由 SensoryState 驱动、视差滑动钳制在图片溢出宽度内，单图非无缝为已知限制）；tree_outline（过稀）/leaf_path（内容溢出）/traveler（构图全幅）不合格待重生成，保持程序降级。真实音频素材未取得，ASSETS.md 记录需求规格与来源要求。（T05 收尾更新：第三批 outline/leaf_path 已达标、五层入包；真实音频已按 CC0/CC BY 授权入库；棋盘格/透明度问题使五层整体标记待复验，见 §20.9 与 ASSETS.md。）
+- **M1 状态**：除「森林真实环境 loop/脚步素材」待素材入库外，M1 其余项均已完成并有证据；**M1 尚未达成**（退出条件要求完整可听的森林体验）。（T05 收尾更新：素材与机制已齐，模拟器全程可听可走通关；但标准 800 m 真人手动验收、真机耳机/来电、振动实测未执行，**M1 仍不宣布完成**，见 §20.9。）
 
 **T05 补充（2026-10-13 晚）**：
 - **性能修复**（f599a6a）：帧循环此前每帧无条件更新 walk StateFlow，静止/暂停/终态仍 60fps 全树重组；改为快照相等则跳过推送，静止期零重组（慢设备上手势分发曾被饿死）。
 - **v3 图层接入**（1baef18）：交付方按 ASSETS.md 反馈重做（见 docs/visual-assets-handoff.md，共 14 次生成、凭据 host-managed）；tree_outline（覆盖 48%）与 leaf_path（上 70% 全空+底部地面带）达标接入，森林五个视觉层全部为真实素材（共 381 KB）；traveler 三轮均满帧（81%）不合格，保持程序旅人。
 - **模拟器全链路复验**（Pixel 6 / API 36，全新安装）：米数轻触开关（"已走 X 米"↔提示）、摇杆甜点行走（62s 保持 → 88m，≈1.16 m/s 符合曲线与地形系数）、摇杆区长按 2.2s 不触发放弃、**真实图层按距离解锁**（117m 处树冠区亮度 7.8→31.8，近地区不变）、暂停轻点→继续/放弃确认→返回会话、放弃控件长按 1.9s→结果页诚实显示「这次走了 117 m」+用时折叠。此前"触摸失效"为误报（全新安装默认选中 700m 夜径致模式页开始被禁用 + 一次安装未生效）。待真机：实体耳机/来电焦点、锁屏、标准 800m 人工通关。
+
+### 20.9 T05 收尾记录（2026-10-13 · 本提交）
+
+**一、中断与播放边界**（`domain/sensory/PlaybackSupport` 四组件，纯 Kotlin 可注入；`AndroidSensoryBackend` 重写；`SessionViewModel` 焦点门控）：
+- `LoopPlayerState`：MediaPlayer `prepareAsync` 异步就绪（不再同步 prepare 阻塞主线程）；PREPARING 期间请求暂停→就绪后保持暂停；PREPARING 期间释放→迟到的 `onPrepared` 被吸收不复活播放；setGain 缓存到就绪后生效。
+- `StepLayerLoadState`：SoundPool 单一全局 `OnLoadCompleteListener` 在 init 注册并分发到所有层（后注册覆盖先注册的坑已规避）；只轮换到已加载成功的变体，加载失败给出带文件名的诊断日志；失败层静默跳过不阻塞其他层。
+- `AudioFocusGate` + `SessionViewModel.attemptAudioResume()`：焦点丢失→暂停并标记需重申请；恢复时**重新申请并检查结果**，仅 `AUDIOFOCUS_REQUEST_GRANTED` 才恢复音频；焦点被拒不得出声（单测锁定）。
+- `ActiveStepStreams`：暂停/中断停止全部在播脚步流；恢复**不补播**旧流，只随新步伐出声（单测锁定）。
+- 暂停 UI 修正：弃用误导文案「摇一摇摇杆继续」，改为居中「已暂停 + 点『继续走』后，摇杆重新给输入才会前进 + 继续走按钮」；`resumeAfterInterruption()` = 恢复状态机 + 重申请焦点 + 推送快照，回到 Ready 等新输入。
+- 测试：`PlaybackSupportTest` 13 个（准备期暂停/释放、迟到回调吸收、加载失败诊断、焦点被拒、重申请获准恢复、暂停停活跃流不补播等），加上既有 189 个测试全部保留。
+
+**二、真实森林音频**（`assets/audio/`，共 2360 KB ≤ 3 MB 预算）：
+- `forest_insects.ogg` 63s 无缝循环：Wikimedia Commons「Waidachswald Oberschefflenz Abend」（User:Karlunun，**CC0**）；60s 段 + 3s 三角交叉淡入接缝（filter_complex asplit/atrim/acrossfade/concat），两遍 loudnorm −24 LUFS / TP −3 dBTP。
+- `forest_birds.ogg` 63s 无缝循环：Commons「Dawn chorus at Glencairnie」（DivyaCM，**CC BY 4.0**）；同规格处理。
+- `forest_step_01..06.ogg` 400ms one-shot ×6：Gravity Sound 落叶/枯枝素材（**CC BY 4.0**）；numpy 20ms RMS 包络定切点、8ms 淡入出、−18.1 LUFS（环境音上方约 6dB）；编码 `-strict -2 -qscale:a 3`（Homebrew ffmpeg 无 libvorbis，实验性 native 编码器为已记录偏差；编码器仅立体声→脚步为双单声道）。
+- `forest.json` 三层均指向真实文件；`MigratedSceneConfigsTest` 更新为「森林真实素材 `REQUIRE_REAL_ASSETS` 放行，沙漠/夜径占位不放行」。来源链接与逐项授权记录见 ASSETS.md。
+
+**三、视觉复验（v4 修复轮）**：v3 入包时按指示标记「五层待复验」；交付方随后提交 v4 alpha 内容约束版（trunks 底部 ≤35% 上限、clearing 中带限位 + 羽化，0 次 API 调用，候选存 `design/assets/forest/candidates/v4/`）。ZCode 按 §14 标准程序化复验**全部通过**：五层棋盘格同/跨相位差均 <3.2 或同相≥跨相，合成图梯度符号交替率 x 56%/y 32%（棋盘特征需 >90%），频谱峰值在整幅纵向渐变而非 8px 频率；四边 alpha 均值全 0，785m 全层合成于 #060806 边缘亮度 7.2≈void、无白边无矩形底；层间亮度相关性 r∈[−0.22,+0.30] 无重复内容；两项 alpha 约束实测落实（89≤89、带外 0）。**v4 五层替换入包**（381→260 KB），forest.json/渲染机制/门禁/fadeMeters 未动，opacity 仍由 SensoryState 驱动，锁定层不可见与 reduceMotion 逻辑不变；traveler 程序绘制为正式方案。复验数据与合成预览见 ASSETS.md §一；真人视觉走查归入待验证清单。
+
+**四、模拟器 800 m 全程走查**（Pixel 6 / API 36 / CI 产物 app-debug.apk 全新安装，检查点截图存 `.local-verify/t5final/`）：
+- 检查点：0m 黑幕 / 102m 轮廓树木 / 268m 树干林光 / 427m 落叶路径 / ~676m 透光光柱+远鸟 / 782m 林间空地；画面均值亮度 8.4→20.4→73.7→83.9→84.2 随米数单调展开。
+- 静默起点：0–79m 应用 SoundPool 播放器状态 idle、logcat 无 SensoryBackend 告警；80m 后脚步 one-shot 每 ~600ms（≈1.05 m/s ÷ 0.7m 步幅）密集 started，与解锁门吻合。
+- 环境音：240m 创建并立即 started 的 MediaPlayer（虫鸣，48kHz 立体声）；600m 第二个 MediaPlayer（远鸟）并行 started。
+- 停走冻结：停走后间隔 3s 两帧截图逐像素差 0；脚步事件止于停走时刻。
+- 来电中断：`emu gsm call` → 通话界面；取消后回应用用「已暂停 + 继续走」新 UI、暂停按钮禁用、米数冻结 786m；暂停态按住摇杆 5s 米数不变（拒绝输入）；点「继续走」后新摇杆输入恢复前进。
+- 通关与清理：786→800m 通关进入结果页（「森林 · 走到了 · 走完 800 m」）；通关瞬间三个播放器（两 MediaPlayer + SoundPool）全部 stopped/released，活跃播放器列表为空，进程存活无泄漏。
+
+**五、仍待验证（M1 不宣布完成的原因）**：标准 800 m 真人手动验收（不用快进/不用模拟器脚本）；真机实体耳机断连与真实来电焦点；锁屏/通知栏返回；脚步振动（模拟器无 vibrator HAL）；v4 视觉的真人最终走查。
 
 ---
 
