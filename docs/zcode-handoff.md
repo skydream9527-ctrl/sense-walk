@@ -14,7 +14,7 @@
 
 - 技术栈：Kotlin、Jetpack Compose、Navigation、DataStore、kotlinx-serialization-json；minSdk 26，compileSdk / targetSdk 35。
 - 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`）；T05 收尾绿跑见 DEVELOPMENT.md §20.9（最新提交与 run 号以该节为准）。本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
-- **T01–T04 已完成**（T04 含边界修复：地形速度系数 §5.7、指针清理、摇杆实体区域、终态清理）；**T05 机制与收尾均已完成**：SensoryCoordinator + SoundPool/MediaPlayer/Vibrator 真实引擎 + 中断播放边界（prepareAsync 异步就绪、加载失败诊断、焦点重申请、暂停停活跃脚步流不补播、终态吸收迟到回调，13 个可注入单测）；**森林真实音频已入库**（落叶脚步 ×6 + 虫鸣/远鸟无缝循环，CC0/CC BY 授权可查，`REQUIRE_REAL_ASSETS` 放行，处理记录见 ASSETS.md）；**视觉五层为 v4 修复版，ZCode 程序化复验合格（棋盘格/白边/矩形底/层重复四项）并替换入包 260 KB**，旅人为程序绘制正式方案，复验数据见 ASSETS.md §一；模拟器 800 m 全程走查通过（含来电中断「已暂停」新交互与通关三播放器即时释放，证据见 DEVELOPMENT.md §20.9）。
+- **T01–T04 已完成**（T04 含边界修复：地形速度系数 §5.7、指针清理、摇杆实体区域、终态清理）；**T05 机制与收尾已完成**：SensoryCoordinator + SoundPool/MediaPlayer/Vibrator 真实引擎 + 中断播放边界（prepareAsync 异步就绪、加载失败诊断、焦点重申请、暂停停活跃脚步流不补播、终态吸收迟到回调）；**森林真实音频已入库**（落叶脚步 ×6 + 虫鸣/远鸟无缝循环，CC0/CC BY 授权可查，`REQUIRE_REAL_ASSETS` 放行，处理记录见 ASSETS.md）。**T06 前两处定点修复已完成**：① 音频焦点门控所有出声入口（焦点未获准零脚步零 loop、获准不补播且不重复建层，调用链测试用记录型假后端锁定）；② 撤回 v4「五层复验合格」（漏检 32px 对角棋盘，light_shows/clearing 两层程序降级待 MiniMax 重制，outline/trunks/leaf_path 三层真实图入包，六阶段合成重生成）。旅人为程序绘制正式方案；模拟器 800 m 全程走查通过（证据见 DEVELOPMENT.md §20.9/§20.10）。
 - **M1 不宣布完成**：标准 800 m 真人手动验收、真机实体耳机/来电焦点、锁屏返回、脚步振动（模拟器无 HAL）、v4 视觉真人走查仍为待验证项。
 - 待做：T06 计步/前台服务、T07 快照恢复/地形/雨林、T08 四景、T09 真机与内测；以及上述 M1 待验证清单。
 - 已有 HTML 是设计原型，不能当 Android 功能完成的证据。下一阶段发送 **T06** 阶段提示词（或先补 M1 待验证项）；不要重做 T01–T05。

@@ -15,7 +15,7 @@
 
 ## 0. 当前进度（仓库核查，2026-10-12 · T05 收尾后）
 
-**结论：T01–T05 已合入 main（T05 记录见 §20.8–§20.9，音频焦点门控定点修复见 §20.10，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与视觉复验未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
+**结论：T01–T05 已合入 main（T05 记录见 §20.8–§20.9，T06 前两处定点修复见 §20.10，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与问题视觉层重制未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
 
 | 模块 | 已有内容 / 源码证据 | 与目标的差距 |
 | --- | --- | --- |
@@ -23,7 +23,7 @@
 | 场景 | schema v2 JSON（森林/沙漠/夜径）；SceneValidator；Loading/Ready/Error | 雨林/城市配置与入口未齐；森林素材已真实化，沙漠/夜径仍显式占位 |
 | 会话 | `VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔；后台暂停不偷跑 | 地形越坎属 T07 |
 | 结果页 | Completed / Abandoned，展示实际米数 | 用时折叠等打磨可继续 |
-| 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点门控全部出声入口（被拒零脚步零 loop，获准不补播不重复建层，调用链测试锁定） | 振动待真机验证（模拟器无 HAL）；视觉五层待 MiniMax 修复批次复验 |
+| 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点门控全部出声入口（被拒零脚步零 loop，获准不补播不重复建层，调用链测试锁定） | 振动待真机验证（模拟器无 HAL）；light_shows/clearing 程序降级待 MiniMax 重制 |
 | 设置 | 振动、节奏提示、减少动效、按住前进、手动暂停等已接入偏好 | 步长/GPS 等属后续 |
 | 实走与生命周期 | T04 起不进入假计步会话 | **T06**：计步、权限、前台服务 |
 | 验证 | JVM 单测覆盖领域、虚走集成与播放边界；GitHub Actions 打包/lint/test；模拟器 800 m 全程走查通过 | 真人标准 800 m 手动验收与真机耳机/来电属「待验证」 |
@@ -1037,7 +1037,7 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 - `forest_step_01..06.ogg` 400ms one-shot ×6：Gravity Sound 落叶/枯枝素材（**CC BY 4.0**）；numpy 20ms RMS 包络定切点、8ms 淡入出、−18.1 LUFS（环境音上方约 6dB）；编码 `-strict -2 -qscale:a 3`（Homebrew ffmpeg 无 libvorbis，实验性 native 编码器为已记录偏差；编码器仅立体声→脚步为双单声道）。
 - `forest.json` 三层均指向真实文件；`MigratedSceneConfigsTest` 更新为「森林真实素材 `REQUIRE_REAL_ASSETS` 放行，沙漠/夜径占位不放行」。来源链接与逐项授权记录见 ASSETS.md。
 
-**三、视觉复验（v4 修复轮）**：v3 入包时按指示标记「五层待复验」；交付方随后提交 v4 alpha 内容约束版（trunks 底部 ≤35% 上限、clearing 中带限位 + 羽化，0 次 API 调用，候选存 `design/assets/forest/candidates/v4/`）。ZCode 按 §14 标准程序化复验**全部通过**：五层棋盘格同/跨相位差均 <3.2 或同相≥跨相，合成图梯度符号交替率 x 56%/y 32%（棋盘特征需 >90%），频谱峰值在整幅纵向渐变而非 8px 频率；四边 alpha 均值全 0，785m 全层合成于 #060806 边缘亮度 7.2≈void、无白边无矩形底；层间亮度相关性 r∈[−0.22,+0.30] 无重复内容；两项 alpha 约束实测落实（89≤89、带外 0）。**v4 五层替换入包**（381→260 KB），forest.json/渲染机制/门禁/fadeMeters 未动，opacity 仍由 SensoryState 驱动，锁定层不可见与 reduceMotion 逻辑不变；traveler 程序绘制为正式方案。复验数据与合成预览见 ASSETS.md §一；真人视觉走查归入待验证清单。
+**三、视觉复验（v4 修复轮）——结论已被 §20.10 撤回**：v3 入包时按指示标记「五层待复验」；交付方提交 v4 alpha 内容约束版（trunks 底部 ≤35% 上限、clearing 中带限位 + 羽化，0 次 API 调用）。a235bf1 曾以程序化统计（8px 相位差、块交替率、四边 alpha、层间相关）判定合格并替换入包——**该结论错误**：检验只覆盖 8px 周期与符号交替，漏掉 32px 周期对角纹理；用户实际图像复核发现 785m 合成中央明显棋盘格。撤回与问题层降级见 §20.10；traveler 程序绘制为正式方案不变。
 
 **四、模拟器 800 m 全程走查**（Pixel 6 / API 36 / CI 产物 app-debug.apk 全新安装，检查点截图存 `.local-verify/t5final/`）：
 - 检查点：0m 黑幕 / 102m 轮廓树木 / 268m 树干林光 / 427m 落叶路径 / ~676m 透光光柱+远鸟 / 782m 林间空地；画面均值亮度 8.4→20.4→73.7→83.9→84.2 随米数单调展开。
@@ -1057,4 +1057,23 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 - 接线：`SessionViewModel` 三处同步许可——首次申请结果、焦点丢失/耳机断连、重申请结果；顺序 `setAudioAllowed(true)` → `resume()`（PREPARING 层迟到回调仍由 `LoopPlayerState` 状态机吸收，不绕过焦点/暂停）。
 - 测试：`AudioFocusChainTest` 6 个调用链用例（控制器→相位→协调器→**记录型假后端**，非仅布尔值）：首次被拒跨 100/300/750m 零出声调用且距离相位照常；中断重申请被拒继续行走零新增脚步零 loop；获准后新脚步 ≈ 获准后距离/步幅（不补播）、ambience 只启动一次、待启层按当前淡入进度启动 gain>0；准备期焦点丢失/终态释放吸收迟到回调；协调器终态后放开许可也不启动层。
 
-**修复 2（视觉撤回与问题层程序降级）见下一提交。**
+**修复 2：撤回 v4「五层复验合格」结论**：
+- 撤回原因：a235bf1 的程序化统计只覆盖 8px 周期与符号交替率，漏掉 **32px 周期对角纹理**；用户实际图像复核发现 785m 合成图中央明显棋盘格——统计阈值不能替代图像检查（教训入 ASSETS.md 复验方法备忘）。
+- 定位：合成中心 32px 对角能量 26.65%；逐层隔离 **light_shows 55.10%**（v2 起沿用未重制）；移除后 785m（新增 clearing）仍 21.78%；仅 outline/trunks/leaf_path 的 265–630m 阶段 0.46% 干净。**问题层 = light_shows、clearing 两个 overlay**。
+- 处置：两问题层从 forest.json 移除 asset → `ForestShell` 程序降级（`drawLightShows`/`drawClearingGlow`），**不以降透明度隐藏问题**；outline/trunks/leaf_path 三层真实图保留入包（214 KB）。六阶段合成按入包文件**重新生成**（`.local-verify/t6fix/stages/`，不复用旧截图）：265m 起各阶段中心对角能量 0.46%。等 MiniMax 新修复稿后按 ASSETS.md §一 方法（含 32px 检验与图像目检）重新验收；角色维持程序绘制。
+
+---
+
+## 21. ZCode 开发交接
+
+开发任务与可复制提示词见 [docs/zcode-handoff.md](./docs/zcode-handoff.md)：将 §13 的 M0–M3 拆成 T01–T09，含总提示词、逐阶段实现要求、验收条件与复核提示词。交接以 GitHub main 或源码交接 ZIP 为入口；本地只需编辑/提交源码，无需具备完整 Android 开发环境。
+
+顺序：T01 云端打包 → T02 配置 → T03 领域 → T04 虚走 → T05 森林感官 → T06 实走/服务 → T07 恢复/地形/雨林 → T08 四景 → T09 真机/内测。按阶段交付；实体设备和真人验证缺失时保留待验证状态。
+
+### 21.1 用户确认的交付方式
+
+功能开发由 ZCode 按阶段实现，代码提交 GitHub；编译、测试和 APK 打包由 GitHub Actions 执行。工作流位于 `.github/workflows/android.yml`，产生 APK、检查报告和完整源码交接 ZIP。需要稳定下载链接时，在 main 手动触发 `publish_release` 创建 GitHub 预发布版本。用户不需要先完善本地 JDK/SDK/Android Studio 或模拟器。实体设备与真人验证保留待验证清单，不阻塞不依赖它们的功能开发；最终体验验收仍需真实证据。
+
+### 21.2 云端打包基线修复
+
+首次 GitHub Actions 编译发现 `domain/scene/Scene.kt` 的 KDoc 中 `scenes/*.json` 被 Kotlin 识别为嵌套注释起点，导致未闭合注释和 Scene/Phase/Layer 连锁解析失败。已仅调整这行注释，不改变应用行为；后续以新的云端构建结果确认。
