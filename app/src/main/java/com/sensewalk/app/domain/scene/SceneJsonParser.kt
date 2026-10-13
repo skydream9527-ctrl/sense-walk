@@ -169,13 +169,15 @@ object SceneJsonParser {
         return result
     }
 
-    /** 视觉层必须真实素材与显式开发占位二选一，不允许两者皆有或皆无 */
+    /**
+     * 视觉层三种状态：真实素材（asset）/ 显式开发占位（placeholder，列入占位清单，
+     * REQUIRE_REAL_ASSETS 下不放行）/ **程序渲染层**（两者皆显式省略——渲染走
+     * VisualShell 内置程序绘制，不冒充真实素材也不列入占位清单）。
+     * 互斥规则保留：asset 与 placeholder 不得同时出现。
+     */
     private fun checkAssetOrPlaceholder(path: String, asset: String?, placeholder: String?) {
         if (asset != null && placeholder != null) {
             throw SceneConfigParseException("$path: asset 与 placeholder 互斥，占位必须显式且唯一")
-        }
-        if (asset == null && placeholder == null) {
-            throw SceneConfigParseException("$path: 需要 asset 或显式 placeholder，不能两者皆无")
         }
     }
 

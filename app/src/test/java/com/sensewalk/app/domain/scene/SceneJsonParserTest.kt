@@ -2,6 +2,7 @@ package com.sensewalk.app.domain.scene
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 import org.junit.Test
@@ -162,6 +163,23 @@ class SceneJsonParserTest {
         } catch (e: SceneConfigParseException) {
             assertTrue(e.message!!.contains("stepOneShot 需要 files"))
         }
+    }
+
+    @Test
+    fun `视觉层省略 asset 与 placeholder 为程序渲染层 - 合法且不列占位`() {
+        val json = TestScenes.VALID_JSON.replace(
+            "\"far_view\": { \"type\": \"overlay\", \"placeholder\": \"dev_gradient:test_far\" }",
+            "\"far_view\": { \"type\": \"overlay\" }",
+        )
+        val config = SceneJsonParser.parse(json)
+        val far = config.visualLayers["far_view"] as VisualLayerDef.Overlay
+        assertNull("程序渲染层无 asset", far.asset)
+        assertNull("程序渲染层不是开发占位", far.placeholder)
+        val result = SceneValidator.validate(config, TestScenes.locator, SceneValidator.AssetsPolicy.REQUIRE_REAL_ASSETS)
+        assertTrue(
+            "程序渲染层不得列入占位清单（也不冒充真实素材）",
+            result.placeholders.none { it.startsWith("visualLayers.far_view") },
+        )
     }
 
     @Test
