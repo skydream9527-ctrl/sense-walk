@@ -85,10 +85,15 @@ fun ForestShell(
         // 1. void 黑幕（起点即黑；其他层长出后仍然作为底色）
         drawRect(VoidColor)
 
-        // 2. tree_outline 远景树冠轮廓线（交付图过稀，保持程序剪影）
+        // 2. tree_outline 远景树冠轮廓线（真实图层；无图回退程序剪影）
         val outlineAlpha = a("tree_outline")
         if (outlineAlpha > 0.01f) {
-            drawTreeline(outlineTrees, outlineAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
+            val bitmap = bitmaps["tree_outline"]
+            if (bitmap != null) {
+                drawImageLayer(bitmap, outlineAlpha, imageParallaxPx("tree_outline"))
+            } else {
+                drawTreeline(outlineTrees, outlineAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
+            }
         }
 
         // 3. tree_trunks 树干与林间光（真实图层；无图回退程序剪影）
@@ -102,10 +107,15 @@ fun ForestShell(
             }
         }
 
-        // 4. leaf_path 落叶与路径细节（交付图内容溢出，保持程序近景）
+        // 4. leaf_path 落叶与路径细节（真实图层；无图回退程序近景）
         val pathAlpha = a("leaf_path")
         if (pathAlpha > 0.01f) {
-            drawLeafGround(leaves, pathAlpha, parallaxOffset(sPos, 0.6f, reduceMotion), size)
+            val bitmap = bitmaps["leaf_path"]
+            if (bitmap != null) {
+                drawImageLayer(bitmap, pathAlpha, imageParallaxPx("leaf_path"))
+            } else {
+                drawLeafGround(leaves, pathAlpha, parallaxOffset(sPos, 0.6f, reduceMotion), size)
+            }
         }
 
         // 5. light_shows 飞鸟剪影与透光光柱（真实图层；无图回退程序绘制）

@@ -37,9 +37,9 @@
   },
   "visualLayers": {
     "void": { "type": "solid", "color": "#060806" },
-    "tree_outline": { "type": "parallax", "placeholder": "dev_silhouette:forest_tree_outline", "parallax": 0.3 },
+    "tree_outline": { "type": "parallax", "asset": "visual/forest_tree_outline.webp", "parallax": 0.3 },
     "tree_trunks": { "type": "parallax", "asset": "visual/forest_tree_trunks.webp", "parallax": 0.3 },
-    "leaf_path": { "type": "parallax", "placeholder": "dev_silhouette:forest_leaf_path", "parallax": 0.6 },
+    "leaf_path": { "type": "parallax", "asset": "visual/forest_leaf_path.webp", "parallax": 0.6 },
     "light_shows": { "type": "overlay", "asset": "visual/forest_light_shows.webp" },
     "clearing": { "type": "overlay", "asset": "visual/forest_clearing.webp" }
   }
