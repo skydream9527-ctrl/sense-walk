@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 """
-森林素材后处理（向量化版）：
+森林素材后处理（v2 — 收紧 alpha，区分 role）。
 
-1. 把每张 raw JPG 转成 PNG（带 alpha）；
-2. 对每张图把 #060806（黑幕色）做柔和抠图，低于阈值 → alpha=0；
-3. 上下两端的"全画布留白"区域按提示词应该已经透明，做一次收紧
-   —— 任何贴近 #060806 的像素透明度都到 0；
-4. 转成 WebP（无损/质量 90），交付到 app/src/main/assets/visual/ 与
-   design/assets/forest/artwork/；
-5. 生成各层的纯 alpha 黑白预览（用于透明检查）；
-6. 输出素材联系表 Markdown 片段。
-
-注意：模型只输出 JPG，alpha 是后处理模拟。
+主要改进：
+- leaf_path 增加"上半 / 中段远景雾"额外 mask：上半 55% 区域，
+  灰度低、饱和度低的淡色雾当背景处理 → 透明。
+- overlay 角色（light_shows、clearing）允许更宽的亮度阈值，避免
+  把淡光柱误杀。
+- character 角色：保留 4 周小边带 + 极严的颜色阈值。
+- 同时输出 alpha_on_void 预览与 alpha_mask，供检查。
 """
 from __future__ import annotations
 
@@ -21,7 +18,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[4]  # design/assets/forest/scripts → sense-walk
+ROOT = Path(__file__).resolve().parents[4]
 RAW_DIR = ROOT / "design" / "assets" / "forest" / "raw"
 ART_DIR = ROOT / "design" / "assets" / "forest" / "artwork"
 PREVIEW_DIR = ROOT / "design" / "assets" / "forest" / "previews"
@@ -31,10 +28,10 @@ ART_DIR.mkdir(parents=True, exist_ok=True)
 PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
 ASSETS_VISUAL.mkdir(parents=True, exist_ok=True)
 
-VOID_RGB = np.array([0x06, 0x08, 0x06], dtype=np.float32)  # #060806 黑幕
+VOID_RGB = np.array([0x06, 0x08, 0x06], dtype=np.float32)
 
 LAYER_FILES = {
-    "style_ref": ("style_ref", "reference"),
+    "style_ref": ("forest_style_ref", "reference"),
     "forest_tree_outline": ("forest_tree_outline", "parallax-bg"),
     "forest_tree_trunks": ("forest_tree_trunks", "parallax-bg"),
     "forest_leaf_path": ("forest_leaf_path", "parallax-fg"),
@@ -44,117 +41,159 @@ LAYER_FILES = {
 }
 
 
-def compute_alpha(rgb: np.ndarray, role: str) -> np.ndarray:
-    """rgb: H×W×3 uint8。返回 H×W uint8 alpha。"""
-    diff = rgb.astype(np.float32) - VOID_RGB[None, None, :]
-    dist = np.sqrt((diff * diff).sum(axis=2))
+def _color_distance(rgb, target):
+    diff = rgb.astype(np.float32) - target[None, None, :]
+    return np.sqrt((diff * diff).sum(axis=2))
 
-    dist_thr_lo = 22.0
-    dist_thr_hi = 60.0
-    alpha = np.clip((dist - dist_thr_lo) / (dist_thr_hi - dist_thr_lo), 0.0, 1.0)
+
+def compute_alpha(rgb, role):
+    dist = _color_distance(rgb, VOID_RGB)
+    h, w = dist.shape
+
+    if role == "reference":
+        # 风格参考保持原图，不抠
+        return np.full((h, w), 255, dtype=np.uint8)
+
+    if role == "character":
+        lo, hi = 26.0, 70.0
+    elif role == "parallax-bg":
+        # 远景 #1A2820 vs #060806 距离 ≈ 46；需要让树线可见
+        lo, hi = 12.0, 35.0
+    elif role == "parallax-fg":
+        # 叶路径：要识别落叶（暖褐/绿叶）vs 远景雾（淡灰绿）
+        lo, hi = 18.0, 50.0
+    else:  # overlay
+        lo, hi = 14.0, 45.0
+
+    alpha = np.clip((dist - lo) / max(hi - lo, 1e-3), 0.0, 1.0)
     alpha = (alpha * 255).astype(np.uint8)
 
-    # 角色周围更大边带
-    h, w = alpha.shape
+    # 边带强制透明
     if role == "character":
-        edge_t, edge_b, edge_l, edge_r = 0.06, 0.04, 0.05, 0.05
+        et, eb, el, er = 0.06, 0.04, 0.05, 0.05
     else:
-        edge_t, edge_b, edge_l, edge_r = 0.04, 0.04, 0.04, 0.04
-    t = int(h * edge_t)
-    b = int(h * edge_b)
-    l = int(w * edge_l)
-    r = int(w * edge_r)
+        et, eb, el, er = 0.04, 0.04, 0.04, 0.04
+    t, b, l, r = int(h*et), int(h*eb), int(w*el), int(w*er)
     alpha[:t, :] = 0
-    alpha[h - b:, :] = 0
+    alpha[h-b:, :] = 0
     alpha[:, :l] = 0
-    alpha[:, w - r:] = 0
+    alpha[:, w-r:] = 0
+
+    # leaf_path 专属：
+    # - 上 12% 强制全透明（"上部留白"安全带）
+    # - 12%~50% 区域的"远景淡雾"（低饱和度）按颜色距离收紧透明度，
+    #   距离 #060806 远 + 饱和度低 → 大幅透明化（保留 ~10% alpha）
+    if role == "parallax-fg":
+        top_mask = np.zeros((h, w), dtype=bool)
+        top_mask[: int(h*0.12), :] = True
+        alpha[top_mask] = 0
+        mid_mask = np.zeros((h, w), dtype=bool)
+        mid_mask[int(h*0.12):int(h*0.50), :] = True
+        sat = rgb.max(axis=2).astype(np.int16) - rgb.min(axis=2).astype(np.int16)
+        is_foggy_mid = (sat < 25)
+        # 远景雾透明度乘 0.15（仅留一抹暗示，不抢主景）
+        alpha[mid_mask & is_foggy_mid] = np.minimum(alpha[mid_mask & is_foggy_mid], 40)
+
+    # overlay 角色：背景（暗绿 #1A2820 附近）也要当透明，
+    # 只保留"明显主体像素"（亮度高或饱和度高或与 #060806 距离大）
+    if role == "overlay":
+        lum = rgb.mean(axis=2)
+        sat = rgb.max(axis=2).astype(np.int16) - rgb.min(axis=2).astype(np.int16)
+        is_subject = (lum > 65) | (sat > 40) | (dist > 80)
+        # 主体外的像素强制为透明（暗绿背景）
+        alpha[~is_subject] = 0
+        # 飞鸟：纯黑剪影，但紧贴主体（光柱）的小区域保留弱透明
+        from scipy import ndimage
+        try:
+            mask = is_subject.astype(np.uint8)
+            dil = ndimage.binary_dilation(mask, iterations=3)
+            keep = dil & (lum < 60) & (sat < 25)
+            alpha[keep] = np.maximum(alpha[keep], 70)
+        except Exception:
+            pass
+
     return alpha
 
 
-def save_artwork(rgba: Image.Image, base: str):
-    art_png = ART_DIR / f"{base}.png"
-    rgba.save(art_png, format="PNG", optimize=True)
+def save_artwork(rgba_img, base):
+    png = ART_DIR / f"{base}.png"
     webp = ASSETS_VISUAL / f"{base}.webp"
-    rgba.save(webp, format="WEBP", quality=90, method=6)
-    return art_png, webp
+    rgba_img.save(png, format="PNG", optimize=True)
+    rgba_img.save(webp, format="WEBP", quality=90, method=6)
+    return png, webp
 
 
-def make_alpha_preview(rgba: Image.Image, base: str) -> Path:
-    bg = Image.new("RGB", rgba.size, tuple(int(c) for c in VOID_RGB))
-    bg.paste(rgba, mask=rgba.split()[3])
+def make_alpha_preview(rgba_img, base):
+    bg = Image.new("RGB", rgba_img.size, tuple(int(c) for c in VOID_RGB))
+    bg.paste(rgba_img, mask=rgba_img.split()[3])
     out = PREVIEW_DIR / f"{base}_alpha_on_void.jpg"
     bg.convert("RGB").save(out, format="JPEG", quality=82)
     return out
 
 
-def make_alpha_mask(rgba: Image.Image, base: str) -> Path:
-    a = rgba.split()[3]
+def make_alpha_mask(rgba_img, base):
     out = PREVIEW_DIR / f"{base}_alpha_mask.png"
-    a.save(out, format="PNG")
+    rgba_img.split()[3].save(out, format="PNG")
     return out
 
 
-def make_tile_preview(rgba: Image.Image, base: str, repeat: int = 2) -> Path:
-    w, h = rgba.size
+def make_tile_preview(rgba_img, base, repeat=2):
+    w, h = rgba_img.size
     canvas = Image.new("RGBA", (w * repeat, h), (6, 8, 6, 255))
-    a = rgba.split()[3]
+    a = rgba_img.split()[3]
     for i in range(repeat):
-        canvas.paste(rgba, (i * w, 0), mask=a)
+        canvas.paste(rgba_img, (i * w, 0), mask=a)
     out = PREVIEW_DIR / f"{base}_tile_x{repeat}.jpg"
     canvas.convert("RGB").save(out, format="JPEG", quality=82)
     return out
 
 
-def main() -> int:
+def main():
     jobs_path = ROOT / "design" / "assets" / "forest" / "records" / "jobs.json"
-    if not jobs_path.exists():
-        print("[error] jobs.json missing", file=sys.stderr)
-        return 1
     state = json.loads(jobs_path.read_text(encoding="utf-8"))
 
     summary = []
-    for job_id, (base, role) in LAYER_FILES.items():
-        rec = state["jobs"].get(job_id)
+    for jid, (base, role) in LAYER_FILES.items():
+        rec = state["jobs"].get(jid)
         if not rec:
-            print(f"[skip] {job_id} 没有 record")
+            print(f"[skip] {jid} 没有 record")
             continue
-        raw_path = ROOT / rec["raw_path"]
-        if not raw_path.exists():
-            print(f"[skip] {job_id} raw 缺失: {raw_path}")
+        raw = ROOT / rec["raw_path"]
+        if not raw.exists():
+            print(f"[skip] {jid} raw 缺失: {raw}")
             continue
-        img = Image.open(raw_path).convert("RGB")
+        img = Image.open(raw).convert("RGB")
         rgb = np.asarray(img, dtype=np.uint8)
         alpha = compute_alpha(rgb, role)
-        rgba = np.dstack([rgb, alpha])
-        rgba_img = Image.fromarray(rgba, mode="RGBA")
-        art_png, webp = save_artwork(rgba_img, base)
-        alpha_p = make_alpha_preview(rgba_img, base)
-        mask_p = make_alpha_mask(rgba_img, base)
-        tile_p = make_tile_preview(rgba_img, base) if role in ("parallax-bg", "parallax-fg") else None
+        rgba_arr = np.dstack([rgb, alpha])
+        rgba_img = Image.fromarray(rgba_arr, "RGBA")
+        png, webp = save_artwork(rgba_img, base)
+        aov = make_alpha_preview(rgba_img, base)
+        am = make_alpha_mask(rgba_img, base)
+        tp = make_tile_preview(rgba_img, base) if role in ("parallax-bg", "parallax-fg", "overlay") else None
         size_info = {
-            "raw_bytes": raw_path.stat().st_size,
-            "png_bytes": art_png.stat().st_size,
+            "raw_bytes": raw.stat().st_size,
+            "png_bytes": png.stat().st_size,
             "webp_bytes": webp.stat().st_size,
             "width": rgba_img.size[0],
             "height": rgba_img.size[1],
+            "alpha_zero_pct": float((alpha < 5).mean() * 100),
+            "alpha_full_pct": float((alpha > 250).mean() * 100),
         }
-        summary.append(
-            {
-                "job_id": job_id,
-                "base": base,
-                "role": role,
-                "raw": str(raw_path.relative_to(ROOT)),
-                "artwork_png": str(art_png.relative_to(ROOT)),
-                "android_webp": str(webp.relative_to(ROOT)),
-                "alpha_on_void": str(alpha_p.relative_to(ROOT)),
-                "alpha_mask": str(mask_p.relative_to(ROOT)),
-                "tile_preview": str(tile_p.relative_to(ROOT)) if tile_p else None,
-                **size_info,
-            }
-        )
+        summary.append({
+            "job_id": jid, "base": base, "role": role,
+            "raw": str(raw.relative_to(ROOT)),
+            "artwork_png": str(png.relative_to(ROOT)),
+            "android_webp": str(webp.relative_to(ROOT)),
+            "alpha_on_void": str(aov.relative_to(ROOT)),
+            "alpha_mask": str(am.relative_to(ROOT)),
+            "tile_preview": str(tp.relative_to(ROOT)) if tp else None,
+            **size_info,
+        })
         print(
-            f"[ok ] {base}: raw={size_info['raw_bytes']/1024:.0f}KB → "
-            f"webp={size_info['webp_bytes']/1024:.0f}KB, {size_info['width']}x{size_info['height']}"
+            f"[ok ] {base} ({role}): {size_info['raw_bytes']/1024:.0f}KB raw → "
+            f"{size_info['webp_bytes']/1024:.0f}KB webp, "
+            f"α0={size_info['alpha_zero_pct']:.1f}% α255={size_info['alpha_full_pct']:.1f}%"
         )
 
     out = ROOT / "design" / "assets" / "forest" / "records" / "postprocess_summary.json"

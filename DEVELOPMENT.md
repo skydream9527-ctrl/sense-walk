@@ -768,13 +768,13 @@ stateDiagram-v2
 ### M1 — 单景虚走完整闭环（P0，原 Week 2 拆分）
 
 - [x] 纯 Kotlin 领域：`ComfortStickMapper` + 惯性、`ProgressAccumulator`、`CompletionGate`、`PhaseScheduler`、`SessionStateMachine`；对应 S1–S4 / S6 / S9（T03：comfort_v1 Fritsch–Carlson 保形 Hermite、s_pos/s_best 会计、六状态状态机与可注入时钟；S9 恢复/计步部分按范围保留待 T06/T07；143 个 JVM 测试见 §20.7）
-- [ ] Home → 模式选择 → 虚走开始；记住上次选择，未实现的实走清楚标注状态
-- [ ] `SessionViewModel` 持有会话；UI 只输入/渲染；后台暂停并清零输入，回前台不自动行走
-- [ ] 森林 VisualShell 用渐变/剪影按 `fadeMeters` 展开；首版平地 + 缓坡，自动跳随后接入
-- [ ] 通关/放弃分结果；独立长按区 1.5 s + 取消反馈；返回键确认；米数可信、用时折叠
-- [ ] 删除静默秒数设置；振动、节奏提示、减少动效、按住前进优先接入
-- [ ] 先保留音频 stub 验规则，再接森林真实环境 loop、步伐同步音效/振动；补音频焦点与耳机断连处理
-- [ ] 建 `ASSETS.md`：路径、来源、授权、处理规格与占位状态
+- [x] Home → 模式选择 → 虚走开始；记住上次选择，未实现的实走清楚标注状态（T04：仅森林虚走开放，实走/其他景如实标注暂未开放；上次选择持久化、失效回退；模拟器实测闭环）
+- [x] `SessionViewModel` 持有会话；UI 只输入/渲染；后台暂停并清零输入，回前台不自动行走（T04+边界修复：单一帧循环、dt 钳 0.05s、暂停清输入与惯性；JVM 测试 + 模拟器验证）
+- [x] 森林 VisualShell 用渐变/剪影按 `fadeMeters` 展开；首版平地 + 缓坡，自动跳随后接入（T04+边界修复：程序剪影/渐变六层，opacity 严格来自 SensoryState；§5.7 地形速度系数含 1.5m 过渡已接入；gap_hop 按 T07 降级；MiniMax 第二批 3 层（tree_trunks/light_shows/clearing）验收合格已接入，其余层程序降级，见 ASSETS.md）
+- [x] 通关/放弃分结果；独立长按区 1.5 s + 取消反馈；返回键确认；米数可信、用时折叠（T04+边界修复：长按用单调帧时间、完成后松手不弹框、无障碍点击动作；模拟器实测放弃流程与结果页）
+- [x] 删除静默秒数设置；振动、节奏提示、减少动效、按住前进优先接入（T04：silenceSeconds/SessionClock 已删；四开关入设置页；按住前进持续按住同曲线同门禁）
+- [ ] 先保留音频 stub 验规则，再接森林真实环境 loop、步伐同步音效/振动；补音频焦点与耳机断连处理（T05：**机制已完成**——SensoryCoordinator 步伐节奏/停走冻结/everyNSteps/终态释放 + SoundPool/MediaPlayer/Vibrator 真实引擎 + 音频焦点与耳机断连暂停（不自动恢复行走），可注入单测；**真实音频素材未取得**，占位层静默跳过，见 ASSETS.md——素材入库前不算完成）
+- [x] 建 `ASSETS.md`：路径、来源、授权、处理规格与占位状态（T05：已建，含 MiniMax 首批视觉素材逐层验证记录与音频素材需求规格）
 
 **退出条件**：普通用户能完成一次森林 800 m 虚走；停走不涨距、不长景色；拉满慢于中段；未满结束为放弃；通关只触发一次；首页/后台返回不丢失或偷跑。至少有一版完整可听的森林体验供 M2 前体验访谈。
 
@@ -997,6 +997,24 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 - `SessionStateMachine`：Ready/Walking/Paused/Completed/Abandoned/Interrupted；显式事件 + `DispatchOutcome`（ACCEPTED/REJECTED/ABSORBED_TERMINAL）；终态吸收一切迟到事件；暂停/中断/终态清零输入与速度，恢复回 Ready 等待新输入；`elapsedActiveMs` 只累计 Walking（可注入 `MonotonicClock`）。
 - **测试**：143 个 JVM 单测（T02 53 + 边界 17 + T03 73），覆盖 S1（密集采样间距 0.002 的连续性、分段无过冲、硬顶、拉满<甜点、先升后降）、S2（回退/重走/反复来回不刷距）、S3（唯一触发、边界、迟到）、S4（opacity 纯函数、米数不变输出不变）、S6（既有三景校验）、S9 部分（终态吸收、批量相位、s_best 快照往返）与异常输入（NaN/负 dt/Infinity/非法构造）。证据以 GitHub Actions 实际运行为准。
 - **T04 接入点**：SessionViewModel 组合上述组件为唯一状态来源；Compose 帧循环调 `updateInput` + 受限 dt 的 `frame` 等价逻辑；摇杆 UI 产出 d = |向量|×max(0,cosθ) 后交给 mapper，不自行换算速度。
+
+### 20.8 T04 边界修复与 T05 感官机制记录（2026-10-13）
+
+**T04 边界修复**（提交 0a7165f，CI run 38338455403 全绿，170 测试 0 失败）：
+- `VirtualWalkController` 接入 §5.7 地形速度系数：平地 1.0 / 上坡 1−1.5×grade（下限 0.80）/ 下坡 0.95 / 不平 0.95；段边界 1.5 m 线性过渡；gap_hop 在 T07 前按平地明确降级。测试覆盖段内系数、过渡边界、上坡慢于平地、森林 800 m 回归（用时区间仍成立）。
+- 通关即清空摇杆输入与速度惯性（测试锁定）。
+- `AbandonControl`：长按进度改单调帧时间（进后台无帧即冻结，回来不补满）；松手/取消/禁用/离开页面 try/finally 复位；长按完成后松手不再弹确认框；新增无障碍 `onClick` 动作直接打开确认对话框。
+- `HoldToWalkButton`：try/finally 保证前进输入释放 + DisposableEffect 离开页面释放。
+- `JoystickZone` 从全屏 pointerInput 改为下方 45% 实体区域，不再可能拦截上方米数/暂停/放弃控件。
+- Snapshot 新增 `frameDtMs`/`metersDelta`，相位事件经 `drainPhaseEvents()` 暴露（T05 感官协调器消费）。
+
+**T05 感官机制**（本提交）：
+- `domain/sensory/SensoryCoordinator`（纯 Kotlin，可注入随机源）：脚步由**有效距离**按 0.7 m 步幅积累触发（不按渲染帧、不靠时间）；环境 loop 相位触发后开始、每层只启动一次、按 fadeMs 淡入且**只在有新增有效距离时推进**（§8.2 停走冻结增益）；暂停冻结恢复继续不重启轨道；振动按 everyNSteps 跟步伐、尊重 vibrationEnabled；终态 release 后一切后端调用停止。
+- `engine/sensory/AndroidSensoryBackend`（真实引擎）：SoundPool 脚步变体（随机音高 0.97–1.03、音量 ±10% 由协调器决定）+ MediaPlayer 逐层环境循环（音量=淡入增益）+ Vibrator 波形模式表。**当前场景音频层全部为显式占位（无 file）：引擎跳过并在日志说明，不伪造声音**——素材入库后无需改代码即可播放。
+- `SessionViewModel` 集成：每帧 `controller.frame() → drainPhaseEvents → coordinator.onFrame(dt, metersDelta, walking)`；音频焦点丢失（来电/切音乐/闪避）与耳机断连（ACTION_AUDIO_BECOMING_NOISY）→ 暂停会话与播放，**恢复不自动行走**（等待用户新输入）；终态/VM 销毁释放全部音频与振动资源。删除被取代的 `AudioMixer`/`HapticEngine` 日志 stub。
+- **测试**：SensoryCoordinatorTest 11 个（解锁前静默、步伐非帧率、静止/暂停无脚步、变体与音量范围、停走冻结、fadeMs=0 立即满增益、重复相位不重启、暂停恢复不重置、everyNSteps 与开关、终态释放后无声）。焦点/耳机断连为 Android 组件接线，**待真机验证**。
+- **素材**：MiniMax 视觉素材两批交付——第二批 3 层（tree_trunks/light_shows/clearing）验收合格并接入 forest.json/ForestShell（139+20+43 KB，opacity 仍由 SensoryState 驱动、视差滑动钳制在图片溢出宽度内，单图非无缝为已知限制）；tree_outline（过稀）/leaf_path（内容溢出）/traveler（构图全幅）不合格待重生成，保持程序降级。真实音频素材未取得，ASSETS.md 记录需求规格与来源要求。
+- **M1 状态**：除「森林真实环境 loop/脚步素材」待素材入库外，M1 其余项均已完成并有证据；**M1 尚未达成**（退出条件要求完整可听的森林体验）。
 
 ---
 

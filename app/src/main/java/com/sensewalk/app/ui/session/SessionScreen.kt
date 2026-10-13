@@ -137,6 +137,7 @@ fun SessionScreen(
             }
             SessionContent(
                 vm = vm,
+                config = state.controller.config,
                 walk = walk,
                 reduceMotion = settings.reduceMotion,
                 rhythmHint = settings.rhythmHint,
@@ -150,6 +151,7 @@ fun SessionScreen(
 @Composable
 private fun SessionContent(
     vm: SessionViewModel,
+    config: com.sensewalk.app.domain.scene.SceneConfig,
     walk: com.sensewalk.app.domain.walk.VirtualWalkController.Snapshot?,
     reduceMotion: Boolean,
     rhythmHint: Boolean,
@@ -242,13 +244,29 @@ private fun SessionContent(
             .fillMaxSize()
             .background(SenseBlack),
     ) {
-        // 森林视觉：黑幕起，按 SensoryState 揭示
+        // 森林视觉：黑幕起，按 SensoryState 揭示；带 asset 的层渲染真实图片，其余程序降级
+        val imageLayers = remember(config) {
+            buildMap {
+                config.visualLayers.forEach { (id, def) ->
+                    val asset = when (def) {
+                        is com.sensewalk.app.domain.scene.VisualLayerDef.Parallax -> def.asset
+                        is com.sensewalk.app.domain.scene.VisualLayerDef.Overlay -> def.asset
+                        is com.sensewalk.app.domain.scene.VisualLayerDef.Solid -> null
+                    }
+                    if (asset != null) {
+                        val parallax = (def as? com.sensewalk.app.domain.scene.VisualLayerDef.Parallax)?.parallax ?: 0f
+                        put(id, ForestImageLayer(asset, parallax))
+                    }
+                }
+            }
+        }
         ForestShell(
             sensory = walk?.sensory ?: com.sensewalk.app.domain.phase.SensoryState(emptyMap(), emptyMap(), emptyList()),
             sPos = walk?.sPos ?: 0f,
             velocity = walk?.velocity ?: 0f,
             terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
             reduceMotion = reduceMotion,
+            imageLayers = imageLayers,
         )
 
         // 上半区：轻触查看米数 + 放弃/暂停控件

@@ -49,3 +49,6 @@ keystore.properties
 *.log
 *.swp
 *~
+
+# 本地验证截图/产物（不入库）
+.local-verify/

@@ -1,6 +1,7 @@
 # T04 验收清单（对照 design/ 与 PRD）
 
 核查日期：2026-10-12 · 对照 commit `808d872` · CI [run 38249797779](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38249797779) 成功。  
+**边界修复（2026-10-13）**：commit `0a7165f`（地形速度系数 §5.7 + 指针清理 + 摇杆区域 + 终态清理），CI run 38338455403 全绿。  
 基线：`design/README.md` 硬约束 + `design/03-product-prd/prd.md` P0 + `docs/zcode-handoff.md` T04 退出条件。
 
 ## 源码/CI 已满足（无需真机也可记为通过）
@@ -14,7 +15,8 @@
 | 黑幕起笔、米数揭示 | `ForestShell` 按 `SensoryState` opacity；轻触才看可信米数 | 通过（视觉为程序剪影） |
 | 放弃 1.5 s 长按；系统返回确认 | `AbandonControl`；`BackHandler` 继续/放弃对话框 | 通过 |
 | 后台不偷跑 | 生命周期暂停清零速度/输入（SessionScreen + controller） | 通过（单测/代码路径；真机再确认） |
-| 音频未冒充完成 | `AudioMixer`/`HapticEngine` 仍 stub；占位显式 | 正确：T05 范围 |
+| 音频未冒充完成 | `AudioMixer`/`HapticEngine` 仍 stub；占位显式 | ~~正确：T05 范围~~ → T05 已被真实引擎取代（素材待补，见 ASSETS.md） |
+| 边界修复（2026-10-13） | 地形速度系数 §5.7（段内/1.5m 过渡/gap_hop 降级）；通关清输入与惯性；长按单调帧时间 + 完成后不弹框 + 无障碍点击；按住前进释放保证；摇杆实体下方 45% 区域 | 通过（JVM 单测；模拟器复验见交付报告） |
 
 ## 待真机/人工（标「待验证」，不据此宣称 M1 完成）
 

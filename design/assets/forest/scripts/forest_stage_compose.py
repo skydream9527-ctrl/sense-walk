@@ -20,7 +20,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]  # design/assets/forest/scripts → sense-walk
 ASSETS_VISUAL = ROOT / "app" / "src" / "main" / "assets" / "visual"
 PREVIEW_DIR = ROOT / "design" / "assets" / "forest" / "previews"
 PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
@@ -83,15 +83,28 @@ def compose(stage_meters: float, layers: list[str]) -> np.ndarray:
         a_l = phase_opacity(ln, stage_meters)
         if a_l <= 0:
             continue
-        # 把该层缩放到画布
+        # 把该层缩放到画布：先把 RGB 预乘 alpha（pre-multiplied），
+        # LANCZOS 缩放后再除以 alpha——避免透明像素的 RGB 在 LANCZOS 中"渗透"到邻近像素
         if rgba.shape[:2] != (h, w):
-            img = Image.fromarray((rgba * 255).astype(np.uint8), "RGBA").resize((w, h), Image.LANCZOS)
-            rgba = np.asarray(img, dtype=np.float32) / 255.0
+            arr8 = (rgba * 255).astype(np.uint8)
+            a8 = arr8[..., 3].astype(np.float32) / 255.0
+            rgb8 = arr8[..., 0:3].astype(np.float32) / 255.0
+            # 预乘
+            premul = (rgb8 * a8[..., None]).clip(0, 1)
+            premul_img = Image.fromarray((premul * 255).astype(np.uint8), "RGB").resize((w, h), Image.LANCZOS)
+            a_img = Image.fromarray((a8 * 255).astype(np.uint8), "L").resize((w, h), Image.LANCZOS)
+            premul = np.asarray(premul_img, dtype=np.float32) / 255.0
+            a_new = np.asarray(a_img, dtype=np.float32) / 255.0
+            # alpha 阈值化：LANCZOS 会在 alpha=0 边界外推微小值；这里强制 < 32 → 0
+            a_new = np.where(a_new < 32/255, 0.0, a_new)
+            # 反预乘：alpha=0 处 RGB=0
+            safe = np.where(a_new[..., None] > 1e-3, 1.0 / np.maximum(a_new[..., None], 1e-3), 0)
+            rgb_new = (premul * safe).clip(0, 1)
+            rgba = np.dstack([rgb_new, a_new])
         # 源 alpha × phase alpha
         a = rgba[..., 3] * a_l
         # 标准 over 合成
         out_a = a + cur[..., 3] * (1 - a)
-        # 防 div0
         safe = np.where(out_a[..., None] > 1e-6, 1.0 / np.maximum(out_a[..., None], 1e-6), 0)
         out_rgb = (rgba[..., 0:3] * a[..., None] + cur[..., 0:3] * cur[..., 3][..., None] * (1 - a[..., None])) * safe
         cur = np.dstack([out_rgb, out_a])
@@ -104,10 +117,13 @@ def main() -> int:
         comp = compose(m, layers)
         out8 = (np.clip(comp, 0, 1) * 255).astype(np.uint8)
         full = Image.fromarray(out8, "RGBA")
-        full.convert("RGB").save(PREVIEW_DIR / f"stage_{tag}_full.png", "PNG", optimize=True)
+        # 始终先与 #060806 合成，再以 RGB 存图，避免透明区域显示为透明/棋盘
+        void_bg = Image.new("RGB", full.size, tuple(int(c) for c in VOID_RGB))
+        void_bg.paste(full, mask=full.split()[3])
+        void_bg.save(PREVIEW_DIR / f"stage_{tag}_full.png", "PNG", optimize=True)
         # 0.5× 缩图，便于文档
-        small = full.resize((540, 960), Image.LANCZOS)
-        small.convert("RGB").save(PREVIEW_DIR / f"stage_{tag}_540x960.jpg", "JPEG", quality=85)
+        small = void_bg.resize((540, 960), Image.LANCZOS)
+        small.save(PREVIEW_DIR / f"stage_{tag}_540x960.jpg", "JPEG", quality=85)
         rows.append(
             {
                 "tag": tag,

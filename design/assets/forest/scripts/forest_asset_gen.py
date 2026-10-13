@@ -151,7 +151,7 @@ def already_done(state: dict, job_id: str) -> Optional[dict]:
     if not rec:
         return None
     raw = ROOT / rec["raw_path"]
-    if raw.exists() and rec.get("node_id"):
+    if raw.exists() and raw.stat().st_size > 0:
         return rec
     return None
 
@@ -224,13 +224,16 @@ def forest_jobs() -> list[JobSpec]:
         job_id="forest_tree_outline",
         label="forest_tree_outline",
         prompt=(
-            "A horizontal seamless 2D hand-drawn silhouette tree line for parallax background. "
-            "Only distant sparse tree canopies and treeline at the horizon, dark greenish-black "
-            "silhouettes (#1A2820). Plain dark teal-green background (#060806) that will be made "
-            "transparent. No midground, no foreground, no ground, no path, no character, no "
-            "birds, no light beams, no text, no UI. Tiles horizontally with no visible seam."
+            "A SINGLE horizontal distant forest treeline silhouette in 2D hand-drawn style, "
+            "placed at the LOWER 30 percent of the canvas. Above the treeline the canvas is "
+            "completely empty dark void color #060806 (no patterns, no other tree rows, no "
+            "stacking, no repeating). Trees are distant dark greenish-black silhouettes "
+            "around #1A2820, sparse and natural, only one row across the bottom. Below the "
+            "treeline is also dark void #060806 (no ground drawn here, no leaves, no path). "
+            "No midground, no foreground, no character, no birds, no light beams, no text, no "
+            "UI, no logos, no watermarks. The treeline must be ONE single row, not three."
         ),
-        notes="parallax 远景；目标 1080×1920 canvas；上层树冠、底层地平线下方完全留作透明。",
+        notes="parallax 远景；要求画布下方 1 行树线，其余画布 #060806。",
     )
 
     trunks = JobSpec(
@@ -264,14 +267,16 @@ def forest_jobs() -> list[JobSpec]:
         job_id="forest_light_shows",
         label="forest_light_shows",
         prompt=(
-            "A horizontal 2D hand-drawn transparent overlay for forest scene. Two or three very "
-            "soft pale green diagonal sun beams #8FA87A, low opacity, plus two or three very "
-            "small distant bird silhouettes (small, restrained, not the main subject). Plain "
-            "dark teal-green background (#060806) to be removed. No trees, no full background, "
-            "no character, no text, no UI. The light beams must be narrow and faint, not large "
-            "opaque white areas."
+            "A horizontal 2D hand-drawn transparent overlay for forest scene. EXACTLY THREE "
+            "very soft pale green diagonal sun beams in color #8FA87A, low opacity, narrow, "
+            "in the upper half only, evenly distributed across the canvas. Plus THREE very "
+            "small distant bird silhouettes (small, restrained, in the upper third, not the "
+            "main subject). Plain dark teal-green background #060806 that will be made "
+            "transparent. No trees, no full background, no character, no text, no UI, no "
+            "other shapes. The light beams must be narrow and faint, not large opaque white "
+            "areas. No geometric polygons, no abstract shapes, no scattered confetti-like dots."
         ),
-        notes="overlay 飞鸟+光柱；限制鸟尺寸、不抢戏。",
+        notes="overlay 飞鸟+光柱；3 根光柱、3 只小鸟、限制鸟尺寸、不抢戏。",
     )
 
     clearing = JobSpec(
@@ -291,13 +296,15 @@ def forest_jobs() -> list[JobSpec]:
         job_id="traveler_idle",
         label="traveler_idle",
         prompt=(
-            "A single still 2D hand-drawn character sprite, side 3/4 view facing right, "
-            "transparent background, body proportions head-to-height about 1 to 3.3. "
-            "Neutral adult, medium-length coat or light cloak, loose pants, simple travel "
-            "boots, no facial features drawn. Main color muted gray-green #6A7A6E, dark "
-            "shadows #2A322C, very faint pale green rim light. Relaxed idle pose, no "
-            "walking motion, complete body, no scenery, no trees, no ground, no shadow on "
-            "ground, no text, no UI."
+            "A single still 2D hand-drawn character sprite, STRICT side view facing RIGHT, "
+            "transparent background, body proportions head-to-height about 1 to 3.3 (chubby, "
+            "compact, NOT slim, NOT elongated). Neutral adult, medium-length coat or light "
+            "cloak, loose pants, simple travel boots. NO facial features drawn, no eyes, no "
+            "mouth, no nose. Main color muted gray-green #6A7A6E, dark shadows #2A322C, very "
+            "faint pale green rim light. Relaxed idle pose, both feet flat on the same "
+            "horizontal baseline, no walking motion, complete body shown left to right with "
+            "the head rightmost, no scenery, no trees, no ground, no shadow on ground, no "
+            "text, no UI, no logo."
         ),
         notes="默认旅人；只静态帧；脚底基线齐平；四周完全透明。",
     )
