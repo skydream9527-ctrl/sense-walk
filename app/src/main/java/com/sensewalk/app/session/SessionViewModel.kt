@@ -107,7 +107,8 @@ class SessionViewModel(
         (uiState.value as? UiState.Ready)?.let { block(it.controller) }
     }
 
-    /** 唯一帧驱动入口：控制器步进 → 相位事件 → 感官协调器 */
+    /** 唯一帧驱动入口：控制器步进 → 相位事件 → 感官协调器。
+     *  快照无变化（静止/暂停/终态）时不推送，避免空闲期 60fps 全树重组。 */
     fun onFrame() = withController { controller ->
         val snapshot = controller.frame()
         coordinator?.let { sensory ->
@@ -121,7 +122,9 @@ class SessionViewModel(
                 sensory.release() // 终态：释放音频与振动，迟到帧不再发声
             }
         }
-        _walk.value = snapshot
+        if (snapshot != _walk.value) {
+            _walk.value = snapshot
+        }
     }
 
     fun onStick(deflection: Float) = withController {
