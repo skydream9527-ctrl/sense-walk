@@ -100,9 +100,9 @@ class AudioFocusChainTest {
         fun frames(n: Int) {
             repeat(n) {
                 clock.now += FRAME_MS
-                controller.frame()
+                // 与 VM 相同：必须用 frame() 的返回值（snapshot() 的 frameDtMs/metersDelta 恒为 0）
+                val s = controller.frame()
                 coordinator.onPhaseEvents(controller.drainPhaseEvents())
-                val s = controller.snapshot()
                 coordinator.onFrame(
                     dtMs = s.frameDtMs,
                     metersDelta = s.metersDelta,
