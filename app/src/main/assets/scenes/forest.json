@@ -31,9 +31,9 @@
     ]
   },
   "layers": {
-    "footsteps": { "type": "stepOneShot", "placeholder": "dev_tone_variants:forest_step" },
-    "ambience": { "type": "loop", "placeholder": "dev_tone:forest_insects" },
-    "deep_birds": { "type": "loop", "placeholder": "dev_tone:forest_birds" }
+    "footsteps": { "type": "stepOneShot", "files": ["audio/forest_step_01.ogg", "audio/forest_step_02.ogg", "audio/forest_step_03.ogg", "audio/forest_step_04.ogg", "audio/forest_step_05.ogg", "audio/forest_step_06.ogg"] },
+    "ambience": { "type": "loop", "file": "audio/forest_insects.ogg" },
+    "deep_birds": { "type": "loop", "file": "audio/forest_birds.ogg" }
   },
   "visualLayers": {
     "void": { "type": "solid", "color": "#060806" },

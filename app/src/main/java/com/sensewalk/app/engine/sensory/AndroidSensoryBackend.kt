@@ -11,17 +11,23 @@ import android.os.VibratorManager
 import android.util.Log
 import com.sensewalk.app.domain.scene.AudioLayerDef
 import com.sensewalk.app.domain.scene.SceneConfig
+import com.sensewalk.app.domain.sensory.ActiveStepStreams
+import com.sensewalk.app.domain.sensory.LoopPlayerState
 import com.sensewalk.app.domain.sensory.SensoryBackend
+import com.sensewalk.app.domain.sensory.StepLayerLoadState
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
- * 感官后端的 Android 实现（T05）：
- * - 脚步 one-shot：SoundPool（低延迟，支持随机音高/音量）；
- * - 环境 loop：每层一个 MediaPlayer 循环播放，音量即淡入增益；
+ * 感官后端的 Android 实现（T05 收尾版）：
+ * - 脚步 one-shot：SoundPool；异步加载状态跟踪（[StepLayerLoadState]）——
+ *   未加载完成不播放，加载失败给明确诊断日志；
+ * - 环境 loop：每层一个 MediaPlayer，**prepareAsync**（不阻塞主线程），
+ *   生命周期由 [LoopPlayerState] 管理：准备期暂停/释放、迟到 OnPrepared 吸收；
+ * - 暂停/中断：停止活跃脚步流（[ActiveStepStreams]），恢复不补播旧脚步；
  * - 振动：Vibrator 波形（模式表见 [vibrationEffect]）。
  *
- * 素材现状（见 ASSETS.md）：场景配置的音频层当前全部为显式开发占位
- * （placeholder，无 file）——本实现会跳过占位层并在日志中说明，
- * 不伪造声音；素材入库后无需改代码即可播放。
+ * 素材现状（见 ASSETS.md）：场景配置的音频层若仍为显式开发占位
+ * （placeholder，无 file）则跳过并记日志，不伪造声音。
  */
 class AndroidSensoryBackend(
     private val context: Context,
@@ -38,31 +44,43 @@ class AndroidSensoryBackend(
         )
         .build()
 
-    /** layerId → 已加载的 SoundPool id 列表（变体） */
-    private val stepSounds = mutableMapOf<String, MutableList<Int>>()
+    /** layerId → 异步加载状态 */
+    private val stepLayers = mutableMapOf<String, StepLayerLoadState>()
 
-    /** layerId → 循环播放器 */
-    private val loops = mutableMapOf<String, MediaPlayer>()
+    /** layerId → (MediaPlayer, 生命周期状态) */
+    private data class LoopEntry(val player: MediaPlayer, val state: LoopPlayerState)
+
+    private val loops = mutableMapOf<String, LoopEntry>()
+    private val stepStreams = ActiveStepStreams()
+    private val released = AtomicBoolean(false)
 
     private val vibrator: Vibrator? = resolveVibrator()
 
     init {
-        // 预加载脚步变体；占位层（无 files）记录后跳过
+        // SoundPool 只有单个全局加载监听器：统一分发给各层（在 load 之前注册）
+        soundPool.setOnLoadCompleteListener { _, sampleId, status ->
+            stepLayers.values.forEach { it.onLoadComplete(sampleId, status == 0) }
+            if (status != 0) Log.w(TAG, "脚步素材 soundId=$sampleId 异步加载失败 (status=$status)")
+        }
+        // 异步预加载脚步变体；占位层（无 files）记录后跳过
         for ((layerId, def) in config.layers) {
             if (def is AudioLayerDef.StepOneShot && def.files.isNotEmpty()) {
-                val ids = mutableListOf<Int>()
+                val fileById = mutableMapOf<Int, String>()
                 for (file in def.files) {
                     val id = loadSound(file)
-                    if (id != null) ids.add(id)
+                    if (id != null) fileById[id] = file
                 }
-                if (ids.isNotEmpty()) stepSounds[layerId] = ids
-                else Log.i(TAG, "脚步层 '$layerId' 素材未入库（占位），静默跳过")
+                if (fileById.isEmpty()) {
+                    Log.i(TAG, "脚步层 '$layerId' 素材未入库（占位），静默跳过")
+                } else {
+                    stepLayers[layerId] = StepLayerLoadState(layerId, fileById.keys.toList(), fileById)
+                }
             }
         }
     }
 
     override fun startLoop(layerId: String) {
-        if (layerId in loops) return
+        if (released.get() || loops.containsKey(layerId)) return
         val def = config.layers[layerId] as? AudioLayerDef.Loop ?: return
         val file = def.file ?: run {
             Log.i(TAG, "环境层 '$layerId' 为开发占位（无 file），本轮不播放")
@@ -71,6 +89,7 @@ class AndroidSensoryBackend(
         try {
             val afd = context.assets.openFd(file)
             val player = MediaPlayer()
+            val entry = LoopEntry(player, LoopPlayerState())
             player.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
             afd.close()
             player.isLooping = true
@@ -80,46 +99,87 @@ class AndroidSensoryBackend(
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build(),
             )
-            player.setVolume(0f, 0f)
-            player.prepare()
-            player.start()
-            loops[layerId] = player
+            player.setOnPreparedListener { p ->
+                if (p !== player) return@setOnPreparedListener
+                entry.state.onPrepared()
+                if (entry.state.isPrepared) {
+                    // 就绪后应用缓存的增益；新层从 0 淡入
+                    p.setVolume(entry.state.gain, entry.state.gain)
+                    if (entry.state.phase == LoopPlayerState.Phase.PLAYING) p.start()
+                }
+                if (entry.state.phase == LoopPlayerState.Phase.RELEASED) {
+                    // 准备期间已终态：迟到回调只做清理
+                    runCatching { p.release() }
+                }
+            }
+            player.setOnErrorListener { p, what, extra ->
+                Log.w(TAG, "环境层 '$layerId' 播放错误 (what=$what extra=$extra)，释放该层")
+                entry.state.onError()
+                runCatching { p.release() }
+                loops.remove(layerId)
+                true
+            }
+            // 异步准备，不阻塞主线程；初始按"应播放"登记
+            entry.state.requestStart()
+            player.prepareAsync()
+            loops[layerId] = entry
         } catch (e: Exception) {
-            Log.w(TAG, "环境层 '$layerId' 播放失败（$file）：${e.message}")
+            Log.w(TAG, "环境层 '$layerId' 启动失败（$file）：${e.message}")
         }
     }
 
     override fun setLoopGain(layerId: String, gain: Float) {
-        loops[layerId]?.setVolume(gain.coerceIn(0f, 1f), gain.coerceIn(0f, 1f))
+        val entry = loops[layerId] ?: return
+        entry.state.setGain(gain)
+        if (entry.state.isPrepared) {
+            entry.player.setVolume(entry.state.gain, entry.state.gain)
+        }
     }
 
     override fun playStep(layerId: String, variant: Int, volume: Float, pitchFactor: Float) {
-        val ids = stepSounds[layerId] ?: return // 占位层：无声（ASSETS.md 记录）
-        if (ids.isEmpty()) return
-        val id = ids[variant.mod(ids.size)]
-        soundPool.play(id, volume, volume, 1, 0, pitchFactor.coerceIn(0.5f, 2f))
+        val layer = stepLayers[layerId] ?: return // 占位层：无声（ASSETS.md 记录）
+        val soundId = layer.playableVariant(variant) ?: return // 变体未加载完成：跳过本次
+        val streamId = soundPool.play(soundId, volume, volume, 1, 0, pitchFactor.coerceIn(0.5f, 2f))
+        stepStreams.onStreamStarted(streamId)
+        if (streamId == 0) Log.w(TAG, "脚步播放失败（layer=$layerId variant=$variant）")
     }
 
     override fun pauseAll() {
-        loops.values.forEach { player ->
-            runCatching { if (player.isPlaying) player.pause() }
+        // 环境 loop：播放中的暂停（准备中的登记为就绪后暂停）
+        loops.values.forEach { entry ->
+            val wasPlaying = entry.state.phase == LoopPlayerState.Phase.PLAYING
+            entry.state.requestPause()
+            if (wasPlaying) runCatching { entry.player.pause() }
+        }
+        // 脚步：停止所有在播流；恢复不补播
+        stepStreams.stopAll().forEach { streamId ->
+            runCatching { soundPool.stop(streamId) }
         }
     }
 
     override fun resumeAll() {
-        loops.values.forEach { player ->
-            runCatching { if (!player.isPlaying) player.start() }
+        if (released.get()) return
+        loops.values.forEach { entry ->
+            val wasPausedPrepared = entry.state.phase == LoopPlayerState.Phase.PAUSED
+            entry.state.requestStart()
+            if (wasPausedPrepared) runCatching { entry.player.start() }
         }
+        // 脚步流不恢复：新步伐重新开始（不补播旧脚步）
     }
 
     override fun releaseAll() {
-        loops.values.forEach { player ->
+        if (!released.compareAndSet(false, true)) return
+        loops.values.forEach { entry ->
+            entry.state.release()
             runCatching {
-                player.stop()
-                player.release()
+                entry.player.stop()
+                entry.player.release()
             }
         }
         loops.clear()
+        stepStreams.stopAll().forEach { streamId ->
+            runCatching { soundPool.stop(streamId) }
+        }
         runCatching { soundPool.release() }
     }
 
@@ -136,7 +196,7 @@ class AndroidSensoryBackend(
         val afd = context.assets.openFd(file)
         val id = soundPool.load(afd, 1)
         afd.close()
-        if (id != 0) id else null // 0 = 加载失败
+        if (id != 0) id else null // 0 = 同步失败
     } catch (e: Exception) {
         Log.w(TAG, "脚步素材加载失败（$file）：${e.message}")
         null

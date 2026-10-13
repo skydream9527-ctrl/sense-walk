@@ -5,7 +5,8 @@
 
 ## 一、森林视觉素材（MiniMax 生成，v1/v2/v3 三批交付）
 
-**状态：v3 后 5 层接入；traveler 三轮未达标保持程序绘制。**
+**状态：v3 后 5 层入包（待复验）；traveler 三轮未达标保持程序绘制。**
+（2026-10-13：交付方正在修复棋盘格残留与透明蒙版；当前包内文件经棋盘格相位检测未见异常，但以修复稿复验为最终结论，暂不宣称五层全部合格。）
 交付三批：v1/v2（2026-10-12）+ v3 按 ASSETS.md 反馈重做（2026-10-13，
 见 `docs/visual-assets-handoff.md`，生成 14 次、凭据 host-managed）。
 逐层验证（覆盖率 = alpha>60 像素占比；验证脚本指标留档于交付记录）：
@@ -31,21 +32,25 @@
 - **遗留**：traveler 若第四轮交付仍满帧，建议改为「程序绘制为正式方案」
   或交付方提供局部裁剪的透明 PNG。
 
-## 二、森林音频素材
+## 二、森林音频素材（2026-10-13 入包，真实素材）
 
-**状态：未取得，待补。** `app/src/main/assets/audio/` 仅有 .gitkeep。
-场景配置的音频层全部为显式开发占位（`placeholder: "dev_tone*"`），
-`SceneValidator` 的 `REQUIRE_REAL_ASSETS` 策略不放行（有测试锁定）。
+**状态：已取得并接入**（来源 Wikimedia Commons，逐条授权如下）；
+`forest.json` 三个音频层已用真实 `files`/`file` 替换占位，
+`REQUIRE_REAL_ASSETS` 发布策略对森林放行（有测试锁定）。
 
-| 需求 | 规格（§14.1） | 来源要求 |
-| --- | --- | --- |
-| 环境 loop（insects / birds） | ogg Vorbis 96 kbps · 48 kHz · 立体声 · 60–120 s · 首尾交叉淡化无缝 · −26~−23 LUFS · 真峰值 ≤ −3 dBTP | 自采或可验证 CC0；逐条记录来源链接与授权 |
-| 脚步 one-shot ×4–6（落叶土路） | ogg · 单声道 · ≤400 ms · 比环境层高 3–6 dB | 同上 |
+| 层 | 包内文件 | 来源（Wikimedia Commons） | 授权 | 加工 |
+| --- | --- | --- | --- | --- |
+| footsteps | audio/forest_step_01..06.ogg（各 ~13 KB，400 ms） | [Walking through leaves (Gravity Sound)](https://commons.wikimedia.org/wiki/File:Walking_through_leaves_(Gravity_Sound).wav) + [leaves and sticks (Gravity Sound)](https://commons.wikimedia.org/wiki/File:Walking_through_leaves_and_sticks_(Gravity_Sound).wav) | **CC BY 4.0**（gravitysound.studio） | onset 检测切 6 变体（5×sticks+1×leaves），8ms 淡入淡出，−18.1 LUFS（比环境高 ~6 dB） |
+| ambience | audio/forest_insects.ogg（1.22 MB，63 s） | [Waidachswald Oberschefflenz Abend 20250616 2005](https://commons.wikimedia.org/wiki/File:Waidachswald_Oberschefflenz_Abend_20250616_2005.ogg)（傍晚森林，User:Karlunun） | **CC0** | 60 s 段 + 3 s 首尾三角交叉淡化无缝循环；两遍 loudnorm −24.0 LUFS；真峰值 −6.3 dBTP |
+| deep_birds | audio/forest_birds.ogg（0.87 MB，63 s） | [Dawn chorus at Glencairnie](https://commons.wikimedia.org/wiki/File:Dawn_chorus_at_Glencairnie_big_bungalow_Craigmore_DM.ogg)（黎明鸟合唱，DivyaCM） | **CC BY 4.0** | 取 40–100 s 温和段同上处理；−24.0 LUFS；真峰值 −8.5 dBTP |
 
-- **播放机制已就绪**（T05）：`AndroidSensoryBackend`（SoundPool 脚步变体 +
-  MediaPlayer 环境 loop + Vibrator 波形）会跳过占位层并在日志说明，不伪造声音；
-  素材入库后无需改代码。
-- **预算**：每场景音频 ≤3 MB + 视觉 ≤2 MB；当前 APK 约 16.8 MB。
+- **规格符合（§14.1）**：ogg Vorbis；63 s；循环无缝；−24.0 LUFS（区间内）；
+  真峰值 −4.4~−8.5 dBTP（≤−3）；总 2360 KB ≤ 3 MB。
+- **已知偏差**：本机 ffmpeg 无 libvorbis，用原生 Vorbis（qscale 3）；脚步因原生
+  编码器仅双声道而用同相复制（听感等同单声道）。后续可换 libvorbis 重编码。
+- **致谢义务**：CC BY 4.0 两项须在发布说明署名（gravitysound.studio、DivyaCM）；
+  CC0 无署名义务。关于页接入属后续打磨。
+- **待真机验证**：实际听感、锁屏播放、焦点切换行为。
 
 ## 三、振动
 

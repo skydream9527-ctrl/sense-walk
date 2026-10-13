@@ -108,9 +108,22 @@ class MigratedSceneConfigsTest {
     }
 
     @Test
-    fun `当前全部素材为开发占位且发布策略不放行`() {
-        // 诚实边界：占位通过 ≠ 发布素材齐备；REQUIRE_REAL_ASSETS 下三景都必须失败
-        listOf("forest", "desert", "night_path").forEach { id ->
+    fun `占位状态如实分层 - 森林全真实素材发布放行，其他景占位不放行`() {
+        // 森林（T05 收尾）：五个视觉层 + 三个音频层全部为真实素材（Wikimedia
+        // CC0/CC BY，见 ASSETS.md），无占位；发布策略应放行
+        val forest = loadScene("forest")
+        val forestDev = validateReal(forest)
+        assertTrue("森林开发策略应通过: ${forestDev.errors}", forestDev.valid)
+        assertTrue("森林不应再有占位: ${forestDev.placeholders}", forestDev.placeholders.isEmpty())
+        val forestRelease = SceneValidator.validate(
+            forest,
+            FileAssetLocator(assetsDir()),
+            SceneValidator.AssetsPolicy.REQUIRE_REAL_ASSETS,
+        )
+        assertTrue("森林发布策略应放行（素材齐全）: ${forestRelease.errors}", forestRelease.valid)
+
+        // 沙漠/夜径：素材未入库，仍为显式占位；发布策略不放行
+        listOf("desert", "night_path").forEach { id ->
             val config = loadScene(id)
             val dev = validateReal(config)
             assertTrue("$id 开发策略应通过: ${dev.errors}", dev.valid)

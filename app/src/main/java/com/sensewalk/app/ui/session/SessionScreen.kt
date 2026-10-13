@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -381,16 +383,41 @@ private fun SessionContent(
             }
         }
 
-        // 放弃进度期间与终态的轻提示
+        // 暂停（外部中断/后台返回/手动）：明确的「继续」操作回到 Ready 等待新输入。
+        // 焦点恢复/耳机重连不会自动行走——必须点按继续并重新给摇杆输入。
         if (session == SessionState.PAUSED && !showConfirm) {
-            Text(
-                text = "已暂停 · 摇一摇摇杆继续",
-                style = MaterialTheme.typography.labelMedium,
-                color = SenseMuted,
+            Column(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 140.dp),
-            )
+                    .align(Alignment.Center)
+                    .padding(horizontal = 48.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "已暂停",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = SenseOnSurface,
+                )
+                Text(
+                    text = "点「继续走」后，摇杆重新给输入才会前进",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = SenseMuted,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 6.dp, bottom = 16.dp),
+                )
+                Button(
+                    onClick = vm::resumeAfterInterruption,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = AccentSoft,
+                        contentColor = SenseBlack,
+                    ),
+                    shape = RoundedCornerShape(14.dp),
+                ) {
+                    Text("继续走", style = MaterialTheme.typography.titleMedium)
+                }
+            }
         }
     }
 }

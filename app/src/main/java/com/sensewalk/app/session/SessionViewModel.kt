@@ -17,6 +17,7 @@ import com.sensewalk.app.data.UserSettings
 import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.domain.session.MonotonicClock
 import com.sensewalk.app.domain.session.SessionState
+import com.sensewalk.app.domain.sensory.AudioFocusGate
 import com.sensewalk.app.domain.sensory.SensoryCoordinator
 import com.sensewalk.app.domain.walk.VirtualWalkController
 import com.sensewalk.app.engine.sensory.AndroidSensoryBackend
@@ -72,6 +73,8 @@ class SessionViewModel(
     private var focusRequest: AudioFocusRequest? = null
     private var noisyReceiver: BroadcastReceiver? = null
     private var focusRegistered = false
+    private val focusGate = AudioFocusGate()
+    private var audioResumed = false
 
     init {
         viewModelScope.launch {
@@ -130,8 +133,9 @@ class SessionViewModel(
     fun onStick(deflection: Float) = withController {
         it.onStick(deflection)
         val snapshot = it.snapshot()
-        // 焦点丢失暂停后重新给输入：恢复播放（行走由新输入驱动，不自动前进）
-        if (snapshot.session == SessionState.WALKING) coordinator?.resume()
+        // 焦点丢失暂停后的新输入：行走由新输入驱动（不自动前进）；
+        // 音频恢复前必须确认焦点已获准
+        if (snapshot.session == SessionState.WALKING) attemptAudioResume()
         _walk.value = snapshot
     }
 
@@ -160,7 +164,18 @@ class SessionViewModel(
 
     fun resumeFromDialog() = withController {
         it.resume()
-        coordinator?.resume()
+        attemptAudioResume()
+        _walk.value = it.snapshot()
+    }
+
+    /**
+     * 外部中断（来电/焦点丢失/耳机断连/后台）后的「继续」入口：
+     * 回到 READY 等待新输入；音频恢复以焦点重新获准为前提，
+     * 未获准则静默继续（不外放、不阻塞行走）。
+     */
+    fun resumeAfterInterruption() = withController {
+        it.resume()
+        attemptAudioResume()
         _walk.value = it.snapshot()
     }
 
@@ -192,19 +207,27 @@ class SessionViewModel(
                     AudioManager.AUDIOFOCUS_LOSS,
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK,
-                    -> onExternalAudioInterruption()
-                    // AUDIOFOCUS_GAIN：不擅自恢复行走；由用户新输入驱动
+                    -> {
+                        focusGate.onFocusLoss()
+                        audioResumed = false
+                        onExternalAudioInterruption()
+                    }
+                    // AUDIOFOCUS_GAIN：不自动行走、不自动恢复播放——由用户新输入驱动
                 }
             }
             .build()
         focusRequest = request
-        audioManager?.requestAudioFocus(request)
+        val result = audioManager?.requestAudioFocus(request) ?: 0
+        focusGate.onRequestResult(result)
+        audioResumed = focusGate.canResumeAudio()
         focusRegistered = true
 
         // 耳机断连：立即暂停播放，避免突然外放（系统广播 ACTION_AUDIO_BECOMING_NOISY）
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (intent?.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY) {
+                    focusGate.onFocusLoss()
+                    audioResumed = false
                     onExternalAudioInterruption()
                 }
             }
@@ -216,6 +239,26 @@ class SessionViewModel(
             IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY),
             ContextCompat.RECEIVER_NOT_EXPORTED,
         )
+    }
+
+    /**
+     * 恢复音频的前置：重新申请焦点并检查结果；
+     * 未获准不得直接恢复音频（会话本身可以继续，只是静默）。
+     */
+    private fun attemptAudioResume() {
+        if (audioResumed) {
+            coordinator?.resume()
+            return
+        }
+        val request = focusRequest ?: return
+        val result = audioManager?.requestAudioFocus(request) ?: 0
+        focusGate.onRequestResult(result)
+        if (focusGate.canResumeAudio()) {
+            audioResumed = true
+            coordinator?.resume()
+        } else {
+            audioResumed = false // 焦点被拒：音频保持暂停，新脚步与 loop 均不出声
+        }
     }
 
     /** 来电/切音乐/拔耳机：暂停会话与播放；不自动恢复 */
