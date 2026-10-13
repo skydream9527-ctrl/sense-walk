@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "jobs": {
+    "connectivity_test": {
+      "job_id": "connectivity_test",
+      "label": "connectivity_test",
+      "prompt": "A soft misty forest at dawn, low saturation hand-drawn illustration style, calm, no text, no UI",
+      "aspect_ratio": "9:16",
+      "resolution": "1K",
+      "input_urls": [],
+      "node_id": "451814297646098",
+      "file_name": "connectivity_test.jpg",
+      "raw_path": "design/assets/forest/raw/connectivity_test.jpg",
+      "summary": "Batch processing completed: 1/1 succeeded",
+      "notes": "连通性测试，正式任务前丢弃，仅作记录。",
+      "ts": 1760335080
+    }
+  }
+}

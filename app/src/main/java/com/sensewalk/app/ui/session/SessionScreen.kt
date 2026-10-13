@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -309,12 +310,15 @@ private fun SessionContent(
             }
         }
 
-        // 下半区 45%：浮动摇杆
+        // 下半区 45%：浮动摇杆（实体区域限定，不拦截上方控件）
         JoystickZone(
-            bottomAreaFraction = 0.45f,
             rhythmHint = rhythmHint,
             onDeflection = vm::onStick,
             onReleased = vm::onStickReleased,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .fillMaxHeight(0.45f),
         )
 
         // 按住前进（无障碍，开放决策 #12）：持续按住才走，同一曲线与门禁
@@ -393,6 +397,14 @@ private fun HoldToWalkButton(
     onHold: () -> Unit,
     onRelease: () -> Unit,
 ) {
+    val currentOnHold by rememberUpdatedState(onHold)
+    val currentOnRelease by rememberUpdatedState(onRelease)
+
+    // 离开页面时释放前进输入
+    DisposableEffect(Unit) {
+        onDispose { currentOnRelease() }
+    }
+
     Box(
         Modifier
             .semantics {
@@ -403,14 +415,18 @@ private fun HoldToWalkButton(
                     val down = awaitFirstDown(requireUnconsumed = false)
                     if (!enabled) return@awaitEachGesture
                     down.consume()
-                    onHold()
-                    while (true) {
-                        val event = awaitPointerEvent()
-                        val change = event.changes.firstOrNull { it.id == down.id } ?: break
-                        if (!change.pressed) break
-                        change.consume()
+                    try {
+                        currentOnHold()
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull { it.id == down.id } ?: break
+                            if (!change.pressed) break // 松手或系统取消
+                            change.consume()
+                        }
+                    } finally {
+                        // 松手、取消、禁用切换重启协程或离开组合都保证释放
+                        currentOnRelease()
                     }
-                    onRelease()
                 }
             }
             .background(Color.White.copy(alpha = 0.10f), RoundedCornerShape(24.dp))

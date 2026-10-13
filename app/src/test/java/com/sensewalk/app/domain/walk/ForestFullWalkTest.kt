@@ -107,4 +107,15 @@ class ForestFullWalkTest {
         val full = distanceIn(120, 1.00f)
         assertTrue("甜点 2 分钟应走 $sweet m > 拉满 $full m", sweet > full * 1.2f)
     }
+
+    @Test
+    fun `森林地形系数 - gap_hop 开发降级为平地且坡段生效`() {
+        val clock = FakeClock()
+        val controller = VirtualWalkController(forestConfig(), clock)
+        // 0-140 平地；140-240 上坡 0.07；240-270 gap_hop（T07 前降级平地）；270-400 不平
+        assertEquals(1.0f, controller.terrainFactorAt(70f), 1e-4f)
+        assertEquals(0.895f, controller.terrainFactorAt(190f), 1e-4f)
+        assertEquals("gap_hop 降级为平地系数", 1.0f, controller.terrainFactorAt(255f), 1e-4f)
+        assertEquals(0.95f, controller.terrainFactorAt(300f), 1e-4f)
+    }
 }

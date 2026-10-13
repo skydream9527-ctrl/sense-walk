@@ -1,10 +1,13 @@
 package com.sensewalk.app.domain.walk
 
+import com.sensewalk.app.domain.phase.PhaseEvent
 import com.sensewalk.app.domain.phase.PhaseScheduler
 import com.sensewalk.app.domain.phase.SensoryState
 import com.sensewalk.app.domain.progress.CompletionGate
 import com.sensewalk.app.domain.progress.ProgressAccumulator
+import com.sensewalk.app.domain.scene.PathSegment
 import com.sensewalk.app.domain.scene.SceneConfig
+import com.sensewalk.app.domain.scene.SceneDurationEstimator
 import com.sensewalk.app.domain.scene.TerrainKind
 import com.sensewalk.app.domain.session.MonotonicClock
 import com.sensewalk.app.domain.session.SessionEvent
@@ -46,6 +49,9 @@ class VirtualWalkController(
     /** 上一帧时间基线；null 表示下一帧只建立基线 */
     private var lastFrameMs: Long? = null
 
+    /** 已触发待消费的相位事件（感官协调器经 [drainPhaseEvents] 取走） */
+    private var pendingEvents = mutableListOf<PhaseEvent>()
+
     init {
         // 显式建立黑幕：会话从 atMeters=0 的 void 相位开始
         scheduler.update(0f)
@@ -61,6 +67,10 @@ class VirtualWalkController(
         val elapsedActiveMs: Long,
         /** 当前地形段（视觉姿态用）；gap_hop 在 T07 前按行走降级 */
         val terrain: TerrainKind = TerrainKind.FLAT,
+        /** 本帧有效步进时长（ms）；非行走帧为 0 */
+        val frameDtMs: Float = 0f,
+        /** 本帧新增有效米数（meters 增量） */
+        val metersDelta: Float = 0f,
     )
 
     fun snapshot(): Snapshot = Snapshot(
@@ -130,23 +140,79 @@ class VirtualWalkController(
     fun frame(): Snapshot {
         val now = clock.nowMs()
         val last = lastFrameMs
+        var dtMs = 0L
+        var metersBefore = 0f
         if (stateMachine.state == SessionState.WALKING && last != null) {
-            val dtMs = (now - last).coerceIn(0L, MAX_FRAME_MS)
-            if (dtMs > 0L) advance(dtMs)
+            dtMs = (now - last).coerceIn(0L, MAX_FRAME_MS)
+            if (dtMs > 0L) {
+                metersBefore = accumulator.meters
+                advance(dtMs)
+            }
         }
         lastFrameMs = now
-        return snapshot()
+        val snap = snapshot()
+        return if (dtMs > 0L) {
+            snap.copy(frameDtMs = dtMs.toFloat(), metersDelta = snap.meters - metersBefore)
+        } else snap
     }
 
     private fun advance(dtMs: Long) {
-        val target = mapper.targetSpeed(inputDeflection)
+        // §12.2：v_tgt = 曲线 × 地形系数（gap_hop 在 T07 前按平地降级）
+        val target = mapper.targetSpeed(inputDeflection) * terrainFactorAt(accumulator.sPos)
         val v = inertia.step(dtMs / 1000f, target)
         accumulator.advance(v * dtMs / 1000f)
-        scheduler.update(accumulator.meters)
+        pendingEvents += scheduler.update(accumulator.meters)
         stateMachine.updateInput(inputDeflection, v)
         if (gate.onMeters(accumulator.meters)) {
+            // 通关即终态：清空输入与惯性，停止一切前进（迟到事件由状态机吸收）
+            inputDeflection = 0f
+            inertia.reset()
             stateMachine.dispatch(SessionEvent.Complete)
         }
+    }
+
+    /** 取出本会话已触发的相位事件（一次性消费；供感官协调器接音频/振动） */
+    fun drainPhaseEvents(): List<PhaseEvent> {
+        val events = pendingEvents
+        pendingEvents = mutableListOf()
+        return events
+    }
+
+    /**
+     * 地形速度系数（§5.7）：平地 1.0；上坡 1−1.5×grade（下限 0.80）；
+     * 下坡 0.95（不加速）；不平 0.95；gap_hop 在 T07 前按平地降级。
+     * 段边界两侧 1.5 m 线性过渡，避免速度突变。
+     */
+    internal fun terrainFactorAt(meters: Float): Float {
+        val segments = config.pathProfile.segments
+        val idx = segments.indexOfFirst { meters >= it.from && meters < it.to }
+        if (idx < 0) return 1f
+        val cur = segmentFactor(segments[idx])
+        var factor = cur
+        // 左边界：与上一段在 [from, from+1.5] 混合
+        if (idx > 0) {
+            val prev = segmentFactor(segments[idx - 1])
+            val from = segments[idx].from.toFloat()
+            if (meters < from + TRANSITION_METERS) {
+                val t = ((meters - from) / TRANSITION_METERS).coerceIn(0f, 1f)
+                factor = prev + (cur - prev) * t
+            }
+        }
+        // 右边界：与下一段在 [to-1.5, to] 混合
+        if (idx < segments.size - 1) {
+            val next = segmentFactor(segments[idx + 1])
+            val to = segments[idx].to.toFloat()
+            if (meters > to - TRANSITION_METERS) {
+                val t = ((to - meters) / TRANSITION_METERS).coerceIn(0f, 1f)
+                factor = next + (cur - next) * t
+            }
+        }
+        return factor
+    }
+
+    private fun segmentFactor(segment: PathSegment): Float = when (segment.kind) {
+        TerrainKind.GAP_HOP -> 1f // 开发降级：自动越坎（§5.6 站稳再跳）属 T07
+        else -> SceneDurationEstimator.terrainSpeedFactor(segment.kind, segment.grade).toFloat()
     }
 
     /** 当前地形段（视觉姿态用）；越界按平地 */
@@ -162,5 +228,8 @@ class VirtualWalkController(
     companion object {
         /** 单帧有效 dt 上限（§12.2） */
         const val MAX_FRAME_MS = 50L
+
+        /** 段间地形速度系数线性过渡宽度（§5.7） */
+        const val TRANSITION_METERS = 1.5f
     }
 }

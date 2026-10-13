@@ -259,4 +259,61 @@ class VirtualWalkControllerTest {
         assertEquals(TerrainKind.FLAT, controller.terrainAt(80f))
         assertEquals("越界按平地", TerrainKind.FLAT, controller.terrainAt(999f))
     }
+
+    // ---- T04 边界：地形速度系数（§5.7） ----
+
+    @Test
+    fun `地形速度系数 - 段内取段系数`() {
+        val (controller, _) = newController() // 0-30 flat / 30-60 slope_up 0.07 / 60-100 flat
+        assertEquals(1.0f, controller.terrainFactorAt(10f), 1e-4f)
+        assertEquals("上坡 1−1.5×0.07 = 0.895", 0.895f, controller.terrainFactorAt(45f), 1e-4f)
+        assertEquals(1.0f, controller.terrainFactorAt(80f), 1e-4f)
+    }
+
+    @Test
+    fun `地形速度系数 - 段边界 1_5m 线性过渡`() {
+        val (controller, _) = newController()
+        // 左边界 [30, 31.5]：30 → 上段 1.0；31.5 → 本段 0.895
+        assertEquals(1.0f, controller.terrainFactorAt(30f), 1e-4f)
+        assertEquals("过渡中点", 0.9475f, controller.terrainFactorAt(30.75f), 1e-3f)
+        assertEquals(0.895f, controller.terrainFactorAt(31.5f), 1e-4f)
+        // 右边界 [58.5, 60]：58.5 → 本段 0.895；60 → 下段 1.0
+        assertEquals(0.895f, controller.terrainFactorAt(58.5f), 1e-4f)
+        assertEquals(0.9475f, controller.terrainFactorAt(59.25f), 1e-3f)
+        assertEquals(0.9993f, controller.terrainFactorAt(59.99f), 1e-3f)
+    }
+
+    @Test
+    fun `上坡段实际前进慢于平地`() {
+        fun walkedAfter40s(segments: List<com.sensewalk.app.domain.scene.PathSegment>): Float {
+            val clock = FakeClock()
+            val controller = VirtualWalkController(config(segments = segments), clock)
+            controller.onStick(0.55f)
+            repeat(800) { clock.now += 50; controller.frame() } // 40s
+            return controller.accumulator.meters
+        }
+        val flat = walkedAfter40s(listOf(com.sensewalk.app.domain.scene.PathSegment(0, 100, TerrainKind.FLAT)))
+        val hilly = walkedAfter40s(
+            listOf(
+                com.sensewalk.app.domain.scene.PathSegment(0, 30, TerrainKind.FLAT),
+                com.sensewalk.app.domain.scene.PathSegment(30, 100, TerrainKind.SLOPE_UP, 0.07f),
+            ),
+        )
+        assertTrue("上坡应更慢：平地 $flat vs 上坡 $hilly", hilly < flat - 0.5f)
+    }
+
+    @Test
+    fun `通关即清空输入与惯性`() {
+        val (controller, clock) = newController()
+        var frames = 0
+        while (controller.snapshot().session != SessionState.COMPLETED && frames < 10_000) {
+            clock.now += 50
+            controller.frame()
+            if (controller.snapshot().deflection == 0f) controller.onStick(0.55f)
+            frames++
+        }
+        assertEquals(SessionState.COMPLETED, controller.snapshot().session)
+        assertEquals("通关清空摇杆输入", 0f, controller.snapshot().deflection, 1e-6f)
+        assertEquals("通关清空速度惯性", 0f, controller.snapshot().velocity, 1e-6f)
+    }
 }
