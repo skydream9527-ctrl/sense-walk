@@ -97,7 +97,7 @@ class AndroidSensoryBackend(
         val ids = stepSounds[layerId] ?: return // 占位层：无声（ASSETS.md 记录）
         if (ids.isEmpty()) return
         val id = ids[variant.mod(ids.size)]
-        soundPool.play(id, volume, volume, 1, 0f, pitchFactor.coerceIn(0.5f, 2f))
+        soundPool.play(id, volume, volume, 1, 0, pitchFactor.coerceIn(0.5f, 2f))
     }
 
     override fun pauseAll() {

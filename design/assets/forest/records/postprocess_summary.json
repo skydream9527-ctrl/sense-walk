@@ -64,12 +64,12 @@
     "alpha_mask": "design/assets/forest/previews/forest_leaf_path_alpha_mask.png",
     "tile_preview": "design/assets/forest/previews/forest_leaf_path_tile_x2.jpg",
     "raw_bytes": 826083,
-    "png_bytes": 1269073,
-    "webp_bytes": 119224,
+    "png_bytes": 1269160,
+    "webp_bytes": 119272,
     "width": 768,
     "height": 1376,
     "alpha_zero_pct": 22.55178052325581,
-    "alpha_full_pct": 77.44812484859496
+    "alpha_full_pct": 42.408835241036826
   },
   {
     "job_id": "forest_light_shows",
