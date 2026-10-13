@@ -10,13 +10,13 @@
 4. T01–T08 是可由开发工具执行的工作；T09 还包含真人内测和实体手机验证。无法实际执行的部分必须标记「待验证」，不能据此宣称最终 MVP 已验收。
 5. 本地只需能编辑源码和提交代码；JDK、SDK、Gradle、测试和 APK 打包由 GitHub Actions 执行。本地缺 SDK/模拟器不阻塞开发；云端失败按日志修复。日历工期等 T04 跑通闭环后再估算。
 
-## 当前基线（2026-10-12，T03 后）
+## 当前基线（2026-10-12，T04 后 · commit 808d872）
 
 - 技术栈：Kotlin、Jetpack Compose、Navigation、DataStore、kotlinx-serialization-json；minSdk 26，compileSdk / targetSdk 35。
-- 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`），自 f8e606b 起构建全绿；本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
-- 已有：首页三景（森林/沙漠/夜径）、静默计时、设置、结束页；音频/振动仍是日志 stub；**T02 完成** SceneConfig schema v2、解析器、SceneValidator、时长推导、Loading/Ready/Error 加载状态；**T03 完成** 纯 Kotlin 领域层——`ComfortStickMapper`（comfort_v1 FC 保形 Hermite）、`VelocityInertia`、`ProgressAccumulator`（s_pos/s_best）、`CompletionGate`、`PhaseScheduler`、`SessionStateMachine`，143 个 JVM 单测（S1–S4/S6/S9 部分）。
-- 待做：会话 UI 接入领域层（T04：模式选择、浮动摇杆、放弃区、结果页）、真实素材（当前全部为显式开发占位）、计步、前台服务、中断恢复持久化（快照数据类已预留）。
-- 已有 HTML 是设计原型，不能当 Android 功能完成的证据；会话行为仍是静默计时骨架，领域规则尚未接入 UI。
+- 构建：由 GitHub Actions 云端执行（`.github/workflows/android.yml`），自 f8e606b 起构建全绿；T04 合入后最新绿跑为 [run 38249797779](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38249797779)（`808d872`）。本地不要求完整 Android 环境（见 `docs/BUILD.md`）。用户已确认此交付方式（DEVELOPMENT.md §21.1）。
+- **T01–T04 已完成**：云端打包；SceneConfig schema v2 + 校验/加载态；纯 Kotlin 领域层（comfort_v1、惯性、s_pos/s_best、门禁、相位、状态机）及 JVM 单测；**森林 800 m 虚走 UI 闭环**（Home→模式选择→会话→通关/放弃，浮动摇杆、1.5 s 放弃、ForestShell 黑幕起笔、后台暂停不偷跑；仅森林虚走开放，实走与其他景诚实标「暂未开放」）。
+- 待做：**T05** 森林真实音视素材与感官生命周期（`AudioMixer`/`HapticEngine` 仍为日志 stub，配置层为显式开发占位）；其后 T06 计步/前台服务、T07 快照恢复/地形/雨林、T08 四景、T09 真机与内测。
+- 已有 HTML 是设计原型，不能当 Android 功能完成的证据。下一阶段请发送总提示词 + **T05** 阶段提示词；不要重做 T04。
 
 ## 开发计划
 

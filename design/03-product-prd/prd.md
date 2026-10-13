@@ -5,7 +5,7 @@
 | 产品名 | 慢行 / SenseWalk |
 | 文档版本 | design-pack · 对齐产品规则 **v0.8**（保留 v0.7 机制，补当前状态与交付验收） |
 | 平台 | Android（Kotlin · Jetpack Compose · minSdk 26） |
-| 状态 | 设计包；Android 源码仍是 Week 1 静默骨架；本轮不改 `app/` 业务代码 |
+| 状态 | 设计包（验收基线）；Android 已完成 T04 森林虚走闭环（`808d872`）；感官素材待 T05；本设计目录仍不改 `app/` |
 
 ---
 
