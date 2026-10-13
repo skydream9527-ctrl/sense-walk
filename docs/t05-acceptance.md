@@ -42,9 +42,10 @@
 
 ## APK
 
-- Actions artifact（需登录 GitHub）：[`sensewalk-apk-4974b23…`](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38406951754)（约 18.6 MB）。
-- 稳定下载链路由 main 手动 `workflow_dispatch` 并勾选 `publish_release` 生成 Pre-release（当前最新 Pre-release 仍为 `build-26-3062ed5`，**早于**本轮 `4974b23` 修复，真机请用本 run 的 artifact 或先打新 Pre-release）。
+- **稳定 Pre-release（推荐真机安装）**：[`build-34-9c0ccc4`](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-34-9c0ccc4) · 直接下载 [`app-debug.apk`](https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-34-9c0ccc4/app-debug.apk)（约 19.2 MB，含 `4974b23` 程序渲染层修复 + 本清单）。
+- Actions artifact（需登录）：[run 38406951754](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38406951754)（`4974b23`）；Pre-release 构建记录见 [run 38421621801](https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38421621801)。
+- 旧包 `build-26-3062ed5` **早于**本轮修复，真机请勿再用。
 
 ## 结论
 
-T05 机制与素材在源码/CI/模拟器维度可记「完成」。**M1 退出条件未齐**（标准 800 m 真人手测 + 真机耳机/来电/振动）。建议：装 `4974b23` APK 跑待验证 1–5，或先开 T06 并行推进实走，M1 勾选留到有真机证据再做。
+T05 机制与素材在源码/CI/模拟器维度可记「完成」。**M1 退出条件未齐**（标准 800 m 真人手测 + 真机耳机/来电/振动）。建议：装 `build-34-9c0ccc4` APK 跑待验证 1–5，或先开 T06 并行推进实走，M1 勾选留到有真机证据再做。

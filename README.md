@@ -34,7 +34,7 @@ Kotlin + Jetpack Compose。**T01–T04 已完成**：云端打包与 CI；schema
 
 本地无需准备完整 Android 环境。代码提交后由 [GitHub Actions](https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml) 执行测试/lint/构建，提供 APK、报告与源码交接 ZIP（Artifacts 保留 30 天）。
 
-在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前 APK 仍为 Week 1 骨架，后续按 T02–T09 开发。版本矩阵、本地构建步骤与已知网络问题见 [docs/BUILD.md](./docs/BUILD.md)。
+在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前最新 Pre-release 为 [`build-34-9c0ccc4`](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-34-9c0ccc4)（T05 收尾森林虚走可听可走；M1 真机验收见 [docs/t05-acceptance.md](./docs/t05-acceptance.md)）。版本矩阵、本地构建步骤与已知网络问题见 [docs/BUILD.md](./docs/BUILD.md)。
 
 ## 打开工程（可选，本地开发时）
 
