@@ -1,0 +1,153 @@
+{
+  "version": "v5",
+  "rationale": "v4 修复声明撤回. ZCode t5final 复验发现 v4 clearing 中央 RGB (140-180 林间光色) 与 trunks 林间光叠加产生视觉棋盘格. v5 重新制作 clearing 为程序化径向渐变 (与 ForestShell.kt drawClearingGlow 语义一致, 色 #A8C5A0 GlowColor, 透明底, 无棋盘).",
+  "clearing_decision": "程序化重做, 弃用 v3 raw. 因为 v3 raw 实际是第二组树林柔光, 不是空地微光.",
+  "trunks_decision": "保留 v4 入包版 (alpha=0.94 林间光是设计意图, 中央拉普拉斯 max=73 远低于 ZCode 阈值)",
+  "light_shows_decision": "保留 v4 入包版 (中央 alpha=0.08 稀疏, 最终合成时 alpha*0.5=0.04 视觉影响 <1%)",
+  "traveler_decision": "标记为拒绝稿. v4 candidates/v4/{png,alpha_on_void,...}/traveler_idle.* 保留作为'为何拒绝'证据, 不作为可接入交付物. 程序绘制 (ForestShell.kt drawTraveler) 为正式方案.",
+  "layer_reports": [
+    {
+      "name": "forest_clearing",
+      "bg": "void",
+      "center_brightness_mean": 21.8,
+      "center_brightness_std": 11.4,
+      "center_lap_max": 1,
+      "center_lap_p95": 0.7,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.0
+    },
+    {
+      "name": "forest_clearing",
+      "bg": "black",
+      "center_brightness_mean": 15.8,
+      "center_brightness_std": 11.8,
+      "center_lap_max": 1,
+      "center_lap_p95": 0.7,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.0
+    },
+    {
+      "name": "forest_clearing",
+      "bg": "white",
+      "center_brightness_mean": 247.1,
+      "center_brightness_std": 5.4,
+      "center_lap_max": 1,
+      "center_lap_p95": 0.3,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 100.0,
+      "alt_rate": 0.0
+    },
+    {
+      "name": "forest_clearing",
+      "bg": "magenta",
+      "center_brightness_mean": 170.0,
+      "center_brightness_std": 0.4,
+      "center_lap_max": 0,
+      "center_lap_p95": 0.3,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.0
+    },
+    {
+      "name": "forest_tree_trunks",
+      "bg": "void",
+      "center_brightness_mean": 137.1,
+      "center_brightness_std": 67.1,
+      "center_lap_max": 71,
+      "center_lap_p95": 3.0,
+      "high_freq_pct": 0.01,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 1.1
+    },
+    {
+      "name": "forest_tree_trunks",
+      "bg": "black",
+      "center_brightness_mean": 136.7,
+      "center_brightness_std": 67.6,
+      "center_lap_max": 70,
+      "center_lap_p95": 3.0,
+      "high_freq_pct": 0.01,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 1.2
+    },
+    {
+      "name": "forest_tree_trunks",
+      "bg": "white",
+      "center_brightness_mean": 151.0,
+      "center_brightness_std": 64.6,
+      "center_lap_max": 70,
+      "center_lap_p95": 3.0,
+      "high_freq_pct": 0.01,
+      "bright_pixel_pct": 48.801,
+      "alt_rate": 1.9
+    },
+    {
+      "name": "forest_tree_trunks",
+      "bg": "magenta",
+      "center_brightness_mean": 146.3,
+      "center_brightness_std": 61.7,
+      "center_lap_max": 70,
+      "center_lap_p95": 3.0,
+      "high_freq_pct": 0.01,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 1.4
+    },
+    {
+      "name": "forest_light_shows",
+      "bg": "void",
+      "center_brightness_mean": 12.3,
+      "center_brightness_std": 20.5,
+      "center_lap_max": 83,
+      "center_lap_p95": 5.3,
+      "high_freq_pct": 1.47,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.1
+    },
+    {
+      "name": "forest_light_shows",
+      "bg": "black",
+      "center_brightness_mean": 6.1,
+      "center_brightness_std": 22.2,
+      "center_lap_max": 93,
+      "center_lap_p95": 5.7,
+      "high_freq_pct": 1.6,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.1
+    },
+    {
+      "name": "forest_light_shows",
+      "bg": "white",
+      "center_brightness_mean": 241.5,
+      "center_brightness_std": 44.8,
+      "center_lap_max": 295,
+      "center_lap_p95": 6.0,
+      "high_freq_pct": 2.97,
+      "bright_pixel_pct": 97.373,
+      "alt_rate": 0.1
+    },
+    {
+      "name": "forest_light_shows",
+      "bg": "magenta",
+      "center_brightness_mean": 163.1,
+      "center_brightness_std": 23.4,
+      "center_lap_max": 171,
+      "center_lap_p95": 6.0,
+      "high_freq_pct": 2.96,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.1
+    }
+  ],
+  "file_hashes_sha256": {
+    "design/assets/forest/candidates/v5/webp/forest_clearing.webp": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+    "design/assets/forest/candidates/v5/png/forest_clearing.png": "5602ea1828da6475eb0343f278d433409b641b571ec26802e1e4dcce0f04dfc6",
+    "design/assets/forest/candidates/v5/alpha_mask/forest_clearing.png": "bc3fdd7bbd13b26861becd3e27e66439cfab7b3800720545d31bcf8a8eb809dc",
+    "design/assets/forest/candidates/v5/alpha_on_void/forest_clearing.jpg": "6a1a70332b72628911b58a56a7aac3b2fb43dc476c1d8227699e54881620edc8",
+    "design/assets/forest/candidates/v5/black_on/forest_clearing.jpg": "6e9d1433e1f000eff479cd0a19cb4b74d42dbf22c96f17a67c5363508df705a5",
+    "design/assets/forest/candidates/v5/white_on/forest_clearing.jpg": "22d483af2aa4ae7424e57ab0d0a72438123ba9d9135ffe9d335f25df2f2cc027",
+    "design/assets/forest/candidates/v5/magenta_on/forest_clearing.jpg": "b5d2834c67370f3314d3d736546f7e6c057b72379b2dcf129b90d1b95e323e9d"
+  },
+  "api_calls": 0,
+  "cumulative_api_calls": 14
+}

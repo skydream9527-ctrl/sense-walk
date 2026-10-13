@@ -1,0 +1,150 @@
+[
+  {
+    "meters": 0,
+    "layers": [],
+    "opacities": {},
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_000m_full.png",
+    "full_sha256": "f9e81c9273cec29496def1bc35b804751ca8db7c189436f5a5b143bfc77d5992",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_000m_540x960.jpg",
+    "small_sha256": "384a403ce056ccba7f5cafc5ee45f9b65a94f8435a2840c46c0bab15c933d9c3",
+    "diagnose_center": {
+      "center_brightness_mean": 6.7,
+      "center_brightness_std": 0.0,
+      "lap_max": 0,
+      "lap_p95": 0.0,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.0
+    }
+  },
+  {
+    "meters": 100,
+    "layers": [
+      "tree_outline"
+    ],
+    "opacities": {
+      "tree_outline": 0.6
+    },
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_100m_full.png",
+    "full_sha256": "99474f0792192bf55974c261435a89e7b8b8cec4df76ddfdc66cdd7b73ddec04",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_100m_540x960.jpg",
+    "small_sha256": "8c61f14196181c4b315641cf7e8553b023b53b247c70cafa243240d189682927",
+    "diagnose_center": {
+      "center_brightness_mean": 20.3,
+      "center_brightness_std": 10.9,
+      "lap_max": 16,
+      "lap_p95": 2.3,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.0
+    }
+  },
+  {
+    "meters": 265,
+    "layers": [
+      "tree_outline",
+      "tree_trunks"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7
+    },
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_265m_full.png",
+    "full_sha256": "6c912debb9d8203fb9147a75af2dd305a3914c6667c67b16d8976c527a8d0e12",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_265m_540x960.jpg",
+    "small_sha256": "6364f0a892a7ed235e605be5549bc945aed627827468209a293e4fa5ab952811",
+    "diagnose_center": {
+      "center_brightness_mean": 105.8,
+      "center_brightness_std": 45.5,
+      "lap_max": 20,
+      "lap_p95": 1.3,
+      "high_freq_pct": 0.0,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.6
+    }
+  },
+  {
+    "meters": 425,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8
+    },
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_425m_full.png",
+    "full_sha256": "fc6ffbae4a72dfcad5aac917a0e9d6b6bf048ee35ef8d63a336916e8fd696851",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_425m_540x960.jpg",
+    "small_sha256": "026242800495232b103fa9be6d843099049a21ff49479d06d2dcf46d3c276d2c",
+    "diagnose_center": {
+      "center_brightness_mean": 105.9,
+      "center_brightness_std": 41.8,
+      "lap_max": 72,
+      "lap_p95": 2.7,
+      "high_freq_pct": 0.09,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.9
+    }
+  },
+  {
+    "meters": 630,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path",
+      "light_shows"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8,
+      "light_shows": 0.5
+    },
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_630m_full.png",
+    "full_sha256": "20d73798b5ea3a2f85693f54c21ce48289e2b4abad05ed3f9ae29c6d3d40a546",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_630m_540x960.jpg",
+    "small_sha256": "c5e335bbbfdf4e3ff940f4ddd5639940ccbfcb2b5c868748daa7752002a35729",
+    "diagnose_center": {
+      "center_brightness_mean": 104.7,
+      "center_brightness_std": 40.5,
+      "lap_max": 72,
+      "lap_p95": 4.7,
+      "high_freq_pct": 0.1,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.8
+    }
+  },
+  {
+    "meters": 785,
+    "layers": [
+      "tree_outline",
+      "tree_trunks",
+      "leaf_path",
+      "light_shows",
+      "clearing"
+    ],
+    "opacities": {
+      "tree_outline": 0.6,
+      "tree_trunks": 0.7,
+      "leaf_path": 0.8,
+      "light_shows": 0.5,
+      "clearing": 0.9
+    },
+    "full": "design/assets/forest/candidates/v5/stage_compose/stage_785m_full.png",
+    "full_sha256": "931264aa5f81dfc5189c4b867af15b6af8383c94f02e9c78a40a66c8e355bf9c",
+    "small": "design/assets/forest/candidates/v5/stage_compose/stage_785m_540x960.jpg",
+    "small_sha256": "013472e4c9d0458a99f7c51dc9f764b282550b8c36fa00e5dd5ee336c908e506",
+    "diagnose_center": {
+      "center_brightness_mean": 111.0,
+      "center_brightness_std": 36.9,
+      "lap_max": 70,
+      "lap_p95": 4.3,
+      "high_freq_pct": 0.09,
+      "bright_pixel_pct": 0.0,
+      "alt_rate": 0.8
+    }
+  }
+]
