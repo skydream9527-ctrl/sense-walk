@@ -210,6 +210,7 @@ class SessionViewModel(
                     -> {
                         focusGate.onFocusLoss()
                         audioResumed = false
+                        coordinator?.setAudioAllowed(false)
                         onExternalAudioInterruption()
                     }
                     // AUDIOFOCUS_GAIN：不自动行走、不自动恢复播放——由用户新输入驱动
@@ -220,6 +221,8 @@ class SessionViewModel(
         val result = audioManager?.requestAudioFocus(request) ?: 0
         focusGate.onRequestResult(result)
         audioResumed = focusGate.canResumeAudio()
+        // 首次申请被拒也必须静默：协调器从此不放脚步、不启 loop（距离照常推进）
+        coordinator?.setAudioAllowed(focusGate.canResumeAudio())
         focusRegistered = true
 
         // 耳机断连：立即暂停播放，避免突然外放（系统广播 ACTION_AUDIO_BECOMING_NOISY）
@@ -228,6 +231,7 @@ class SessionViewModel(
                 if (intent?.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY) {
                     focusGate.onFocusLoss()
                     audioResumed = false
+                    coordinator?.setAudioAllowed(false)
                     onExternalAudioInterruption()
                 }
             }
@@ -243,7 +247,8 @@ class SessionViewModel(
 
     /**
      * 恢复音频的前置：重新申请焦点并检查结果；
-     * 未获准不得直接恢复音频（会话本身可以继续，只是静默）。
+     * 未获准不得出声——脚步与待启环境层全部静默（[SensoryCoordinator.setAudioAllowed]），
+     * 距离与相位照常推进，不阻塞行走。
      */
     private fun attemptAudioResume() {
         if (audioResumed) {
@@ -255,9 +260,11 @@ class SessionViewModel(
         focusGate.onRequestResult(result)
         if (focusGate.canResumeAudio()) {
             audioResumed = true
+            coordinator?.setAudioAllowed(true) // 先放开许可：待启层按当前相位/淡入启动
             coordinator?.resume()
         } else {
-            audioResumed = false // 焦点被拒：音频保持暂停，新脚步与 loop 均不出声
+            audioResumed = false // 焦点被拒：保持静默（脚步不播、loop 不启、不补播）
+            coordinator?.setAudioAllowed(false)
         }
     }
 

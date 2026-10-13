@@ -15,7 +15,7 @@
 
 ## 0. 当前进度（仓库核查，2026-10-12 · T05 收尾后）
 
-**结论：T01–T05 已合入 main（最新核查见 §20.8 T05 记录，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与视觉复验未执行前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
+**结论：T01–T05 已合入 main（T05 记录见 §20.8–§20.9，音频焦点门控定点修复见 §20.10，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与视觉复验未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
 
 | 模块 | 已有内容 / 源码证据 | 与目标的差距 |
 | --- | --- | --- |
@@ -23,7 +23,7 @@
 | 场景 | schema v2 JSON（森林/沙漠/夜径）；SceneValidator；Loading/Ready/Error | 雨林/城市配置与入口未齐；森林素材已真实化，沙漠/夜径仍显式占位 |
 | 会话 | `VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔；后台暂停不偷跑 | 地形越坎属 T07 |
 | 结果页 | Completed / Abandoned，展示实际米数 | 用时折叠等打磨可继续 |
-| 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点/耳机断连中断边界 + 可注入单测 | 振动待真机验证（模拟器无 HAL）；视觉五层待 MiniMax 修复批次复验 |
+| 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点门控全部出声入口（被拒零脚步零 loop，获准不补播不重复建层，调用链测试锁定） | 振动待真机验证（模拟器无 HAL）；视觉五层待 MiniMax 修复批次复验 |
 | 设置 | 振动、节奏提示、减少动效、按住前进、手动暂停等已接入偏好 | 步长/GPS 等属后续 |
 | 实走与生命周期 | T04 起不进入假计步会话 | **T06**：计步、权限、前台服务 |
 | 验证 | JVM 单测覆盖领域、虚走集成与播放边界；GitHub Actions 打包/lint/test；模拟器 800 m 全程走查通过 | 真人标准 800 m 手动验收与真机耳机/来电属「待验证」 |
@@ -1049,18 +1049,12 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 
 **五、仍待验证（M1 不宣布完成的原因）**：标准 800 m 真人手动验收（不用快进/不用模拟器脚本）；真机实体耳机断连与真实来电焦点；锁屏/通知栏返回；脚步振动（模拟器无 vibrator HAL）；v4 视觉的真人最终走查。
 
----
+### 20.10 T06 前两处定点修复（2026-10-13）
 
-## 21. ZCode 开发交接
+**修复 1：音频焦点约束所有实际出声入口**：
+- 缺陷：`attemptAudioResume` 焦点被拒时只是不调 `resume()`，但会话照常 `onFrame` → 新脚步照播（SoundPool 不受 pauseAll 影响）、新解锁环境层照 `startLoop`——即**焦点未获准仍出声**（首次申请被拒、来电后拒绝重申请两条路径都命中）。
+- 修复：`SensoryCoordinator.setAudioAllowed(allowed)` 单点门控——false 时脚步只积累步幅不调后端（**获准后不补播旧脚步**）、新环境层登记待启不 `startLoop`（`startedLoops` 与 fade 表分离，**已启动层不重复创建**）；距离/相位/淡入进度照常推进（静默不阻塞行走），振动不受影响（非出声）。true 时按**当前淡入进度**启动待启层（不丢已解锁层、不从 0 重来）。
+- 接线：`SessionViewModel` 三处同步许可——首次申请结果、焦点丢失/耳机断连、重申请结果；顺序 `setAudioAllowed(true)` → `resume()`（PREPARING 层迟到回调仍由 `LoopPlayerState` 状态机吸收，不绕过焦点/暂停）。
+- 测试：`AudioFocusChainTest` 6 个调用链用例（控制器→相位→协调器→**记录型假后端**，非仅布尔值）：首次被拒跨 100/300/750m 零出声调用且距离相位照常；中断重申请被拒继续行走零新增脚步零 loop；获准后新脚步 ≈ 获准后距离/步幅（不补播）、ambience 只启动一次、待启层按当前淡入进度启动 gain>0；准备期焦点丢失/终态释放吸收迟到回调；协调器终态后放开许可也不启动层。
 
-开发任务与可复制提示词见 [docs/zcode-handoff.md](./docs/zcode-handoff.md)：将 §13 的 M0–M3 拆成 T01–T09，含总提示词、逐阶段实现要求、验收条件与复核提示词。交接以 GitHub main 或源码交接 ZIP 为入口；本地只需编辑/提交源码，无需具备完整 Android 开发环境。
-
-顺序：T01 云端打包 → T02 配置 → T03 领域 → T04 虚走 → T05 森林感官 → T06 实走/服务 → T07 恢复/地形/雨林 → T08 四景 → T09 真机/内测。按阶段交付；实体设备和真人验证缺失时保留待验证状态。
-
-### 21.1 用户确认的交付方式
-
-功能开发由 ZCode 按阶段实现，代码提交 GitHub；编译、测试和 APK 打包由 GitHub Actions 执行。工作流位于 `.github/workflows/android.yml`，产生 APK、检查报告和完整源码交接 ZIP。需要稳定下载链接时，在 main 手动触发 `publish_release` 创建 GitHub 预发布版本。用户不需要先完善本地 JDK/SDK/Android Studio 或模拟器。实体设备与真人验证保留待验证清单，不阻塞不依赖它们的功能开发；最终体验验收仍需真实证据。
-
-### 21.2 云端打包基线修复
-
-首次 GitHub Actions 编译发现 `domain/scene/Scene.kt` 的 KDoc 中 `scenes/*.json` 被 Kotlin 识别为嵌套注释起点，导致未闭合注释和 Scene/Phase/Layer 连锁解析失败。已仅调整这行注释，不改变应用行为；后续以新的云端构建结果确认。
+**修复 2（视觉撤回与问题层程序降级）见下一提交。**
