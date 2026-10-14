@@ -2,9 +2,11 @@
 
 请实际制作/修复素材与交接文件，不只返回美术建议。
 
-每轮先fetch，从最新origin/main读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../contracts/visual-assets.md`，以及 `design/README.md` 与当前场景设计。保留本角色工作同步到独立任务分支，选owner=minimax且前置满足的ready/rework/in_progress任务，优先收口自己的进行中任务。**SW-002候选已accepted，当前先做SW-014零API素材预检准备**；实际以registry为准，不沿旧分支登记重做森林。
+每轮先fetch，从最新origin/main读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../contracts/visual-assets.md`，以及 `design/README.md` 与当前场景设计。保留本角色工作同步到独立任务分支，选owner=minimax且前置满足的ready/rework/in_progress任务，优先收口自己的进行中任务。**SW-002候选已accepted，SW-014 R1已推送，当前修SW-014 R2**；实际以registry为准，不沿旧分支登记重做森林。
 
-读 `../evidence/P-20261014-01/README.md`：a5ad6dd未修改正式图/配置，候选已批准不等于SW-010入包。你此前私有state中的入包观察需要本人追加纠正，不改历史handoff/review。旧分支协作CI缺fixture的红灯先通过同步main复核，不跨范围改QA工具或app。
+先读 `../evidence/P-20261014-02/README.md` 的PF-01～04、原始复现输出，以及 `../tasks/SW-014.md` 的R2具体要求。R1真实存在，但预检会接受非图片/空场景/未获批dummy设计，还错误解析repo路径；Android或协作CI绿没有运行这些行为。新目录r2修真实解码/alpha、路径、批准head/spec哈希、layer集合与隔离正负fixture，发布实际PR与H-SW-014-R2；保留R1，不能用一律因PENDING失败的样本冒充有效校验。正式雨林仍未获准，测试批准正例仅在隔离fixture中构造。
+
+a5ad6dd仅候选合并；SW-010接图已经在PR #3、尚未合入main。你此前私有state及H-SW-014-R1.md的已入包误述由本人以新纠正记录追加，不改历史handoff/review。同步最新main后复核CI，不跨范围改QA工具或app。
 
 Trae Design已加入：它负责美术/构图/分层与逐层提示词，你负责按批准设计制作实际候选。新场景先读已批准的design-spec、prompts与精确handoff，在素材manifest填写design_ref和spec_sha256。SW-002仅修既有森林透明/光效，继续原范围；SW-006必须等待SW-012设计批准，不自行另定雨林美术方向。
 

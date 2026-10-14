@@ -379,20 +379,21 @@
 
     <section id="status">
       <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">2026-10-14复核：main为da9bd24，仍是森林虚走/实走基线。ZCode PR #1云端238项通过但未合入且需新反例修订；森林光效候选已批准，正式接线尚未完成。真机与真人验收仍待执行。</p>
-      <div class="callout"><strong>当前并行：</strong>ZCode修订SW-001 R2、随后SW-010接图；MiniMax做SW-014零API素材预检；Trae收口已有SW-011草稿；Antigravity执行SW-013复验与集成。之后推进快照恢复、地形与雨林。</div>
+      <p class="section-lead">2026-10-14第三轮复核：main为6d33d94。ZCode PR #1 R2云端249项、PR #3正式接图push云端217项通过，均未独立验收/合入且有角色状态冲突。MiniMax预检已发布但实测有误判，Trae仍有未共享草稿。真机与真人验收待执行。</p>
+      <div class="callout"><strong>当前并行：</strong>ZCode收口现有两PR；MiniMax零API修SW-014 R2；Trae发布SW-011已有设计；Antigravity从常驻队列复审、顺序集成并交组合测试包。之后推进快照恢复、地形与雨林。</div>
       <table>
-        <thead><tr><th>模块</th><th>代码已有</th><th>待实现</th></tr></thead>
+        <thead><tr><th>模块</th><th>实际已有</th><th>下一步</th></tr></thead>
         <tbody>
-          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>自动越坎、站稳与完整地形动作</td></tr>
-          <tr><td>场景与素材</td><td>森林三层正式图；两层光效候选已获批准</td><td>SW-010逐字节接线/实际Android复验；雨林与四景</td></tr>
+          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>快照批准后自动越坎、站稳与完整地形动作</td></tr>
+          <tr><td>场景与素材</td><td>main森林三层正式图；PR #3两层光效已真正接图</td><td>同步冲突、独立Android验图/终景意图、组合版本CI后合入</td></tr>
           <tr><td>音频与振动</td><td>森林真实音频、步伐播放、循环层、音频焦点边界</td><td>真机耳机 / 来电 / 振动验证</td></tr>
-          <tr><td>实走与恢复</td><td>基线计步/前台服务；PR #1补强已交付</td><td>detector失败cue回退/低步数同刻合并R2；快照恢复、锁屏15分钟</td></tr>
-          <tr><td>图片设计</td><td>Trae本机43文件SVG/五层/六阶段/三比例草稿</td><td>SW-011提交/handoff/审稿，获批后SW-012雨林设计</td></tr>
-          <tr><td>质量验证</td><td>PR云端238项原始JUnit已核查归档；main协作CI通过</td><td>独立新反例/应用验收；标准800m真人、真机矩阵</td></tr>
+          <tr><td>实走与恢复</td><td>PR #1 R2已接detector失败cue回退/同刻合并修正</td><td>完整head独立复审；获批后SW-004快照，锁屏15分钟Pending</td></tr>
+          <tr><td>图片设计</td><td>Trae本机43文件SVG/五层/六阶段/三比例草稿，hash复核匹配</td><td>发布SW-011共享PR/handoff/审稿，获批后SW-012雨林设计</td></tr>
+          <tr><td>素材工具</td><td>SW-014 R1零API脚本/fixture已推送</td><td>修非图/空层/未批准引用误判与根路径，补隔离正负fixture</td></tr>
+          <tr><td>质量验证</td><td>249项/217项原始JUnit分别归档；SW-013协调已accepted</td><td>常驻队列独立审稿/集成；组合测试包、标准800m真人/真机矩阵</td></tr>
         </tbody>
       </table>
-      <p>完整规则见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>，本轮源码/证据/下一步见 <a href="collaboration/evidence/P-20261014-01/README.md">最新核查</a> 与 <a href="collaboration/BOARD.md">任务看板</a>。PR通过、候选获批、本机设计稿和应用验收分别记录，不据此宣布M1/M2/MVP完成。</p>
+      <p>完整规则见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>，本轮证据/下一步见 <a href="collaboration/evidence/P-20261014-02/README.md">最新核查</a>、<a href="collaboration/queues/antigravity.md">验收队列</a> 与 <a href="collaboration/BOARD.md">任务看板</a>。旧build-41不含两工作PR，云端通过不代表M1/M2/MVP完成。</p>
     </section>
 
     <section id="vision">
