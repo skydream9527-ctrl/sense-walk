@@ -1,0 +1,9 @@
+F-005 release 清洁证据（本地预检 + CI 门禁）
+本地：
+  ./gradlew :app:processReleaseMainManifest
+  M=app/build/intermediates/merged_manifest/release/processReleaseMainManifest/AndroidManifest.xml
+  grep -q DebugStepReceiver "$M" → 未命中（release 合并清单不含 debug 注入接收器）
+  服务声明存在：com.sensewalk.app.service.WalkForegroundService（health 类型）
+CI（.github/workflows/android.yml 新增 "Release manifest guard"）：
+  同一断言在每次 test/lint/build 后运行，命中即 ::error:: 退出非零。
+注：字节码级（dex 字符串扫描）未做；如需请在 review 注明，R2 补充。

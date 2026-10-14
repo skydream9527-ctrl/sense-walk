@@ -1,0 +1,17 @@
+实走冒烟与会话连续性（emulator Pixel 6 / API 36；debug 注入冒烟——不构成真实计步验证）
+前置：pm grant ACTIVITY_RECOGNITION / POST_NOTIFICATIONS；settings put global sensewalk_debug_stub 1；
+     UI 路径进入森林实走；注入经 DebugStepReceiver（仅 debug 构建注册）。
+
+A. 封顶节奏回归：
+   基线广播 count=1000 后 12 批 ×10 步（shell 实际到达间隔 ~0.8–1s）
+   → 米数 14 m ≈ 12 × ~1.17 m（1.4 m/s 封顶生效，与修复前行为一致）
+B. F-001 同刻零计距（JVM 用例在 RealWalkEngineTest，模拟器未重复注入同刻——shell 无法保证同毫秒到达）
+C. 会话连续性 / 单引擎（F-004 行为级）：
+   input keyevent HOME → am start MainActivity（task 复位，无新 VM start）
+   再注入 4 批 ×10 步 → 米数 14 m → 25 m（按真实到达间隔 ~1.5–2s 封顶 ≈ +11 m）
+   同一引擎连续累计：无重置、无双计
+D. 通知「停止」三清：
+   cmd statusbar expand-notifications → 展开通知卡 → 点「停止」(action0)
+   → dumpsys：ServiceRecord(app=ProcessRecord)=0、「实走中」通知=0、
+     dumpsys audio u/pid:10218/<pid>=0（无残留播放器）；进程存活（pid 7504）
+结论：正常链路、连续性、终态清理全部通过；真机计步/锁屏仍 pending。
