@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-13",
+  "updated_on": "2026-10-14",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -16,13 +16,15 @@
       "title": "T06 可靠性补强",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-001.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "PR #1已交付未合入；按P-20261014-01的P-01/P-02修订R2后交Antigravity完整head复验"
+      ]
     },
     {
       "id": "SW-002",
@@ -55,22 +57,23 @@
       "title": "森林图片设计与通用视觉规范",
       "owner": "trae-design",
       "kind": "design",
-      "status": "ready",
+      "status": "in_progress",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-011.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "本机43文件设计草稿未提交/无handoff/未批准；由Trae完成共享交付"
+      ]
     },
     {
       "id": "SW-010",
       "title": "森林光效批准候选入包",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
-        "SW-001",
         "SW-002",
         "SW-003"
       ],
@@ -78,7 +81,9 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "a5ad6dd仅合并候选，正式forest.json仍程序降级；需真正接线与Android证据"
+      ]
     },
     {
       "id": "SW-004",
@@ -120,7 +125,8 @@
       "depends_on": [
         "SW-002",
         "SW-003",
-        "SW-012"
+        "SW-012",
+        "SW-014"
       ],
       "task_file": "docs/collaboration/tasks/SW-006.md",
       "latest_handoff": null,
@@ -185,6 +191,37 @@
         "SW-008"
       ],
       "task_file": "docs/collaboration/tasks/SW-009.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-013",
+      "title": "第二轮独立复验与交接收口",
+      "owner": "antigravity",
+      "kind": "coordination",
+      "status": "ready",
+      "depends_on": [
+        "SW-003"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-013.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-014",
+      "title": "雨林素材交付预检准备（零API）",
+      "owner": "minimax",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-002",
+        "SW-003"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-014.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,

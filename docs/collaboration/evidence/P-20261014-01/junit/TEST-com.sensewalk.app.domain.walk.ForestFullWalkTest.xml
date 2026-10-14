@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.ForestFullWalkTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-14T07:34:13" hostname="runnervmmprz5" time="0.235">
+  <properties/>
+  <testcase name="森林地形系数 - gap_hop 开发降级为平地且坡段生效" classname="com.sensewalk.app.domain.walk.ForestFullWalkTest" time="0.004"/>
+  <testcase name="真实森林 - 拉满慢于甜点（控制器级验证）" classname="com.sensewalk.app.domain.walk.ForestFullWalkTest" time="0.052"/>
+  <testcase name="真实森林 800m 甜点速度完整通关" classname="com.sensewalk.app.domain.walk.ForestFullWalkTest" time="0.169"/>
+  <testcase name="真实森林 800m 中途放弃 - 未满距不通关" classname="com.sensewalk.app.domain.walk.ForestFullWalkTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

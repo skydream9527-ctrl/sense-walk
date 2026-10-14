@@ -1,0 +1,45 @@
+{
+  "observed_on": "2026-10-14",
+  "main_commit": "da9bd247bd4537787c1b6c0e26b966c38d46f22d",
+  "pr1_head_commit": "bdb1ea7fab82855fd2e836e4454c0092451d4bef",
+  "production_assets": {
+    "clearing": {
+      "production_file": "app/src/main/assets/visual/forest_clearing.webp",
+      "production_bytes": 29680,
+      "production_sha256": "c15064a9fd89cb38a7a74144cf930783182869f5082a90582259aa2882c50346",
+      "approved_candidate": "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+      "candidate_bytes": 26312,
+      "candidate_sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "byte_identical": false,
+      "active_asset_config": null
+    },
+    "light_shows": {
+      "production_file": "app/src/main/assets/visual/forest_light_shows.webp",
+      "production_bytes": 16598,
+      "production_sha256": "e03d587d232707456a4d7f0f16b5e23c712e095acce23a1c0412b13dd120b613",
+      "approved_candidate": "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+      "candidate_bytes": 34414,
+      "candidate_sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "byte_identical": false,
+      "active_asset_config": null
+    }
+  },
+  "trae_local_draft": {
+    "base_commit": "5a129d41cfa5d04424521e987136616407f47e5c",
+    "committed": false,
+    "handoff_present": false,
+    "manifest_sha256": "1a5ea1a9b1788037f56cc65e036e681ade0e27f630ccb523aae2a51b64852977",
+    "manifest_files": 43,
+    "hash_or_byte_mismatches": [],
+    "roles": [
+      "doc",
+      "layer_export_reference",
+      "preview",
+      "prompt",
+      "source",
+      "spec",
+      "style_reference"
+    ]
+  },
+  "physical_validation": "pending"
+}
