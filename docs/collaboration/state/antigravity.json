@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "antigravity",
-  "current_task": null,
-  "status": "idle",
-  "branch": null,
-  "head_commit": null,
-  "latest_handoff": null,
+  "current_task": "SW-003",
+  "status": "handoff_ready",
+  "branch": "codex/antigravity/SW-003-coordination-baseline",
+  "head_commit": "af816246611e9e996e679a0f17cd87784af397bb",
+  "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-003-R1.json",
   "updated_on": "2026-10-13",
-  "note": "初始化状态，不代表此agent已经领取任务；首次执行时由本人更新。"
+  "note": "SW-003 基线核查与风险反例建立完成，SW-002 独立审核 approved 并集成合入 main。"
 }

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-003-R1",
+  "task_id": "SW-003",
+  "revision": 1,
+  "producer": "antigravity",
+  "recipient": "zcode",
+  "base_commit": "a5ad6dd634abcbe4868dcc9eaf6e57ca6a2a48ec",
+  "head_commit": "af816246611e9e996e679a0f17cd87784af397bb",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/antigravity/H-SW-003-R1.md",
+  "changed_files": [
+    "docs/collaboration/evidence/SW-003/baseline-qa-report.md",
+    "tools/qa/test_baseline_risks.py",
+    "tools/qa/test_collaboration.py",
+    "docs/collaboration/reviews/R-SW-002-R1.json",
+    "docs/collaboration/reviews/R-SW-002-R1.md",
+    "docs/collaboration/handoffs/antigravity/H-SW-003-R1.json",
+    "docs/collaboration/handoffs/antigravity/H-SW-003-R1.md",
+    "docs/collaboration/state/antigravity.json"
+  ],
+  "checks": [
+    {
+      "name": "B-20261013-01 原始 JUnit XML 报告与摘要哈希校验 (217 项)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/B-20261013-01/test-summary.json",
+        "docs/collaboration/evidence/SW-003/baseline-qa-report.md"
+      ]
+    },
+    {
+      "name": "R-BASE-001 风险项 F-001/F-002/F-003/F-004 独立测试与路径复现",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_baseline_risks.py",
+        "docs/collaboration/evidence/SW-003/baseline-qa-report.md"
+      ]
+    },
+    {
+      "name": "协作多代理测试套件全面回归",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_collaboration.py"
+      ]
+    },
+    {
+      "name": "SW-002 森林光效候选独立审核与批准",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/reviews/R-SW-002-R1.json",
+        "docs/collaboration/reviews/R-SW-002-R1.md"
+      ]
+    },
+    {
+      "name": "真机与真人实体验证走查 (800m步行/计步/锁屏/音频焦点/振动)",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "标准 800m 真人行走、真机计步准确度、锁屏 15 分钟保活、实体耳机/来电及真实振动走查保留为 Pending"
+  ],
+  "requests": [
+    "请 ZCode 在 SW-001 中根据 docs/collaboration/evidence/SW-003/baseline-qa-report.md 修复 F-001/F-002/F-003/F-004 缺陷",
+    "SW-002 候选已由 Antigravity 独立审核 approved，请 ZCode 在 SW-010 中将 approved_candidate 候选入包并接入 forest.json"
+  ],
+  "design_manifest": null
+}

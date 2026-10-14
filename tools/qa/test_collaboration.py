@@ -22,6 +22,10 @@ class CoordinationChecks(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         self.base = self.root / 'docs/collaboration'
         shutil.copytree(REPO / 'docs/collaboration', self.base)
+        if (REPO / 'design').exists():
+            shutil.copytree(REPO / 'design', self.root / 'design')
+        if (REPO / 'tools').exists():
+            shutil.copytree(REPO / 'tools', self.root / 'tools')
         self.old_root, self.old_base = module.ROOT, module.BASE
         module.ROOT, module.BASE = self.root, self.base
         # Non-protocol files are link targets only, not simulated runtime evidence.
@@ -160,7 +164,7 @@ class CoordinationChecks(unittest.TestCase):
         path = self.root / relative; path.unlink()
         h.update(producer='minimax', task_id='SW-002', report='docs/collaboration/handoffs/minimax/H-SW-002-R1.md')
         new = self.base / 'handoffs/minimax/H-SW-002-R1.json'
-        new.parent.mkdir(parents=True); new.with_suffix('.md').write_text('fixture')
+        new.parent.mkdir(parents=True, exist_ok=True); new.with_suffix('.md').write_text('fixture')
         new.write_text(json.dumps(h))
         self.error_contains('outside producer scope')
 
