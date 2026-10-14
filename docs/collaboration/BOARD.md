@@ -6,7 +6,7 @@
 
 | ID | 任务 | 负责者 | 状态 | 前置 | 最新交付 / 审核 |
 | --- | --- | --- | --- | --- | --- |
-| SW-001 | [T06 可靠性补强](tasks/SW-001.md) | zcode | in_progress | — | — / — |
+| SW-001 | [T06 可靠性补强](tasks/SW-001.md) | zcode | rework | — | [H-SW-001-R1](handoffs/zcode/H-SW-001-R1.json) / [R-SW-001-R1](reviews/R-SW-001-R1.json) |
 | SW-002 | [森林光效候选验收收尾](tasks/SW-002.md) | minimax | accepted | — | [H-SW-002-R1](handoffs/minimax/H-SW-002-R1.json) / [R-SW-002-R1](reviews/R-SW-002-R1.json) |
 | SW-003 | [独立基线验收与协作集成启动](tasks/SW-003.md) | antigravity | accepted | — | [H-SW-003-R1](handoffs/antigravity/H-SW-003-R1.json) / — |
 | SW-011 | [森林图片设计与通用视觉规范](tasks/SW-011.md) | trae-design | in_progress | — | — / — |
@@ -18,7 +18,7 @@
 | SW-007 | [T07C 雨林双模式与素材接入](tasks/SW-007.md) | zcode | queued | SW-005, SW-006 | — / — |
 | SW-008 | [T08 四景内容与一致性](tasks/SW-008.md) | zcode | queued | SW-007, SW-010 | — / — |
 | SW-009 | [T09 真机内测与发布候选验收](tasks/SW-009.md) | antigravity | queued | SW-008 | — / — |
-| SW-013 | [第二轮独立复验与交接收口](tasks/SW-013.md) | antigravity | ready | SW-003 | — / — |
+| SW-013 | [第二轮独立复验与交接收口](tasks/SW-013.md) | antigravity | accepted | SW-003 | [H-SW-013-R1](handoffs/antigravity/H-SW-013-R1.json) / — |
 | SW-014 | [雨林素材交付预检准备（零API）](tasks/SW-014.md) | minimax | ready | SW-002, SW-003 | — / — |
 
 ## 生产者状态（辅助，不能替代审核）

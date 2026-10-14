@@ -16,14 +16,14 @@
       "title": "T06 可靠性补强",
       "owner": "zcode",
       "kind": "code",
-      "status": "in_progress",
+      "status": "rework",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-001.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R1.json",
       "integrated_commit": null,
       "pending": [
-        "PR #1已交付未合入；按P-20261014-01的P-01/P-02修订R2后交Antigravity完整head复验"
+        "PR #1 审查出具 changes_requested：等待 ZCode 修订 R2 修复 P-01 (detector注册失败回退)、P-02 (同刻合并步数未带回) 及 P-03 (清理tools越界并绑定新head)"
       ]
     },
     {
@@ -201,14 +201,14 @@
       "title": "第二轮独立复验与交接收口",
       "owner": "antigravity",
       "kind": "coordination",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-013.md",
-      "latest_handoff": null,
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
       "latest_review": null,
-      "integrated_commit": null,
+      "integrated_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
       "pending": []
     },
     {
