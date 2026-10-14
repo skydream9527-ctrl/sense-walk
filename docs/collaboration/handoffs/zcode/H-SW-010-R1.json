@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-010-R1",
+  "task_id": "SW-010",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "550eb63b0ad14dae39d03b3e5b97ed0080057bda",
+  "head_commit": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-010-R1.md",
+  "changed_files": [
+    "ASSETS.md",
+    "app/src/main/assets/scenes/forest.json",
+    "app/src/main/assets/visual/forest_clearing.webp",
+    "app/src/main/assets/visual/forest_light_shows.webp"
+  ],
+  "checks": [
+    {
+      "name": "候选 manifest ↔ 正式入包文件 sha256 核对（100% 一致）",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/alpha-visibility-analysis.txt"
+      ]
+    },
+    {
+      "name": "模拟器真实展示六阶段（0/100/265/425/630/785m，无棋盘格/接缝暴露）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-000m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-100m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-265m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-425m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-630m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/stage-785m.png"
+      ]
+    },
+    {
+      "name": "停止冻结（8秒间隔两次截图，画面主体逐像素哈希一致）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/stages/freeze-a.png",
+        "docs/collaboration/evidence/H-SW-010-R1/stages/freeze-b.png"
+      ]
+    },
+    {
+      "name": "全量 JVM 单测（本地，217/0/0，无新增用例，纯资源接线）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/alpha-visibility-analysis.txt"
+      ]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/alpha-visibility-analysis.txt"
+      ]
+    },
+    {
+      "name": "视觉强度独立复验（候选 alpha 偏低，实机对比差异量化）",
+      "type": "review",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/alpha-visibility-analysis.txt"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + validate（PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-010-R1.md"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "视觉强度是否达标——两层候选 alpha 偏低，实机对比画面差异 mean 1.4%/max 12.5%，请求独立裁定",
+    "真机（非模拟器）视觉走查未执行",
+    "tileable/平铺持续视差未实现（候选本身非 tileable，维持 cover 模式）"
+  ],
+  "requests": [
+    "独立审核 head a1df0e2，特别复验视觉强度问题并给出裁定",
+    "批准后更新 registry（SW-010 → accepted）"
+  ],
+  "design_manifest": null
+}
