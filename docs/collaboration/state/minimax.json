@@ -4,7 +4,7 @@
   "current_task": "SW-014",
   "status": "in_progress",
   "branch": "codex/minimax/SW-014-rainforest-preflight",
-  "head_commit": "PENDING_THIS_COMMIT_SHA",
+  "head_commit": "9e1547a155b5870dfc2da352952fe6af7439fb9e",
   "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
   "previous_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
   "updated_on": "2026-10-14",
