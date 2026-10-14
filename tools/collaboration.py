@@ -212,6 +212,9 @@ def validate() -> list[str]:
                     errors.append(f'{context}: design artifact byte count mismatch {artifact["path"]}')
     for path, r in reviews:
         context = path.name
+        if not r.get('handoff') or not repo_path(r['handoff']).is_file():
+            errors.append(f'{context}: missing handoff {r.get("handoff")}')
+            continue
         h = read(repo_path(r['handoff']))
         if r.get('reviewer') != 'antigravity' or r.get('reviewer') == h.get('producer'):
             errors.append(f'{context}: not an independent review')
@@ -261,11 +264,22 @@ def board_text() -> str:
     r = read(BASE / 'registry.json')
     lines = ['# 协作任务看板', '', '> 自动生成：仅编辑 registry.json，再执行 python3 tools/collaboration.py render。状态是交付登记，不是产品最终验收。', '',
              f'基线：`{r["baseline_commit"][:7]}` · 更新日期：{r["updated_on"]} · 协调者：{r["coordinator"]}', '',
-             '| ID | 任务 | 负责者 | 状态 | 前置 | 最新交付 / 审核 |', '| --- | --- | --- | --- | --- | --- |']
+             '| ID | 任务 | 负责者 | 状态 | 前置 | 已入库交付 / 审核 |', '| --- | --- | --- | --- | --- | --- |']
+    def link(p):
+        return f'[{Path(p).stem}]({Path(p).relative_to(Path("docs/collaboration")).as_posix()})' if p else '—'
     for t in r['tasks']:
-        def link(p):
-            return f'[{Path(p).stem}]({Path(p).relative_to(Path("docs/collaboration")).as_posix()})' if p else '—'
         lines.append(f'| {t["id"]} | [{t["title"]}]({Path(t["task_file"]).relative_to(Path("docs/collaboration"))}) | {t["owner"]} | {t["status"]} | {", ".join(t["depends_on"]) or "—"} | {link(t.get("latest_handoff"))} / {link(t.get("latest_review"))} |')
+    observed = [t for t in r['tasks'] if t.get('observed_delivery')]
+    if observed:
+        lines += ['', '## 远端交付观察（尚非独立批准）', '',
+                  '上表交付/审核指已入库记录；下面的新轮次由协调者消费后再更新正式指针。远端head变化须重新核对，不能从观察直接accepted。', '',
+                  '| 任务/轮次 | PR或分支 | 观察交付head | 来源 |', '| --- | --- | --- | --- |']
+        for t in observed:
+            d = t['observed_delivery']
+            location = f'[PR]({d["pr_url"]})' if d.get('pr_url') else f'`{d["branch"]}`'
+            lines.append(f'| {t["id"]} R{d["revision"]} | {location} | `{d["branch_head"][:7]}` | {link(d["source_report"])} |')
+    if r.get('review_queue'):
+        lines += ['', f'持续审稿与下一步：{link(r["review_queue"])}。协调轮完成不等于产品验收完成。']
     lines += ['', '## 生产者状态（辅助，不能替代审核）', '', '| 角色 | 当前任务 | 自报状态 | 最近交付 |', '| --- | --- | --- | --- |']
     for role in sorted(ROLES):
         lines.append(f'| {role} | [查看本角色实时状态](state/{role}.json) | 生产者单写 | [查看交付目录](handoffs/README.md) |')

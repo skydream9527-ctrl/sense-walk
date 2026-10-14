@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-001-R1",
+  "task_id": "SW-001",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
+  "reviewed_commit": "2dba5ebbb4897a7a6b9f05e562a9bf6b5bebb39c",
+  "verdict": "changes_requested",
+  "report": "docs/collaboration/reviews/R-SW-001-R1.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "JVM 单测与 lint 历史/云端报告核查 (238 项)",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-01/test-summary.json"
+      ]
+    },
+    {
+      "name": "P-01: detector 注册失败脚步音回退验证",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "tools/qa/test_pr1_reliability_review.py"
+      ]
+    },
+    {
+      "name": "P-02: 同刻合并步数未带回/被清除反例验证",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "tools/qa/test_pr1_reliability_review.py"
+      ]
+    },
+    {
+      "name": "P-03: 工具维护提交越界与 business head 漂移审核",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "tools/qa/test_pr1_reliability_review.py"
+      ]
+    },
+    {
+      "name": "真机计步与锁屏保活走查",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "P-01",
+      "severity": "P1",
+      "file": "app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt:68-71, app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt:192",
+      "summary": "hasDetector 仅代表硬件存在；当 port.registerDetector 返回 false 时，hasDetector 仍为 true，导致 stepAudioFromDistance 被错误设为 false，造成实走过程中完全无脚步声和振动（静音行走）。"
+    },
+    {
+      "id": "P-02",
+      "severity": "P1",
+      "file": "app/src/main/java/com/sensewalk/app/domain/walk/RealWalkEngine.kt:111-114",
+      "summary": "同刻合并分支直接执行 lastAcceptedCount = stepCount，未保留 pending 步数；下一正常正间隔仅以新读数减去已推进基线，导致同刻到达的步数被彻底丢弃而非带回计距。"
+    },
+    {
+      "id": "P-03",
+      "severity": "P2",
+      "file": "tools/collaboration.py",
+      "summary": "提交 bdb1ea7 修改了 tools/collaboration.py，超出 ZCode 写入范围；且 handoff 中 head_commit 仍为 2dba5eb，产生 head 漂移。需在 R2 中统一修复。"
+    }
+  ],
+  "pending": [
+    "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+    "真机耳机断连/来电打断处理（physical-device）"
+  ]
+}

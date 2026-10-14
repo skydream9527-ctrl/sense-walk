@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.stick.VelocityInertiaTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-14T08:55:48" hostname="runnervmmprz5" time="0.001">
+  <properties/>
+  <testcase name="减速 τ 0_35 - 从甜点到拉满目标慢慢掉下去" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="Infinity dt 不改变速度" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="reset 清零速度" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="负 dt 不改变速度" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="加速 τ 0_60 - 从静止约 2 秒接近甜点速度" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="NaN dt 不改变速度" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.001"/>
+  <testcase name="dt 上限 0_05 - 大 dt 不追补后台时间" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="NaN 目标速度按松手处理" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="初始速度非法值归零" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <testcase name="松手 τ 0_25 - 约 1 秒内停稳" classname="com.sensewalk.app.domain.stick.VelocityInertiaTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

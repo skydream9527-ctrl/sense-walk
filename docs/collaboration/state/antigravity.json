@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "antigravity",
-  "current_task": "SW-003",
+  "current_task": "SW-013",
   "status": "handoff_ready",
-  "branch": "codex/antigravity/SW-003-coordination-baseline",
-  "head_commit": "af816246611e9e996e679a0f17cd87784af397bb",
-  "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-003-R1.json",
-  "updated_on": "2026-10-13",
-  "note": "SW-003 基线核查与风险反例建立完成，SW-002 独立审核 approved 并集成合入 main。"
+  "branch": "codex/antigravity/SW-013-second-round-review",
+  "head_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
+  "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
+  "updated_on": "2026-10-14",
+  "note": "SW-013 第二轮独立复验完成：PR #1 审查出具 changes_requested 并登记 SW-001 rework；SW-010、SW-011、SW-014 等待对应角色提交。"
 }

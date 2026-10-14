@@ -1125,3 +1125,12 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 当前并行：ZCode先SW-001 R2、随后独立SW-010接线；MiniMax SW-014零API预检脚本；Trae完成SW-011真实交付、获批后SW-012；Antigravity SW-013完整head/应用/设计复验与顺序登记。SW-010只依赖已批准候选与协调启动，SW-004仍等待T06可靠性批准，SW-006仍等待雨林设计与预检准备批准。规则调整依据见 [D-004](./docs/collaboration/decisions/D-004-next-round-planning.md)。
 
 后续依次收口恢复→地形/雨林双模式→按城市/沙漠拆分设计/素材/接入→真机内测汇总。标准距离、comfort_v1、门禁、冻结及真实体验验收要求保持。四个工具继续只读自己的roles入口，每轮核对最新origin/main；本次未启动或消息通知外部工具，不要求完善本地Android环境。
+
+
+### 21.6 第三轮交付复审与持续协作（2026-10-14）
+
+本轮 [核查报告](./docs/collaboration/evidence/P-20261014-02/README.md) 基准main为6d33d94：ZCode SW-001 R2/PR #1已交、249项云端单测通过；SW-010/PR #3真正接正式光效、217项push分支单测通过。均未独立验收/合入，两个PR只在角色state有冲突，作者顺序同步并保留各任务记录。两份云端原始XML分别归档，不能当作同一组合版本覆盖。
+
+MiniMax SW-014已交工具但零API实测会接受非图/空层/未批准引用，并错误解析repo路径，下一轮修R2。Trae43份本机草稿hash复核一致，优先真实推送SW-011设计包，获批后才SW-012。Antigravity的SW-013协调已accepted，继续从 [常驻验收队列](./docs/collaboration/queues/antigravity.md) 审实际head/应用/脚本/设计、顺序集成并交组合测试包。登记observed_delivery是定位观察而非批准；旧handoff笔误用追加correction纠正。规则维护依据见 [D-005](./docs/collaboration/decisions/D-005-persistent-review-queue.md)。
+
+SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试预算保持。产品米数/相位/opacity不变，终景强度需真实app与设计意图复验；无真机/真人不伪造验收。旧build-41不包含新工作PR。本轮仅完成核查与计划文件维护，没有向外部执行工具自动发消息。
