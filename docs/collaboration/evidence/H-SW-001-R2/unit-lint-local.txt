@@ -1,0 +1,17 @@
+SW-001 R2 本地验证（工作树 sensewalk-zcode-sw001，业务提交 7b17424）
+日期：2026-10-14（本地时区）
+
+$ ./gradlew :app:testDebugUnitTest
+  249 tests completed, 0 failed（R1 238 → R2 249，新增 11：
+   RealWalkEngineTest +4：P02 审核反例 0/0.7/0/1.4、低步数未封顶掩盖、
+     暂停丢弃合并批、重注册丢弃合并批；
+   StepSensorSourceTest +4：P01 注册失败回退/注册成功距离静默/无硬件回退/stop 重置；
+   SensorCueWiringTest +3（新文件）：注册结果→服务接线→SensoryCoordinator 调用链，
+     记录型假后端验证实际 playStep 出声/静默与无双计距）
+  结果 XML 汇总脚本统计：total=249 failures=0 errors=0
+
+$ ./gradlew :app:lintDebug :app:assembleDebug
+  BUILD SUCCESSFUL；app-debug.apk 生成（20,234,061 bytes）
+  （该 APK 即 emulator-regression.txt 所装构建）
+
+复现：checkout 7b17424 后执行上述命令。
