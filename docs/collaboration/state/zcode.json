@@ -7,7 +7,7 @@
   "head_commit": "a1df0e295b7c95d6212b8c65d597087a9458d906",
   "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
   "updated_on": "2026-10-14",
-  "note": "SW-010 R1 已交付（批准候选逐字节入包+接线；视觉强度问题量化待独立裁定）。SW-001 R2 也已交付（PR #1），见 deliveries 索引；本文件为两 PR 冲突的人工合并，两项交付信息均保留（D-005）。current_task 指当前动作（补 SW-010 验收证据），不改变 SW-001 的独立审核状态。",
+  "note": "SW-010 R1 已交付并追加长屏/小屏/停走/光效意图证据（appendix-sizes）；视觉强度问题量化待独立裁定。SW-001 R2 也在 PR #1 待二审；deliveries 索引保留两项（D-005 人工合并）。",
   "deliveries": {
     "SW-001": {
       "branch": "codex/zcode/SW-001-t06-reliability",
