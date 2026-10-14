@@ -6,7 +6,7 @@
   "producer": "minimax",
   "recipient": "antigravity",
   "base_commit": "5a129d41cfa5d04424521e987136616407f47e5c",
-  "head_commit": "5b5692b4b30e3249a96615d9785a9d1f5dd4398b",
+  "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
   "pr_url": null,
   "report": "docs/collaboration/handoffs/minimax/H-SW-002-R1.md",
   "changed_files": [
