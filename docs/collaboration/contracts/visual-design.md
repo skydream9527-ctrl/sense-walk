@@ -68,4 +68,6 @@ design/05-visual-design/SW-xxx/r1/
 
 Trae只声明design_candidate。Antigravity独立审核设计head与manifest全部文件哈希；批准后才称approved_design。MiniMax新场景素材manifest需 `design_ref`（设计任务/已批准handoff/spec路径/spec_sha256），旧设计变化则失去原来引用的批准，必须重审。ZCode入包仍做实际Android验证。
 
+设计新revision获批时，协调者将受影响的当前素材任务登记rework，并重新安排接入依赖；不能继续声称旧素材匹配新设计。历史设计/素材文件及批准记录保留，校验它们在当时引用的确切设计head/哈希与独立批准；历史可查看不代表当前可入包。新交付或仍登记accepted的交付必须引用当前批准设计，不能用归档记录跳过新审稿。
+
 当前SW-002为现有森林透明/光效修复，可沿已有设计继续，不因新增角色被重置。SW-006雨林制作必须等待SW-012已批准设计；本轮设计不是授权改标准距离、地图规则、已有角色动画或整个UI布局。

@@ -48,6 +48,8 @@ accepted 的语义取决于任务：素材任务=候选获验收；入包任务=
 
 design任务accepted仅表示设计包获独立审核，不是素材入包。Trae交design_manifest与源/预览/spec/提示词哈希；批准后MiniMax新场景素材需引用具体design_ref。设计文件变化使原引用失效。森林SW-002机械修复沿原设计继续；SW-006雨林必须先有SW-012批准设计。规范见 [visual-design](contracts/visual-design.md)。
 
+新设计revision被批准后，协调者将受影响素材任务登记rework、同步接入依赖；历史记录保持原head/哈希及当时独立批准，不覆盖。归档或明确退回的旧交付可以查看；最新新交付及仍accepted的当前交付必须匹配当前批准设计。归档语义不能成为继续入包旧稿的授权。
+
 检查类型至少区分 source / unit / cloud-build / emulator / physical-device / human / visual。同一轮截图检查不等于自动化 UI 测试；debug 注入不等于真实传感器。仪器测试未运行必须直说。
 
 ## 证据永久性

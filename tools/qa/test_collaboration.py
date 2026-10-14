@@ -46,22 +46,22 @@ class CoordinationChecks(unittest.TestCase):
     def error_contains(self, text):
         self.assertTrue(any(text in e for e in module.validate()), module.validate())
 
-    def handoff(self, task_id='SW-001', producer='zcode'):
-        relative = f'docs/collaboration/handoffs/{producer}/H-{task_id}-R1.json'
+    def handoff(self, task_id='SW-001', producer='zcode', revision=1):
+        relative = f'docs/collaboration/handoffs/{producer}/H-{task_id}-R{revision}.json'
         report = relative.replace('.json', '.md')
         path = self.root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         (self.root / report).write_text('Fixture delivery, not actual project QA')
-        h = dict(schema_version=1, id=f'H-{task_id}-R1', task_id=task_id, revision=1,
+        h = dict(schema_version=1, id=f'H-{task_id}-R{revision}', task_id=task_id, revision=revision,
                  producer=producer, recipient='antigravity', base_commit='1'*40,
-                 head_commit='2'*40, report=report, changed_files=['app/src/main/Example.kt'],
+                 head_commit=('2' if revision == 1 else '4')*40, report=report, changed_files=['app/src/main/Example.kt'],
                  checks=[dict(name='fixture source check', type='source', status='passed', evidence=[report])], artifacts=[], pending=[])
         path.write_text(json.dumps(h))
         return relative, h
 
     def review(self, handoff):
         h = module.read(self.root / handoff)
-        relative = f'docs/collaboration/reviews/R-{h["task_id"]}-R1.json'
+        relative = f'docs/collaboration/reviews/R-{h["task_id"]}-R{h["revision"]}.json'
         report = relative.replace('.json', '.md')
         (self.root / report).write_text('Fixture independent review, not actual project QA')
         r = dict(schema_version=1, task_id=h['task_id'], reviewer='antigravity', producer=h['producer'],
@@ -70,19 +70,19 @@ class CoordinationChecks(unittest.TestCase):
         (self.root / relative).write_text(json.dumps(r))
         return relative, r
 
-    def design_delivery(self, accepted=False):
-        relative, h = self.handoff('SW-011', 'trae-design')
-        folder = self.root / 'design/05-visual-design/SW-011/r1'
+    def design_delivery(self, accepted=False, revision=1):
+        relative, h = self.handoff('SW-011', 'trae-design', revision)
+        folder = self.root / f'design/05-visual-design/SW-011/r{revision}'
         folder.mkdir(parents=True, exist_ok=True)
         files = []
         # Plain bytes model protocol inputs only, never pretend to be image QA.
         for role, filename in [('spec', 'design-spec.json'), ('source', 'source.svg'),
                                ('prompt', 'prompts.md'), ('preview', 'preview.txt')]:
             path = folder / filename
-            path.write_text(json.dumps({'fixture': role}))
+            path.write_text(json.dumps({'fixture': role, 'revision': revision}))
             files.append(dict(path=str(path.relative_to(self.root)), role=role,
                               sha256=hashlib.sha256(path.read_bytes()).hexdigest(), bytes=path.stat().st_size))
-        manifest = dict(schema_version=1, task_id='SW-011', revision=1, producer='trae-design',
+        manifest = dict(schema_version=1, task_id='SW-011', revision=revision, producer='trae-design',
                         spec_file=files[0]['path'], files=files, limitations=['protocol fixture'])
         manifest_path = folder / 'design-manifest.json'
         manifest_path.write_text(json.dumps(manifest))
@@ -97,13 +97,13 @@ class CoordinationChecks(unittest.TestCase):
         ref = dict(task_id='SW-011', handoff=relative, spec_file=manifest['spec_file'], spec_sha256=files[0]['sha256'])
         return relative, h, manifest_path, manifest, ref
 
-    def asset_delivery(self, design_ref=None):
-        relative, h = self.handoff('SW-006', 'minimax')
-        folder = self.root / 'design/assets/rainforest/candidates/fixture'
+    def asset_delivery(self, design_ref=None, revision=1):
+        relative, h = self.handoff('SW-006', 'minimax', revision)
+        folder = self.root / f'design/assets/rainforest/candidates/fixture/r{revision}'
         folder.mkdir(parents=True, exist_ok=True)
         candidate = folder / 'layer.txt'
         candidate.write_text('protocol fixture, not a generated image')
-        manifest = dict(schema_version=1, task_id='SW-006', revision=1, producer='minimax', design_ref=design_ref,
+        manifest = dict(schema_version=1, task_id='SW-006', revision=revision, producer='minimax', design_ref=design_ref,
                         layers=[dict(file=str(candidate.relative_to(self.root)), sha256=hashlib.sha256(candidate.read_bytes()).hexdigest(),
                                      bytes=candidate.stat().st_size, width=1080, height=1920, checks=[h['report']])])
         manifest_path = folder / 'asset-manifest.json'
@@ -262,6 +262,38 @@ class CoordinationChecks(unittest.TestCase):
         # This disposable fixture changes its design prerequisite to SW-011.
         self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
         self.asset_delivery(ref)
+        self.assertEqual([], module.validate())
+
+    def test_archived_asset_reference_survives_new_approved_design_revision(self):
+        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
+        _, _, _, _, old_ref = self.design_delivery(accepted=True)
+        self.asset_delivery(old_ref)
+        _, _, _, _, new_ref = self.design_delivery(accepted=True, revision=2)
+        self.asset_delivery(new_ref, revision=2)
+        self.assertEqual([], module.validate())
+
+    def test_current_asset_cannot_use_superseded_design_revision(self):
+        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
+        _, _, _, _, old_ref = self.design_delivery(accepted=True)
+        self.asset_delivery(old_ref)
+        self.design_delivery(accepted=True, revision=2)
+        self.asset_delivery(old_ref, revision=2)
+        self.error_contains('not the accepted design revision')
+
+    def test_archived_asset_reference_still_requires_historical_approval(self):
+        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
+        _, _, _, _, unapproved_ref = self.design_delivery()
+        self.asset_delivery(unapproved_ref)
+        _, _, _, _, new_ref = self.design_delivery(accepted=True, revision=2)
+        self.asset_delivery(new_ref, revision=2)
+        self.error_contains('no approval for cited revision')
+
+    def test_retired_asset_can_remain_visible_during_rework(self):
+        _, _, _, _, old_ref = self.design_delivery(accepted=True)
+        self.asset_delivery(old_ref)
+        self.design_delivery(accepted=True, revision=2)
+        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(
+            status='rework', depends_on=['SW-011'], latest_handoff='docs/collaboration/handoffs/minimax/H-SW-006-R1.json'))
         self.assertEqual([], module.validate())
 
     def test_existing_audit_history_cannot_be_rewritten(self):

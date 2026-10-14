@@ -107,8 +107,13 @@ def validate() -> list[str]:
                 errors.append(f'state/{role}: task not executable')
         if state.get('latest_handoff') and not repo_path(state['latest_handoff']).is_file():
             errors.append(f'state/{role}: missing handoff')
-    for path in (BASE / 'handoffs').rglob('*.json'):
-        h = read(path); context = path.name
+    deliveries = [(path, read(path)) for path in (BASE / 'handoffs').rglob('*.json')]
+    latest_revision = {}
+    for _, h in deliveries:
+        latest_revision[h.get('task_id')] = max(latest_revision.get(h.get('task_id'), 0), h.get('revision', 0))
+    reviews = [(path, read(path)) for path in (BASE / 'reviews').rglob('*.json')]
+    for path, h in deliveries:
+        context = path.name
         task = by_id.get(h.get('task_id'))
         if not task or h.get('producer') != task['owner']:
             errors.append(f'{context}: producer/task mismatch')
@@ -155,13 +160,29 @@ def validate() -> list[str]:
             if design_dependencies and not ref:
                 errors.append(f'{context}: new asset batch requires approved design_ref')
             if ref:
+                handoff_path = path.relative_to(ROOT).as_posix()
+                is_current = h.get('revision') == latest_revision[h.get('task_id')]
+                # An explicitly retired delivery remains readable during rework.
+                if task and task['status'] in {'rework', 'blocked'} and task.get('latest_handoff') == handoff_path:
+                    is_current = False
+                if task and task['status'] == 'accepted' and task.get('latest_handoff') == handoff_path:
+                    is_current = True
                 design_task = by_id.get(ref.get('task_id'))
-                if design_dependencies and ref.get('task_id') not in design_dependencies:
+                if is_current and design_dependencies and ref.get('task_id') not in design_dependencies:
                     errors.append(f'{context}: design_ref does not match required design task')
-                if not design_task or design_task['kind'] != 'design' or design_task['status'] != 'accepted' or design_task.get('latest_handoff') != ref.get('handoff'):
-                    errors.append(f'{context}: design_ref is not the accepted design revision')
+                if not design_task or design_task['kind'] != 'design':
+                    errors.append(f'{context}: design_ref does not cite a design task')
                 else:
+                    if is_current and (design_task['status'] != 'accepted' or design_task.get('latest_handoff') != ref.get('handoff')):
+                        errors.append(f'{context}: design_ref is not the accepted design revision')
                     design_h = read(repo_path(ref['handoff']))
+                    if design_h.get('task_id') != ref.get('task_id') or design_h.get('producer') != 'trae-design':
+                        errors.append(f'{context}: design_ref handoff task mismatch')
+                    if not any(r.get('handoff') == ref['handoff'] and r.get('verdict') == 'approved'
+                               and r.get('reviewer') == 'antigravity' and r.get('producer') == 'trae-design'
+                               and r.get('task_id') == ref['task_id'] and r.get('reviewed_commit') == design_h.get('head_commit')
+                               for _, r in reviews):
+                        errors.append(f'{context}: design_ref has no approval for cited revision')
                     design_m = read(repo_path(design_h['design_manifest']))
                     spec = repo_path(ref['spec_file'])
                     if ref['spec_file'] != design_m['spec_file'] or not spec.is_file() or hashlib.sha256(spec.read_bytes()).hexdigest() != ref.get('spec_sha256'):
@@ -189,8 +210,8 @@ def validate() -> list[str]:
                     errors.append(f'{context}: design artifact hash mismatch {artifact["path"]}')
                 if p.is_file() and p.stat().st_size != artifact.get('bytes'):
                     errors.append(f'{context}: design artifact byte count mismatch {artifact["path"]}')
-    for path in (BASE / 'reviews').rglob('*.json'):
-        r = read(path); context = path.name
+    for path, r in reviews:
+        context = path.name
         h = read(repo_path(r['handoff']))
         if r.get('reviewer') != 'antigravity' or r.get('reviewer') == h.get('producer'):
             errors.append(f'{context}: not an independent review')
