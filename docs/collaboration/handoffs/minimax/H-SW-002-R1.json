@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-002-R1",
+  "task_id": "SW-002",
+  "revision": 1,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "base_commit": "5a129d41cfa5d04424521e987136616407f47e5c",
+  "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/minimax/H-SW-002-R1.md",
+  "changed_files": [
+    "design/assets/forest/candidates/SW-002/r1/manifest.json",
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+    "design/assets/forest/candidates/SW-002/r1/png/forest_clearing.png",
+    "design/assets/forest/candidates/SW-002/r1/png/forest_light_shows.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing_center600.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows_center600.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/black/forest_light_shows.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/white/forest_light_shows.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_light_shows.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m.png",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m_540x960.jpg",
+    "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
+    "design/assets/forest/candidates/SW-002/r1/rejected/superseded/v5_forest_clearing.png",
+    "design/assets/forest/candidates/SW-002/r1/rejected/superseded/v5_forest_light_shows.png",
+    "design/assets/forest/candidates/SW-002/r1/rejected/superseded/v4_forest_light_shows_actual_asset.webp",
+    "design/assets/forest/candidates/SW-002/r1/rejected/superseded/README.md",
+    "design/assets/forest/scripts/forest_candidate_sw002_r1.py",
+    "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
+    "docs/collaboration/handoffs/minimax/H-SW-002-R1.md",
+    "docs/collaboration/state/minimax.json"
+  ],
+  "checks": [
+    {
+      "name": "4 底色实际合成 (黑/白/洋红/void) 浅色像素检查",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg"
+      ]
+    },
+    {
+      "name": "32px 周期对角能量 (ZCode ASSETS.md §一 复验标准)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json"
+      ]
+    },
+    {
+      "name": "8px 相位差 + 块交替率 (ZCode ASSETS.md §一 复验标准)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json"
+      ]
+    },
+    {
+      "name": "高频率拉普拉斯 (棋盘格本质特征)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png"
+      ]
+    },
+    {
+      "name": "alpha 通道实际合成 (不用颜色距离阈值; 用程序生成 + 4 底色视觉确认)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+        "design/assets/forest/scripts/forest_candidate_sw002_r1.py"
+      ]
+    },
+    {
+      "name": "6 阶段合成 (按 forest.json 真实 phase 配置, 引用入包 v4 outline/trunks/leaf_path + r1 light_shows/clearing)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m.png"
+      ]
+    },
+    {
+      "name": "原始尺寸偏差说明 (768x1376 vs 期望 1080x1920)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "API 账本 (本轮 0, 累计 14)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "AI 输出不标 CC0 (ASSETS.md §一 规则)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "Android 模拟器/真机视觉走查 (本轮不执行, 见 pending)",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "candidate-asset",
+      "path": "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "role": "overlay",
+      "tileable": false
+    },
+    {
+      "kind": "candidate-asset",
+      "path": "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "role": "overlay",
+      "tileable": false
+    }
+  ],
+  "asset_manifest": "design/assets/forest/candidates/SW-002/r1/manifest.json",
+  "pending": [
+    "Android 模拟器视觉走查 (用户/真机验收, SW-002 r1 提交不阻塞, 但 ANTIGRAVITY 独立审核前不算 approved_candidate)",
+    "无 tileable: overlay 不做平铺 (ForestShell.kt 当前 cover 模式, overflow≈0 不暴露接缝; 但 v6 之后若改平铺模式需重做 tileable 候选)",
+    "clearing 复用了 v5 候选 (commit 62b0c29 在 git history 但不在 main HEAD 5a129d4): 因为 v5 候选程序化代码本身不依赖任何 API 或历史 commit, 字节级与 v5 一致; 不重新派生 v5 修复合并冲突"
+  ],
+  "requests": [
+    "请按 docs/collaboration/PROTOCOL.md 独立审核本 H-SW-002-R1, 校验 manifest SHA256, 实际打开 4 底色检查图与 6 阶段合成目检",
+    "通过 → 写 R-SW-002-R1.json/.md 标记 approved_candidate; ZCode 在 SW-010 中根据 approved candidate 单独入包",
+    "退回 → 写 changes_requested, 登记 rework, 我写 R2; R1 不覆盖",
+    "请求协调者对齐共享 ASSETS.md (本轮 candidate 不写入 ASSETS.md, 等独立审核 approved 后再补)"
+  ],
+  "design_manifest": null
+}
