@@ -1,6 +1,6 @@
 {
   "status": "failed",
-  "manifest": "design/assets/rainforest/preflight/fixtures/manifest_oversize/manifest.json",
+  "manifest": "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_oversize/manifest.json",
   "contract_version": "visual-assets v1",
   "summary": {
     "total": 32,

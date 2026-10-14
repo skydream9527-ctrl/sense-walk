@@ -6,7 +6,7 @@
   "producer": "minimax",
   "recipient": "antigravity",
   "base_commit": "550eb63b0ad14dae39d03b3e5b97ed0080057bda",
-  "head_commit": "9e1547a155b5870dfc2da352952fe6af7439fb9e",
+  "head_commit": "225d59f61b444ebdeedec2b341dc992eac7dc6b5",
   "pr_url": null,
   "report": "docs/collaboration/handoffs/minimax/H-SW-014-R1.md",
   "changed_files": [
@@ -15,17 +15,14 @@
     "design/assets/rainforest/preflight/SW-014/r1/scripts/preflight.py",
     "design/assets/rainforest/preflight/SW-014/r1/scripts/dry_run.py",
     "design/assets/rainforest/preflight/SW-014/r1/scripts/api_log_template.py",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/webp/rainforest_*.webp",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/png/rainforest_*.png",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/checks/{black,white,magenta,alpha_mask}/rainforest_*.{jpg,png}",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_oversize/",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_wrong_hash/",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_missing/",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_not_tileable/",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_no_design/",
-    "design/assets/rainforest/preflight/SW-014/r1/fixtures/design_ref_pending.json",
     "design/assets/rainforest/preflight/SW-014/r1/fixtures/api_log_template.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/design_ref_pending.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_oversize/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_wrong_hash/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_missing/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_not_tileable/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_no_design/manifest.json",
     "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_ok.json",
     "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_oversize.json",
     "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_wrong_hash.json",
@@ -112,7 +109,8 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json"
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/api_log_template.json"
       ]
     },
     {
@@ -134,7 +132,7 @@
     {
       "kind": "tool-script",
       "path": "design/assets/rainforest/preflight/SW-014/r1/scripts/gen_fixtures.py",
-      "sha256": "737f0d49a4dc5ab9cf2c1f2c4545f23bb92ef4271a61d9aba5f699183a30ccd8",
+      "sha256": "fc7864280f9298a413f2e8823736fab065f84180189d8c61efab5f54a980ddce",
       "role": "fixture-generator"
     },
     {
