@@ -7,5 +7,22 @@
   "head_commit": "a1df0e295b7c95d6212b8c65d597087a9458d906",
   "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
   "updated_on": "2026-10-14",
-  "note": "SW-010 已交付待独立审核：批准候选逐字节入包，哈希一致，模拟器六阶段无棋盘格/停止冻结正常；但发现两层候选 alpha 偏低、实机可见度弱，已量化证据交 Antigravity 裁定，不自行判定合格。SW-001 R2 仍在审核中（PR #1）。"
+  "note": "SW-010 R1 已交付（批准候选逐字节入包+接线；视觉强度问题量化待独立裁定）。SW-001 R2 也已交付（PR #1），见 deliveries 索引；本文件为两 PR 冲突的人工合并，两项交付信息均保留（D-005）。current_task 指当前动作（补 SW-010 验收证据），不改变 SW-001 的独立审核状态。",
+  "deliveries": {
+    "SW-001": {
+      "branch": "codex/zcode/SW-001-t06-reliability",
+      "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+      "delivery_head": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
+      "status": "awaiting independent review R2"
+    },
+    "SW-010": {
+      "branch": "codex/zcode/SW-010-forest-lightshows",
+      "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
+      "status": "awaiting independent review R1"
+    }
+  }
 }

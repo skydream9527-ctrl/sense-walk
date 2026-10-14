@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-001-R1",
+  "task_id": "SW-001",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
+  "head_commit": "2dba5ebbb4897a7a6b9f05e562a9bf6b5bebb39c",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
+  "report": "docs/collaboration/handoffs/zcode/H-SW-001-R1.md",
+  "changed_files": [
+    ".github/workflows/android.yml",
+    "app/src/main/java/com/sensewalk/app/domain/walk/RealWalkEngine.kt",
+    "app/src/main/java/com/sensewalk/app/service/SessionArbiter.kt",
+    "app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt",
+    "app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt",
+    "app/src/main/java/com/sensewalk/app/engine/sensor/AndroidSensorPort.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/RealWalkEngineTest.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/RealWalkControllerTest.kt",
+    "app/src/test/java/com/sensewalk/app/service/SessionArbiterTest.kt",
+    "app/src/test/java/com/sensewalk/app/engine/sensor/StepSensorSourceTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "lint（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + Release manifest guard",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/release-manifest-check.txt"
+      ]
+    },
+    {
+      "name": "崩溃粘性重启无空会话（am crash）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/emulator-f002-crash-restart.txt"
+      ]
+    },
+    {
+      "name": "正常冒烟（debug 注入，不构成真实计步验证）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/emulator-smoke-and-continuity.txt"
+      ]
+    },
+    {
+      "name": "会话连续性（HOME 往返同引擎）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/emulator-smoke-and-continuity.txt"
+      ]
+    },
+    {
+      "name": "通知停止三清",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/emulator-smoke-and-continuity.txt"
+      ]
+    },
+    {
+      "name": "真实计步 / 锁屏 15 分钟 / 真机耳机来电 / 振动",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/emulator-smoke-and-continuity.txt"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+    "真机耳机断连/来电对实走服务的中断（physical-device）",
+    "release 字节码级（dex 字符串）检查未做——已提供合并清单级证据，如需请在 review 注明"
+  ],
+  "requests": [
+    "请按 SW-001 任务文件对 head 2dba5eb 独立审核（reviews/R-SW-001-R1），不自批准",
+    "集成 PR 后登记 registry（SW-001 → in_review/accepted 由你判定）",
+    "共享文档建议：DEVELOPMENT.md 增补 SW-001 记录（内容见 handoff「最终行为」），由你集成"
+  ],
+  "design_manifest": null
+}

@@ -16,15 +16,25 @@
       "title": "T06 可靠性补强",
       "owner": "zcode",
       "kind": "code",
-      "status": "in_progress",
+      "status": "handoff_ready",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-001.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R1.json",
       "integrated_commit": null,
       "pending": [
-        "PR #1已交付未合入；按P-20261014-01的P-01/P-02修订R2后交Antigravity完整head复验"
-      ]
+        "R2已发布/249项云端通过，待Antigravity实际Kotlin与完整head复审；旧R1 changes_requested仅针对当时head",
+        "作者顺序同步main解决state冲突、刷新PR描述并追加R2 base SHA笔误纠正；真机锁屏/硬件仍Pending"
+      ],
+      "observed_delivery": {
+        "revision": 2,
+        "branch": "codex/zcode/SW-001-t06-reliability",
+        "branch_head": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+        "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
+        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+      }
     },
     {
       "id": "SW-002",
@@ -64,7 +74,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "本机43文件设计草稿未提交/无handoff/未批准；由Trae完成共享交付"
+        "本轮复核43文件草稿hash/字节一致，但仍未提交/推送/无handoff；Trae优先发布既有设计PR"
       ]
     },
     {
@@ -72,7 +82,7 @@
       "title": "森林光效批准候选入包",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "handoff_ready",
       "depends_on": [
         "SW-002",
         "SW-003"
@@ -82,8 +92,18 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "a5ad6dd仅合并候选，正式forest.json仍程序降级；需真正接线与Android证据"
-      ]
+        "PR #3已接正式图/配置且hash匹配；217项仅push分支CI，未独立应用验收/合入",
+        "作者解决state冲突；Antigravity复验六阶段/屏比/冻结/终景意图，新组合版本CI与测试包待交"
+      ],
+      "observed_delivery": {
+        "revision": 1,
+        "branch": "codex/zcode/SW-010-forest-lightshows",
+        "branch_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+        "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
+        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+      }
     },
     {
       "id": "SW-004",
@@ -201,14 +221,14 @@
       "title": "第二轮独立复验与交接收口",
       "owner": "antigravity",
       "kind": "coordination",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-013.md",
-      "latest_handoff": null,
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
       "latest_review": null,
-      "integrated_commit": null,
+      "integrated_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
       "pending": []
     },
     {
@@ -216,7 +236,7 @@
       "title": "雨林素材交付预检准备（零API）",
       "owner": "minimax",
       "kind": "code",
-      "status": "ready",
+      "status": "rework",
       "depends_on": [
         "SW-002",
         "SW-003"
@@ -225,7 +245,19 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "bootstrap实测PF-01～04：非图/空层/未批准dummy误判通过及repo路径错误；安排零API R2，不代替独立review",
+        "发布R2 PR/handoff与成功/隔离失败fixture；Antigravity复审后才accepted，雨林制作仍等SW-012"
+      ],
+      "observed_delivery": {
+        "revision": 1,
+        "branch": "codex/minimax/SW-014-rainforest-preflight",
+        "branch_head": "13d6c0d51261a467feb2c3a57705ae7820198e49",
+        "business_head": "7d047a22ddde21664983db5ee298c18d805b5326",
+        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
+        "pr_url": null,
+        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+      }
     }
   ],
   "physical_validation_pending": [
@@ -234,5 +266,7 @@
     "实体耳机/来电与振动",
     "真机视觉走查",
     "最终5–8人内测"
-  ]
+  ],
+  "review_queue": "docs/collaboration/queues/antigravity.md",
+  "latest_progress_report": "docs/collaboration/evidence/P-20261014-02/README.md"
 }

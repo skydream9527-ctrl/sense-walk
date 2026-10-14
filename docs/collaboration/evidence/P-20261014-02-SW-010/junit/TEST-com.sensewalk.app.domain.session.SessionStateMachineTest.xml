@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.session.SessionStateMachineTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-10-14T09:43:54" hostname="runnervmmprz5" time="0.002">
+  <properties/>
+  <testcase name="中断期间时长不计入 elapsedActive" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="首次前进进入 Walking" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="S9 Completed 吸收迟到事件不重复通关" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="elapsedActive 只累计 Walking 时长" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.001"/>
+  <testcase name="通关进入 Completed 终态" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="非法转换被拒绝且状态不变" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="Interrupted 也可选择放弃" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="暂停清零输入与速度" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="暂停后输入上报被忽略" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="S9 Abandoned 吸收迟到的通关事件" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="Ready 也可直接放弃" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="updateInput 的 NaN 归零且偏转钳制" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="恢复回到 Ready 并等待新输入" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="终态后输入上报被忽略" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="中断进入 Interrupted 可恢复或放弃" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.0"/>
+  <testcase name="初始状态为 Ready" classname="com.sensewalk.app.domain.session.SessionStateMachineTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

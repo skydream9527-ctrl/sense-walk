@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-10-14",
+  "timezone": "America/Los_Angeles",
+  "kind": "bootstrap-observation-not-independent-review",
+  "main_commit": "6d33d948eac764af37c188325814c020e10e6a7e",
+  "producer_deliveries": [
+    {
+      "task_id": "SW-001",
+      "pr": {
+        "headRefName": "codex/zcode/SW-001-t06-reliability",
+        "headRefOid": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+        "mergeStateStatus": "DIRTY",
+        "mergeable": "CONFLICTING",
+        "number": 1,
+        "state": "OPEN",
+        "title": "SW-001: T06 可靠性补强（F-001~F-005）",
+        "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1"
+      },
+      "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+      "branch_head": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+      "run": {
+        "id": 38538465638,
+        "html_url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38538465638",
+        "event": "pull_request",
+        "head_sha": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-14T08:54:26Z",
+        "updated_at": "2026-10-14T08:56:34Z"
+      },
+      "tested_checkout": "a79db37cb004dee3b6bb6809984850449422e211",
+      "junit_summary": "docs/collaboration/evidence/P-20261014-02-SW-001/test-summary.json",
+      "merge_tree_exit": 1,
+      "conflicts": [
+        "CONFLICT (content): Merge conflict in docs/collaboration/state/zcode.json"
+      ],
+      "post_business_diff": [
+        "docs/collaboration/evidence/H-SW-001-R2/unit-lint-local.txt",
+        "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+        "docs/collaboration/handoffs/zcode/H-SW-001-R2.md",
+        "docs/collaboration/state/zcode.json"
+      ]
+    },
+    {
+      "task_id": "SW-010",
+      "pr": {
+        "headRefName": "codex/zcode/SW-010-forest-lightshows",
+        "headRefOid": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+        "mergeStateStatus": "DIRTY",
+        "mergeable": "CONFLICTING",
+        "number": 3,
+        "state": "OPEN",
+        "title": "SW-010: 森林 light_shows/clearing 批准候选入包",
+        "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3"
+      },
+      "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+      "branch_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+      "run": {
+        "id": 38544330404,
+        "html_url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38544330404",
+        "event": "push",
+        "head_sha": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-14T09:42:33Z",
+        "updated_at": "2026-10-14T09:44:43Z"
+      },
+      "tested_checkout": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+      "junit_summary": "docs/collaboration/evidence/P-20261014-02-SW-010/test-summary.json",
+      "merge_tree_exit": 1,
+      "conflicts": [
+        "CONFLICT (content): Merge conflict in docs/collaboration/state/zcode.json"
+      ],
+      "post_business_diff": [
+        "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+        "docs/collaboration/handoffs/zcode/H-SW-010-R1.md",
+        "docs/collaboration/state/zcode.json"
+      ]
+    },
+    {
+      "task_id": "SW-014",
+      "branch": "codex/minimax/SW-014-rainforest-preflight",
+      "branch_head": "13d6c0d51261a467feb2c3a57705ae7820198e49",
+      "business_head": "7d047a22ddde21664983db5ee298c18d805b5326",
+      "pr_url": null,
+      "post_business_diff": [
+        "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
+        "docs/collaboration/state/minimax.json"
+      ],
+      "android_run": 38537213806,
+      "collaboration_run": 38537213773,
+      "probe_results": "docs/collaboration/evidence/P-20261014-02/sw014-probe-results.json"
+    }
+  ],
+  "trae_draft": {
+    "task_id": "SW-011",
+    "head": "5a129d41cfa5d04424521e987136616407f47e5c",
+    "shared_delivery": false,
+    "manifest_file": "design/05-visual-design/SW-011/r1/design-manifest.json",
+    "manifest_sha256": "1a5ea1a9b1788037f56cc65e036e681ade0e27f630ccb523aae2a51b64852977",
+    "spec_sha256": "797fe5357f06f2a4bde3c9a1c015b84587a175055e3b2455f3e4dd2323c80246",
+    "file_count": 43,
+    "hash_byte_mismatches": [],
+    "git_status": [
+      " M .gitignore",
+      " M docs/collaboration/state/trae-design.json",
+      "?? design/05-visual-design/SW-011/"
+    ]
+  },
+  "sw010_production_assets": {
+    "clearing": {
+      "production_file": "app/src/main/assets/visual/forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "bytes": 26312
+    },
+    "light_shows": {
+      "production_file": "app/src/main/assets/visual/forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "bytes": 34414
+    }
+  },
+  "releases": [
+    {
+      "isLatest": false,
+      "isPrerelease": true,
+      "publishedAt": "2026-10-14T03:45:05Z",
+      "tagName": "build-41-8ef1446"
+    },
+    {
+      "isLatest": false,
+      "isPrerelease": true,
+      "publishedAt": "2026-10-14T03:14:24Z",
+      "tagName": "build-39-0e1687b"
+    },
+    {
+      "isLatest": false,
+      "isPrerelease": true,
+      "publishedAt": "2026-10-14T02:41:05Z",
+      "tagName": "build-37-8056e11"
+    }
+  ]
+}

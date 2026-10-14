@@ -1,0 +1,14 @@
+SW-001 R1 本地（worktree codex/zcode/SW-001-t06-reliability，业务 head 2dba5eb）检查摘要
+日期：2026-10-14 · 设备：开发机（Homebrew JDK 21 + android-commandlinetools SDK）
+
+命令：
+  ANDROID_HOME=/opt/homebrew/share/android-commandlinetools ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
+
+结果：
+- :app:testDebugUnitTest  238 tests / 0 failures / 0 errors（21 个 TEST-*.XML 汇总；
+  基线 8056e11 为 217 → 新增 21：SessionArbiterTest 8、StepSensorSourceTest 7、
+  RealWalkEngineTest 反例重写净增 5、RealWalkControllerTest +1）
+- :app:lintDebug          BUILD SUCCESSFUL（0 errors）
+- :app:assembleDebug      BUILD SUCCESSFUL，APK 已安装模拟器用于回归
+
+说明：本地结果供预检；同一套件由 PR 分支 Actions（android.yml）云端复跑为准。

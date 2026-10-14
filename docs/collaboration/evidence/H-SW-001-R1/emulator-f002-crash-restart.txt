@@ -1,0 +1,12 @@
+F-002 空重启验证（emulator，Pixel 6 / API 36 / arm64，serial emulator-5554）
+方法：正常进入实走会话（UI 路径 + debug 冒烟开关 + pm grant 授权）→
+     adb shell am crash com.sensewalk.app（真实进程死亡触发 START_STICKY 粘性重启）
+
+时序与观察：
+1. am crash 前会话活动：ServiceRecord caller=com.sensewalk.app，pid 7400，通知「慢行 · 实走中」在栏
+2. am crash 后 3s：旧 pid 无（进程死亡）
+3. 粘性重启后（~8s）：
+   - 新进程 pid 7504（系统为重启拉起）
+   - dumpsys activity services com.sensewalk.app：无存活 ServiceRecord（null Intent → 仲裁 STOP_CLEAN → stopSelf）
+   - dumpsys notification --noredact | grep 实走中 → 0（无空前台通知）
+结论：崩溃粘性重启不再留下空通知/空会话；不假装可恢复（快照属 T07）。
