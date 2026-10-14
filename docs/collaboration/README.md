@@ -11,20 +11,23 @@
 
 同一角色后续继续使用同一句。角色入口不绑定旧提交；每次都查询任务登记与最新交接。四个入口由用户交给对应工具。
 
-## 现在可以并行做什么
+## 2026-10-14进展与当前分工
+
+本轮完整核查、238项PR云端JUnit原始证据、源码反例及阶段规划见 [进展报告](evidence/P-20261014-01/README.md)。本机当前分支可能属于别的角色或落后于main；每轮先fetch，再从最新origin/main读取登记/入口，保留本角色未交付工作同步到独立分支，不能reset覆盖别人工作。
 
 | 角色 | 当前任务 | 结果去向 |
 | --- | --- | --- |
-| ZCode | [SW-001：T06 可靠性补强](tasks/SW-001.md) | 功能 PR → Antigravity 审核 |
-| MiniMax Code | [SW-002：森林光效候选收尾](tasks/SW-002.md) | 带哈希候选 → Antigravity 验收 → ZCode 入包 |
-| Trae Design | [SW-011：森林图片设计与通用规范](tasks/SW-011.md) | 设计稿/提示词 → 独立审核 → MiniMax 制作 |
-| Antigravity | [SW-003：独立基线验收与协作集成](tasks/SW-003.md) | 审核、证据、任务登记与测试发布 |
+| ZCode | [SW-001修订PR #1的R2](tasks/SW-001.md)，随后 [SW-010正式光效接入](tasks/SW-010.md) | 具体新反例修正 + 分别提交应用证据 → 独立审核 |
+| MiniMax Code | [SW-014：零API素材预检准备](tasks/SW-014.md) | 脚本/fixture/账本 → 审核；雨林制作等待SW-012 |
+| Trae Design | [SW-011：完成既有森林设计草稿交付](tasks/SW-011.md) | 真实提交/manifest/handoff → 独立审核，之后SW-012 |
+| Antigravity | [SW-013：第二轮复验与交接收口](tasks/SW-013.md) | 完整head审查、应用验图、设计审稿、顺序登记/集成 |
 
-开始前必须核对真实 main；四项是**已安排、尚未执行**的任务，不把历史成果伪装成新 agent 交付。当前森林机械修图继续原范围；雨林等新图按 Trae 设计 → Antigravity 审核 → MiniMax 素材 → 再审核 → ZCode 接入 → Android 复验推进。
+SW-002候选与SW-003启动已accepted；候选进main不等于正式入包，当前森林两层光效仍程序降级。PR #1云端238项通过但未合入且有待修正反例；Trae已有本机草稿但未提交。新的SW-013/014仅已安排，本系统未向执行工具发消息。雨林按 Trae设计 → 审核 → MiniMax素材 → 验图 → ZCode接入 → Android复验推进。
 
 ## 文件导航
 
 - [任务看板](BOARD.md)：由 registry 生成，可在 GitHub 浏览。
+- [最新进展与下一轮规划](evidence/P-20261014-01/README.md)：main/PR/本机草稿分别核对。
 - [协作协议](PROTOCOL.md)：隔离、所有权、领取、交接、退回与集成。
 - [整体路线](ROADMAP.md)：T07 拆成快照、地形、雨林三个可验收步骤。
 - [基线核查](evidence/B-20261013-01/README.md)：8056e11、217 项云端测试、素材与 T06 风险。

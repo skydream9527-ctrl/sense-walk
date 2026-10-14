@@ -15,6 +15,8 @@
 
 ## 0. 当前进度（仓库核查，2026-10-13 · T06 后）
 
+**2026-10-14追加核查**：main为da9bd24。SW-002候选已获独立approved，实际生产光效仍程序降级，SW-010待正式接线；ZCode PR #1的21份云端JUnit XML实际统计238项全通过，但未合入，detector注册失败cue回退与低步数同刻合并需R2复验。Trae本机43文件设计草稿未共享提交，不能标设计approved。下一交付物先收口这些任务，之后再做T07。当前分工、原始新证据与完整提示词见 [最新核查](./docs/collaboration/evidence/P-20261014-01/README.md)、[协作入口](./docs/collaboration/README.md)；以下保留13日实现快照。
+
 **结论：T01–T06 已合入 main（T05 记录见 §20.8–§20.9，定点修复见 §20.10，T06 实走记录见 §20.11，Actions 全绿）。** 森林 800 m 虚走可通关/放弃且感官层为真实引擎 + 真实素材；**森林实走（counter 计步 + health 前台服务）已实现并经模拟器链路验证**；其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电/实走计步/锁屏 15 分钟与问题视觉层重制未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
 
 | 模块 | 已有内容 / 源码证据 | 与目标的差距 |
@@ -1115,3 +1117,11 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 协作扩为四个角色，新增 [Trae Design 稳定入口](./docs/collaboration/roles/trae-design.md) 与 [图片设计规范](./docs/collaboration/contracts/visual-design.md)。Trae 单写 `design/05-visual-design/<task-id>/r<n>/`：可编辑源、色板/构图/分层、六阶段及三比例预览、MiniMax逐层生成提示词和设计清单。Antigravity独立审核具体head与全部设计文件哈希后，MiniMax再按引用制作候选；ZCode入包仍需应用证据。
 
 首轮SW-011为森林与通用视觉语言，SW-012为其批准后的900m雨林设计，SW-006雨林素材新增该设计前置。现有SW-002森林透明/光效修复继续原范围，已有工作不被重置。新设计尚未制作或批准；当前仅完成可执行任务与规范，不据此更新产品完成状态。距离、相位、程序旅人与操作区按现有产品/配置保持。
+
+### 21.5 第二轮进展与四角色分工（2026-10-14）
+
+本轮 [核查报告](./docs/collaboration/evidence/P-20261014-01/README.md) 区分main、未合入PR与本机未提交设计。ZCode PR #1云端238项通过，仍需两个源码反例的R2修订；MiniMax SW-002已批准候选，a5ad6dd没有修改生产图与配置；Trae已有可编辑源与预览但无共享handoff。完整原始JUnit与观察哈希落入证据目录，旧审核原文保留。
+
+当前并行：ZCode先SW-001 R2、随后独立SW-010接线；MiniMax SW-014零API预检脚本；Trae完成SW-011真实交付、获批后SW-012；Antigravity SW-013完整head/应用/设计复验与顺序登记。SW-010只依赖已批准候选与协调启动，SW-004仍等待T06可靠性批准，SW-006仍等待雨林设计与预检准备批准。规则调整依据见 [D-004](./docs/collaboration/decisions/D-004-next-round-planning.md)。
+
+后续依次收口恢复→地形/雨林双模式→按城市/沙漠拆分设计/素材/接入→真机内测汇总。标准距离、comfort_v1、门禁、冻结及真实体验验收要求保持。四个工具继续只读自己的roles入口，每轮核对最新origin/main；本次未启动或消息通知外部工具，不要求完善本地Android环境。
