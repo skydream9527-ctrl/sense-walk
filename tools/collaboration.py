@@ -103,7 +103,7 @@ def validate() -> list[str]:
         elif id and state.get('status') in {'in_progress', 'handoff_ready'}:
             # A producer may not yet have consumed the coordinator's acceptance/block notice.
             # Stale private state must not force the coordinator to overwrite another role's file.
-            if by_id[id]['status'] == 'queued' or (by_id[id]['status'] not in {'accepted', 'blocked'} and any(by_id[d]['status'] != 'accepted' for d in by_id[id]['depends_on'])):
+            if by_id[id]['status'] == 'queued' or (by_id[id]['status'] not in {'accepted', 'blocked'} and any(d not in by_id or by_id[d]['status'] != 'accepted' for d in by_id[id]['depends_on'])):
                 errors.append(f'state/{role}: task not executable')
         if state.get('latest_handoff') and not repo_path(state['latest_handoff']).is_file():
             errors.append(f'state/{role}: missing handoff')
