@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-14T02:40:05" hostname="runnervmmprz5" time="0.016">
+  <properties/>
+  <testcase name="环境淡入按 fadeMs 推进且停走冻结增益" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.005"/>
+  <testcase name="重复相位事件不重启轨道" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="暂停冻结淡入且恢复后继续 - 不重置相位" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="振动未解锁前不触发" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.001"/>
+  <testcase name="脚步层未解锁前保持静默 - 不因移动发声" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="终态释放后不再发声" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="everyNSteps 振动跟随步伐且尊重开关" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.006"/>
+  <testcase name="fadeMs 为 0 的层立即到目标增益" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="脚步变体与音量在规格范围内" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.001"/>
+  <testcase name="静止与回退不产生脚步" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <testcase name="脚步按步伐节奏触发 - 不按渲染帧" classname="com.sensewalk.app.domain.sensory.SensoryCoordinatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

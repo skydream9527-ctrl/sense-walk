@@ -52,3 +52,7 @@ keystore.properties
 
 # 本地验证截图/产物（不入库）
 .local-verify/
+
+# 协作校验工具的 Python 缓存（不进入交接源码包）
+__pycache__/
+*.py[cod]

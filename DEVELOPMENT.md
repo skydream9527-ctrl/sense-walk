@@ -1099,3 +1099,13 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 ### 21.2 云端打包基线修复
 
 首次 GitHub Actions 编译发现 `domain/scene/Scene.kt` 的 KDoc 中 `scenes/*.json` 被 Kotlin 识别为嵌套注释起点，导致未闭合注释和 Scene/Phase/Layer 连锁解析失败。已仅调整这行注释，不改变应用行为；后续以新的云端构建结果确认。
+
+### 21.3 多 agent 文件交接（2026-10-13）
+
+执行计划与完整提示词现保存于 [docs/collaboration](./docs/collaboration/README.md)：ZCode 单写功能与正式入包，MiniMax Code 交独立候选，Antigravity 独立验收与顺序集成。三个稳定角色入口查询单一任务登记，交付 JSON+Markdown、独立 review、决策与证据按 revision 保留。
+
+本文件继续定义产品规则；实际派工/审核状态以 [registry](./docs/collaboration/registry.json) 与 [生成看板](./docs/collaboration/BOARD.md) 为准；当前代码状态摘要属于有日期的核查记录。历史 T01–T09 文档不作为重复执行入口。
+
+本次核查基线8056e11：217个实际云端JUnit测试全部通过，原始XML已归档；T06有同刻事件计距、空服务重启、注册失败边界需要补强（[审阅](./docs/collaboration/reviews/R-BASE-001.md)），不以全绿替代这些反例验证。森林light_shows/clearing保持程序降级，MiniMax v5柔光为待独立审核候选。首批任务SW-001/002/003分别交三角色；T07拆为恢复、地形、雨林，前置未accepted不得跳序。
+
+用户只需告知各工具读取对应roles文件；本系统不自动发送消息、启动agent或调用付费API。缺设备的真机/真人项保留Pending，独立源码工作继续；M1/M2/最终MVP只在实际退出证据齐备时验收。

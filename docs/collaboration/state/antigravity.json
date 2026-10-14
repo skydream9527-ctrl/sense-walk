@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "agent": "antigravity",
+  "current_task": null,
+  "status": "idle",
+  "branch": null,
+  "head_commit": null,
+  "latest_handoff": null,
+  "updated_on": "2026-10-13",
+  "note": "初始化状态，不代表此agent已经领取任务；首次执行时由本人更新。"
+}

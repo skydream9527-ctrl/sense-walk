@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-10-13",
+  "coordinator": "antigravity",
+  "baseline_id": "B-20261013-01",
+  "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
+  "role_entries": {
+    "zcode": "docs/collaboration/roles/zcode.md",
+    "minimax": "docs/collaboration/roles/minimax.md",
+    "antigravity": "docs/collaboration/roles/antigravity.md"
+  },
+  "tasks": [
+    {
+      "id": "SW-001",
+      "title": "T06 可靠性补强",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [],
+      "task_file": "docs/collaboration/tasks/SW-001.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-002",
+      "title": "森林光效候选验收收尾",
+      "owner": "minimax",
+      "kind": "asset",
+      "status": "ready",
+      "depends_on": [],
+      "task_file": "docs/collaboration/tasks/SW-002.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-003",
+      "title": "独立基线验收与协作集成启动",
+      "owner": "antigravity",
+      "kind": "coordination",
+      "status": "ready",
+      "depends_on": [],
+      "task_file": "docs/collaboration/tasks/SW-003.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-010",
+      "title": "森林光效批准候选入包",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-001",
+        "SW-002",
+        "SW-003"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-010.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-004",
+      "title": "T07A 会话快照与中断恢复",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-001",
+        "SW-003"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-004.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-006",
+      "title": "T07C 雨林候选素材批次",
+      "owner": "minimax",
+      "kind": "asset",
+      "status": "queued",
+      "depends_on": [
+        "SW-002",
+        "SW-003"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-006.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-005",
+      "title": "T07B 自动越坎与站稳规则",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-004"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-005.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-007",
+      "title": "T07C 雨林双模式与素材接入",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-005",
+        "SW-006"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-007.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-008",
+      "title": "T08 四景内容与一致性",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-007",
+        "SW-010"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-008.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-009",
+      "title": "T09 真机内测与发布候选验收",
+      "owner": "antigravity",
+      "kind": "coordination",
+      "status": "queued",
+      "depends_on": [
+        "SW-008"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-009.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    }
+  ],
+  "physical_validation_pending": [
+    "标准距离真人手动行走",
+    "真实计步与锁屏15分钟",
+    "实体耳机/来电与振动",
+    "真机视觉走查",
+    "最终5–8人内测"
+  ]
+}

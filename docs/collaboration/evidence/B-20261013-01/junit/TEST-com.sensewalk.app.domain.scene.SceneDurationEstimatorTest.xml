@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.SceneDurationEstimatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-14T02:40:04" hostname="runnervmmprz5" time="0.001">
+  <properties/>
+  <testcase name="上坡降低平均速度从而拉长时长" classname="com.sensewalk.app.domain.scene.SceneDurationEstimatorTest" time="0.001"/>
+  <testcase name="平地 800m 约 12 分钟" classname="com.sensewalk.app.domain.scene.SceneDurationEstimatorTest" time="0.0"/>
+  <testcase name="地形系数符合 §5_7" classname="com.sensewalk.app.domain.scene.SceneDurationEstimatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-001-R1",
+  "task_id": "SW-001",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "REPLACE_WITH_40_CHAR_SHA",
+  "head_commit": "REPLACE_WITH_40_CHAR_SHA",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-001-R1.md",
+  "changed_files": [],
+  "checks": [
+    {
+      "name": "必要检查名称",
+      "type": "unit",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "列真实未执行项"
+  ],
+  "requests": [
+    "请按任务文件独立审核，不自批准"
+  ]
+}

@@ -1,5 +1,7 @@
 # SenseWalk · ZCode 开发计划与提示词
 
+> 自多 agent 文件交接启用后，本文件保留阶段规则和历史提示词。实际下一任务请读取 [ZCode 稳定入口](collaboration/roles/zcode.md) 与 [任务登记](collaboration/registry.json)；不要按旧使用方法重复从 T01 开始，也不要跳过独立审核。MiniMax 与 Antigravity 入口见 [协作首页](collaboration/README.md)。
+
 交接日期：2026-10-12。交付方式：**功能开发 + GitHub Actions 云端检查/打包 + GitHub 下载交付**，无需完善本地 Android 环境。依据 [DEVELOPMENT.md v0.8](../DEVELOPMENT.md)。本文将 M0–M3 拆成 9 个可单独交付的任务，不新增产品规则。开发前以 ZCode 实际拿到的源码为准，重新核查进度。
 
 ## 使用方法

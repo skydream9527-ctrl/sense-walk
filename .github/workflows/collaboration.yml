@@ -1,0 +1,38 @@
+name: Collaboration handoff checks
+
+on:
+  push:
+    branches: [main, 'codex/**']
+    paths:
+      - 'AGENTS.md'
+      - 'docs/collaboration/**'
+      - 'tools/collaboration.py'
+      - 'tools/qa/test_collaboration.py'
+      - '.github/workflows/collaboration.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'AGENTS.md'
+      - 'docs/collaboration/**'
+      - 'tools/collaboration.py'
+      - 'tools/qa/test_collaboration.py'
+      - '.github/workflows/collaboration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6, same pinned revision as Android workflow
+        with:
+          fetch-depth: 0
+      - name: Check tasks, handoffs, evidence and immutable records
+        env:
+          TASK_CHECK_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python3 tools/collaboration.py check --base-ref "$TASK_CHECK_BASE"
+      - name: Exercise protocol rejection cases in disposable repositories
+        run: python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -v

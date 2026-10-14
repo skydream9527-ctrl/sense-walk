@@ -6,9 +6,11 @@
 
 **[打开可视化计划页 →](./docs/plan.html)**（单文件 HTML，可双击离线打开，支持深/浅色）
 
-完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.8**）：[当前代码进度](./DEVELOPMENT.md#0-当前进度仓库核查2026-10-12)、[分阶段交付与验收](./DEVELOPMENT.md#13-里程碑)、[完善与改进建议](./DEVELOPMENT.md#20-完善与改进v08)。产品规则保留 v0.7，进度以源码与验证记录为准。
+完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.8**）：[当前代码进度](./DEVELOPMENT.md)、[分阶段交付与验收](./DEVELOPMENT.md#13-里程碑)、[完善与改进建议](./DEVELOPMENT.md#20-完善与改进v08)。产品规则保留 v0.7，进度以源码与验证记录为准。
 
-**交给 ZCode 开发**：见 [开发任务与可复制提示词](./docs/zcode-handoff.md)（总提示词 + T01–T09 分阶段提示词 + 验收清单）。
+**三 agent 协作入口**：见 [协作首页与任务看板](./docs/collaboration/README.md)。ZCode 负责功能/入包，MiniMax Code 负责候选素材，Antigravity 负责独立验收/集成；完整提示词与实际交付均通过文件 handoff 保存。后续只需让各工具读取 [ZCode](./docs/collaboration/roles/zcode.md)、[MiniMax](./docs/collaboration/roles/minimax.md)、[Antigravity](./docs/collaboration/roles/antigravity.md) 对应入口。
+
+旧 [T01–T09 提示词](./docs/zcode-handoff.md) 保留作阶段参考，具体下一任务以协作登记为准。
 
 **完整设计包（PRD 级）**见 [`design/`](./design/)：场景与地形 → 角色 → PRD → [交互演示](./design/04-interaction-mockups/demo/index.html)。阅读顺序以 `design/README.md` 为准。
 
@@ -24,7 +26,7 @@
 - **距离门禁**：进度 = 有效距离；未满要求米数不能通关；长按 = 放弃
 - 感官与视觉层随 **`atMeters`** 展开；耳目同程、不可加速揭示
 
-## 当前状态（2026-10-12）
+## 当前状态（2026-10-13）
 
 Kotlin + Jetpack Compose。**T01–T04 已完成**：云端打包与 CI；schema v2 配置契约（严格类型校验/加载态/重试）；纯 Kotlin 领域层（comfort_v1 保形曲线、s_pos/s_best 有效距离、门禁、相位调度、状态机，含 §5.7 地形速度系数）；**森林 800 m 虚走 UI 闭环**（模式选择、浮动摇杆、长按放弃、黑幕层层展开、后台不偷跑，仅森林虚走开放）。**T05 感官机制与收尾已完成**：步伐驱动脚步/淡入冻结/everyNSteps 振动 + SoundPool/MediaPlayer/Vibrator 真实引擎 + 音频焦点/耳机断连中断边界（暂停拒绝摇杆、恢复仅凭新输入、终态释放，可注入单测）；**森林真实音频素材已入库**（落叶脚步 ×6 + 虫鸣/远鸟循环，CC0/CC BY 授权可查，`REQUIRE_REAL_ASSETS` 发布策略放行，来源与处理记录见 ASSETS.md）；视觉真实图三层入包（outline/trunks/leaf_path）；light_shows 与 clearing 检出 32px 对角棋盘纹理，已程序降级待 MiniMax 重制（曾以 8px 统计误判 v4 五层合格并撤回，见 DEVELOPMENT §20.10 与 ASSETS.md）；旅人为程序绘制正式方案。模拟器 800 m 全程走查已通过（静默起点、80 m 脚步解锁、240/600 m 环境音、停走逐像素冻结、来电中断「已暂停」、通关即释放全部播放器）；**标准 800 m 真人手动验收与真机耳机/来电验证仍待执行，M1 不据此宣布完成**。**T06 森林实走已实现**：TYPE_STEP_COUNTER 唯一计距（首事件基线、1.4 m/s 封顶、暂停不补算）、health 前台服务（单一会话源、通知返回/停止）、权限与无传感器诚实回退虚走；真实计步与锁屏 15 分钟待真机验证。快照恢复与四景属后续阶段；HTML demo 是设计原型。
 
@@ -34,7 +36,7 @@ Kotlin + Jetpack Compose。**T01–T04 已完成**：云端打包与 CI；schema
 
 本地无需准备完整 Android 环境。代码提交后由 [GitHub Actions](https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml) 执行测试/lint/构建，提供 APK、报告与源码交接 ZIP（Artifacts 保留 30 天）。
 
-在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供 ZCode 接手和用户测试。当前最新 Pre-release 为 [`build-34-9c0ccc4`](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-34-9c0ccc4)（T05 收尾森林虚走可听可走；M1 真机验收见 [docs/t05-acceptance.md](./docs/t05-acceptance.md)）。版本矩阵、本地构建步骤与已知网络问题见 [docs/BUILD.md](./docs/BUILD.md)。
+在 main 手动运行工作流并勾选 `publish_release`，检查通过后将 APK 与源码 ZIP 放到 [GitHub Releases](https://github.com/skydream9527-ctrl/sense-walk/releases)，供开发接手和用户测试。本轮核查的最新 Pre-release 为 [`build-37-8056e11`](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-37-8056e11)（含森林实走；217 项云端单测通过，真机/真人待验证；完整核查与 T06 补强任务见 [协作基线](./docs/collaboration/evidence/B-20261013-01/README.md)）。版本矩阵、本地构建步骤与已知网络问题见 [docs/BUILD.md](./docs/BUILD.md)。
 
 ## 打开工程（可选，本地开发时）
 

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-001-R1",
+  "task_id": "SW-001",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
+  "reviewed_commit": "REPLACE_WITH_40_CHAR_SHA",
+  "verdict": "changes_requested",
+  "report": "docs/collaboration/reviews/R-SW-001-R1.md",
+  "artifact_hashes": {},
+  "checks": [],
+  "findings": [],
+  "pending": []
+}

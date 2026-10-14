@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-002",
+  "revision": 1,
+  "scene_id": "forest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "clearing",
+      "file": "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+      "sha256": "REPLACE_WITH_64_CHAR_SHA256",
+      "width": 768,
+      "height": 1376,
+      "bytes": 0,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "说明程序算法/原稿/服务及条款来源",
+      "process": "实际处理步骤",
+      "quality_status": "candidate",
+      "checks": [],
+      "limitations": [
+        "实际限制"
+      ]
+    }
+  ]
+}
