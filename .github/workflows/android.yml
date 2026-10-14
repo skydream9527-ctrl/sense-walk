@@ -55,6 +55,15 @@ jobs:
           chmod +x gradlew
       - name: Test, lint and build with repository wrapper
         run: ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug --no-daemon --console=plain
+      - name: Release manifest guard (SW-001 F-005)
+        run: |
+          ./gradlew :app:processReleaseMainManifest --no-daemon --console=plain
+          M=$(find app/build/intermediates/merged_manifest/release -name AndroidManifest.xml | head -1)
+          echo "release merged manifest: $M"
+          if grep -q "DebugStepReceiver" "$M"; then
+            echo "::error::release merged manifest contains DebugStepReceiver"; exit 1
+          fi
+          echo "release manifest clean: debug-only smoke entries absent"
       - name: Upload installable debug APK
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

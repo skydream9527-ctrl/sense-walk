@@ -9,13 +9,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ServiceInfo
-import android.hardware.SensorManager
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
+import android.os.SystemClock
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +29,7 @@ import com.sensewalk.app.domain.sensory.AudioFocusGate
 import com.sensewalk.app.domain.sensory.SensoryCoordinator
 import com.sensewalk.app.domain.walk.RealWalkController
 import com.sensewalk.app.domain.walk.VirtualWalkController
+import com.sensewalk.app.engine.sensor.AndroidSensorPort
 import com.sensewalk.app.engine.sensor.StepSensorSource
 import com.sensewalk.app.engine.sensory.AndroidSensoryBackend
 import kotlinx.coroutines.CoroutineScope
@@ -84,12 +85,16 @@ class WalkForegroundService : android.app.Service() {
     private var coordinator: SensoryCoordinator? = null
     private var sensors: StepSensorSource? = null
     private var sceneName: String = ""
-    private var finished = false
+
+    /** 生命周期仲裁（F-002/F-004）：空重启、单飞装配、迟到协程丢弃 */
+    private val arbiter = SessionArbiter()
 
     /** debug 构建冒烟用：跳过硬件检查（服务生命周期验证，不构成计步验证） */
     private var debugStubSensor = false
 
-    private val clock = MonotonicClock { System.nanoTime() / 1_000_000 }
+    // 事件时间基准：elapsedRealtime（休眠不停表，与 SensorEvent.timestamp 同系）——
+    // 见 StepSensorSource/AndroidSensorPort 与 SW-001 handoff 的时间基准核查
+    private val clock = MonotonicClock { SystemClock.elapsedRealtime() }
     private var audioManager: AudioManager? = null
     private var focusRequest: AudioFocusRequest? = null
     private var noisyReceiver: BroadcastReceiver? = null
@@ -103,29 +108,36 @@ class WalkForegroundService : android.app.Service() {
         (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
-            ACTION_STOP -> {
+        val sceneId = intent?.getStringExtra(EXTRA_SCENE_ID)
+        return when (arbiter.onCommand(intent?.action, sceneId != null)) {
+            SessionArbiter.Decision.ABANDON_AND_FINISH -> {
                 abandonSession()
-                return START_NOT_STICKY
+                START_NOT_STICKY
             }
-            ACTION_DEBUG_STEP -> {
+            SessionArbiter.Decision.STOP_CLEAN -> {
+                // F-002：START_STICKY 空重启/无有效会话——不进前台、不留空通知，
+                // 清掉可能残留的前台身份后干净退出（快照恢复属 T07，不假装可恢复）
+                stopSelfClean()
+                START_NOT_STICKY
+            }
+            SessionArbiter.Decision.FORWARD_DEBUG_STEP -> {
                 // debug 构建专用：adb 注入 counter 读数冒烟（服务生命周期/渲染/UI），
                 // 不构成真实计步验证；release 构建不可达
                 if (isDebuggable() && controller != null) {
-                    val count = intent.getLongExtra(EXTRA_DEBUG_COUNT, 0L)
+                    val count = intent?.getLongExtra(EXTRA_DEBUG_COUNT, 0L) ?: 0L
                     onCounterEvent(count, clock.nowMs())
                 }
-                return START_STICKY
+                START_STICKY
             }
-            else -> {
+            SessionArbiter.Decision.START_FOREGROUND_AND_SETUP -> {
                 startAsForeground() // startForegroundService 后 5s 内必须进前台
-                val sceneId = intent?.getStringExtra(EXTRA_SCENE_ID)
                 debugStubSensor = DebugWalkSmoke.enabled(this)
-                if (controller == null && sceneId != null && !finished) {
-                    setupSession(sceneId)
-                }
-                return START_STICKY // 系统重建保住前台身份；会话快照恢复属 T07（不假装已支持）
+                setupSession(sceneId!!)
+                START_STICKY
             }
+            SessionArbiter.Decision.NONE ->
+                // F-004：装配中/活动中的重复 start——单飞，绝不建第二套引擎
+                START_STICKY
         }
     }
 
@@ -139,17 +151,18 @@ class WalkForegroundService : android.app.Service() {
                     val config = state.scenes.firstOrNull { it.id == sceneId }
                     if (config == null) {
                         uiState.value = UiState.Error("场景不可用：'$sceneId'")
-                        stopSelfClean()
+                        failSetup()
                         return@launch
                     }
+                    val port = AndroidSensorPort(app)
                     val sensorSource = StepSensorSource(
-                        sensorManager = app.getSystemService(SensorManager::class.java),
+                        port = port,
                         onCounter = ::onCounterEvent,
                         onDetectorStep = ::onDetectorStep,
                     )
                     if (!sensorSource.canCountDistance && !debugStubSensor) {
                         uiState.value = UiState.Error("此设备没有计步传感器（TYPE_STEP_COUNTER），请改用虚走")
-                        stopSelfClean()
+                        failSetup()
                         return@launch
                     }
                     sceneName = config.name
@@ -158,13 +171,29 @@ class WalkForegroundService : android.app.Service() {
                         config = config,
                         backend = AndroidSensoryBackend(app, config),
                     )
-                    // detector（若存在）负责步伐音/振；counter 只管计距与淡入——不双份出声
-                    sensory.stepAudioFromDistance = !sensorSource.hasDetector
+                    // F-003：以真实注册结果为准（硬件存在 ≠ 注册成功）
+                    val registered = debugStubSensor || sensorSource.start()
+                    if (!registered) {
+                        sensory.release()
+                        uiState.value = UiState.Error(
+                            "计步传感器注册失败（可能因权限变化或传感器暂不可用）。请重试，或改用虚走。",
+                        )
+                        failSetup()
+                        return@launch
+                    }
+                    // F-004：装配期间服务可能已被停止/终态——迟到协程一律丢弃，
+                    // 释放本次临时创建的资源，不发布第二套会话
+                    if (!arbiter.onSetupCompleted(active = true)) {
+                        sensorSource.stop()
+                        sensory.release()
+                        return@launch
+                    }
+                    // detector（若存在且已注册成功）负责步伐音/振；counter 只管计距与淡入
+                    sensory.stepAudioFromDistance = !(sensorSource.isStarted && sensorSource.hasDetector)
                     sensory.onPhaseEvents(real.drainPhaseEvents())
                     controller = real
                     coordinator = sensory
                     sensors = sensorSource
-                    sensorSource.start()
                     real.start()
                     setupAudioFocus()
                     observeVibrationSetting(app)
@@ -173,11 +202,17 @@ class WalkForegroundService : android.app.Service() {
                 }
                 is SceneLoadState.Error -> {
                     uiState.value = UiState.Error("场景配置加载失败：\n${state.diagnostics.joinToString("\n")}")
-                    stopSelfClean()
+                    failSetup()
                 }
                 SceneLoadState.Loading -> Unit
             }
         }
+    }
+
+    /** 装配失败：仲裁记终态并干净退出（不残留前台/通知/监听） */
+    private fun failSetup() {
+        arbiter.onFinish()
+        stopSelfClean()
     }
 
     private fun onCounterEvent(stepCount: Long, eventTimeMs: Long) {
@@ -221,17 +256,22 @@ class WalkForegroundService : android.app.Service() {
     }
 
     fun abandonSession() {
-        val real = controller ?: return
-        if (real.stateMachine.state != SessionState.COMPLETED) {
+        val real = controller
+        if (real != null && real.stateMachine.state != SessionState.COMPLETED) {
             real.abandon()
+            walk.value = real.snapshot()
         }
+        // 装配中（controller 尚未发布）也可被通知「停止」：仲裁记终态，
+        // 迟到的装配协程会自行丢弃
         finishSession()
-        walk.value = real.snapshot()
     }
 
     private fun finishSession() {
-        if (finished) return
-        finished = true
+        if (arbiter.phase == SessionArbiter.Phase.FINISHED) {
+            stopSelfClean()
+            return
+        }
+        arbiter.onFinish()
         sensors?.stop()
         coordinator?.release()
         teardownAudioFocus()
@@ -251,6 +291,11 @@ class WalkForegroundService : android.app.Service() {
             )
         }
         val notification = buildNotification()
+        // 服务类型依据（SW-001 F-005 核查）：本服务的持续前台职责是"计步锻炼会话"
+        // （TYPE_STEP_COUNTER），官方归类为 FOREGROUND_SERVICE_TYPE_HEALTH，API 34+
+        // 需 FOREGROUND_SERVICE_HEALTH + 下列运行时权限之一（我们持有 ACTIVITY_RECOGNITION）。
+        // 会话中的环境音播放是该健康会话的一部分，不是独立的媒体服务职责，
+        // 故不机械追加 mediaPlayback 类型；若后续把音频拆成独立常驻播放服务再另行评估。
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 ServiceCompat.startForeground(
@@ -264,7 +309,7 @@ class WalkForegroundService : android.app.Service() {
             // API 34+：health 类型要求运行时已持有 ACTIVITY_RECOGNITION 等（"any of"）；
             // 权限被拒/在设置中被撤回的竞态下诚实降级为不可实走，不崩溃
             uiState.value = UiState.Error("缺少活动识别权限，无法开始实走。可在系统设置授权后重试，或改用虚走。")
-            stopSelfClean()
+            failSetup()
         }
     }
 
@@ -381,6 +426,7 @@ class WalkForegroundService : android.app.Service() {
     }
 
     override fun onDestroy() {
+        arbiter.onFinish()
         sensors?.stop()
         coordinator?.release()
         teardownAudioFocus()
