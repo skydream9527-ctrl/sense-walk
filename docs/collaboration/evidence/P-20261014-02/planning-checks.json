@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "bootstrap-planning-verification-not-product-approval",
+  "base_commit": "6d33d948eac764af37c188325814c020e10e6a7e",
+  "checks": [
+    {
+      "command": "python3 tools/collaboration.py render",
+      "result": "passed"
+    },
+    {
+      "command": "python3 tools/collaboration.py check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -q",
+      "result": "passed",
+      "tests": 31
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "name": "Markdown/HTML local links plus observed source/queue paths",
+      "result": "passed",
+      "markdown_links_checked": 95
+    },
+    {
+      "name": "SW-014 R1 read-only behavioral probes",
+      "result": "four documented mismatches reproduced; not producer acceptance"
+    },
+    {
+      "name": "Trae 43 draft files hash/bytes audit",
+      "result": "all matched; not shared/approved"
+    }
+  ],
+  "api_calls": 0,
+  "android_environment_installed": false,
+  "physical_device": "pending",
+  "human_acceptance": "pending"
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.SceneValidatorTest" tests="29" skipped="0" failures="0" errors="0" timestamp="2026-10-14T08:55:48" hostname="runnervmmprz5" time="0.067">
+  <properties/>
+  <testcase name="模型直接构造 parallax 为 NaN 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.002"/>
+  <testcase name="30% 处的 gap_hop 合法" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="pathProfile 中段空缺被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.003"/>
+  <testcase name="开发占位在开发策略下合法但被记录" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="相位越过终点被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.009"/>
+  <testcase name="缺失素材文件被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="音量越界被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="模型直接构造 grade 为 NaN 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.007"/>
+  <testcase name="visual 相位引用未定义层被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="缺少 75% 音频里程碑被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="透明度越界被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="基准配置通过校验" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.003"/>
+  <testcase name="真实素材在发布策略下通过" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="模型直接构造 toVolume 为 NaN 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="pathProfile 重叠被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="相位 id 重复被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="pathProfile 终点与门禁不一致被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.007"/>
+  <testcase name="atMeters 0 的视觉相位引用非 void 层不能充当黑幕" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="发布策略把开发占位当错误" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="everyNSteps 小于 1 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="void 层不是 solid 类型被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="相位 atMeters 乱序被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.006"/>
+  <testcase name="视觉淡入越过终点被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="模型直接构造 toOpacity 为 Infinity 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="缺少黑幕相位被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="audio 相位引用未定义层被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="缺少 95% 视觉里程碑被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.0"/>
+  <testcase name="pathProfile 不从 0 开始被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.001"/>
+  <testcase name="前 10% 出现 gap_hop 被拒绝" classname="com.sensewalk.app.domain.scene.SceneValidatorTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

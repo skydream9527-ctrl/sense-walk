@@ -1,0 +1,285 @@
+{
+  "audit_kind": "bootstrap-observation-not-independent-approval",
+  "source_head": "13d6c0d51261a467feb2c3a57705ae7820198e49",
+  "script_sha256": {
+    "api_log_template.py": "5e12066f7f94b5dc1ad6d95b8d0dba577246e2efca687bb12be5ec62b9ef1b9f",
+    "dry_run.py": "1379a21cbdb31d9bcd2c78783bcbd9e7a0e60fb24d80fbfb194459c0a67cfc61",
+    "gen_fixtures.py": "fc7864280f9298a413f2e8823736fab065f84180189d8c61efab5f54a980ddce",
+    "preflight.py": "5649ce466c92544b5f403faad967599ff91ed7ddb32a82ef47edc920962b5960"
+  },
+  "root_resolution": {
+    "expected_repo_root": "/Users/yunhegong/.codex/worktrees/sw014",
+    "actual_preflight_root": "/Users/yunhegong/.codex/worktrees/sw014/design/assets",
+    "actual_dry_run_root": "/Users/yunhegong/.codex/worktrees/sw014/design/assets",
+    "matches": false
+  },
+  "cases": [
+    {
+      "id": "PF-01",
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 0,
+        "cost": 0,
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "",
+          "spec_file": "",
+          "spec_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "layers": [
+          {
+            "layer_id": "unknown_layer",
+            "file": "fake.webp",
+            "sha256": "1c3b4f0ccc989085f2b6e9736482daaeed662be107247d1f0502e246d76f18c9",
+            "bytes": 43,
+            "width": 0,
+            "height": 0,
+            "alpha_channel": true,
+            "tileable": false,
+            "checks": []
+          }
+        ]
+      },
+      "expected": "failed",
+      "reason": "non-image, zero dimensions, no checks, unknown layer, missing approved design",
+      "actual": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-audit-onyn694h/manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 13,
+          "passed": 13,
+          "failed": 0,
+          "total_bytes": 43,
+          "layer_count": 1
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "layer_unknown_layer_bytes",
+            "detail": "43"
+          },
+          {
+            "ok": true,
+            "name": "layer_unknown_layer_sha256",
+            "detail": "1c3b4f0ccc989085"
+          },
+          {
+            "ok": true,
+            "name": "layer_unknown_layer_size",
+            "detail": "0x0"
+          },
+          {
+            "ok": true,
+            "name": "layer_unknown_layer_budget",
+            "detail": "43 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_unknown_layer_alpha",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "43 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref",
+            "detail": "task=SW-012 handoff="
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_file",
+            "detail": ""
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "未发现 CC0 标记"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "PF-02",
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 0,
+        "cost": 0,
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "",
+          "spec_file": "",
+          "spec_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "layers": []
+      },
+      "expected": "failed",
+      "reason": "empty scene and missing approved design",
+      "actual": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-audit-onyn694h/manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 8,
+          "passed": 8,
+          "failed": 0,
+          "total_bytes": 0,
+          "layer_count": 0
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "0 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref",
+            "detail": "task=SW-012 handoff="
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_file",
+            "detail": ""
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "未发现 CC0 标记"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "PF-03",
+      "input": {
+        "task_id": "SW-012",
+        "handoff": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-audit-onyn694h/NOT_AN_APPROVED_HANDOFF.json",
+        "spec_file": "",
+        "spec_sha256": "not-a-sha"
+      },
+      "expected": {
+        "ok": false
+      },
+      "reason": "dummy file, absent spec and invalid hash; no review/registry approval",
+      "actual": {
+        "ok": true,
+        "reason": "task=SW-012 approved"
+      }
+    },
+    {
+      "id": "PF-04",
+      "input_file": "design/assets/forest/candidates/SW-002/r1/manifest.json",
+      "expected": "repo-root paths resolve to existing approved candidate files",
+      "reason": "contract paths are repo-root-relative, not manifest-directory-relative",
+      "actual": {
+        "status": "failed",
+        "manifest": "/Users/yunhegong/.codex/worktrees/sw014/design/assets/forest/candidates/SW-002/r1/manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 8,
+          "passed": 6,
+          "failed": 2,
+          "total_bytes": 0,
+          "layer_count": 2
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": false,
+            "name": "layer_clearing_file_exists",
+            "detail": "missing design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp"
+          },
+          {
+            "ok": false,
+            "name": "layer_light_shows_file_exists",
+            "detail": "missing design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "0 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "未发现 CC0 标记"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          }
+        ]
+      }
+    }
+  ],
+  "reproduction_only": true
+}

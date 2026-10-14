@@ -44,6 +44,10 @@ GitHub 账号可能相同；这里保证的是执行角色独立，不能宣称 
 
 coordination 启动/验收组织任务可由协调者依据实际产出登记完成；这不是批准自己的产品代码或素材，代码/素材仍必须独立 review。
 
+Antigravity 的独立审稿/登记/集成是持续职责；coordination任务accepted后仍读取 `queues/antigravity.md`，不要求每轮新增启动ID。队列只定位待验交付，不授权作者跨任务开工，也不代替review。
+
+registry可保存 `observed_delivery`（branch、branch_head、business_head、handoff_path、pr_url、source_report）定位已发布但尚未导入main的交付；该字段为bootstrap/协调核查观察，不是正式latest_handoff，也不满足accepted条件。latest_handoff/latest_review仍须是本仓库实际文件。已有R1 changes_requested不能否定后来R2的存在，也不能自动将R2批准；中心状态handoff_ready注明正在等哪个revision复审。用户要求的bootstrap计划维护可依据实测问题安排rework，但必须标明来源，由Antigravity另写正式review。
+
 accepted 的语义取决于任务：素材任务=候选获验收；入包任务=应用接线获验收；开发任务=指定源码/CI 范围通过。真机 Pending 仍写在 registry 和报告中，不能自动将 M1/M2/MVP 判为完成。
 
 design任务accepted仅表示设计包获独立审核，不是素材入包。Trae交design_manifest与源/预览/spec/提示词哈希；批准后MiniMax新场景素材需引用具体design_ref。设计文件变化使原引用失效。森林SW-002机械修复沿原设计继续；SW-006雨林必须先有SW-012批准设计。规范见 [visual-design](contracts/visual-design.md)。
@@ -71,3 +75,5 @@ Antigravity 在工作 PR 绿跑且审核完成后按现有授权集成；遇保�
 看板任务行只从 registry 生成；生产者状态列链接到各自实时 JSON，不把这些自报值固化为验收状态。这样生产者更新自己的 state 不必抢写中心看板。
 
 协调者已accepted/blocked但生产者尚未消费结果时，private state允许短暂滞后；以registry为准，不要求协调者越权替对方清state。执行者下一轮读取登记后将已结束任务清空/领取下一ready任务。
+
+同一角色存在多个待验PR时，只有本人可在private state追加 `deliveries` 对象（task ID→分支/业务head/交付head/handoff路径/PR）以保留定位；它不改变中心状态，现有校验器不验证扩展字段。current_task仍指本人当前动作。本人顺序同步各分支、人工合并state冲突并保留两项信息，不能全选一方抹掉另一个交付，不把未审业务合进别的任务以规避冲突。bootstrap不替作者写该文件。详见 [D-005](decisions/D-005-persistent-review-queue.md)。
