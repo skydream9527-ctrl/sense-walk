@@ -54,7 +54,9 @@
       "status": "passed",
       "evidence": [
         "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
-        "4 底色合成: clearing 浅色 0% / light_shows 浅色 0%"
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg"
       ]
     },
     {
@@ -62,7 +64,7 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "records/diagnose.json: clearing 32px_alt 0%, light_shows 32px_alt 0%"
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json"
       ]
     },
     {
@@ -70,7 +72,7 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "records/diagnose.json: 4 底色 8px_alt 均 0-0.02%"
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json"
       ]
     },
     {
@@ -78,7 +80,9 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "records/diagnose.json: clearing lap_max 0-1, light_shows lap_max 24-121 (剪影边缘设计, 占比 0.025%)"
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png"
       ]
     },
     {
@@ -86,7 +90,9 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "clearing 程序化径向渐变 (主+次+三束斜光+羽化); light_shows 程序化 (三束斜光+2 只远景飞鸟+羽化)"
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+        "design/assets/forest/scripts/forest_candidate_sw002_r1.py"
       ]
     },
     {
@@ -94,7 +100,12 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "checks/stages/stage_{000,100,265,425,630,785}m.png + 540x960 jpg"
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m.png"
       ]
     },
     {
@@ -102,7 +113,7 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "manifest.json: 候选 width=768, height=1376, 不冒称 1080x1920"
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
       ]
     },
     {
@@ -110,7 +121,7 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "manifest.json api_attempts_total=14 (v1/v2/v3=14, v4=0, v5=0, SW-002 r1=0); cost=unknown"
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
       ]
     },
     {
@@ -118,7 +129,7 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "manifest.json origin: 程序算法 (非 AI 生图)"
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
       ]
     },
     {
@@ -132,12 +143,14 @@
     {
       "kind": "candidate-asset",
       "path": "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
       "role": "overlay",
       "tileable": false
     },
     {
       "kind": "candidate-asset",
       "path": "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
       "role": "overlay",
       "tileable": false
     }

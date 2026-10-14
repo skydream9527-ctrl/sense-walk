@@ -22,10 +22,11 @@
       "process": "make_clearing_canvas: 主径向 cx=0.68W,cy=0.42H,r=0.55W,peak=0.30; 次径向 cx=0.30W,cy=0.55H,r=0.40W,peak=0.12; 三束斜光 -8/-2/+5 deg, peak=0.10; 边缘 80px ramp; RGB 统一 GlowColor #A8C5A0",
       "quality_status": "candidate",
       "checks": [
-        "checks/alpha_mask/forest_clearing.png",
-        "checks/black/forest_clearing.jpg",
-        "checks/white/forest_clearing.jpg",
-        "checks/magenta/forest_clearing.jpg"
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing_center600.png"
       ],
       "limitations": [
         "原始 raw 768x1376, 与项目最终画布 1080x1920 比例为 cover 缩放, 非原生高分辨率",
@@ -47,10 +48,11 @@
       "process": "make_light_shows_canvas: 三束斜光 -14/-8/-2 deg, peak 0.40-0.45, y 方向顶部亮底部 0; 2 只飞鸟翼展 28px, 翼上 8px 翼下 4px V 字, BIRD 颜色 #1A2820, 边缘 60px ramp",
       "quality_status": "candidate",
       "checks": [
-        "checks/alpha_mask/forest_light_shows.png",
-        "checks/black/forest_light_shows.jpg",
-        "checks/white/forest_light_shows.jpg",
-        "checks/magenta/forest_light_shows.jpg"
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows_center600.png"
       ],
       "limitations": [
         "原始 raw 768x1376, 与项目最终画布 1080x1920 比例为 cover 缩放, 非原生高分辨率",
