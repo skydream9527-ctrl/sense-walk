@@ -89,11 +89,13 @@ fun ModeScreen(
     }
 
     val virtualWalkOpen = scene.id == "forest"
+    val realWalkOpen = scene.id == "forest" // T06：森林实走开放（counter 计步 + 前台服务）
     var selectedMode by remember { mutableStateOf(if (virtualWalkOpen) NavRoutes.Mode.VIRTUAL else null) }
 
     // 恢复上次选择（仅当仍可用）
     LaunchedEffect(lastMode) {
         if (virtualWalkOpen && lastMode == NavRoutes.Mode.VIRTUAL) selectedMode = NavRoutes.Mode.VIRTUAL
+        if (realWalkOpen && lastMode == NavRoutes.Mode.REAL) selectedMode = NavRoutes.Mode.REAL
     }
 
     Scaffold(
@@ -141,10 +143,14 @@ fun ModeScreen(
             Spacer(Modifier.height(12.dp))
             ModeCard(
                 title = "实走 · 出门走",
-                subtitle = "暂未开放 · 计步与前台服务开发中",
-                enabled = false,
-                selected = false,
-                onClick = {},
+                subtitle = if (realWalkOpen) {
+                    "计步算距离，锁屏也能走（需活动识别权限）"
+                } else {
+                    "暂未开放 · 本景正在准备中"
+                },
+                enabled = realWalkOpen,
+                selected = selectedMode == NavRoutes.Mode.REAL,
+                onClick = { selectedMode = NavRoutes.Mode.REAL },
             )
 
             Spacer(Modifier.height(24.dp))

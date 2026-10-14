@@ -423,7 +423,7 @@ private fun SessionContent(
 }
 
 @Composable
-private fun PauseButton(enabled: Boolean, onClick: () -> Unit) {
+internal fun PauseButton(enabled: Boolean, onClick: () -> Unit) {
     Box(
         Modifier
             .semantics { contentDescription = "暂停：打开继续或放弃确认" }

@@ -46,8 +46,16 @@ class SensoryCoordinator(
 
     private var stepAccumMeters = 0f
     private var stepCount = 0L
+    private var cueCount = 0L
     private var vibrationEnabled = true
     private var released = false
+
+    /**
+     * 脚步音是否由距离步幅积累触发（虚走默认 true）。
+     * 实走同时有 detector 时置 false：counter 只管计距与淡入，
+     * 脚步音/振由 detector cue（[onStepCue]）驱动，避免双份出声。
+     */
+    var stepAudioFromDistance = true
 
     /** 音频许可（音频焦点已获准）。默认 true：由持有者在会话建立时按首次申请结果置位。 */
     private var audioAllowed = true
@@ -110,7 +118,7 @@ class SensoryCoordinator(
                 }
             }
         }
-        if (moving && stepLayers.isNotEmpty()) {
+        if (moving && stepLayers.isNotEmpty() && stepAudioFromDistance) {
             stepAccumMeters += metersDelta
             while (stepAccumMeters >= strideMeters) {
                 stepAccumMeters -= strideMeters
@@ -127,6 +135,26 @@ class SensoryCoordinator(
                     hapticPattern?.let { backend.vibrate(it) }
                 }
             }
+        }
+    }
+
+    /**
+     * detector 单步 cue（实走步伐同步音/振）：只出一步声与对应振动，
+     * **不计距、不推进淡入**；未解锁脚步层/焦点未获准/终态时静默。
+     * 与 [stepAudioFromDistance] 互斥使用（同一会话二选一），不产生双份声音。
+     */
+    fun onStepCue() {
+        if (released || !audioAllowed) return
+        if (stepLayers.isEmpty()) return
+        for ((layerId, step) in stepLayers) {
+            val variant = if (step.variants > 1) random.nextInt(step.variants) else 0
+            val volume = (step.volume * (0.9f + random.nextFloat() * 0.2f)).coerceIn(0f, 1f)
+            val pitch = 0.97f + random.nextFloat() * 0.06f
+            backend.playStep(layerId, variant, volume, pitch)
+        }
+        cueCount++
+        if (vibrationEnabled && cueCount % hapticEveryN == 0L) {
+            hapticPattern?.let { backend.vibrate(it) }
         }
     }
 

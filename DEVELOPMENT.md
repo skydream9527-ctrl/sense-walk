@@ -13,23 +13,23 @@
 
 ---
 
-## 0. 当前进度（仓库核查，2026-10-12 · T05 收尾后）
+## 0. 当前进度（仓库核查，2026-10-13 · T06 后）
 
-**结论：T01–T05 已合入 main（T05 记录见 §20.8–§20.9，T06 前两处定点修复见 §20.10，Actions 全绿）。** 森林 800 m 虚走可通关/放弃，感官层为真实引擎 + 真实素材；实走与其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电与问题视觉层重制未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
+**结论：T01–T06 已合入 main（T05 记录见 §20.8–§20.9，定点修复见 §20.10，T06 实走记录见 §20.11，Actions 全绿）。** 森林 800 m 虚走可通关/放弃且感官层为真实引擎 + 真实素材；**森林实走（counter 计步 + health 前台服务）已实现并经模拟器链路验证**；其他场景诚实标「暂未开放」。标准 800 m 真人手动验收、真机耳机/来电/实走计步/锁屏 15 分钟与问题视觉层重制未完成前，**M1 不宣布完成**。以下依据源码与 CI，不把 HTML demo 当 Android 完成证据。
 
 | 模块 | 已有内容 / 源码证据 | 与目标的差距 |
 | --- | --- | --- |
-| 工程与导航 | Home → 模式选择 → 会话 → 结果；Navigation / DataStore / SessionViewModel | 实走入口未开放；雨林/城市未进主流程 |
+| 工程与导航 | Home → 模式选择 → 会话（虚走/实走） → 结果；Navigation / DataStore | 雨林/城市未进主流程 |
 | 场景 | schema v2 JSON（森林/沙漠/夜径）；SceneValidator；Loading/Ready/Error | 雨林/城市配置与入口未齐；森林素材已真实化，沙漠/夜径仍显式占位 |
-| 会话 | `VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔；后台暂停不偷跑 | 地形越坎属 T07 |
+| 会话 | 虚走：`VirtualWalkController` + comfort_v1 摇杆、门禁、相位、ForestShell 黑幕起笔，后台暂停不偷跑；实走：`RealWalkController`/`RealWalkEngine`（counter 唯一计距）+ `WalkForegroundService`（health 前台、单一会话源） | 地形越坎属 T07 |
 | 结果页 | Completed / Abandoned，展示实际米数 | 用时折叠等打磨可继续 |
 | 感官 | `SensoryCoordinator` + `AndroidSensoryBackend`（SoundPool 脚步/MediaPlayer 循环/Vibrator）；森林真实素材入库（`REQUIRE_REAL_ASSETS` 放行）；焦点门控全部出声入口（被拒零脚步零 loop，获准不补播不重复建层，调用链测试锁定） | 振动待真机验证（模拟器无 HAL）；light_shows/clearing 程序降级待 MiniMax 重制 |
 | 设置 | 振动、节奏提示、减少动效、按住前进、手动暂停等已接入偏好 | 步长/GPS 等属后续 |
-| 实走与生命周期 | T04 起不进入假计步会话 | **T06**：计步、权限、前台服务 |
-| 验证 | JVM 单测覆盖领域、虚走集成与播放边界；GitHub Actions 打包/lint/test；模拟器 800 m 全程走查通过 | 真人标准 800 m 手动验收与真机耳机/来电属「待验证」 |
+| 实走与生命周期 | TYPE_STEP_COUNTER 计距（首事件基线、1.4 m/s 封顶、重复/乱序/下降/暂停不补算）；detector 仅步伐 cue（400ms 节流）；权限/硬件缺失诚实回退虚走；通知返回+停止；终态三清（服务/通知/播放器） | 真实计步、锁屏 15 分钟、权限拒绝流转待真机 |
+| 验证 | JVM 单测 217 个覆盖领域、虚走集成、播放边界与 S5/S8；GitHub Actions 打包/lint/test；模拟器验证：虚走 800 m 全程走查 + 实走服务链路（注入冒烟，不冒充真实计步） | 真人标准 800 m 手动验收与真机耳机/来电/实走属「待验证」 |
 | 设计包 | `design/` PRD 级设计 + HTML demo | demo 不接 Android 距离引擎；验收以本文件 + design 为准 |
 
-**下一交付物**：T06 实走（计步、权限、前台服务）。T05 遗留待办：标准 800 m 手动验收、真机耳机/来电验证、MiniMax 修复批次视觉复验（见 ASSETS.md）。
+**下一交付物**：T07 快照恢复/地形越坎/雨林。遗留待办：标准 800 m 手动验收、真机耳机/来电/实走计步/锁屏验证、MiniMax 问题层重制（见 ASSETS.md）。
 
 ---
 
@@ -780,14 +780,14 @@ stateDiagram-v2
 
 ### M2 — 实走、后台和中断恢复（P1，作为一个整体交付，原 Week 3）
 
-- [ ] `RealWalker`：counter 基线 + 时间戳 + 步长 + 速度帽；首次/批量/重复/乱序/重启/暂停恢复事件验证 S5 / S8
-- [ ] 计步权限、无传感器降级；先不启用 GPS；有 counter 无 detector 时仍可实走
-- [ ] `WalkForegroundService` + 按功能声明的服务类型/权限；通知提供回到会话和停止入口
-- [ ] 快照与 30 分钟被动中断恢复，保存 `s_best` 和传感器基线；S7 / S9；主动放弃不续
-- [ ] 步伐同步音/振；counter 延迟只允许 UI 平滑展示，真实门禁不靠展示插值提前触发
-- [ ] 虚走自动跳 + 站稳规则、旅人 idle/walk/tense/climb/hop；雨林第二景素材与配置
+- [x] `RealWalker`：counter 基线 + 时间戳 + 步长 + 速度帽；首次/批量/重复/乱序/重启/暂停恢复事件验证 S5 / S8（T06：`RealWalkEngine`/`RealWalkController`，21 个 JVM 测试锁定；注入冒烟顺带验证 S5 封顶与暂停不补算在服务链路生效，真实计步待真机）
+- [x] 计步权限、无传感器降级；先不启用 GPS；有 counter 无 detector 时仍可实走（T06：NeedPermission/NoSensor 诚实回退页 + 模拟器实测无传感器路径；counter-only 时脚步音由距离步幅驱动）
+- [x] `WalkForegroundService` + 按功能声明的服务类型/权限；通知提供回到会话和停止入口（T06：health 类型 + FOREGROUND_SERVICE_HEALTH/ACTIVITY_RECOGNITION/POST_NOTIFICATIONS；API 34+ 权限缺失 SecurityException 捕获降级；通知两动作模拟器实测）
+- [ ] 快照与 30 分钟被动中断恢复，保存 `s_best` 和传感器基线；S7 / S9；主动放弃不续（属 T07；当前服务 START_STICKY 只保前台身份，被杀后会话不恢复——如实标注）
+- [x] 步伐同步音/振；counter 延迟只允许 UI 平滑展示，真实门禁不靠展示插值提前触发（T06：detector cue 400ms 节流不密集补播、不二次计距；米数只来自 counter 事件本身，无 UI 插值路径）
+- [ ] 虚走自动跳 + 站稳规则、旅人 idle/walk/tense/climb/hop；雨林第二景素材与配置（属 T07）
 
-**退出条件**：森林实走锁屏 15 分钟仍可计距、播放和抵达；权限拒绝/缺传感器可回虚走；服务停止后不继续计步或播音；杀进程、重启、音频焦点丢失的结果可解释且不重复通关。
+**退出条件**：森林实走锁屏 15 分钟仍可计距、播放和抵达（**待真机验证**）；权限拒绝/缺传感器可回虚走（✓ 模拟器验证）；服务停止后不继续计步或播音（✓ 三清验证）；杀进程、重启、音频焦点丢失的结果可解释且不重复通关（部分：焦点丢失可解释不重复通关 ✓，杀进程恢复属 T07）。
 
 ### M3 — 四景内容、体验校准与内测（P1，原 Week 4 拆分）
 
@@ -1060,7 +1060,29 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 **修复 2：撤回 v4「五层复验合格」结论**：
 - 撤回原因：a235bf1 的程序化统计只覆盖 8px 周期与符号交替率，漏掉 **32px 周期对角纹理**；用户实际图像复核发现 785m 合成图中央明显棋盘格——统计阈值不能替代图像检查（教训入 ASSETS.md 复验方法备忘）。
 - 定位：合成中心 32px 对角能量 26.65%；逐层隔离 **light_shows 55.10%**（v2 起沿用未重制）；移除后 785m（新增 clearing）仍 21.78%；仅 outline/trunks/leaf_path 的 265–630m 阶段 0.46% 干净。**问题层 = light_shows、clearing 两个 overlay**。
-- 处置：两问题层从 forest.json 移除 asset → `ForestShell` 程序降级（`drawLightShows`/`drawClearingGlow`），**不以降透明度隐藏问题**；outline/trunks/leaf_path 三层真实图保留入包（214 KB）。六阶段合成按入包文件**重新生成**（`.local-verify/t6fix/stages/`，不复用旧截图）：265m 起各阶段中心对角能量 0.46%。等 MiniMax 新修复稿后按 ASSETS.md §一 方法（含 32px 检验与图像目检）重新验收；角色维持程序绘制。
+- 处置：两问题层从 forest.json 移除 asset → `ForestShell` 程序降级（`drawLightShows`/`drawClearingGlow`），**不以降透明度隐藏问题**；outline/trunks/leaf_path 三层真实图保留入包（214 KB）。六阶段合成按入包文件**重新生成**（`.local-verify/t6fix/stages/`，不复用旧截图）：265m 起各阶段中心对角能量 0.46%。等 MiniMax 新修复稿后按 ASSETS.md §一 方法（含 32px 检验与图像目检）重新验收；角色维持程序绘制。（后续：交付方已交 v5——clearing 按程序语义重制的径向渐变图，Zcode 程序化检验三项全净（四边 alpha 0、32px 对角 0.24%）；因应用内程序绘制语义相同且零字节，暂不采纳，留待真人目检与 light_shows 重制稿一并定夺。）
+
+### 20.11 T06 实走记录（2026-10-13 · 本提交）
+
+**领域层（纯 Kotlin，S5/S8 全部锁定）**：
+- `domain/walk/RealWalkEngine`：TYPE_STEP_COUNTER **唯一计距源**——首事件/重注册/暂停恢复后首事件只建基线；距离 = 步数增量 × 步长（默认 0.70 m，钳制 0.45–0.95）；**单事件增量 ≤ 1.4 m/s × 有效事件间隔**（S5：1 秒 10 步只得 1.4 m）；同刻批量按单步封顶；重复读数忽略（不推进时间基线）；读数下降（重启重置）重建基线不吞后续真实增量；时间回退乱序事件忽略；暂停期与恢复后不补算缺口。
+- `domain/walk/RealWalkController`：与虚走共享 ProgressAccumulator/CompletionGate/PhaseScheduler/SessionStateMachine，快照复用 `VirtualWalkController.Snapshot`（UI 无需分型）；`start()` 即 FirstForward；恢复自动回 WALKING（实走无摇杆可等）；detector 事件只产出步伐 cue 且 **400ms 节流**（批量不密集补播），绝不计距。
+- `SensoryCoordinator` 增补：`stepAudioFromDistance=false`（有 detector 时 counter 只管计距/淡入）+ `onStepCue()`（detector 驱动单步音/振，焦点未获准静默）——两模式不双份出声。
+
+**Android 层**：
+- `engine/sensor/StepSensorSource`：counter/detector 探测与注册（主线程 Handler 回调）；无 counter 诚实返回不可计距。
+- `service/WalkForegroundService`：**会话唯一持有者**（controller/coordinator/传感器都在服务，Activity 重建仅重绑不建第二引擎）；foregroundServiceType="health"（API 34+ 运行时需 ACTIVITY_RECOGNITION——SecurityException 捕获降级为可解释错误页，不崩溃，此约束为模拟器实测发现）；通知「回到会话 + 停止」（停止=放弃同一终态）；音频焦点门控与虚走同规则（含首次被拒静默、耳机断连暂停）；终态三清：注销传感器、释放音振、移除前台并 stopSelf。
+- UI：`RealWalkViewModel` 绑定服务镜像状态；权限缺失（NeedPermission，可请求可回虚走）/无传感器（NoSensor，诚实回退）/加载失败三态可解释页；实走会话页复用 ForestShell/米数/放弃/暂停，下半区为状态文案（无摇杆）；模式页实走卡开放（森林）；Manifest 增 ACTIVITY_RECOGNITION/FOREGROUND_SERVICE(_HEALTH)/POST_NOTIFICATIONS 与服务声明；不申请定位。
+- debug 冒烟（`DebugWalkSmoke` 全局开关 + debug source set 广播接收器，release 不注册不生效）：模拟器注入 counter 读数仅用于服务生命周期/渲染验证，**不构成真实计步或锁屏验证**。
+
+**测试**：新增 21 个 JVM 测试（RealWalkEngineTest 14：S5 封顶、S8 全边界、步长钳制、终态；RealWalkControllerTest 7：基线/计距/detector 不计距与节流/暂停恢复不补算/满距唯一通关/放弃/快照语义）。全量 **217 测试 0 失败** + lint 通过。
+
+**模拟器验证**（Pixel 6 / API 36，证据截图 `.local-verify/t6fix/`）：
+- 无传感器回退：模拟器无 TYPE_STEP_COUNTER → 实走开始即「这台设备没有计步传感器…回首页改用虚走」，无服务/通知残留。
+- 冒烟链路（pm grant 权限 + 注入）：前台服务合法启动（PROC_STATE_TOP，从可见 Activity）、通知「慢行 · 实走中」发布；注入 15 批 ×10 步/0.8s → 17 m = 15×1.12 m——**S5 封顶在真实服务链路精确生效**；暂停期注入 30 步零补算、恢复后首批只建基线（17→19 m 仅计恢复后步数）；结果页诚实「这次走了 19 m」；长按放弃与通知「停止」两条终态路径均验证三清（服务/通知/播放器全为 0，进程存活）。
+- 途中发现并修复：API 34+ FGS health 类型要求运行时权限在握，缺失时 SecurityException——已加捕获降级（不崩溃、可解释）。
+
+**待真机验证（不冒充已完成）**：真实计步精度与步长校准；锁屏 15 分钟持续计距/播放；权限拒绝→设置的完整流转；真机耳机/来电对实走服务的中断。
 
 ---
 

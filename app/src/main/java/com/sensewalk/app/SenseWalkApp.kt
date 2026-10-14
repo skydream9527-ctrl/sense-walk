@@ -17,6 +17,7 @@ import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.ui.home.HomeScreen
 import com.sensewalk.app.ui.mode.ModeScreen
 import com.sensewalk.app.ui.navigation.NavRoutes
+import com.sensewalk.app.ui.session.RealWalkSession
 import com.sensewalk.app.ui.session.ResultScreen
 import com.sensewalk.app.ui.session.SessionScreen
 import com.sensewalk.app.ui.settings.SettingsScreen
@@ -93,18 +94,32 @@ fun SenseWalkApp(
             ) { entry ->
                 val sceneId = entry.arguments?.getString("sceneId") ?: return@composable
                 val mode = entry.arguments?.getString("mode") ?: return@composable
-                SessionScreen(
-                    sceneId = sceneId,
-                    mode = mode,
-                    onFinished = { outcome, meters, elapsedMs ->
-                        navController.navigate(
-                            NavRoutes.result(sceneId, outcome, meters, elapsedMs),
-                        ) {
-                            popUpTo(NavRoutes.session(sceneId, mode)) { inclusive = true }
-                        }
-                    },
-                    onBack = { navController.popBackStack() },
-                )
+                if (mode == NavRoutes.Mode.REAL) {
+                    RealWalkSession(
+                        sceneId = sceneId,
+                        onFinished = { outcome, meters, elapsedMs ->
+                            navController.navigate(
+                                NavRoutes.result(sceneId, outcome, meters, elapsedMs),
+                            ) {
+                                popUpTo(NavRoutes.session(sceneId, mode)) { inclusive = true }
+                            }
+                        },
+                        onBack = { navController.popBackStack() },
+                    )
+                } else {
+                    SessionScreen(
+                        sceneId = sceneId,
+                        mode = mode,
+                        onFinished = { outcome, meters, elapsedMs ->
+                            navController.navigate(
+                                NavRoutes.result(sceneId, outcome, meters, elapsedMs),
+                            ) {
+                                popUpTo(NavRoutes.session(sceneId, mode)) { inclusive = true }
+                            }
+                        },
+                        onBack = { navController.popBackStack() },
+                    )
+                }
             }
 
             composable(
@@ -128,7 +143,7 @@ fun SenseWalkApp(
                     meters = meters,
                     elapsedMs = elapsedMs,
                     onWalkAgain = {
-                        navController.navigate(NavRoutes.session(sceneId, NavRoutes.Mode.VIRTUAL)) {
+                        navController.navigate(NavRoutes.mode(sceneId)) {
                             popUpTo(NavRoutes.HOME)
                         }
                     },
