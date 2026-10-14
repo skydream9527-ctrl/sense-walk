@@ -265,9 +265,9 @@ def board_text() -> str:
     lines = ['# 协作任务看板', '', '> 自动生成：仅编辑 registry.json，再执行 python3 tools/collaboration.py render。状态是交付登记，不是产品最终验收。', '',
              f'基线：`{r["baseline_commit"][:7]}` · 更新日期：{r["updated_on"]} · 协调者：{r["coordinator"]}', '',
              '| ID | 任务 | 负责者 | 状态 | 前置 | 已入库交付 / 审核 |', '| --- | --- | --- | --- | --- | --- |']
+    def link(p):
+        return f'[{Path(p).stem}]({Path(p).relative_to(Path("docs/collaboration")).as_posix()})' if p else '—'
     for t in r['tasks']:
-        def link(p):
-            return f'[{Path(p).stem}]({Path(p).relative_to(Path("docs/collaboration")).as_posix()})' if p else '—'
         lines.append(f'| {t["id"]} | [{t["title"]}]({Path(t["task_file"]).relative_to(Path("docs/collaboration"))}) | {t["owner"]} | {t["status"]} | {", ".join(t["depends_on"]) or "—"} | {link(t.get("latest_handoff"))} / {link(t.get("latest_review"))} |')
     observed = [t for t in r['tasks'] if t.get('observed_delivery')]
     if observed:
