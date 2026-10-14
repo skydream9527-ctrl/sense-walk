@@ -3,7 +3,7 @@
   "agent": "minimax",
   "current_task": null,
   "previous_task": "SW-002",
-  "status": "awaiting_integration",
+  "status": "waiting",
   "branch": "codex/minimax/SW-002-clearing-lightshow",
   "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
   "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
