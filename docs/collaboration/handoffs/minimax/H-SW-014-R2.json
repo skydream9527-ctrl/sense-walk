@@ -6,7 +6,7 @@
   "producer": "minimax",
   "recipient": "antigravity",
   "base_commit": "e7ab092ad9967d9e6d97e212d777ac3546e4525e",
-  "head_commit": "PENDING_THIS_COMMIT_SHA_REPLACED_AFTER_COMMIT",
+  "head_commit": "6e683e2087574df51efd43d8dea73270d321f5aa",
   "pr_url": null,
   "report": "docs/collaboration/handoffs/minimax/H-SW-014-R2.md",
   "changed_files": [
