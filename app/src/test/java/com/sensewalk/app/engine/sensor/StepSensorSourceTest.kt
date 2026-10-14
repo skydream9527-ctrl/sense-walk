@@ -116,6 +116,45 @@ class StepSensorSourceTest {
     }
 
     @Test
+    fun `P01 detector 硬件在但注册失败 - cue 回退距离驱动`() {
+        val port = FakePort(hasDetector = true, detectorRegisterOk = false)
+        val src = source(port)
+        assertTrue(src.start())
+        assertTrue("硬件存在", port.hasDetector)
+        assertFalse("注册未成功", src.detectorActive)
+        assertTrue("注册失败必须回退距离脚步音（P-01：不得因硬件存在而静音）", src.cueAudioFromDistance)
+    }
+
+    @Test
+    fun `P01 detector 注册成功 - cue 由 detector 驱动`() {
+        val port = FakePort()
+        val src = source(port)
+        assertTrue(src.start())
+        assertTrue(src.detectorActive)
+        assertFalse("detector 在岗时距离不再出脚步音（避免双份）", src.cueAudioFromDistance)
+    }
+
+    @Test
+    fun `P01 无 detector 硬件 - counter-only 同样距离驱动`() {
+        val port = FakePort(hasDetector = false)
+        val src = source(port)
+        assertTrue(src.start())
+        assertFalse(src.detectorActive)
+        assertTrue(src.cueAudioFromDistance)
+    }
+
+    @Test
+    fun `P01 stop 重置 detector 注册态 - 不残留上次的注册结果`() {
+        val port = FakePort()
+        val src = source(port)
+        assertTrue(src.start())
+        assertTrue(src.detectorActive)
+        src.stop()
+        assertFalse(src.detectorActive)
+        assertFalse("停止后不提供任何 cue 来源", src.cueAudioFromDistance)
+    }
+
+    @Test
     fun `注册成功后回调链路保持 - counter 事件到达监听`() {
         val port = FakePort()
         var received: Long = -1

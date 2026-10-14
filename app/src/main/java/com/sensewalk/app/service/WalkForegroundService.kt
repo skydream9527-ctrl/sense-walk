@@ -66,7 +66,7 @@ class WalkForegroundService : android.app.Service() {
     inner class LocalBinder : Binder() {
         val uiState: StateFlow<UiState> get() = this@WalkForegroundService.uiState
         val walk: StateFlow<VirtualWalkController.Snapshot?> get() = this@WalkForegroundService.walk
-        val hasDetector: Boolean get() = sensors?.hasDetector == true
+        val hasDetector: Boolean get() = sensors?.detectorActive == true
 
         fun pauseForDialog() = this@WalkForegroundService.pauseSession()
         fun resumeFromDialog() = this@WalkForegroundService.resumeSession()
@@ -188,8 +188,9 @@ class WalkForegroundService : android.app.Service() {
                         sensory.release()
                         return@launch
                     }
-                    // detector（若存在且已注册成功）负责步伐音/振；counter 只管计距与淡入
-                    sensory.stepAudioFromDistance = !(sensorSource.isStarted && sensorSource.hasDetector)
+                    // detector 真正注册成功才负责步伐音/振；注册失败或无硬件时
+                    // 回退按距离出声——按注册结果而非硬件存在选择 cue 源（P-01）
+                    sensory.stepAudioFromDistance = sensorSource.cueAudioFromDistance
                     sensory.onPhaseEvents(real.drainPhaseEvents())
                     controller = real
                     coordinator = sensory

@@ -1,0 +1,31 @@
+SW-001 R2 模拟器回归（P-01/P-02 修复后重跑；build: app-debug.apk @ worktree bdb1ea7+f59446f+R2 业务提交）
+设备：emulator-5554 (sdk_gphone64_arm64, API 36)；冒烟注入=DebugStepReceiver 显式广播
+（settings global sensewalk_debug_stub=1）；注入≠真实计步，真机项仍 Pending。
+
+[1] 正常计距连续性（引擎语义变更后基础路径）
+  注入 0(基线)→2→4→6→8（每 ~1.2s +2 步）：UI 米数 0 → "5 m"（5.6m，4×1.4）
+  结论：正常路径不回归。PASS
+
+[2] 大批量封顶（1.4 m/s 硬顶）
+  上一接受事件 (8) 后 ~16s 注入 1008（+1000 步）：UI "28 m" = 5.6 + 22.4（=1.4×16s 封顶）
+  1000×0.7=700m 被正确封到 22.4m。PASS
+
+[3] 暂停不补算（P-02 语义端到端）
+  暂停（UI 暂停按钮 → 对话框）→ 注入 +50 步 → 继续走 → 恢复后首事件(+1) 0m → 再 +2 步
+  UI: 28 m → 29 m（仅 +1.4m）。暂停期 50 步被丢弃、恢复后重建基线。PASS
+
+[4] F-002 崩溃重启不留空前台
+  adb shell am crash com.sensewalk.app → 等 10s：
+  dumpsys activity services com.sensewalk.app → ServiceRecord 计数 0
+  活跃通知（real_walk/ONGOING）→ 0（仅渠道设置与历史统计条目）
+  结论：START_STICKY null-Intent 重启后服务自行退出，无空通知。PASS
+
+[5] 通知栏「停止」三清
+  新会话（注入 0、4）→ 通知"慢行 · 实走中"在栏（isForeground=true, types=0x100/health,
+  actions=1）→ 点通知「停止」action → 3s 后：
+  ServiceRecord 0；活跃通知 0；topResumedActivity=com.sensewalk.app/.MainActivity
+  结论：停止=放弃路径清理服务/通知，返回前台。PASS
+
+补充观察（P-01 在设备侧的对应面）：本机冒烟走 stub 绕过注册（debugStubSensor=true），
+不经过 registerListener 真实返回值路径；detector 注册失败→距离脚步音回退的判定由
+JVM 调用链测试锁定（SensorCueWiringTest），真机 detector 注册失败场景仍属真机待验证。

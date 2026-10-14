@@ -106,10 +106,56 @@ class RealWalkEngineTest {
         val e = engine()
         e.onCounterEvent(0L, 0L)
         // (1,1000) 正常事件 0.7m；(2,1000) 与上一接受同刻 → 合并 0m；
-        // (4,2000) 相对计数基线 2 步、时间基线 1000ms：raw 1.4 = cap 1.4
+        // (4,2000) 带回 3 步 raw 2.1 封顶到 1.4（本用例被 cap 掩盖，
+        // 带回/丢弃的区分见 P02 用例）
         assertEquals(0.7f, e.onCounterEvent(1L, 1_000L).meters, 1e-3f)
         assertEquals(0f, e.onCounterEvent(2L, 1_000L).meters, 1e-6f)
         assertEquals(1.4f, e.onCounterEvent(4L, 2_000L).meters, 1e-3f)
+    }
+
+    @Test
+    fun `P02 审核反例 - 0_0_7_0_1_4 合并步数真实带回`() {
+        val e = engine()
+        assertEquals(0f, e.onCounterEvent(0L, 0L).meters, 1e-6f) // 基线
+        assertEquals(0.7f, e.onCounterEvent(1L, 1_000L).meters, 1e-3f)
+        assertEquals(0f, e.onCounterEvent(2L, 1_000L).meters, 1e-6f) // 同刻合并
+        // 带回 2 步 raw 1.4 = cap 1.4（未超帽）；若同刻时推进计数基线（丢弃），
+        // 这里只会得 3-2=1 步 0.7m
+        assertEquals("合并步数必须带回", 1.4f, e.onCounterEvent(3L, 2_000L).meters, 1e-3f)
+    }
+
+    @Test
+    fun `P02 低步数合并带回 - 未被封顶掩盖`() {
+        val e = engine()
+        assertEquals(0f, e.onCounterEvent(0L, 0L).meters, 1e-6f) // 基线 (0,0)
+        assertEquals(0f, e.onCounterEvent(1L, 0L).meters, 1e-6f) // 同刻合并 1 步
+        // 带回 2 步 raw 1.4，间隔 2000ms cap 2.8 → 未封顶；
+        // 丢弃语义只会得 1 步 0.7——cap 掩盖不了差异
+        assertEquals(1.4f, e.onCounterEvent(2L, 2_000L).meters, 1e-3f)
+    }
+
+    @Test
+    fun `P02 暂停丢弃未计距的合并批 - 不跨暂停补算`() {
+        val e = engine()
+        e.onCounterEvent(0L, 0L)
+        assertEquals(0.7f, e.onCounterEvent(1L, 1_000L).meters, 1e-3f)
+        assertEquals(0f, e.onCounterEvent(2L, 1_000L).meters, 1e-6f) // 1 步待带回
+        e.pause()
+        e.onCounterEvent(3L, 1_500L) // 暂停期事件只推基线
+        e.resume()
+        assertEquals("恢复后首事件只建基线", 0f, e.onCounterEvent(4L, 2_000L).meters, 1e-6f)
+        assertEquals("合并批已丢弃，只剩新 1 步", 0.7f, e.onCounterEvent(5L, 3_000L).meters, 1e-3f)
+    }
+
+    @Test
+    fun `P02 重注册丢弃未计距的合并批`() {
+        val e = engine()
+        e.onCounterEvent(0L, 0L)
+        assertEquals(0.7f, e.onCounterEvent(1L, 1_000L).meters, 1e-3f)
+        assertEquals(0f, e.onCounterEvent(3L, 1_000L).meters, 1e-6f) // 2 步待带回
+        e.restartBaseline()
+        assertEquals("重注册后首事件只建基线", 0f, e.onCounterEvent(4L, 2_000L).meters, 1e-6f)
+        assertEquals("合并批已丢弃，只剩新 1 步", 0.7f, e.onCounterEvent(5L, 3_000L).meters, 1e-3f)
     }
 
     @Test

@@ -46,10 +46,14 @@ class StepSensorSource(
     val canCountDistance: Boolean get() = port.hasCounter
 
     private var started = false
+    private var detectorRegistered = false
 
     /**
      * 注册监听（一次）。返回是否**真的注册成功**（硬件存在且端口注册返回
      * true）；未整体成功时已注册的部分会被注销。
+     *
+     * detector 注册失败不阻塞实走（counter-only 可走），其实际返回值被
+     * 记录到 [detectorActive]——cue 来源按注册结果而非硬件存在选择（P-01）。
      */
     fun start(): Boolean {
         if (started) return true
@@ -58,8 +62,7 @@ class StepSensorSource(
         try {
             if (!port.registerCounter(onCounter)) return false
             if (port.hasDetector) {
-                // detector 注册失败不阻塞实走（counter-only 可走），音/振按距离步幅驱动
-                port.registerDetector(onDetectorStep)
+                detectorRegistered = port.registerDetector(onDetectorStep)
             }
             started = true
             success = true
@@ -73,8 +76,19 @@ class StepSensorSource(
     fun stop() {
         if (!started) return
         started = false
+        detectorRegistered = false
         port.unregisterAll()
     }
 
     val isStarted: Boolean get() = started
+
+    /** detector 是否**真的注册成功**（区别于 [hasDetector] 的硬件存在） */
+    val detectorActive: Boolean get() = started && detectorRegistered
+
+    /**
+     * 脚步音/振是否改由距离驱动：detector 未真正在岗（无硬件或注册失败）时
+     * 回退按距离步幅出声，counter-only 也有步伐反馈；与 detector cue 互斥，
+     * 同一会话不会双份出声。
+     */
+    val cueAudioFromDistance: Boolean get() = started && !detectorRegistered
 }
