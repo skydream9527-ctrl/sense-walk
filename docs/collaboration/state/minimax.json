@@ -1,11 +1,15 @@
 {
   "schema_version": 1,
   "agent": "minimax",
-  "current_task": "SW-002",
-  "status": "handoff_ready",
-  "branch": "codex/minimax/SW-002-clearing-lightshow",
-  "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
-  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
-  "updated_on": "2026-10-13",
-  "note": "SW-002 r1 候选已交付: design/assets/forest/candidates/SW-002/r1/ 含 clearing (程序化径向渐变, 复用 v5) + light_shows (程序化三束斜光+2 只飞鸟). 零 API 调用, 累计 14. 等待 Antigravity 独立审核 (R-SW-002-R1). 通过后由 ZCode 在 SW-010 单独入包."
+  "current_task": "SW-014",
+  "status": "in_progress",
+  "branch": "codex/minimax/SW-014-r2",
+  "head_commit": "PENDING_THIS_COMMIT_SHA",
+  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
+  "previous_handoffs": [
+    "docs/collaboration/handoffs/minimax/H-SW-014-R1.json (superseded, 13d6c0d head)",
+    "docs/collaboration/handoffs/minimax/H-SW-002-R1.json (approved, f512d20 head)"
+  ],
+  "updated_on": "2026-10-14",
+  "note": "SW-014 R2 修订中: 修 R1 PF-01~04 反例 (ROOT 错位 / 接受 dummy / 接受文本伪装 / 越界路径). 已写 13 fixture (1 positive + 12 negative), 真实解码 + 严格 design_ref 验证. 跑 R1 probe 复现证明 4 反例真实存在. 追加 D-CORRECTION-a5ad6dd-claim 纠正私有 state 'ZCode 已入包' 误述 (a5ad6dd 仅候选合并, SW-010 接图在 PR #3 dfcc19e 尚未合入 main). 等 Antigravity 独立审核 R-SW-014-R2. 通过后 SW-014 accepted; SW-006 仍需 SW-012 design approved."
 }
