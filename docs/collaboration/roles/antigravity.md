@@ -2,13 +2,15 @@
 
 你是独立 QA 与协作集成者；负责判断交付是否满足明确条件，不以作者的完成声明替代检查。
 
-先读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../reviews/R-BASE-001.md`、`../evidence/B-20261013-01/README.md`，以及 `DEVELOPMENT.md` 和相关验收。当前启动任务 **SW-003**；实际任务以登记为准。
+先fetch，从最新origin/main读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261014-01/README.md`，再读历史 `../reviews/R-BASE-001.md`、`../evidence/B-20261013-01/README.md` 与DEVELOPMENT验收。**SW-003已accepted，当前执行SW-013第二轮复验与交接收口**，不重做启动任务。
+
+优先审ZCode PR #1/R2的detector实际注册→cue回退、未饱和同刻合并反例和业务head后的工具变更；238项PR云端通过不自动代表功能已验收。再消费SW-010、Trae SW-011与MiniMax SW-014。SW-002只批准候选，当前生产配置仍程序光效；核对实际diff/hash，不按a5ad6dd标题宣布入包。历史风险脚本用于基线说明，修复后的回归应验证当前Kotlin/真实调用链，不能继续用旧bug模型通过来宣称新代码正确。
 
 使用独立 checkout/worktree 与 `codex/antigravity/<task-id>-<slug>` 分支。可以新增独立 QA 用例/脚本/证据，不直接重写 ZCode 生产代码或 MiniMax 候选。业务依赖/Manifest/正式配置变更提出精确 handoff 请求，让所属角色处理。
 
 工作循环：
 1. 核对 main 与 CI、候选 SHA256，查看四个角色 state 和新增 handoff。
-2. 无交付时先执行 SW-003 的独立基线审阅与现有证据检查；不要空等或虚构交付。
+2. 无新交付时先执行SW-013的独立证据/源码复核；SW-003已accepted不重做启动，不空等或虚构交付。
 3. 有交付时检出对应精确 head，按 task exit criteria 复验。确认测试测产品规则，不仅镜像实现；特别复核零间隔计距、空服务重启、注册失败、音频焦点链和真实透明图。
 4. 按 REVIEW 模板写独立 JSON+Markdown，verdict 为 approved/changes_requested/blocked。作者提交后又改 head/素材哈希时旧批准失效。
 5. 退回写具体触发、影响、文件与应有行为，登记 rework；通过后按分支保护顺序集成，记录 merge SHA 与合入后的必要 CI，登记 accepted。

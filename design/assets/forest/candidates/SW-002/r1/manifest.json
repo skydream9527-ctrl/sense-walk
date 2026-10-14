@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-002",
+  "revision": 1,
+  "scene_id": "forest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "clearing",
+      "file": "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "width": 768,
+      "height": 1376,
+      "bytes": 26312,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "程序算法 (径向渐变 + 边缘羽化, 与 ForestShell.kt drawClearingGlow 语义一致); 复用 v5 候选 (62b0c29) 字节级一致; 不调用生图 API",
+      "process": "make_clearing_canvas: 主径向 cx=0.68W,cy=0.42H,r=0.55W,peak=0.30; 次径向 cx=0.30W,cy=0.55H,r=0.40W,peak=0.12; 三束斜光 -8/-2/+5 deg, peak=0.10; 边缘 80px ramp; RGB 统一 GlowColor #A8C5A0",
+      "quality_status": "candidate",
+      "checks": [
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing_center600.png"
+      ],
+      "limitations": [
+        "原始 raw 768x1376, 与项目最终画布 1080x1920 比例为 cover 缩放, 非原生高分辨率",
+        "本轮 SW-002 r1 不调用生图 API, 内容是程序化径向 + 斜光, 不是真实 AI 林间柔光",
+        "无 tileable (overlay 不做平铺, 但 ForestShell.kt 暂为 cover 模式, 无接缝暴露)"
+      ]
+    },
+    {
+      "layer_id": "light_shows",
+      "file": "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "width": 768,
+      "height": 1376,
+      "bytes": 34414,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "程序算法 (三束斜光 + 2 只飞鸟剪影, 与 ForestShell.kt drawLightShows 语义一致); 弃用 v4 真实图 (ASSETS.md 标记 32px 对角能量 55.10% 为问题层); 不调用生图 API",
+      "process": "make_light_shows_canvas: 三束斜光 -14/-8/-2 deg, peak 0.40-0.45, y 方向顶部亮底部 0; 2 只飞鸟翼展 28px, 翼上 8px 翼下 4px V 字, BIRD 颜色 #1A2820, 边缘 60px ramp",
+      "quality_status": "candidate",
+      "checks": [
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows_center600.png"
+      ],
+      "limitations": [
+        "原始 raw 768x1376, 与项目最终画布 1080x1920 比例为 cover 缩放, 非原生高分辨率",
+        "本轮 SW-002 r1 不调用生图 API, 内容是程序化斜光 + 简化飞鸟",
+        "飞鸟数量 2 (与 ForestShell.kt drawLightShows 一致), 真实 AI 飞鸟 3 只是 v4 失败稿; 简化版避免 v4 棋盘格根因"
+      ]
+    }
+  ],
+  "design_ref": null
+}

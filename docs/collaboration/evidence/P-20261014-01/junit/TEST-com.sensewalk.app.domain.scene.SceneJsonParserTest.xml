@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.SceneJsonParserTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-10-14T07:34:12" hostname="runnervmmprz5" time="0.089">
+  <properties/>
+  <testcase name="数值字段不接受对象冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.007"/>
+  <testcase name="数值字段不接受布尔冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="数值字段不接受数组冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="整数字段不接受小数" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.008"/>
+  <testcase name="未知音频层类型给出诊断" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.004"/>
+  <testcase name="溢出为 Infinity 的数值被拒绝" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="坏 JSON 语法给出明确诊断" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="数值字段不接受字符串冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="字符串字段不接受布尔冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="字符串字段不接受数字冒充" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="合法 v2 JSON 完整解析" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="未知 schemaVersion 被拒绝" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="未知地形给出带路径诊断" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="file 与 placeholder 互斥" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="缺失 schemaVersion 被拒绝" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="v2 中出现的未知字段按向前兼容忽略" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="数值字段类型错误给出实际值" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <testcase name="视觉层省略 asset 与 placeholder 为程序渲染层 - 合法且不列占位" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.007"/>
+  <testcase name="stepOneShot 的 files 元素必须是字符串" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.012"/>
+  <testcase name="根元素不是对象给出明确诊断" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.019"/>
+  <testcase name="stepOneShot 无文件无占位被拒绝" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="未知通道给出带路径诊断" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.001"/>
+  <testcase name="旧 v1 格式被拒绝并提示迁移" classname="com.sensewalk.app.domain.scene.SceneJsonParserTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

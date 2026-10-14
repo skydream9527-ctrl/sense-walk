@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-002-R1",
+  "task_id": "SW-002",
+  "reviewer": "antigravity",
+  "producer": "minimax",
+  "handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
+  "reviewed_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-002-R1.md",
+  "artifact_hashes": {
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0"
+  },
+  "checks": [
+    {
+      "name": "候选 WebP 与 Manifest SHA256 哈希及尺寸校验",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/manifest.json",
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp",
+        "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp"
+      ]
+    },
+    {
+      "name": "4 底色 (黑/白/洋红/void) 透明度与无棋盘格特征验证",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/records/diagnose.json",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_clearing.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/black/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/white/forest_light_shows.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/magenta/forest_light_shows.jpg"
+      ]
+    },
+    {
+      "name": "6 阶段合成图与业务配置一致性检查",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m_540x960.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m_540x960.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m_540x960.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m_540x960.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m_540x960.jpg",
+        "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m_540x960.jpg"
+      ]
+    },
+    {
+      "name": "API 账本核验 (本轮 0，累计 14)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/candidates/SW-002/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "Android 模拟器与真机真实渲染走查",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "Android 模拟器与真机真实走查待 SW-010 入包由 ZCode 接线后执行"
+  ]
+}

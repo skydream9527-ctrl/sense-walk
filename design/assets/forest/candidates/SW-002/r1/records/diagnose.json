@@ -1,0 +1,243 @@
+{
+  "version": "SW-002 r1",
+  "rationale": "v4 light_shows/clearing 被 ZCode 撤回 (ASSETS.md §一); r1 提交 clearing 复用 v5 + light_shows 程序化重做; 零 API",
+  "diagnose": [
+    {
+      "name": "clearing",
+      "bg": "void",
+      "content_band": [
+        412,
+        688,
+        153,
+        614
+      ],
+      "brightness_mean": 28.0,
+      "brightness_std": 12.5,
+      "diag_32px_energy_pct": 31.68,
+      "alt_8px_pct": 0.0,
+      "alt_32px_pct": 0.0,
+      "lap_max": 1,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 0.0
+    },
+    {
+      "name": "clearing",
+      "bg": "black",
+      "content_band": [
+        412,
+        688,
+        153,
+        614
+      ],
+      "brightness_mean": 22.2,
+      "brightness_std": 13.0,
+      "diag_32px_energy_pct": 31.85,
+      "alt_8px_pct": 0.0,
+      "alt_32px_pct": 0.0,
+      "lap_max": 1,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 0.0
+    },
+    {
+      "name": "clearing",
+      "bg": "white",
+      "content_band": [
+        412,
+        688,
+        153,
+        614
+      ],
+      "brightness_mean": 244.1,
+      "brightness_std": 5.9,
+      "diag_32px_energy_pct": 28.35,
+      "alt_8px_pct": 0.0,
+      "alt_32px_pct": 0.0,
+      "lap_max": 1,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 100.0
+    },
+    {
+      "name": "clearing",
+      "bg": "magenta",
+      "content_band": [
+        412,
+        688,
+        153,
+        614
+      ],
+      "brightness_mean": 170.1,
+      "brightness_std": 0.4,
+      "diag_32px_energy_pct": 6.49,
+      "alt_8px_pct": 0.0,
+      "alt_32px_pct": 0.0,
+      "lap_max": 0,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 0.0
+    },
+    {
+      "name": "light_shows",
+      "bg": "void",
+      "content_band": [
+        137,
+        550,
+        153,
+        614
+      ],
+      "brightness_mean": 16.9,
+      "brightness_std": 11.1,
+      "diag_32px_energy_pct": 38.09,
+      "alt_8px_pct": 0.01,
+      "alt_32px_pct": 0.0,
+      "lap_max": 26,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 0.0
+    },
+    {
+      "name": "light_shows",
+      "bg": "black",
+      "content_band": [
+        137,
+        550,
+        153,
+        614
+      ],
+      "brightness_mean": 10.7,
+      "brightness_std": 11.7,
+      "diag_32px_energy_pct": 38.23,
+      "alt_8px_pct": 0.0,
+      "alt_32px_pct": 0.0,
+      "lap_max": 24,
+      "high_freq_pct": 0.0,
+      "bright_uniform_pct": 0.0
+    },
+    {
+      "name": "light_shows",
+      "bg": "white",
+      "content_band": [
+        137,
+        550,
+        153,
+        614
+      ],
+      "brightness_mean": 245.9,
+      "brightness_std": 10.3,
+      "diag_32px_energy_pct": 14.09,
+      "alt_8px_pct": 0.01,
+      "alt_32px_pct": 0.0,
+      "lap_max": 121,
+      "high_freq_pct": 0.025,
+      "bright_uniform_pct": 99.515
+    },
+    {
+      "name": "light_shows",
+      "bg": "magenta",
+      "content_band": [
+        137,
+        550,
+        153,
+        614
+      ],
+      "brightness_mean": 167.5,
+      "brightness_std": 3.8,
+      "diag_32px_energy_pct": 9.5,
+      "alt_8px_pct": 0.01,
+      "alt_32px_pct": 0.0,
+      "lap_max": 75,
+      "high_freq_pct": 0.025,
+      "bright_uniform_pct": 0.0
+    }
+  ],
+  "file_hashes_sha256": {
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_clearing.webp": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+    "design/assets/forest/candidates/SW-002/r1/png/forest_clearing.png": "5602ea1828da6475eb0343f278d433409b641b571ec26802e1e4dcce0f04dfc6",
+    "design/assets/forest/candidates/SW-002/r1/webp/forest_light_shows.webp": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+    "design/assets/forest/candidates/SW-002/r1/png/forest_light_shows.png": "4472a3d433d8307ff1fc758376f264bb83be6031f292a255a28a346c2f85b3b0",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_clearing.png": "bc3fdd7bbd13b26861becd3e27e66439cfab7b3800720545d31bcf8a8eb809dc",
+    "design/assets/forest/candidates/SW-002/r1/checks/alpha_mask/forest_light_shows.png": "515a80913e42b8953ffaa188a6de64f3a022eac556524148dd5be7fd97e6b728"
+  },
+  "stages": [
+    {
+      "meters": 0,
+      "layers": [],
+      "opacities": {},
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_000m_540x960.jpg"
+    },
+    {
+      "meters": 100,
+      "layers": [
+        "tree_outline"
+      ],
+      "opacities": {
+        "tree_outline": 0.6
+      },
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_100m_540x960.jpg"
+    },
+    {
+      "meters": 265,
+      "layers": [
+        "tree_outline",
+        "tree_trunks"
+      ],
+      "opacities": {
+        "tree_outline": 0.6,
+        "tree_trunks": 0.7
+      },
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_265m_540x960.jpg"
+    },
+    {
+      "meters": 425,
+      "layers": [
+        "tree_outline",
+        "tree_trunks",
+        "leaf_path"
+      ],
+      "opacities": {
+        "tree_outline": 0.6,
+        "tree_trunks": 0.7,
+        "leaf_path": 0.8
+      },
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_425m_540x960.jpg"
+    },
+    {
+      "meters": 630,
+      "layers": [
+        "tree_outline",
+        "tree_trunks",
+        "leaf_path",
+        "light_shows"
+      ],
+      "opacities": {
+        "tree_outline": 0.6,
+        "tree_trunks": 0.7,
+        "leaf_path": 0.8,
+        "light_shows": 0.65
+      },
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_630m_540x960.jpg"
+    },
+    {
+      "meters": 785,
+      "layers": [
+        "tree_outline",
+        "tree_trunks",
+        "leaf_path",
+        "light_shows",
+        "clearing"
+      ],
+      "opacities": {
+        "tree_outline": 0.6,
+        "tree_trunks": 0.7,
+        "leaf_path": 0.8,
+        "light_shows": 0.65,
+        "clearing": 0.9
+      },
+      "png": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m.png",
+      "jpg": "design/assets/forest/candidates/SW-002/r1/checks/stages/stage_785m_540x960.jpg"
+    }
+  ],
+  "api_attempts_total": 14
+}

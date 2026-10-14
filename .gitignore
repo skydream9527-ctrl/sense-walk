@@ -56,3 +56,6 @@ keystore.properties
 # 协作校验工具的 Python 缓存（不进入交接源码包）
 __pycache__/
 *.py[cod]
+
+# 各agent的本地隔离worktree，不进入源码包
+.worktrees/
