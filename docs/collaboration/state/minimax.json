@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "minimax",
-  "current_task": null,
-  "status": "idle",
-  "branch": null,
-  "head_commit": null,
-  "latest_handoff": null,
+  "current_task": "SW-002",
+  "status": "handoff_ready",
+  "branch": "codex/minimax/SW-002-clearing-lightshow",
+  "head_commit": "PENDING_THIS_COMMIT_SHA",
+  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
   "updated_on": "2026-10-13",
-  "note": "初始化状态，不代表此agent已经领取任务；首次执行时由本人更新。"
+  "note": "SW-002 r1 候选已交付: design/assets/forest/candidates/SW-002/r1/ 含 clearing (程序化径向渐变, 复用 v5) + light_shows (程序化三束斜光+2 只飞鸟). 零 API 调用, 累计 14. 等待 Antigravity 独立审核 (R-SW-002-R1). 通过后由 ZCode 在 SW-010 单独入包."
 }
