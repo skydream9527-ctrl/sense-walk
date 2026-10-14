@@ -7,8 +7,8 @@
 | ID | 任务 | 负责者 | 状态 | 前置 | 最新交付 / 审核 |
 | --- | --- | --- | --- | --- | --- |
 | SW-001 | [T06 可靠性补强](tasks/SW-001.md) | zcode | ready | — | — / — |
-| SW-002 | [森林光效候选验收收尾](tasks/SW-002.md) | minimax | ready | — | — / — |
-| SW-003 | [独立基线验收与协作集成启动](tasks/SW-003.md) | antigravity | ready | — | — / — |
+| SW-002 | [森林光效候选验收收尾](tasks/SW-002.md) | minimax | accepted | — | [H-SW-002-R1](handoffs/minimax/H-SW-002-R1.json) / [R-SW-002-R1](reviews/R-SW-002-R1.json) |
+| SW-003 | [独立基线验收与协作集成启动](tasks/SW-003.md) | antigravity | accepted | — | [H-SW-003-R1](handoffs/antigravity/H-SW-003-R1.json) / — |
 | SW-011 | [森林图片设计与通用视觉规范](tasks/SW-011.md) | trae-design | ready | — | — / — |
 | SW-010 | [森林光效批准候选入包](tasks/SW-010.md) | zcode | queued | SW-001, SW-002, SW-003 | — / — |
 | SW-004 | [T07A 会话快照与中断恢复](tasks/SW-004.md) | zcode | queued | SW-001, SW-003 | — / — |

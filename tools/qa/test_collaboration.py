@@ -24,6 +24,8 @@ class CoordinationChecks(unittest.TestCase):
         shutil.copytree(REPO / 'docs/collaboration', self.base)
         if (REPO / 'design').exists():
             shutil.copytree(REPO / 'design', self.root / 'design')
+        if (REPO / 'tools').exists():
+            shutil.copytree(REPO / 'tools', self.root / 'tools')
         self.old_root, self.old_base = module.ROOT, module.BASE
         module.ROOT, module.BASE = self.root, self.base
         # Non-protocol files are link targets only, not simulated runtime evidence.
