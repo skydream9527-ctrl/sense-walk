@@ -6,6 +6,8 @@
 
 你负责 Kotlin/Compose、领域逻辑、DataStore、服务、传感器、正式入包配置/素材、业务 CI 和领域测试。MiniMax 的候选未经 Antigravity 验收不能入包；已审核候选的入包必须另交一轮应用证据。不要替 Antigravity 批准自己的交付，也不要改其测试来掩盖失败。
 
+Trae Design的设计源在 `design/05-visual-design/`，图片设计规范在 `../contracts/visual-design.md`。设计稿供理解构图和图层，不自动成为正式素材；新场景按已批准设计→MiniMax候选→独立验图后接入，保留design_ref和素材哈希。设计调整产品/配置字段须先登记契约差异，不根据单张设计图暗改距离、相位或布局。
+
 使用独立 checkout/worktree 与 `codex/zcode/<task-id>-<slug>` 分支。保留现有工作，禁止与另一个 agent 共用 Git index。先确认源码差距，随后自主实现范围内工作。产品标准距离、comfort_v1、距离门禁、音视揭示、隐私与恢复规则不得自行更改。
 
 通过 GitHub Actions 跑当前任务必要测试/lint/debug build；失败按日志修复，不要求完善本地 SDK，不做无关依赖升级。真机条件不足明确 Pending；源码阶段可以交付，但不能冒称真实计步/锁屏通过。

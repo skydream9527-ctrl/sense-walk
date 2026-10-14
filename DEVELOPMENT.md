@@ -1109,3 +1109,9 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 本次核查基线8056e11：217个实际云端JUnit测试全部通过，原始XML已归档；T06有同刻事件计距、空服务重启、注册失败边界需要补强（[审阅](./docs/collaboration/reviews/R-BASE-001.md)），不以全绿替代这些反例验证。森林light_shows/clearing保持程序降级，MiniMax v5柔光为待独立审核候选。首批任务SW-001/002/003分别交三角色；T07拆为恢复、地形、雨林，前置未accepted不得跳序。
 
 用户只需告知各工具读取对应roles文件；本系统不自动发送消息、启动agent或调用付费API。缺设备的真机/真人项保留Pending，独立源码工作继续；M1/M2/最终MVP只在实际退出证据齐备时验收。
+
+### 21.4 Trae Design 图片设计交接（2026-10-13 追加）
+
+协作扩为四个角色，新增 [Trae Design 稳定入口](./docs/collaboration/roles/trae-design.md) 与 [图片设计规范](./docs/collaboration/contracts/visual-design.md)。Trae 单写 `design/05-visual-design/<task-id>/r<n>/`：可编辑源、色板/构图/分层、六阶段及三比例预览、MiniMax逐层生成提示词和设计清单。Antigravity独立审核具体head与全部设计文件哈希后，MiniMax再按引用制作候选；ZCode入包仍需应用证据。
+
+首轮SW-011为森林与通用视觉语言，SW-012为其批准后的900m雨林设计，SW-006雨林素材新增该设计前置。现有SW-002森林透明/光效修复继续原范围，已有工作不被重置。新设计尚未制作或批准；当前仅完成可执行任务与规范，不据此更新产品完成状态。距离、相位、程序旅人与操作区按现有产品/配置保持。

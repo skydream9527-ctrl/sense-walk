@@ -7,9 +7,11 @@
 | 并行第一批 | SW-001 T06 可靠性补强 | ZCode 代码；Antigravity 回归 | 基线 | 零间隔不涨距、服务/传感器失败可清理 |
 | 并行第一批 | SW-002 森林光效候选 | MiniMax 候选；Antigravity 看图 | 基线 | 干净 clearing + light_shows；哈希与检查图 |
 | 并行第一批 | SW-003 独立基线与协作集成 | Antigravity | 基线 | 可复核审阅、首轮 handoff 真正闭合 |
+| 并行第一批 | SW-011 森林图片设计与通用规范 | Trae Design；Antigravity 审稿 | 基线 | 可编辑源、分层/阶段/比例预览、素材提示词及哈希 |
 | 素材通过后 | SW-010 森林光效入包 | ZCode；Antigravity 复验 | SW-001/002/003 | 候选→配置→实际 Android 渲染证据 |
 | 第二批 | SW-004 快照恢复（T07A） | ZCode | SW-001/003 | 被动中断 30min 恢复；主动结束不恢复；S7/S9 |
-| 第二批 | SW-006 雨林候选（T07C 美术） | MiniMax | SW-002/003 | 有雨林身份的候选与 manifest；不改 Android |
+| 设计第二批 | SW-012 雨林图片设计包 | Trae Design；Antigravity 审稿 | SW-011 | 雨林设计明确分层/透明/比例/色板与逐层素材提示词 |
+| 第二批 | SW-006 雨林候选（T07C 美术） | MiniMax | SW-002/003/012 | 引用批准设计的候选与 manifest；不改 Android |
 | 第三批 | SW-005 自动越坎（T07B） | ZCode | SW-004 | 站稳/跳跃不刷距，reduceMotion 可用 |
 | 第三批 | SW-007 雨林双模式接入 | ZCode；Antigravity 审核 | SW-005/006 | 900m 雨林配置、声景、素材与双模式 |
 | 第四批 | SW-008 城市/沙漠与一致性（T08） | ZCode 接线；MiniMax 分景候选 | SW-007/010 | 四主场景同规则，各景素材可追溯 |
@@ -17,4 +19,4 @@
 
 SW-003 为持续 QA 队列的启动任务；完成启动后 Antigravity 仍持续接收新交付，不因这一任务 accepted 就停止审查。真机已有时可以提前验证森林，最终 SW-009 汇总证据，不要求把真机验证拖到最后。
 
-任务文件已经保存完整下一步要求。后续只需要协调者把满足前置的任务激活为 ready，三个 agent 继续读取自己的入口即可。若 SW-008 范围过大，激活前拆子任务，保留旧 ID 的 superseded 决策，不能一次性混合多景修改。
+任务文件已经保存完整下一步要求。后续只需要协调者把满足前置的任务激活为 ready，四个角色继续读取自己的入口即可。森林既有修图SW-002继续原范围；新场景按“Trae设计→Antigravity批准→MiniMax制作→Antigravity验图→ZCode入包→Antigravity应用复验”推进。若 SW-008 范围过大，激活前拆子任务并为城市/沙漠分别登记Trae设计、MiniMax候选与ZCode接入的前置链，保留旧 ID 的 superseded 决策，不能一次性混合多景修改。

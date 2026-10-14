@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "agent": "trae-design",
+  "current_task": null,
+  "status": "idle",
+  "branch": null,
+  "head_commit": null,
+  "latest_handoff": null,
+  "updated_on": "2026-10-13",
+  "note": "新增设计角色初始化；尚未领取或执行设计任务。"
+}

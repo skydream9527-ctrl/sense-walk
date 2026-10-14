@@ -6,6 +6,7 @@ on:
     paths:
       - 'AGENTS.md'
       - 'docs/collaboration/**'
+      - 'design/05-visual-design/**'
       - 'tools/collaboration.py'
       - 'tools/qa/test_collaboration.py'
       - '.github/workflows/collaboration.yml'
@@ -14,6 +15,7 @@ on:
     paths:
       - 'AGENTS.md'
       - 'docs/collaboration/**'
+      - 'design/05-visual-design/**'
       - 'tools/collaboration.py'
       - 'tools/qa/test_collaboration.py'
       - '.github/workflows/collaboration.yml'

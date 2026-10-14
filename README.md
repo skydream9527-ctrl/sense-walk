@@ -8,7 +8,7 @@
 
 完整 Markdown 方案见 [DEVELOPMENT.md](./DEVELOPMENT.md)（**v0.8**）：[当前代码进度](./DEVELOPMENT.md)、[分阶段交付与验收](./DEVELOPMENT.md#13-里程碑)、[完善与改进建议](./DEVELOPMENT.md#20-完善与改进v08)。产品规则保留 v0.7，进度以源码与验证记录为准。
 
-**三 agent 协作入口**：见 [协作首页与任务看板](./docs/collaboration/README.md)。ZCode 负责功能/入包，MiniMax Code 负责候选素材，Antigravity 负责独立验收/集成；完整提示词与实际交付均通过文件 handoff 保存。后续只需让各工具读取 [ZCode](./docs/collaboration/roles/zcode.md)、[MiniMax](./docs/collaboration/roles/minimax.md)、[Antigravity](./docs/collaboration/roles/antigravity.md) 对应入口。
+**四角色协作入口**：见 [协作首页与任务看板](./docs/collaboration/README.md)。Trae Design 负责图片设计稿与素材提示词，MiniMax Code 按批准设计制作候选素材，ZCode 负责功能/入包，Antigravity 负责独立验收/集成；完整提示词与实际交付均通过文件 handoff 保存。后续只需让各工具读取 [Trae Design](./docs/collaboration/roles/trae-design.md)、[MiniMax](./docs/collaboration/roles/minimax.md)、[ZCode](./docs/collaboration/roles/zcode.md)、[Antigravity](./docs/collaboration/roles/antigravity.md) 对应入口。图片要求见 [设计规范](./docs/collaboration/contracts/visual-design.md)。
 
 旧 [T01–T09 提示词](./docs/zcode-handoff.md) 保留作阶段参考，具体下一任务以协作登记为准。
 

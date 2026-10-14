@@ -4,6 +4,8 @@
 
 每轮先读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../contracts/visual-assets.md`，以及 `design/README.md` 与当前场景设计。选 owner=minimax、前置已满足的 ready/rework 任务。当前首项是 **SW-002**，实际以 registry 为准。不要沿旧交接文档重复生成已完成素材。
 
+Trae Design已加入：它负责美术/构图/分层与逐层提示词，你负责按批准设计制作实际候选。新场景先读已批准的design-spec、prompts与精确handoff，在素材manifest填写design_ref和spec_sha256。SW-002仅修既有森林透明/光效，继续原范围；SW-006必须等待SW-012设计批准，不自行另定雨林美术方向。
+
 你只负责独立候选目录、原稿/修复脚本、三底色检查、拼接/阶段预览、manifest 和自己的 handoff。不得修改 `app/`、正式配置、代码、中心任务登记或声称 Android 已接入。跨角色需要通过 handoff 请求。
 
 本轮 SW-002 的新增付费 API 预算为 **0**：沿用 v5 干净柔光，修复/重做 light_shows 可采用程序渐变/矢量/现有候选。角色采用程序绘制，不继续人物生图。后续已激活任务的 API 预算另写在任务文件中，所有尝试累计，失败/超时计入。凭据仅 host-managed/env，不进 Git。

@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'docs/collaboration'
-ROLES = {'zcode', 'minimax', 'antigravity'}
+ROLES = {'zcode', 'minimax', 'antigravity', 'trae-design'}
 STATES = {'queued', 'ready', 'in_progress', 'handoff_ready', 'in_review', 'rework', 'accepted', 'blocked'}
 CHECK_STATES = {'passed', 'failed', 'pending', 'not_applicable'}
 SHA = re.compile(r'^[a-f0-9]{40}$')
@@ -16,6 +16,7 @@ HASH = re.compile(r'^[a-f0-9]{64}$')
 WRITE_SCOPES = {
     'zcode': ['app/**', 'gradle/**', 'gradlew*', '*gradle*', 'settings.gradle.kts', '.github/workflows/android.yml', 'ASSETS.md', 'docs/collaboration/handoffs/zcode/**', 'docs/collaboration/state/zcode.json'],
     'minimax': ['design/assets/**', 'docs/collaboration/handoffs/minimax/**', 'docs/collaboration/state/minimax.json'],
+    'trae-design': ['design/05-visual-design/**', 'docs/collaboration/handoffs/trae-design/**', 'docs/collaboration/state/trae-design.json'],
     'antigravity': ['docs/**', 'README.md', 'DEVELOPMENT.md', 'ASSETS.md', 'AGENTS.md', 'app/src/androidTest/**', 'tools/**', '.github/workflows/collaboration.yml'],
 }
 
@@ -113,6 +114,8 @@ def validate() -> list[str]:
             errors.append(f'{context}: producer/task mismatch')
         if task and task['kind'] == 'asset' and not h.get('asset_manifest'):
             errors.append(f'{context}: asset delivery requires a manifest')
+        if task and task['kind'] == 'design' and not h.get('design_manifest'):
+            errors.append(f'{context}: design delivery requires a manifest')
         if h.get('schema_version') != 1 or h.get('revision', 0) < 1:
             errors.append(f'{context}: invalid version/revision')
         if not SHA.fullmatch(h.get('head_commit', '')) or not SHA.fullmatch(h.get('base_commit', '')):
@@ -147,6 +150,45 @@ def validate() -> list[str]:
                     errors.append(f'{context}: missing dimensions/visual evidence {layer["file"]}')
                 for evidence in layer.get('checks', []):
                     if not repo_path(evidence).is_file(): errors.append(f'{context}: missing visual check {evidence}')
+            design_dependencies = [d for d in task['depends_on'] if by_id[d]['kind'] == 'design'] if task else []
+            ref = m.get('design_ref')
+            if design_dependencies and not ref:
+                errors.append(f'{context}: new asset batch requires approved design_ref')
+            if ref:
+                design_task = by_id.get(ref.get('task_id'))
+                if design_dependencies and ref.get('task_id') not in design_dependencies:
+                    errors.append(f'{context}: design_ref does not match required design task')
+                if not design_task or design_task['kind'] != 'design' or design_task['status'] != 'accepted' or design_task.get('latest_handoff') != ref.get('handoff'):
+                    errors.append(f'{context}: design_ref is not the accepted design revision')
+                else:
+                    design_h = read(repo_path(ref['handoff']))
+                    design_m = read(repo_path(design_h['design_manifest']))
+                    spec = repo_path(ref['spec_file'])
+                    if ref['spec_file'] != design_m['spec_file'] or not spec.is_file() or hashlib.sha256(spec.read_bytes()).hexdigest() != ref.get('spec_sha256'):
+                        errors.append(f'{context}: design_ref spec hash mismatch')
+        if h.get('design_manifest'):
+            manifest_path = repo_path(h['design_manifest'])
+            design_prefix = f'design/05-visual-design/{h["task_id"]}/r{h["revision"]}/'
+            if not manifest_path.relative_to(ROOT).as_posix().startswith(design_prefix):
+                errors.append(f'{context}: design manifest outside task revision directory')
+            m = read(manifest_path)
+            if m.get('schema_version') != 1 or m.get('task_id') != h.get('task_id') or m.get('producer') != 'trae-design' or m.get('producer') != h.get('producer') or m.get('revision') != h.get('revision'):
+                errors.append(f'{context}: design manifest identity mismatch')
+            files = m.get('files', [])
+            roles = {f.get('role') for f in files}
+            if not {'spec', 'source', 'prompt', 'preview'}.issubset(roles):
+                errors.append(f'{context}: design package missing source/spec/prompt/preview')
+            if m.get('spec_file') not in {f.get('path') for f in files if f.get('role') == 'spec'}:
+                errors.append(f'{context}: design spec not present in manifest')
+            for artifact in files:
+                p = repo_path(artifact['path'])
+                canonical = p.relative_to(ROOT).as_posix()
+                if canonical != artifact['path'] or not canonical.startswith(design_prefix):
+                    errors.append(f'{context}: design output outside task revision directory or noncanonical path')
+                if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != artifact.get('sha256'):
+                    errors.append(f'{context}: design artifact hash mismatch {artifact["path"]}')
+                if p.is_file() and p.stat().st_size != artifact.get('bytes'):
+                    errors.append(f'{context}: design artifact byte count mismatch {artifact["path"]}')
     for path in (BASE / 'reviews').rglob('*.json'):
         r = read(path); context = path.name
         h = read(repo_path(r['handoff']))
@@ -167,6 +209,11 @@ def validate() -> list[str]:
             m = read(repo_path(h['asset_manifest']))
             expected = {l['file']: l['sha256'] for l in m['layers']}
             if r.get('artifact_hashes') != expected: errors.append(f'{context}: approval missing exact candidate hashes')
+        if r.get('verdict') == 'approved' and h.get('design_manifest'):
+            m = read(repo_path(h['design_manifest']))
+            expected = {f['path']: f['sha256'] for f in m['files']}
+            if r.get('artifact_hashes') != expected:
+                errors.append(f'{context}: approval missing exact design hashes')
     # Preserve the historical CI proof: counters and hashes must remain consistent.
     for path in (BASE / 'evidence').glob('*/test-summary.json'):
         s = read(path); total = dict(tests=0, failures=0, errors=0, skipped=0)

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "producer": "trae-design",
+  "spec_file": "design/05-visual-design/SW-011/r1/design-spec.json",
+  "files": [
+    {
+      "path": "design/05-visual-design/SW-011/r1/design-spec.json",
+      "sha256": "REPLACE_WITH_64_CHAR_SHA256",
+      "bytes": 0,
+      "role": "spec"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/prompts.md",
+      "sha256": "REPLACE_WITH_64_CHAR_SHA256",
+      "bytes": 0,
+      "role": "prompt"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/REPLACE_WITH_ACTUAL_EDITABLE_SOURCE.svg",
+      "sha256": "REPLACE_WITH_64_CHAR_SHA256",
+      "bytes": 0,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/REPLACE_WITH_ACTUAL_PREVIEW.png",
+      "sha256": "REPLACE_WITH_64_CHAR_SHA256",
+      "bytes": 0,
+      "role": "preview"
+    }
+  ],
+  "limitations": ["模板不是交付证据；列全实际文件，替换路径/哈希/字节数，注明尚未实现或待审核事项。清单本身不列入自身哈希。"]
+}

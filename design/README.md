@@ -18,8 +18,11 @@
 | ② | [`02-characters/`](./02-characters/) | 默认「旅人」规格与可选变体 |
 | ③ | [`03-product-prd/`](./03-product-prd/) | 完整 PRD、信息架构、感官解锁同程表 |
 | ④ | [`04-interaction-mockups/`](./04-interaction-mockups/) | 关键路径、线框、可打开 HTML 演示 |
+| ⑤ | [`05-visual-design/`](./05-visual-design/) | Trae Design 图片设计任务、可编辑稿与预览的版本目录 |
 
 一页纸定位可先扫一眼 [`00-overview.md`](./00-overview.md)，再按上表深入。
+
+图片设计执行入口：[Trae Design](../docs/collaboration/roles/trae-design.md)；具体构图、分层、透明、导出与交接要求见 [图片设计规范](../docs/collaboration/contracts/visual-design.md)。实际设计稿由Trae交付后归档，`assets/`继续由MiniMax保存候选素材。
 
 ---
 
@@ -48,7 +51,8 @@ design/
   03-product-prd/
   04-interaction-mockups/
     demo/                   ← 浏览器打开 index.html
-  assets/
+  05-visual-design/          ← Trae：按任务/revision存设计源与预览
+  assets/                   ← MiniMax：生成/修图后的候选素材
 ```
 
 ## 演示入口

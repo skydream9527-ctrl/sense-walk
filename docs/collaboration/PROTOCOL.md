@@ -5,6 +5,7 @@
 | 文件/动作 | 负责者 | 其他角色的方式 |
 | --- | --- | --- |
 | `app/src/main/**`、`app/src/test/**`、Gradle、生产 Manifest、正式 assets、业务 CI | ZCode | 提交需求/发现，ZCode 接线 |
+| `design/05-visual-design/**`、design-spec/manifest、素材级提示词与设计源 | Trae Design | MiniMax只读批准设计；不得自动入包 |
 | `design/assets/**/candidates/**`、美术脚本、候选 manifest/检查图 | MiniMax | 只读验收；候选不得自动入包 |
 | `app/src/androidTest/**`、`tools/qa/**`、独立证据/审核 | Antigravity | ZCode 可提出测试需求；测试依赖改动由 ZCode 处理 |
 | `registry.json`、BOARD、任务启用、集成/发布清单、当前状态摘要 | Antigravity | 作者在自己的 handoff 提出更新请求 |
@@ -44,6 +45,8 @@ GitHub 账号可能相同；这里保证的是执行角色独立，不能宣称 
 coordination 启动/验收组织任务可由协调者依据实际产出登记完成；这不是批准自己的产品代码或素材，代码/素材仍必须独立 review。
 
 accepted 的语义取决于任务：素材任务=候选获验收；入包任务=应用接线获验收；开发任务=指定源码/CI 范围通过。真机 Pending 仍写在 registry 和报告中，不能自动将 M1/M2/MVP 判为完成。
+
+design任务accepted仅表示设计包获独立审核，不是素材入包。Trae交design_manifest与源/预览/spec/提示词哈希；批准后MiniMax新场景素材需引用具体design_ref。设计文件变化使原引用失效。森林SW-002机械修复沿原设计继续；SW-006雨林必须先有SW-012批准设计。规范见 [visual-design](contracts/visual-design.md)。
 
 检查类型至少区分 source / unit / cloud-build / emulator / physical-device / human / visual。同一轮截图检查不等于自动化 UI 测试；debug 注入不等于真实传感器。仪器测试未运行必须直说。
 

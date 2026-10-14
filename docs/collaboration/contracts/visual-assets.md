@@ -16,3 +16,5 @@
 状态：candidate → approved_candidate/rejected → integrated（需单独 ZCode 入包任务）→ app_verified。MiniMax 最多声明 candidate；approved_candidate 来自独立 review；integrated 来自配置/代码提交；app_verified 来自 Android 证据。每个批准必须匹配 file sha256。
 
 发生尺寸、ID、定位基线或渲染角色变化，先写 handoff 给 ZCode/Antigravity，不直接改 app。候选是契约数据，不是产品规则授权。
+
+新场景制作前先消费Trae批准设计，按 [图片设计契约](visual-design.md) 给manifest增加design_ref：task_id、已批准handoff路径、spec_file、spec_sha256。雨林SW-006以SW-012 accepted为前置；森林SW-002机械修复保持原任务输入，design_ref可为null，不能用这条例外跳过新场景设计。设计稿、候选素材、正式入包各自独立验收。

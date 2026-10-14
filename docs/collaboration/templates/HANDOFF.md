@@ -12,7 +12,11 @@
 
 ## 变更与契约
 
-列文件、消费者、接口 revision 与需要下游执行的动作。素材附 manifest、真实哈希与拒绝稿。
+列文件、消费者、接口 revision 与需要下游执行的动作。
+
+- 设计任务：JSON附 `design_manifest`，列可编辑源、规范、逐层提示词、实际预览的全部哈希与限制，见 [设计清单模板](design-manifest.json.example) 和 [设计规格模板](design-spec.json.example)。
+- 素材任务：JSON附 `asset_manifest`，列真实哈希、检查图与拒绝稿；新场景manifest的 `design_ref` 记录已批准设计任务/handoff/spec文件及SHA256。
+- 代码任务：引用实际批准候选与接线差异，另交应用验证。设计预览不能充当Android截图或功能通过证据。
 
 ## 检查记录
 

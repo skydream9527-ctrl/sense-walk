@@ -7,7 +7,8 @@
   "role_entries": {
     "zcode": "docs/collaboration/roles/zcode.md",
     "minimax": "docs/collaboration/roles/minimax.md",
-    "antigravity": "docs/collaboration/roles/antigravity.md"
+    "antigravity": "docs/collaboration/roles/antigravity.md",
+    "trae-design": "docs/collaboration/roles/trae-design.md"
   },
   "tasks": [
     {
@@ -50,6 +51,19 @@
       "pending": []
     },
     {
+      "id": "SW-011",
+      "title": "森林图片设计与通用视觉规范",
+      "owner": "trae-design",
+      "kind": "design",
+      "status": "ready",
+      "depends_on": [],
+      "task_file": "docs/collaboration/tasks/SW-011.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
       "id": "SW-010",
       "title": "森林光效批准候选入包",
       "owner": "zcode",
@@ -83,6 +97,21 @@
       "pending": []
     },
     {
+      "id": "SW-012",
+      "title": "雨林图片设计包",
+      "owner": "trae-design",
+      "kind": "design",
+      "status": "queued",
+      "depends_on": [
+        "SW-011"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-012.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
       "id": "SW-006",
       "title": "T07C 雨林候选素材批次",
       "owner": "minimax",
@@ -90,7 +119,8 @@
       "status": "queued",
       "depends_on": [
         "SW-002",
-        "SW-003"
+        "SW-003",
+        "SW-012"
       ],
       "task_file": "docs/collaboration/tasks/SW-006.md",
       "latest_handoff": null,

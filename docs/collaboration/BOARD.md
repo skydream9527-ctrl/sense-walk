@@ -9,9 +9,11 @@
 | SW-001 | [T06 可靠性补强](tasks/SW-001.md) | zcode | ready | — | — / — |
 | SW-002 | [森林光效候选验收收尾](tasks/SW-002.md) | minimax | ready | — | — / — |
 | SW-003 | [独立基线验收与协作集成启动](tasks/SW-003.md) | antigravity | ready | — | — / — |
+| SW-011 | [森林图片设计与通用视觉规范](tasks/SW-011.md) | trae-design | ready | — | — / — |
 | SW-010 | [森林光效批准候选入包](tasks/SW-010.md) | zcode | queued | SW-001, SW-002, SW-003 | — / — |
 | SW-004 | [T07A 会话快照与中断恢复](tasks/SW-004.md) | zcode | queued | SW-001, SW-003 | — / — |
-| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | queued | SW-002, SW-003 | — / — |
+| SW-012 | [雨林图片设计包](tasks/SW-012.md) | trae-design | queued | SW-011 | — / — |
+| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | queued | SW-002, SW-003, SW-012 | — / — |
 | SW-005 | [T07B 自动越坎与站稳规则](tasks/SW-005.md) | zcode | queued | SW-004 | — / — |
 | SW-007 | [T07C 雨林双模式与素材接入](tasks/SW-007.md) | zcode | queued | SW-005, SW-006 | — / — |
 | SW-008 | [T08 四景内容与一致性](tasks/SW-008.md) | zcode | queued | SW-007, SW-010 | — / — |
@@ -23,6 +25,7 @@
 | --- | --- | --- | --- |
 | antigravity | [查看本角色实时状态](state/antigravity.json) | 生产者单写 | [查看交付目录](handoffs/README.md) |
 | minimax | [查看本角色实时状态](state/minimax.json) | 生产者单写 | [查看交付目录](handoffs/README.md) |
+| trae-design | [查看本角色实时状态](state/trae-design.json) | 生产者单写 | [查看交付目录](handoffs/README.md) |
 | zcode | [查看本角色实时状态](state/zcode.json) | 生产者单写 | [查看交付目录](handoffs/README.md) |
 
 ## 实体验证仍待完成

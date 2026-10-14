@@ -25,5 +25,6 @@
   ],
   "requests": [
     "请按任务文件独立审核，不自批准"
-  ]
+  ],
+  "design_manifest": null
 }

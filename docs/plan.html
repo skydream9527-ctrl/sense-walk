@@ -361,37 +361,38 @@
         关卡从一片黑幕开始，感官与风景随路程展开。满距才通关：不可跳过，不可加速。
       </p>
       <div class="hero-meta">
-        <span class="chip done">代码：Week 1 静默骨架</span>
+        <span class="chip done">代码：森林虚走 / 实走</span>
         <span class="chip rule">进度 = 距离</span>
         <span class="chip comfort">舒适节奏摇杆</span>
         <span class="chip terrain">地形动作</span>
         <span class="chip vis">景色层层展开</span>
         <span class="chip">虚走 · 实走</span>
-        <span class="chip">评审 v0.8 · 2026-10-12</span>
+        <span class="chip">协作追加 · 2026-10-13</span>
       </div>
       <p class="hero-lead" style="margin-top:18px;margin-bottom:0;font-size:0.95rem">
         完整设计包见 <a href="../design/README.md"><code>design/</code></a>
         （场景与地形 → 角色 → PRD → <a href="../design/04-interaction-mockups/demo/index.html">交互演示</a>）。<br>
-        交给 ZCode：<a href="zcode-handoff.md">开发任务与可复制提示词（T01–T09）</a>；本地无需完整环境，由 <a href="https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml">GitHub Actions</a> 打包。
+        交给各工具：<a href="collaboration/README.md">四角色协作入口与任务看板</a>，图片设计见 <a href="collaboration/roles/trae-design.md">Trae Design 提示词</a> / <a href="collaboration/contracts/visual-design.md">图片规范</a>。<br>
+        历史阶段参考：<a href="zcode-handoff.md">T01–T09</a>；本地无需完整环境，由 <a href="https://github.com/skydream9527-ctrl/sense-walk/actions/workflows/android.yml">GitHub Actions</a> 打包。
       </p>
     </header>
 
     <section id="status">
       <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">设计方案与交互原型较完整，Android 仍处于静默骨架。以下区分源码已有与尚待交付；HTML demo 和设计截图不代表 App 已实现。</p>
-      <div class="callout"><strong>下一交付物：</strong>森林 800 m 虚走完整闭环。先验收选景 → 模式 → 摇杆计距 → 距离解锁 → 通关 / 放弃，再扩展实走和四景内容。</div>
+      <p class="section-lead">功能基线8056e11已实现森林800m虚走与实走，云端217项JVM测试通过。真机与真人验收仍待执行；当前派工/审核以协作登记为准，设计预览不代表App已接入。</p>
+      <div class="callout"><strong>当前可并行：</strong>ZCode补强T06边界，MiniMax收尾森林光效，Trae Design制作森林图片设计与通用规范，Antigravity独立验收。后续推进快照恢复、地形与雨林。</div>
       <table>
         <thead><tr><th>模块</th><th>代码已有</th><th>待实现</th></tr></thead>
         <tbody>
-          <tr><td>页面与设置</td><td>Compose 导航、三景卡片、静默计时、DataStore</td><td>模式选择、步长与无障碍设置、会话状态与独立结果</td></tr>
-          <tr><td>距离与控制</td><td>SessionClock 按秒累计</td><td>摇杆、有效米数、距离门禁、地形</td></tr>
-          <tr><td>场景与素材</td><td>森林 / 沙漠 / 夜径旧 atSec JSON</td><td>schema v2、雨林 / 城市、真实音视素材</td></tr>
-          <tr><td>音频与振动</td><td>日志 stub，未执行相位</td><td>实际播放、步伐同步、按距离展开</td></tr>
-          <tr><td>实走与恢复</td><td>Manifest 仅振动权限</td><td>计步、前台服务、权限、快照、锁屏验证</td></tr>
-          <tr><td>质量验证</td><td>新增 GitHub Actions 检查与打包</td><td>云端构建结果、规则单测、真机与用户内测</td></tr>
+          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>自动越坎、站稳与完整地形动作</td></tr>
+          <tr><td>场景与素材</td><td>schema v2；森林三层真实图入包，光效程序降级</td><td>光效独立验收；雨林 / 城市与四景接入</td></tr>
+          <tr><td>音频与振动</td><td>森林真实音频、步伐播放、循环层、音频焦点边界</td><td>真机耳机 / 来电 / 振动验证</td></tr>
+          <tr><td>实走与恢复</td><td>计步源、health前台服务、权限与无传感器回退</td><td>同刻计距 / 服务重启 / 注册失败补强；快照恢复、锁屏15分钟</td></tr>
+          <tr><td>图片设计</td><td>Trae任务、分层规范、文件交接与设计版本检查已就绪</td><td>SW-011森林设计稿，批准后SW-012雨林设计</td></tr>
+          <tr><td>质量验证</td><td>GitHub Actions测试 / lint / 打包；原始测试XML已归档</td><td>标准800m真人手动验收、真机矩阵与最终内测</td></tr>
         </tbody>
       </table>
-      <p>完整源码证据和验证状态见 <a href="../DEVELOPMENT.md#0-当前进度仓库核查2026-10-12">DEVELOPMENT §0</a> 与 <a href="../DEVELOPMENT.md#204-本轮验证记录2026-10-12">§20.4</a>。本轮只更新计划与设计说明；既有工作区修改保留。</p>
+      <p>完整规则见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>；源码/云端核查见 <a href="collaboration/evidence/B-20261013-01/README.md">基线证据</a>，最新分工见 <a href="collaboration/BOARD.md">任务看板</a>。协作入口已准备，尚无执行者的新handoff，不据此声明设计或功能已经验收。</p>
     </section>
 
     <section id="vision">
@@ -629,7 +630,7 @@
         <article class="scene-card forest">
           <div class="scene-head">
             <h3>森林</h3>
-            <div class="scene-id">forest · 旧 JSON 已有，待迁移</div>
+            <div class="scene-id">forest · schema v2，虚走 / 实走已接入</div>
           </div>
           <div class="scene-body">
             <p class="scene-theme">树荫 · 清爽 · 生命感 (~13 min)</p>
@@ -657,7 +658,7 @@
         <article class="scene-card desert">
           <div class="scene-head">
             <h3>沙漠</h3>
-            <div class="scene-id">desert · 旧 JSON 已有，待迁移</div>
+            <div class="scene-id">desert · schema v2，待正式开放</div>
           </div>
           <div class="scene-body">
             <p class="scene-theme">空旷 · 风 · 孤独 (~19 min)</p>
@@ -808,7 +809,7 @@
       <div class="formula">M0 工程与配置 → M1 森林虚走 → M2 实走与恢复 → M3 四景内测</div>
       <div class="weeks">
         <div class="week done">
-          <div class="week-head"><h3>已有源码 — Week 1 骨架</h3><span class="week-tag">源码核查</span></div>
+          <div class="week-head"><h3>历史起点 — Week 1 骨架</h3><span class="week-tag">早期基线</span></div>
           <ul><li><span class="check on">✓</span>Compose · SessionClock · 三个旧 JSON · 设置 · 感官 stub</li></ul>
         </div>
         <div class="week">
@@ -820,7 +821,7 @@
           <p><strong>验收：</strong>云端构建通过且下载包可用；本地无需完善环境；配置有效，缺素材有显式占位 / 报错。</p>
         </div>
         <div class="week">
-          <div class="week-head"><h3>M1 — 森林虚走闭环</h3><span class="week-tag">P0 · 下一目标</span></div>
+          <div class="week-head"><h3>M1 — 森林虚走闭环</h3><span class="week-tag">源码已交付 · 真人待验收</span></div>
           <ul>
             <li><span class="check"></span>舒适曲线 + 惯性、有效米数、门禁、相位、会话状态</li>
             <li><span class="check"></span>选景 → 模式 → 虚走；剪影按 fadeMeters 展开；缓坡</li>
@@ -909,7 +910,7 @@
 
     <footer>
       <div>源码 <a href="../DEVELOPMENT.md">DEVELOPMENT.md</a> · <a href="https://github.com/skydream9527-ctrl/sense-walk">GitHub</a></div>
-      <div>v0.8 · 2026-10-12 · 现状核查 / 分阶段交付 / 改进建议</div>
+      <div>v0.8 · 协作追加 2026-10-13 · 现状核查 / 四角色交接 / 改进建议</div>
     </footer>
   </main>
 </div>

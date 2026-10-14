@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "scene_id": "forest",
+  "status": "design_candidate",
+  "basis": {
+    "commit": "REPLACE_WITH_ACTUAL_40_CHAR_SOURCE_SHA",
+    "scene_config": "app/src/main/assets/scenes/forest.json",
+    "renderer": "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt"
+  },
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "coordinate_system": "normalized_0_to_1",
+    "crop_previews": [{"width": 1080, "height": 2400}, {"width": 390, "height": 844}],
+    "actual_source_resolution": "REPLACE_WITH_ACTUAL_SOURCE_RESOLUTION_AND_UPSCALE_HISTORY",
+    "safe_area_notes": "REPLACE_WITH_ACTUAL_APP_INSETS_AND_CANVAS_RELATION"
+  },
+  "anchors": {"traveler_x": 0.34, "ground_y": 0.865, "joystick_area_bottom_fraction": 0.45},
+  "palette": {
+    "void": "#060806", "outline": "#1A2820", "trunks": "#2D4A3E",
+    "light": "#8FA87A", "leaf": "#6B8F71", "warm": "#A89060"
+  },
+  "layers": [
+    {"id": "tree_outline", "type": "parallax", "at_meters": 80, "to_opacity": 0.6, "fade_meters": 20, "tileable": false, "design_notes": "REPLACE_WITH_COMPOSITION_TRANSPARENT_REGIONS_AND_REFERENCE_FILES"},
+    {"id": "tree_trunks", "type": "parallax", "at_meters": 240, "to_opacity": 0.7, "fade_meters": 25, "tileable": false, "design_notes": "REPLACE_WITH_COMPOSITION_TRANSPARENT_REGIONS_AND_REFERENCE_FILES"},
+    {"id": "leaf_path", "type": "parallax", "at_meters": 400, "to_opacity": 0.8, "fade_meters": 25, "tileable": false, "design_notes": "REPLACE_WITH_COMPOSITION_TRANSPARENT_REGIONS_AND_REFERENCE_FILES"},
+    {"id": "light_shows", "type": "overlay", "at_meters": 600, "to_opacity": 0.65, "fade_meters": 30, "tileable": false, "design_notes": "REPLACE_WITH_COMPOSITION_TRANSPARENT_REGIONS_AND_REFERENCE_FILES"},
+    {"id": "clearing", "type": "overlay", "at_meters": 760, "to_opacity": 0.9, "fade_meters": 25, "tileable": false, "design_notes": "REPLACE_WITH_COMPOSITION_TRANSPARENT_REGIONS_AND_REFERENCE_FILES"}
+  ],
+  "preview_meters": [0, 100, 265, 425, 630, 785],
+  "programmatic_layers": ["void", "traveler"],
+  "source_files": ["REPLACE_WITH_ACTUAL_REPO_RELATIVE_EDITABLE_SOURCE"],
+  "reference_sources": [{"file": "REPLACE_WITH_ACTUAL_REFERENCE_PATH", "origin": "REPLACE_WITH_SOURCE_AND_USAGE_RIGHTS"}],
+  "proposed_changes": [],
+  "limitations": ["模板不是实际设计交付；替换所有占位值，记录实际工具/导出和未实现限制"]
+}
