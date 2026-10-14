@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "zcode",
-  "current_task": null,
-  "status": "idle",
-  "branch": null,
-  "head_commit": null,
-  "latest_handoff": null,
-  "updated_on": "2026-10-13",
-  "note": "初始化状态，不代表此agent已经领取任务；首次执行时由本人更新。"
+  "current_task": "SW-001",
+  "status": "handoff_ready",
+  "branch": "codex/zcode/SW-001-t06-reliability",
+  "head_commit": "2dba5ebbb4897a7a6b9f05e562a9bf6b5bebb39c",
+  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.md",
+  "updated_on": "2026-10-14",
+  "note": "SW-001 R1 已交付待独立审核（F-001~F-005；238 本地单测 0 失败；模拟器回归通过；真机项 pending）。未开始 SW-004/SW-010。"
 }
