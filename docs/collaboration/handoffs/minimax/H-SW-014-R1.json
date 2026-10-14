@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-014-R1",
+  "task_id": "SW-014",
+  "revision": 1,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "base_commit": "550eb63b0ad14dae39d03b3e5b97ed0080057bda",
+  "head_commit": "PENDING_THIS_COMMIT_SHA",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/minimax/H-SW-014-R1.md",
+  "changed_files": [
+    "design/assets/rainforest/preflight/SW-014/r1/README.md",
+    "design/assets/rainforest/preflight/SW-014/r1/scripts/gen_fixtures.py",
+    "design/assets/rainforest/preflight/SW-014/r1/scripts/preflight.py",
+    "design/assets/rainforest/preflight/SW-014/r1/scripts/dry_run.py",
+    "design/assets/rainforest/preflight/SW-014/r1/scripts/api_log_template.py",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/webp/rainforest_*.webp",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/png/rainforest_*.png",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/checks/{black,white,magenta,alpha_mask}/rainforest_*.{jpg,png}",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_oversize/",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_wrong_hash/",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_missing/",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_not_tileable/",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_no_design/",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/design_ref_pending.json",
+    "design/assets/rainforest/preflight/SW-014/r1/fixtures/api_log_template.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_ok.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_oversize.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_wrong_hash.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_missing.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_not_tileable.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_no_design.json",
+    "design/assets/rainforest/preflight/SW-014/r1/records/dry_run_pending.json",
+    "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
+    "docs/collaboration/handoffs/minimax/H-SW-014-R1.md",
+    "docs/collaboration/state/minimax.json"
+  ],
+  "checks": [
+    {
+      "name": "fixture 全部 6 类生成成功 (PIL 程序化, 零 API)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_oversize/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_wrong_hash/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_missing/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_not_tileable/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_no_design/manifest.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别字节不符 (manifest_oversize: bytes 500000 != actual 10346)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_oversize.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别 SHA 不匹配 (manifest_wrong_hash: 0...0 != 0c5b8c...)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_wrong_hash.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别文件缺失 (manifest_missing: far_glow.webp 实际不存在)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_missing.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别 tileable=true 但缺 tileable checks",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_not_tileable.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别缺 design_ref (新场景 rainforest 必须)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_no_design.json"
+      ]
+    },
+    {
+      "name": "预检脚本识别 design_ref PENDING (manifest_ok 也因 SW-012 未批阻断)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/preflight_manifest_ok.json"
+      ]
+    },
+    {
+      "name": "dry_run 入口正确报告 design_ref 不通过 (exit code 1)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/records/dry_run_pending.json"
+      ]
+    },
+    {
+      "name": "API 账本字段 (api_attempts_this_revision / total / cost) 存在",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json"
+      ]
+    },
+    {
+      "name": "AI 输出不标 CC0 (origin 字段无 CC0 字符串)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r1/fixtures/manifest_ok/manifest.json"
+      ]
+    },
+    {
+      "name": "Android 模拟器/真机走查 (本任务不涉及, 工具脚本不是 Android 代码)",
+      "type": "physical-device",
+      "status": "not_applicable",
+      "evidence": []
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r1/scripts/gen_fixtures.py",
+      "sha256": "737f0d49a4dc5ab9cf2c1f2c4545f23bb92ef4271a61d9aba5f699183a30ccd8",
+      "role": "fixture-generator"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r1/scripts/preflight.py",
+      "sha256": "5649ce466c92544b5f403faad967599ff91ed7ddb32a82ef47edc920962b5960",
+      "role": "preflight-checker"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r1/scripts/dry_run.py",
+      "sha256": "1379a21cbdb31d9bcd2c78783bcbd9e7a0e60fb24d80fbfb194459c0a67cfc61",
+      "role": "dry-run-mock"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r1/scripts/api_log_template.py",
+      "sha256": "5e12066f7f94b5dc1ad6d95b8d0dba577246e2efca687bb12be5ec62b9ef1b9f",
+      "role": "api-log-template"
+    }
+  ],
+  "asset_manifest": null,
+  "pending": [
+    "等待 Antigravity 独立审核 R-SW-014-R1; 获准后此任务 accepted, 但不等于雨林素材获批 (SW-012 设计未批前 SW-006 不能启动付费调用)",
+    "fixture 中 origin 字段写 'fixture' 是为了标识非正式图, 不是已批准候选; SW-006 实际启动时 minimax 必须用 SW-012 approved 后的 design_ref"
+  ],
+  "requests": [
+    "请按 PROTOCOL §独立审核 R-SW-014-R1 校验 SHA256, 实际跑 preflight.py + dry_run.py 确认行为",
+    "通过 → 写 approved handoff; 获准后 SW-006 可启动 (但需先等 SW-012 approved)",
+    "退回 → 写 changes_requested, 登记 rework, 写 R2; R1 不覆盖"
+  ],
+  "design_manifest": null
+}

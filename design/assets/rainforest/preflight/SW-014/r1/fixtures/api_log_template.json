@@ -1,0 +1,12 @@
+{
+  "task_id": "SW-006",
+  "revision": 1,
+  "schema_version": 1,
+  "budget_initial": 8,
+  "budget_remaining": 8,
+  "total": 0,
+  "cost_usd": "unknown",
+  "attempts": [],
+  "_note": "此模板由 SW-014 预检脚本产出的 fixture; SW-006 实际调用时 minimax 自己实例化, 不复用此文件.",
+  "_created_at": "2026-10-14T08:36:15.142462+00:00"
+}

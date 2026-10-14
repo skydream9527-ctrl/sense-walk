@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "agent": "minimax",
-  "current_task": "SW-002",
-  "status": "handoff_ready",
-  "branch": "codex/minimax/SW-002-clearing-lightshow",
-  "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
-  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
-  "updated_on": "2026-10-13",
-  "note": "SW-002 r1 候选已交付: design/assets/forest/candidates/SW-002/r1/ 含 clearing (程序化径向渐变, 复用 v5) + light_shows (程序化三束斜光+2 只飞鸟). 零 API 调用, 累计 14. 等待 Antigravity 独立审核 (R-SW-002-R1). 通过后由 ZCode 在 SW-010 单独入包."
+  "current_task": "SW-014",
+  "status": "in_progress",
+  "branch": "codex/minimax/SW-014-rainforest-preflight",
+  "head_commit": "PENDING_THIS_COMMIT_SHA",
+  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
+  "previous_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
+  "updated_on": "2026-10-14",
+  "note": "SW-014 (雨林素材交付预检准备, 零 API) 领取; 前置 SW-002/SW-003 已 accepted, 不依赖 SW-001. 交付: scripts/{gen_fixtures, preflight, dry_run, api_log_template}.py + 6 fixture (manifest_ok / oversize / wrong_hash / missing / not_tileable / no_design) + records/ 7 份预检报告. 等待 Antigravity 审核 R-SW-014-R1. 通过后 SW-014 accepted; SW-006 仍需 SW-012 design approved 才能启动付费调用."
 }

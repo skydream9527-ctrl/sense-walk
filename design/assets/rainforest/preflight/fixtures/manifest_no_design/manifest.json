@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 0,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "mist",
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 33460,
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "sha256": "58d6a732fa441d183209fd05cd28cf9ffa4989106feee172c556472affe0d0b7",
+      "origin": "fixture (自制小样本, 非雨林正式图)",
+      "process": "SW-014 gen_fixtures.py 程序化生成",
+      "quality_status": "fixture",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "fixture: 用于 SW-014 预检脚本验证, 不作为雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "file": "webp/rainforest_trunks_canopy.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 2298,
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "sha256": "3aac322985c0c3d2040261b831eed06db92f5c96d042f062bd50626314266193",
+      "origin": "fixture (自制小样本, 非雨林正式图)",
+      "process": "SW-014 gen_fixtures.py 程序化生成",
+      "quality_status": "fixture",
+      "checks": [
+        "checks/alpha_mask/rainforest_trunks_canopy.png",
+        "checks/black/rainforest_trunks_canopy.jpg",
+        "checks/white/rainforest_trunks_canopy.jpg",
+        "checks/magenta/rainforest_trunks_canopy.jpg"
+      ],
+      "limitations": [
+        "fixture: 用于 SW-014 预检脚本验证, 不作为雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "vines_light",
+      "file": "webp/rainforest_vines_light.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 4846,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "sha256": "324ba3a9a1b22d09310fe262ec3ac1ad38264f1a060ed8a6ad99bc207bb96dfd",
+      "origin": "fixture (自制小样本, 非雨林正式图)",
+      "process": "SW-014 gen_fixtures.py 程序化生成",
+      "quality_status": "fixture",
+      "checks": [
+        "checks/alpha_mask/rainforest_vines_light.png",
+        "checks/black/rainforest_vines_light.jpg",
+        "checks/white/rainforest_vines_light.jpg",
+        "checks/magenta/rainforest_vines_light.jpg"
+      ],
+      "limitations": [
+        "fixture: 用于 SW-014 预检脚本验证, 不作为雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "far_glow",
+      "file": "webp/rainforest_far_glow.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 26812,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "sha256": "be25e508b9a64ff9e13d36fd9e50a27615468730d05732bdd7dcaab5355f80ec",
+      "origin": "fixture (自制小样本, 非雨林正式图)",
+      "process": "SW-014 gen_fixtures.py 程序化生成",
+      "quality_status": "fixture",
+      "checks": [
+        "checks/alpha_mask/rainforest_far_glow.png",
+        "checks/black/rainforest_far_glow.jpg",
+        "checks/white/rainforest_far_glow.jpg",
+        "checks/magenta/rainforest_far_glow.jpg"
+      ],
+      "limitations": [
+        "fixture: 用于 SW-014 预检脚本验证, 不作为雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "clearing_glow",
+      "file": "webp/rainforest_clearing_glow.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 27362,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "sha256": "9b34460ea980493d69bda3c24e90ffe1ef0601fd65ba00d9ed4f500f461d5db4",
+      "origin": "fixture (自制小样本, 非雨林正式图)",
+      "process": "SW-014 gen_fixtures.py 程序化生成",
+      "quality_status": "fixture",
+      "checks": [
+        "checks/alpha_mask/rainforest_clearing_glow.png",
+        "checks/black/rainforest_clearing_glow.jpg",
+        "checks/white/rainforest_clearing_glow.jpg",
+        "checks/magenta/rainforest_clearing_glow.jpg"
+      ],
+      "limitations": [
+        "fixture: 用于 SW-014 预检脚本验证, 不作为雨林正式图"
+      ]
+    }
+  ],
+  "design_ref": null
+}

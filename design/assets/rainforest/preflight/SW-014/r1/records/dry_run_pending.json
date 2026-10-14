@@ -1,0 +1,32 @@
+{
+  "task_id": "SW-006",
+  "dry_run": true,
+  "api_attempts_this_dry_run": 0,
+  "design_ref_check": {
+    "ok": false,
+    "reason": "design_ref.handoff 不存在: docs/collaboration/handoffs/trae-design/H-SW-012-R1.json"
+  },
+  "planned_layer_ids": [
+    "mist",
+    "trunks_canopy",
+    "vines_light",
+    "far_glow",
+    "clearing_glow"
+  ],
+  "next_steps_for_sw006": [
+    "1. 等待 SW-012 design handoff approved by Antigravity",
+    "2. 切到独立 worktree codex/minimax/SW-006-rainforest-batch",
+    "3. 实例化 api_log_template.json (revision=1, budget_remaining=8)",
+    "4. 按 layer_ids 顺序生图, 每次写 attempt 到 api_log.attempts",
+    "5. 后处理 + 4 底色检查 + 6 阶段合成 (沿 forest 脚本复用)",
+    "6. 写 manifest.json (含 design_ref) + 提交独立 worktree 分支",
+    "7. 写 H-SW-006-R1.json + .md, 等 Antigravity 独立审核",
+    "8. 通过后由 ZCode 在 SW-007 单独入包 (不在本任务范围)"
+  ],
+  "forbidden_in_sw006": [
+    "不替 Trae 决定雨林构图/色板/光效",
+    "不绕过 design_ref 调生图 API",
+    "不重置账本 (R1/R2/R3 累计 8 次, 不重命名轮次清零)",
+    "不写 CC0 / 不转售"
+  ]
+}
