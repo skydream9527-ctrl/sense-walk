@@ -14,13 +14,18 @@
     "reviewed_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
     "report": "docs/collaboration/reviews/R-SW-002-R1.md"
   },
+  "sw002_integration_observed": {
+    "integrated_commit": "a5ad6dd634ab",
+    "integrated_commit_message": "feat(asset): integrate SW-002 r1 forest clearing and light shows candidates",
+    "registry_status_as_of_now": "accepted (registry SW-002.integrated_commit = a5ad6dd634ab)",
+    "sw010_registry_status": "queued (registry 未走完 SW-010 任务流程, 但 ZCode 在 a5ad6dd 实际完成了入包动作; 协调者后续可能补 SW-010 review / 改 accepted)"
+  },
   "next_actionable_tasks": [
-    "SW-006 (queued, depends_on [SW-002, SW-003, SW-012])"
+    "SW-006 (queued, depends_on [SW-002 ✓accepted, SW-003 ✓accepted, SW-012 queued])"
   ],
   "blocked_on": [
-    "SW-012: Trae Design 雨林设计包 (depends_on SW-011, queued); SW-006 不得在 SW-012 approved 前生成付费调用",
-    "SW-010: ZCode 入包 (depends_on [SW-001, SW-002, SW-003], queued); SW-002 R1 approved_candidate 等 SW-010 接线"
+    "SW-012: Trae Design 雨林设计包 (depends_on SW-011 ready, queued); SW-006 不得在 SW-012 approved 前生成付费调用"
   ],
   "updated_on": "2026-10-13",
-  "note": "SW-002 R1 approved by Antigravity (reviewed_commit=f512d20). minimax 范围已结束: 不写 R2 handoff, 不直接入包, 不写 ASSETS.md. 等待: (1) ZCode 在 SW-010 单独入包 + Android 模拟器/真机走查; (2) Trae SW-011 设计批准 → SW-012 雨林设计批准 → SW-006 雨林候选批次进入 ready. 本分支 HEAD 业务锁定 f512d20, 后续提交不改变 R1 审核绑定."
+  "note": "SW-002 R1 approved + ZCode 实际入包 (a5ad6dd); registry SW-002 状态 accepted. minimax 范围已结束. 下一可领取任务 SW-006 但前置 SW-012 (Trae 雨林设计) 未 approved, 不能启动付费调用. 等待 Trae 发布 SW-011 (森林设计) → SW-012 (雨林设计) handoff."
 }
