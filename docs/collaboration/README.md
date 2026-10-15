@@ -13,23 +13,23 @@
 
 ## 2026-10-14进展与当前分工
 
-第三轮完整核查、PR #1的249项/PR #3的217项原始云端JUnit、预检实测反例与分工见 [最新进展报告](evidence/P-20261014-02/README.md)。本机当前分支可能属于别的角色或落后于main；每轮先fetch，再从最新origin/main读取登记/入口，保留本角色未交付工作同步到独立分支，不能reset覆盖别人工作。
+第四轮核查、最新PR合并checkout原始JUnit、MiniMax R2五个新反例与分工见 [最新进展报告](evidence/P-20261014-03/README.md)。本机当前分支可能属于别的角色或落后于main；每轮先fetch，再从最新origin/main读取登记/入口，保留本角色未交付工作同步到独立分支，不能reset覆盖别人工作。
 
 | 角色 | 当前任务 | 结果去向 |
 | --- | --- | --- |
-| ZCode | [SW-001 R2](tasks/SW-001.md)/[SW-010 PR #3](tasks/SW-010.md)已交，顺序同步main、解决自己的state冲突和补验收证据 | 独立复审/集成；SW-001批准后SW-004 |
-| MiniMax Code | [SW-014 R2零API修订](tasks/SW-014.md) | 修PF-01～04/真实解码/批准引用/隔离fixture，交PR与handoff；雨林仍等SW-012 |
+| ZCode | [SW-001 R2](tasks/SW-001.md)/[SW-010 PR #3](tasks/SW-010.md)已同步解冲突并补证据，不重复已做动作 | 响应独立QA；SW-001 accepted后SW-004快照 |
+| MiniMax Code | [SW-014 R3零API修订](tasks/SW-014.md)，R2已推送但有新误放行 | 修R2-01～05/spec读取/实际预算与累计账本，交真实PR/handoff |
 | Trae Design | [SW-011：发布既有43文件森林设计草稿](tasks/SW-011.md) | 推送真实源/manifest/handoff → 独立审核，之后SW-012 |
-| Antigravity | [常驻验收队列](queues/antigravity.md)；SW-013协调已accepted | R2全head/森林应用/预检工具/设计审稿，顺序集成/激活/组合测试包 |
+| Antigravity | [常驻验收队列](queues/antigravity.md)，优先SW-001 R2独立结论 | 通过即顺序集成/激活SW-004，再森林接图/预检最新revision/收到的设计；交组合包 |
 
-SW-002候选、SW-003/SW-013协调已accepted；PR #1 R2和PR #3尚未合入，当前main两层光效仍程序降级。两PR现有合并冲突，云端绿不代替独立批准；SW-014脚本已发布但实测有误判。Trae仍无共享交付。registry的observed_delivery只定位远端交付，正式批准仍由review/集成证据决定。本系统未向执行工具发消息。雨林按 Trae设计 → 审核 → MiniMax素材 → 验图 → ZCode接入 → Android复验推进。
+SW-002候选、SW-003/SW-013协调已accepted；两个工作PR现均MERGEABLE/CLEAN，最新PR合并checkout分别249/217项通过，但仍未独立验收/合入main。MiniMax R2根定位/解码已修、13原fixture结果吻合，新五个反例仍需R3；Trae仍无共享交付。近期目标是可靠性/森林独立验收→合入→组合CI/新测试包，以及共享设计/合格预检工具。main两层光效仍程序降级，旧build-41不含工作PR；真机/真人仍Pending。observed_delivery只定位远端交付，本系统未向执行工具发消息。
 
 ## 文件导航
 
 - [任务看板](BOARD.md)：由 registry 生成，可在 GitHub 浏览。
-- [最新进展与下一轮规划](evidence/P-20261014-02/README.md)：main/PR/本机草稿分别核对。
+- [最新进展与下一轮规划](evidence/P-20261014-03/README.md)：main/PR/本机草稿分别核对。
 - [常驻验收队列](queues/antigravity.md)：精确待验提交；协调轮完成后继续消费交付。
-- [上一轮源码核查](evidence/P-20261014-01/README.md)：保留当时238项结果与R2触发依据。
+- [上一轮交付核查](evidence/P-20261014-02/README.md) 与 [初版源码核查](evidence/P-20261014-01/README.md)：保留各轮当时证据与修订依据。
 - [协作协议](PROTOCOL.md)：隔离、所有权、领取、交接、退回与集成。
 - [整体路线](ROADMAP.md)：T07 拆成快照、地形、雨林三个可验收步骤。
 - [基线核查](evidence/B-20261013-01/README.md)：8056e11、217 项云端测试、素材与 T06 风险。

@@ -23,17 +23,17 @@
       "latest_review": "docs/collaboration/reviews/R-SW-001-R1.json",
       "integrated_commit": null,
       "pending": [
-        "R2已发布/249项云端通过，待Antigravity实际Kotlin与完整head复审；旧R1 changes_requested仅针对当时head",
-        "作者顺序同步main解决state冲突、刷新PR描述并追加R2 base SHA笔误纠正；真机锁屏/硬件仍Pending"
+        "PR #1已同步/解冲突/纠正，最新合并checkout249项通过；优先等待Antigravity R2实际Kotlin/完整head独立review并集成",
+        "accepted后才激活SW-004；真机计步/锁屏/耳机来电仍Pending"
       ],
       "observed_delivery": {
         "revision": 2,
         "branch": "codex/zcode/SW-001-t06-reliability",
-        "branch_head": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+        "branch_head": "d11873f3d5553fda872dd18f4483ca1e1b11223a",
         "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
-        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
       }
     },
     {
@@ -74,7 +74,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "本轮复核43文件草稿hash/字节一致，但仍未提交/推送/无handoff；Trae优先发布既有设计PR"
+        "第四轮43文件草稿hash/bytes仍一致，仍未提交/推送/无handoff；Trae优先发布现有设计PR，不重复生成"
       ]
     },
     {
@@ -92,17 +92,17 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "PR #3已接正式图/配置且hash匹配；217项仅push分支CI，未独立应用验收/合入",
-        "作者解决state冲突；Antigravity复验六阶段/屏比/冻结/终景意图，新组合版本CI与测试包待交"
+        "PR #3已同步/解冲突，补长屏/小屏/冻结/意图证据，最新PR合并checkout217项通过；待独立应用/视觉review与集成",
+        "两工作PR组合CI/新测试包待交；终景强度按设计意图裁定，不改既定opacity"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/zcode/SW-010-forest-lightshows",
-        "branch_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+        "branch_head": "393f22570a541118d80e7a50c6860c3b57f2fd49",
         "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
       }
     },
     {
@@ -246,17 +246,17 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "bootstrap实测PF-01～04：非图/空层/未批准dummy误判通过及repo路径错误；安排零API R2，不代替独立review",
-        "发布R2 PR/handoff与成功/隔离失败fixture；Antigravity复审后才accepted，雨林制作仍等SW-012"
+        "R2已推送/1正12负样本实测吻合，但bootstrap复现R2-01～05：测试标记旁路、RGBA透明反判、空检查图、负账本、批准链不匹配",
+        "安排零API R3并建真实PR，补批准spec读取/真实预算/累计账本；此为bootstrap派工，正式review由Antigravity写"
       ],
       "observed_delivery": {
-        "revision": 1,
-        "branch": "codex/minimax/SW-014-rainforest-preflight",
-        "branch_head": "13d6c0d51261a467feb2c3a57705ae7820198e49",
-        "business_head": "7d047a22ddde21664983db5ee298c18d805b5326",
-        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-014-R1.json",
+        "revision": 2,
+        "branch": "codex/minimax/SW-014-r2",
+        "branch_head": "bda0b74d53791c09a4c9b7a2858b9c32321bc862",
+        "business_head": "6e683e2087574df51efd43d8dea73270d321f5aa",
+        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
         "pr_url": null,
-        "source_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
       }
     }
   ],
@@ -268,5 +268,5 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261014-02/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261014-03/README.md"
 }

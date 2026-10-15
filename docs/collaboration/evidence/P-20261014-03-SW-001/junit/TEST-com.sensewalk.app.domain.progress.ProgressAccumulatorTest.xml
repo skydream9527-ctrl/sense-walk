@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-14T11:08:02" hostname="runnervmmprz5" time="0.013">
+  <properties/>
+  <testcase name="前进累计距离" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.002"/>
+  <testcase name="NaN 与 Infinity 增量被忽略" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.001"/>
+  <testcase name="S9 快照往返保留 s_best - 回退后恢复不重复计距" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.0"/>
+  <testcase name="非法门禁距离拒绝构造" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.005"/>
+  <testcase name="S2 S9 走回旧位置不重复累计" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.0"/>
+  <testcase name="S2 回退不减少有效米数" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.001"/>
+  <testcase name="反复来回同一区间不刷距" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.001"/>
+  <testcase name="米数钳制到门禁距离" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.001"/>
+  <testcase name="remaining 反映剩余" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.0"/>
+  <testcase name="回退不越过起点" classname="com.sensewalk.app.domain.progress.ProgressAccumulatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -27,9 +27,9 @@
 
 | 任务/轮次 | PR或分支 | 观察交付head | 来源 |
 | --- | --- | --- | --- |
-| SW-001 R2 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/1) | `c026c64` | [README](evidence/P-20261014-02/README.md) |
-| SW-010 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/3) | `dfcc19e` | [README](evidence/P-20261014-02/README.md) |
-| SW-014 R1 | `codex/minimax/SW-014-rainforest-preflight` | `13d6c0d` | [README](evidence/P-20261014-02/README.md) |
+| SW-001 R2 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/1) | `d11873f` | [README](evidence/P-20261014-03/README.md) |
+| SW-010 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/3) | `393f225` | [README](evidence/P-20261014-03/README.md) |
+| SW-014 R2 | `codex/minimax/SW-014-r2` | `bda0b74` | [README](evidence/P-20261014-03/README.md) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 

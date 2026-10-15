@@ -379,21 +379,20 @@
 
     <section id="status">
       <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">2026-10-14第三轮复核：main为6d33d94。ZCode PR #1 R2云端249项、PR #3正式接图push云端217项通过，均未独立验收/合入且有角色状态冲突。MiniMax预检已发布但实测有误判，Trae仍有未共享草稿。真机与真人验收待执行。</p>
-      <div class="callout"><strong>当前并行：</strong>ZCode收口现有两PR；MiniMax零API修SW-014 R2；Trae发布SW-011已有设计；Antigravity从常驻队列复审、顺序集成并交组合测试包。之后推进快照恢复、地形与雨林。</div>
+      <p class="section-lead">2026-10-14第四轮复核：main为e7ab092。ZCode两PR已解冲突、补纠正/屏比证据，最新PR合并checkout分别249/217项通过；独立review及合入尚未完成。MiniMax R2已发布但仍有五个误放行反例，Trae43份设计仍未共享。</p>
+      <div class="callout"><strong>当前重点：</strong>Antigravity优先完成可靠性R2独立结论、通过即集成解锁快照；ZCode响应QA；MiniMax零API修SW-014 R3；Trae提交推送已有SW-011。近期交付目标是独立验收、组合CI和新测试包。</div>
       <table>
-        <thead><tr><th>模块</th><th>实际已有</th><th>下一步</th></tr></thead>
+        <thead><tr><th>模块</th><th>实际进展</th><th>下一步</th></tr></thead>
         <tbody>
-          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>快照批准后自动越坎、站稳与完整地形动作</td></tr>
-          <tr><td>场景与素材</td><td>main森林三层正式图；PR #3两层光效已真正接图</td><td>同步冲突、独立Android验图/终景意图、组合版本CI后合入</td></tr>
-          <tr><td>音频与振动</td><td>森林真实音频、步伐播放、循环层、音频焦点边界</td><td>真机耳机 / 来电 / 振动验证</td></tr>
-          <tr><td>实走与恢复</td><td>PR #1 R2已接detector失败cue回退/同刻合并修正</td><td>完整head独立复审；获批后SW-004快照，锁屏15分钟Pending</td></tr>
-          <tr><td>图片设计</td><td>Trae本机43文件SVG/五层/六阶段/三比例草稿，hash复核匹配</td><td>发布SW-011共享PR/handoff/审稿，获批后SW-012雨林设计</td></tr>
-          <tr><td>素材工具</td><td>SW-014 R1零API脚本/fixture已推送</td><td>修非图/空层/未批准引用误判与根路径，补隔离正负fixture</td></tr>
-          <tr><td>质量验证</td><td>249项/217项原始JUnit分别归档；SW-013协调已accepted</td><td>常驻队列独立审稿/集成；组合测试包、标准800m真人/真机矩阵</td></tr>
+          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>SW-001批准后快照恢复，再地形/自动越坎</td></tr>
+          <tr><td>场景与素材</td><td>PR #3正式接图，已补长屏/小屏三阶段与冻结/意图图</td><td>独立app/视觉review、合入、两PR组合CI</td></tr>
+          <tr><td>实走可靠性</td><td>PR #1 R2已同步并纠正交接，249项新PR合并测试通过</td><td>实际Kotlin/服务链独立复审；通过即激活SW-004</td></tr>
+          <tr><td>图片设计</td><td>Trae43文件可编辑源/预览/提示词草稿，hash一致</td><td>真实推送SW-011与handoff，获批后SW-012雨林设计</td></tr>
+          <tr><td>素材工具</td><td>SW-014 R2根定位/真实解码已修，原13样本结果吻合</td><td>R3修默认测试标记旁路/alpha/缺底图/批准链/账本，并建PR</td></tr>
+          <tr><td>验收与发布</td><td>云端原始XML分开归档；作者两尺寸冻结图状态栏以下零差异</td><td>Antigravity正式review/merge/新组合测试包；真机与真人仍Pending</td></tr>
         </tbody>
       </table>
-      <p>完整规则见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>，本轮证据/下一步见 <a href="collaboration/evidence/P-20261014-02/README.md">最新核查</a>、<a href="collaboration/queues/antigravity.md">验收队列</a> 与 <a href="collaboration/BOARD.md">任务看板</a>。旧build-41不含两工作PR，云端通过不代表M1/M2/MVP完成。</p>
+      <p>详见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>、<a href="collaboration/evidence/P-20261014-03/README.md">最新核查</a>、<a href="collaboration/queues/antigravity.md">验收队列</a> 与 <a href="collaboration/BOARD.md">任务看板</a>。main尚未包含两工作PR，旧build-41也不包含；云端通过不代表M1/M2/MVP已验收。</p>
     </section>
 
     <section id="vision">
