@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-14T11:08:03" hostname="runnervmmprz5" time="0.021">
+  <properties/>
+  <testcase name="甜点速度完整通关 - 门禁唯一触发且相位各一次" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.006"/>
+  <testcase name="S9 单次批量进度跨多个阈值全部按序触发一次" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.0"/>
+  <testcase name="S1 拉满比甜点慢 - 同样帧数拉满走得更少" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.01"/>
+  <testcase name="未满距主动结束为 Abandoned - 迟到通关被吸收" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.001"/>
+  <testcase name="暂停不偷跑 - 回前台等待新输入" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.0"/>
+  <testcase name="S2 回退重走不重复计距 - 全链路视角" classname="com.sensewalk.app.domain.session.VirtualWalkIntegrationTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "bootstrap-planning-verification-not-independent-product-review",
+  "base_commit": "e7ab092ad9967d9e6d97e212d777ac3546e4525e",
+  "checks": {
+    "collaboration_render": "passed",
+    "collaboration_check": "passed",
+    "protocol_unit_tests": {
+      "count": 31,
+      "result": "passed"
+    },
+    "git_diff_check": "passed",
+    "markdown_local_links_checked": 98,
+    "html_local_links": "passed",
+    "sw014_r2_published_fixture_results": "1 positive ok / 12 negative failed reproduced",
+    "sw014_r2_additional_probes": "5 mismatches reproduced, require R3; not approved",
+    "trae_manifest_files": "43 hashes/bytes matched, still unshared",
+    "sw010_author_freeze_pairs": "Both sizes: 0 changed pixels below status bar; not emulator rerun"
+  },
+  "new_api_calls": 0,
+  "android_environment_installed": false,
+  "physical_device": "pending",
+  "human_acceptance": "pending"
+}

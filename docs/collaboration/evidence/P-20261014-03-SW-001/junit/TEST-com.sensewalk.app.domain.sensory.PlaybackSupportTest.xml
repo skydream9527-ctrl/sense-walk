@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.sensory.PlaybackSupportTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-14T11:08:03" hostname="runnervmmprz5" time="0.011">
+  <properties/>
+  <testcase name="中断后重新申请获准则恢复" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="加载失败给出明确诊断" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.01"/>
+  <testcase name="暂停停止活跃脚步流 - 恢复不补播旧流" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="准备期间请求开始 - 就绪后播放" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="错误回调等同释放" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="准备期间请求暂停 - 就绪后保持暂停不自动播放" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="未知 soundId 的回调被忽略" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.001"/>
+  <testcase name="就绪前增益被缓存 - 就绪后可应用" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="准备期间释放 - 迟到的 onPrepared 被吸收" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="释放后请求与增益全部无效" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="播放中暂停再恢复 - 不需要重新准备" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="未加载完成的变体不可播放" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="焦点未获准不得恢复音频" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <testcase name="获准后可恢复 - 丢失后再次拒绝" classname="com.sensewalk.app.domain.sensory.PlaybackSupportTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
