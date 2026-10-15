@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "antigravity",
-  "current_task": "SW-013",
-  "status": "handoff_ready",
-  "branch": "codex/antigravity/SW-013-second-round-review",
-  "head_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
-  "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
+  "current_task": null,
+  "status": "idle",
+  "branch": "codex/antigravity/review-queue-round3",
+  "head_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0",
+  "latest_handoff": null,
   "updated_on": "2026-10-14",
-  "note": "SW-013 第二轮独立复验完成：PR #1 审查出具 changes_requested 并登记 SW-001 rework；SW-010、SW-011、SW-014 等待对应角色提交。"
+  "note": "队列消费：SW-001 R2 独立审核通过并已集成入 main（merge 1e23881），激活 SW-004 为 ready；SW-010 R1 审核通过（approved），等待作者同步 main 解决 state 冲突后合入；SW-014 R2 出具 changes_requested，等待 R3。"
 }

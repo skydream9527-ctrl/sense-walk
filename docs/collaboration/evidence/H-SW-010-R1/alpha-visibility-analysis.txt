@@ -1,0 +1,25 @@
+SW-010 R1 视觉存在感检查：light_shows / clearing 两层入包后实际可见度
+
+[forest_light_shows.webp] 768x1376
+  素材自身 alpha: max=140/255=54.9%  mean=6.24/255=2.45%
+  非零像素占比: 32.6%
+[forest_clearing.webp] 768x1376
+  素材自身 alpha: max=76/255=29.8%  mean=8.69/255=3.41%
+  非零像素占比: 50.4%
+
+forest.json 相位 toOpacity：light_shows=0.65（600m门+30m fade）、clearing=0.9（760m门+25m fade）
+  叠加后合成 alpha 峰值：light_shows ≈ 35.7%  clearing ≈ 26.8%
+
+真实 app 截图差异量化（stage-630m.png vs stage-785m.png，排除顶部状态栏/控件与底部文案条，
+即仅比较 y=300..1650 的画面主体像素，RGB 逐通道绝对差之和）：
+  mean abs diff = 3.571 / 255   (约 1.4%)
+  max  abs diff = 32   / 255    (约 12.5%)
+  diff>10 的像素占比 = 29.7%（存在但幅度小）；diff>30 的像素占比 = 9.7%
+
+结论：接线/打包/相位触发均按预期工作（630→785m 期间 clearing 门限触发、
+light_shows 已早于630m满淡入），哈希与批准候选一致、无棋盘格/AI生图瑕疵。
+但两张候选素材自身 alpha 偏低（候选阶段的保守取值），叠加相位目标 toOpacity 后，
+在真实游玩画面上两个阶段之间最大逐像素差异约 12.5%（多数差异 <10/255），
+肉眼连续游玩时该变化并不显著——建议 Antigravity 独立复验是否接受当前视觉强度，
+或要求 MiniMax 提高这两层候选的 alpha 取值后再次批准。
+不构成棋盘格/AI生图瑕疵类的拒绝理由，是「视觉强度是否达标」的产品判断，不代笔自批准。

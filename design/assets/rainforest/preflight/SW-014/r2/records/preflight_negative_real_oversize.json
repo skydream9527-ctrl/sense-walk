@@ -1,0 +1,254 @@
+{
+  "status": "failed",
+  "manifest": "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_real_oversize/manifest.json",
+  "contract_version": "visual-assets v1",
+  "summary": {
+    "total": 48,
+    "passed": 47,
+    "failed": 1,
+    "total_bytes": 96894,
+    "layer_count": 5
+  },
+  "checks": [
+    {
+      "ok": true,
+      "name": "schema_version",
+      "detail": "1"
+    },
+    {
+      "ok": true,
+      "name": "field_producer",
+      "detail": "minimax"
+    },
+    {
+      "ok": true,
+      "name": "task_scene",
+      "detail": "SW-006 + rainforest"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_bytes",
+      "detail": "33460"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_sha256",
+      "detail": "58d6a732fa441d18"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_decode",
+      "detail": "RGBA 768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_size",
+      "detail": "768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_budget",
+      "detail": "33460 <= 400 KB"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_alpha_channel",
+      "detail": "true"
+    },
+    {
+      "ok": true,
+      "name": "layer_mist_alpha_pixels",
+      "detail": "透明 54.57%"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_bytes",
+      "detail": "4414"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_sha256",
+      "detail": "6930d36c3fbd4f7f"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_decode",
+      "detail": "RGBA 768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_size",
+      "detail": "768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_budget",
+      "detail": "4414 <= 400 KB"
+    },
+    {
+      "ok": true,
+      "name": "layer_trunks_canopy_alpha_channel",
+      "detail": "true"
+    },
+    {
+      "ok": false,
+      "name": "layer_trunks_canopy_opaque",
+      "detail": "透明像素 0.00% < 0.1% (不透明层)"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_bytes",
+      "detail": "4846"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_sha256",
+      "detail": "324ba3a9a1b22d09"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_decode",
+      "detail": "RGBA 768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_size",
+      "detail": "768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_budget",
+      "detail": "4846 <= 400 KB"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_alpha_channel",
+      "detail": "true"
+    },
+    {
+      "ok": true,
+      "name": "layer_vines_light_alpha_pixels",
+      "detail": "透明 0.70%"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_bytes",
+      "detail": "26812"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_sha256",
+      "detail": "be25e508b9a64ff9"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_decode",
+      "detail": "RGBA 768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_size",
+      "detail": "768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_budget",
+      "detail": "26812 <= 400 KB"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_alpha_channel",
+      "detail": "true"
+    },
+    {
+      "ok": true,
+      "name": "layer_far_glow_alpha_pixels",
+      "detail": "透明 27.03%"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_bytes",
+      "detail": "27362"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_sha256",
+      "detail": "9b34460ea980493d"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_decode",
+      "detail": "RGBA 768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_size",
+      "detail": "768x1376"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_budget",
+      "detail": "27362 <= 400 KB"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_alpha_channel",
+      "detail": "true"
+    },
+    {
+      "ok": true,
+      "name": "layer_clearing_glow_alpha_pixels",
+      "detail": "透明 40.98%"
+    },
+    {
+      "ok": true,
+      "name": "required_layers",
+      "detail": "全部 5 层齐"
+    },
+    {
+      "ok": true,
+      "name": "scene_budget",
+      "detail": "96894 <= 2 MB"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_task_id",
+      "detail": "SW-012"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_handoff_producer",
+      "detail": "trae-design"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_spec_sha",
+      "detail": "c8eb9306a83a4d24"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_registry_status",
+      "detail": "fixture 模式: queued (实际)"
+    },
+    {
+      "ok": true,
+      "name": "api_field_api_attempts_this_revision",
+      "detail": "0"
+    },
+    {
+      "ok": true,
+      "name": "api_field_api_attempts_total",
+      "detail": "14"
+    },
+    {
+      "ok": true,
+      "name": "api_field_cost",
+      "detail": "unknown"
+    },
+    {
+      "ok": true,
+      "name": "cc0_check",
+      "detail": "origin 字段无 CC0 标记"
+    }
+  ]
+}

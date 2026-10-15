@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-010-R1",
+  "task_id": "SW-010",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+  "reviewed_commit": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+  "delivery_head": "393f22570a541118d80e7a50c6860c3b57f2fd49",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-010-R1.md",
+  "artifact_hashes": {
+    "app/src/main/assets/visual/forest_clearing.webp": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+    "app/src/main/assets/visual/forest_light_shows.webp": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0"
+  },
+  "checks": [
+    {
+      "name": "候选素材哈希逐字节核对 (clearing & light_shows 100% 匹配 SW-002 批准候选)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-010-R1.md",
+        "docs/collaboration/evidence/P-20261014-03/sw010-author-evidence-inspection.json"
+      ]
+    },
+    {
+      "name": "场景配置 forest.json 接线核对 (asset 路径补回，atMeters/toOpacity/fadeMeters 保持原样)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-010-R1.md"
+      ]
+    },
+    {
+      "name": "多比例屏 (1080x2880 长屏 / 720x1280 小屏) 及 6 阶段渐进展示走查",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-010-R1/sizes/1080x2880-100m.png",
+        "docs/collaboration/evidence/H-SW-010-R1/sizes/720x1280-100m.png"
+      ]
+    },
+    {
+      "name": "停止冻结走查 (状态栏以下画面主体 0 像素差)",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw010-author-evidence-inspection.json"
+      ]
+    },
+    {
+      "name": "终景柔光视觉强度独立裁定 (符合安静林间空地氛围意图，不作为拒绝阈值)",
+      "type": "review",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/reviews/R-SW-010-R1.md"
+      ]
+    },
+    {
+      "name": "云端全量单测通过 (PR #3 run 38558587815，217 项 0 失败)",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03-SW-010/test-summary.json"
+      ]
+    },
+    {
+      "name": "真机视觉走查与内测",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "真机（非模拟器）视觉走查（physical-device）",
+    "tileable/平铺持续视差（非本任务范围，维持 cover 模式）"
+  ]
+}

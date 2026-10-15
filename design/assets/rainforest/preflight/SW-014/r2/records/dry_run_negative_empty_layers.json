@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "全部 5 项通过",
+  "checks": [
+    {
+      "ok": true,
+      "name": "task_id",
+      "detail": "SW-012"
+    },
+    {
+      "ok": true,
+      "name": "handoff_producer",
+      "detail": "trae-design"
+    },
+    {
+      "ok": true,
+      "name": "handoff_head_commit",
+      "detail": "FIXTURE_NOT_"
+    },
+    {
+      "ok": true,
+      "name": "spec_sha",
+      "detail": "c8eb9306a83a4d24"
+    },
+    {
+      "ok": true,
+      "name": "registry_status",
+      "detail": "fixture 模式: queued (实际)"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-012-R1-FAKE",
+  "task_id": "SW-012",
+  "revision": 1,
+  "producer": "trae-design",
+  "recipient": "antigravity",
+  "head_commit": "FIXTURE_NOT_REAL",
+  "base_commit": "FIXTURE_NOT_REAL"
+}

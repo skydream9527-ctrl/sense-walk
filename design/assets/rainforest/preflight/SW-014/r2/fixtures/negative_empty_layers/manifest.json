@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_empty_layers/_design/H-SW-012-R1-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_empty_layers/_design/spec.md",
+    "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c",
+    "_fixture_mode": true,
+    "_expected_registry_status": "queued"
+  }
+}
