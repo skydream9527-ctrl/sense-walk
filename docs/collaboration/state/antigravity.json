@@ -3,9 +3,9 @@
   "agent": "antigravity",
   "current_task": null,
   "status": "idle",
-  "branch": "codex/antigravity/review-queue-round3",
-  "head_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0",
+  "branch": "codex/antigravity/review-queue-round4",
+  "head_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
   "latest_handoff": null,
-  "updated_on": "2026-10-14",
-  "note": "队列消费：SW-001 R2 独立审核通过并已集成入 main（merge 1e23881），激活 SW-004 为 ready；SW-010 R1 审核通过（approved），等待作者同步 main 解决 state 冲突后合入；SW-014 R2 出具 changes_requested，等待 R3。"
+  "updated_on": "2026-10-15",
+  "note": "队列消费：SW-011 R1 独立审核通过并已合入 main（merge 256d7e3），激活 SW-012 为 ready；SW-014 R3 独立实测 18 fixture + 6 回归反例全部通过，已合入 main（merge 3ea89c1），SW-006 保持锁定；SW-010 R1 approved 等待作者 PR #3 同步；SW-004 ready 待 ZCode 领取。"
 }

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-011-R1",
+  "task_id": "SW-011",
+  "reviewer": "antigravity",
+  "producer": "trae-design",
+  "handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+  "reviewed_commit": "52779607f4205d4281e1200a25a78ed24d59bf74",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-011-R1.md",
+  "artifact_hashes": {
+    "design/05-visual-design/SW-011/r1/README.md": "3e88ecc28805cc48e1ef4962175efabe3092d063486c5f421491d1367ad1feb4",
+    "design/05-visual-design/SW-011/r1/design-spec.json": "f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414",
+    "design/05-visual-design/SW-011/r1/exports/forest_clearing.png": "bb75a4811e3d4dac88d197ed837ea510f51936e3eccc22a783e86fbc6b040b08",
+    "design/05-visual-design/SW-011/r1/exports/forest_leaf_path.png": "0d799cfa3f2d34b9bdfe7adc0bed95f7454f410be4cb415edebcf419a029e83b",
+    "design/05-visual-design/SW-011/r1/exports/forest_light_shows.png": "c42cdafb481cadfe6c1e76aec521c2f24c48ba42be180cc4a17ab3d16fc4b076",
+    "design/05-visual-design/SW-011/r1/exports/forest_tree_outline.png": "2f065531680c749d82dd5fabe76c29df70ab57728303f0886ad79e3dc4566d3b",
+    "design/05-visual-design/SW-011/r1/exports/forest_tree_trunks.png": "17fcdf23b4ac14349011559491a3dbeafb4a58e4458bbad54cdcfed50aad5195",
+    "design/05-visual-design/SW-011/r1/previews/composition_guide.png": "eb1e167167df7f9839a97b9653dc8439b0b808753d74af3db3f0cf1164573261",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x1920.png": "95c2fc9a6f804ba100882c0cd03c0b80bb185c2513862d433de6639f03e1eed8",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x2400.png": "4f4023bff5256da78ef37cb97313f37ee8df54b11366a40ab84b91dcc6c93228",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_390x844.png": "e081083a5ab3245930e0a876c347d298e2ba244420c70115d8a9feb86231507b",
+    "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_black.jpg": "cc5fcf07707d01a01a67f612242a0ae329ef33727a713f14e332bc983417bc4a",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_magenta.jpg": "91f1a938d7029c433234e9843abd8c8d1de5de270ea55061d5c61ec43cd83003",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_white.jpg": "a3fadb25fccdf3ae54c1ce37e6329d675774d363816d30848a8ee7f38f8c8645",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_black.jpg": "2b7021fb9dfdf4b904f7722c41155c5e7a20d69f88a450cbbd198fd8a4920740",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_magenta.jpg": "d21d1266150cd26489482009aefe77cfe7696989514b2a06e712876be7e65c37",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_white.jpg": "e1a0fc873417a44549231f1abb7f4f1cf5025d30f0b6f01d44406555c83477a4",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_black.jpg": "9c67860492d53674bb52641cfe81c33ebdc058008d8b71c904e6b67e1dbf38d7",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_magenta.jpg": "59e6c44e37b87a40fdaa4f617899a37ec1ce2387a5510fd864b46a4fe889b587",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_white.jpg": "3e7f5f47c7a375e0ceb1e2fd66a3caefe0e646b62bac406d3c0d6ba92ded4515",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_black.jpg": "b2884930ddf1da1ef01bbc84357ff37361ee490be60921c48ace08c0cdf36fb0",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_magenta.jpg": "fd4c900ce7b39e3288d63c0f9b04f2aa813cdc6ab74e23e0af16de283948baf8",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_white.jpg": "bbcce01bdb2d21f4f2dcf31959af8d0b11b395a8ebe41dedd510c29c5b2cc6e6",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_black.jpg": "a0b886a4c651a12fab1d132841a93c5ebc51fcff7b079907100e2d6a4ef011e3",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_magenta.jpg": "8f0377d1e44fdaa8f28664d5976c69c8ca929f1ed567fab550ea031cc9f6329f",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_white.jpg": "05efb82074777137ffbcda4f42d78bd0c4bf1b3970223f01058bd6a0fdd3df80",
+    "design/05-visual-design/SW-011/r1/previews/layer_map.png": "776ccbfde34f4632ea790abb75d74722b9d66c6c63974474aa7c03f191f43479",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json": "f2f56f9d505b90b462f6fe08a9e93340a9ed9cca613fa58b935c97b029cf29e8",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png": "75b822aaacb90a7dec4073b3f906169216c8de456be4b3d06c95372e2c923aeb",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png": "c0018545ce02f37e1a1a699ee89b46cc22bdc61b1101007bc8b4a89cfe03190c",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png": "f0eaacb913cdb0796eb5685ad94ce2074481241e0a0ddd6bd48499628fd208c9",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_000m.png": "3bd56d41a0ed270b0de8c3125e9bd4cb4d0f38a7ebc5441f1d7a93d3f568b8d7",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_100m.png": "a68fab6ba3f4ca05f3f140fb478ef5acd599fd6eabbdb4777c895e1d7a53219f",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_265m.png": "d5767af9a5ece174124e9e71405a2403a16363b77e3a465a3002612c8ee2e3cd",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_425m.png": "ed86500d39aa577a76dcf05e7b1fdddf0df9db32348ad270cc29976495870399",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_630m.png": "2bd53b192f3f1e9f5eb8c37a31b4e82e0995bd5094a0520e620d3115563a304e",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png": "c26a956a5c2b6db6a82f024d5367b56f2f76ec91f8cf974e0af8e4705b2e701b",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_leaf_path_zoom.png": "783925830fe71876f2f88fbddf20facb7431c2a2c37a3d9d95f43a1a6f57ecd9",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png": "2d0f318e39766217fc9da6c72aba041f1ce4db141b6e59c7db0b643e476dad40",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_outline_zoom.png": "213b25fbc4947c443e6e3fb92fa71945e9f45f12a240f1a470e957fe67d729ee",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_trunks_zoom.png": "63ecdb71f5b1403e67e16b364f7507869ff40d0d72cfc2a5b163d82f52f508a0",
+    "design/05-visual-design/SW-011/r1/prompts.md": "33f7407328fda1d5234cd33f4480eac6e6fb8b61200d80487c1b9ac7f2ec102a",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_clearing.svg": "b80150131df2c11c2334dfcaf634a5383d305add28132d36845f38484216bbaa",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_leaf_path.svg": "91150182afe1a2b91813386e8c67f64d34bb07e6ee61f3f0c04ebecc98a70182",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_light_shows.svg": "e6c144e15e9b9c08d3153c4b2803f2d2eca3860d2ab876e308f585efe9347894",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_master.svg": "ce3c6baaa022d0d83da6ac77cd61cd73ef5c7ebf8eb1b048d4f63dec879be343",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_outline.svg": "f00569d715d513137b394aa39e0e9b4a95584e9a684a9d3dda7c8399f193f570",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_trunks.svg": "a92f2ef96518aabff6b824cc3d06ed94018f5f9624c461c2d38e19f485e8c45e",
+    "design/05-visual-design/SW-011/r1/source/sw011_model.py": "a0d36dc3ef99ba4b9526feb929fb5205ef1b0abc1151d73fd8546cf6e01a1969",
+    "design/05-visual-design/SW-011/r1/source/sw011_render.py": "e37a38767c0b57486b8e75e4672d42d610565cf01f00f875cf712e47900ce66a",
+    "design/05-visual-design/SW-011/r1/source/sw011_supplement.py": "f6aae5c053be00634ee71651338688840e67e2fbab8476c07c60e86d4af4c2d5"
+  },
+  "checks": [
+    {
+      "name": "统一视觉风格与冷调森林基准色板一致性检查",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png",
+        "design/05-visual-design/SW-011/r1/previews/composition_guide.png"
+      ]
+    },
+    {
+      "name": "六阶段 smoothstep 合成与 forest.json 相位/透明度/fadeMeters/视差对齐",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_000m.png",
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_100m.png",
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_265m.png",
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_425m.png",
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_630m.png",
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png"
+      ]
+    },
+    {
+      "name": "四边无硬边/棋盘/同心环及三底色 2x 放大目检 (修复历史 overlay 缺陷)",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png",
+        "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png",
+        "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_black.jpg",
+        "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_black.jpg"
+      ]
+    },
+    {
+      "name": "ForestShell.drawImageLayer 运行时逐像素裁切复核与恒可见带验证",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json",
+        "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png",
+        "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png",
+        "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png"
+      ]
+    },
+    {
+      "name": "SVG 与 PIL 双后端共享图元模型及 53 文件 manifest SHA256 零差异验证",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/design-manifest.json",
+        "design/05-visual-design/SW-011/r1/source/sw011_model.py",
+        "design/05-visual-design/SW-011/r1/source/sw011_render.py"
+      ]
+    },
+    {
+      "name": "逐层 MiniMax 提示词 (prompts.md) 完备性与契约规范核查",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/prompts.md"
+      ]
+    }
+  ]
+}
