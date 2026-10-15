@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "scene_id": "forest",
+  "status": "design_candidate",
+  "producer": "trae-design",
+  "created_on": "2026-10-13",
+  "basis": {
+    "base_commit": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
+    "scene_config": "app/src/main/assets/scenes/forest.json",
+    "renderer": "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "asset_status_ref": "ASSETS.md",
+    "contract": "docs/collaboration/contracts/visual-design.md"
+  },
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "coordinate_system": "normalized_0_to_1",
+    "crop_previews": [
+      {"width": 1080, "height": 1920, "note": "基准；按高度铺满、左对齐，宽恰好不溢出"},
+      {"width": 1080, "height": 2400, "note": "长屏：按高铺满 scale=1.25，目标宽 1350，右侧溢出 270px 作横向视差余量"},
+      {"width": 390, "height": 844, "note": "小屏：按高铺满 scale=844/1920≈0.4396，目标宽约 475，左对齐、右侧溢出约 85px 供视差；不做左右 cover 硬裁"}
+    ],
+    "actual_source_resolution": "原生 1080×1920 矢量/图元模型（sw011_model.py 单位即逻辑像素）；PNG 由同一模型 2× 超采样(2160×3840)后 LANCZOS 缩回 1080×1920 抗锯齿。无放大旧 768×1376 素材，无任何位图放大史。",
+    "safe_area_notes": "关键内容收在中央 80% 安全宽（x=.10–.90）、y=.12–.92。下方 y=.55–1.00 为摇杆触控区（45%），保持低对比、不烘焙按钮/文字/摇杆；顶部 y=0–.12 留给米数/暂停/放弃，树干冠线允许进入但不放置高亮信息。裁切与视差语义对齐 ForestShell.drawImageLayer：scale=height/imageHeight，左对齐，仅在右侧溢出宽度内横移。",
+    "light_source": "统一右上斜射（俯角约 12–20°），所有层共享；树干右侧细边光、光柱自右上向左下。",
+    "shared_baselines": "同一地平线/冠线带与脚底基线；旅人脚底 y=.865，地面体上缘约 y=.71–.75。"
+  },
+  "anchors": {
+    "traveler_x": 0.34,
+    "ground_y": 0.865,
+    "joystick_area_bottom_fraction": 0.45,
+    "traveler_render": "程序绘制（ForestShell.drawTraveler），本轮不出角色素材，仅在合成图中以同数值剪影示意"
+  },
+  "palette": {
+    "void": "#060806",
+    "outline": "#1A2820",
+    "trunks": "#2D4A3E",
+    "light": "#8FA87A",
+    "leaf": "#6B8F71",
+    "warm": "#A89060",
+    "extended_note": "以下为在契约六色之内做明暗组织所需的派生 token，全部从既有森林色板推导，未引入新色相；正式素材应优先用契约六色，派生色仅作体积/层次过渡。",
+    "extended": {
+      "void_rgb": [6, 8, 6],
+      "outline_back": "#22332A",
+      "trunk_dark": "#244036",
+      "trunk_foreground": "#243A30",
+      "glow": "#A8C5A0",
+      "earth_top": "#4A4030",
+      "earth_bottom": "#312A1F",
+      "path_earth": "#6A5B42",
+      "twig": "#5A4E38",
+      "beam": "#DDE7C4",
+      "traveler": "#7A857C"
+    }
+  },
+  "layers": [
+    {
+      "id": "tree_outline",
+      "type": "parallax",
+      "parallax": 0.3,
+      "at_meters": 80,
+      "to_opacity": 0.6,
+      "fade_meters": 20,
+      "tileable": false,
+      "design_notes": "只画远处两排阔叶冠线（柔圆团簇，#22332A 后排 + #1A2820 前排），集中在 y≈.55–.85 的冠线带；上缘与树间全部真透明，靠纵向 mask 在 y≈.64–.83 间淡出，不画竖干、不画地面。参考 previews/layer_checks/forest_tree_outline_{black,white,magenta}.jpg 与 exports/forest_tree_outline.png。",
+      "transparent_regions": "画面上部天空、冠线以上、树间空隙、最下缘均为真透明 alpha=0"
+    },
+    {
+      "id": "tree_trunks",
+      "type": "parallax",
+      "parallax": 0.3,
+      "at_meters": 240,
+      "to_opacity": 0.7,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "七根微摆、带根扩的中景树干（竖向体积渐变：#244036 两端没入暗部、#2D4A3E 中上受光），最右一根 #243A30 前景最暗纯剪影；右上细边光与少量枝桠；树后三团极弱大柔斑林间竖光（#8FA87A，alpha≤.11，σ≈44 大模糊，仅作空气感不形成光柱）。纵向 mask 让树干从黑幕淡入、到地面前淡出，不画地面。参考 forest_tree_trunks_* 检查图。",
+      "transparent_regions": "树间、树冠以上、地面以下为真透明；林间竖光是柔光不是实底"
+    },
+    {
+      "id": "leaf_path",
+      "type": "parallax",
+      "parallax": 0.6,
+      "at_meters": 400,
+      "to_opacity": 0.8,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "只画下部干叶土坡：和缓起伏的地面体（#4A4030→#312A1F 竖向渐变，上缘透明淡入）、中央极弱土路光带、两侧落叶堆柔斑、约 60 片干叶（暖褐 #A89060 为主、落叶绿 #6B8F71 次之、少量枯枝色）与 9 根细枝。中央触控带与旅人脚底刻意稀疏。上部全部真透明。参考 forest_leaf_path_* 检查图。",
+      "transparent_regions": "地面起伏上缘以上（y≲.71）全透明；土路/叶堆为半透明柔光"
+    },
+    {
+      "id": "light_shows",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 600,
+      "to_opacity": 0.65,
+      "fade_meters": 30,
+      "tileable": false,
+      "design_notes": "只含三束右上斜射体积光与三只远鸟。光束为纵向拉伸的椭圆径向辉光（#DDE7C4，峰值 alpha .10–.20，缓衰减，σ≈24 柔化），光源点在画面外右上，屏内只留柔和中段，无多边形/矩形硬边；远鸟为 #8FA87A 细弧线 V 形，集中在 x≈.60–.68、y≈.14–.19。绝不附带第二套树林、背景填充、矩形底或任何重复/棋盘纹理。这是本轮相对历史 v4/v5 拒绝稿的重点修正。参考 forest_light_shows_* 检查图。",
+      "transparent_regions": "除三束渐隐光与三只鸟外全部真透明；光束边缘自然衰减到 alpha=0，无硬轮廓"
+    },
+    {
+      "id": "clearing",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 760,
+      "to_opacity": 0.9,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "只含单一柔和林间空地微光：一个椭圆径向辉光（#A8C5A0，中心 alpha .30，r 600，中心约 x=.66/y=.40）加一条很弱的远处开口横辉（alpha .10，σ≈26）。无同心环、无重复纹理、无棋盘、无第二套树林或地面。这是历史 32px 对角棋盘残留的重点修正层。参考 forest_clearing_* 检查图。",
+      "transparent_regions": "辉光以外全透明；中心到边缘平滑衰减到 alpha=0"
+    }
+  ],
+  "preview_meters": [0, 100, 265, 425, 630, 785],
+  "opacity_model": "opacity = target * smoothstep((meters-atMeters)/fadeMeters)，smoothstep=x*x*(3-2x)，meters<at 为 0；与 SensoryState/forest.json 一致。预览透明度只用于合成展示，禁止烘焙进最终 RGB/alpha。",
+  "programmatic_layers": ["void", "traveler"],
+  "source_files": [
+    "design/05-visual-design/SW-011/r1/source/sw011_model.py",
+    "design/05-visual-design/SW-011/r1/source/sw011_render.py",
+    "design/05-visual-design/SW-011/r1/source/sw011_supplement.py",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_outline.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_trunks.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_leaf_path.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_light_shows.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_clearing.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_master.svg"
+  ],
+  "supplement_checks_20261014": {
+    "generator": "design/05-visual-design/SW-011/r1/source/sw011_supplement.py",
+    "zoom_previews": [
+      "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_outline_zoom.png",
+      "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_trunks_zoom.png",
+      "design/05-visual-design/SW-011/r1/previews/zoom/forest_leaf_path_zoom.png",
+      "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png",
+      "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png"
+    ],
+    "zoom_method": "每层 2–3 个内容热点 + 画布四缘，260×260 源像素框，黑/白/洋红三底，2× 最近邻放大不美化。",
+    "runtime_crop_preview": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png",
+    "runtime_extremes": [
+      "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png",
+      "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png"
+    ],
+    "runtime_quantitative": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json",
+    "runtime_geometry_390x844": {"scale": 0.439583, "dst_width_dest_px": 475, "overflow_dest_px": 85},
+    "runtime_geometry_1080x2400": {"scale": 1.25, "dst_width_dest_px": 1350, "overflow_dest_px": 270},
+    "always_visible_source_band_x": [216, 864],
+    "drawimage_layer_model": "scale=h/imageH; dstW=floor(imageW*scale+0.5); overflow=max(0,dstW-w); xOffset=-clamp(parallaxPx,0,overflow)；左对齐、按高度铺满；overlay 不视差。逐像素复刻 ForestShell.drawImageLayer。"
+  },
+  "reference_sources": [
+    {
+      "file": "design/05-visual-design/SW-011/r1/previews/composition_guide.png",
+      "origin": "internal_original",
+      "usage_rights": "Trae Design 内部生成的统一风格/色板/构图说明，无外部版权来源"
+    },
+    {
+      "file": "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png",
+      "origin": "internal_original",
+      "usage_rights": "由本任务可编辑模型渲染的 785m 终景风格参考，非外部素材"
+    }
+  ],
+  "external_assets_used": "无。未调用任何外部付费/生图 API；全部为本地 Python(PIL+numpy) 几何/渐变渲染与手写 SVG。",
+  "proposed_changes": [
+    "本轮不改变 layer ID、atMeters/toOpacity/fadeMeters、800m、parallax、旅人锚点与程序绘制，也不修改任何 app/ 源码或 forest.json。",
+    "给 MiniMax 的视觉方向差异（仅设计，不含运行时改动）：light_shows 由历史矩形硬边光柱改为椭圆径向体积光并把光源移出画面；clearing 收敛为单一径向辉光，去除同心环/32px 对角重复；tree_trunks 增加竖向体积渐变与最暗前景树；三层 parallax 维持现有低风险构图。",
+    "正式素材仍需 MiniMax 按本 spec/prompts 制作并独立验收；本设计稿不放入 app/assets，不构成 Android 已接入证据。"
+  ],
+  "verification_self_checks": [
+    "0m 合成仅含程序旅人（非黑像素统计 1780 个，全在旅人包围盒 x353–380/y1565–1664），无任何层提前揭示",
+    "两个 overlay 层在黑/白/洋红底上目检：无棋盘格、无同心环、无矩形底、无白边；alpha 边缘自然衰减",
+    "六阶段按真实 smoothstep 透明度与固定随机种子渲染，演进连续",
+    "三比例按 drawImageLayer 的按高铺满+左对齐语义出图并标注安全区/触控区/旅人锚点",
+    "2026-10-14 补：每层内容热点+画布四缘三底 2× 最近邻放大（previews/zoom/），重点层无白边/矩形底/32px 对角重复，暗部主体未被抠除",
+    "2026-10-14 补：逐像素复刻 drawImageLayer 出 390×844 静止/最大视差极端（previews/runtime_crop/）；跨屏恒可见源带 x[216,864]，旅人锚点 x=367 恒可见",
+    "2026-10-14 补：两 overlay 四边最外/内邻各4px 无 alpha>=64 实色边、外缘不亮于内邻（无矩形硬底/白边光晕）；light_shows 仅上缘 maxα15、clearing 仅右缘 maxα21 为连续软渐变"
+  ],
+  "limitations": [
+    "设计稿为可编辑矢量/图元模型与渲染预览，不是 MiniMax 正式素材，也不是 Android 接入或真机验收证据。",
+    "tree_* / leaf_path 标记 tileable=false：当前渲染只支持图片在右侧溢出宽度内有限滑动，单图非无缝；本稿未做无缝平铺，也不假设运行时已支持平铺。",
+    "SVG 为可编辑源，PNG 以 PIL 后端为准（两者消费同一模型，椭圆径向等图元已在双后端实现）；未提供 PSD/Figma，工具不具备则不虚构。中央/边缘放大与运行时裁切复核已于 2026-10-14 补齐（supplement_checks_20261014）。",
+    "正式素材尺寸/≤400KB 每层、≤2MB 每景等由 MiniMax 按 visual-assets 契约交付并压缩；本设计导出 PNG 体积不受该预算约束。"
+  ]
+}

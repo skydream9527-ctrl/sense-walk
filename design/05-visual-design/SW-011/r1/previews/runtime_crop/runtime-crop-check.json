@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "producer": "trae-design",
+  "generated_on": "2026-10-14",
+  "method": "本地逐像素复刻 ForestShell.drawImageLayer：scale=h/imageH; dstW=floor(imageW*scale+0.5); overflow=max(0,dstW-w); xOffset=-min(max(shift,0),overflow)，左对齐、按高度铺满。",
+  "source_canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "targets": [
+    {
+      "size": [
+        1080,
+        1920
+      ],
+      "scale": 1.0,
+      "dst_width_dest_px": 1080,
+      "overflow_dest_px": 0,
+      "rest_visible_source_x": [
+        0,
+        1080
+      ],
+      "max_parallax_visible_source_x": [
+        0.0,
+        1080
+      ]
+    },
+    {
+      "size": [
+        1080,
+        2400
+      ],
+      "scale": 1.25,
+      "dst_width_dest_px": 1350,
+      "overflow_dest_px": 270,
+      "rest_visible_source_x": [
+        0,
+        864.0
+      ],
+      "max_parallax_visible_source_x": [
+        216.0,
+        1080
+      ]
+    },
+    {
+      "size": [
+        390,
+        844
+      ],
+      "scale": 0.439583,
+      "dst_width_dest_px": 475,
+      "overflow_dest_px": 85,
+      "rest_visible_source_x": [
+        0,
+        887.2
+      ],
+      "max_parallax_visible_source_x": [
+        193.36,
+        1080
+      ]
+    }
+  ],
+  "traveler": {
+    "anchor_x_normalized": 0.34,
+    "anchor_y_normalized": 0.865,
+    "source_x": 367.20000000000005,
+    "source_y": 1660.8
+  },
+  "overlay_border_alpha_max0to255_strip4": {
+    "light_shows": {
+      "top": {
+        "max": 15,
+        "mean": 1.63,
+        "px_alpha_ge_10": 268,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 1.69
+      },
+      "bottom": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      },
+      "left": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      },
+      "right": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      }
+    },
+    "clearing": {
+      "top": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      },
+      "bottom": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      },
+      "left": {
+        "max": 0,
+        "mean": 0.0,
+        "px_alpha_ge_10": 0,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 0.0
+      },
+      "right": {
+        "max": 21,
+        "mean": 6.79,
+        "px_alpha_ge_10": 2855,
+        "px_alpha_ge_64": 0,
+        "inner_adjacent_mean": 6.99
+      }
+    }
+  },
+  "overlay_content_bbox_alpha_gt8": {
+    "light_shows": {
+      "x0": 473,
+      "y0": 0,
+      "x1": 941,
+      "y1": 1176
+    },
+    "clearing": {
+      "x0": 211,
+      "y0": 266,
+      "x1": 1079,
+      "y1": 1270
+    }
+  },
+  "checks": [
+    {
+      "name": "traveler_anchor_always_visible_across_targets",
+      "pass": true,
+      "detail": "旅人源x=367 位于恒可见带[216,864]"
+    },
+    {
+      "name": "light_shows_edges_no_rectangle_seam_or_fringe",
+      "pass": true,
+      "edge_max_alpha": 15,
+      "solid_edge_pixels_alpha_ge_64": 0,
+      "brighter_than_interior_fringe": false,
+      "criteria": "max<24 且 无>=64实色边 且 外缘不亮于内邻；软渐变低alpha连续到边不算矩形接缝",
+      "detail": "最外/内邻各4px四边alpha：无实色亮边、外缘不亮于内邻即无白边/矩形硬底；低alpha软渐变连续漫到个别屏边属正常（屏外不可见），配合 zoom 三底目检无棋盘/同心环"
+    },
+    {
+      "name": "clearing_edges_no_rectangle_seam_or_fringe",
+      "pass": true,
+      "edge_max_alpha": 21,
+      "solid_edge_pixels_alpha_ge_64": 0,
+      "brighter_than_interior_fringe": false,
+      "criteria": "max<24 且 无>=64实色边 且 外缘不亮于内邻；软渐变低alpha连续到边不算矩形接缝",
+      "detail": "最外/内邻各4px四边alpha：无实色亮边、外缘不亮于内邻即无白边/矩形硬底；低alpha软渐变连续漫到个别屏边属正常（屏外不可见），配合 zoom 三底目检无棋盘/同心环"
+    },
+    {
+      "name": "rest_left_aligned_left_edge_never_cropped",
+      "pass": true,
+      "detail": "静止时 xOffset=0，所有层源 x=0 对齐屏幕左缘，仅右侧溢出被临时隐藏作视差余量"
+    }
+  ],
+  "always_visible_band_source_x": [
+    216.0,
+    864.0
+  ],
+  "all_pass": true
+}

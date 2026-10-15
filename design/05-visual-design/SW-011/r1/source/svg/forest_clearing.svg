@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+<radialGradient id="clearing-rg-1" gradientUnits="userSpaceOnUse" cx="713" cy="768" r="600"><stop offset="0.0" stop-color="#A8C5A0" stop-opacity="0.3"/><stop offset="0.45" stop-color="#A8C5A0" stop-opacity="0.12"/><stop offset="1.0" stop-color="#A8C5A0" stop-opacity="0.0"/></radialGradient>
+<filter id="clearing-blur-2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
+</defs>
+  <rect x="0" y="0" width="1080" height="1920" fill="url(#clearing-rg-1)"/>
+  <g filter="url(#clearing-blur-2)">
+    <ellipse cx="668" cy="1126" rx="392" ry="92" fill="#C7D4B2" fill-opacity="0.1"/>
+  </g>
+</svg>
