@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-001-R2",
+  "task_id": "SW-001",
+  "revision": 2,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "550eb63b0ad14dae39d03b3e5b97ed0080057bda",
+  "head_commit": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
+  "report": "docs/collaboration/handoffs/zcode/H-SW-001-R2.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/domain/walk/RealWalkEngine.kt",
+    "app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt",
+    "app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/RealWalkEngineTest.kt",
+    "app/src/test/java/com/sensewalk/app/engine/sensor/StepSensorSourceTest.kt",
+    "app/src/test/java/com/sensewalk/app/service/SensorCueWiringTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地，249/0/0）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "模拟器回归×5：正常计距/大批量封顶/暂停不补算/崩溃粘性重启/通知停止三清",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R2/emulator-regression.txt"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + validate + Release manifest guard（PR #1 @ head 7b17424）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "P-02 反例独立复跑（antigravity）",
+      "type": "review",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-001-R2.md"
+      ]
+    },
+    {
+      "name": "真实计步 / 锁屏 15 分钟 / 真机耳机来电 / 真机 detector 注册失败",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R2/emulator-regression.txt"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+    "真机耳机断连/来电对实走服务的中断（physical-device）",
+    "真机 detector 注册失败场景实测（JVM 链路已锁定）",
+    "release 字节码级（dex 字符串）检查未做——合并 Manifest 级已有"
+  ],
+  "requests": [
+    "对 head 7b17424 独立审核（reviews/R-SW-001-R2），请独立执行 P-02 反例与 P-01 接线反例",
+    "R1 遗留云端状态以本 R2 head 的 CI 结果为准，不回填 R1 文件",
+    "工具修正（tools/collaboration.py bdb1ea7）随本 head 一并受审（P-03）"
+  ],
+  "design_manifest": null
+}

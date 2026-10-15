@@ -4,8 +4,26 @@
   "current_task": "SW-001",
   "status": "handoff_ready",
   "branch": "codex/zcode/SW-001-t06-reliability",
-  "head_commit": "2dba5ebbb4897a7a6b9f05e562a9bf6b5bebb39c",
-  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.md",
+  "head_commit": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
   "updated_on": "2026-10-14",
-  "note": "SW-001 R1 已交付待独立审核（F-001~F-005；238 本地单测 0 失败；模拟器回归通过；真机项 pending）。未开始 SW-004/SW-010。"
+  "note": "R2 已交付（P-01/P-02 修复 + 完整业务 head 7b17424，含工具修正）；等待 Antigravity 二审 reviews/R-SW-001-R2。SW-010 R1 也已交付（PR #3），见 deliveries 索引；本文件为两 PR 冲突的人工合并，两项交付信息均保留（D-005）。",
+  "deliveries": {
+    "SW-001": {
+      "branch": "codex/zcode/SW-001-t06-reliability",
+      "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+      "delivery_head": "c026c641a98bd9b9c86ac31a88da31f18857ecc8",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
+      "status": "awaiting independent review R2"
+    },
+    "SW-010": {
+      "branch": "codex/zcode/SW-010-forest-lightshows",
+      "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
+      "delivery_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
+      "status": "awaiting independent review R1"
+    }
+  }
 }

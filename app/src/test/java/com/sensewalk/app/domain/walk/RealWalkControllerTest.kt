@@ -136,4 +136,24 @@ class RealWalkControllerTest {
         assertEquals(com.sensewalk.app.domain.scene.TerrainKind.FLAT, snap.terrain)
         assertEquals(1f, snap.sensory.visualOpacities["void"]!!, 1e-6f)
     }
+
+    @Test
+    fun `F001 批量跨相位 - 单个大批量事件一次触发全部跨越相位且各只一次`() {
+        val (c, _) = controller(required = 200)
+        c.start()
+        c.onCounterEvent(0L, 0L) // 基线
+        // 长锁屏后单个批量事件：160 步在 200s 间隔到达 → raw 112m，cap 280m → 112m
+        // 一次跨越 steps(100m)/ambience(300m)？—— 300 未跨；明确断言跨过的相位各触发一次
+        val snap = c.onCounterEvent(160L, 200_000L)
+        assertEquals(112f, snap.meters, 0.5f)
+        val fired = c.drainPhaseEvents().map { it.phase.id }
+        assertTrue("steps 相位触发", fired.contains("steps"))
+        assertTrue("100m 里程碑跨过", c.scheduler.firedPhaseIds.contains("steps"))
+        assertEquals("跨相位只触发一次", 1, c.scheduler.firedPhaseIds.count { it == "steps" })
+        // 同刻续报（interval 0）：进度不动，相位不重复
+        val before = c.snapshot().meters
+        c.onCounterEvent(200L, 200_000L)
+        assertEquals(before, c.snapshot().meters, 1e-6f)
+        assertEquals(1, c.scheduler.firedPhaseIds.count { it == "steps" })
+    }
 }
