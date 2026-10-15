@@ -25,3 +25,17 @@ APK 内容等价。
 
 接线/裁切/冻结/相位触发在各比例下均按预期；光效强度弱的问题仍待独立裁定，
 本附录不改变 R1 的请求与 Pending。
+
+---
+
+## 同步说明（2026-10-15，收口轮）
+
+按 P-20261015-01/R-SW-010-R1 approved 后的集成要求，分支已 merge 最新 main
+（`7c2a3b7`），merge head `586e6ad`：
+
+- 冲突仅 `state/zcode.json`：以 main（SW-004 交付后）为基础人工合并，
+  current_task 指回 SW-010 收口，deliveries 索引保留 SW-001（accepted）、
+  SW-004（accepted，集成 814fc78）、SW-010（approved）全部记录；
+- `app/` 业务内容与获准集成一致：两 webp sha256 仍为
+  `1dcda4f7…` / `1973a1f5…`（R-SW-010-R1 核对的值），forest.json 参数未动；
+- 无业务变化，不新开 revision；本 head 的 CI 供 QA 复核后集成。
