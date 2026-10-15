@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.service.SensorCueWiringTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-14T11:08:04" hostname="runnervmmprz5" time="0.009">
+  <properties/>
+  <testcase name="P01 detector 注册失败 - 回退距离脚步音且跨解锁门后真实出声" classname="com.sensewalk.app.service.SensorCueWiringTest" time="0.008"/>
+  <testcase name="P01 无 detector 硬件 - counter-only 距离驱动出声" classname="com.sensewalk.app.service.SensorCueWiringTest" time="0.001"/>
+  <testcase name="P01 detector 注册成功 - 距离不再出脚步音而 detector cue 出声" classname="com.sensewalk.app.service.SensorCueWiringTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

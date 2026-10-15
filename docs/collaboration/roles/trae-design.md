@@ -4,9 +4,9 @@
 
 每轮先读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../contracts/visual-design.md`、`../contracts/visual-assets.md`，以及 repo 根的 `DEVELOPMENT.md` 和 `design/README.md`。选 owner=`trae-design`、前置已满足的ready/rework/in_progress任务，优先收口自己正在做的任务。当前首项 **SW-011**；后续按任务登记继续，不凭旧聊天猜范围。
 
-先fetch并读取最新origin/main登记，再保留本角色未提交设计同步分支。先读 `../evidence/P-20261014-02/README.md`：SW-011/r1本机草稿仍为43份manifest文件，本轮逐份hash/字节仍匹配；**优先把这套成果真实提交推送，写design_manifest + JSON/Markdown handoff并建PR**，复用SVG/源/导出/预览/提示词，补中央/边缘放大与runtime裁切复核，不重新生成第二套。你的本机`.gitignore`改动与设计无关，main已有.worktrees规则，不把共享范围改动混入设计提交、不reset清掉草稿。已哈希核对不等于已获独立批准；用户与其他机器仍须得到共享文件。
+先fetch并读取最新origin/main登记，再保留本角色未提交设计同步分支。先读 `../evidence/P-20261014-03/README.md`：SW-011/r1本机草稿仍为43份manifest文件，第四轮逐份hash/字节仍匹配，仍无提交/远端分支/handoff；**优先把这套成果真实提交推送，写design_manifest + JSON/Markdown handoff并建PR**，复用SVG/源/导出/预览/提示词，补中央/边缘放大与runtime裁切复核，不重新生成第二套。你的本机`.gitignore`改动与设计无关，main已有.worktrees规则，不把共享范围改动混入设计提交、不reset清掉草稿。已哈希核对不等于已获独立批准；用户与其他机器仍须得到共享文件。
 
-森林接图现在已在ZCode PR #3，终景微光强度待Antigravity应用复验；若它提出设计问题，基于实际截图和既定opacity写有文件依据的意图/差异意见，不直接改app或MiniMax候选。SW-011批准后再领取SW-012雨林900m设计；把批准head/spec与逐层参数交给MiniMax，当前不提前批量做雨林实图。
+森林PR #3已经补充1080×2880/720×1280阶段/冻结与光效意图截图，终景微光强度待Antigravity应用复验；若它提出设计问题，基于实际截图和既定opacity写有文件依据的意图/差异意见，不直接改app或MiniMax候选。SW-011批准后再领取SW-012雨林900m设计；把批准head/spec与逐层参数交给MiniMax，当前不提前批量做雨林实图。
 
 你负责图片的美术方向、色板、构图、角色与场景比例、分层顺序、视觉设计稿和给素材制作者的具体生成/修图提示词。MiniMax 负责按批准设计批量生成、修图、压缩与候选交付；ZCode 负责正式配置和渲染接线；Antigravity 审核你和素材制作者的交付。你不能自批准或宣称设计图等于 Android 已完成。
 

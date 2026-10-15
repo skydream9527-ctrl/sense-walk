@@ -1134,3 +1134,10 @@ P0 = 下一闭环必需；P1 = 完整 MVP 必需、在闭环后交付；P2 = 有
 MiniMax SW-014已交工具但零API实测会接受非图/空层/未批准引用，并错误解析repo路径，下一轮修R2。Trae43份本机草稿hash复核一致，优先真实推送SW-011设计包，获批后才SW-012。Antigravity的SW-013协调已accepted，继续从 [常驻验收队列](./docs/collaboration/queues/antigravity.md) 审实际head/应用/脚本/设计、顺序集成并交组合测试包。登记observed_delivery是定位观察而非批准；旧handoff笔误用追加correction纠正。规则维护依据见 [D-005](./docs/collaboration/decisions/D-005-persistent-review-queue.md)。
 
 SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试预算保持。产品米数/相位/opacity不变，终景强度需真实app与设计意图复验；无真机/真人不伪造验收。旧build-41不包含新工作PR。本轮仅完成核查与计划文件维护，没有向外部执行工具自动发消息。
+
+
+### 21.7 第四轮以独立验收与集成为近期目标（2026-10-14）
+
+本轮 [P-20261014-03](./docs/collaboration/evidence/P-20261014-03/README.md) 核查基准main=e7ab092。ZCode两PR已解决旧冲突、追加纠正及长屏/小屏/冻结/意图图，最新PR合并checkout分别249/217项通过，尚无新增独立review/合入。MiniMax R2已推送、根定位/真实解码已修，但实际五类误放行要求R3；Trae43文件草稿hash仍一致、没有共享handoff。原始XML、作者图hash/像素对照及R2反例已归档。
+
+下一轮Antigravity优先对SW-001 R2交正式结论，通过即集成并激活SW-004，随后森林接图与预检最新revision/收到的设计；ZCode响应具体QA，不重复旧冲突/纠正处理；MiniMax零API修R3并建PR；Trae先推送现有SW-011，获批后SW-012。按 [D-006](./docs/collaboration/decisions/D-006-delivery-review-and-preflight-r3.md) 维护，既定距离/相位/opacity和原API预算不变。近期里程碑是review/merge/组合CI/新测试包与可共享设计/合格预检工具，不能仅累加文档/任务数量宣称产品完成。真机/真人仍Pending，本轮不自动向外部执行工具发消息。

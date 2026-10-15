@@ -18,3 +18,8 @@
 发生尺寸、ID、定位基线或渲染角色变化，先写 handoff 给 ZCode/Antigravity，不直接改 app。候选是契约数据，不是产品规则授权。
 
 新场景制作前先消费Trae批准设计，按 [图片设计契约](visual-design.md) 给manifest增加design_ref：task_id、已批准handoff路径、spec_file、spec_sha256。雨林SW-006以SW-012 accepted为前置；森林SW-002机械修复保持原任务输入，design_ref可为null，不能用这条例外跳过新场景设计。设计稿、候选素材、正式入包各自独立验收。
+
+
+## 预检测试边界澄清（2026-10-14，D-006）
+
+预检默认入口不得因候选manifest内的测试标记而跳过真实设计批准。测试harness使用独立临时registry/review/spec，fixture结果显式标记且不作为生产可用判定；真实SW-012状态不被修改。accepted状态必须绑定当前独立review/交付head/spec，不能仅信status或任意存在的文件。alpha报告区分全透明、半透明与全不透明，必需三底检查图齐备；API累计以账本及此前revision为据，保留项目历史总数与单任务预算，不由新manifest重置。依据与实测见 [D-006](../decisions/D-006-delivery-review-and-preflight-r3.md) 和 [P-20261014-03](../evidence/P-20261014-03/README.md)。此为既有批准/透明/累计要求的测试边界澄清，不追溯撤销森林SW-002批准。

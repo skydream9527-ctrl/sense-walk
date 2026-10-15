@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-10-14T11:44:53" hostname="runnervmmprz5" time="0.139">
+  <properties/>
+  <testcase name="地形查询与快照姿态" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.003"/>
+  <testcase name="后台返回不偷跑 - 不补算后台时间且不自动前进" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="非零摇杆输入触发首次前进" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="NaN 输入归零不污染状态" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <testcase name="未满距主动放弃 - 门禁不触发且米数冻结" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="松手按惯性停稳 - 不立即冻结" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <testcase name="重复帧源不重复计距" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="新会话全新状态 - 不沿用旧门禁与已触发相位" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.034"/>
+  <testcase name="暂停中的输入被忽略" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <testcase name="初始化即黑幕 - void 相位已触发且其余层为 0" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <testcase name="通关即清空输入与惯性" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.043"/>
+  <testcase name="满距唯一通关 - 门禁只触发一次" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.036"/>
+  <testcase name="暂停清零输入与惯性 - 暂停期间不累计" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="上坡段实际前进慢于平地" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.011"/>
+  <testcase name="单帧 dt 上限 0_05 秒 - 卡顿帧不追进度" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <testcase name="地形速度系数 - 段内取段系数" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.001"/>
+  <testcase name="地形速度系数 - 段边界 1_5m 线性过渡" classname="com.sensewalk.app.domain.walk.VirtualWalkControllerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
