@@ -7,7 +7,7 @@
   "recipient": "antigravity",
   "base_commit": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
   "head_commit": "f8aad383db465592bf1bd749db42bdef3e3901e2",
-  "pr_url": "REPLACE_WITH_PR_URL_AFTER_PUSH",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/8",
   "report": "docs/collaboration/handoffs/minimax/H-SW-014-R3.md",
   "prior_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
   "prior_review": "docs/collaboration/reviews/R-SW-014-R2.json",
