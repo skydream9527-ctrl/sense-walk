@@ -379,20 +379,20 @@
 
     <section id="status">
       <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">2026-10-14第四轮复核：main为e7ab092。ZCode两PR已解冲突、补纠正/屏比证据，最新PR合并checkout分别249/217项通过；独立review及合入尚未完成。MiniMax R2已发布但仍有五个误放行反例，Trae43份设计仍未共享。</p>
-      <div class="callout"><strong>当前重点：</strong>Antigravity优先完成可靠性R2独立结论、通过即集成解锁快照；ZCode响应QA；MiniMax零API修SW-014 R3；Trae提交推送已有SW-011。近期交付目标是独立验收、组合CI和新测试包。</div>
+      <p class="section-lead">2026-10-15：main基准6104e3d，可靠性、快照恢复、53文件森林设计、预检R3已验收合入；build-109已发布，274项单测通过。森林正式接图已approved但PR #3仍有作者state冲突，尚未进入main/测试包。</p>
+      <div class="callout"><strong>当前并行：</strong>ZCode先收口接图，再做SW-005地形；Trae做SW-012雨林设计；MiniMax零API做SW-015真实设计/预检联调；Antigravity集成接图并随到验收新任务。</div>
       <table>
-        <thead><tr><th>模块</th><th>实际进展</th><th>下一步</th></tr></thead>
+        <thead><tr><th>模块</th><th>已核实进展</th><th>下一步</th></tr></thead>
         <tbody>
-          <tr><td>距离与控制</td><td>舒适摇杆、有效米数、距离门禁、相位与状态机</td><td>SW-001批准后快照恢复，再地形/自动越坎</td></tr>
-          <tr><td>场景与素材</td><td>PR #3正式接图，已补长屏/小屏三阶段与冻结/意图图</td><td>独立app/视觉review、合入、两PR组合CI</td></tr>
-          <tr><td>实走可靠性</td><td>PR #1 R2已同步并纠正交接，249项新PR合并测试通过</td><td>实际Kotlin/服务链独立复审；通过即激活SW-004</td></tr>
-          <tr><td>图片设计</td><td>Trae43文件可编辑源/预览/提示词草稿，hash一致</td><td>真实推送SW-011与handoff，获批后SW-012雨林设计</td></tr>
-          <tr><td>素材工具</td><td>SW-014 R2根定位/真实解码已修，原13样本结果吻合</td><td>R3修默认测试标记旁路/alpha/缺底图/批准链/账本，并建PR</td></tr>
-          <tr><td>验收与发布</td><td>云端原始XML分开归档；作者两尺寸冻结图状态栏以下零差异</td><td>Antigravity正式review/merge/新组合测试包；真机与真人仍Pending</td></tr>
+          <tr><td>可靠性与恢复</td><td>SW-001/SW-004 accepted，快照存取/恢复入口/实走重建基线在main</td><td>SW-005站稳/轻跳/不刷距，回归暂停与快照</td></tr>
+          <tr><td>森林正式光效</td><td>SW-010已approved，柔光意图已裁定</td><td>作者同步state冲突，新head/CI复核后合入并出组合包</td></tr>
+          <tr><td>视觉设计</td><td>SW-011已共享批准，53文件hash/bytes匹配</td><td>SW-012雨林900m分层/实际fade预览/三比例/逐层prompt</td></tr>
+          <tr><td>素材工具</td><td>SW-014 R3原18fixture/6探针通过</td><td>SW-015适配真实id/type，拒绝空规格/空候选；与雨林设计并行</td></tr>
+          <tr><td>雨林制作与接入</td><td>任务链与原8次尝试预算已定义</td><td>设计/联调均accepted后SW-006候选，再SW-007双模式接入</td></tr>
+          <tr><td>验证与发布</td><td>build-109：274项JVM/lint/build，APK hash已核对</td><td>真机计步/锁屏/耳机来电/跨boot与真人内测仍Pending</td></tr>
         </tbody>
       </table>
-      <p>详见 <a href="../DEVELOPMENT.md">DEVELOPMENT</a>、<a href="collaboration/evidence/P-20261014-03/README.md">最新核查</a>、<a href="collaboration/queues/antigravity.md">验收队列</a> 与 <a href="collaboration/BOARD.md">任务看板</a>。main尚未包含两工作PR，旧build-41也不包含；云端通过不代表M1/M2/MVP已验收。</p>
+      <p>见 <a href="collaboration/evidence/P-20261015-01/README.md">本轮核查</a>、<a href="collaboration/ROADMAP.md">整体路线</a>、<a href="collaboration/queues/antigravity.md">验收队列</a>、<a href="collaboration/BOARD.md">任务看板</a> 与 <a href="https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d">测试包</a>。原始证据/任务/完整提示词已入文档，CI和代码阶段通过不代表M1/M2/MVP最终验收。</p>
     </section>
 
     <section id="vision">

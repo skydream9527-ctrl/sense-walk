@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-15T09:40:17" hostname="runnervmmprz5" time="0.268">
+  <properties/>
+  <testcase name="恢复后可继续行走并通关" classname="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" time="0.165"/>
+  <testcase name="S9 回退快照恢复 - 走回旧位置不重复计距" classname="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" time="0.025"/>
+  <testcase name="恢复不重播一次性提示 - 同米数相位无新事件、感官静态一致" classname="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" time="0.043"/>
+  <testcase name="S7 恢复进度与相位完整还原" classname="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" time="0.026"/>
+  <testcase name="S7 恢复后 READY 等新输入 - 不给输入帧不前进" classname="com.sensewalk.app.domain.walk.VirtualWalkRestoreTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

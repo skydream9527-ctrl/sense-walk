@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-10-15",
+  "timezone": "America/Los_Angeles",
+  "kind": "bootstrap-planning-observation-not-new-product-approval",
+  "base_main": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+  "registry_tasks": [
+    {
+      "id": "SW-001",
+      "owner": "zcode",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R2.json",
+      "integrated_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0",
+      "pending": [
+        "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+        "真机耳机断连与来电中断实走服务（physical-device）",
+        "真机 detector 注册失败场景实测（JVM 链路已锁，设备侧待验证）"
+      ]
+    },
+    {
+      "id": "SW-002",
+      "owner": "minimax",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-002-R1.json",
+      "integrated_commit": "a5ad6dd634abcbe4868dcc9eaf6e57ca6a2a48ec",
+      "pending": []
+    },
+    {
+      "id": "SW-003",
+      "owner": "antigravity",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-003-R1.json",
+      "latest_review": null,
+      "integrated_commit": "af816246611e9e996e679a0f17cd87784af397bb",
+      "pending": []
+    },
+    {
+      "id": "SW-011",
+      "owner": "trae-design",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-011-R1.json",
+      "integrated_commit": "256d7e3b3fb426a03401c19e8495eacbd93048b2",
+      "pending": []
+    },
+    {
+      "id": "SW-010",
+      "owner": "zcode",
+      "status": "handoff_ready",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
+      "integrated_commit": null,
+      "pending": [
+        "独立审核已出具 approved（R-SW-010-R1），终景柔光意图裁定通过；待作者同步 main 解决 state/zcode.json 冲突后合入",
+        "合入后跑两工作 PR 组合版本 CI 并发布测试安装包；真机视觉走查仍 Pending"
+      ]
+    },
+    {
+      "id": "SW-004",
+      "owner": "zcode",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-004-R1.json",
+      "integrated_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd",
+      "pending": [
+        "跨 boot 真实重启验证（validator 单测覆盖 bootCount 语义，真机物理重启保留 pending）",
+        "真机实走中断恢复（真实计步场景，physical-device 保持 pending）"
+      ]
+    },
+    {
+      "id": "SW-012",
+      "owner": "trae-design",
+      "status": "ready",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "前置依赖 SW-011 视觉规范已 accepted，任务激活为 ready，待 Trae Design 领取开展雨林设计"
+      ]
+    },
+    {
+      "id": "SW-006",
+      "owner": "minimax",
+      "status": "queued",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-005",
+      "owner": "zcode",
+      "status": "ready",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "前置依赖 SW-004 会话快照已 accepted，任务激活为 ready，待 ZCode 领取实现"
+      ]
+    },
+    {
+      "id": "SW-007",
+      "owner": "zcode",
+      "status": "queued",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-008",
+      "owner": "zcode",
+      "status": "queued",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-009",
+      "owner": "antigravity",
+      "status": "queued",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": []
+    },
+    {
+      "id": "SW-013",
+      "owner": "antigravity",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
+      "latest_review": null,
+      "integrated_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
+      "pending": []
+    },
+    {
+      "id": "SW-014",
+      "owner": "minimax",
+      "status": "accepted",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R3.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-014-R3.json",
+      "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
+      "pending": [
+        "预检工具脚本已就绪且经 18 组 fixture 与回归反例全面验证，0 API 消耗；雨林正式生图 SW-006 保持锁定，仍需等待雨林设计 SW-012 验收通过"
+      ]
+    }
+  ],
+  "sw010_pr": {
+    "headRefName": "codex/zcode/SW-010-forest-lightshows",
+    "headRefOid": "2a7121677ee7579da1955dd0352631ec0525a566",
+    "mergeStateStatus": "DIRTY",
+    "mergeable": "CONFLICTING",
+    "number": 3,
+    "state": "OPEN",
+    "title": "SW-010: 森林 light_shows/clearing 批准候选入包",
+    "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3"
+  },
+  "sw010_merge_conflicts": [
+    "CONFLICT (content): Merge conflict in docs/collaboration/state/zcode.json"
+  ],
+  "sw010_post_business_app_diff": [],
+  "trae_design_manifest": {
+    "files": 53,
+    "sha256": "c6b71dea33ca2128a9385dfd0d2d9bfd9c87e7018d1c5e20edd37e549e1020ad",
+    "mismatches": []
+  },
+  "release": {
+    "assets": [
+      {
+        "apiUrl": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/releases/assets/643396612",
+        "contentType": "application/vnd.android.package-archive",
+        "createdAt": "2026-10-15T09:41:30Z",
+        "digest": "sha256:ae84c3de620e0cd96b2ae975a9bc8ec1795ba3d7bcd1032db5c9758f3137e8b0",
+        "downloadCount": 0,
+        "id": "RA_kwDOVFgo2s4mWXQE",
+        "label": "",
+        "name": "app-debug.apk",
+        "size": 20246962,
+        "state": "uploaded",
+        "updatedAt": "2026-10-15T09:41:31Z",
+        "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-109-6104e3d/app-debug.apk"
+      },
+      {
+        "apiUrl": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/releases/assets/643396610",
+        "contentType": "application/zip",
+        "createdAt": "2026-10-15T09:41:30Z",
+        "digest": "sha256:85f0616c1abc0cd16cea7d635b3ed4b46f5989904874d274710907792a7c93ca",
+        "downloadCount": 0,
+        "id": "RA_kwDOVFgo2s4mWXQC",
+        "label": "",
+        "name": "sensewalk-source-6104e3d.zip",
+        "size": 197870645,
+        "state": "uploaded",
+        "updatedAt": "2026-10-15T09:41:35Z",
+        "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-109-6104e3d/sensewalk-source-6104e3d.zip"
+      }
+    ],
+    "body": "SenseWalk development build. Debug APK and tracked source/ZCode handoff bundle.\n\nCommit: 6104e3d4967dcca64ed02a26c484bffc564b61f9\nChecks: JVM test task, Android lint and debug build.\nSource: https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38714429274\n\nThis is an implementation preview. Physical-device and user validation are reported separately in the development plan. A test task with no test sources does not establish behavioral coverage.\n",
+    "publishedAt": "2026-10-15T09:41:36Z",
+    "tagName": "build-109-6104e3d",
+    "targetCommitish": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+    "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d"
+  }
+}

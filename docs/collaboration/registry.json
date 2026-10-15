@@ -82,17 +82,17 @@
       "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
       "integrated_commit": null,
       "pending": [
-        "独立审核已出具 approved（R-SW-010-R1），终景柔光意图裁定通过；待作者同步 main 解决 state/zcode.json 冲突后合入",
-        "合入后跑两工作 PR 组合版本 CI 并发布测试安装包；真机视觉走查仍 Pending"
+        "R-SW-010-R1已approved；当前PR #3 head2a71216与main仍在state/zcode.json冲突，由ZCode本人同步保留新快照/双方交付信息",
+        "Antigravity复核同步后完整head/批准素材hash与新CI后集成；build-109尚不含此接图，合入后再发组合测试包"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/zcode/SW-010-forest-lightshows",
-        "branch_head": "393f22570a541118d80e7a50c6860c3b57f2fd49",
+        "branch_head": "2a7121677ee7579da1955dd0352631ec0525a566",
         "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261015-01/README.md"
       }
     },
     {
@@ -128,7 +128,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "前置依赖 SW-011 视觉规范已 accepted，任务激活为 ready，待 Trae Design 领取开展雨林设计"
+        "SW-011已accepted，本轮领取900m雨林分层设计，使用canonical id/type并给出fade完成点/三比例/逐层提示词"
       ]
     },
     {
@@ -141,13 +141,16 @@
         "SW-002",
         "SW-003",
         "SW-012",
-        "SW-014"
+        "SW-014",
+        "SW-015"
       ],
       "task_file": "docs/collaboration/tasks/SW-006.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "等待SW-012雨林设计和SW-015真实规格预检联调分别accepted，之后才激活正式候选/原8次API总尝试"
+      ]
     },
     {
       "id": "SW-005",
@@ -163,7 +166,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "前置依赖 SW-004 会话快照已 accepted，任务激活为 ready，待 ZCode 领取实现"
+        "SW-004已accepted，本轮可领取地形/站稳/自动轻跳，必须保持有效距离与快照恢复不变量"
       ]
     },
     {
@@ -243,7 +246,26 @@
       "latest_review": "docs/collaboration/reviews/R-SW-014-R3.json",
       "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
       "pending": [
-        "预检工具脚本已就绪且经 18 组 fixture 与回归反例全面验证，0 API 消耗；雨林正式生图 SW-006 保持锁定，仍需等待雨林设计 SW-012 验收通过"
+        "R3既有18组fixture/6回归验收保留；真实设计id/type兼容与空集合校验由新增SW-015收口，正式雨林制作还需SW-012/SW-015批准"
+      ]
+    },
+    {
+      "id": "SW-015",
+      "title": "真实设计规格与素材预检联调（零API）",
+      "owner": "minimax",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-011",
+        "SW-014"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-015.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "bootstrap实测真实Trae id/type规格被R3读为空集合且空候选误判ok，需消费者兼容与严格非空验证；不重写原R3",
+        "与SW-012设计并行，新增API 0；独立批准后才解锁SW-006"
       ]
     }
   ],
@@ -255,5 +277,5 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261014-03/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261015-01/README.md"
 }

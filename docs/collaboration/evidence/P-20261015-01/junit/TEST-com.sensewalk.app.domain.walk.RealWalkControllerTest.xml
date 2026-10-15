@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.RealWalkControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-15T09:40:17" hostname="runnervmmprz5" time="0.004">
+  <properties/>
+  <testcase name="满距唯一通关 - 终态吸收后续步数" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.002"/>
+  <testcase name="暂停冻结 - 恢复后立即回 WALKING 且不补算" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <testcase name="F001 批量跨相位 - 单个大批量事件一次触发全部跨越相位且各只一次" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <testcase name="start 进入 WALKING - 首个 counter 事件只建基线" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <testcase name="快照与虚走同型 - 字段语义诚实" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <testcase name="放弃终态 - detector cue 停止" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <testcase name="counter 增量推进米数与相位 - detector 不计距" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.001"/>
+  <testcase name="detector cue 节流 - 批量密集事件不密集补播" classname="com.sensewalk.app.domain.walk.RealWalkControllerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
