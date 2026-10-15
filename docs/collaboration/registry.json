@@ -100,17 +100,18 @@
       "title": "T07A 会话快照与中断恢复",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-001",
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-004.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-004-R1.json",
+      "integrated_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd",
       "pending": [
-        "前置依赖 SW-001 与 SW-003 已全部 accepted，任务激活为 ready，待 ZCode 领取实现"
+        "跨 boot 真实重启验证（validator 单测覆盖 bootCount 语义，真机物理重启保留 pending）",
+        "真机实走中断恢复（真实计步场景，physical-device 保持 pending）"
       ]
     },
     {
@@ -153,7 +154,7 @@
       "title": "T07B 自动越坎与站稳规则",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-004"
       ],
@@ -161,7 +162,9 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "前置依赖 SW-004 会话快照已 accepted，任务激活为 ready，待 ZCode 领取实现"
+      ]
     },
     {
       "id": "SW-007",

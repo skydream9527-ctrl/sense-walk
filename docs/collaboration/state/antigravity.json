@@ -3,9 +3,9 @@
   "agent": "antigravity",
   "current_task": null,
   "status": "idle",
-  "branch": "codex/antigravity/review-queue-round4",
-  "head_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
+  "branch": "codex/antigravity/SW-004-review-integration",
+  "head_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd",
   "latest_handoff": null,
   "updated_on": "2026-10-15",
-  "note": "队列消费：SW-011 R1 独立审核通过并已合入 main（merge 256d7e3），激活 SW-012 为 ready；SW-014 R3 独立实测 18 fixture + 6 回归反例全部通过，已合入 main（merge 3ea89c1），SW-006 保持锁定；SW-010 R1 approved 等待作者 PR #3 同步；SW-004 ready 待 ZCode 领取。"
+  "note": "队列消费：SW-011 R1、SW-014 R3、SW-004 R1 均已独立审核通过并合入 main（merge 814fc78）；激活下游 SW-012（雨林设计）与 SW-005（越坎与姿态防作弊）为 ready；SW-010 R1 approved 等待作者 PR #3 同步。"
 }
