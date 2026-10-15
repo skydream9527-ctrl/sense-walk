@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "agent": "zcode",
-  "current_task": "SW-004",
+  "current_task": "SW-005",
   "status": "handoff_ready",
-  "branch": "codex/zcode/SW-004-session-snapshot",
-  "head_commit": "dac64311092f18dc1fabe49977cf845d2fa5da89",
-  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
-  "updated_on": "2026-10-14",
-  "note": "SW-004 R1 已交付待审核（T07A 快照恢复：字段模型+25 单测+模拟器实测全过）；SW-001 accepted/合入，SW-010 approved 待集成。SW-005 等 SW-004 批准。",
+  "branch": "codex/zcode/SW-005-terrain",
+  "head_commit": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
+  "updated_on": "2026-10-15",
+  "note": "SW-005 R1 已交付待审核（T07B 越坎：TerrainMotor+22 单测+模拟器 800m 通关实测；快照零新增字段）。SW-010 已同步收口（e7441a2）待 QA 复核集成。SW-007 仍等 SW-006。",
   "deliveries": {
     "SW-001": {
       "branch": "codex/zcode/SW-001-t06-reliability",
@@ -23,7 +23,7 @@
       "delivery_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-      "status": "awaiting independent review R1"
+      "status": "approved (R-SW-010-R1); synced head e7441a2 awaiting integration"
     },
     "SW-004": {
       "branch": "codex/zcode/SW-004-session-snapshot",
@@ -32,6 +32,13 @@
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/9",
       "status": "awaiting independent review R1",
       "delivery_head": "c18b99074d4d1d7b63331339684b829cdbcdcac4"
+    },
+    "SW-005": {
+      "branch": "codex/zcode/SW-005-terrain",
+      "business_head": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
+      "pr": null,
+      "status": "awaiting independent review R1"
     }
   }
 }
