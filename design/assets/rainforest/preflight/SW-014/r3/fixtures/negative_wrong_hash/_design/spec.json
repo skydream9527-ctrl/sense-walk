@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-012",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "layers": [
+    {
+      "layer_id": "mist",
+      "render_role": "parallax"
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "render_role": "parallax"
+    },
+    {
+      "layer_id": "vines_light",
+      "render_role": "overlay"
+    },
+    {
+      "layer_id": "far_glow",
+      "render_role": "overlay"
+    },
+    {
+      "layer_id": "clearing_glow",
+      "render_role": "overlay"
+    }
+  ]
+}

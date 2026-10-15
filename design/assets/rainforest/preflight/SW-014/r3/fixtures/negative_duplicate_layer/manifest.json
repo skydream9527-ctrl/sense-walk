@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "mist",
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "mist",
+      "file": "webp/rainforest_mist_2.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_duplicate_layer/_design/H-SW-012-R1-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_duplicate_layer/_design/spec.json",
+    "spec_sha256": "34a29360920eba3a281c513cc7e82244cb77bfcbede85df85e53a4fbf7d38e4b"
+  }
+}

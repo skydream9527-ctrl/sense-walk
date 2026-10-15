@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "foo_bar",
+      "file": "webp/rainforest_foo_bar.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 5070,
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "c43d7b415403d1b329eec3fc059b6fc2d6de9444736d21e2d8ce05e0bce4879c",
+      "checks": [
+        "checks/alpha_mask/rainforest_foo_bar.png",
+        "checks/black/rainforest_foo_bar.jpg",
+        "checks/white/rainforest_foo_bar.jpg",
+        "checks/magenta/rainforest_foo_bar.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_unknown_layer/_design/H-SW-012-R1-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_unknown_layer/_design/spec.json",
+    "spec_sha256": "34a29360920eba3a281c513cc7e82244cb77bfcbede85df85e53a4fbf7d38e4b"
+  }
+}

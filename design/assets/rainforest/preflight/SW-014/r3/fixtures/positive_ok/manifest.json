@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "mist",
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "file": "webp/rainforest_trunks_canopy.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 2682,
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "7a3291d8ac4f2e75f7bcf126b839d52f6115232cec899b15a20152e2b152b688",
+      "checks": [
+        "checks/alpha_mask/rainforest_trunks_canopy.png",
+        "checks/black/rainforest_trunks_canopy.jpg",
+        "checks/white/rainforest_trunks_canopy.jpg",
+        "checks/magenta/rainforest_trunks_canopy.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "vines_light",
+      "file": "webp/rainforest_vines_light.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 5070,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "c43d7b415403d1b329eec3fc059b6fc2d6de9444736d21e2d8ce05e0bce4879c",
+      "checks": [
+        "checks/alpha_mask/rainforest_vines_light.png",
+        "checks/black/rainforest_vines_light.jpg",
+        "checks/white/rainforest_vines_light.jpg",
+        "checks/magenta/rainforest_vines_light.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "far_glow",
+      "file": "webp/rainforest_far_glow.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 27996,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "6d158cc35e4e8bbfa913fce6d85a08111a9dcbbd4ea6527e064cf959954b4e0e",
+      "checks": [
+        "checks/alpha_mask/rainforest_far_glow.png",
+        "checks/black/rainforest_far_glow.jpg",
+        "checks/white/rainforest_far_glow.jpg",
+        "checks/magenta/rainforest_far_glow.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    },
+    {
+      "layer_id": "clearing_glow",
+      "file": "webp/rainforest_clearing_glow.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 32872,
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R3 fixture: PIL 程序化自制小样本, 非雨林正式图",
+      "process": "make_layer_png (SW-014 R3 build_fixtures.py)",
+      "sha256": "d1272816ef77c311c34ec5533a350f53d212e6e97d9d2619148acf51198609fa",
+      "checks": [
+        "checks/alpha_mask/rainforest_clearing_glow.png",
+        "checks/black/rainforest_clearing_glow.jpg",
+        "checks/white/rainforest_clearing_glow.jpg",
+        "checks/magenta/rainforest_clearing_glow.jpg"
+      ],
+      "limitations": [
+        "R3 fixture: PIL 程序化自制小样本, 非雨林正式图"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-014/r3/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-014/r3/fixtures/positive_ok/_design/spec.json",
+    "spec_sha256": "34a29360920eba3a281c513cc7e82244cb77bfcbede85df85e53a4fbf7d38e4b"
+  }
+}
