@@ -52,6 +52,11 @@ class SessionStateMachine(private val clock: MonotonicClock) {
     var elapsedActiveMs: Long = 0L
         private set
 
+    /** T07A 恢复入口：还原中断前的累计活跃时长（只此一处可写） */
+    fun restoreElapsedActiveMs(ms: Long) {
+        if (ms >= 0L) elapsedActiveMs = ms
+    }
+
     /** 终态后吸收的迟到事件计数（供调试/测试断言） */
     var absorbedLateEventCount: Int = 0
         private set

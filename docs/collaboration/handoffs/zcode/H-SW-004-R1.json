@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-004-R1",
+  "task_id": "SW-004",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
+  "head_commit": "dac64311092f18dc1fabe49977cf845d2fa5da89",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-004-R1.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/domain/session/SessionSnapshot.kt",
+    "app/src/main/java/com/sensewalk/app/domain/session/SessionStateMachine.kt",
+    "app/src/main/java/com/sensewalk/app/domain/walk/VirtualWalkController.kt",
+    "app/src/main/java/com/sensewalk/app/domain/walk/RealWalkController.kt",
+    "app/src/main/java/com/sensewalk/app/domain/sensory/SensoryCoordinator.kt",
+    "app/src/main/java/com/sensewalk/app/data/SessionSnapshotStore.kt",
+    "app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt",
+    "app/src/main/java/com/sensewalk/app/session/SessionViewModel.kt",
+    "app/src/main/java/com/sensewalk/app/SenseWalkApp.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/RealWalkSessionScreen.kt",
+    "app/src/main/java/com/sensewalk/app/ui/navigation/PendingRestore.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地，274/0/0，+25 覆盖契约反例）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "模拟器实测×5（实走杀进程恢复/虚走恢复/通知停止清快照/结果页无恢复框/HOME同会话）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/emulator-recovery.txt"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + validate（PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-004-R1.md"
+      ]
+    },
+    {
+      "name": "跨 boot 真实重启 / 真机实走中断恢复",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/emulator-recovery.txt"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "跨 boot 真实重启验证（validator 单测覆盖语义，真机重启实测 Pending）",
+    "真机实走中断恢复（physical-device）"
+  ],
+  "requests": [
+    "审核 head dac6431 并确认字段模型可冻结为契约 revision",
+    "通过后更新 registry 并激活 SW-005"
+  ],
+  "design_manifest": null
+}

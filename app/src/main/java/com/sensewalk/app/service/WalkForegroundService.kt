@@ -21,6 +21,8 @@ import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.sensewalk.app.MainActivity
 import com.sensewalk.app.data.SceneRepository
+import com.sensewalk.app.data.SessionSnapshotStore
+import com.sensewalk.app.domain.session.SessionSnapshot
 import com.sensewalk.app.data.SettingsRepository
 import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.domain.session.MonotonicClock
@@ -41,6 +43,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -101,6 +105,13 @@ class WalkForegroundService : android.app.Service() {
     private val focusGate = AudioFocusGate()
     private var audioResumed = false
 
+    // ---- T07A 会话快照（SW-004）----
+    private val snapshotStore by lazy { SessionSnapshotStore(applicationContext) }
+    private var sessionId: String = ""
+    private var saveTicker: Job? = null
+    private var lastCounterReading: Long? = null
+    private var lastCounterEventMs: Long? = null
+
     override fun onBind(intent: Intent): IBinder = binder
 
     /** debug 冒烟入口仅限可调试构建（release 不生成注入路径） */
@@ -116,7 +127,8 @@ class WalkForegroundService : android.app.Service() {
             }
             SessionArbiter.Decision.STOP_CLEAN -> {
                 // F-002：START_STICKY 空重启/无有效会话——不进前台、不留空通知，
-                // 清掉可能残留的前台身份后干净退出（快照恢复属 T07，不假装可恢复）
+                // 清掉可能残留的前台身份后干净退出。T07A 恢复仍只由用户在 UI 显式选择，
+                // 空重启不自动恢复会话
                 stopSelfClean()
                 START_NOT_STICKY
             }
@@ -132,7 +144,7 @@ class WalkForegroundService : android.app.Service() {
             SessionArbiter.Decision.START_FOREGROUND_AND_SETUP -> {
                 startAsForeground() // startForegroundService 后 5s 内必须进前台
                 debugStubSensor = DebugWalkSmoke.enabled(this)
-                setupSession(sceneId!!)
+                setupSession(sceneId!!, intent?.getStringExtra(EXTRA_RESTORE_JSON))
                 START_STICKY
             }
             SessionArbiter.Decision.NONE ->
@@ -143,7 +155,7 @@ class WalkForegroundService : android.app.Service() {
 
     // ---- 会话装配（仅一次；重复 onStartCommand 不重建，保证单一引擎）----
 
-    private fun setupSession(sceneId: String) {
+    private fun setupSession(sceneId: String, restoreJson: String? = null) {
         val app = applicationContext
         scope.launch {
             when (val state = SceneRepository(app).loadAll()) {
@@ -166,7 +178,10 @@ class WalkForegroundService : android.app.Service() {
                         return@launch
                     }
                     sceneName = config.name
-                    val real = RealWalkController(config, clock)
+                    // T07A 恢复（SW-004）：UI 层已校验；此处防御性解析，失败按新会话
+                    val restore = parseRestore(restoreJson, config)
+                    sessionId = restore?.snapshot?.sessionId ?: java.util.UUID.randomUUID().toString()
+                    val real = RealWalkController(config, clock, restore = restore?.toControllerRestore())
                     val sensory = SensoryCoordinator(
                         config = config,
                         backend = AndroidSensoryBackend(app, config),
@@ -191,7 +206,12 @@ class WalkForegroundService : android.app.Service() {
                     // detector 真正注册成功才负责步伐音/振；注册失败或无硬件时
                     // 回退按距离出声——按注册结果而非硬件存在选择 cue 源（P-01）
                     sensory.stepAudioFromDistance = sensorSource.cueAudioFromDistance
-                    sensory.onPhaseEvents(real.drainPhaseEvents())
+                    if (restore != null) {
+                        // 恢复：按当前米数静态重建感官（loop 满淡入、不重播一次性提示）
+                        sensory.restoreState(real.snapshot().sensory)
+                    } else {
+                        sensory.onPhaseEvents(real.drainPhaseEvents())
+                    }
                     controller = real
                     coordinator = sensory
                     sensors = sensorSource
@@ -200,6 +220,8 @@ class WalkForegroundService : android.app.Service() {
                     observeVibrationSetting(app)
                     walk.value = real.snapshot()
                     uiState.value = UiState.Ready(config.name)
+                    hasActiveSession = true
+                    startSnapshotTicker()
                 }
                 is SceneLoadState.Error -> {
                     uiState.value = UiState.Error("场景配置加载失败：\n${state.diagnostics.joinToString("\n")}")
@@ -210,6 +232,75 @@ class WalkForegroundService : android.app.Service() {
         }
     }
 
+    // ---- 快照保存/清除（T07A：每 5s + 越相位 + 状态转换；主动结束清除）----
+
+    /** 防御性解析（UI 已校验过）；损坏 JSON 不阻塞新会话 */
+    private fun parseRestore(json: String?, config: com.sensewalk.app.domain.scene.SceneConfig): ParsedRestore? {
+        if (json == null) return null
+        val snap = SessionSnapshot.fromJson(json) ?: return null
+        if (snap.sceneId != config.id) return null
+        return ParsedRestore(
+            snapshot = snap,
+            toControllerRestore = {
+                VirtualWalkController.Restore(
+                    progress = com.sensewalk.app.domain.progress.ProgressSnapshot(
+                        sPos = snap.sPos, sBest = snap.sBest, meters = snap.meters,
+                        requiredDistanceMeters = config.requiredDistanceMeters.toFloat(),
+                    ),
+                    firedPhaseIds = snap.firedPhaseIds.toSet(),
+                    elapsedActiveMs = snap.elapsedActiveMs,
+                )
+            },
+        )
+    }
+
+    private class ParsedRestore(
+        val snapshot: SessionSnapshot,
+        val toControllerRestore: () -> VirtualWalkController.Restore,
+    )
+
+    private fun startSnapshotTicker() {
+        saveTicker?.cancel()
+        saveTicker = scope.launch {
+            while (true) {
+                kotlinx.coroutines.delay(SAVE_INTERVAL_MS)
+                persistSnapshot()
+            }
+        }
+    }
+
+    /** 状态转换/越相位时立即保存（节流外的补充时机） */
+    private fun saveSnapshotNow() {
+        scope.launch { persistSnapshot() }
+    }
+
+    private suspend fun persistSnapshot() {
+        val real = controller ?: return
+        val state = real.stateMachine.state
+        // 终态由 finish/abandon 清除，这里不再写（终态快照不是恢复候选）
+        if (state == SessionState.COMPLETED || state == SessionState.ABANDONED) return
+        val acc = real.accumulator.snapshot()
+        snapshotStore.save(
+            SessionSnapshot(
+                snapshotVersion = SessionSnapshot.SNAPSHOT_VERSION,
+                sessionId = sessionId,
+                mode = "real",
+                sceneId = real.config.id,
+                sceneSchemaVersion = real.config.schemaVersion,
+                state = state.name,
+                savedAtWallMs = System.currentTimeMillis(),
+                bootCount = SessionSnapshotStore.bootCount(applicationContext),
+                meters = acc.meters,
+                sPos = acc.sPos,
+                sBest = acc.sBest,
+                firedPhaseIds = real.scheduler.firedPhaseIds.toList(),
+                elapsedActiveMs = real.stateMachine.elapsedActiveMs,
+                lastCounterReading = lastCounterReading,
+                lastCounterEventMs = lastCounterEventMs,
+            ),
+        )
+    }
+
     /** 装配失败：仲裁记终态并干净退出（不残留前台/通知/监听） */
     private fun failSetup() {
         arbiter.onFinish()
@@ -218,9 +309,16 @@ class WalkForegroundService : android.app.Service() {
 
     private fun onCounterEvent(stepCount: Long, eventTimeMs: Long) {
         val real = controller ?: return
+        lastCounterReading = stepCount
+        lastCounterEventMs = eventTimeMs
         val snap = real.onCounterEvent(stepCount, eventTimeMs)
+        var firedPhases = false
         coordinator?.let { sensory ->
-            sensory.onPhaseEvents(real.drainPhaseEvents())
+            val events = real.drainPhaseEvents()
+            if (events.isNotEmpty()) {
+                firedPhases = true
+                sensory.onPhaseEvents(events)
+            }
             sensory.onFrame(
                 dtMs = snap.frameDtMs,
                 metersDelta = snap.metersDelta,
@@ -230,6 +328,7 @@ class WalkForegroundService : android.app.Service() {
         if (snap.session == SessionState.COMPLETED || snap.session == SessionState.ABANDONED) {
             finishSession()
         }
+        if (firedPhases) saveSnapshotNow() // 越相位即存（契约）
         if (snap != walk.value) walk.value = snap
     }
 
@@ -247,6 +346,7 @@ class WalkForegroundService : android.app.Service() {
         real.pause()
         coordinator?.pause()
         walk.value = real.snapshot()
+        saveSnapshotNow() // 状态转换即存（契约）
     }
 
     fun resumeSession() {
@@ -254,6 +354,7 @@ class WalkForegroundService : android.app.Service() {
         real.resume()
         attemptAudioResume()
         walk.value = real.snapshot()
+        saveSnapshotNow()
     }
 
     fun abandonSession() {
@@ -276,6 +377,11 @@ class WalkForegroundService : android.app.Service() {
         sensors?.stop()
         coordinator?.release()
         teardownAudioFocus()
+        // 主动结束（放弃/通关）：清除恢复候选（契约：只有被动中断可恢复）
+        hasActiveSession = false
+        saveTicker?.cancel()
+        sessionId = ""
+        scope.launch { snapshotStore.clear() }
         stopSelfClean()
     }
 
@@ -436,10 +542,20 @@ class WalkForegroundService : android.app.Service() {
     }
 
     companion object {
+        /** 进程内活会话标志（T07A 竞争仲裁）：服务装配成功后置 true、主动结束置 false。
+         *  进程死亡即失真为 false（与服务同生死）——MODE 层据此区分「重绑现有会话」
+         *  与「从快照恢复」，避免对活服务再起一套恢复引擎。 */
+        @Volatile
+        var hasActiveSession: Boolean = false
+
         const val EXTRA_SCENE_ID = "sceneId"
+        const val EXTRA_RESTORE_JSON = "restoreJson"
         const val ACTION_STOP = "com.sensewalk.action.STOP_WALK"
         private const val CHANNEL_ID = "real_walk"
         private const val NOTIFICATION_ID = 4601
+
+        /** 快照周期（契约：每 5s） */
+        private const val SAVE_INTERVAL_MS = 5_000L
 
         // debug 冒烟专用（release 不可达）：跳过硬件检查启动 + 注入 counter 读数
         const val ACTION_DEBUG_STEP = "com.sensewalk.action.DEBUG_STEP"
@@ -447,9 +563,10 @@ class WalkForegroundService : android.app.Service() {
         const val EXTRA_DEBUG_COUNT = "debugCount"
 
         /** 只从可见 Activity 调用（前台启动前台服务的合法路径；后台启动受系统限制） */
-        fun start(context: Context, sceneId: String) {
+        fun start(context: Context, sceneId: String, restoreJson: String? = null) {
             val intent = Intent(context, WalkForegroundService::class.java)
                 .putExtra(EXTRA_SCENE_ID, sceneId)
+            if (restoreJson != null) intent.putExtra(EXTRA_RESTORE_JSON, restoreJson)
             ContextCompat.startForegroundService(context, intent)
         }
     }

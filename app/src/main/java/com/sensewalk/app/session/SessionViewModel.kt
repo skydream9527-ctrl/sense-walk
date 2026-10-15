@@ -12,6 +12,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.core.content.ContextCompat
 import com.sensewalk.app.data.SceneRepository
+import com.sensewalk.app.data.SessionSnapshotStore
+import com.sensewalk.app.domain.session.SessionSnapshot
 import com.sensewalk.app.data.SettingsRepository
 import com.sensewalk.app.data.UserSettings
 import com.sensewalk.app.domain.scene.SceneLoadState
@@ -42,6 +44,7 @@ import kotlinx.coroutines.launch
 class SessionViewModel(
     application: Application,
     private val sceneId: String,
+    restoreSnapshot: SessionSnapshot? = null,
 ) : AndroidViewModel(application) {
 
     sealed interface UiState {
@@ -66,7 +69,19 @@ class SessionViewModel(
 
     private val systemClock = MonotonicClock { System.nanoTime() / 1_000_000 }
 
+    private companion object {
+        /** 快照周期（契约：每 5s） */
+        const val SAVE_INTERVAL_MS = 5_000L
+    }
+
     private var coordinator: SensoryCoordinator? = null
+
+    // ---- T07A 会话快照（SW-004）----
+    private val snapshotStore = SessionSnapshotStore(application)
+    private val restoredSnapshot = restoreSnapshot
+    private var sessionId: String = restoreSnapshot?.sessionId ?: java.util.UUID.randomUUID().toString()
+    private var saveTicker: kotlinx.coroutines.Job? = null
+    private var snapshotCleared = false
 
     // 音频焦点与耳机断连
     private var audioManager: AudioManager? = null
@@ -87,7 +102,18 @@ class SessionViewModel(
                     if (config == null) {
                         _uiState.value = UiState.Error("场景不可用：'$sceneId' 不在已加载的场景中")
                     } else {
-                        val controller = VirtualWalkController(config, systemClock)
+                        // T07A 恢复（SW-004）：UI 已校验；VM 只负责透传（防御性场景校验）
+                        val restore = restoredSnapshot?.takeIf { it.sceneId == config.id }?.let { snap ->
+                            VirtualWalkController.Restore(
+                                progress = com.sensewalk.app.domain.progress.ProgressSnapshot(
+                                    sPos = snap.sPos, sBest = snap.sBest, meters = snap.meters,
+                                    requiredDistanceMeters = config.requiredDistanceMeters.toFloat(),
+                                ),
+                                firedPhaseIds = snap.firedPhaseIds.toSet(),
+                                elapsedActiveMs = snap.elapsedActiveMs,
+                            )
+                        }
+                        val controller = VirtualWalkController(config, systemClock, restore)
                         val sensory = SensoryCoordinator(
                             config = config,
                             backend = AndroidSensoryBackend(app, config),
@@ -96,9 +122,15 @@ class SessionViewModel(
                         _uiState.value = UiState.Ready(controller)
                         _walk.value = controller.snapshot()
                         setupAudioInterruptionHandling()
-                        // 相位事件（含初始化黑幕）交给协调器；振动偏好实时跟随设置
-                        sensory.onPhaseEvents(controller.drainPhaseEvents())
+                        if (restore != null) {
+                            // 恢复：静态重建感官（loop 满淡入；一次性提示/旧脚步不重播）
+                            sensory.restoreState(controller.snapshot().sensory)
+                        } else {
+                            // 相位事件（含初始化黑幕）交给协调器；振动偏好实时跟随设置
+                            sensory.onPhaseEvents(controller.drainPhaseEvents())
+                        }
                         observeVibrationSetting()
+                        startSnapshotTicker()
                     }
                 }
                 SceneLoadState.Loading -> Unit
@@ -110,12 +142,62 @@ class SessionViewModel(
         (uiState.value as? UiState.Ready)?.let { block(it.controller) }
     }
 
+    // ---- 快照保存/清除（T07A：每 5s + 越相位/状态转换；主动结束清除）----
+
+    private fun startSnapshotTicker() {
+        saveTicker?.cancel()
+        saveTicker = viewModelScope.launch {
+            while (true) {
+                kotlinx.coroutines.delay(SAVE_INTERVAL_MS)
+                persistSnapshot()
+            }
+        }
+    }
+
+    private fun saveSnapshotNow() {
+        viewModelScope.launch { persistSnapshot() }
+    }
+
+    private suspend fun persistSnapshot() {
+        if (snapshotCleared) return
+        val controller = (uiState.value as? UiState.Ready)?.controller ?: return
+        val state = controller.stateMachine.state
+        if (state == SessionState.COMPLETED || state == SessionState.ABANDONED) return
+        val acc = controller.accumulator.snapshot()
+        snapshotStore.save(
+            SessionSnapshot(
+                snapshotVersion = SessionSnapshot.SNAPSHOT_VERSION,
+                sessionId = sessionId,
+                mode = "virtual",
+                sceneId = sceneId,
+                sceneSchemaVersion = controller.config.schemaVersion,
+                state = state.name,
+                savedAtWallMs = System.currentTimeMillis(),
+                bootCount = SessionSnapshotStore.bootCount(app),
+                meters = acc.meters,
+                sPos = acc.sPos,
+                sBest = acc.sBest,
+                firedPhaseIds = controller.scheduler.firedPhaseIds.toList(),
+                elapsedActiveMs = controller.stateMachine.elapsedActiveMs,
+            ),
+        )
+    }
+
+    /** 主动结束（放弃/通关）：清除恢复候选 */
+    private fun clearSnapshot() {
+        snapshotCleared = true
+        saveTicker?.cancel()
+        viewModelScope.launch { snapshotStore.clear() }
+    }
+
     /** 唯一帧驱动入口：控制器步进 → 相位事件 → 感官协调器。
      *  快照无变化（静止/暂停/终态）时不推送，避免空闲期 60fps 全树重组。 */
     fun onFrame() = withController { controller ->
         val snapshot = controller.frame()
         coordinator?.let { sensory ->
-            sensory.onPhaseEvents(controller.drainPhaseEvents())
+            val events = controller.drainPhaseEvents()
+            sensory.onPhaseEvents(events)
+            if (events.isNotEmpty()) saveSnapshotNow() // 越相位即存（契约）
             sensory.onFrame(
                 dtMs = snapshot.frameDtMs,
                 metersDelta = snapshot.metersDelta,
@@ -123,6 +205,7 @@ class SessionViewModel(
             )
             if (snapshot.session == SessionState.COMPLETED || snapshot.session == SessionState.ABANDONED) {
                 sensory.release() // 终态：释放音频与振动，迟到帧不再发声
+                clearSnapshot() // 通关：清除恢复候选
             }
         }
         if (snapshot != _walk.value) {
@@ -148,6 +231,7 @@ class SessionViewModel(
         it.onAppBackground()
         coordinator?.pause()
         _walk.value = it.snapshot()
+        saveSnapshotNow() // 进入后台即存（不依赖 onDestroy）
     }
 
     fun onAppForeground() = withController {
@@ -160,12 +244,14 @@ class SessionViewModel(
         it.pause()
         coordinator?.pause()
         _walk.value = it.snapshot()
+        saveSnapshotNow() // 状态转换即存
     }
 
     fun resumeFromDialog() = withController {
         it.resume()
         attemptAudioResume()
         _walk.value = it.snapshot()
+        saveSnapshotNow()
     }
 
     /**
@@ -183,6 +269,7 @@ class SessionViewModel(
         it.abandon()
         coordinator?.release()
         _walk.value = it.snapshot()
+        clearSnapshot() // 主动放弃：清除恢复候选
     }
 
     override fun onCleared() {
