@@ -29,8 +29,9 @@
       "branch": "codex/zcode/SW-004-session-snapshot",
       "business_head": "dac64311092f18dc1fabe49977cf845d2fa5da89",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
-      "pr": null,
-      "status": "awaiting independent review R1"
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/9",
+      "status": "awaiting independent review R1",
+      "delivery_head": "c18b99074d4d1d7b63331339684b829cdbcdcac4"
     }
   }
 }
