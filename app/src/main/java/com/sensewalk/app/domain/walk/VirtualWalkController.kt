@@ -68,6 +68,12 @@ class VirtualWalkController(
     /** 已触发待消费的相位事件（感官协调器经 [drainPhaseEvents] 取走） */
     private var pendingEvents = mutableListOf<PhaseEvent>()
 
+    /** 越坎马达（T07B / SW-005）：接近/站稳/轻跳；无持久状态（快照不新增字段） */
+    internal val terrainMotor = TerrainMotor()
+
+    /** 本局首坎站稳提示（一次性消费；UI 轻提示） */
+    fun consumeStabilizeHint(): Boolean = terrainMotor.consumeHint()
+
     data class Snapshot(
         val session: SessionState,
         val meters: Float,
@@ -82,6 +88,8 @@ class VirtualWalkController(
         val frameDtMs: Float = 0f,
         /** 本帧新增有效米数（meters 增量） */
         val metersDelta: Float = 0f,
+        /** 越坎步态（T07B 表现态：idle/walk/tense/climb/hop；不驱动距离） */
+        val gait: TerrainMotor.Gait = TerrainMotor.Gait.IDLE,
     )
 
     fun snapshot(): Snapshot = Snapshot(
@@ -93,6 +101,10 @@ class VirtualWalkController(
         sensory = scheduler.sensoryState(accumulator.meters),
         elapsedActiveMs = stateMachine.elapsedActiveMs,
         terrain = terrainAt(accumulator.sPos),
+        gait = terrainMotor.gait(
+            walking = stateMachine.state == SessionState.WALKING,
+            terrain = terrainAt(accumulator.sPos),
+        ),
     )
 
     /** 摇杆偏转输入（0..1，负值与 NaN 归 0）；READY 下非零输入即开始行走 */
@@ -121,6 +133,7 @@ class VirtualWalkController(
         inputDeflection = 0f
         inertia.reset()
         lastFrameMs = null
+        terrainMotor.pause() // 站稳计时保持（恢复后从剩余时长继续），不重置
     }
 
     /** 恢复：回到 READY 等待新输入，不自动前进 */
@@ -135,6 +148,7 @@ class VirtualWalkController(
         if (isTerminal()) return
         inputDeflection = 0f
         inertia.reset()
+        terrainMotor.markTerminal()
         stateMachine.dispatch(SessionEvent.Abandon)
     }
 
@@ -168,16 +182,38 @@ class VirtualWalkController(
     }
 
     private fun advance(dtMs: Long) {
-        // §12.2：v_tgt = 曲线 × 地形系数（gap_hop 在 T07 前按平地降级）
-        val target = mapper.targetSpeed(inputDeflection) * terrainFactorAt(accumulator.sPos)
+        // T07B：越坎马达先行判定（接近/站稳/轻跳），给出本帧速度指令
+        val directive = terrainMotor.step(
+            dtMs = dtMs,
+            sPos = accumulator.sPos,
+            deflection = inputDeflection,
+            gapAhead = TerrainMotor.gapAhead(config.pathProfile.segments, accumulator.sPos),
+            paused = false,
+        )
+        // §12.2：v_tgt = 曲线 × 地形系数（gap_hop 段内已由马达接管，系数不再叠加）
+        val terrainFactor = if (directive is TerrainMotor.SpeedDirective.hop) 1f
+        else terrainFactorAt(accumulator.sPos)
+        val curve = mapper.targetSpeed(inputDeflection)
+        val target = when (directive) {
+            is TerrainMotor.SpeedDirective.clamp -> minOf(curve * terrainFactor, directive.maxSpeed)
+            is TerrainMotor.SpeedDirective.holdZero -> 0f
+            is TerrainMotor.SpeedDirective.hop -> TerrainMotor.HOP_SPEED
+            is TerrainMotor.SpeedDirective.normal -> curve * terrainFactor
+        }
         val v = inertia.step(dtMs / 1000f, target)
-        accumulator.advance(v * dtMs / 1000f)
+        // 站稳（holdZero）期间位移绝对冻结：不 advance（含惯性残余，§5.6 站稳不刷距）
+        if (directive !is TerrainMotor.SpeedDirective.holdZero) {
+            accumulator.advance(v * dtMs / 1000f)
+        }
         pendingEvents += scheduler.update(accumulator.meters)
-        stateMachine.updateInput(inputDeflection, v)
+        // 跳跃期间不接受摇杆输入（§5.6）：状态机按当前有效速度收输入
+        val effectiveInput = if (directive is TerrainMotor.SpeedDirective.hop) 0f else inputDeflection
+        stateMachine.updateInput(effectiveInput, v)
         if (gate.onMeters(accumulator.meters)) {
             // 通关即终态：清空输入与惯性，停止一切前进（迟到事件由状态机吸收）
             inputDeflection = 0f
             inertia.reset()
+            terrainMotor.markTerminal()
             stateMachine.dispatch(SessionEvent.Complete)
         }
     }
