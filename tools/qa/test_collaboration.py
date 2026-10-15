@@ -75,8 +75,8 @@ class CoordinationChecks(unittest.TestCase):
         return relative, r
 
     def design_delivery(self, accepted=False, revision=1):
-        relative, h = self.handoff('SW-011', 'trae-design', revision)
-        folder = self.root / f'design/05-visual-design/SW-011/r{revision}'
+        relative, h = self.handoff('SW-012', 'trae-design', revision)
+        folder = self.root / f'design/05-visual-design/SW-012/r{revision}'
         folder.mkdir(parents=True, exist_ok=True)
         files = []
         # Plain bytes model protocol inputs only, never pretend to be image QA.
@@ -86,7 +86,7 @@ class CoordinationChecks(unittest.TestCase):
             path.write_text(json.dumps({'fixture': role, 'revision': revision}))
             files.append(dict(path=str(path.relative_to(self.root)), role=role,
                               sha256=hashlib.sha256(path.read_bytes()).hexdigest(), bytes=path.stat().st_size))
-        manifest = dict(schema_version=1, task_id='SW-011', revision=revision, producer='trae-design',
+        manifest = dict(schema_version=1, task_id='SW-012', revision=revision, producer='trae-design',
                         spec_file=files[0]['path'], files=files, limitations=['protocol fixture'])
         manifest_path = folder / 'design-manifest.json'
         manifest_path.write_text(json.dumps(manifest))
@@ -96,9 +96,9 @@ class CoordinationChecks(unittest.TestCase):
             review_path, review = self.review(relative)
             review['artifact_hashes'] = {f['path']: f['sha256'] for f in files}
             (self.root / review_path).write_text(json.dumps(review))
-            self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-011').update(
+            self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-012').update(
                 status='accepted', latest_handoff=relative, latest_review=review_path, integrated_commit='3'*40))
-        ref = dict(task_id='SW-011', handoff=relative, spec_file=manifest['spec_file'], spec_sha256=files[0]['sha256'])
+        ref = dict(task_id='SW-012', handoff=relative, spec_file=manifest['spec_file'], spec_sha256=files[0]['sha256'])
         return relative, h, manifest_path, manifest, ref
 
     def asset_delivery(self, design_ref=None, revision=1):
@@ -251,7 +251,9 @@ class CoordinationChecks(unittest.TestCase):
         self.error_contains('not the accepted design revision')
 
     def test_asset_cannot_substitute_other_approved_design(self):
-        _, _, _, _, ref = self.design_delivery(accepted=True)
+        ref = dict(task_id='SW-011', handoff='docs/collaboration/handoffs/trae-design/H-SW-011-R1.json',
+                   spec_file='design/05-visual-design/SW-011/r1/design-spec.json',
+                   spec_sha256='f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414')
         self.asset_delivery(ref)  # SW-006 requires SW-012, not approved SW-011.
         self.error_contains('does not match required design task')
 
@@ -263,13 +265,10 @@ class CoordinationChecks(unittest.TestCase):
 
     def test_asset_exact_accepted_design_reference_is_valid(self):
         _, _, _, _, ref = self.design_delivery(accepted=True)
-        # This disposable fixture changes its design prerequisite to SW-011.
-        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
         self.asset_delivery(ref)
         self.assertEqual([], module.validate())
 
     def test_archived_asset_reference_survives_new_approved_design_revision(self):
-        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
         _, _, _, _, old_ref = self.design_delivery(accepted=True)
         self.asset_delivery(old_ref)
         _, _, _, _, new_ref = self.design_delivery(accepted=True, revision=2)
@@ -277,7 +276,6 @@ class CoordinationChecks(unittest.TestCase):
         self.assertEqual([], module.validate())
 
     def test_current_asset_cannot_use_superseded_design_revision(self):
-        self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(depends_on=['SW-011']))
         _, _, _, _, old_ref = self.design_delivery(accepted=True)
         self.asset_delivery(old_ref)
         self.design_delivery(accepted=True, revision=2)
