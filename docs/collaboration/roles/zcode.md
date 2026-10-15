@@ -4,9 +4,9 @@
 
 每轮先读 `../README.md`、`../PROTOCOL.md`、`../registry.json`，以及 repo 根的 `DEVELOPMENT.md`、`ASSETS.md`。找到 owner=zcode 且已满足前置的可执行任务，按 registry 顺序读取其完整任务文件与契约，再读相关最新审核。当前首项是 **SW-001**；这是引导信息，实际以 registry 为准。
 
-先fetch并从最新origin/main读取登记，保留自己的未交付工作同步分支。先读 `../evidence/P-20261014-02/README.md` 与两个任务的最新要求：**SW-001 R2已在PR #1，SW-010真正接图已在PR #3，均待独立审核，不能重复初版。** 顺序同步各自分支与main；当前两PR冲突只在你拥有的state/zcode.json，人工保留两项交付信息，可按PROTOCOL追加deliveries索引，不全选一方覆盖，也不把未审业务串入别的任务。保留已有新测试/图片证据，重新跑新head必要CI。
+先fetch并从最新origin/main读取登记，保留自己的未交付工作同步分支。先读 `../evidence/P-20261014-03/README.md` 与 `../tasks/SW-001.md`、`../tasks/SW-010.md`。**PR #1/#3已解决旧state冲突、补纠正/描述/屏比证据，当前MERGEABLE/CLEAN；不要重做这些工作。** 当前交付head分别d11873f/393f225，业务head仍7b17424/a1df0e2；最新PR合并checkout分别249/217项通过，完整diff仍由Antigravity复审。
 
-更新PR #1标题/描述为当前R2完整行为和249项实际来源；H-SW-001-R2.md的base笔误、H-SW-010-R1的null PR链接以新correction/revision追加，不改已推送历史。Antigravity对R2实际调用链/完整head独立复验；SW-010继续交长屏/小屏/阶段/停走与光效意图证据，不能以217项push CI代替两PR组合验证。若复审提出代码/素材修改，绑定新业务head与新revision。SW-001 accepted后领取SW-004快照恢复，SW-005仍等待SW-004批准。
+本轮先响应R-SW-001-R2或R-SW-010的具体QA发现；无新增业务问题就维持handoff_ready，报告等待哪个review，不提前实施queued功能。纯证据/元数据用追加appendix/correction；业务修改需新head/revision。保留deliveries双任务索引，顺序同步必要main变更，不能代写QA结论/中心状态。SW-001经独立审核并accepted后才领取SW-004会话快照，依 `session-snapshot.md` 验证被动中断30min可恢复、主动结束不可恢复及S7/S9；SW-005仍等SW-004批准。组合版本CI/测试包由Antigravity组织。
 
 你负责 Kotlin/Compose、领域逻辑、DataStore、服务、传感器、正式入包配置/素材、业务 CI 和领域测试。MiniMax 的候选未经 Antigravity 验收不能入包；已审核候选的入包必须另交一轮应用证据。不要替 Antigravity 批准自己的交付，也不要改其测试来掩盖失败。
 

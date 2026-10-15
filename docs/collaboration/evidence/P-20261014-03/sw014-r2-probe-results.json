@@ -1,0 +1,2287 @@
+{
+  "kind": "bootstrap-observation-not-independent-review",
+  "source_head": "bda0b74d53791c09a4c9b7a2858b9c32321bc862",
+  "scripts": {
+    "build_fixtures.py": "7b5e4b932014522f45f1e285c547e3c3cc7dca88ebf465fbf90bde76f8483a4e",
+    "dry_run.py": "c8141938fae3798f20d6fe25aa888369111c5ad3b8ad3171cf95049455a50cda",
+    "preflight.py": "f32be99b8dbe7659edf9455785707992b90ffd9fe29b7bae0075773b37cb6680",
+    "probe_r1_reproduction.py": "8a10857b37e979cdcaaabc985bb21018e1163852bc8c69f5a6029b54f0249f8c"
+  },
+  "root_matches": true,
+  "published_fixtures": [
+    {
+      "name": "negative_duplicate_layer",
+      "status": "failed",
+      "summary": {
+        "total": 28,
+        "passed": 26,
+        "failed": 2,
+        "total_bytes": 66920,
+        "layer_count": 2
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_duplicate",
+          "detail": "layer_id 重复: mist"
+        },
+        {
+          "ok": false,
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_empty_layers",
+      "status": "failed",
+      "summary": {
+        "total": 13,
+        "passed": 12,
+        "failed": 1,
+        "total_bytes": 0,
+        "layer_count": 0
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_missing_check",
+      "status": "failed",
+      "summary": {
+        "total": 49,
+        "passed": 48,
+        "failed": 1,
+        "total_bytes": 94778,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_check_alpha_mask",
+          "detail": "缺/越界: checks/alpha_mask/rainforest_mist.png"
+        }
+      ]
+    },
+    {
+      "name": "negative_missing_file",
+      "status": "failed",
+      "summary": {
+        "total": 42,
+        "passed": 37,
+        "failed": 5,
+        "total_bytes": 61318,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_file_missing",
+          "detail": "文件不存在 / 越界 / 绝对路径: webp/rainforest_mist.webp"
+        },
+        {
+          "ok": false,
+          "name": "layer_trunks_canopy_bytes",
+          "detail": "manifest 0 != actual 2298"
+        },
+        {
+          "ok": false,
+          "name": "layer_vines_light_bytes",
+          "detail": "manifest 0 != actual 4846"
+        },
+        {
+          "ok": false,
+          "name": "layer_far_glow_bytes",
+          "detail": "manifest 0 != actual 26812"
+        },
+        {
+          "ok": false,
+          "name": "layer_clearing_glow_bytes",
+          "detail": "manifest 0 != actual 27362"
+        }
+      ]
+    },
+    {
+      "name": "negative_not_image",
+      "status": "failed",
+      "summary": {
+        "total": 44,
+        "passed": 43,
+        "failed": 1,
+        "total_bytes": 61364,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_decode",
+          "detail": "非图/坏图: cannot identify image file '/Users/yunhegong/.codex/worktrees/sw014-r2/design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_not_image/webp/rainforest_mist.webp'"
+        }
+      ]
+    },
+    {
+      "name": "negative_opaque_layer",
+      "status": "failed",
+      "summary": {
+        "total": 48,
+        "passed": 47,
+        "failed": 1,
+        "total_bytes": 63258,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_opaque",
+          "detail": "透明像素 0.00% < 0.1% (不透明层)"
+        }
+      ]
+    },
+    {
+      "name": "negative_real_oversize",
+      "status": "failed",
+      "summary": {
+        "total": 48,
+        "passed": 47,
+        "failed": 1,
+        "total_bytes": 96894,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_trunks_canopy_opaque",
+          "detail": "透明像素 0.00% < 0.1% (不透明层)"
+        }
+      ]
+    },
+    {
+      "name": "negative_stale_spec_sha",
+      "status": "failed",
+      "summary": {
+        "total": 48,
+        "passed": 47,
+        "failed": 1,
+        "total_bytes": 94778,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "design_ref_spec_sha_mismatch",
+          "detail": "manifest stale_sha_actual != 实际 c8eb9306a83a4d24"
+        }
+      ]
+    },
+    {
+      "name": "negative_unknown_layer",
+      "status": "failed",
+      "summary": {
+        "total": 21,
+        "passed": 19,
+        "failed": 2,
+        "total_bytes": 4846,
+        "layer_count": 1
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_foo_bar_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        },
+        {
+          "ok": false,
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_design_ref",
+      "status": "failed",
+      "summary": {
+        "total": 48,
+        "passed": 45,
+        "failed": 3,
+        "total_bytes": 94778,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "design_ref_handoff_path",
+          "detail": "handoff 路径越界/不存在/绝对: docs/collaboration/handoffs/trae-design/THIS_PATH_DOES_NOT_EXIST.json"
+        },
+        {
+          "ok": false,
+          "name": "design_ref_spec_file_path",
+          "detail": "spec_file 路径越界/不存在: design/05-visual-design/SW-012/this_spec_does_not_exist.md"
+        },
+        {
+          "ok": false,
+          "name": "design_ref_registry_status",
+          "detail": "task SW-012 status=queued != accepted (真实模式不允许 queued/in_progress)"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_hash",
+      "status": "failed",
+      "summary": {
+        "total": 48,
+        "passed": 47,
+        "failed": 1,
+        "total_bytes": 94778,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_sha256",
+          "detail": "manifest 0000000000000000 != actual 58d6a732fa441d18"
+        }
+      ]
+    },
+    {
+      "name": "negative_zero_size",
+      "status": "failed",
+      "summary": {
+        "total": 49,
+        "passed": 46,
+        "failed": 3,
+        "total_bytes": 61390,
+        "layer_count": 5
+      },
+      "failed_checks": [
+        {
+          "ok": false,
+          "name": "layer_mist_size_manifest",
+          "detail": "实际 1x1 != manifest 0x0"
+        },
+        {
+          "ok": false,
+          "name": "layer_mist_size_unsupported",
+          "detail": "1x1 不在 {(768, 1376), (1080, 1920)}"
+        },
+        {
+          "ok": false,
+          "name": "layer_mist_opaque",
+          "detail": "透明像素 0.00% < 0.1% (不透明层)"
+        }
+      ]
+    },
+    {
+      "name": "positive_ok",
+      "status": "ok",
+      "summary": {
+        "total": 48,
+        "passed": 48,
+        "failed": 0,
+        "total_bytes": 94778,
+        "layer_count": 5
+      },
+      "failed_checks": []
+    }
+  ],
+  "cases": [
+    {
+      "id": "R2-01",
+      "reason": "Default entry accepts manifest-controlled fixture flag while actual SW-012 is queued",
+      "expected": "failed outside an explicit isolated test harness",
+      "input_design_ref": {
+        "task_id": "SW-012",
+        "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+        "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+        "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c",
+        "_fixture_mode": true,
+        "_expected_registry_status": "queued"
+      },
+      "actual_preflight": {
+        "status": "ok",
+        "manifest": "/Users/yunhegong/.codex/worktrees/sw014-r2/design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 48,
+          "passed": 48,
+          "failed": 0,
+          "total_bytes": 94778,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "33460"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "58d6a732fa441d18"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "33460 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "透明 54.57%"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "2298"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "3aac322985c0c3d2"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "2298 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "透明 16.64%"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "4846"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "324ba3a9a1b22d09"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "4846 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "透明 0.70%"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_bytes",
+            "detail": "26812"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_sha256",
+            "detail": "be25e508b9a64ff9"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_budget",
+            "detail": "26812 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_pixels",
+            "detail": "透明 27.03%"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_bytes",
+            "detail": "27362"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_sha256",
+            "detail": "9b34460ea980493d"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_budget",
+            "detail": "27362 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_pixels",
+            "detail": "透明 40.98%"
+          },
+          {
+            "ok": true,
+            "name": "required_layers",
+            "detail": "全部 5 层齐"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "94778 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      },
+      "actual_dry_run": {
+        "ok": true,
+        "reason": "全部 5 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head_commit",
+            "detail": "FIXTURE_NOT_"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R2-02",
+      "reason": "Fully opaque RGBA alpha=255 is accepted as 100% transparent; code counts alpha>0",
+      "expected": "failed",
+      "fixture_only": true,
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 14,
+        "cost": "unknown",
+        "layers": [
+          {
+            "layer_id": "mist",
+            "file": "webp/opaque-audit-fixture.png",
+            "width": 768,
+            "height": 1376,
+            "bytes": 7142,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "979cd4d1d9624639b27cf64d526f45ce1f23b3ec4dbe8694a8e1e39b36a769e3",
+            "checks": [
+              "checks/alpha_mask/rainforest_mist.png",
+              "checks/black/rainforest_mist.jpg",
+              "checks/white/rainforest_mist.jpg",
+              "checks/magenta/rainforest_mist.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "trunks_canopy",
+            "file": "webp/rainforest_trunks_canopy.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 2298,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "3aac322985c0c3d2040261b831eed06db92f5c96d042f062bd50626314266193",
+            "checks": [
+              "checks/alpha_mask/rainforest_trunks_canopy.png",
+              "checks/black/rainforest_trunks_canopy.jpg",
+              "checks/white/rainforest_trunks_canopy.jpg",
+              "checks/magenta/rainforest_trunks_canopy.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "vines_light",
+            "file": "webp/rainforest_vines_light.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 4846,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "324ba3a9a1b22d09310fe262ec3ac1ad38264f1a060ed8a6ad99bc207bb96dfd",
+            "checks": [
+              "checks/alpha_mask/rainforest_vines_light.png",
+              "checks/black/rainforest_vines_light.jpg",
+              "checks/white/rainforest_vines_light.jpg",
+              "checks/magenta/rainforest_vines_light.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "far_glow",
+            "file": "webp/rainforest_far_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 26812,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "be25e508b9a64ff9e13d36fd9e50a27615468730d05732bdd7dcaab5355f80ec",
+            "checks": [
+              "checks/alpha_mask/rainforest_far_glow.png",
+              "checks/black/rainforest_far_glow.jpg",
+              "checks/white/rainforest_far_glow.jpg",
+              "checks/magenta/rainforest_far_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "clearing_glow",
+            "file": "webp/rainforest_clearing_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 27362,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "9b34460ea980493d69bda3c24e90ffe1ef0601fd65ba00d9ed4f500f461d5db4",
+            "checks": [
+              "checks/alpha_mask/rainforest_clearing_glow.png",
+              "checks/black/rainforest_clearing_glow.jpg",
+              "checks/white/rainforest_clearing_glow.jpg",
+              "checks/magenta/rainforest_clearing_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          }
+        ],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+          "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+          "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c",
+          "_fixture_mode": true,
+          "_expected_registry_status": "queued"
+        }
+      },
+      "actual_preflight": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r2-audit-tvhrd2dh/design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/audit-manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 48,
+          "passed": 48,
+          "failed": 0,
+          "total_bytes": 68460,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "7142"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "979cd4d1d9624639"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "7142 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "透明 100.00%"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "2298"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "3aac322985c0c3d2"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "2298 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "透明 16.64%"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "4846"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "324ba3a9a1b22d09"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "4846 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "透明 0.70%"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_bytes",
+            "detail": "26812"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_sha256",
+            "detail": "be25e508b9a64ff9"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_budget",
+            "detail": "26812 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_pixels",
+            "detail": "透明 27.03%"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_bytes",
+            "detail": "27362"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_sha256",
+            "detail": "9b34460ea980493d"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_budget",
+            "detail": "27362 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_pixels",
+            "detail": "透明 40.98%"
+          },
+          {
+            "ok": true,
+            "name": "required_layers",
+            "detail": "全部 5 层齐"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "68460 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      },
+      "actual_dry_run": {
+        "ok": true,
+        "reason": "全部 5 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head_commit",
+            "detail": "FIXTURE_NOT_"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R2-03",
+      "reason": "Empty required background-check list is accepted",
+      "expected": "failed",
+      "fixture_only": true,
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 14,
+        "cost": "unknown",
+        "layers": [
+          {
+            "layer_id": "mist",
+            "file": "webp/rainforest_mist.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 33460,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "58d6a732fa441d183209fd05cd28cf9ffa4989106feee172c556472affe0d0b7",
+            "checks": [],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "trunks_canopy",
+            "file": "webp/rainforest_trunks_canopy.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 2298,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "3aac322985c0c3d2040261b831eed06db92f5c96d042f062bd50626314266193",
+            "checks": [
+              "checks/alpha_mask/rainforest_trunks_canopy.png",
+              "checks/black/rainforest_trunks_canopy.jpg",
+              "checks/white/rainforest_trunks_canopy.jpg",
+              "checks/magenta/rainforest_trunks_canopy.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "vines_light",
+            "file": "webp/rainforest_vines_light.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 4846,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "324ba3a9a1b22d09310fe262ec3ac1ad38264f1a060ed8a6ad99bc207bb96dfd",
+            "checks": [
+              "checks/alpha_mask/rainforest_vines_light.png",
+              "checks/black/rainforest_vines_light.jpg",
+              "checks/white/rainforest_vines_light.jpg",
+              "checks/magenta/rainforest_vines_light.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "far_glow",
+            "file": "webp/rainforest_far_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 26812,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "be25e508b9a64ff9e13d36fd9e50a27615468730d05732bdd7dcaab5355f80ec",
+            "checks": [
+              "checks/alpha_mask/rainforest_far_glow.png",
+              "checks/black/rainforest_far_glow.jpg",
+              "checks/white/rainforest_far_glow.jpg",
+              "checks/magenta/rainforest_far_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "clearing_glow",
+            "file": "webp/rainforest_clearing_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 27362,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "9b34460ea980493d69bda3c24e90ffe1ef0601fd65ba00d9ed4f500f461d5db4",
+            "checks": [
+              "checks/alpha_mask/rainforest_clearing_glow.png",
+              "checks/black/rainforest_clearing_glow.jpg",
+              "checks/white/rainforest_clearing_glow.jpg",
+              "checks/magenta/rainforest_clearing_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          }
+        ],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+          "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+          "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c",
+          "_fixture_mode": true,
+          "_expected_registry_status": "queued"
+        }
+      },
+      "actual_preflight": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r2-audit-tvhrd2dh/design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/audit-manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 48,
+          "passed": 48,
+          "failed": 0,
+          "total_bytes": 94778,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "33460"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "58d6a732fa441d18"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "33460 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "透明 54.57%"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "2298"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "3aac322985c0c3d2"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "2298 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "透明 16.64%"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "4846"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "324ba3a9a1b22d09"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "4846 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "透明 0.70%"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_bytes",
+            "detail": "26812"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_sha256",
+            "detail": "be25e508b9a64ff9"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_budget",
+            "detail": "26812 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_pixels",
+            "detail": "透明 27.03%"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_bytes",
+            "detail": "27362"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_sha256",
+            "detail": "9b34460ea980493d"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_budget",
+            "detail": "27362 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_pixels",
+            "detail": "透明 40.98%"
+          },
+          {
+            "ok": true,
+            "name": "required_layers",
+            "detail": "全部 5 层齐"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "94778 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      },
+      "actual_dry_run": {
+        "ok": true,
+        "reason": "全部 5 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head_commit",
+            "detail": "FIXTURE_NOT_"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R2-04",
+      "reason": "Negative cumulative API attempts accepted; only field existence checked",
+      "expected": "failed",
+      "fixture_only": true,
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": -1,
+        "cost": "unknown",
+        "layers": [
+          {
+            "layer_id": "mist",
+            "file": "webp/rainforest_mist.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 33460,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "58d6a732fa441d183209fd05cd28cf9ffa4989106feee172c556472affe0d0b7",
+            "checks": [
+              "checks/alpha_mask/rainforest_mist.png",
+              "checks/black/rainforest_mist.jpg",
+              "checks/white/rainforest_mist.jpg",
+              "checks/magenta/rainforest_mist.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "trunks_canopy",
+            "file": "webp/rainforest_trunks_canopy.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 2298,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "3aac322985c0c3d2040261b831eed06db92f5c96d042f062bd50626314266193",
+            "checks": [
+              "checks/alpha_mask/rainforest_trunks_canopy.png",
+              "checks/black/rainforest_trunks_canopy.jpg",
+              "checks/white/rainforest_trunks_canopy.jpg",
+              "checks/magenta/rainforest_trunks_canopy.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "vines_light",
+            "file": "webp/rainforest_vines_light.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 4846,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "324ba3a9a1b22d09310fe262ec3ac1ad38264f1a060ed8a6ad99bc207bb96dfd",
+            "checks": [
+              "checks/alpha_mask/rainforest_vines_light.png",
+              "checks/black/rainforest_vines_light.jpg",
+              "checks/white/rainforest_vines_light.jpg",
+              "checks/magenta/rainforest_vines_light.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "far_glow",
+            "file": "webp/rainforest_far_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 26812,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "be25e508b9a64ff9e13d36fd9e50a27615468730d05732bdd7dcaab5355f80ec",
+            "checks": [
+              "checks/alpha_mask/rainforest_far_glow.png",
+              "checks/black/rainforest_far_glow.jpg",
+              "checks/white/rainforest_far_glow.jpg",
+              "checks/magenta/rainforest_far_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "clearing_glow",
+            "file": "webp/rainforest_clearing_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 27362,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "9b34460ea980493d69bda3c24e90ffe1ef0601fd65ba00d9ed4f500f461d5db4",
+            "checks": [
+              "checks/alpha_mask/rainforest_clearing_glow.png",
+              "checks/black/rainforest_clearing_glow.jpg",
+              "checks/white/rainforest_clearing_glow.jpg",
+              "checks/magenta/rainforest_clearing_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          }
+        ],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+          "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+          "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c",
+          "_fixture_mode": true,
+          "_expected_registry_status": "queued"
+        }
+      },
+      "actual_preflight": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r2-audit-tvhrd2dh/design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/audit-manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 48,
+          "passed": 48,
+          "failed": 0,
+          "total_bytes": 94778,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "33460"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "58d6a732fa441d18"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "33460 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "透明 54.57%"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "2298"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "3aac322985c0c3d2"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "2298 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "透明 16.64%"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "4846"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "324ba3a9a1b22d09"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "4846 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "透明 0.70%"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_bytes",
+            "detail": "26812"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_sha256",
+            "detail": "be25e508b9a64ff9"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_budget",
+            "detail": "26812 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_pixels",
+            "detail": "透明 27.03%"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_bytes",
+            "detail": "27362"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_sha256",
+            "detail": "9b34460ea980493d"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_budget",
+            "detail": "27362 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_pixels",
+            "detail": "透明 40.98%"
+          },
+          {
+            "ok": true,
+            "name": "required_layers",
+            "detail": "全部 5 层齐"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "94778 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "-1"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      },
+      "actual_dry_run": {
+        "ok": true,
+        "reason": "全部 5 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head_commit",
+            "detail": "FIXTURE_NOT_"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "fixture 模式: queued (实际)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R2-05",
+      "reason": "Registry approves handoff/review A but input references B with wrong task and malformed head; both pass without fixture flag",
+      "expected": "failed",
+      "fixture_only": true,
+      "input": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "scene_id": "rainforest",
+        "producer": "minimax",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 14,
+        "cost": "unknown",
+        "layers": [
+          {
+            "layer_id": "mist",
+            "file": "webp/rainforest_mist.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 33460,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "58d6a732fa441d183209fd05cd28cf9ffa4989106feee172c556472affe0d0b7",
+            "checks": [
+              "checks/alpha_mask/rainforest_mist.png",
+              "checks/black/rainforest_mist.jpg",
+              "checks/white/rainforest_mist.jpg",
+              "checks/magenta/rainforest_mist.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "trunks_canopy",
+            "file": "webp/rainforest_trunks_canopy.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 2298,
+            "alpha_channel": true,
+            "render_role": "parallax",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "3aac322985c0c3d2040261b831eed06db92f5c96d042f062bd50626314266193",
+            "checks": [
+              "checks/alpha_mask/rainforest_trunks_canopy.png",
+              "checks/black/rainforest_trunks_canopy.jpg",
+              "checks/white/rainforest_trunks_canopy.jpg",
+              "checks/magenta/rainforest_trunks_canopy.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "vines_light",
+            "file": "webp/rainforest_vines_light.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 4846,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "324ba3a9a1b22d09310fe262ec3ac1ad38264f1a060ed8a6ad99bc207bb96dfd",
+            "checks": [
+              "checks/alpha_mask/rainforest_vines_light.png",
+              "checks/black/rainforest_vines_light.jpg",
+              "checks/white/rainforest_vines_light.jpg",
+              "checks/magenta/rainforest_vines_light.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "far_glow",
+            "file": "webp/rainforest_far_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 26812,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "be25e508b9a64ff9e13d36fd9e50a27615468730d05732bdd7dcaab5355f80ec",
+            "checks": [
+              "checks/alpha_mask/rainforest_far_glow.png",
+              "checks/black/rainforest_far_glow.jpg",
+              "checks/white/rainforest_far_glow.jpg",
+              "checks/magenta/rainforest_far_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          },
+          {
+            "layer_id": "clearing_glow",
+            "file": "webp/rainforest_clearing_glow.webp",
+            "width": 768,
+            "height": 1376,
+            "bytes": 27362,
+            "alpha_channel": true,
+            "render_role": "overlay",
+            "tileable": false,
+            "origin": "R2 fixture: PIL 程序化自制小样本, 非雨林正式图",
+            "process": "make_layer_png (SW-014 R2 build_fixtures.py)",
+            "sha256": "9b34460ea980493d69bda3c24e90ffe1ef0601fd65ba00d9ed4f500f461d5db4",
+            "checks": [
+              "checks/alpha_mask/rainforest_clearing_glow.png",
+              "checks/black/rainforest_clearing_glow.jpg",
+              "checks/white/rainforest_clearing_glow.jpg",
+              "checks/magenta/rainforest_clearing_glow.jpg"
+            ],
+            "limitations": [
+              "R2 fixture: PIL 程序化自制小样本, 非雨林正式图"
+            ]
+          }
+        ],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+          "spec_file": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+          "spec_sha256": "c8eb9306a83a4d2463ba8b99d55b9a3e9984924f68804fa1eaa4bac7849dde7c"
+        }
+      },
+      "actual_preflight": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r2-audit-tvhrd2dh/design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/audit-manifest.json",
+        "contract_version": "visual-assets v1",
+        "summary": {
+          "total": 48,
+          "passed": 48,
+          "failed": 0,
+          "total_bytes": 94778,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "33460"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "58d6a732fa441d18"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "33460 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "透明 54.57%"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "2298"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "3aac322985c0c3d2"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "2298 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "透明 16.64%"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "4846"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "324ba3a9a1b22d09"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "4846 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "透明 0.70%"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_bytes",
+            "detail": "26812"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_sha256",
+            "detail": "be25e508b9a64ff9"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_budget",
+            "detail": "26812 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_far_glow_alpha_pixels",
+            "detail": "透明 27.03%"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_bytes",
+            "detail": "27362"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_sha256",
+            "detail": "9b34460ea980493d"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_budget",
+            "detail": "27362 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_clearing_glow_alpha_pixels",
+            "detail": "透明 40.98%"
+          },
+          {
+            "ok": true,
+            "name": "required_layers",
+            "detail": "全部 5 层齐"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "94778 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_registry_status",
+            "detail": "accepted"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      },
+      "actual_dry_run": {
+        "ok": true,
+        "reason": "全部 5 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head_commit",
+            "detail": "not-a-sha"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "c8eb9306a83a4d24"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "accepted"
+          }
+        ]
+      },
+      "approval_fixture_context": {
+        "latest_handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/CURRENT-APPROVED-A.json",
+        "latest_review": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/CURRENT-APPROVED-REVIEW-A.json",
+        "expected_handoff": {
+          "fixture_only": true,
+          "task_id": "SW-012",
+          "producer": "trae-design",
+          "head_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "expected_review": {
+          "fixture_only": true,
+          "task_id": "SW-012",
+          "reviewer": "antigravity",
+          "verdict": "approved",
+          "reviewed_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "handoff": "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/CURRENT-APPROVED-A.json"
+        },
+        "note": "Synthetic temporary test metadata, not a real design approval"
+      }
+    }
+  ]
+}
