@@ -25,19 +25,24 @@ class RealWalkController(
     val config: SceneConfig,
     private val clock: MonotonicClock,
     strideMeters: Float = RealWalkEngine.DEFAULT_STRIDE_METERS,
+    restore: VirtualWalkController.Restore? = null,
 ) {
 
     val stateMachine = SessionStateMachine(clock)
-    val accumulator = ProgressAccumulator(config.requiredDistanceMeters.toFloat())
+    val accumulator = restore?.let { ProgressAccumulator.fromSnapshot(it.progress) }
+        ?: ProgressAccumulator(config.requiredDistanceMeters.toFloat())
     val gate = CompletionGate(config.requiredDistanceMeters.toFloat())
-    val scheduler = PhaseScheduler(config)
+    val scheduler = PhaseScheduler(config, restore?.firedPhaseIds ?: emptySet())
     val engine = RealWalkEngine(clock, strideMeters)
 
     private var pendingEvents = mutableListOf<PhaseEvent>()
     private var lastCueMs: Long = Long.MIN_VALUE
 
     init {
-        scheduler.update(0f) // 黑幕起点
+        scheduler.update(0f) // 黑幕起点（已触发相位不重复触发）
+        // 实走恢复：engine 初始即处于 rebasePending——下一个 counter 事件只重建
+        // 基线、不补中断缺口（契约：跨中断/跨 boot 不减算旧 sensor timestamp）
+        restore?.let { stateMachine.restoreElapsedActiveMs(it.elapsedActiveMs) }
     }
 
     /** 会话开始：按下「开始出门」即视为前行意图，进入 WALKING 等待步数 */

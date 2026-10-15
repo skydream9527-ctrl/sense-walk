@@ -131,7 +131,8 @@ class RealWalkViewModel(
 
     private fun startService() {
         _uiState.value = UiState.Loading
-        WalkForegroundService.start(app, sceneId)
+        // T07A：MODE 页确认过的恢复快照（无则新会话）；活服务时 start 被 F-004 单飞忽略
+        WalkForegroundService.start(app, sceneId, com.sensewalk.app.ui.navigation.PendingRestore.consumeRealJson())
         val ok = app.bindService(
             Intent(app, WalkForegroundService::class.java),
             connection,

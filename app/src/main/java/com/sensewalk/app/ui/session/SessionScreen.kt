@@ -78,7 +78,11 @@ fun SessionScreen(
         key = "session-$sceneId-$mode",
         factory = viewModelFactory {
             initializer {
-                SessionViewModel(this[APPLICATION_KEY] as Application, sceneId)
+                SessionViewModel(
+                    this[APPLICATION_KEY] as Application,
+                    sceneId,
+                    com.sensewalk.app.ui.navigation.PendingRestore.consumeVirtual(),
+                )
             }
         },
     )

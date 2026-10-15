@@ -1,0 +1,19 @@
+SW-004 R1 本地验证（worktree sensewalk-zcode-sw004）
+
+$ ./gradlew :app:testDebugUnitTest
+  274 tests / 0 failures / 0 errors（main 基线 249 + 新增 25：
+   SessionSnapshotValidatorTest +14：有效/跨boot/30min边界/版本不符/场景缺失/
+     schema变化/终态/NaN-Infinity/负值超终点/s_best<s_pos/未知相位/未知模式负时长/
+     JSON往返+未知字段+损坏输入/无快照；
+   VirtualWalkRestoreTest +5：S7 READY等输入/进度相位还原/S9回退往返不重复计距/
+     一次性提示不重播+感官静态一致/恢复后走完通关；
+   RealWalkRestoreTest +3：恢复后首counter事件建基线不补中断缺口/
+     相位与时长还原/恢复会话走完+终态吸收；
+   SensoryRestoreTest +3：loop满淡入直接落目标增益/不重播旧脚步新步伐出声/
+     重复相位事件不重启已恢复层）
+
+$ ./gradlew :app:lintDebug :app:assembleDebug
+  BUILD SUCCESSFUL；app-debug.apk 生成（20,246,962 bytes，
+  即 emulator-recovery.txt 所装构建）
+
+复现：checkout <业务head> 后执行上述命令。
