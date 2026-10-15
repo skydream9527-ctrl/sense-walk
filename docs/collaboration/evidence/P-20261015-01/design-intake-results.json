@@ -1,0 +1,345 @@
+{
+  "kind": "bootstrap-cross-role-intake-observation-not-independent-review",
+  "source_head": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+  "script_sha256": "e3ab95b8809f55543c08745c3c8edb85125d7523b19d97fe0e687d1d799b271f",
+  "schema_cases": [
+    {
+      "name": "approved-SW-011",
+      "input_ids": [
+        "tree_outline",
+        "tree_trunks",
+        "leaf_path",
+        "light_shows",
+        "clearing"
+      ],
+      "expected_layer_count": 5,
+      "actual_extracted_layers": []
+    },
+    {
+      "name": "published-design-template",
+      "input_ids": [
+        "tree_outline",
+        "tree_trunks",
+        "leaf_path",
+        "light_shows",
+        "clearing"
+      ],
+      "expected_layer_count": 5,
+      "actual_extracted_layers": []
+    }
+  ],
+  "empty_candidate_cases": [
+    {
+      "name": "published-id-type-shape",
+      "fixture_only": true,
+      "expected_status": "failed",
+      "input_spec": {
+        "fixture_only": true,
+        "task_id": "SW-012",
+        "scene_id": "rainforest",
+        "layers": [
+          {
+            "id": "tree_outline",
+            "type": "parallax",
+            "parallax": 0.3,
+            "at_meters": 80,
+            "to_opacity": 0.6,
+            "fade_meters": 20,
+            "tileable": false,
+            "design_notes": "只画远处两排阔叶冠线（柔圆团簇，#22332A 后排 + #1A2820 前排），集中在 y≈.55–.85 的冠线带；上缘与树间全部真透明，靠纵向 mask 在 y≈.64–.83 间淡出，不画竖干、不画地面。参考 previews/layer_checks/forest_tree_outline_{black,white,magenta}.jpg 与 exports/forest_tree_outline.png。",
+            "transparent_regions": "画面上部天空、冠线以上、树间空隙、最下缘均为真透明 alpha=0"
+          },
+          {
+            "id": "tree_trunks",
+            "type": "parallax",
+            "parallax": 0.3,
+            "at_meters": 240,
+            "to_opacity": 0.7,
+            "fade_meters": 25,
+            "tileable": false,
+            "design_notes": "七根微摆、带根扩的中景树干（竖向体积渐变：#244036 两端没入暗部、#2D4A3E 中上受光），最右一根 #243A30 前景最暗纯剪影；右上细边光与少量枝桠；树后三团极弱大柔斑林间竖光（#8FA87A，alpha≤.11，σ≈44 大模糊，仅作空气感不形成光柱）。纵向 mask 让树干从黑幕淡入、到地面前淡出，不画地面。参考 forest_tree_trunks_* 检查图。",
+            "transparent_regions": "树间、树冠以上、地面以下为真透明；林间竖光是柔光不是实底"
+          },
+          {
+            "id": "leaf_path",
+            "type": "parallax",
+            "parallax": 0.6,
+            "at_meters": 400,
+            "to_opacity": 0.8,
+            "fade_meters": 25,
+            "tileable": false,
+            "design_notes": "只画下部干叶土坡：和缓起伏的地面体（#4A4030→#312A1F 竖向渐变，上缘透明淡入）、中央极弱土路光带、两侧落叶堆柔斑、约 60 片干叶（暖褐 #A89060 为主、落叶绿 #6B8F71 次之、少量枯枝色）与 9 根细枝。中央触控带与旅人脚底刻意稀疏。上部全部真透明。参考 forest_leaf_path_* 检查图。",
+            "transparent_regions": "地面起伏上缘以上（y≲.71）全透明；土路/叶堆为半透明柔光"
+          },
+          {
+            "id": "light_shows",
+            "type": "overlay",
+            "parallax": 0.0,
+            "at_meters": 600,
+            "to_opacity": 0.65,
+            "fade_meters": 30,
+            "tileable": false,
+            "design_notes": "只含三束右上斜射体积光与三只远鸟。光束为纵向拉伸的椭圆径向辉光（#DDE7C4，峰值 alpha .10–.20，缓衰减，σ≈24 柔化），光源点在画面外右上，屏内只留柔和中段，无多边形/矩形硬边；远鸟为 #8FA87A 细弧线 V 形，集中在 x≈.60–.68、y≈.14–.19。绝不附带第二套树林、背景填充、矩形底或任何重复/棋盘纹理。这是本轮相对历史 v4/v5 拒绝稿的重点修正。参考 forest_light_shows_* 检查图。",
+            "transparent_regions": "除三束渐隐光与三只鸟外全部真透明；光束边缘自然衰减到 alpha=0，无硬轮廓"
+          },
+          {
+            "id": "clearing",
+            "type": "overlay",
+            "parallax": 0.0,
+            "at_meters": 760,
+            "to_opacity": 0.9,
+            "fade_meters": 25,
+            "tileable": false,
+            "design_notes": "只含单一柔和林间空地微光：一个椭圆径向辉光（#A8C5A0，中心 alpha .30，r 600，中心约 x=.66/y=.40）加一条很弱的远处开口横辉（alpha .10，σ≈26）。无同心环、无重复纹理、无棋盘、无第二套树林或地面。这是历史 32px 对角棋盘残留的重点修正层。参考 forest_clearing_* 检查图。",
+            "transparent_regions": "辉光以外全透明；中心到边缘平滑衰减到 alpha=0"
+          }
+        ]
+      },
+      "input_manifest": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "producer": "minimax",
+        "scene_id": "rainforest",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 14,
+        "cost": 0,
+        "layers": [],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/test-only/handoff.json",
+          "spec_file": "design/test-only/spec.json",
+          "spec_sha256": "1811c8b97acc4a2752cc85ada81a83ead34a4b53222563183faa9cfd88fc1a83"
+        }
+      },
+      "actual": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw-design-intake-audit-nbuvaa_w/design/test-only/manifest.json",
+        "contract_version": "visual-assets v1",
+        "fixture_mode": false,
+        "summary": {
+          "total": 17,
+          "passed": 17,
+          "failed": 0,
+          "total_bytes": 0,
+          "layer_count": 0
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "design_spec_dynamic_read",
+            "detail": "spec layers=[]"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "0 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_head",
+            "detail": "aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "1811c8b97acc4a27"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_chain_handoff_head",
+            "detail": "匹配 approved handoff head aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_head",
+            "detail": "匹配 reviewed_commit aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_cumulative_check",
+            "detail": "累计=14, 历史=14, 本轮=0"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty-spec-layers",
+      "fixture_only": true,
+      "expected_status": "failed",
+      "input_spec": {
+        "fixture_only": true,
+        "task_id": "SW-012",
+        "scene_id": "rainforest",
+        "layers": []
+      },
+      "input_manifest": {
+        "schema_version": 1,
+        "task_id": "SW-006",
+        "revision": 1,
+        "producer": "minimax",
+        "scene_id": "rainforest",
+        "api_attempts_this_revision": 0,
+        "api_attempts_total": 14,
+        "cost": 0,
+        "layers": [],
+        "design_ref": {
+          "task_id": "SW-012",
+          "handoff": "design/test-only/handoff.json",
+          "spec_file": "design/test-only/spec.json",
+          "spec_sha256": "36bae1c9f47d0c2e7ff88e4dfb9f7b34c3a6a6c7498323d7b6ae63ab86f59a2c"
+        }
+      },
+      "actual": {
+        "status": "ok",
+        "manifest": "/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw-design-intake-audit-nbuvaa_w/design/test-only/manifest.json",
+        "contract_version": "visual-assets v1",
+        "fixture_mode": false,
+        "summary": {
+          "total": 17,
+          "passed": 17,
+          "failed": 0,
+          "total_bytes": 0,
+          "layer_count": 0
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "design_spec_dynamic_read",
+            "detail": "spec layers=[]"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "0 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_head",
+            "detail": "aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "36bae1c9f47d0c2e"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_chain_handoff_head",
+            "detail": "匹配 approved handoff head aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_head",
+            "detail": "匹配 reviewed_commit aaaaaaaaaaaa"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_cumulative_check",
+            "detail": "累计=14, 历史=14, 本轮=0"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1141,3 +1141,10 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 本轮 [P-20261014-03](./docs/collaboration/evidence/P-20261014-03/README.md) 核查基准main=e7ab092。ZCode两PR已解决旧冲突、追加纠正及长屏/小屏/冻结/意图图，最新PR合并checkout分别249/217项通过，尚无新增独立review/合入。MiniMax R2已推送、根定位/真实解码已修，但实际五类误放行要求R3；Trae43文件草稿hash仍一致、没有共享handoff。原始XML、作者图hash/像素对照及R2反例已归档。
 
 下一轮Antigravity优先对SW-001 R2交正式结论，通过即集成并激活SW-004，随后森林接图与预检最新revision/收到的设计；ZCode响应具体QA，不重复旧冲突/纠正处理；MiniMax零API修R3并建PR；Trae先推送现有SW-011，获批后SW-012。按 [D-006](./docs/collaboration/decisions/D-006-delivery-review-and-preflight-r3.md) 维护，既定距离/相位/opacity和原API预算不变。近期里程碑是review/merge/组合CI/新测试包与可共享设计/合格预检工具，不能仅累加文档/任务数量宣称产品完成。真机/真人仍Pending，本轮不自动向外部执行工具发消息。
+
+
+### 21.8 转入地形、雨林设计与真实规格联调（2026-10-15）
+
+本轮 [P-20261015-01](./docs/collaboration/evidence/P-20261015-01/README.md) 基准main6104e3d：SW-001可靠性、SW-004快照、SW-011森林53文件设计与SW-014预检R3均accepted/合入；build-109已发布，26份原始JUnit共274项全通过，APK hash核对一致。SW-010已approved但PR #3仍在作者state冲突，尚未入main/测试包；由ZCode同步、Antigravity复核新head/CI后集成。
+
+本轮并行：ZCode SW-005地形/站稳/自动轻跳；Trae SW-012雨林900m设计；MiniMax新增SW-015零API真实规格联调（已批准id/type设计被R3读为空集合，空候选误放行）；Antigravity持续集成/验收及组合出包。SW-006增加SW-015前置，设计和联调均独立批准后才启用原8次尝试制作。已冻结快照字段已对齐契约摘要，旧批准/历史记录保持，private state由各角色本人消费。规则依据 [D-007](./docs/collaboration/decisions/D-007-next-stage-and-design-intake.md)。真机/真人仍Pending，无本地完整Android环境前置，不自动向外部工具发消息。

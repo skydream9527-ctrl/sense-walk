@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "bootstrap-planning-verification-not-new-product-approval",
+  "base_commit": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+  "checks": {
+    "collaboration_render": "passed",
+    "collaboration_check": "passed (structure/dependencies/hashes/Markdown navigation)",
+    "protocol_unit_tests": {
+      "count": 31,
+      "result": "passed"
+    },
+    "html_local_links": "passed",
+    "git_diff_check": "passed",
+    "release_jvm_xml": {
+      "suites": 26,
+      "tests": 274,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "apk_sha256": "downloaded and matched GitHub digest",
+    "sw011_manifest": "53 hashes/bytes matched",
+    "sw014_existing_r3_probe": "strict 1 positive/17 negative and 6 regressions matched expectations",
+    "cross_role_intake": "id/type inputs extracted as empty; 2 empty candidate cases wrongly ok, assigned SW-015"
+  },
+  "new_api_calls": 0,
+  "android_environment_installed": false,
+  "emulator_run_by_this_audit": false,
+  "physical_device": "pending",
+  "human_acceptance": "pending"
+}

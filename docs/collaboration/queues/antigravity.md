@@ -1,20 +1,19 @@
 # Antigravity 常驻验收队列
 
-本轮依据：[P-20261014-03](../evidence/P-20261014-03/README.md) 及第四轮独立验收执行。下表保存当前队列状态与各任务验收动作：
+2026-10-15依据 [P-20261015-01](../evidence/P-20261015-01/README.md)。先fetch最新main/实际交付分支；以下是定位快照，head变化需比较差异。已accepted的SW-001/SW-004/SW-011/SW-014不再按旧入口重做。
 
-| 优先级 / 任务 | 交付入口与版本 | 当前状态与验收动作 |
+| 顺序 | 当前入口 | 实际动作/退出条件 |
 | --- | --- | --- |
-| 1 / SW-011 R1 | [PR #7](https://github.com/skydream9527-ctrl/sense-walk/pull/7)，head `9a68b99081158f38223efa7aa3dbd1580bedbb44`，业务 head `52779607f4205d4281e1200a25a78ed24d59bf74` | **已验收并集成 (accepted)**：出具 [R-SW-011-R1](../reviews/R-SW-011-R1.md)（approved），PR #7 已合入 main（merge `256d7e3b3fb426a03401c19e8495eacbd93048b2`）；下游任务 `SW-012` 激活为 `ready` |
-| 2 / SW-014 R3 | [PR #8](https://github.com/skydream9527-ctrl/sense-walk/pull/8)，head `a50afebe892c6243c37dc3805a9ad3e2cf5330cd`，业务 head `f8aad383db465592bf1bd749db42bdef3e3901e2` | **已验收并集成 (accepted)**：出具 [R-SW-014-R3](../reviews/R-SW-014-R3.md)（approved），PR #8 已合入 main（merge `3ea89c16815ff93677cda00ed6e04d41728b998a`）；18 组 fixture 与回归测试实测通过；SW-006 保持锁定 |
-| 3 / SW-010 R1 | [PR #3](https://github.com/skydream9527-ctrl/sense-walk/pull/3)，head `393f22570a541118d80e7a50c6860c3b57f2fd49`，业务 head `a1df0e295b7c95d6212b8c65d597087a9458d906` | **已完成独立审核 (approved)**：出具 [R-SW-010-R1](../reviews/R-SW-010-R1.md)；终景柔光意图裁定通过；待 ZCode 同步最新 main 解决 state 冲突后合并 PR #3 |
-| 4 / SW-004 R1 | [PR #9](https://github.com/skydream9527-ctrl/sense-walk/pull/9)，head `db1ec81e5bc4aad5bbc23ab74a1c29c1d3ce0651`，业务 head `dac64311092f18dc1fabe49977cf845d2fa5da89` | **已验收并集成 (accepted)**：出具 [R-SW-004-R1](../reviews/R-SW-004-R1.md)（approved），PR #9 已合入 main（merge `814fc78f72017c643ce43cbf4b3ced6d89c1f5bd`）；下游任务 `SW-005` 激活为 `ready` |
-| 5 / SW-012 | 状态 `ready` | **等待交付**：前置 SW-011 已 accepted，等待 Trae Design 领取开展雨林场景分层设计 |
-| 6 / SW-005 | 状态 `ready` | **等待交付**：前置 SW-004 已 accepted，等待 ZCode 领取实现 T07B 越坎与姿态防作弊 |
+| 1 / SW-010接图集成 | [PR #3](https://github.com/skydream9527-ctrl/sense-walk/pull/3)，head `2a7121677ee7579da1955dd0352631ec0525a566`；R-SW-010-R1已approved，业务head `a1df0e295b7c95d6212b8c65d597087a9458d906` | 让ZCode在本人分支合main并保留SW-004等state信息，当前冲突仅该文件。复核新head相对main的实际delta/原批准hash/CI后集成，记merge与accepted；业务差异需新revision/复验，不代写作者state |
+| 随到审 / SW-015 | MiniMax ready的新零API真实规格联调，前置SW-011/SW-014均accepted | 真实Trae id/type规格提取五层；空/重复/冲突spec和空/缺层候选拒绝，严格批准/账本/预算保护回归，测试自动断言；写独立review并集成 |
+| 随到审 / SW-012 | Trae ready的雨林900m设计 | 全manifest/source/spec/prompt/hash、解锁与fade完成点、三比例/三底局部、真实输出/透明/拼接；冻结canonical id/type及下游映射，设计批准不当作素材/Android完成 |
+| 随到审 / SW-005 | ZCode ready的地形/站稳/轻跳 | 实际Kotlin/调用链和app证据，站稳不刷距、反复同坎、暂停/后台/取消/恢复/迟到、reduceMotion、800m；回归SW-004快照 |
+| 激活门禁 / SW-006 | queued，仍等SW-012与SW-015 | 两者accepted后才ready，候选使用具体批准design_ref和新批准预检入口、原总8次尝试；不能凭临时fixture批准或SW-014原通过跳过联调 |
 
-## 协作与集成说明
+已完成：SW-001集成1e23881；SW-004集成814fc78；SW-011集成256d7e3；SW-014集成3ea89c1。build-109-6104e3d已发布，274项JVM/lint/build成功，APK SHA256见本轮报告；不是“准备发布”，也不含未合入SW-010。接图集成后再交组合CI/Release，记录准确commit/APK hash及Pending。
 
-1. **SW-011 成功集成入 main**：Trae Design 交付的 53 文件设计包与图元模型通过独立验收。彻底消除了历史光效/空地候选的棋盘格/硬边缺陷，逐像素裁切复核验证了恒可见带与旅人安全区，SVG/PIL 双后端模型及 manifest SHA256 零差异。PR #7 已合入 main（`256d7e3`）。下游 `SW-012`（雨林图片设计包）激活为 `ready`。
-2. **SW-014 R3 成功集成入 main**：MiniMax 彻底修复了 R2-01～R2-05 等 5 项漏洞，新增动态 spec 读取（R3-06）与 5.56MB/27.44MB 真实超预算反例（R3-07）。经 Antigravity 本地实测 18 组 fixture 与 6 组回归探针，门禁与审批链无懈可击，全流程 0 API 消耗。PR #8 已合入 main（`3ea89c1`）。雨林生图 `SW-006` 仍需等待 `SW-012` 验收，保持锁定。
-3. **SW-004 R1 成功集成入 main**：ZCode 交付的 T07A 会话快照与中断恢复机制通过独立验收。快照模型字段（snapshotVersion=1, UUID, 30min wall-time, acrossBoot 等）完成契约冻结；独立 QA 验证套件（12 项测试）与 274 项 JVM 单测全部通过；实走杀进程重新建基线防作弊与静态感官重建无破音/不重播验证通过。PR #9 已合入 main（`814fc78`）。下游 `SW-005`（T07B 越坎与姿态防作弊）激活为 `ready`。
-4. **SW-010 待合并**：PR #3 经独立审核已通过（`approved`），待 ZCode 同步 main 后由 Antigravity 完成 GitHub 合并。
-5. **测试预发布版本**：当前 main 分支已集齐 SW-001 可靠性补强、SW-011 森林视觉规范与图元模型、SW-014 R3 预检工具链以及 SW-004 会话快照持久化恢复机制，将触发发布新一版集成测试包。
+本轮bootstrap只做观察/派工，不新批产品；SW-015发现见可复现输入输出。SW-014原18fixture严格模式1正/17负与6回归探针重跑吻合，不能推导为所有真实设计schema已经兼容。不要在队列使用“无懈可击”等无范围结论。旧SW-011 review Markdown的merge SHA笔误用新correction追加，registry/真实PR merge为准，不改历史。
+
+Python规格模型、真实JVM测试、作者模拟器证据读取、本人模拟器/physical-device/真人分别记录；模型不能代表执行Kotlin/Service/Android。真机/真人可提前执行，缺设备保留Pending，不阻塞独立代码阶段集成、不宣称M1/M2/MVP完成。各角色本人消费批准后更新state，协调者不代写。
+
+顺序写review→依保护集成→CI/准确merge登记→accepted/render BOARD；没有新交付一次报告待哪个文件，不无限轮询。保持SW-003/SW-013历史协调结论，不重复建启动任务、不自动向外部工具发消息。
