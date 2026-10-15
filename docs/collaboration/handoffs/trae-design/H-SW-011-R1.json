@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "producer": "trae-design",
+  "base_commit": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
+  "head_commit": "52779607f4205d4281e1200a25a78ed24d59bf74",
+  "changed_files": [
+    "design/05-visual-design/SW-011/r1/README.md",
+    "design/05-visual-design/SW-011/r1/design-manifest.json",
+    "design/05-visual-design/SW-011/r1/design-spec.json",
+    "design/05-visual-design/SW-011/r1/exports/forest_clearing.png",
+    "design/05-visual-design/SW-011/r1/exports/forest_leaf_path.png",
+    "design/05-visual-design/SW-011/r1/exports/forest_light_shows.png",
+    "design/05-visual-design/SW-011/r1/exports/forest_tree_outline.png",
+    "design/05-visual-design/SW-011/r1/exports/forest_tree_trunks.png",
+    "design/05-visual-design/SW-011/r1/previews/composition_guide.png",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x1920.png",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x2400.png",
+    "design/05-visual-design/SW-011/r1/previews/crops/crop_390x844.png",
+    "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_black.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_magenta.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_white.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_black.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_magenta.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_white.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_black.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_magenta.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_white.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_black.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_magenta.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_white.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_black.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_magenta.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_white.jpg",
+    "design/05-visual-design/SW-011/r1/previews/layer_map.png",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png",
+    "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_000m.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_100m.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_265m.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_425m.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_630m.png",
+    "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_leaf_path_zoom.png",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_outline_zoom.png",
+    "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_trunks_zoom.png",
+    "design/05-visual-design/SW-011/r1/prompts.md",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_clearing.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_leaf_path.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_light_shows.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_master.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_outline.svg",
+    "design/05-visual-design/SW-011/r1/source/svg/forest_tree_trunks.svg",
+    "design/05-visual-design/SW-011/r1/source/sw011_model.py",
+    "design/05-visual-design/SW-011/r1/source/sw011_render.py",
+    "design/05-visual-design/SW-011/r1/source/sw011_supplement.py",
+    "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+    "docs/collaboration/handoffs/trae-design/H-SW-011-R1.md",
+    "docs/collaboration/state/trae-design.json"
+  ],
+  "artifacts": [],
+  "checks": [
+    {
+      "id": "visual-style-consistency",
+      "type": "visual",
+      "summary": "五层共用统一深林绿青冷调、雾感柔边与一致光源；风格参考与六阶段合成目检一致，旅人锚点不被遮挡",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png"
+      ]
+    },
+    {
+      "id": "layer-phase-coverage",
+      "type": "visual",
+      "summary": "六阶段 smoothstep 合成与 forest.json 相位/透明度/fadeMeters、parallax 0.3/0.3/0.6 对齐(80/240/400/600/760m)",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png"
+      ]
+    },
+    {
+      "id": "edge-seam-checkerboard",
+      "type": "visual",
+      "summary": "两 overlay 四边无实色亮边/白边/棋盘/矩形底/同心环；逐行边缘检测 light_shows 边缘 max alpha=15、clearing=21，均连续软渐变，外加四缘三底放大目检",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png"
+      ]
+    },
+    {
+      "id": "runtime-crop-safe-zone",
+      "type": "source",
+      "summary": "逐像素复刻 ForestShell.drawImageLayer(按高度铺满/左对齐/右侧溢出)：恒可见带 x[216,864]，旅人锚点 x=367 静止与最大视差两极端恒可见，视口四缘无实色边",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json"
+      ]
+    },
+    {
+      "id": "editable-source-reproducible",
+      "type": "source",
+      "summary": "SVG 与 PIL 后端共享同一图元模型；manifest 53 文件 SHA256/字节独立复算 0 处不符，纯本地 PIL+numpy 零外部付费 API",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-011/r1/design-manifest.json"
+      ]
+    }
+  ],
+  "design_manifest": "design/05-visual-design/SW-011/r1/design-manifest.json",
+  "report": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.md",
+  "pending_verification": [
+    "Antigravity 按 contracts/visual-design.md 独立目检/量检并判定设计可接受性(风格/边缘棋盘/最小屏安全区/可复现源)",
+    "批准后 MiniMax 依 prompts.md 制作候选，候选须独立三档(2/12/26MPX) OOM/计时/真机/视觉盲检，再由 antigravity 集成判定；本设计包不替代素材与集成验收"
+  ]
+}
