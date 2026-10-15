@@ -645,7 +645,7 @@
     {
       "kind": "verify-record",
       "path": "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json",
-      "sha256": null,
+      "sha256": "0f67b02ced3093e70e5c28909988a8b73d1090c72fbaf29ec7e5f2bf5a5d1d55",
       "role": "all-fixtures-and-regression-probes-output"
     }
   ],
