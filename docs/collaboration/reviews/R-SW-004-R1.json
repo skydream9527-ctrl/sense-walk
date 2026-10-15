@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-004-R1",
+  "task_id": "SW-004",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
+  "reviewed_commit": "dac64311092f18dc1fabe49977cf845d2fa5da89",
+  "delivery_head": "db1ec81e5bc4aad5bbc23ab74a1c29c1d3ce0651",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-004-R1.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "独立 QA 验证套件 (test_pr9_r1_verification.py, 12 项测试全通过)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_pr9_r1_verification.py"
+      ]
+    },
+    {
+      "name": "全量 JVM 单元测试 (本地 274/0/0, +25 覆盖契约反例)",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "Lint 检查与 Debug APK 编译构建",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "模拟器实测×5 (实走杀进程恢复/虚走恢复/通知停止清快照/结果页无恢复框/HOME同会话)",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/emulator-recovery.txt"
+      ]
+    },
+    {
+      "name": "GitHub Actions 云端全量构建与契约门禁 (PR #9 run 38697708610 / 38697702729 绿标)",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-004-R1.md"
+      ]
+    },
+    {
+      "name": "感官恢复静态重构与音频焦点门控 (SensoryCoordinator 满淡入不重播旧脚步/一次性提示)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_pr9_r1_verification.py",
+        "docs/collaboration/evidence/H-SW-004-R1/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "跨 boot 真实重启验证 (单测覆盖 bootCount 语义，真机物理重启保留 pending)",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/emulator-recovery.txt"
+      ]
+    },
+    {
+      "name": "真机实走中断恢复 (physical-device 保持 pending)",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-004-R1/emulator-recovery.txt"
+      ]
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "跨 boot 真实重启验证（validator 单测覆盖 bootCount 语义，真机物理重启保留 pending）",
+    "真机实走中断恢复（真实计步场景，physical-device 保持 pending）"
+  ]
+}
