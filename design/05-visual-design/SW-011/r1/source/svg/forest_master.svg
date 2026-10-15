@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<rect width="1080" height="1920" fill="#060806"/>
+<image href="forest_tree_outline.svg" x="0" y="0" width="1080" height="1920" opacity="0.6"/>
+<image href="forest_tree_trunks.svg" x="0" y="0" width="1080" height="1920" opacity="0.7"/>
+<image href="forest_leaf_path.svg" x="0" y="0" width="1080" height="1920" opacity="0.8"/>
+<image href="forest_light_shows.svg" x="0" y="0" width="1080" height="1920" opacity="0.65"/>
+<image href="forest_clearing.svg" x="0" y="0" width="1080" height="1920" opacity="0.9"/>
+<g stroke="#7A857C" fill="#7A857C" stroke-linecap="round"><line x1="365.20000000000005" y1="1646.8" x2="357.20000000000005" y2="1660.8" stroke-width="6"/><line x1="369.20000000000005" y1="1646.8" x2="377.20000000000005" y2="1660.8" stroke-width="6"/><rect x="357.20000000000005" y="1586.8" width="20" height="60.0" rx="10" stroke="none"/><circle cx="367.20000000000005" cy="1574.8" r="9" stroke="none"/></g>
+</svg>

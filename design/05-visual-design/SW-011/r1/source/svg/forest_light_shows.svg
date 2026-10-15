@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+<filter id="light_shows-blur-1" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
+<radialGradient id="light_shows-eg-2" gradientUnits="userSpaceOnUse" cx="1000" cy="570.5600000000002" r="968.0000000000001" gradientTransform="matrix(0.07748,0,0,1,922.521,0)"><stop offset="0.0" stop-color="#DDE7C4" stop-opacity="0.2"/><stop offset="0.45" stop-color="#DDE7C4" stop-opacity="0.11"/><stop offset="0.78" stop-color="#DDE7C4" stop-opacity="0.032"/><stop offset="1.0" stop-color="#DDE7C4" stop-opacity="0.0"/></radialGradient>
+<filter id="light_shows-blur-3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
+<radialGradient id="light_shows-eg-4" gradientUnits="userSpaceOnUse" cx="902" cy="499.72000000000014" r="891.0000000000001" gradientTransform="matrix(0.05612,0,0,1,851.383,0)"><stop offset="0.0" stop-color="#DDE7C4" stop-opacity="0.14"/><stop offset="0.45" stop-color="#DDE7C4" stop-opacity="0.077"/><stop offset="0.78" stop-color="#DDE7C4" stop-opacity="0.022"/><stop offset="1.0" stop-color="#DDE7C4" stop-opacity="0.0"/></radialGradient>
+<filter id="light_shows-blur-5" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
+<radialGradient id="light_shows-eg-6" gradientUnits="userSpaceOnUse" cx="1090" cy="459.0000000000001" r="825.0000000000001" gradientTransform="matrix(0.04364,0,0,1,1042.436,0)"><stop offset="0.0" stop-color="#DDE7C4" stop-opacity="0.1"/><stop offset="0.45" stop-color="#DDE7C4" stop-opacity="0.055"/><stop offset="0.78" stop-color="#DDE7C4" stop-opacity="0.016"/><stop offset="1.0" stop-color="#DDE7C4" stop-opacity="0.0"/></radialGradient>
+</defs>
+  <g opacity="0.95" transform="rotate(16.5 1000 -320)">
+    <g filter="url(#light_shows-blur-1)">
+      <rect x="0" y="0" width="1080" height="1920" fill="url(#light_shows-eg-2)"/>
+    </g>
+  </g>
+  <g opacity="0.75" transform="rotate(20.0 902 -320)">
+    <g filter="url(#light_shows-blur-3)">
+      <rect x="0" y="0" width="1080" height="1920" fill="url(#light_shows-eg-4)"/>
+    </g>
+  </g>
+  <g opacity="0.6" transform="rotate(12.5 1090 -300)">
+    <g filter="url(#light_shows-blur-5)">
+      <rect x="0" y="0" width="1080" height="1920" fill="url(#light_shows-eg-6)"/>
+    </g>
+  </g>
+  <g >
+    <path d="M 633.0,330 Q 641.0,320.0 648,328.0" fill="none" stroke="#8FA87A" stroke-width="5.0" stroke-linecap="round" stroke-opacity="0.7"/>
+    <path d="M 648,328.0 Q 655.0,320.0 663.0,330" fill="none" stroke="#8FA87A" stroke-width="5.0" stroke-linecap="round" stroke-opacity="0.7"/>
+    <path d="M 723.2,262 Q 728.96,254.8 734,260.56" fill="none" stroke="#8FA87A" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-opacity="0.6"/>
+    <path d="M 734,260.56 Q 739.04,254.8 744.8,262" fill="none" stroke="#8FA87A" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-opacity="0.6"/>
+    <path d="M 693.75,360 Q 698.15,354.5 702,358.9" fill="none" stroke="#8FA87A" stroke-width="2.75" stroke-linecap="round" stroke-opacity="0.5"/>
+    <path d="M 702,358.9 Q 705.85,354.5 710.25,360" fill="none" stroke="#8FA87A" stroke-width="2.75" stroke-linecap="round" stroke-opacity="0.5"/>
+  </g>
+</svg>
