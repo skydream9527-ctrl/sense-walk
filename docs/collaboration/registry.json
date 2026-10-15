@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-14",
+  "updated_on": "2026-10-15",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -16,25 +16,17 @@
       "title": "T06 可靠性补强",
       "owner": "zcode",
       "kind": "code",
-      "status": "handoff_ready",
+      "status": "accepted",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-001.md",
-      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
-      "latest_review": "docs/collaboration/reviews/R-SW-001-R1.json",
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R2.json",
+      "integrated_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0",
       "pending": [
-        "PR #1已同步/解冲突/纠正，最新合并checkout249项通过；优先等待Antigravity R2实际Kotlin/完整head独立review并集成",
-        "accepted后才激活SW-004；真机计步/锁屏/耳机来电仍Pending"
-      ],
-      "observed_delivery": {
-        "revision": 2,
-        "branch": "codex/zcode/SW-001-t06-reliability",
-        "branch_head": "d11873f3d5553fda872dd18f4483ca1e1b11223a",
-        "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
-        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
-        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
-      }
+        "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+        "真机耳机断连与来电中断实走服务（physical-device）",
+        "真机 detector 注册失败场景实测（JVM 链路已锁，设备侧待验证）"
+      ]
     },
     {
       "id": "SW-002",
@@ -67,15 +59,13 @@
       "title": "森林图片设计与通用视觉规范",
       "owner": "trae-design",
       "kind": "design",
-      "status": "in_progress",
+      "status": "accepted",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-011.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
-      "pending": [
-        "第四轮43文件草稿hash/bytes仍一致，仍未提交/推送/无handoff；Trae优先发布现有设计PR，不重复生成"
-      ]
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-011-R1.json",
+      "integrated_commit": "256d7e3b3fb426a03401c19e8495eacbd93048b2",
+      "pending": []
     },
     {
       "id": "SW-010",
@@ -88,21 +78,21 @@
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-010.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
       "integrated_commit": null,
       "pending": [
-        "PR #3已同步/解冲突，补长屏/小屏/冻结/意图证据，最新PR合并checkout217项通过；待独立应用/视觉review与集成",
-        "两工作PR组合CI/新测试包待交；终景强度按设计意图裁定，不改既定opacity"
+        "R-SW-010-R1已approved；当前PR #3 head2a71216与main仍在state/zcode.json冲突，由ZCode本人同步保留新快照/双方交付信息",
+        "Antigravity复核同步后完整head/批准素材hash与新CI后集成；build-109尚不含此接图，合入后再发组合测试包"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/zcode/SW-010-forest-lightshows",
-        "branch_head": "393f22570a541118d80e7a50c6860c3b57f2fd49",
+        "branch_head": "2a7121677ee7579da1955dd0352631ec0525a566",
         "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261015-01/README.md"
       }
     },
     {
@@ -110,23 +100,26 @@
       "title": "T07A 会话快照与中断恢复",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "accepted",
       "depends_on": [
         "SW-001",
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-004.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
-      "pending": []
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-004-R1.json",
+      "integrated_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd",
+      "pending": [
+        "跨 boot 真实重启验证（validator 单测覆盖 bootCount 语义，真机物理重启保留 pending）",
+        "真机实走中断恢复（真实计步场景，physical-device 保持 pending）"
+      ]
     },
     {
       "id": "SW-012",
       "title": "雨林图片设计包",
       "owner": "trae-design",
       "kind": "design",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-011"
       ],
@@ -134,7 +127,9 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "SW-011已accepted，本轮领取900m雨林分层设计，使用canonical id/type并给出fade完成点/三比例/逐层提示词"
+      ]
     },
     {
       "id": "SW-006",
@@ -146,20 +141,23 @@
         "SW-002",
         "SW-003",
         "SW-012",
-        "SW-014"
+        "SW-014",
+        "SW-015"
       ],
       "task_file": "docs/collaboration/tasks/SW-006.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "等待SW-012雨林设计和SW-015真实规格预检联调分别accepted，之后才激活正式候选/原8次API总尝试"
+      ]
     },
     {
       "id": "SW-005",
       "title": "T07B 自动越坎与站稳规则",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-004"
       ],
@@ -167,7 +165,9 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "SW-004已accepted，本轮可领取地形/站稳/自动轻跳，必须保持有效距离与快照恢复不变量"
+      ]
     },
     {
       "id": "SW-007",
@@ -236,28 +236,37 @@
       "title": "雨林素材交付预检准备（零API）",
       "owner": "minimax",
       "kind": "code",
-      "status": "rework",
+      "status": "accepted",
       "depends_on": [
         "SW-002",
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-014.md",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R3.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-014-R3.json",
+      "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
+      "pending": [
+        "R3既有18组fixture/6回归验收保留；真实设计id/type兼容与空集合校验由新增SW-015收口，正式雨林制作还需SW-012/SW-015批准"
+      ]
+    },
+    {
+      "id": "SW-015",
+      "title": "真实设计规格与素材预检联调（零API）",
+      "owner": "minimax",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-011",
+        "SW-014"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-015.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "R2已推送/1正12负样本实测吻合，但bootstrap复现R2-01～05：测试标记旁路、RGBA透明反判、空检查图、负账本、批准链不匹配",
-        "安排零API R3并建真实PR，补批准spec读取/真实预算/累计账本；此为bootstrap派工，正式review由Antigravity写"
-      ],
-      "observed_delivery": {
-        "revision": 2,
-        "branch": "codex/minimax/SW-014-r2",
-        "branch_head": "bda0b74d53791c09a4c9b7a2858b9c32321bc862",
-        "business_head": "6e683e2087574df51efd43d8dea73270d321f5aa",
-        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
-        "pr_url": null,
-        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
-      }
+        "bootstrap实测真实Trae id/type规格被R3读为空集合且空候选误判ok，需消费者兼容与严格非空验证；不重写原R3",
+        "与SW-012设计并行，新增API 0；独立批准后才解锁SW-006"
+      ]
     }
   ],
   "physical_validation_pending": [
@@ -268,5 +277,5 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261014-03/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261015-01/README.md"
 }

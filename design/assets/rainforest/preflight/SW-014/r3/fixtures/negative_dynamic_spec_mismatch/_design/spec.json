@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-012",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "layers": [
+    {
+      "layer_id": "mist",
+      "render_role": "parallax"
+    },
+    {
+      "layer_id": "clearing_glow",
+      "render_role": "overlay"
+    }
+  ]
+}

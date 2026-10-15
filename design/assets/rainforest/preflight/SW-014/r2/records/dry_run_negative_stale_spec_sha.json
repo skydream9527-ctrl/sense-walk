@@ -1,0 +1,31 @@
+{
+  "ok": false,
+  "reason": "失败: spec_sha_mismatch",
+  "checks": [
+    {
+      "ok": true,
+      "name": "task_id",
+      "detail": "SW-012"
+    },
+    {
+      "ok": true,
+      "name": "handoff_producer",
+      "detail": "trae-design"
+    },
+    {
+      "ok": true,
+      "name": "handoff_head_commit",
+      "detail": "FIXTURE_NOT_"
+    },
+    {
+      "ok": false,
+      "name": "spec_sha_mismatch",
+      "detail": "manifest stale_sha_actual != 实际 c8eb9306a83a4d24"
+    },
+    {
+      "ok": true,
+      "name": "registry_status",
+      "detail": "fixture 模式: queued (实际)"
+    }
+  ]
+}

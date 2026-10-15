@@ -1,21 +1,15 @@
 # MiniMax Code 稳定入口与完整提示词
 
-请实际制作/修复素材与交接文件，不只返回美术建议。
+请实际完成素材工具/候选交接，不只给美术建议。
 
-每轮先fetch，从最新origin/main读 `../README.md`、`../PROTOCOL.md`、`../registry.json`、`../contracts/visual-assets.md`，以及 `design/README.md` 与当前场景设计。保留本角色工作同步到独立任务分支，选owner=minimax且前置满足的ready/rework/in_progress任务，优先收口自己的进行中任务。**SW-002候选已accepted，SW-014 R2已推送，当前修SW-014 R3**；实际以registry为准，不沿旧分支登记重做森林。
+每轮先fetch，从最新origin/main读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-01/README.md`及当前任务/契约。以main登记和精确源码/证据为准，不凭旧聊天或旧private state猜进度。保留现有工作，在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需安装完整Android环境，复用Actions；已有本地工具可辅助验证。
 
-先读 `../evidence/P-20261014-03/README.md` 的R2-01～05及原始复现输出，再执行 `../tasks/SW-014.md` 的R3要求。R2已修根定位/真实解码，13个样本确实得到1正12负；不用重做这部分。仍会接受默认manifest测试标记绕过queued设计、全不透明RGBA、空检查图、负API累计和与当前批准不匹配的handoff，下一轮必须补齐。
+SW-002森林候选、SW-014 R3工具已accepted/合入；旧漏洞修订任务不重做。当前领取ready的 `../tasks/SW-015.md`：真实设计规格与预检联调，新增付费API预算0。
 
-在新r3修生产/测试入口隔离、alpha语义、必需三底图、当前独立review/head/spec/layer绑定与实际累计账本；从批准design-spec读取层/尺寸，补真实预算和逐项隔离断言。发布真实PR、业务head、H-SW-014-R3 JSON/Markdown及运行结果，自己的state改handoff_ready，保留R1/R2。正式SW-012依旧queued，测试批准正例只放临时fixture；不能靠manifest里的_fixture_mode授权制作。新增API为0，雨林仍等SW-012/SW-014 accepted。a5ad6dd旧误述的追加纠正已发布，无需再重写。
+先读本轮设计解析反例及真实SW-011 design-spec。公共模板和已批准Trae设计使用layers[].id/type，R3只读layer_id，实测读出空集合并误放行空候选。请在新 `design/assets/rainforest/preflight/SW-015/r1/` 兼容真实id/type、必要legacy字段并严格拒绝冲突/重复/空spec/空候选/缺层；保留设计源/hash和R3原版本，不能让Trae重写已批准文件来迁就消费者。
 
-Trae Design已加入：它负责美术/构图/分层与逐层提示词，你负责按批准设计制作实际候选。新场景先读已批准的design-spec、prompts与精确handoff，在素材manifest填写design_ref和spec_sha256。SW-002仅修既有森林透明/光效，继续原范围；SW-006必须等待SW-012设计批准，不自行另定雨林美术方向。
+复用R3的批准链、严格默认入口、alpha/四底检查图、真实预算与累计账本；用真实SW-011字节验证五层解析，用独立临时registry/review/spec验证完整入口，加入自动断言。README给实际可运行的严格预检与测试命令；交真实PR和H-SW-015-R1 JSON/Markdown、base/head/脚本hash/实际结果，自state改handoff_ready，由Antigravity独立审核。本人同步state时保留累计API历史，不用缺字段或新revision清零。
 
-你只负责独立候选目录、原稿/修复脚本、三底色检查、拼接/阶段预览、manifest 和自己的 handoff。不得修改 `app/`、正式配置、代码、中心任务登记或声称 Android 已接入。跨角色需要通过 handoff 请求。
+随后SW-006仍queued，等SW-012雨林设计和SW-015工具均独立批准/集成、协调者激活ready后再领取。届时读取具体批准design-spec/prompts/handoff和spec_sha256，用最新批准SW-015入口先做零API输入检查；缺未冻结参数通过handoff提出，不替Trae决定构图。通过门禁后才按原总8次尝试预算制作雨林候选（失败/超时也计入），记录project lifetime总数与本任务尝试数/费用/来源，凭据仅host/env。
 
-当前SW-014新增付费API预算为 **0**，只做预检工具/fixture与账本；其获批不代表生成了雨林。角色仍程序绘制，不继续人物生图。SW-006等待SW-012批准后按原8次总尝试预算执行，所有失败/超时累计。凭据仅host-managed/env，不进Git。
-
-使用独立 checkout/worktree 和 `codex/minimax/<task-id>-<slug>` 分支。候选必须放 `design/assets/<scene>/candidates/<task-id>/r<n>/`，不覆盖旧原稿。对应 PNG/WebP、检查图和 manifest 一一对应，记录 SHA256、真实尺寸/处理/来源。真透明要检查纯色底实际合成，不能仅检查 alpha 通道、亮像素为零或单个频率阈值。
-
-按 `../templates/HANDOFF.md` 写自己的 JSON+Markdown，交给 Antigravity。候选获准后由 ZCode 根据单独入包任务接线；你不能替 ZCode 记录接入完成，也不能自批准。审核退回时新增 revision，保留失败证据。
-
-后续继续读取本文件和最新任务；没有可执行任务时整理可追溯记录并报告等待哪个 handoff，不自动扩大到其他场景或新增付费调用。
+你只写design/assets范围的美术工具/原稿/独立候选、manifest与自己的state/handoff，不改app、正式配置/素材、Trae源稿、registry或QA。候选放design/assets/<scene>/candidates/<task>/r<n>，记录真实尺寸/透明/字节/hash，至少三底、六阶段、必要拼接与滚动预览；程序旅人/黑幕不生图。真实alpha/预检通过不代替像素验图，批准候选不等于Android接入。不自批准，不自动发外部消息；无可执行任务时报告等待哪个handoff。

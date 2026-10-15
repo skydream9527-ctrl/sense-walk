@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.RealWalkEngineTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-10-15T09:40:17" hostname="runnervmmprz5" time="0.006">
+  <properties/>
+  <testcase name="正常步进 - 增量乘步长" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="F001 下降与乱序组合 - 各自重建或忽略且不重复累计" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="F001 连续 100 批同刻读数零进度 - 合并步数由下一正间隔事件封顶带回" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="P02 低步数合并带回 - 未被封顶掩盖" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="F001 同刻合并不丢真实批量 - 合并步数由下一正间隔事件带回" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S5 F001 同刻事件零计距 - 1_4 乘 0 秒等于 0" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S5 作弊序列 - 1 秒 10 步只得 1_4 米" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 重复读数忽略 - 不涨距也不推进时间基线" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="P02 审核反例 - 0_0_7_0_1_4 合并步数真实带回" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="F001 步长非有限值被拒绝 - 不污染 meters" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="detector 事件只是 cue - 不参与计距且受状态约束" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 读数下降重建基线 - 不涨距" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 首次事件只建立基线 - 不涨距" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 时间回退的乱序事件忽略" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S5 封顶按有效间隔线性 - 2 秒 20 步 2_8 米" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 暂停期间不补算 - 恢复后首事件只建基线" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="S8 暂停时未收到事件 - 恢复后同样不补算缺口" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="P02 重注册丢弃未计距的合并批" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="步长设置钳制到 0_45 - 0_95" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="F001 正常重启 - 重注册基线与读数下降基线都不吞后续增量" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="终态后一切事件零增量" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="传感器重注册 - 下一事件只建基线" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <testcase name="P02 暂停丢弃未计距的合并批 - 不跨暂停补算" classname="com.sensewalk.app.domain.walk.RealWalkEngineTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

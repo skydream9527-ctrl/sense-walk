@@ -1,0 +1,10 @@
+{
+  "release_tag": "build-109-6104e3d",
+  "commit": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+  "file": "app-debug.apk",
+  "bytes": 20246962,
+  "sha256": "ae84c3de620e0cd96b2ae975a9bc8ec1795ba3d7bcd1032db5c9758f3137e8b0",
+  "verified_against": "GitHub release asset digest (matched)",
+  "installed_or_run": false,
+  "contains_sw010": false
+}

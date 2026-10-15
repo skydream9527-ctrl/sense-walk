@@ -4,21 +4,29 @@ import com.sensewalk.app.domain.session.MonotonicClock
 import kotlin.math.min
 
 /**
- * 实走计距引擎（T06，§3.3 实走 / S5 / S8）。
+ * 实走计距引擎（T06 / SW-001 F-001 修订版，§3.3 实走 / S5 / S8）。
  *
  * TYPE_STEP_COUNTER 是**唯一**计距源；首事件只建立基线，此后
- * 距离 = 步数增量 × 步长；单次事件增量不超过 `1.4 m/s × 有效事件间隔`
- * （与 §4.3 硬顶一致，注入「1 秒 10 步」的作弊序列也只得 ≤ 1.4 m）。
+ * 距离 = 步数增量 × 步长；**单次有效事件增量 ≤ 1.4 m/s × 有效事件间隔**
+ * ——零/负有效间隔的增量恒为 0（1.4×0=0），任何同刻事件序列都刷不出进度。
+ *
+ * 事件时间语义：调用方传入的事件时间必须来自**同一单调基准**
+ * （Android 侧使用 elapsedRealtime 基准，见 StepSensorSource/服务说明；
+ * 系统休眠不停表，设备重启基准归零且 counter 同步重置 → 走读数下降路径）。
  *
  * S8 边界：
- * - 首次事件只设基线，不涨距；
- * - 重复读数（同值）忽略；读数下降（传感器/设备重启重置）重建基线，不涨距；
- * - 时间回退的乱序事件忽略；
- * - 同刻批量（间隔 0）按单步封顶，不密集刷距；
+ * - 首次事件/重注册后/暂停恢复后首事件只设基线，不涨距；
+ * - 重复读数（同值）整体忽略，不推进时间基线；
+ * - 读数下降（传感器/设备重启重置）重建基线，不涨距、不吞后续真实增量；
+ * - 时间回退（早于上一接受事件）的乱序事件整体忽略——其步数会在下一个
+ *   正常事件中按计数差自然带回，且受该事件的间隔封顶；
+ * - **同刻合并**：与上一接受事件同刻（间隔 ≤ 0）的高读数本事件 0 米，
+ *   且**不推进任何基线**——本批步数留在计数差里，由下一个正间隔事件
+ *   一次性计距并封顶（连续同刻刷量无效，真实批量不丢，P-02 修订）；
+ *   暂停/重定基线会丢弃尚未计距的合并批，不跨暂停补算；
  * - 暂停期间不补算：暂停即武装重定基线，暂停期与恢复后的第一个事件都只建基线；
- * - 传感器重注册（服务重启等）调用 [restartBaseline]，下一事件只建基线。
+ * - 步长非有限值（NaN/Infinity）被拒绝并保持原值，不污染 meters。
  *
- * 步长默认 0.70 m，可设范围 0.45–0.95 m（越界钳制）。
  * 纯 Kotlin：时钟可注入，全部行为可 JVM 单测（S5/S8）。
  */
 class RealWalkEngine(
@@ -26,10 +34,10 @@ class RealWalkEngine(
     strideMeters: Float = DEFAULT_STRIDE_METERS,
 ) {
 
-    /** 有效步长（米）；设置钳制到 [MIN_STRIDE_METERS, MAX_STRIDE_METERS] */
-    var strideMeters: Float = strideMeters.coerceIn(MIN_STRIDE_METERS, MAX_STRIDE_METERS)
+    /** 有效步长（米）；钳制到 [MIN_STRIDE_METERS, MAX_STRIDE_METERS]；非有限值被拒绝 */
+    var strideMeters: Float = sanitizeStride(strideMeters, DEFAULT_STRIDE_METERS)
         set(value) {
-            field = value.coerceIn(MIN_STRIDE_METERS, MAX_STRIDE_METERS)
+            field = sanitizeStride(value, field)
         }
 
     /** counter 累计读数基线；null = 尚未建立（下一事件只建基线） */
@@ -45,13 +53,10 @@ class RealWalkEngine(
     private var paused = false
     private var terminal = false
 
-    /** counter 事件的有效结果：增量米数 + 计算封顶所用有效间隔 */
-    data class StepDelta(val meters: Float, val intervalMs: Long)
-
     /**
      * counter 事件处理：返回本次**有效新增米数**与有效间隔
-     * （0 米 = 基线/重复/乱序/暂停/终态）。[stepCount] 为系统累计步数（只增），
-     * [eventTimeMs] 为事件时间戳。
+     * （0 米 = 基线/重复/乱序/同刻合并/暂停/终态）。[stepCount] 为系统累计
+     * 步数（只增），[eventTimeMs] 为同一单调基准的事件时间戳。
      */
     fun onCounterEvent(stepCount: Long, eventTimeMs: Long): StepDelta {
         if (terminal) return StepDelta(0f, 0L)
@@ -68,7 +73,7 @@ class RealWalkEngine(
             rebasePending = false
             return StepDelta(0f, 0L)
         }
-        if (stepCount == lastAcceptedCount) return StepDelta(0f, 0L) // 重复读数：忽略（不推进时间基线）
+        if (stepCount == lastAcceptedCount) return StepDelta(0f, 0L) // 重复读数：整体忽略
         if (stepCount < lastAcceptedCount) {
             // 读数下降（设备/传感器重置重启）：重建基线，不涨距
             baselineCount = stepCount
@@ -76,13 +81,22 @@ class RealWalkEngine(
             lastAcceptedMs = eventTimeMs
             return StepDelta(0f, 0L)
         }
-        if (eventTimeMs < lastAcceptedMs) return StepDelta(0f, 0L) // 时间回退的乱序事件：忽略
+        if (eventTimeMs < lastAcceptedMs) {
+            // 时间回退的乱序事件：整体忽略；其步数由下一正常事件的计数差自然带回
+            return StepDelta(0f, 0L)
+        }
 
         val steps = stepCount - lastAcceptedCount
         val intervalMs = eventTimeMs - lastAcceptedMs
+        if (intervalMs <= 0L) {
+            // 同刻合并：本事件 0 米（1.4×0=0）。不推进计数/时间任何基线——
+            // 本批步数留在计数差里，由下一个正间隔事件统一计距并封顶，
+            // 而不是推进计数基线把它们吞掉（P-02：审核反例
+            // (0,0)→(1,1000)→(2,1000)→(3,2000) 必须得 0,0.7,0,1.4）
+            return StepDelta(0f, 0L)
+        }
         val raw = steps * strideMeters
-        // 封顶：1.4 m/s × 有效间隔；同刻批量（间隔 0）按单步封顶（保守，只少算不多算）
-        val capMeters = if (intervalMs <= 0L) strideMeters else MAX_SPEED_MPS * intervalMs / 1000f
+        val capMeters = MAX_SPEED_MPS * intervalMs / 1000f
         val delta = min(raw, capMeters).coerceAtLeast(0f)
 
         lastAcceptedCount = stepCount
@@ -90,7 +104,7 @@ class RealWalkEngine(
         return StepDelta(delta, intervalMs)
     }
 
-    /** detector 单步事件：只用于已解锁的脚步音/振同步，绝不计距（返回 false 提示调用方仅作 cue） */
+    /** detector 单步事件：只用于已解锁的脚步音/振同步，绝不计距 */
     fun onDetectorStep(): Boolean = !terminal && !paused
 
     /** 暂停：立即武装重定基线（暂停期与恢复后首事件不补算） */
@@ -118,13 +132,19 @@ class RealWalkEngine(
     val isTerminal: Boolean get() = terminal
     val isPaused: Boolean get() = paused
 
+    private fun sanitizeStride(value: Float, fallback: Float): Float =
+        if (value.isFinite()) value.coerceIn(MIN_STRIDE_METERS, MAX_STRIDE_METERS) else fallback
+
+    /** counter 事件的有效结果：增量米数 + 计算封顶所用有效间隔 */
+    data class StepDelta(val meters: Float, val intervalMs: Long)
+
     companion object {
         /** 虚走/实走统一步长默认（§3.3） */
         const val DEFAULT_STRIDE_METERS = 0.70f
         const val MIN_STRIDE_METERS = 0.45f
         const val MAX_STRIDE_METERS = 0.95f
 
-        /** §4.3 硬顶：作弊序列/异常间隔下的单事件距离上限速率 */
+        /** §4.3 硬顶：单事件距离上限速率（Δd ≤ 1.4 m/s × 有效间隔；间隔 0 ⇒ 0） */
         const val MAX_SPEED_MPS = 1.4f
     }
 }

@@ -60,6 +60,44 @@ class SensoryCoordinator(
     /** 音频许可（音频焦点已获准）。默认 true：由持有者在会话建立时按首次申请结果置位。 */
     private var audioAllowed = true
 
+    /**
+     * 恢复静态感官状态（T07A / SW-004）：按**当前米数**的 SensoryState 重建，
+     * 不重播一次性提示（历史脚步/提示音不补播）：
+     * - loop 层直接登记为**满淡入**（elapsedMs = fadeMs）并按当前音频许可启动；
+     * - 脚步 one-shot 层恢复解锁（新步伐可出声，旧脚步不补）；
+     * - 振动规则恢复最后一条；视觉本就是米数纯函数，无后端状态。
+     * 只在会话恢复构造后调用一次；正常相位推进仍走 [onPhaseEvents]。
+     */
+    fun restoreState(sensory: com.sensewalk.app.domain.phase.SensoryState) {
+        if (released) return
+        for ((layerId, target) in sensory.audioTargets) {
+            when (val def = config.layers[layerId]) {
+                is AudioLayerDef.StepOneShot -> {
+                    if (layerId !in stepLayers) {
+                        val variants = def.files.size.coerceAtLeast(1)
+                        stepLayers[layerId] = StepLayer(target.toVolume.coerceIn(0f, 1f), variants)
+                    }
+                }
+                is AudioLayerDef.Loop -> {
+                    if (layerId !in loops) {
+                        // 静态重建：淡入视为已完成，直接落在目标增益
+                        loops[layerId] = LoopFade(
+                            target.toVolume.coerceIn(0f, 1f),
+                            target.fadeMs.toFloat(),
+                            target.fadeMs.toFloat(),
+                        )
+                        if (audioAllowed) startLoopNow(layerId)
+                    }
+                }
+                null -> Unit
+            }
+        }
+        sensory.hapticRules.lastOrNull()?.let {
+            hapticPattern = it.pattern
+            hapticEveryN = it.everyNSteps.coerceAtLeast(1).toLong()
+        }
+    }
+
     /** 相位事件（来自控制器 drainPhaseEvents）；重复事件不会重启已启动的层 */
     fun onPhaseEvents(events: List<PhaseEvent>) {
         if (released) return

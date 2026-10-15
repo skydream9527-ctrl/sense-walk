@@ -7,10 +7,21 @@ counterexamples identified in R-BASE-001 (F-001 to F-004) without modifying prod
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import unittest
 import xml.etree.ElementTree as ET
 
 REPO = Path(__file__).resolve().parents[2]
+BASELINE_COMMIT = '8056e11b2b366d958132dfa0d5674dbaa8577db1'
+
+
+def git_show_baseline(path_in_repo: str) -> str:
+    cmd = ['git', 'show', f'{BASELINE_COMMIT}:{path_in_repo}']
+    proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    if proc.returncode == 0:
+        return proc.stdout
+    p = REPO / path_in_repo
+    return p.read_text(encoding='utf-8') if p.is_file() else ''
 
 
 class BaselineEvidenceAudit(unittest.TestCase):
@@ -97,8 +108,7 @@ class BaselineRiskReproductions(unittest.TestCase):
         5. Returns `START_STICKY`.
         Outcome: Notification is permanently shown with no active session or controller.
         """
-        service_file = REPO / 'app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt'
-        source = service_file.read_text(encoding='utf-8')
+        source = git_show_baseline('app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt')
 
         self.assertIn('startAsForeground()', source)
         self.assertIn('val sceneId = intent?.getStringExtra(EXTRA_SCENE_ID)', source)
@@ -114,14 +124,12 @@ class BaselineRiskReproductions(unittest.TestCase):
         3. `registered = counter != null` sets registered to true even if registerListener failed.
         4. In WalkForegroundService.kt: `sensorSource.start()` return value is discarded.
         """
-        sensor_source_file = REPO / 'app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt'
-        source = sensor_source_file.read_text(encoding='utf-8')
+        source = git_show_baseline('app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt')
 
         self.assertIn('sensorManager.registerListener(this, counter', source)
         self.assertIn('registered = counter != null', source)
 
-        service_file = REPO / 'app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt'
-        service_source = service_file.read_text(encoding='utf-8')
+        service_source = git_show_baseline('app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt')
         # Line 167: sensorSource.start() invoked with return value ignored
         self.assertIn('sensorSource.start()', service_source)
 
@@ -134,8 +142,7 @@ class BaselineRiskReproductions(unittest.TestCase):
         3. A second onStartCommand arriving before `loadAll` completes sees `controller == null`,
            triggering a duplicate `setupSession(sceneId)` coroutine.
         """
-        service_file = REPO / 'app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt'
-        source = service_file.read_text(encoding='utf-8')
+        source = git_show_baseline('app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt')
 
         self.assertIn('if (controller == null && sceneId != null && !finished)', source)
         self.assertIn('scope.launch {', source)
@@ -144,16 +151,14 @@ class BaselineRiskReproductions(unittest.TestCase):
 
     def test_security_debug_step_injection_restricted_to_debuggable(self):
         """ACTION_DEBUG_STEP is strictly restricted to debug builds."""
-        service_file = REPO / 'app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt'
-        source = service_file.read_text(encoding='utf-8')
+        source = git_show_baseline('app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt')
 
         self.assertIn('if (isDebuggable() && controller != null)', source)
         self.assertIn('ApplicationInfo.FLAG_DEBUGGABLE', source)
 
     def test_counter_and_detector_audio_segregation(self):
         """Detector does not double-count distance; counter stepAudioFromDistance is gated."""
-        service_file = REPO / 'app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt'
-        source = service_file.read_text(encoding='utf-8')
+        source = git_show_baseline('app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt')
 
         self.assertIn('sensory.stepAudioFromDistance = !sensorSource.hasDetector', source)
 

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-014-R3",
+  "task_id": "SW-014",
+  "reviewer": "antigravity",
+  "producer": "minimax",
+  "handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R3.json",
+  "reviewed_commit": "f8aad383db465592bf1bd749db42bdef3e3901e2",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-014-R3.md",
+  "artifact_hashes": {
+    "design/assets/rainforest/preflight/SW-014/r3/scripts/build_fixtures.py": "37abfd25e1447b6bf4c8c409b65e3c6684d392d662b1c64bbc8c5529b5ede58d",
+    "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py": "e3ab95b8809f55543c08745c3c8edb85125d7523b19d97fe0e687d1d799b271f",
+    "design/assets/rainforest/preflight/SW-014/r3/scripts/dry_run.py": "305e4c69459c9592099a4e954b864d48a884d573c5db2431e3248d98b1ac47c2",
+    "design/assets/rainforest/preflight/SW-014/r3/scripts/probe_r3_reproduction.py": "3b73f125e61ce4dbd936286303912c4d2cb9fa8b33011eaf5eb5fd0b8f326ec1",
+    "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json": "0f67b02ced3093e70e5c28909988a8b73d1090c72fbaf29ec7e5f2bf5a5d1d55"
+  },
+  "checks": [
+    {
+      "name": "生产默认入口测试标记隔离与 CLI 显式旗标模式验证 (R3-01)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "真实半透明像素 (alpha < 127) 判定与不透明层拦截验证 (R3-02)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "检查图 4 件套完整性与空清单补查验证 (R3-03)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "API 账本非负整数及跨 revision 历史累计防倒退验证 (R3-04)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "双向严格批准链与 Head/Spec SHA 核查验证 (R3-05)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/dry_run.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "动态读取 design-spec.json 图层规范验证 (R3-06)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "真实超预算隔离反例拦截验证 (单层 5.56MB / 全景 27.44MB, R3-07)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    },
+    {
+      "name": "18 组隔离 Fixtures 与 6 组回归用例本地实测复现一致",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r3/scripts/probe_r3_reproduction.py",
+        "design/assets/rainforest/preflight/SW-014/r3/records/probe-results.json"
+      ]
+    }
+  ]
+}

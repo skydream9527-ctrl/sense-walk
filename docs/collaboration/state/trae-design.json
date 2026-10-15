@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "trae-design",
-  "current_task": null,
-  "status": "idle",
-  "branch": null,
-  "head_commit": null,
-  "latest_handoff": null,
-  "updated_on": "2026-10-13",
-  "note": "新增设计角色初始化；尚未领取或执行设计任务。"
+  "current_task": "SW-011",
+  "status": "handoff_ready",
+  "branch": "codex/trae-design/SW-011-forest-visual-design",
+  "head_commit": "52779607f4205d4281e1200a25a78ed24d59bf74",
+  "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+  "updated_on": "2026-10-14",
+  "note": "SW-011 r1 设计包完成并保留既有草稿：已从最新 origin/main(17a8663b) 快进并复核 ForestShell/forest.json；补齐每图层中央/边缘三底 2x 放大(previews/zoom)与逐像素复刻 drawImageLayer 的运行时裁切复核(previews/runtime_crop)；manifest 53 文件 SHA256 全通过。交 Antigravity 审核，批准后供 MiniMax 制作素材。"
 }

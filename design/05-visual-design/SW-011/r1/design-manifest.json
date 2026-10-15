@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "producer": "trae-design",
+  "created_on": "2026-10-13",
+  "updated_on": "2026-10-14",
+  "spec_file": "design/05-visual-design/SW-011/r1/design-spec.json",
+  "files": [
+    {
+      "path": "design/05-visual-design/SW-011/r1/README.md",
+      "sha256": "3e88ecc28805cc48e1ef4962175efabe3092d063486c5f421491d1367ad1feb4",
+      "bytes": 8549,
+      "role": "doc"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/design-spec.json",
+      "sha256": "f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414",
+      "bytes": 12624,
+      "role": "spec"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/exports/forest_clearing.png",
+      "sha256": "bb75a4811e3d4dac88d197ed837ea510f51936e3eccc22a783e86fbc6b040b08",
+      "bytes": 127737,
+      "role": "layer_export_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/exports/forest_leaf_path.png",
+      "sha256": "0d799cfa3f2d34b9bdfe7adc0bed95f7454f410be4cb415edebcf419a029e83b",
+      "bytes": 98473,
+      "role": "layer_export_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/exports/forest_light_shows.png",
+      "sha256": "c42cdafb481cadfe6c1e76aec521c2f24c48ba42be180cc4a17ab3d16fc4b076",
+      "bytes": 244104,
+      "role": "layer_export_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/exports/forest_tree_outline.png",
+      "sha256": "2f065531680c749d82dd5fabe76c29df70ab57728303f0886ad79e3dc4566d3b",
+      "bytes": 51367,
+      "role": "layer_export_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/exports/forest_tree_trunks.png",
+      "sha256": "17fcdf23b4ac14349011559491a3dbeafb4a58e4458bbad54cdcfed50aad5195",
+      "bytes": 189766,
+      "role": "layer_export_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/composition_guide.png",
+      "sha256": "eb1e167167df7f9839a97b9653dc8439b0b808753d74af3db3f0cf1164573261",
+      "bytes": 475735,
+      "role": "style_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x1920.png",
+      "sha256": "95c2fc9a6f804ba100882c0cd03c0b80bb185c2513862d433de6639f03e1eed8",
+      "bytes": 464201,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x2400.png",
+      "sha256": "4f4023bff5256da78ef37cb97313f37ee8df54b11366a40ab84b91dcc6c93228",
+      "bytes": 525720,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_390x844.png",
+      "sha256": "e081083a5ab3245930e0a876c347d298e2ba244420c70115d8a9feb86231507b",
+      "bytes": 141298,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png",
+      "sha256": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+      "bytes": 432171,
+      "role": "style_reference"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_black.jpg",
+      "sha256": "cc5fcf07707d01a01a67f612242a0ae329ef33727a713f14e332bc983417bc4a",
+      "bytes": 12987,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_magenta.jpg",
+      "sha256": "91f1a938d7029c433234e9843abd8c8d1de5de270ea55061d5c61ec43cd83003",
+      "bytes": 12825,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_white.jpg",
+      "sha256": "a3fadb25fccdf3ae54c1ce37e6329d675774d363816d30848a8ee7f38f8c8645",
+      "bytes": 11106,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_black.jpg",
+      "sha256": "2b7021fb9dfdf4b904f7722c41155c5e7a20d69f88a450cbbd198fd8a4920740",
+      "bytes": 15901,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_magenta.jpg",
+      "sha256": "d21d1266150cd26489482009aefe77cfe7696989514b2a06e712876be7e65c37",
+      "bytes": 16260,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_white.jpg",
+      "sha256": "e1a0fc873417a44549231f1abb7f4f1cf5025d30f0b6f01d44406555c83477a4",
+      "bytes": 16915,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_black.jpg",
+      "sha256": "9c67860492d53674bb52641cfe81c33ebdc058008d8b71c904e6b67e1dbf38d7",
+      "bytes": 11571,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_magenta.jpg",
+      "sha256": "59e6c44e37b87a40fdaa4f617899a37ec1ce2387a5510fd864b46a4fe889b587",
+      "bytes": 11564,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_white.jpg",
+      "sha256": "3e7f5f47c7a375e0ceb1e2fd66a3caefe0e646b62bac406d3c0d6ba92ded4515",
+      "bytes": 10083,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_black.jpg",
+      "sha256": "b2884930ddf1da1ef01bbc84357ff37361ee490be60921c48ace08c0cdf36fb0",
+      "bytes": 14124,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_magenta.jpg",
+      "sha256": "fd4c900ce7b39e3288d63c0f9b04f2aa813cdc6ab74e23e0af16de283948baf8",
+      "bytes": 18369,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_white.jpg",
+      "sha256": "bbcce01bdb2d21f4f2dcf31959af8d0b11b395a8ebe41dedd510c29c5b2cc6e6",
+      "bytes": 18598,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_black.jpg",
+      "sha256": "a0b886a4c651a12fab1d132841a93c5ebc51fcff7b079907100e2d6a4ef011e3",
+      "bytes": 36432,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_magenta.jpg",
+      "sha256": "8f0377d1e44fdaa8f28664d5976c69c8ca929f1ed567fab550ea031cc9f6329f",
+      "bytes": 48344,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_white.jpg",
+      "sha256": "05efb82074777137ffbcda4f42d78bd0c4bf1b3970223f01058bd6a0fdd3df80",
+      "bytes": 45183,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/layer_map.png",
+      "sha256": "776ccbfde34f4632ea790abb75d74722b9d66c6c63974474aa7c03f191f43479",
+      "bytes": 173349,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json",
+      "sha256": "f2f56f9d505b90b462f6fe08a9e93340a9ed9cca613fa58b935c97b029cf29e8",
+      "bytes": 4655,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png",
+      "sha256": "75b822aaacb90a7dec4073b3f906169216c8de456be4b3d06c95372e2c923aeb",
+      "bytes": 191268,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png",
+      "sha256": "c0018545ce02f37e1a1a699ee89b46cc22bdc61b1101007bc8b4a89cfe03190c",
+      "bytes": 183784,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png",
+      "sha256": "f0eaacb913cdb0796eb5685ad94ce2074481241e0a0ddd6bd48499628fd208c9",
+      "bytes": 272905,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_000m.png",
+      "sha256": "3bd56d41a0ed270b0de8c3125e9bd4cb4d0f38a7ebc5441f1d7a93d3f568b8d7",
+      "bytes": 15175,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_100m.png",
+      "sha256": "a68fab6ba3f4ca05f3f140fb478ef5acd599fd6eabbdb4777c895e1d7a53219f",
+      "bytes": 40301,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_265m.png",
+      "sha256": "d5767af9a5ece174124e9e71405a2403a16363b77e3a465a3002612c8ee2e3cd",
+      "bytes": 151195,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_425m.png",
+      "sha256": "ed86500d39aa577a76dcf05e7b1fdddf0df9db32348ad270cc29976495870399",
+      "bytes": 226631,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_630m.png",
+      "sha256": "2bd53b192f3f1e9f5eb8c37a31b4e82e0995bd5094a0520e620d3115563a304e",
+      "bytes": 337758,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png",
+      "sha256": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+      "bytes": 432171,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png",
+      "sha256": "c26a956a5c2b6db6a82f024d5367b56f2f76ec91f8cf974e0af8e4705b2e701b",
+      "bytes": 211462,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_leaf_path_zoom.png",
+      "sha256": "783925830fe71876f2f88fbddf20facb7431c2a2c37a3d9d95f43a1a6f57ecd9",
+      "bytes": 183569,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png",
+      "sha256": "2d0f318e39766217fc9da6c72aba041f1ce4db141b6e59c7db0b643e476dad40",
+      "bytes": 297750,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_outline_zoom.png",
+      "sha256": "213b25fbc4947c443e6e3fb92fa71945e9f45f12a240f1a470e957fe67d729ee",
+      "bytes": 165058,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_trunks_zoom.png",
+      "sha256": "63ecdb71f5b1403e67e16b364f7507869ff40d0d72cfc2a5b163d82f52f508a0",
+      "bytes": 188747,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/prompts.md",
+      "sha256": "33f7407328fda1d5234cd33f4480eac6e6fb8b61200d80487c1b9ac7f2ec102a",
+      "bytes": 10549,
+      "role": "prompt"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_clearing.svg",
+      "sha256": "b80150131df2c11c2334dfcaf634a5383d305add28132d36845f38484216bbaa",
+      "bytes": 730,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_leaf_path.svg",
+      "sha256": "91150182afe1a2b91813386e8c67f64d34bb07e6ee61f3f0c04ebecc98a70182",
+      "bytes": 10726,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_light_shows.svg",
+      "sha256": "e6c144e15e9b9c08d3153c4b2803f2d2eca3860d2ab876e308f585efe9347894",
+      "bytes": 3308,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_master.svg",
+      "sha256": "ce3c6baaa022d0d83da6ac77cd61cd73ef5c7ebf8eb1b048d4f63dec879be343",
+      "bytes": 1014,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_tree_outline.svg",
+      "sha256": "f00569d715d513137b394aa39e0e9b4a95584e9a684a9d3dda7c8399f193f570",
+      "bytes": 12250,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/svg/forest_tree_trunks.svg",
+      "sha256": "a92f2ef96518aabff6b824cc3d06ed94018f5f9624c461c2d38e19f485e8c45e",
+      "bytes": 7599,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/sw011_model.py",
+      "sha256": "a0d36dc3ef99ba4b9526feb929fb5205ef1b0abc1151d73fd8546cf6e01a1969",
+      "bytes": 12879,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/sw011_render.py",
+      "sha256": "e37a38767c0b57486b8e75e4672d42d610565cf01f00f875cf712e47900ce66a",
+      "bytes": 31157,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-011/r1/source/sw011_supplement.py",
+      "sha256": "f6aae5c053be00634ee71651338688840e67e2fbab8476c07c60e86d4af4c2d5",
+      "bytes": 16801,
+      "role": "source"
+    }
+  ],
+  "limitations": [
+    "设计候选，不是 MiniMax 素材候选，也不是 Android 接入/真机验收证据；exports/ 不放入 app/assets。",
+    "全部由本地 Python(PIL+numpy) 与手写 SVG 生成，零外部付费/生图 API；无 PSD/Figma 原生文件。",
+    "tree_outline/tree_trunks/leaf_path 为 tileable=false，未做无缝平铺，运行时仅支持右侧溢出宽度内有限横移。",
+    "导出 PNG 不受每层<=400KB/每景<=2MB 入包预算约束；正式压缩与尺寸由 MiniMax 按 visual-assets 契约交付。",
+    "本清单不列 design-manifest.json 自身哈希以避免递归。"
+  ]
+}

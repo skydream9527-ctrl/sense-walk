@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "antigravity",
-  "current_task": "SW-013",
-  "status": "handoff_ready",
-  "branch": "codex/antigravity/SW-013-second-round-review",
-  "head_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb",
-  "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
-  "updated_on": "2026-10-14",
-  "note": "SW-013 第二轮独立复验完成：PR #1 审查出具 changes_requested 并登记 SW-001 rework；SW-010、SW-011、SW-014 等待对应角色提交。"
+  "current_task": null,
+  "status": "idle",
+  "branch": "codex/antigravity/SW-004-review-integration",
+  "head_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd",
+  "latest_handoff": null,
+  "updated_on": "2026-10-15",
+  "note": "队列消费：SW-011 R1、SW-014 R3、SW-004 R1 均已独立审核通过并合入 main（merge 814fc78）；激活下游 SW-012（雨林设计）与 SW-005（越坎与姿态防作弊）为 ready；SW-010 R1 approved 等待作者 PR #3 同步。"
 }

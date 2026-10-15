@@ -1,0 +1,79 @@
+{
+  "status": "failed",
+  "manifest": "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_empty_layers/manifest.json",
+  "contract_version": "visual-assets v1",
+  "summary": {
+    "total": 13,
+    "passed": 12,
+    "failed": 1,
+    "total_bytes": 0,
+    "layer_count": 0
+  },
+  "checks": [
+    {
+      "ok": true,
+      "name": "schema_version",
+      "detail": "1"
+    },
+    {
+      "ok": true,
+      "name": "field_producer",
+      "detail": "minimax"
+    },
+    {
+      "ok": true,
+      "name": "task_scene",
+      "detail": "SW-006 + rainforest"
+    },
+    {
+      "ok": false,
+      "name": "missing_required_layers",
+      "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+    },
+    {
+      "ok": true,
+      "name": "scene_budget",
+      "detail": "0 <= 2 MB"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_task_id",
+      "detail": "SW-012"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_handoff_producer",
+      "detail": "trae-design"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_spec_sha",
+      "detail": "c8eb9306a83a4d24"
+    },
+    {
+      "ok": true,
+      "name": "design_ref_registry_status",
+      "detail": "fixture 模式: queued (实际)"
+    },
+    {
+      "ok": true,
+      "name": "api_field_api_attempts_this_revision",
+      "detail": "0"
+    },
+    {
+      "ok": true,
+      "name": "api_field_api_attempts_total",
+      "detail": "14"
+    },
+    {
+      "ok": true,
+      "name": "api_field_cost",
+      "detail": "unknown"
+    },
+    {
+      "ok": true,
+      "name": "cc0_check",
+      "detail": "origin 字段无 CC0 标记"
+    }
+  ]
+}
