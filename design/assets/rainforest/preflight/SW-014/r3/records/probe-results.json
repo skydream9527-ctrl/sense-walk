@@ -1,0 +1,713 @@
+{
+  "kind": "minimax-r3-verification",
+  "source_head": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
+  "scripts": {
+    "build_fixtures.py": "37abfd25e1447b6bf4c8c409b65e3c6684d392d662b1c64bbc8c5529b5ede58d",
+    "dry_run.py": "305e4c69459c9592099a4e954b864d48a884d573c5db2431e3248d98b1ac47c2",
+    "preflight.py": "e3ab95b8809f55543c08745c3c8edb85125d7523b19d97fe0e687d1d799b271f",
+    "probe_r3_reproduction.py": "3b73f125e61ce4dbd936286303912c4d2cb9fa8b33011eaf5eb5fd0b8f326ec1"
+  },
+  "fixture_mode_results": [
+    {
+      "name": "negative_duplicate_layer",
+      "status": "failed",
+      "passed": 42,
+      "total": 44,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_duplicate",
+          "detail": "layer_id 重复: mist"
+        },
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_dynamic_spec_mismatch",
+      "status": "failed",
+      "passed": 79,
+      "total": 82,
+      "failed": 3,
+      "failed_checks": [
+        {
+          "name": "layer_trunks_canopy_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        },
+        {
+          "name": "layer_vines_light_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        },
+        {
+          "name": "layer_far_glow_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        }
+      ]
+    },
+    {
+      "name": "negative_empty_layers",
+      "status": "failed",
+      "passed": 18,
+      "total": 19,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_manifest_fixture_key",
+      "status": "ok",
+      "passed": 79,
+      "total": 79,
+      "failed": 0,
+      "failed_checks": []
+    },
+    {
+      "name": "negative_missing_check",
+      "status": "failed",
+      "passed": 78,
+      "total": 79,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 alpha_mask 检查图路径越界/不存在: checks/alpha_mask/rainforest_mist.png"
+        }
+      ]
+    },
+    {
+      "name": "negative_missing_file",
+      "status": "failed",
+      "passed": 67,
+      "total": 72,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_mist_file_missing",
+          "detail": "文件不存在 / 越界 / 绝对路径: webp/rainforest_mist.webp"
+        },
+        {
+          "name": "layer_trunks_canopy_bytes",
+          "detail": "manifest 0 != actual 2682"
+        },
+        {
+          "name": "layer_vines_light_bytes",
+          "detail": "manifest 0 != actual 5070"
+        },
+        {
+          "name": "layer_far_glow_bytes",
+          "detail": "manifest 0 != actual 27996"
+        },
+        {
+          "name": "layer_clearing_glow_bytes",
+          "detail": "manifest 0 != actual 32872"
+        }
+      ]
+    },
+    {
+      "name": "negative_negative_api_cumulative",
+      "status": "failed",
+      "passed": 77,
+      "total": 79,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "api_field_api_attempts_total",
+          "detail": "必须为非负整数, 实际 -1"
+        },
+        {
+          "name": "api_cumulative_regression",
+          "detail": "累计 api_attempts_total=-1 < state/minimax.json 历史 0 (不允许重置)"
+        }
+      ]
+    },
+    {
+      "name": "negative_not_image",
+      "status": "failed",
+      "passed": 69,
+      "total": 74,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_mist_decode",
+          "detail": "非图/坏图: cannot identify image file '/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r3-verify-awqenp9s/design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_not_image/webp/rainforest_mist.webp'"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 alpha_mask 检查图路径越界/不存在: checks/alpha_mask/rainforest_mist.png"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 black 检查图路径越界/不存在: checks/black/rainforest_mist.jpg"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 white 检查图路径越界/不存在: checks/white/rainforest_mist.jpg"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 magenta 检查图路径越界/不存在: checks/magenta/rainforest_mist.jpg"
+        }
+      ]
+    },
+    {
+      "name": "negative_opaque_layer",
+      "status": "failed",
+      "passed": 78,
+      "total": 79,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_opaque_real",
+          "detail": "半透明像素 0.00% < 0.1% (R3-02 真不透明层)"
+        }
+      ]
+    },
+    {
+      "name": "negative_real_oversize_layer",
+      "status": "failed",
+      "passed": 77,
+      "total": 79,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_budget_real",
+          "detail": "实际 5488154 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "scene_budget_real",
+          "detail": "实际 5556774 > 2097152 (2 MB) [真实预算隔离]"
+        }
+      ]
+    },
+    {
+      "name": "negative_real_oversize_scene",
+      "status": "failed",
+      "passed": 73,
+      "total": 79,
+      "failed": 6,
+      "failed_checks": [
+        {
+          "name": "layer_mist_budget_real",
+          "detail": "实际 5490194 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_trunks_canopy_budget_real",
+          "detail": "实际 5488404 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_vines_light_budget_real",
+          "detail": "实际 5487184 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_far_glow_budget_real",
+          "detail": "实际 5487706 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_clearing_glow_budget_real",
+          "detail": "实际 5486950 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "scene_budget_real",
+          "detail": "实际 27440438 > 2097152 (2 MB) [真实预算隔离]"
+        }
+      ]
+    },
+    {
+      "name": "negative_stale_spec_sha",
+      "status": "failed",
+      "passed": 76,
+      "total": 78,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "design_spec_dynamic_required",
+          "detail": "SW-006 rainforest 必须 design-spec 含 layers 字段; 但 spec 加载失败 (SHA 不匹配或路径错)"
+        },
+        {
+          "name": "design_ref_spec_sha_mismatch",
+          "detail": "manifest stale_sha_actual != 实际 34a29360920eba3a"
+        }
+      ]
+    },
+    {
+      "name": "negative_unknown_layer",
+      "status": "failed",
+      "passed": 30,
+      "total": 32,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_foo_bar_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        },
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_approval_chain",
+      "status": "failed",
+      "passed": 77,
+      "total": 79,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "design_ref_approval_chain_handoff_head",
+          "detail": "当前 handoff head bbbbbbbbbbbb != registry 已批准 handoff head aaaaaaaaaaaa (批准链不匹配)"
+        },
+        {
+          "name": "design_ref_approval_review_head",
+          "detail": "review reviewed_commit aaaaaaaaaaaa != handoff head bbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_design_ref",
+      "status": "failed",
+      "passed": 73,
+      "total": 76,
+      "failed": 3,
+      "failed_checks": [
+        {
+          "name": "design_spec_dynamic_required",
+          "detail": "SW-006 rainforest 必须 design-spec 含 layers 字段; 但 spec 加载失败 (SHA 不匹配或路径错)"
+        },
+        {
+          "name": "design_ref_handoff_path",
+          "detail": "handoff 路径越界/不存在/绝对: docs/collaboration/handoffs/trae-design/THIS_PATH_DOES_NOT_EXIST.json"
+        },
+        {
+          "name": "design_ref_spec_file_path",
+          "detail": "spec_file 路径越界/不存在: design/05-visual-design/SW-012/this_spec_does_not_exist.md"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_hash",
+      "status": "failed",
+      "passed": 78,
+      "total": 79,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_sha256",
+          "detail": "manifest 0000000000000000 != actual def2c04a9d722022"
+        }
+      ]
+    },
+    {
+      "name": "negative_zero_size",
+      "status": "failed",
+      "passed": 78,
+      "total": 80,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_size_manifest",
+          "detail": "实际 1x1 != manifest 0x0"
+        },
+        {
+          "name": "layer_mist_size_unsupported",
+          "detail": "1x1 不在 {(768, 1376), (1080, 1920)}"
+        }
+      ]
+    },
+    {
+      "name": "positive_ok",
+      "status": "ok",
+      "passed": 79,
+      "total": 79,
+      "failed": 0,
+      "failed_checks": []
+    }
+  ],
+  "strict_results": [
+    {
+      "name": "negative_duplicate_layer",
+      "status": "failed",
+      "passed": 41,
+      "total": 43,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_duplicate",
+          "detail": "layer_id 重复: mist"
+        },
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_dynamic_spec_mismatch",
+      "status": "failed",
+      "passed": 78,
+      "total": 81,
+      "failed": 3,
+      "failed_checks": [
+        {
+          "name": "layer_trunks_canopy_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        },
+        {
+          "name": "layer_vines_light_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        },
+        {
+          "name": "layer_far_glow_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'mist']"
+        }
+      ]
+    },
+    {
+      "name": "negative_empty_layers",
+      "status": "failed",
+      "passed": 17,
+      "total": 18,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_manifest_fixture_key",
+      "status": "failed",
+      "passed": 78,
+      "total": 80,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "design_ref_field__fixture_mode_forbidden",
+          "detail": "生产入口禁止 design_ref._fixture_mode 字段, 必须用 --fixture-mode CLI 旗标"
+        },
+        {
+          "name": "design_ref_field__expected_registry_status_forbidden",
+          "detail": "生产入口禁止 design_ref._expected_registry_status 字段, 必须用 --fixture-mode CLI 旗标"
+        }
+      ]
+    },
+    {
+      "name": "negative_missing_check",
+      "status": "failed",
+      "passed": 77,
+      "total": 78,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 alpha_mask 检查图路径越界/不存在: checks/alpha_mask/rainforest_mist.png"
+        }
+      ]
+    },
+    {
+      "name": "negative_missing_file",
+      "status": "failed",
+      "passed": 66,
+      "total": 71,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_mist_file_missing",
+          "detail": "文件不存在 / 越界 / 绝对路径: webp/rainforest_mist.webp"
+        },
+        {
+          "name": "layer_trunks_canopy_bytes",
+          "detail": "manifest 0 != actual 2682"
+        },
+        {
+          "name": "layer_vines_light_bytes",
+          "detail": "manifest 0 != actual 5070"
+        },
+        {
+          "name": "layer_far_glow_bytes",
+          "detail": "manifest 0 != actual 27996"
+        },
+        {
+          "name": "layer_clearing_glow_bytes",
+          "detail": "manifest 0 != actual 32872"
+        }
+      ]
+    },
+    {
+      "name": "negative_negative_api_cumulative",
+      "status": "failed",
+      "passed": 76,
+      "total": 78,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "api_field_api_attempts_total",
+          "detail": "必须为非负整数, 实际 -1"
+        },
+        {
+          "name": "api_cumulative_regression",
+          "detail": "累计 api_attempts_total=-1 < state/minimax.json 历史 0 (不允许重置)"
+        }
+      ]
+    },
+    {
+      "name": "negative_not_image",
+      "status": "failed",
+      "passed": 68,
+      "total": 73,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_mist_decode",
+          "detail": "非图/坏图: cannot identify image file '/var/folders/df/ld73jxb13d3_qv4yjch0b0z80000gn/T/sw014-r3-verify-awqenp9s/design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_not_image/webp/rainforest_mist.webp'"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 alpha_mask 检查图路径越界/不存在: checks/alpha_mask/rainforest_mist.png"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 black 检查图路径越界/不存在: checks/black/rainforest_mist.jpg"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 white 检查图路径越界/不存在: checks/white/rainforest_mist.jpg"
+        },
+        {
+          "name": "layer_mist_check_required_path",
+          "detail": "必需 magenta 检查图路径越界/不存在: checks/magenta/rainforest_mist.jpg"
+        }
+      ]
+    },
+    {
+      "name": "negative_opaque_layer",
+      "status": "failed",
+      "passed": 77,
+      "total": 78,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_opaque_real",
+          "detail": "半透明像素 0.00% < 0.1% (R3-02 真不透明层)"
+        }
+      ]
+    },
+    {
+      "name": "negative_real_oversize_layer",
+      "status": "failed",
+      "passed": 76,
+      "total": 78,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_budget_real",
+          "detail": "实际 5488154 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "scene_budget_real",
+          "detail": "实际 5556774 > 2097152 (2 MB) [真实预算隔离]"
+        }
+      ]
+    },
+    {
+      "name": "negative_real_oversize_scene",
+      "status": "failed",
+      "passed": 72,
+      "total": 78,
+      "failed": 6,
+      "failed_checks": [
+        {
+          "name": "layer_mist_budget_real",
+          "detail": "实际 5490194 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_trunks_canopy_budget_real",
+          "detail": "实际 5488404 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_vines_light_budget_real",
+          "detail": "实际 5487184 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_far_glow_budget_real",
+          "detail": "实际 5487706 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "layer_clearing_glow_budget_real",
+          "detail": "实际 5486950 > 409600 (400 KB) [真实预算隔离]"
+        },
+        {
+          "name": "scene_budget_real",
+          "detail": "实际 27440438 > 2097152 (2 MB) [真实预算隔离]"
+        }
+      ]
+    },
+    {
+      "name": "negative_stale_spec_sha",
+      "status": "failed",
+      "passed": 75,
+      "total": 77,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "design_spec_dynamic_required",
+          "detail": "SW-006 rainforest 必须 design-spec 含 layers 字段; 但 spec 加载失败 (SHA 不匹配或路径错)"
+        },
+        {
+          "name": "design_ref_spec_sha_mismatch",
+          "detail": "manifest stale_sha_actual != 实际 34a29360920eba3a"
+        }
+      ]
+    },
+    {
+      "name": "negative_unknown_layer",
+      "status": "failed",
+      "passed": 29,
+      "total": 31,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_foo_bar_unknown",
+          "detail": "layer_id 不在已知集合 ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        },
+        {
+          "name": "missing_required_layers",
+          "detail": "缺必需层: ['clearing_glow', 'far_glow', 'mist', 'trunks_canopy', 'vines_light']"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_approval_chain",
+      "status": "failed",
+      "passed": 76,
+      "total": 78,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "design_ref_approval_chain_handoff_head",
+          "detail": "当前 handoff head bbbbbbbbbbbb != registry 已批准 handoff head aaaaaaaaaaaa (批准链不匹配)"
+        },
+        {
+          "name": "design_ref_approval_review_head",
+          "detail": "review reviewed_commit aaaaaaaaaaaa != handoff head bbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_design_ref",
+      "status": "failed",
+      "passed": 72,
+      "total": 75,
+      "failed": 3,
+      "failed_checks": [
+        {
+          "name": "design_spec_dynamic_required",
+          "detail": "SW-006 rainforest 必须 design-spec 含 layers 字段; 但 spec 加载失败 (SHA 不匹配或路径错)"
+        },
+        {
+          "name": "design_ref_handoff_path",
+          "detail": "handoff 路径越界/不存在/绝对: docs/collaboration/handoffs/trae-design/THIS_PATH_DOES_NOT_EXIST.json"
+        },
+        {
+          "name": "design_ref_spec_file_path",
+          "detail": "spec_file 路径越界/不存在: design/05-visual-design/SW-012/this_spec_does_not_exist.md"
+        }
+      ]
+    },
+    {
+      "name": "negative_wrong_hash",
+      "status": "failed",
+      "passed": 77,
+      "total": 78,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "layer_mist_sha256",
+          "detail": "manifest 0000000000000000 != actual def2c04a9d722022"
+        }
+      ]
+    },
+    {
+      "name": "negative_zero_size",
+      "status": "failed",
+      "passed": 77,
+      "total": 79,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "layer_mist_size_manifest",
+          "detail": "实际 1x1 != manifest 0x0"
+        },
+        {
+          "name": "layer_mist_size_unsupported",
+          "detail": "1x1 不在 {(768, 1376), (1080, 1920)}"
+        }
+      ]
+    },
+    {
+      "name": "positive_ok",
+      "status": "ok",
+      "passed": 78,
+      "total": 78,
+      "failed": 0,
+      "failed_checks": []
+    }
+  ],
+  "regression_probes": [
+    {
+      "id": "R2-02-regression",
+      "expected": "failed",
+      "actual_status": "failed",
+      "failed_checks": [
+        "layer_mist_opaque_real"
+      ]
+    },
+    {
+      "id": "R2-03-regression",
+      "expected": "failed (缺必需 alpha_mask 检查图)",
+      "actual_status": "failed",
+      "failed_checks": [
+        "layer_mist_check_required_path"
+      ]
+    },
+    {
+      "id": "R2-04-regression",
+      "expected": "failed",
+      "actual_status": "failed",
+      "failed_checks": [
+        "api_field_api_attempts_total",
+        "api_cumulative_regression"
+      ]
+    },
+    {
+      "id": "R3-01-strict-rejects",
+      "expected": "failed (strict 拒 _fixture_mode 字段)",
+      "actual_status": "failed",
+      "failed_checks": [
+        "design_ref_field__fixture_mode_forbidden",
+        "design_ref_field__expected_registry_status_forbidden"
+      ]
+    },
+    {
+      "id": "R3-01-mode-allows-but-keeps-approval-chain",
+      "expected": "ok (CLI --fixture-mode 允许 _fixture_mode 字段, approval_chain 已 accepted)",
+      "actual_status": "ok",
+      "failed_checks": []
+    },
+    {
+      "id": "R3-05-regression-strict",
+      "expected": "failed (registry 引用 a, design_ref 引用 b)",
+      "actual_status": "failed",
+      "failed_checks": [
+        "design_ref_approval_review_head"
+      ]
+    }
+  ]
+}
