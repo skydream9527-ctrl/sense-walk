@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-001-R2",
+  "task_id": "SW-001",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+  "reviewed_commit": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
+  "delivery_head": "d11873f3d5553fda872dd18f4483ca1e1b11223a",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-001-R2.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "P-01: detector 注册失败回退距离步伐音与 SensoryCoordinator 真实出声",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_pr1_r2_verification.py",
+        "docs/collaboration/evidence/P-20261014-03-SW-001/junit/TEST-com.sensewalk.app.service.SensorCueWiringTest.xml"
+      ]
+    },
+    {
+      "name": "P-02: 低步数与大步数同刻合并保留并由后续正间隔带回、暂停重定基线清空",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_pr1_r2_verification.py",
+        "docs/collaboration/evidence/P-20261014-03-SW-001/junit/TEST-com.sensewalk.app.domain.walk.RealWalkEngineTest.xml"
+      ]
+    },
+    {
+      "name": "P-03: 完整 business head 覆盖与分支 head d11873f 同步 main/解决冲突",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_pr1_r2_verification.py",
+        "docs/collaboration/handoffs/zcode/H-SW-001-R2-correction.md"
+      ]
+    },
+    {
+      "name": "F-002/F-004: SessionArbiter 状态机、空重启干净退出、装配单飞与迟到协程丢弃",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03-SW-001/junit/TEST-com.sensewalk.app.service.SessionArbiterTest.xml"
+      ]
+    },
+    {
+      "name": "全量 JVM 单测 (249 项云端 run 38554272476 通过，0 失败/0 错误/0 跳过)",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03-SW-001/test-summary.json"
+      ]
+    },
+    {
+      "name": "Release Manifest guard (合并清单检查，无调试组件泄漏)",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-001-R1/release-manifest-check.txt"
+      ]
+    },
+    {
+      "name": "真机计步与锁屏保活走查",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+    "真机耳机断连与来电中断实走服务（physical-device）",
+    "真机 detector 注册失败场景实测（JVM 链路已锁，设备侧待验证）"
+  ]
+}

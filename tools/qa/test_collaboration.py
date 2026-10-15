@@ -128,7 +128,7 @@ class CoordinationChecks(unittest.TestCase):
         self.error_contains('dependency cycle')
 
     def test_queued_dependency_cannot_be_skipped(self):
-        self.change_registry(lambda r: next(t for t in r['tasks'] if t['id'] == 'SW-004').update(status='ready'))
+        self.change_registry(lambda r: next(t for t in r['tasks'] if t['id'] == 'SW-005').update(status='ready'))
         self.error_contains('active before dependency')
 
     def test_author_cannot_claim_another_role_task(self):
@@ -169,7 +169,7 @@ class CoordinationChecks(unittest.TestCase):
         self.error_contains('outside producer scope')
 
     def test_accepted_without_review_is_rejected(self):
-        self.change_registry(lambda r: r['tasks'][0].update(status='accepted'))
+        self.change_registry(lambda r: next(t for t in r['tasks'] if t['id'] == 'SW-004').update(status='accepted'))
         self.error_contains('accepted without delivery')
 
     def test_matching_independent_approval_is_structurally_valid(self):

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-014-R2",
+  "task_id": "SW-014",
+  "revision": 2,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "base_commit": "e7ab092ad9967d9e6d97e212d777ac3546e4525e",
+  "head_commit": "6e683e2087574df51efd43d8dea73270d321f5aa",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/minimax/H-SW-014-R2.md",
+  "changed_files": [
+    "design/assets/rainforest/preflight/SW-014/r2/README.md",
+    "design/assets/rainforest/preflight/SW-014/r2/scripts/build_fixtures.py",
+    "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py",
+    "design/assets/rainforest/preflight/SW-014/r2/scripts/dry_run.py",
+    "design/assets/rainforest/preflight/SW-014/r2/scripts/probe_r1_reproduction.py",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_not_image/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_zero_size/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_opaque_layer/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_empty_layers/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_unknown_layer/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_duplicate_layer/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_missing_file/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_wrong_hash/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_missing_check/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_real_oversize/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_wrong_design_ref/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_stale_spec_sha/manifest.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/H-SW-012-R1-FAKE.json",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/spec.md",
+    "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/_design/R-SW-012-R1-FAKE.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_positive_ok.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_not_image.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_zero_size.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_opaque_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_empty_layers.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_unknown_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_duplicate_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_missing_file.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_wrong_hash.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_missing_check.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_real_oversize.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_wrong_design_ref.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_stale_spec_sha.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_positive_ok.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_not_image.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_zero_size.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_opaque_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_empty_layers.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_unknown_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_duplicate_layer.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_missing_file.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_wrong_hash.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_missing_check.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_real_oversize.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_wrong_design_ref.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_stale_spec_sha.json",
+    "design/assets/rainforest/preflight/SW-014/r2/records/r1_probe_reproduction.json",
+    "design/assets/forest/corrections/D-CORRECTION-a5ad6dd-claim.md",
+    "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
+    "docs/collaboration/handoffs/minimax/H-SW-014-R2.md",
+    "docs/collaboration/state/minimax.json"
+  ],
+  "checks": [
+    {
+      "name": "R1 PF-01~04 误判全部复现 (证明 R1 bug 真实存在)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/r1_probe_reproduction.json"
+      ]
+    },
+    {
+      "name": "R2 修 find_repo_root + git toplevel 双重验证 (PF-04 修正)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py"
+      ]
+    },
+    {
+      "name": "R2 修真实解码 (Image.open + verify + load) 拒绝文本伪装 (PF-01 修正)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_not_image.json"
+      ]
+    },
+    {
+      "name": "R2 修缺必需层校验 + 0x0 拒绝 (PF-02 修正)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_empty_layers.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_zero_size.json"
+      ]
+    },
+    {
+      "name": "R2 修 dry_run 严格 design_ref 验证 (PF-03 修正)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_wrong_design_ref.json"
+      ]
+    },
+    {
+      "name": "13 fixture 全部构建成功 (PIL 程序化, 零 API)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/positive_ok/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_not_image/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_zero_size/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_opaque_layer/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_empty_layers/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_unknown_layer/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_duplicate_layer/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_missing_file/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_wrong_hash/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_missing_check/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_real_oversize/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_wrong_design_ref/manifest.json",
+        "design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_stale_spec_sha/manifest.json"
+      ]
+    },
+    {
+      "name": "positive_ok 预检 48/48 通过 (成功正例)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_positive_ok.json"
+      ]
+    },
+    {
+      "name": "12 negative 预检全部失败, 每个有具体非 PENDING 错 (避免全因 PENDING)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_not_image.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_zero_size.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_opaque_layer.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_empty_layers.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_unknown_layer.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_duplicate_layer.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_missing_file.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_wrong_hash.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_missing_check.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_real_oversize.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_wrong_design_ref.json",
+        "design/assets/rainforest/preflight/SW-014/r2/records/preflight_negative_stale_spec_sha.json"
+      ]
+    },
+    {
+      "name": "dry_run 5/5 项对 positive_ok 全部通过 (fixture_mode + queued 状态)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_positive_ok.json"
+      ]
+    },
+    {
+      "name": "dry_run 正确拒绝 negative_wrong_design_ref (handoff_path + spec_file_path 越界)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_wrong_design_ref.json"
+      ]
+    },
+    {
+      "name": "dry_run 正确拒绝 negative_stale_spec_sha (spec_sha_mismatch)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-014/r2/records/dry_run_negative_stale_spec_sha.json"
+      ]
+    },
+    {
+      "name": "a5ad6dd 误述纠正记录追加 (不改 R1 历史)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/forest/corrections/D-CORRECTION-a5ad6dd-claim.md"
+      ]
+    },
+    {
+      "name": "Android 模拟器/真机走查 (本任务不涉及, 工具脚本不是 Android 代码)",
+      "type": "physical-device",
+      "status": "not_applicable",
+      "evidence": []
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r2/scripts/build_fixtures.py",
+      "sha256": "7b5e4b932014522f45f1e285c547e3c3cc7dca88ebf465fbf90bde76f8483a4e",
+      "role": "fixture-generator"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py",
+      "sha256": "f32be99b8dbe7659edf9455785707992b90ffd9fe29b7bae0075773b37cb6680",
+      "role": "preflight-checker"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r2/scripts/dry_run.py",
+      "sha256": "c8141938fae3798f20d6fe25aa888369111c5ad3b8ad3171cf95049455a50cda",
+      "role": "dry-run-mock"
+    },
+    {
+      "kind": "tool-script",
+      "path": "design/assets/rainforest/preflight/SW-014/r2/scripts/probe_r1_reproduction.py",
+      "sha256": "8a10857b37e979cdcaaabc985bb21018e1163852bc8c69f5a6029b54f0249f8c",
+      "role": "r1-bug-reproducer"
+    }
+  ],
+  "asset_manifest": null,
+  "pending": [
+    "等待 Antigravity 独立审核 R-SW-014-R2; 获准后此任务 accepted, 但不等于雨林素材获批 (SW-012 设计未批前 SW-006 不能启动付费调用)",
+    "D-CORRECTION-a5ad6dd-claim 由 Antigravity 复验: 实际 a5ad6dd 没改 forest.json, SW-010 接图在 PR #3 (dfcc19e) 尚未合入 main"
+  ],
+  "requests": [
+    "请按 PROTOCOL §独立审核 R-SW-014-R2 校验 SHA256, 实际跑 preflight.py + dry_run.py + probe_r1_reproduction.py 确认行为",
+    "通过 → 写 approved handoff; 改 registry SW-014 = accepted",
+    "退回 → 写 changes_requested, 登记 rework, 写 R3; R2 不覆盖 R1",
+    "复验 D-CORRECTION-a5ad6dd-claim: 实际 main HEAD 的 forest.json 字段状态, 确认 a5ad6dd 仅候选合并, SW-010 接图 PR #3 OPEN"
+  ],
+  "design_manifest": null
+}

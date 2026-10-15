@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-014-R2",
+  "task_id": "SW-014",
+  "reviewer": "antigravity",
+  "producer": "minimax",
+  "handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
+  "reviewed_commit": "6e683e2087574df51efd43d8dea73270d321f5aa",
+  "delivery_head": "bda0b74d53791c09a4c9b7a2858b9c32321bc862",
+  "verdict": "changes_requested",
+  "report": "docs/collaboration/reviews/R-SW-014-R2.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "PF-04 修正核验 (find_repo_root 根路径探测正确)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/probe_sw014_r2.py"
+      ]
+    },
+    {
+      "name": "PF-01/PF-02 基础修正核验 (真实解码拒绝文本伪装 WebP 与空场景)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "R2-01: 默认预检入口与测试 fixture 模式隔离",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "R2-02: RGBA 透明度像素比例计算 (alpha=255 全不透明被误判为 100% 透明)",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "R2-03: 检查图清单完整性校验 (checks=[] 误放行)",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "R2-04: API 累计账本非负与跨轮次递增校验 (api_attempts_total=-1 误放行)",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "R2-05: 严格批准链 (producer / review / spec hash) 校验",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/sw014-r2-probe-results.json"
+      ]
+    },
+    {
+      "name": "预算超限隔离反例真实超限 (negative_real_oversize 目标仅 4KB，未达 400KB/2MB)",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261014-03/README.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "R2-01",
+      "severity": "P1",
+      "file": "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py:270-285",
+      "summary": "生产预检默认入口允许 manifest 声明 `_fixture_mode=true` 跳过 registry 的 accepted 检查，测试标记由输入文件控制导致门禁可被绕过。测试模式必须由独立的 CLI 参数/测试入口驱动，不可在生产入口放行。"
+    },
+    {
+      "id": "R2-02",
+      "severity": "P1",
+      "file": "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py:140-145",
+      "summary": "real_decode_image 将 `alpha > 0` 判定为透明像素，导致全不透明图层（alpha 全为 255）被判定为 100% 透明，完全反转了透明通道检验逻辑。"
+    },
+    {
+      "id": "R2-03",
+      "severity": "P2",
+      "file": "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py:230-245",
+      "summary": "checks 图层检查仅校验已声明的检查图是否存在，当 checks=[] 时直接通过，未强制校验必需的 4 底色（黑/白/洋红/透明棋盘）及 alpha mask 检查图。"
+    },
+    {
+      "id": "R2-04",
+      "severity": "P2",
+      "file": "design/assets/rainforest/preflight/SW-014/r2/scripts/preflight.py:250-255",
+      "summary": "API 账本字段仅检查 key 是否存在，未校验数值为非负整数，导致 api_attempts_total=-1 等非法输入被误判通过；未实现跨 revision 累计账本校验。"
+    },
+    {
+      "id": "R2-05",
+      "severity": "P2",
+      "file": "design/assets/rainforest/preflight/SW-014/r2/scripts/dry_run.py:50-80",
+      "summary": "dry_run 未完整核对当前批准 review 与交付的 head/spec hash 绑定关系，去除 fixture 标记后伪造的引用依然通过。"
+    }
+  ],
+  "pending": [
+    "雨林设计 SW-012 尚未完成与批准，SW-006 8 次生成预算维持锁定",
+    "待 MiniMax 交付 SW-014 R3 修订"
+  ]
+}

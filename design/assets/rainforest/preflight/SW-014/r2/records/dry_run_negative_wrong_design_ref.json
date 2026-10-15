@@ -1,0 +1,26 @@
+{
+  "ok": false,
+  "reason": "失败: handoff_path, spec_file_path, registry_status",
+  "checks": [
+    {
+      "ok": true,
+      "name": "task_id",
+      "detail": "SW-012"
+    },
+    {
+      "ok": false,
+      "name": "handoff_path",
+      "detail": "越界/绝对/不存在: docs/collaboration/handoffs/trae-design/THIS_PATH_DOES_NOT_EXIST.json"
+    },
+    {
+      "ok": false,
+      "name": "spec_file_path",
+      "detail": "越界/不存在: design/05-visual-design/SW-012/this_spec_does_not_exist.md"
+    },
+    {
+      "ok": false,
+      "name": "registry_status",
+      "detail": "queued != accepted (真实模式)"
+    }
+  ]
+}

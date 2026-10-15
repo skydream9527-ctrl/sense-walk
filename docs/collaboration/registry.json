@@ -16,25 +16,17 @@
       "title": "T06 可靠性补强",
       "owner": "zcode",
       "kind": "code",
-      "status": "handoff_ready",
+      "status": "accepted",
       "depends_on": [],
       "task_file": "docs/collaboration/tasks/SW-001.md",
-      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R1.json",
-      "latest_review": "docs/collaboration/reviews/R-SW-001-R1.json",
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R2.json",
+      "integrated_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0",
       "pending": [
-        "PR #1已同步/解冲突/纠正，最新合并checkout249项通过；优先等待Antigravity R2实际Kotlin/完整head独立review并集成",
-        "accepted后才激活SW-004；真机计步/锁屏/耳机来电仍Pending"
-      ],
-      "observed_delivery": {
-        "revision": 2,
-        "branch": "codex/zcode/SW-001-t06-reliability",
-        "branch_head": "d11873f3d5553fda872dd18f4483ca1e1b11223a",
-        "business_head": "7b17424886ba4b0c7608bd451f0ee244f3b88390",
-        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/1",
-        "source_report": "docs/collaboration/evidence/P-20261014-03/README.md"
-      }
+        "真实计步精度与锁屏 15 分钟持续计距/播放（physical-device）",
+        "真机耳机断连与来电中断实走服务（physical-device）",
+        "真机 detector 注册失败场景实测（JVM 链路已锁，设备侧待验证）"
+      ]
     },
     {
       "id": "SW-002",
@@ -88,12 +80,12 @@
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-010.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
       "integrated_commit": null,
       "pending": [
-        "PR #3已同步/解冲突，补长屏/小屏/冻结/意图证据，最新PR合并checkout217项通过；待独立应用/视觉review与集成",
-        "两工作PR组合CI/新测试包待交；终景强度按设计意图裁定，不改既定opacity"
+        "独立审核已出具 approved（R-SW-010-R1），终景柔光意图裁定通过；待作者同步 main 解决 state/zcode.json 冲突后合入",
+        "合入后跑两工作 PR 组合版本 CI 并发布测试安装包；真机视觉走查仍 Pending"
       ],
       "observed_delivery": {
         "revision": 1,
@@ -110,7 +102,7 @@
       "title": "T07A 会话快照与中断恢复",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-001",
         "SW-003"
@@ -119,7 +111,9 @@
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "前置依赖 SW-001 与 SW-003 已全部 accepted，任务激活为 ready，待 ZCode 领取实现"
+      ]
     },
     {
       "id": "SW-012",
@@ -242,12 +236,12 @@
         "SW-003"
       ],
       "task_file": "docs/collaboration/tasks/SW-014.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-014-R2.json",
       "integrated_commit": null,
       "pending": [
-        "R2已推送/1正12负样本实测吻合，但bootstrap复现R2-01～05：测试标记旁路、RGBA透明反判、空检查图、负账本、批准链不匹配",
-        "安排零API R3并建真实PR，补批准spec读取/真实预算/累计账本；此为bootstrap派工，正式review由Antigravity写"
+        "R2 独立审核出具 changes_requested（R2-01～R2-05、有效超预算隔离反例、动态读取 spec）",
+        "待 MiniMax 在 codex/minimax/SW-014-r3 交付 R3 修订；雨林 SW-006 制作继续锁定等待 SW-012/SW-014 accepted"
       ],
       "observed_delivery": {
         "revision": 2,
