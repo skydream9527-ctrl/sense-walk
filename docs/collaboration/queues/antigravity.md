@@ -1,15 +1,15 @@
 # Antigravity 常驻验收队列
 
-本轮2026-10-15，main更新至集成SW-010/SW-012/SW-015/SW-005；观察来源 [P-20261015-02](../evidence/P-20261015-02/README.md) 及最新审核。
+2026-10-16；main2339333，来源 [P-20261016-01](../evidence/P-20261016-01/README.md)。旧SW010/SW005R2/SW012/SW015已accepted，PR16也已发布，不重复做旧动作。
 
-| 顺序 | 交付定位 | 动作/退出条件 |
+| 优先级 | 当前动作 | 退出条件 |
 | --- | --- | --- |
-| 已收口 SW010 | PR #3，merge `2b47f01aa64262433b52c1a071ddfec2ba4ee249`；accepted | 归档门禁已修，全CI绿；素材hash与delta复核无误，已合入main并标记accepted |
-| 已审并集成 SW012 | PR #15，merge `bb05b035f1109d974790a9e576a77a539c2e43ed`；accepted | 53文件hash全匹配、验图/裁切通过；已发 R-SW-012-R1 与 D-009 冻结五层参数及spec哈希；PR #19 intake notes已合并 |
-| 已审并集成 SW015 | PR #18，merge `a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5`；accepted | 真实SW-011/SW-012 spec解析完全一致；8组fixture/6类负例拦截测试100%符合预期；消耗0 API；已发 R-SW-015-R1 获批 |
-| 已审并集成 SW005 | PR #14，merge `70ebfc7587cf4e8e07dc4979ee0c18deb1616436`；accepted | R2已闭环UI提示（「慢一点，站稳再跳。」3s消失）、步态消费（ForestShell HOP/TENSE）、同局恢复持久化快照（stabilizeHintShown）与死区（d=0.01/0.079/0.08）单测；全CI与303单测全绿；已发 R-SW-005-R2 获批 |
-| 门禁激活 SW006 | ready，前置SW-012+SW-015全部accepted | 门禁正式激活！MiniMax可动用8次独立API预算启动雨林正式候选素材生成流水线 |
-| 下游排队 SW007 | queued，依赖SW-005(已完成)+SW-006(等待制作) | 等待SW-006交付并集成后激活 |
+| 当前组合包 | main云端38847512206/协作38847512200成功，APK/report/source artifact齐；Release仍build109 | 最新已合main测试预发布，真实可下载APK/source、commit/APK SHA256/实际验证范围；不以ZIP digest冒充APK hash |
+| 提示补证 | UI代码已接，作者hint-shown.png抽读未见所述卡片；约3s消失原记录也Pending | 同步录像/短间隔图+UI hierarchy、精确APK/head/步骤，出现→消失→同局恢复不重复；不能运行保持Pending，不撤销已批代码来替代补证 |
+| SW006 / MiniMax | ready，真实雨林候选 | 先核任务内0API生产guard：真实D009批准、实际1080x1920、跨revision总8/API前ledger；到稿后独立像素/alpha/四检查/阶段/裁切/预算/来源/hash，不信旧preflight单绿 |
+| SW016 / ZCode | ready，900m底座与真实声景准备 | 实际Kotlin/配置/渲染/两模式复用/快照；来源许可/声音听辨；不完整配置不使选景或loadAll假成功/整体失败；底座≠雨林完成 |
+| SW017 / Trae | ready，应用上下文参照 | 两模式/阶段/比例/状态、清单/可编辑源/hash；design模拟明确，不改D009/不替App，不成素材新前置 |
+| SW007激活 | queued，依赖SW005/SW006/SW016 | 后两项均accepted再ready，批准图正式入包+900m双模式/真实声景/组合App独立回归 |
+| 审计笔误 | R-SW-015-R1 JSON/MD delivery_head | 实际9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846；旧写9c4ef5a8f4cffb0948cbb391306b4bdafd3c64c1；新增correction，business81fbf2d正确 |
 
-SW011 correction PR13已完成。既有SW001/SW004/SW010/SW011/SW012/SW014/SW015/SW005批准全部有效。各作者state本人更新，QA维护registry/BOARD/review/顺序集成。
-已有build109含恢复/可靠性；真实JUnit、作者local XML、作者模拟器证据读取、本人模拟器、实体/真人结果分开；缺设备Pending不阻塞独立代码阶段，不宣称最终MVP。
+新规划未发布时先按PUBLISH-PLAN-20261016.md导入已完成文档；标准PR/全CI/集成，更新活动发布提示但不改旧证据。作者state本人消费accepted，QA不代写。源码/已有XML/云端artifact与真正运行模拟器/实体/真人分开；无设备/人Pending，不宣称最终MVP。城市/沙漠继续queued，先雨林闭环再拆任务/预算。无新交付一次报告等待项，不无限轮询/自动发消息/商店发布。

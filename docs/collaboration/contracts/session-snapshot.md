@@ -1,4 +1,4 @@
-# 会话快照契约 v1（SW-004 已冻结）
+# 会话快照契约 v1（含已批准SW-005 R2可选字段）
 
 2026-10-15状态：SW-004已实现、独立approved并accepted，生产集成`814fc78f72017c643ce43cbf4b3ced6d89c1f5bd`；依据 [R-SW-004-R1](../reviews/R-SW-004-R1.md) 和domain/session/SessionSnapshot.kt。以下语义已生效，真机跨boot/真实计步恢复仍Pending。DEVELOPMENT §12.3/20.3产品语义优先；后续地形持久中间态扩展须追加兼容决策，不暗改v1。
 
@@ -27,6 +27,7 @@
 | meters / sPos / sBest | Float | 非有限/负数/超终点或sBest<sPos拒绝，不钳成有效档 |
 | firedPhaseIds | List<String> | 只接受已知相位；恢复不重播一次性cue |
 | elapsedActiveMs | Long | 累计活跃时长，非负 |
+| stabilizeHintShown | Boolean | SW005 R2新增可选字段，缺省false；同sessionId恢复保持首局站稳提示已发，不重复提示；snapshotVersion仍1 |
 | lastCounterReading / lastCounterEventMs | Long? / Long? | 可选诊断字段；恢复重新建counter基线，不补缺口 |
 
 JSON手动编码，忽略未知扩展字段，损坏输入返回null。字段使用camelCase实际名称；文档s_pos/s_best是概念别名，不创建第二套JSON字段。示例仅说明结构，不是真实运行证据：
@@ -36,3 +37,5 @@ JSON手动编码，忽略未知扩展字段，损坏输入返回null。字段使
 ```
 
 存储在SessionSnapshotStore，按周期/越相位/重要状态持久化，主动放弃/完成清除；恢复入口与已有实走Service仲裁避免双会话。静态感官重建不复用旧stream、不补播旧脚步。地形任务新增状态时必须回归现有validator/虚走回退/实走基线/感官恢复用例。
+
+2026-10-16摘要同步：可选stabilizeHintShown依据已approved的H-SW-005-R2/R-SW-005-R2，业务b92144e07f9318f1e14f7f18e0a1a28b0115f0d7，集成70ebfc7587cf4e8e07dc4979ee0c18deb1616436。旧R1“零新增字段”提案由R2修订；原hand-off保持历史。此处记录现有实现，不新批字段或改变快照版本。

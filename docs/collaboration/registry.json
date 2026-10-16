@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-15",
+  "updated_on": "2026-10-16",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -119,8 +119,7 @@
       "latest_review": "docs/collaboration/reviews/R-SW-012-R1.json",
       "integrated_commit": "bb05b035f1109d974790a9e576a77a539c2e43ed",
       "pending": [
-        "SW-006 候选素材制作仍需等待 SW-015 联调 accepted 后激活",
-        "真机屏幕与真人视觉体验走查（physical-device/human 待内测阶段）"
+        "设计及消费附页已accepted/集成；真实雨林候选/Android/真机验收仍由后续任务负责，不重画已批准R1。"
       ]
     },
     {
@@ -141,7 +140,8 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "门禁已激活：SW-012 视觉设计与 SW-015 规格预检联调均已 accepted。MiniMax 可动用 8 次独立预算启动正式雨林候选素材制作；需严格遵守 preflight/spec_reader 规范并输出 4 检查图。"
+        "ready：SW012/SW015已accepted。MiniMax在本任务内先0API补生产guard（真实冻结批准/严格1080x1920/任务跨revision总8次/累计账本），自测正确后按既有授权制作候选；保护不通过不调用。",
+        "原8次总尝试预算包括统一参考/重试/失败/超时，不能解释为每轮8次；project历史14与SW006计数分开。"
       ]
     },
     {
@@ -158,8 +158,8 @@
       "latest_review": "docs/collaboration/reviews/R-SW-005-R2.json",
       "integrated_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
       "pending": [
-        "3s 提示消失实测捕获（代码 delay+consume 保证，待 QA 复验）",
-        "真机触感（physical-device 保持 pending）"
+        "提示出现/约3s消失的同步App证据需QA补录：bootstrap抽读hint-shown.png未见所述卡片，不以文件名代替验图；源/UI已接，代码accepted保留。",
+        "真机触感与reduceMotion视觉复核（physical-device仍Pending）"
       ]
     },
     {
@@ -170,13 +170,16 @@
       "status": "queued",
       "depends_on": [
         "SW-005",
-        "SW-006"
+        "SW-006",
+        "SW-016"
       ],
       "task_file": "docs/collaboration/tasks/SW-007.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
-      "pending": []
+      "pending": [
+        "等待SW006批准候选与SW016运行时底座均accepted；当前可并行底座/声景准备属于SW016，不提前开放未完成雨林。"
+      ]
     },
     {
       "id": "SW-008",
@@ -239,7 +242,7 @@
       "latest_review": "docs/collaboration/reviews/R-SW-014-R3.json",
       "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
       "pending": [
-        "R3既有18组fixture/6回归验收保留；真实设计id/type兼容与空集合校验由新增SW-015收口，正式雨林制作还需SW-012/SW-015批准"
+        "原R3验收保留；SW015已accepted完成真实id/type联调，SW006已ready，实际生产尺寸/总预算检查按本轮任务补齐。"
       ]
     },
     {
@@ -256,7 +259,45 @@
       "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
       "latest_review": "docs/collaboration/reviews/R-SW-015-R1.json",
       "integrated_commit": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5",
-      "pending": []
+      "pending": [
+        "R1原批准保留；本轮实测默认预检放行雨林768x1376与9次任务声明，strict-design误拒D009冻结原字节。SW006制作内先补0API生产guard/自动断言，不改已批准R1/spec。",
+        "R-SW-015-R1.json的delivery_head疑似笔误：实际9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846；QA新增correction，原business reviewed_commit正确。"
+      ]
+    },
+    {
+      "id": "SW-016",
+      "title": "雨林运行时底座与真实声景准备",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-005",
+        "SW-012"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-016.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "独立可并行，不等SW006素材：900m schema/按冻结五层渲染/双模式复用/声景来源与音频准备；未完成候选前不宣称雨林可玩或用设计PNG入包。"
+      ]
+    },
+    {
+      "id": "SW-017",
+      "title": "雨林双模式应用验图参照与交接标准",
+      "owner": "trae-design",
+      "kind": "design",
+      "status": "ready",
+      "depends_on": [
+        "SW-012"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-017.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "0外部付费API，复用已批准SW012原字节制作App上下文参照/验图矩阵；不是新生产层设计，不改变D009，也不替代真实App证据。"
+      ]
     }
   ],
   "physical_validation_pending": [
@@ -267,5 +308,5 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261015-02/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261016-01/README.md"
 }

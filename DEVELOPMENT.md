@@ -1152,3 +1152,7 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 ### 21.9 交付收口与雨林审稿（2026-10-15）
 
 核查main904ab01，详见 [P-20261015-02](./docs/collaboration/evidence/P-20261015-02/README.md)。ZCode地形PR14核心已交/云端CI绿，作者local XML296/0，提示与gait无UI消费者，登记rework要求R2补齐当前用户可见规则；森林接图PR3冲突已解，但协作CI因改写旧交接附录失败，先恢复归档字节并新增说明。Trae雨林PR15已交/53文件hash匹配/CI绿，待独立审稿与精确spec hash冻结；MiniMax SW015未见远端交付，保持ready/0API。Antigravity纠错PR13已完成，应继续集成/审稿队列。SW006仍等SW012+SW015都accepted，SW007等SW005+SW006，不把当期必需UI延期混入雨林。规则见 [D-008](./docs/collaboration/decisions/D-008-close-current-deliveries.md)，角色入口已更新。当前main/已确认build109不含未合PR功能，真机/真人仍Pending。
+
+### 21.10 雨林制作、底座与应用验图并行（2026-10-16）
+
+实核main2339333：SW010/SW005R2/SW012/SW015均accepted/合入，SW006已ready；提示UI、死区与同局可选快照字段已接，作者已有303项XML通过，当前main云端成功，测试Release仍旧build109组合。旧角色入口须推进而非返工已完成内容。见 [P-20261016-01](./docs/collaboration/evidence/P-20261016-01/README.md)。本轮实测旧工具放行雨林768尺寸/9次声明、strict-design误拒D009原字节；MiniMax在SW006内先0API补最小生产guard/总账本，再原总8次制图，不新增大工具项目或重置额度。新增ready SW016由ZCode并行900m底座/双模式复用/合法声景准备，新增ready SW017由Trae做应用验图参照；最终SW007仍等候选与底座分别accepted，参照不是新生产规范。QA发准确main组合包、补提示显示/消失时序证据、独立审核与追加delivery SHA纠错；真机/真人仍Pending。决策见 [D010](./docs/collaboration/decisions/D-010-rainforest-parallel-production.md)。

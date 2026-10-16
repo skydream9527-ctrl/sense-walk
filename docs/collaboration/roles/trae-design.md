@@ -1,13 +1,11 @@
 # trae-design 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
+先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
 
-请使用Design模式，负责design/05-visual-design中的可编辑设计与逐层素材提示词；不改app、MiniMax候选/脚本或中心registry。
+请使用Design模式。SW012雨林设计/D009冻结与intake附页均已accepted/合入，不重画森林/雨林原五层，不再次发布同一附页。领取ready的 `../tasks/SW-017.md`，0新增外部付费API。
 
-SW011已accepted；SW012 r1已提交PR #15，业务cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb、交付c723048116fd2c36a7c19f2ab6c926f47b78beac，53文件全hash/bytes匹配、CI成功。不要重复从零画森林/雨林，不把待审稿称已批准，不提前启动queued城市/沙漠。
+只在design/05-visual-design/SW-017/r1及本人state/handoff写应用上下文参照与验图标准。复用SW012批准原图层/source和当前app只读布局，制作虚走/实走两模式参照：六阶段0/110/295/475/700/875m矩阵、基准1080x1920/小390x844/长1080x2400关键裁切、旅人x=.34脚底y=.865、下45%虚走操作区、实走无摇杆；暂停/首局站稳提示/大字号/reduceMotion给必要代表图，不穷举所有组合。
 
-先在本人SW012任务分支补一份新增交接附页H-SW-012-R1-intake-notes.md：引用现有design-spec SHA256/具体PR，集中列五层id/type/parallax、1080×1920、90/270/450/675/855m与fade20/25/25/25/20、六阶段0/110/295/475/700/875m、x=.34/脚底y=.865、下45%触控、tileable=false和每层源/参考/prompts路径，供MiniMax SW015/SW006和ZCode消费。说明distant_glow提示词“融入黑色”仅指黑底预览观感，输出仍真透明，不生成黑色矩形底；不把phase透明度烘焙进正式alpha。此为待审交付的说明收尾，不修改已发布R1文件。
+配逐项验图清单与ZCode/QA消费说明，标明哪些看MiniMax候选、哪些必须实际App/设备验证。所有参照写“设计模拟”，不冒充Android截图/真实走查；看到的旧hint-shown截图本轮未见所述提示，不能照文件名当正确显示范例。未收到SW006候选不编造验图，收到后给具体路径/hash/触发条件反馈，最终批准归Antigravity。
 
-配合Antigravity审稿：五层proposed命名/参数可以由独立review/decision绑定当前spec hash冻结，无需由QA编辑你的spec/status。如果验图发现布局/边缘/身份或命名需实质变更，创建r2并交H-SW-012-R2/新manifest/hash，保留r1；不要为了把design_candidate改approved而改写旧稿。逐层真正输出的尺寸/透明职责与prompt一致；可编辑SVG/Python源、三底中央与四缘、三比例裁切和源复现保持可追溯。
-
-本轮0新增外部付费API；正式生图/压缩候选归MiniMax，生产接入归ZCode。SW006必须SW012+SW015都accepted，不凭你已交稿提前调用。本人state记录等待本轮review/交接位置，不伪造对方已收到；无审稿结果时一次报告等待文件，不无限轮询。
+本任务不改变D009五层规范/里程/alpha，不重新生生产图、不提前扩城市/沙漠，不成为SW006新的design_ref/前置。design-manifest包含本任务spec/source/prompt/preview/hash/bytes；spec_file用integration-reference.json标kind=integration_reference并引用SW012批准handoff/spec hash/D009及状态/尺寸映射，不引入新生产layer ID。可编辑源如实SVG/HTML/Python等，不编造PSD/Figma。H-SW-017-R1 JSON+Markdown绑定真实业务base/head/文件/限制，独立审稿后accepted。需要实质改SW012另写变更请求走R2，不覆盖原53文件。不改app、MiniMax、QA/中心registry或他人state，不自批/自动发外部消息。

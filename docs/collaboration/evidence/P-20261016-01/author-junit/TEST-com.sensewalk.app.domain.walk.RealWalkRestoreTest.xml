@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.RealWalkRestoreTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-16T03:19:41" hostname="yunhedeMacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="恢复后首 counter 事件只建基线 - 中断期步数不补" classname="com.sensewalk.app.domain.walk.RealWalkRestoreTest" time="0.0"/>
+  <testcase name="恢复会话能继续走完 - gate 与 scheduler 正常" classname="com.sensewalk.app.domain.walk.RealWalkRestoreTest" time="0.001"/>
+  <testcase name="恢复点相位与活跃时长还原 - 已触发相位不重播" classname="com.sensewalk.app.domain.walk.RealWalkRestoreTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
