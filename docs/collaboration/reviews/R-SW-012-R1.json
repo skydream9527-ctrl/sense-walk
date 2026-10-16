@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-012-R1",
+  "task_id": "SW-012",
+  "reviewer": "antigravity",
+  "producer": "trae-design",
+  "handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+  "reviewed_commit": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
+  "delivery_head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-012-R1.md",
+  "artifact_hashes": {
+    "design/05-visual-design/SW-012/r1/README.md": "b294ca3dd608bc743f65c4b1c312064ea84e0ddb67d459ded723984e4a2bad88",
+    "design/05-visual-design/SW-012/r1/design-spec.json": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png": "32d0176495ffa0a2dba7a8beb408ff6dedb1d7a9ce103cb9a1830c2aaf7b2d8e",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png": "5e7832770e2f475e3a778c20f0a94c0bd8bd36e3bc560884a9ead2fe851ed007",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png": "17f312b805ff171eb9a3a4d58bd594871860046b782180073bfce9e2f0444c78",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png": "24fa2c4ea55991910eca01da332791801ce947d499e0d67c1b1994590a32005f",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png": "a6a6b8073118cc7aa9472330492eadb703811e9fc90e6d02fe0bbfdb5cdbb595",
+    "design/05-visual-design/SW-012/r1/previews/composition_guide.png": "8cfcb24381b2e1aee9d0395c3cd79f679dc1b6327e4fe4f8a4a2f4037b9ae35f",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x1920.png": "fa8f00bb47ba0d53ed6b35d650887cb38f786c4bea15acda6e4af30102d487a6",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x2400.png": "a6f0063d61b83a1d38886b437327e9d7da7f13b755ae096c52f3d6b07cd5fa01",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_390x844.png": "a58ad2fccab9cc48c7b206be10ce5262bc1ade0a544fdc7539c8207d15479d29",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_black.jpg": "fb6892bd10a5f79a6a45c36154ecfb7a61ba36ac1b33f339239bad77fd769797",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_magenta.jpg": "47076bb66ae7e0e208df3b20df58b634fd3738d98891ae5990ed15ed492b80e3",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_white.jpg": "d36830ba6c141e2bc0a962f06ad41aa63028d13eba5e0709fd896587e43b0a60",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_black.jpg": "fbe01f7315389ae2f375f45b69facd1ebd4a725e7e5e38a624d1ce4bfeedd0f6",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_magenta.jpg": "fd376943b3f8511aa1c252a5a23bb1d010bdb599e92afd0c59bfe3127cbe0c0e",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_white.jpg": "8dadfb5bfd9a4b6bd1e18b99f477a29da2f2c0ce4a560c542fd9be1905847fcb",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_black.jpg": "104c4256fb1864461edef5c0021de8311a77d6c872273e264ca8c1d7b08c16e1",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_magenta.jpg": "38c7c7bb5b54137cc3d504d615f9230181426f907b4686c8002e66cc8293c40a",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_white.jpg": "bb795aa7b8aa50d33e822422e427657b754e6187d02a3cb970ab2925191690c7",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_black.jpg": "32f0354792baf5c903fe43ddd38a2763a9bc5ac0eaf085a0f7ccb32b8965d101",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_magenta.jpg": "cee7d0af0917e4e4595eb568b35da54f2fd05111057dcda7e02b2124458ec004",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_white.jpg": "d4fdfe71f94a306adf15ea236d29d61c9d3509aa2c76145a99f354008aefbdf7",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_black.jpg": "1e20be85762ab35394533775d8727da4f0c17e9503db27a0e7e836d7e363bbe3",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_magenta.jpg": "d43029d0a87516009ca57a32ad90291abef68fbc302fda7252b58af3568bdfad",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_white.jpg": "0e3a4b82032fa846feab970cb6dd51854aa8e6bb9a41f7d5823e2eef1fd807b6",
+    "design/05-visual-design/SW-012/r1/previews/layer_map.png": "234e40c0141bc81425ec92d33f9b8e44c3b00a36f5ec45abca28ce98563ba14e",
+    "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png": "7c55547d28bf21c5a0309ef748061b7feec0c1b98c200de0df699ebe36454187",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json": "7ea16648fc8473091b13cec4eb7ae95c87e4672a624050ada9327220ba47a194",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_parallax_max_390x844.png": "a6cba4c1e9faf07fa902a65e202ac523c01c7bdd849cdaf3496acea53326f8fa",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_rest_390x844.png": "8de4ce9d3fd26406cdbd1f36a802856fc8c3d7b8e785924cb2ecf642ad4e7793",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png": "265222aa78dbeb0b73e33e5caf93499838061353c9905c3520a40a3bcb0f2f83",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_000m.png": "ef21f5d063d29b19cb1fbbae6de5077ca256ae130f21c55e5c7a5f72442d9fbc",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_110m.png": "7c1afb99956376907814cd67fa3a15989daf777a34c09d503dc2128a3d5cc068",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_295m.png": "830e2c9f4ada402878558a82c9c69856d77594471d956483ca807b0c6fce844f",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_475m.png": "8a199a100edf7b4995165263f31a65812486089297d1f2245bb993d9f6e2719e",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_700m.png": "86ad59ac5d3a59b3b988ac2694bba85a13b5d96327953b4d301f3bd64b4a2bfa",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_875m.png": "7c55547d28bf21c5a0309ef748061b7feec0c1b98c200de0df699ebe36454187",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png": "a3f1c0d8a4e98885523b3e363812dff179a6c1765fb8703bcc82dfab231bd61e",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png": "485c98c2206d90ac82541f49475be7331ea4450a967220de1de368f05fb5c0ea",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png": "fc05b8bcdd84f87a754141a707a073f36c2bcc9f7703ca3e0e8be5dbfa4c8907",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_trunks_canopy_zoom.png": "91c14b68067002943ba4f7ea1fd442c151be30f50f4545eb28d77ec4d96b9c77",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_vines_light_zoom.png": "134ef719da128ffe18a6c0ef4843829818f43f420abf6793b7e6f2b6b97b3e2a",
+    "design/05-visual-design/SW-012/r1/prompts.md": "7b19d3f99513436d42f00e9333ff755e0ef89cce9324f820273464df1d478be6",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_distant_glow.svg": "9e6ea6886659b346e2cc0949b904b43074109a69b02af8b9a18394da21945082",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_glade.svg": "744764388b73a4d59f109665174a39efbf71ee26c98045f667367f0fc28d0ff2",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_master.svg": "595a2f5c981703fc865afd1e9c7af90fec7130ed60d7d301a4f3a16e2865caa2",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_mist.svg": "16019c680a2be5f726783a52b0f6ee3ece380378a3269a5c15124c292ed5ac8a",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_trunks_canopy.svg": "36890887c5375085573aeae8213ab58ca613a1ff0a367e563e6d70ddd4f127c0",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_vines_light.svg": "6ba97a7d8e13089c5d42a35a88c960d78162da9f33de1b13971c43e6492cd80b",
+    "design/05-visual-design/SW-012/r1/source/sw012_model.py": "5c851c9042a6f4b3f568d92ab647f988f3a5b04b1147b622cffd920716188a7c",
+    "design/05-visual-design/SW-012/r1/source/sw012_render.py": "aa7cc51cbd0285ddfa9fe14104c70c3896e942d30287ec837a7e6bab1f24359a",
+    "design/05-visual-design/SW-012/r1/source/sw012_supplement.py": "e996f8b40835523e0b8f1b48629d6fb5600e9a321a8f676b421816c6b2b50f87"
+  },
+  "checks": [
+    {
+      "name": "雨林冷湿绿身份与森林暖褐通透差异化目检 (板根粗干/连片阔叶顶棚/垂藤光斑/幽径反光 vs 细高疏干/斜射光束/远鸟)",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png",
+        "design/05-visual-design/SW-012/r1/previews/composition_guide.png"
+      ]
+    },
+    {
+      "name": "六阶段 smoothstep 合成与 900m 时间轴对齐 (0/110/295/475/700/875m，最后阶段≤900m不切屏)",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_000m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_110m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_295m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_475m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_700m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_875m.png"
+      ]
+    },
+    {
+      "name": "四边无硬边/无棋盘/无同心环与三底 (黑/洋红/白) 2x 放大目检 (mist/distant_glow/glade 边缘 max alpha ≤12，无实色亮边)",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_trunks_canopy_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_vines_light_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png"
+      ]
+    },
+    {
+      "name": "运行时逐像素裁切复核与恒可见带验证 (390x844/1080x2400，恒可见带 x[216,864]，旅人 x=367 恒可见，all_pass=true)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json",
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png",
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_rest_390x844.png",
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_parallax_max_390x844.png"
+      ]
+    },
+    {
+      "name": "可编辑模型及 53 文件 manifest SHA256/字节零差异验证 (纯本地 Python+SVG，零外部生图 API)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/design-manifest.json",
+        "design/05-visual-design/SW-012/r1/source/sw012_model.py",
+        "design/05-visual-design/SW-012/r1/source/sw012_render.py"
+      ]
+    },
+    {
+      "name": "逐层 MiniMax 提示词 (prompts.md) 完备性与真实透明要求核查 (澄清融入黑色观感须为真透明)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/prompts.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "SW-006 候选素材制作仍需等待 SW-015 联调 accepted 后激活",
+    "真机屏幕与真人视觉体验走查 (physical-device/human 待内测阶段)"
+  ]
+}

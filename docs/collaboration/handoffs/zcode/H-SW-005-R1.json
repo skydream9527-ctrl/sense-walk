@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-005-R1",
+  "task_id": "SW-005",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "7c2a3b7d644337a2e30a3f194a19ea16a9c75cdf",
+  "head_commit": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-005-R1.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/domain/walk/TerrainMotor.kt",
+    "app/src/main/java/com/sensewalk/app/domain/walk/VirtualWalkController.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/TerrainMotorTest.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/TerrainWalkIntegrationTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地，296/0/0，+22 覆盖任务全部反例）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": ["docs/collaboration/evidence/H-SW-005-R1/unit-lint-local.txt"]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": ["docs/collaboration/evidence/H-SW-005-R1/unit-lint-local.txt"]
+    },
+    {
+      "name": "模拟器真实手势实测（自动越坎/800m 通关/快照链回归）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": ["docs/collaboration/evidence/H-SW-005-R1/emulator-walkthrough.txt"]
+    },
+    {
+      "name": "云端 test/lint/build + validate（PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": ["docs/collaboration/handoffs/zcode/H-SW-005-R1.md"]
+    },
+    {
+      "name": "真机触感/视觉细节（提示 UI 呈现、reduceMotion 抖动）",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": ["docs/collaboration/handoffs/zcode/H-SW-005-R1.md"]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "站稳提示的 UI 呈现（规则已锁定，表现层待接）",
+    "真机触感验证（physical-device）",
+    "reduceMotion 视觉细节（视觉层任务）"
+  ],
+  "requests": [
+    "审核 head 9a791b5（含快照兼容决策：零新增持久字段）",
+    "通过后更新 registry"
+  ],
+  "design_manifest": null
+}
