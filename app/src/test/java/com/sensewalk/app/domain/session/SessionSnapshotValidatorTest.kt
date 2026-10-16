@@ -126,7 +126,9 @@ class SessionSnapshotValidatorTest {
 
     @Test
     fun `JSON 序列化往返无损 - 兼容未知字段与损坏输入`() {
-        val snap = snapshot(mode = "real")
+        val snap = snapshot(mode = "real").copy(stabilizeHintShown = true)
+        // P-02：hintShown 持久往返
+        assertEquals(true, SessionSnapshot.fromJson(SessionSnapshot.toJson(snap))?.stabilizeHintShown)
         val encoded = SessionSnapshot.toJson(snap)
         // 模拟未来版本新增字段：老读取忽略
         val withExtra = encoded.dropLast(1) + ",\"futureField\":1}"

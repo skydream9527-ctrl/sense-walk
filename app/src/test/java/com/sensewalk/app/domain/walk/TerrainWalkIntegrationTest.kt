@@ -214,12 +214,12 @@ class TerrainWalkIntegrationTest {
     }
 
     @Test
-    fun `R2 恢复局同 sessionId 站稳提示可再发 - 不以新局措辞绕过语义`() {
-        // 恢复沿用原 sessionId（SW-004 语义）；站稳提示是「本局第一次站稳」的温和教学，
-        // 中断恢复后玩家可能没看到提示——再发一次是产品上可接受的选择，
-        // 且不违反一次性相位提示不重播规则（PhaseScheduler 相位是另一系统）。
-        // 本用例锁定：恢复构造的控制器 hintShownThisSession 为 false（可再发）。
+    fun `P02 同局恢复提示不重复 - hintShown 随快照保持`() {
         val (original, _) = walkedTo(280f, deflection = 0.95f)
+        // 原局已触发过站稳提示（走到 280m 跨坎必然站稳过紧张段？不一定——0.95 紧张，会）
+        // 直接模拟：原局提示已发
+        original.terrainMotor.restoreHintShown(true)
+        assertTrue(original.terrainMotor.hintShown)
         val clock2 = FakeClock(50_000L)
         val restored = VirtualWalkController(
             config(), clock2,
@@ -230,11 +230,35 @@ class TerrainWalkIntegrationTest {
                 ),
                 firedPhaseIds = original.scheduler.firedPhaseIds,
                 elapsedActiveMs = 0L,
+                stabilizeHintShown = original.terrainMotor.hintShown,
             ),
         )
-        // 恢复控制器未发过提示（瞬态不持久化）
-        assertFalse(restored.consumeStabilizeHint())
-        // 已触发相位不重播（相位系统语义不受影响）
-        assertTrue(restored.drainPhaseEvents().isEmpty())
+        // 恢复后即使再次紧张站稳也不提示（同局仅一次）
+        restored.terrainMotor.step(100, 268f, 0.95f,
+            com.sensewalk.app.domain.scene.PathSegment(270, 300, com.sensewalk.app.domain.scene.TerrainKind.GAP_HOP), paused = false)
+        restored.terrainMotor.step(100, 268f, 0.95f,
+            com.sensewalk.app.domain.scene.PathSegment(270, 300, com.sensewalk.app.domain.scene.TerrainKind.GAP_HOP), paused = false)
+        assertFalse("同局恢复后不得再次提示", restored.consumeStabilizeHint())
     }
+
+    @Test
+    fun `P02 新局提示正常 - 未发过时恢复仍可提示`() {
+        val (original, _) = walkedTo(100f, deflection = 0.5f) // 未遇坎未提示
+        assertFalse(original.terrainMotor.hintShown)
+        val restored = VirtualWalkController(
+            config(), FakeClock(),
+            restore = VirtualWalkController.Restore(
+                progress = original.accumulator.snapshot(),
+                firedPhaseIds = original.scheduler.firedPhaseIds,
+                elapsedActiveMs = 0L,
+                stabilizeHintShown = false,
+            ),
+        )
+        // 恢复后首次紧张站稳正常提示
+        val seg = com.sensewalk.app.domain.scene.PathSegment(270, 300, com.sensewalk.app.domain.scene.TerrainKind.GAP_HOP)
+        restored.terrainMotor.step(100, 268f, 0.95f, seg, paused = false)
+        restored.terrainMotor.step(100, 268f, 0.95f, seg, paused = false)
+        assertTrue("未发过提示的局恢复后首次站稳应提示", restored.consumeStabilizeHint())
+    }
+
 }

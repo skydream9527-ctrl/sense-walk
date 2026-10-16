@@ -36,11 +36,13 @@ class VirtualWalkController(
     restore: Restore? = null,
 ) {
 
-    /** T07A 恢复载荷：进度（s_pos/s_best 分开还原，S9 回退不重复计距）+ 已触发相位 + 活跃时长 */
+    /** T07A 恢复载荷：进度（s_pos/s_best 分开还原，S9 回退不重复计距）+ 已触发相位 +
+     *  活跃时长 + stabilizeHintShown（R-SW-005-R1 P-02：同局恢复保持「站稳提示仅一次」） */
     data class Restore(
         val progress: com.sensewalk.app.domain.progress.ProgressSnapshot,
         val firedPhaseIds: Set<String>,
         val elapsedActiveMs: Long,
+        val stabilizeHintShown: Boolean = false,
     )
 
     val stateMachine = SessionStateMachine(clock)
@@ -50,11 +52,20 @@ class VirtualWalkController(
     val gate = CompletionGate(config.requiredDistanceMeters.toFloat())
     val scheduler = PhaseScheduler(config, restore?.firedPhaseIds ?: emptySet())
 
+    /** 越坎马达（T07B / SW-005）：接近/站稳/轻跳；hintShown 随快照持久（P-02） */
+    internal val terrainMotor = TerrainMotor()
+
+    /** 本局首坎站稳提示（一次性消费；UI 轻提示） */
+    fun consumeStabilizeHint(): Boolean = terrainMotor.consumeHint()
+
     init {
         // 显式建立黑幕：会话从 atMeters=0 的 void 相位开始；恢复构造时已触发相位
         // 不重复触发（黑幕 void 已在 fired 集合内则保持），感官按当前米数静态重建
         scheduler.update(0f)
-        restore?.let { stateMachine.restoreElapsedActiveMs(it.elapsedActiveMs) }
+        restore?.let {
+            stateMachine.restoreElapsedActiveMs(it.elapsedActiveMs)
+            terrainMotor.restoreHintShown(it.stabilizeHintShown)
+        }
     }
 
     private val mapper = ComfortStickMapper()
@@ -68,11 +79,7 @@ class VirtualWalkController(
     /** 已触发待消费的相位事件（感官协调器经 [drainPhaseEvents] 取走） */
     private var pendingEvents = mutableListOf<PhaseEvent>()
 
-    /** 越坎马达（T07B / SW-005）：接近/站稳/轻跳；无持久状态（快照不新增字段） */
-    internal val terrainMotor = TerrainMotor()
 
-    /** 本局首坎站稳提示（一次性消费；UI 轻提示） */
-    fun consumeStabilizeHint(): Boolean = terrainMotor.consumeHint()
 
     data class Snapshot(
         val session: SessionState,

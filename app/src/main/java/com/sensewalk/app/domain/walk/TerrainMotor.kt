@@ -59,6 +59,14 @@ class TerrainMotor {
         return h
     }
 
+    /** R-SW-005-R1 P-02：同局（同 sessionId）恢复保持「仅提示一次」——快照还原用 */
+    fun restoreHintShown(shown: Boolean) {
+        if (shown) hintShownThisSession = true
+    }
+
+    /** 当前是否已发过提示（快照保存用） */
+    val hintShown: Boolean get() = hintShownThisSession
+
     /**
      * 每帧推进（WALKING 状态才调用；dt 已受外层 MAX_FRAME_MS 约束）。
      * 返回本帧速度指令：

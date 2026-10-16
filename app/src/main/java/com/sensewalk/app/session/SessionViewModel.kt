@@ -111,6 +111,7 @@ class SessionViewModel(
                                 ),
                                 firedPhaseIds = snap.firedPhaseIds.toSet(),
                                 elapsedActiveMs = snap.elapsedActiveMs,
+                                stabilizeHintShown = snap.stabilizeHintShown, // P-02：同局仅提示一次
                             )
                         }
                         val controller = VirtualWalkController(config, systemClock, restore)
@@ -179,6 +180,7 @@ class SessionViewModel(
                 sBest = acc.sBest,
                 firedPhaseIds = controller.scheduler.firedPhaseIds.toList(),
                 elapsedActiveMs = controller.stateMachine.elapsedActiveMs,
+                stabilizeHintShown = controller.terrainMotor.hintShown, // P-02：同局恢复不重复提示
             ),
         )
     }

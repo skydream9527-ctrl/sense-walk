@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-005-R2",
+  "task_id": "SW-005",
+  "revision": 2,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+  "head_commit": "669498a147a7a56387d3d5ed3d4df83ed4072161",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
+  "report": "docs/collaboration/handoffs/zcode/H-SW-005-R2.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/domain/walk/TerrainMotor.kt",
+    "app/src/main/java/com/sensewalk/app/domain/walk/VirtualWalkController.kt",
+    "app/src/main/java/com/sensewalk/app/domain/session/SessionSnapshot.kt",
+    "app/src/main/java/com/sensewalk/app/session/SessionViewModel.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/TerrainMotorTest.kt",
+    "app/src/test/java/com/sensewalk/app/domain/walk/TerrainWalkIntegrationTest.kt",
+    "app/src/test/java/com/sensewalk/app/domain/session/SessionSnapshotValidatorTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地，303/0/0，R2 +6 含死区边界）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "模拟器实测：提示卡片真实显示+自动过坎 389m",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/hint-shown.png",
+        "docs/collaboration/evidence/H-SW-005-R2/after-hint-389m.png"
+      ]
+    },
+    {
+      "name": "3s 提示消失实测捕获",
+      "type": "emulator",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/emulator-r2.txt"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + validate（PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-005-R2.md"
+      ]
+    },
+    {
+      "name": "真机触感",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-005-R2.md"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "3s 提示消失的实测捕获（代码 delay+consume 保证，待 QA 复验）",
+    "真机触感（physical-device）"
+  ],
+  "requests": [
+    "审核 R2（UI 闭环+死区边界+P-02 同局提示一次；head 见本提交）",
+    "通过后更新 registry"
+  ],
+  "design_manifest": null
+}
