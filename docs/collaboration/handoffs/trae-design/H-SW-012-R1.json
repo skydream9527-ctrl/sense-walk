@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-012",
+  "revision": 1,
+  "producer": "trae-design",
+  "base_commit": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+  "head_commit": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
+  "changed_files": [
+    "design/05-visual-design/SW-012/r1/README.md",
+    "design/05-visual-design/SW-012/r1/design-manifest.json",
+    "design/05-visual-design/SW-012/r1/design-spec.json",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png",
+    "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png",
+    "design/05-visual-design/SW-012/r1/previews/composition_guide.png",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x1920.png",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x2400.png",
+    "design/05-visual-design/SW-012/r1/previews/crops/crop_390x844.png",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_black.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_magenta.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_white.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_black.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_magenta.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_white.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_black.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_magenta.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_white.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_black.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_magenta.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_white.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_black.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_magenta.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_white.jpg",
+    "design/05-visual-design/SW-012/r1/previews/layer_map.png",
+    "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_parallax_max_390x844.png",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_rest_390x844.png",
+    "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_000m.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_110m.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_295m.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_475m.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_700m.png",
+    "design/05-visual-design/SW-012/r1/previews/stages/stage_875m.png",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_trunks_canopy_zoom.png",
+    "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_vines_light_zoom.png",
+    "design/05-visual-design/SW-012/r1/prompts.md",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_distant_glow.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_glade.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_master.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_mist.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_trunks_canopy.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_vines_light.svg",
+    "design/05-visual-design/SW-012/r1/source/sw012_model.py",
+    "design/05-visual-design/SW-012/r1/source/sw012_render.py",
+    "design/05-visual-design/SW-012/r1/source/sw012_supplement.py",
+    "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+    "docs/collaboration/handoffs/trae-design/H-SW-012-R1.md",
+    "docs/collaboration/state/trae-design.json"
+  ],
+  "artifacts": [],
+  "checks": [
+    {
+      "id": "scene-identity-rainforest-vs-forest",
+      "type": "visual",
+      "summary": "875m 雨林终景与已批准 SW-011 森林终景并排目检：板根粗干+阔叶顶棚+垂藤光斑+贴地湿雾+幽径湿径 vs 细高疏干+斜光束+远鸟+褐土干叶；全稿冷湿绿、无森林暖褐 #A89060，身份明确可分，不是换色相",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png",
+        "design/05-visual-design/SW-012/r1/previews/composition_guide.png"
+      ]
+    },
+    {
+      "id": "layer-phase-coverage",
+      "type": "visual",
+      "summary": "六阶段在各层 fade 完成点取值(0/110/295/475/700/875m)，smoothstep 合成与 rainforest.md §4 的 90/.55/20、270/.85/25、450/1.0/25、675/.85/25、855/.90/20 对齐，最后 875m≤900m 终点不切屏；0m 仅程序旅人无提前揭示",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_875m.png",
+        "design/05-visual-design/SW-012/r1/previews/stages/stage_000m.png"
+      ]
+    },
+    {
+      "id": "edge-seam-checkerboard",
+      "type": "visual",
+      "summary": "三 overlay 四边 strip4 无 alpha>=64 实色边、外缘不亮于内邻（实测边缘 max alpha：mist 12、distant_glow 0、glade 4），叠加每层内容热点+四缘三底 2x 最近邻放大目检：无白边/矩形底/棋盘/同心环",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png",
+        "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png"
+      ]
+    },
+    {
+      "id": "runtime-crop-safe-zone",
+      "type": "source",
+      "summary": "逐像素对齐已批准 drawImageLayer 语义（雨林 Shell 尚未存在，为设计复核非 Android 证据）：390x844 scale=.4396/dstW475/溢出85，1080x2400 scale=1.25/溢出270，恒可见源带 x[216,864]，旅人源锚点 x=367 静止与最大视差两极端恒可见；runtime-crop-check.json all_pass=true",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json",
+        "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png"
+      ]
+    },
+    {
+      "id": "editable-source-reproducible",
+      "type": "source",
+      "summary": "SVG 与 PIL 后端共享同一图元模型（与 SW-011 同构）；design-manifest.json 53 个交付文件 SHA256/字节独立复算 0 处不符、目录无未列文件；纯本地 PIL+numpy+手写 SVG，零外部付费/生图 API",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-012/r1/design-manifest.json",
+        "design/05-visual-design/SW-012/r1/source/sw012_model.py"
+      ]
+    }
+  ],
+  "design_manifest": "design/05-visual-design/SW-012/r1/design-manifest.json",
+  "report": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.md",
+  "pending_verification": [
+    "Antigravity 按 docs/collaboration/contracts/visual-design.md 独立目检/量检并判定设计可接受性（雨林身份与森林区分、overlay 边缘/棋盘、最小屏安全区、proposed layer id/parallax 冻结、可复现源）",
+    "审稿时冻结五层 canonical id/type/at_meters/to_opacity/fade_meters 与 parallax（mist/trunks_canopy/vines_light/distant_glow/glade），供 MiniMax SW-006 与 ZCode 配置契约消费",
+    "批准后启用 SW-006：MiniMax 依 prompts.md 制作候选并在素材 manifest 的 design_ref 引用本批准 handoff 与 design-spec.json 的确切 sha256，候选仍须独立三档 OOM/计时/真机/视觉盲检后由 Antigravity 集成判定；本设计包不替代素材与集成验收"
+  ]
+}

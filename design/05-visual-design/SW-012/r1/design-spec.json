@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-012",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "status": "design_candidate",
+  "producer": "trae-design",
+  "created_on": "2026-10-15",
+  "id_naming_status": "proposed：以下五层 id/parallax 均为设计提案，尚未冻结；由 Antigravity 审核本 r1 时冻结，供 MiniMax(SW-006) 制作素材与 ZCode 配置契约消费。不伪造 rainforest.json 已存在（当前仓库无雨林运行时配置/Shell）。",
+  "basis": {
+    "base_commit": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+    "base_note": "已 fetch 最新 origin/main 并从该提交建任务分支；SW-011 53 文件设计包已 accepted 并入 main，本稿复用其通用视觉语言与图元契约，不改动 SW-011 任何已批准文件。",
+    "scene_doc": "design/01-scenes-terrain/rainforest.md",
+    "product_rules": "DEVELOPMENT.md §7.1/§7.7/§12.4（雨林示例 phases/pathProfile/visualLayers）",
+    "contract": "docs/collaboration/contracts/visual-design.md",
+    "assets_contract": "docs/collaboration/contracts/visual-assets.md",
+    "approved_design_reused": "design/05-visual-design/SW-011/r1/（图元模型/渲染器/补充复核结构、旅人锚点、drawImageLayer 裁切语义）",
+    "runtime_config_status": "app/src/main/assets/scenes/rainforest.json 与雨林 Shell 尚不存在；本稿相位/parallax 为对齐 rainforest.md §4 时间轴的设计值，字段名在实现期可按 DEVELOPMENT §7.7 微调，数值原则不变。"
+  },
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "coordinate_system": "normalized_0_to_1",
+    "crop_previews": [
+      {"width": 1080, "height": 1920, "note": "基准；按高度铺满、左对齐，宽恰好不溢出"},
+      {"width": 1080, "height": 2400, "note": "长屏：按高铺满 scale=1.25，目标宽 1350，右侧溢出 270px 作横向视差余量"},
+      {"width": 390, "height": 844, "note": "小屏：按高铺满 scale=844/1920≈0.4396，目标宽约 475，左对齐、右侧溢出约 85px 供视差；不做左右 cover 硬裁"}
+    ],
+    "actual_source_resolution": "原生 1080×1920 矢量/图元模型（sw012_model.py 单位即逻辑像素）；PNG 由同一模型 2× 超采样(2160×3840)后 LANCZOS 缩回 1080×1920 抗锯齿。无位图放大史、无外部素材。",
+    "safe_area_notes": "关键内容收在中央 80% 安全宽（x=.10–.90）、y=.12–.92。下方 y=.55–1.00 为摇杆触控区（45%），保持湿雾低对比、不烘焙按钮/文字/摇杆/米数/暂停标志；顶部 y=0–.12 留给米数/暂停/放弃，顶棚冠线与垂藤允许进入但不放置高亮信息。裁切/视差语义沿用已批准的按高度铺满、左对齐、仅在右侧溢出宽度内横移。",
+    "light_source": "统一右上（俯角约 12–20°），所有层共享；阔叶冠缘右上受光、藤蔓暖绿光斑、树干右侧细边光、林隙透光自顶棚缺口向下。",
+    "shared_baselines": "与森林同一脚底基线与归一化坐标系；旅人脚底 y=.865。雨林不画森林那种干叶土坡地平线，景深层次为：湿雾前景 → 板根/顶棚 → 垂藤 → 林隙透光 → 幽径湿径。"
+  },
+  "anchors": {
+    "traveler_x": 0.34,
+    "ground_y": 0.865,
+    "joystick_area_bottom_fraction": 0.45,
+    "traveler_render": "程序绘制（沿用森林 drawTraveler 同数值剪影示意）；本轮不出角色素材，任何 exports 单层 PNG 中都不画人。"
+  },
+  "palette": {
+    "source": "design/01-scenes-terrain/rainforest.md §2（契约指定雨林色板）+ 在其明暗组织内派生的层次 token；全部低饱和冷湿绿，不引入森林暖褐 #A89060。",
+    "void": "#050807",
+    "mist": "#1A2E28",
+    "bark": "#1E3D36",
+    "canopy": "#2A5248",
+    "glow_vine": "#C4D4A8",
+    "ui_text": "#E8EBE6",
+    "ui_text_muted": "#8A938A",
+    "extended_note": "以下派生 token 仅用于体积/层次过渡与湿度表达，色相不超出雨林冷湿绿+暖绿光点范围；正式素材应优先使用场景单页色值。",
+    "extended": {
+      "void_rgb": [5, 8, 7],
+      "mist_hi": "#2F4E44",
+      "bark_dark": "#162E28",
+      "bark_foreground": "#122621",
+      "leaf_deep": "#1C4236",
+      "leaf_mid": "#33604F",
+      "leaf_hi": "#4A6B4F",
+      "moss": "#60764A",
+      "vine": "#3A5C4C",
+      "vine_hi": "#6A8A60",
+      "glow_soft": "#A8C9A6",
+      "water": "#5A7D72",
+      "glade": "#9FC09A",
+      "path_wet": "#3A584C",
+      "traveler": "#7A857C"
+    },
+    "forest_separation": "森林用暖褐 #A89060/干叶/土路/斜射光束/远鸟；雨林一律改用湿绿冷调、雾青 #2F4E44、苔绿 #60764A、冷青湿面 #5A7D72 与藤蔓暖绿点光 #C4D4A8，不出现暖褐干叶与通透干爽林相。"
+  },
+  "layers": [
+    {
+      "id": "mist",
+      "id_status": "proposed",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 90,
+      "to_opacity": 0.55,
+      "fade_meters": 20,
+      "tileable": false,
+      "design_notes": "第一层氛围：贴地湿雾（横向大扁椭圆软光，重心 y≈.79，四边软衰减）+ 左下角一团更亮湿雾心托住旅人脚底 + 三缕横向飘雾（收在屏内、大柔化）+ 上部极薄空气雾。只用 #1A2E28/#2F4E44 低 α 解析渐变，恒定 alpha 区不送到屏边。参考 exports/rainforest_mist.png 与 previews/zoom/rainforest_mist_zoom.png。",
+      "transparent_regions": "雾团以外全部真透明；四边 alpha 平滑归零，无矩形底/无水平硬切线。"
+    },
+    {
+      "id": "trunks_canopy",
+      "id_status": "proposed",
+      "type": "parallax",
+      "parallax": 0.3,
+      "at_meters": 270,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "雨林主体景：六根带明显板根扩张的粗壮湿干（底部张开比森林树干更大），竖向体积渐变 #162E28→#1E3D36，最右一根 #122621 前景最暗纯剪影，右侧细边光，树干中上贴极低 α 苔藓柔斑；上方三排连片阔叶顶棚（#1C4236/#2A5248/#33604F 由深到亮），上中部刻意留两处林隙（x≈.54–.68 与 x≈.17–.26）给 675m distant_glow 透光。纵向 mask 让其从黑幕淡入、到地面前淡出，不画地面。参考 exports/rainforest_trunks_canopy.png。",
+      "transparent_regions": "两处顶棚林隙、树间、冠线以上、地面以下为真透明；不铺整片背景。"
+    },
+    {
+      "id": "vines_light",
+      "id_status": "proposed",
+      "type": "parallax",
+      "parallax": 0.6,
+      "at_meters": 450,
+      "to_opacity": 1.0,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "前景细节层（雨林身份核心）：8 条自顶棚垂下的弯曲垂藤（两端超出画布宽，最长止于 y≈.39 不进下 45% 触控区），对生小叶 #6A8A60/#33604F，藤尖偶发克制水珠；藤间与冠隙散布约 20 个藤蔓暖绿光斑 #C4D4A8（柔化圆斑，非长光束）。参考 exports/rainforest_vines_light.png。",
+      "transparent_regions": "藤蔓/叶/光斑以外全部真透明；垂藤避开旅人 x=.34 竖线。"
+    },
+    {
+      "id": "distant_glow",
+      "id_status": "proposed",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 675,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "tileable": false,
+      "design_notes": "林隙透光 + 流动水汽：三团近竖椭圆斑驳漏光（位置与 trunks_canopy 两处顶棚缺口呼应，#A8C9A6 峰值 α .14–.26，大柔化、末端归零，是雨林漏光而非森林那种长斜光束）；中下部三条横向拉长、收进屏内的极淡水汽柔带（#5A7D72/#2F4E44，α≤.10）。无第二套树林、无矩形底、无同心环。参考 exports/rainforest_distant_glow.png。",
+      "transparent_regions": "除三团渐隐漏光与水汽带外全部真透明；漏光边缘自然衰减到 alpha=0。"
+    },
+    {
+      "id": "glade",
+      "id_status": "proposed",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 855,
+      "to_opacity": 0.9,
+      "fade_meters": 20,
+      "tileable": false,
+      "design_notes": "终点幽径（900m 不切屏炫技）：单一椭圆径向幽径辉光 #9FC09A（中心约 x=.56/y=.60，峰值 α .24，四边归零）+ 一条自底中偏右收窄向幽径的湿径（#3A584C 柔带 + #5A7D72 冷青湿面微光 + 三处横向反光），湿径上下缘都用纵向 mask 淡出，屏底 alpha=0。无同心环、无重复纹理。参考 exports/rainforest_glade.png。",
+      "transparent_regions": "辉光/湿径以外全透明；中心到边缘连续平滑到 alpha=0，屏底无矩形边。"
+    }
+  ],
+  "phase_table": {
+    "unlock_meters": [0, 90, 270, 450, 675, 855],
+    "fade_complete_preview_meters": [0, 110, 295, 475, 700, 875],
+    "rows": [
+      {"unlock_m": 0, "layer": "void(程序)", "target_opacity": 1.0, "fade_m": null, "preview_m": 0},
+      {"unlock_m": 90, "layer": "mist", "target_opacity": 0.55, "fade_m": 20, "preview_m": 110},
+      {"unlock_m": 270, "layer": "trunks_canopy", "target_opacity": 0.85, "fade_m": 25, "preview_m": 295},
+      {"unlock_m": 450, "layer": "vines_light", "target_opacity": 1.0, "fade_m": 25, "preview_m": 475},
+      {"unlock_m": 675, "layer": "distant_glow", "target_opacity": 0.85, "fade_m": 25, "preview_m": 700},
+      {"unlock_m": 855, "layer": "glade", "target_opacity": 0.9, "fade_m": 20, "preview_m": 875}
+    ],
+    "rule": "六阶段预览一律取在各层 fade 完成点（unlock+fade），最后一张 875m ≤ 900m 终点，不越终点、不把刚解锁的零 opacity 图当最终效果；900m 保持景色完整、不切屏。"
+  },
+  "preview_meters": [0, 110, 295, 475, 700, 875],
+  "opacity_model": "opacity = target * smoothstep((meters-atMeters)/fadeMeters)，smoothstep=x*x*(3-2x)，meters<at 为 0；与 rainforest.md §4 时间轴及森林已实现的 SensoryState 衰减语义一致（雨林配置实现时沿用）。预览透明度只用于合成展示，禁止烘焙进最终 RGB/alpha；停走即冻结，禁止一键显示全部。",
+  "programmatic_layers": ["void", "traveler"],
+  "source_files": [
+    "design/05-visual-design/SW-012/r1/source/sw012_model.py",
+    "design/05-visual-design/SW-012/r1/source/sw012_render.py",
+    "design/05-visual-design/SW-012/r1/source/sw012_supplement.py",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_mist.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_trunks_canopy.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_vines_light.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_distant_glow.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_glade.svg",
+    "design/05-visual-design/SW-012/r1/source/svg/rainforest_master.svg"
+  ],
+  "supplement_checks_20261015": {
+    "generator": "design/05-visual-design/SW-012/r1/source/sw012_supplement.py",
+    "zoom_previews": [
+      "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png",
+      "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_trunks_canopy_zoom.png",
+      "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_vines_light_zoom.png",
+      "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png",
+      "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png"
+    ],
+    "zoom_method": "每层 3–4 个内容热点 + 画布四缘，260×260 源像素框，黑/白/洋红三底，2× 最近邻放大不美化。",
+    "runtime_crop_preview": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png",
+    "runtime_extremes": [
+      "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_rest_390x844.png",
+      "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_parallax_max_390x844.png"
+    ],
+    "runtime_quantitative": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json",
+    "runtime_geometry_390x844": {"scale": 0.439583, "dst_width_dest_px": 475, "overflow_dest_px": 85},
+    "runtime_geometry_1080x2400": {"scale": 1.25, "dst_width_dest_px": 1350, "overflow_dest_px": 270},
+    "always_visible_source_band_x": [216, 864],
+    "drawimage_layer_model": "scale=h/imageH; dstW=floor(imageW*scale+0.5); overflow=max(0,dstW-w); xOffset=-clamp(parallaxPx,0,overflow)；左对齐、按高度铺满；overlay 不视差。雨林 Shell 尚不存在，此处逐像素对齐已批准森林渲染器语义做设计复核，非 Android 证据。",
+    "overlay_edge_alpha_max0to255_strip4_measured": {
+      "mist": {"top": 0, "bottom": 11, "left": 12, "right": 12, "solid_edge_pixels_alpha_ge_64": 0},
+      "distant_glow": {"top": 0, "bottom": 0, "left": 0, "right": 0, "solid_edge_pixels_alpha_ge_64": 0},
+      "glade": {"top": 0, "bottom": 4, "left": 0, "right": 0, "solid_edge_pixels_alpha_ge_64": 0}
+    }
+  },
+  "reference_sources": [
+    {
+      "file": "design/05-visual-design/SW-012/r1/previews/composition_guide.png",
+      "origin": "internal_original",
+      "usage_rights": "Trae Design 内部生成的雨林风格/色板/构图/与森林差异说明，无外部版权来源"
+    },
+    {
+      "file": "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png",
+      "origin": "internal_original",
+      "usage_rights": "由本任务可编辑模型渲染的 875m 终景风格参考，非外部素材"
+    }
+  ],
+  "external_assets_used": "无。未调用任何外部付费/生图 API；全部为本地 Python(PIL+numpy) 几何/渐变渲染与手写 SVG，零外部网络依赖。",
+  "scene_identity_checks": [
+    "湿绿冷调+雾青/苔色/冷青湿面，全稿无森林暖褐 #A89060、无干叶、无干爽土路。",
+    "粗大板根湿干+遮天连片阔叶顶棚（留林隙），区别于森林细高疏干与通透树荫。",
+    "前景垂藤/对生叶/藤蔓暖绿光斑 + 林隙斑驳漏光，区别于森林斜射长光束与远鸟（雨林不画鸟）。",
+    "贴地湿雾/流动水汽/幽径湿径反光表达湿度；无雷暴炸响视觉、无闪光、无惊吓元素。",
+    "875m 终景与 SW-011 森林终景并排目检：林相、干湿、色温、景深层次均明确可分，不是换色相。"
+  ],
+  "verification_self_checks": [
+    "0m 合成仅含程序旅人，无任何层提前揭示（stage_000m 目检为近黑偏绿黑幕+旅人）。",
+    "三个 overlay 层在黑/白/洋红底上目检：无棋盘格、无同心环、无矩形底、无白边；四缘 strip4 无 alpha>=64 实色边，外缘不亮于内邻。",
+    "六阶段按真实 smoothstep 透明度与固定随机种子渲染（0/110/295/475/700/875m），演进连续，最后一张不越 900m 终点。",
+    "三比例按 drawImageLayer 的按高铺满+左对齐语义出图并标注安全区/触控区/旅人锚点；跨屏恒可见源带 x[216,864]，旅人源锚点 x=367 恒可见。",
+    "每层内容热点+画布四缘三底 2× 最近邻放大（previews/zoom/）：板根/阔叶/垂藤/漏光/湿径边缘干净，暗部主体未被抠除。",
+    "雨林与森林身份差异化目检通过（见 scene_identity_checks）。"
+  ],
+  "limitations": [
+    "设计稿为可编辑矢量/图元模型与渲染预览，不是 MiniMax 正式素材，也不是 Android 接入或真机验收证据；不放 app/assets。",
+    "五层 id/parallax 标记 proposed，需 Antigravity 审稿冻结；rainforest.json 与雨林 Shell 尚未存在，本稿不声称运行时已接线。",
+    "两个视差层标 tileable=false：当前渲染语义只支持右侧溢出宽度内有限滑动，单图非无缝；本稿未做无缝平铺，也不假设运行时已支持平铺。",
+    "SVG 为可编辑源，PNG 以 PIL 后端为准（两者消费同一模型）；未提供 PSD/Figma，工具不具备则不虚构。",
+    "正式素材尺寸/每层 ≤400KB、每景 ≤2MB 等由 MiniMax(SW-006) 按 visual-assets 契约交付并压缩；本设计导出 PNG 体积不受该预算约束。",
+    "不代做音频（rainforest.md §3 声景）、app 接线或真实素材验收；900m 距离、速度/门禁/布局沿用既定规则，本稿不提变更。"
+  ]
+}

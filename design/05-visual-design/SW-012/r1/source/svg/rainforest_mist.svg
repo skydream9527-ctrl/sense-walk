@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+<radialGradient id="mist-eg-1" gradientUnits="userSpaceOnUse" cx="540" cy="1520" r="440" gradientTransform="matrix(1.36364,0,0,1,-196.364,0)"><stop offset="0.0" stop-color="#1A2E28" stop-opacity="0.5"/><stop offset="0.45" stop-color="#1A2E28" stop-opacity="0.32"/><stop offset="0.78" stop-color="#1A2E28" stop-opacity="0.1"/><stop offset="1.0" stop-color="#1A2E28" stop-opacity="0.0"/></radialGradient>
+<radialGradient id="mist-eg-2" gradientUnits="userSpaceOnUse" cx="470" cy="1560" r="250" gradientTransform="matrix(1.44000,0,0,1,-206.800,0)"><stop offset="0.0" stop-color="#2F4E44" stop-opacity="0.16"/><stop offset="0.6" stop-color="#2F4E44" stop-opacity="0.07"/><stop offset="1.0" stop-color="#2F4E44" stop-opacity="0.0"/></radialGradient>
+<filter id="mist-blur-3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="34"/></filter>
+<radialGradient id="mist-eg-4" gradientUnits="userSpaceOnUse" cx="560" cy="770" r="520" gradientTransform="matrix(1.07692,0,0,1,-43.077,0)"><stop offset="0.0" stop-color="#1A2E28" stop-opacity="0.07"/><stop offset="0.7" stop-color="#1A2E28" stop-opacity="0.03"/><stop offset="1.0" stop-color="#1A2E28" stop-opacity="0.0"/></radialGradient>
+</defs>
+  <rect x="0" y="0" width="1080" height="1920" fill="url(#mist-eg-1)"/>
+  <rect x="0" y="0" width="1080" height="1920" fill="url(#mist-eg-2)"/>
+  <g filter="url(#mist-blur-3)">
+    <ellipse cx="300" cy="1070" rx="250" ry="86" fill="#2F4E44" fill-opacity="0.12"/>
+    <ellipse cx="760" cy="1260" rx="240" ry="104" fill="#2F4E44" fill-opacity="0.14"/>
+    <ellipse cx="470" cy="1400" rx="300" ry="72" fill="#2F4E44" fill-opacity="0.1"/>
+  </g>
+  <rect x="0" y="0" width="1080" height="1920" fill="url(#mist-eg-4)"/>
+</svg>

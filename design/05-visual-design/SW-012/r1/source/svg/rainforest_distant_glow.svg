@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+<filter id="distant_glow-blur-1" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="22"/></filter>
+<radialGradient id="distant_glow-eg-2" gradientUnits="userSpaceOnUse" cx="655" cy="300" r="268" gradientTransform="matrix(0.55970,0,0,1,288.396,0)"><stop offset="0.0" stop-color="#A8C9A6" stop-opacity="0.26"/><stop offset="0.5" stop-color="#A8C9A6" stop-opacity="0.143"/><stop offset="0.82" stop-color="#A8C9A6" stop-opacity="0.036"/><stop offset="1.0" stop-color="#A8C9A6" stop-opacity="0.0"/></radialGradient>
+<filter id="distant_glow-blur-3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="22"/></filter>
+<radialGradient id="distant_glow-eg-4" gradientUnits="userSpaceOnUse" cx="232" cy="366" r="205" gradientTransform="matrix(0.52683,0,0,1,109.776,0)"><stop offset="0.0" stop-color="#A8C9A6" stop-opacity="0.18"/><stop offset="0.5" stop-color="#A8C9A6" stop-opacity="0.099"/><stop offset="0.82" stop-color="#A8C9A6" stop-opacity="0.025"/><stop offset="1.0" stop-color="#A8C9A6" stop-opacity="0.0"/></radialGradient>
+<filter id="distant_glow-blur-5" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="22"/></filter>
+<radialGradient id="distant_glow-eg-6" gradientUnits="userSpaceOnUse" cx="892" cy="232" r="172" gradientTransform="matrix(0.53488,0,0,1,414.884,0)"><stop offset="0.0" stop-color="#A8C9A6" stop-opacity="0.14"/><stop offset="0.5" stop-color="#A8C9A6" stop-opacity="0.077"/><stop offset="0.82" stop-color="#A8C9A6" stop-opacity="0.02"/><stop offset="1.0" stop-color="#A8C9A6" stop-opacity="0.0"/></radialGradient>
+<filter id="distant_glow-blur-7" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="32"/></filter>
+</defs>
+  <g filter="url(#distant_glow-blur-1)">
+    <rect x="0" y="0" width="1080" height="1920" fill="url(#distant_glow-eg-2)"/>
+  </g>
+  <g filter="url(#distant_glow-blur-3)">
+    <rect x="0" y="0" width="1080" height="1920" fill="url(#distant_glow-eg-4)"/>
+  </g>
+  <g filter="url(#distant_glow-blur-5)">
+    <rect x="0" y="0" width="1080" height="1920" fill="url(#distant_glow-eg-6)"/>
+  </g>
+  <g filter="url(#distant_glow-blur-7)">
+    <ellipse cx="390" cy="1080" rx="290" ry="80" fill="#5A7D72" fill-opacity="0.08"/>
+    <ellipse cx="730" cy="1272" rx="270" ry="92" fill="#2F4E44" fill-opacity="0.1"/>
+    <ellipse cx="400" cy="1418" rx="290" ry="70" fill="#5A7D72" fill-opacity="0.07"/>
+  </g>
+</svg>
