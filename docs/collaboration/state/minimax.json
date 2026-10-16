@@ -5,7 +5,7 @@
   "previous_task": "SW-002",
   "status": "handoff_ready",
   "branch": "codex/minimax/SW-015-r1",
-  "head_commit": "REPLACE_WITH_R1_HEAD_AFTER_COMMIT",
+  "head_commit": "81fbf2d21e7cdc3131618f9ba6450109a3420f58",
   "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
   "latest_review": {
     "id": "R-SW-002-R1",
