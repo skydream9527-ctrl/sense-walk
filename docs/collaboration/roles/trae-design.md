@@ -1,6 +1,6 @@
 # trae-design 稳定入口与完整提示词
 
-每轮先fetch，从最新origin/main读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及当前任务/契约。以精确源码、远端交付和证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
+先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
 
 请使用Design模式，负责design/05-visual-design中的可编辑设计与逐层素材提示词；不改app、MiniMax候选/脚本或中心registry。
 

@@ -2,6 +2,8 @@
 
 这套系统把开发安排、交付、审核与证据保存到 GitHub。无需额外服务、自动调度器或完整本地 Android 环境。
 
+本轮P-20261015-02目前仅在本地规划分支，GitHub写入受网络/连接器403限制；先由Antigravity按 [发布交接](PUBLISH-PLAN-20261015.md) 导入交付包发布。其余角色可读用户给定的本机入口路径；发布后继续使用下方稳定相对路径。
+
 ## 只需发送的四条入口提示词
 
 - ZCode：`请先 fetch 最新 origin/main，从该版本读取并执行 docs/collaboration/roles/zcode.md；保留现有工作。`

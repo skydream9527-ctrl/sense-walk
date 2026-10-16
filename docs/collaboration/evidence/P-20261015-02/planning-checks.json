@@ -31,5 +31,10 @@
       "note": "53 manifest hashes/bytes match; no UI gait/hint consumers; archived appendix differs; raw author XML296/0, not executed by this audit"
     }
   ],
-  "scope": "Only living planning docs/registry plus new decision/evidence; no app, author state, old handoff/review/evidence/decision changes"
+  "scope": "Only living planning docs/registry plus new decision/evidence; no app, author state, old handoff/review/evidence/decision changes",
+  "publication": {
+    "status": "not_published",
+    "reason": "Local terminal GitHub DNS/network unavailable; connector create_tree/create_branch 403 Resource not accessible by integration",
+    "fallback": "PUBLISH-PLAN-20261015.md + portable planning.bundle / planning.patch / files"
+  }
 }

@@ -46,3 +46,7 @@ Trae本轮补下游消费说明（新增交接附页、引用现有spec/hash/逐
 - [作者本地JUnit原始文件](author-junit)：只读复制作者SW005 worktree已有28份XML，296项/0失败/0错误/0跳过；不是本轮自己执行测试，也不是下载的云端XML。云端run38744519423另核为success，报告artifact11978655122对应临时合并bdea9c674d34a363fba0118cc7a4b2b74700e0a5；因本机DNS未取得ZIP字节，不把作者XML冒充云端原件。
 - 未自己启动模拟器/Android或paid API，没有物理设备/真人结论。作者800m截图/手势声明仍由QA独立复验。
 - 本轮计划检查结果见 [planning-checks.json](planning-checks.json)。历史review/evidence/handoff/decision保持不变；新rework为bootstrap观察，正式review仍归Antigravity。
+
+## 本轮发布限制与可继续入口
+
+本地规划已提交并校验；终端GitHub网络不可达，连接器create_tree/create_branch返回403写权限不足，本轮尚未建立远端PR/合入main。四个入口可由用户给出的本机绝对路径读取；Antigravity先按 [发布交接](../../PUBLISH-PLAN-20261015.md) 导入现成规划/交付包，在其可用GitHub环境正常PR/CI/集成，之后继续常驻验收。包中DELIVERY.json记录最终head/tree/验证与限制；不是已发布声明。
