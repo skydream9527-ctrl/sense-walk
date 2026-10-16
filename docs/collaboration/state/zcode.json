@@ -4,10 +4,10 @@
   "current_task": "SW-005",
   "status": "handoff_ready",
   "branch": "codex/zcode/SW-005-terrain",
-  "head_commit": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
-  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
-  "updated_on": "2026-10-15",
-  "note": "SW-005 R1 已交付待审核（T07B 越坎：TerrainMotor+22 单测+模拟器 800m 通关实测；快照零新增字段）。SW-010 已同步收口（e7441a2）待 QA 复核集成。SW-007 仍等 SW-006。",
+  "head_commit": "669498a147a7a56387d3d5ed3d4df83ed4072161",
+  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
+  "updated_on": "2026-10-16",
+  "note": "SW-005 R2 已交付（UI 闭环+死区边界+302 单测+提示实测）；R1 已收到 R-SW-005-R1 changes_requested，R2 为响应交付。SW-010 门禁已修待集成。SW-007 仍等 SW-005/SW-006。",
   "deliveries": {
     "SW-001": {
       "branch": "codex/zcode/SW-001-t06-reliability",
@@ -23,22 +23,22 @@
       "delivery_head": "dfcc19edd7a73a02cfa1261d6223496b4d0f3fa8",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-      "status": "approved (R-SW-010-R1); synced head e7441a2 awaiting integration"
+      "status": "approved; archive gate fixed (3d24487), awaiting integration"
     },
     "SW-004": {
       "branch": "codex/zcode/SW-004-session-snapshot",
       "business_head": "dac64311092f18dc1fabe49977cf845d2fa5da89",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/9",
-      "status": "awaiting independent review R1",
+      "status": "accepted & merged (814fc78)",
       "delivery_head": "c18b99074d4d1d7b63331339684b829cdbcdcac4"
     },
     "SW-005": {
       "branch": "codex/zcode/SW-005-terrain",
-      "business_head": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
-      "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
-      "pr": null,
-      "status": "awaiting independent review R1"
+      "business_head": "669498a147a7a56387d3d5ed3d4df83ed4072161",
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
+      "status": "R2 delivered (UI closure + deadzone), awaiting review"
     }
   }
 }

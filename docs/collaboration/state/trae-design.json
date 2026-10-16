@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "agent": "trae-design",
-  "current_task": "SW-011",
+  "current_task": "SW-012",
   "status": "handoff_ready",
-  "branch": "codex/trae-design/SW-011-forest-visual-design",
-  "head_commit": "52779607f4205d4281e1200a25a78ed24d59bf74",
-  "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
-  "updated_on": "2026-10-14",
-  "note": "SW-011 r1 设计包完成并保留既有草稿：已从最新 origin/main(17a8663b) 快进并复核 ForestShell/forest.json；补齐每图层中央/边缘三底 2x 放大(previews/zoom)与逐像素复刻 drawImageLayer 的运行时裁切复核(previews/runtime_crop)；manifest 53 文件 SHA256 全通过。交 Antigravity 审核，批准后供 MiniMax 制作素材。"
+  "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+  "head_commit": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
+  "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+  "updated_on": "2026-10-15",
+  "note": "SW-012 r1 雨林900m设计包完成：已从最新 origin/main(904ab01) 建任务分支并保留 SW-011 已批准草稿；复用其图元双后端契约产出雨林五层(mist/trunks_canopy/vines_light/distant_glow/glade，id/parallax 标 proposed)，含可编辑 SVG/Python 源、五层 RGBA 导出、fade 完成点六阶段(0/110/295/475/700/875m)、三比例裁切、每层三底+热点/四缘 2x 放大、逐像素 drawImageLayer 裁切复核(恒可见带 x[216,864]、all_pass)、构图与雨林vs森林差异说明、逐层 prompts；manifest 53 文件 SHA256/字节全通过；零外部付费 API，不改 app/源码与 SW-011。交 Antigravity 审稿冻结命名，批准后启用 SW-006 供 MiniMax 制作素材。"
 }

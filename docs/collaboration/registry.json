@@ -72,7 +72,7 @@
       "title": "森林光效批准候选入包",
       "owner": "zcode",
       "kind": "code",
-      "status": "rework",
+      "status": "accepted",
       "depends_on": [
         "SW-002",
         "SW-003"
@@ -80,20 +80,11 @@
       "task_file": "docs/collaboration/tasks/SW-010.md",
       "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
       "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
-      "integrated_commit": null,
+      "integrated_commit": "2b47f01aa64262433b52c1a071ddfec2ba4ee249",
       "pending": [
-        "Git冲突已解决；PR #3 Android成功但协作run38736953399失败：修改已归档H-SW-010-R1-appendix-sizes.md。作者恢复该文件为main字节，将新说明放新增sync/correction文件，不能禁用历史检查。",
-        "原R1 approved保留；新head及完整delta/素材hash/全部CI由Antigravity复核后集成，尚未进入main/组合包。"
-      ],
-      "observed_delivery": {
-        "revision": 1,
-        "branch": "codex/zcode/SW-010-forest-lightshows",
-        "branch_head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5",
-        "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
-        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
-      }
+        "真机（非模拟器）视觉走查（physical-device）",
+        "tileable/平铺持续视差（非本任务范围，维持 cover 模式）"
+      ]
     },
     {
       "id": "SW-004",
@@ -119,27 +110,18 @@
       "title": "雨林图片设计包",
       "owner": "trae-design",
       "kind": "design",
-      "status": "handoff_ready",
+      "status": "accepted",
       "depends_on": [
         "SW-011"
       ],
       "task_file": "docs/collaboration/tasks/SW-012.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-012-R1.json",
+      "integrated_commit": "bb05b035f1109d974790a9e576a77a539c2e43ed",
       "pending": [
-        "PR15已发布，53文件hash/bytes匹配，五层/六阶段/三比例/逐层prompt齐备，CI成功；待Antigravity独立审稿并用精确spec哈希冻结proposed命名/参数。",
-        "SW-006仍等SW-015联调accepted；设计参考不等于生产候选/Android接入。"
-      ],
-      "observed_delivery": {
-        "revision": 1,
-        "branch": "codex/trae-design/SW-012-rainforest-visual-design",
-        "branch_head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
-        "business_head": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
-        "handoff_path": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/15",
-        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
-      }
+        "SW-006 候选素材制作仍需等待 SW-015 联调 accepted 后激活",
+        "真机屏幕与真人视觉体验走查（physical-device/human 待内测阶段）"
+      ]
     },
     {
       "id": "SW-006",
@@ -159,7 +141,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "等待SW-012雨林设计和SW-015真实规格预检联调分别accepted，之后才激活正式候选/原8次API总尝试"
+        "等待 SW-015 真实规格预检联调 accepted，之后激活正式候选制作（SW-012 已 accepted 冻结规格；原 8 次 API 总尝试不重置）"
       ]
     },
     {
@@ -172,12 +154,12 @@
         "SW-004"
       ],
       "task_file": "docs/collaboration/tasks/SW-005.md",
-      "latest_handoff": null,
-      "latest_review": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-005-R1.json",
       "integrated_commit": null,
       "pending": [
-        "bootstrap源码核查：R1 TerrainMotor/控制器已交，PR14 CI成功；consumeStabilizeHint与gait没有UI消费者，任务要求的提示/站稳/轻跳呈现未完成，不能延后到queued SW-007。",
-        "ZCode以R2补齐界面与真实App证据；Antigravity对精确业务head写正式review，复验恢复/不刷距；本登记不是独立changes_requested审稿。"
+        "R1 changes_requested：核心 TerrainMotor 与 296 JVM 单测已过，但 UI 缺少 consumeStabilizeHint 与 gait 消费者，站稳提示未接表现层。",
+        "ZCode 产出 R2：将控制器状态/提示/步态接入 ViewModel/Compose，确保同一 sessionId 恢复不重复提示、死区边缘输入合规，提供真实 App 截图证据。"
       ],
       "observed_delivery": {
         "revision": 1,
@@ -186,7 +168,7 @@
         "business_head": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
-        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
+        "source_report": "docs/collaboration/reviews/R-SW-005-R1.md"
       }
     },
     {

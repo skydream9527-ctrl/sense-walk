@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+<radialGradient id="glade-eg-1" gradientUnits="userSpaceOnUse" cx="600" cy="1160" r="400" gradientTransform="matrix(1.17500,0,0,1,-105.000,0)"><stop offset="0.0" stop-color="#9FC09A" stop-opacity="0.24"/><stop offset="0.45" stop-color="#9FC09A" stop-opacity="0.12"/><stop offset="0.8" stop-color="#9FC09A" stop-opacity="0.04"/><stop offset="1.0" stop-color="#9FC09A" stop-opacity="0.0"/></radialGradient>
+<filter id="glade-blur-2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="20"/></filter>
+<linearGradient id="glade-mask-3-g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1920"><stop offset="0.6406" stop-color="#fff" stop-opacity="0"/><stop offset="0.6927" stop-color="#fff" stop-opacity="1"/><stop offset="0.875" stop-color="#fff" stop-opacity="1"/><stop offset="0.9896" stop-color="#fff" stop-opacity="0.02"/><stop offset="1.0" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="glade-mask-3"><rect width="1080" height="1920" fill="url(#glade-mask-3-g)"/></mask>
+</defs>
+  <rect x="0" y="0" width="1080" height="1920" fill="url(#glade-eg-1)"/>
+  <g filter="url(#glade-blur-2)" mask="url(#glade-mask-3)">
+    <polygon points="452.0,1920.0 706.0,1920.0 650.0,1300.0 612.0,1252.0 558.0,1300.0" fill="#3A584C" fill-opacity="0.9"/>
+    <polygon points="498.0,1900.0 660.0,1900.0 626.0,1330.0 612.0,1306.0 592.0,1330.0" fill="#5A7D72" fill-opacity="0.22"/>
+    <ellipse cx="606" cy="1580" rx="72" ry="13" fill="#A8C9A6" fill-opacity="0.26"/>
+    <ellipse cx="616" cy="1452" rx="52" ry="13" fill="#A8C9A6" fill-opacity="0.22"/>
+    <ellipse cx="600" cy="1360" rx="36" ry="13" fill="#A8C9A6" fill-opacity="0.18"/>
+  </g>
+</svg>
