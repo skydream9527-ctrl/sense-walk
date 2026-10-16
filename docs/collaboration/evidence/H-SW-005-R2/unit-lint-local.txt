@@ -1,0 +1,21 @@
+SW-005 R2 本地验证（worktree sensewalk-zcode-sw005）
+
+$ ./gradlew :app:testDebugUnitTest
+  302 tests / 0 failures / 0 errors（R1 296 + R2 新增 6：
+   TerrainMotorTest +5：死区 d=0.01 不触发跳 / d=0.079 同 /
+     死区上沿 d=0.08 正常进入越坎 / 站稳中死区输入等同松手 /
+     HOP 中死区输入中止推进（comfort_v1 死区 0-0.08 与曲线一致，
+     无效输入不得刷距——规划 P-20261015-02 要求的 d=.01/.08 边界实测）；
+   TerrainWalkIntegrationTest +1：恢复局同 sessionId 提示可再发
+     （瞬态不持久化；不以"新局"措辞绕过语义，相位系统不重播不受影响））
+
+$ ./gradlew :app:lintDebug :app:assembleDebug
+  BUILD SUCCESSFUL
+
+R2 实现范围：
+- 死区接入 TerrainMotor（INPUT_DEADZONE=0.08f 全部分流判定）；
+- ForestShell gait 姿态：HOP 腾空（reduceMotion 压小不抹除）、
+  TENSE 微蹲外撑、腿收并/footY 离地；
+- SessionViewModel.stabilizeHint 事件 + SessionScreen 提示卡片
+  （3s 自动消失，非 QTE 无交互负担）；
+- SessionScreen 传 gait 给 ForestShell（实走侧默认参数兼容）。

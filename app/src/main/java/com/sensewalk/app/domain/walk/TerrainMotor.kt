@@ -84,10 +84,11 @@ class TerrainMotor {
             reset()
         }
 
+        val hasInput = deflection >= INPUT_DEADZONE // 死区内曲线速度为 0，等同无输入
         return when (phase) {
             Phase.FREE -> {
                 if (activeGap != null && sPos < activeGap!!.from) {
-                    if (deflection <= 0f) {
+                    if (!hasInput) {
                         // 静止待坎：不触发任何自动推进（无输入不刷距）
                         SpeedDirective.normal()
                     } else if (deflection <= COMFORT_DEFLECTION) {
@@ -98,7 +99,7 @@ class TerrainMotor {
                         SpeedDirective.clamp(STABILIZE_SPEED)
                     }
                 } else if (activeGap != null && sPos >= activeGap!!.from) {
-                    if (deflection <= 0f) {
+                    if (!hasInput) {
                         // 惯性滑入坎内但已松手：挂起等待新输入（自动动作不得持续刷距）
                         SpeedDirective.normal()
                     } else {
@@ -111,8 +112,8 @@ class TerrainMotor {
                 }
             }
             Phase.APPROACH -> {
-                // 松手/取消：回到自由态重新接近
-                if (deflection <= 0f) {
+                // 松手/取消（含死区输入）：回到自由态重新接近
+                if (!hasInput) {
                     phase = Phase.FREE
                     return SpeedDirective.normal()
                 }
@@ -128,7 +129,7 @@ class TerrainMotor {
                 SpeedDirective.clamp(STABILIZE_SPEED)
             }
             Phase.STABILIZE -> {
-                if (deflection <= 0f) {
+                if (!hasInput) {
                     // 松手：解除站稳（不保留计时——重新接近会重新判定）
                     phase = Phase.FREE
                     stabilizeElapsedMs = 0L
@@ -143,7 +144,7 @@ class TerrainMotor {
                 }
             }
             Phase.HOP -> {
-                if (deflection <= 0f) {
+                if (!hasInput) {
                     // 跳跃中松手/取消：中止自动推进回自由态（等新输入重新判定）
                     phase = Phase.FREE
                     SpeedDirective.normal()
@@ -190,6 +191,12 @@ class TerrainMotor {
     companion object {
         /** 接近区宽度（gap 前 3 m） */
         const val APPROACH_METERS = 3f
+
+        /**
+         * 输入死区（与 comfort_v1 曲线死区一致 0–0.08）：死区内曲线速度为 0，
+         * 等同无输入——不触发/中止自动跳跃（无效输入不得刷距，SW-005 R2）。
+         */
+        const val INPUT_DEADZONE = 0.08f
 
         /** 紧张阈值：舒适曲线里 d ≤ 0.72 视为不急（§5.6） */
         const val COMFORT_DEFLECTION = 0.72f

@@ -4,6 +4,7 @@ import com.sensewalk.app.domain.scene.TestScenes
 import com.sensewalk.app.domain.session.MonotonicClock
 import com.sensewalk.app.domain.session.SessionState
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -210,5 +211,30 @@ class TerrainWalkIntegrationTest {
         val elapsed = clock.now - start
         // 坎 30m @ ≤1.0m/s ≥ 30s = 60000ms（含过渡余量）
         assertTrue("跳跃必须花真实时间（受速度帽），实际 ${elapsed}ms", elapsed >= 25_000)
+    }
+
+    @Test
+    fun `R2 恢复局同 sessionId 站稳提示可再发 - 不以新局措辞绕过语义`() {
+        // 恢复沿用原 sessionId（SW-004 语义）；站稳提示是「本局第一次站稳」的温和教学，
+        // 中断恢复后玩家可能没看到提示——再发一次是产品上可接受的选择，
+        // 且不违反一次性相位提示不重播规则（PhaseScheduler 相位是另一系统）。
+        // 本用例锁定：恢复构造的控制器 hintShownThisSession 为 false（可再发）。
+        val (original, _) = walkedTo(280f, deflection = 0.95f)
+        val clock2 = FakeClock(50_000L)
+        val restored = VirtualWalkController(
+            config(), clock2,
+            restore = VirtualWalkController.Restore(
+                progress = com.sensewalk.app.domain.progress.ProgressSnapshot(
+                    sPos = 280f, sBest = 280f, meters = 280f,
+                    requiredDistanceMeters = config().requiredDistanceMeters.toFloat(),
+                ),
+                firedPhaseIds = original.scheduler.firedPhaseIds,
+                elapsedActiveMs = 0L,
+            ),
+        )
+        // 恢复控制器未发过提示（瞬态不持久化）
+        assertFalse(restored.consumeStabilizeHint())
+        // 已触发相位不重播（相位系统语义不受影响）
+        assertTrue(restored.drainPhaseEvents().isEmpty())
     }
 }

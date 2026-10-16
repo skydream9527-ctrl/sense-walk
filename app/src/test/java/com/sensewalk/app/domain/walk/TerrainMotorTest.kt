@@ -187,4 +187,48 @@ class TerrainMotorTest {
         approach(m, sPos = 98f, defl = 0.9f)
         assertEquals(TerrainMotor.Gait.TENSE, m.gait(walking = true, terrain = TerrainKind.GAP_HOP))
     }
+
+    // ---- SW-005 R2：死区边界（comfort_v1 死区 0–0.08，规划要求 d=.01/.08 实测）----
+
+    @Test
+    fun `R2 死区输入 d0_01 接近坎 - 不触发跳跃（速度为0等同无输入）`() {
+        val m = motor()
+        val d = m.step(50, 98f, 0.01f, gap, paused = false)
+        assertTrue("死区输入不得触发自动跳跃，实际 $d", d is TerrainMotor.SpeedDirective.normal)
+        assertEquals(TerrainMotor.Phase.FREE, m.currentPhase)
+    }
+
+    @Test
+    fun `R2 死区内 d0_079 - 同样不触发`() {
+        val m = motor()
+        val d = m.step(50, 98f, 0.079f, gap, paused = false)
+        assertTrue(d is TerrainMotor.SpeedDirective.normal)
+    }
+
+    @Test
+    fun `R2 死区上沿 d0_08 - 正常进入越坎流程`() {
+        val m = motor()
+        // d=0.08 处曲线速度仍为 0，但已达有效输入阈值：≤0.72 → 舒适轻跳
+        val d = m.step(50, 98f, 0.08f, gap, paused = false)
+        assertTrue("死区上沿是有效输入，应轻跳，实际 $d", d is TerrainMotor.SpeedDirective.hop)
+    }
+
+    @Test
+    fun `R2 站稳中输入降到死区 - 等同松手回 FREE`() {
+        val m = motor()
+        approach(m, sPos = 98f, defl = 0.9f)
+        approach(m, sPos = 98f, defl = 0.9f) // STABILIZE
+        val d = approach(m, sPos = 98f, defl = 0.05f) // 死区
+        assertEquals(TerrainMotor.Phase.FREE, m.currentPhase)
+        assertTrue(d is TerrainMotor.SpeedDirective.normal)
+    }
+
+    @Test
+    fun `R2 HOP 中输入降到死区 - 中止自动推进`() {
+        val m = motor()
+        m.step(50, 98f, 0.5f, gap, paused = false) // HOP
+        val d = m.step(50, 99f, 0.01f, gap, paused = false)
+        assertEquals(TerrainMotor.Phase.FREE, m.currentPhase)
+        assertTrue("死区输入必须中止跳跃推进", d is TerrainMotor.SpeedDirective.normal)
+    }
 }
