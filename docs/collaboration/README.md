@@ -11,23 +11,23 @@
 
 同一角色后续继续使用同一句。角色入口不绑定旧提交；每次都查询任务登记与最新交接。四个入口由用户交给对应工具。
 
-## 2026-10-15进展与当前分工
+## 2026-10-15本轮进展与当前分工
 
-main基准6104e3d：可靠性SW-001、快照SW-004、53文件森林设计SW-011、预检R3/SW-014均已独立验收合入。最新build-109含可靠性/恢复，云端274项通过；森林正式接图SW-010仅approved，PR #3仍有作者state冲突，尚未入main/测试包。详见 [本轮核查](evidence/P-20261015-01/README.md)。
+main基准904ab01。新交付：[地形PR #14](https://github.com/skydream9527-ctrl/sense-walk/pull/14)、[雨林设计PR #15](https://github.com/skydream9527-ctrl/sense-walk/pull/15)均已发布且云端CI成功；地形提示/gait尚无UI消费者，雨林53文件hash/bytes匹配但未审。森林接图PR #3原approved，Git冲突已解决，当前协作CI因改写旧交接附录失败。MiniMax SW015未见远端新交付。详见 [本轮核查](evidence/P-20261015-02/README.md)。
 
-| 角色 | 本轮任务 | 交付与门禁 |
+| 角色 | 下一步 | 退出条件 |
 | --- | --- | --- |
-| ZCode | 先同步已approved的SW-010/PR #3，再独立实现ready的[SW-005地形](tasks/SW-005.md) | 作者合并自己的state信息；QA复核接图后集成。地形/站稳/轻跳不刷距且保持快照恢复 |
-| Trae Design | ready的[SW-012雨林900m设计](tasks/SW-012.md) | 使用canonical id/type规格、fade完成点/三比例/源/逐层提示词，交设计审核 |
-| MiniMax Code | ready的[SW-015真实设计与预检联调](tasks/SW-015.md)，0 API | 真实Trae id/type解析、空集合/空候选拒绝、保留原保护与历史版本，交独立审核 |
-| Antigravity | [常驻队列](queues/antigravity.md)：SW-010集成，随到审SW-005/SW-012/SW-015 | 精确review/merge/CI与组合测试包；SW-012/SW-015均accepted才激活SW-006 |
+| ZCode | 修SW010归档门禁；补SW005 R2界面/提示/步态/恢复回归 | 独立任务分支、新文件说明不改旧记录；真实App证据+全部CI，交QA |
+| MiniMax Code | 执行ready的SW015，0 API；读取真实SW011和PR15作解析样本 | 严格id/type/空集合/错规格/批准链/累计账本自动断言，交真实PR |
+| Trae Design | SW012补下游消费附页、配合审稿/参数冻结 | 保留R1原字节；实质修改出R2，不重复从零画或直接生图 |
+| Antigravity | 收口PR3，审PR15、SW005 R2及SW015，顺序集成/出组合包 | 精确head/hash/CI；SW012+SW015都accepted才激活SW006 |
 
-本轮实测发现R3只识别layer_id，真实已批准规格id被读成空集合并放行空候选，所以新增零API联调任务与付费制作前置。SW-014既有批准保留，不重做R3旧fixture范围。森林设计已共享，不能继续按旧聊天重交草稿。生产者state由本人消费accepted后更新；registry为准。真机/真人仍Pending，工具启动/消息由用户分别执行。
+SW001/SW004/SW011/SW014既有accepted保留。当前main/已确认build109不含这些未合PR功能；作者local XML296/0与云端CI成功分别记录，不冒充本轮运行Android。真机/真人Pending。bootstrap维护不代表已向外部工具发消息，用户继续转发上方稳定入口即可。
 
 ## 文件导航
 
 - [任务看板](BOARD.md)：由 registry 生成，可在 GitHub 浏览。
-- [最新进展与下一轮规划](evidence/P-20261015-01/README.md)：main/PR/本机草稿分别核对。
+- [最新进展与下一轮规划](evidence/P-20261015-02/README.md)：main/PR/本机草稿分别核对。
 - [常驻验收队列](queues/antigravity.md)：精确待验提交；协调轮完成后继续消费交付。
 - [上一轮交付核查](evidence/P-20261014-03/README.md)、[早期交付核查](evidence/P-20261014-02/README.md) 与 [初版源码核查](evidence/P-20261014-01/README.md)：历史记录保持当时head/证据。
 - [协作协议](PROTOCOL.md)：隔离、所有权、领取、交接、退回与集成。

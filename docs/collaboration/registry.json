@@ -72,7 +72,7 @@
       "title": "森林光效批准候选入包",
       "owner": "zcode",
       "kind": "code",
-      "status": "handoff_ready",
+      "status": "rework",
       "depends_on": [
         "SW-002",
         "SW-003"
@@ -82,17 +82,17 @@
       "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
       "integrated_commit": null,
       "pending": [
-        "R-SW-010-R1已approved；当前PR #3 head2a71216与main仍在state/zcode.json冲突，由ZCode本人同步保留新快照/双方交付信息",
-        "Antigravity复核同步后完整head/批准素材hash与新CI后集成；build-109尚不含此接图，合入后再发组合测试包"
+        "Git冲突已解决；PR #3 Android成功但协作run38736953399失败：修改已归档H-SW-010-R1-appendix-sizes.md。作者恢复该文件为main字节，将新说明放新增sync/correction文件，不能禁用历史检查。",
+        "原R1 approved保留；新head及完整delta/素材hash/全部CI由Antigravity复核后集成，尚未进入main/组合包。"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/zcode/SW-010-forest-lightshows",
-        "branch_head": "2a7121677ee7579da1955dd0352631ec0525a566",
+        "branch_head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5",
         "business_head": "a1df0e295b7c95d6212b8c65d597087a9458d906",
         "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
-        "source_report": "docs/collaboration/evidence/P-20261015-01/README.md"
+        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
       }
     },
     {
@@ -119,7 +119,7 @@
       "title": "雨林图片设计包",
       "owner": "trae-design",
       "kind": "design",
-      "status": "ready",
+      "status": "handoff_ready",
       "depends_on": [
         "SW-011"
       ],
@@ -128,8 +128,18 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "SW-011已accepted，本轮领取900m雨林分层设计，使用canonical id/type并给出fade完成点/三比例/逐层提示词"
-      ]
+        "PR15已发布，53文件hash/bytes匹配，五层/六阶段/三比例/逐层prompt齐备，CI成功；待Antigravity独立审稿并用精确spec哈希冻结proposed命名/参数。",
+        "SW-006仍等SW-015联调accepted；设计参考不等于生产候选/Android接入。"
+      ],
+      "observed_delivery": {
+        "revision": 1,
+        "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+        "branch_head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+        "business_head": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
+        "handoff_path": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/15",
+        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
+      }
     },
     {
       "id": "SW-006",
@@ -157,7 +167,7 @@
       "title": "T07B 自动越坎与站稳规则",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "rework",
       "depends_on": [
         "SW-004"
       ],
@@ -166,8 +176,18 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "SW-004已accepted，本轮可领取地形/站稳/自动轻跳，必须保持有效距离与快照恢复不变量"
-      ]
+        "bootstrap源码核查：R1 TerrainMotor/控制器已交，PR14 CI成功；consumeStabilizeHint与gait没有UI消费者，任务要求的提示/站稳/轻跳呈现未完成，不能延后到queued SW-007。",
+        "ZCode以R2补齐界面与真实App证据；Antigravity对精确业务head写正式review，复验恢复/不刷距；本登记不是独立changes_requested审稿。"
+      ],
+      "observed_delivery": {
+        "revision": 1,
+        "branch": "codex/zcode/SW-005-terrain",
+        "branch_head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+        "business_head": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
+        "source_report": "docs/collaboration/evidence/P-20261015-02/README.md"
+      }
     },
     {
       "id": "SW-007",
@@ -264,8 +284,8 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "bootstrap实测真实Trae id/type规格被R3读为空集合且空候选误判ok，需消费者兼容与严格非空验证；不重写原R3",
-        "与SW-012设计并行，新增API 0；独立批准后才解锁SW-006"
+        "截至本轮远端分支/PR核查未见SW-015交付；保持ready，由MiniMax领取零API真实规格适配，不推断工具已开工或已接消息。",
+        "同时读取SW-011已批准规格与PR15雨林候选规格作只读schema样本；未批准PR15只能测试解析，不能授权生图。"
       ]
     }
   ],
@@ -277,5 +297,5 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261015-01/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261015-02/README.md"
 }

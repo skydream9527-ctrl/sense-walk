@@ -1,0 +1,86 @@
+[
+  {
+    "name": "codex/antigravity/SW-003-coordination-baseline",
+    "head": "b2815feff78ccb22ba843478c1516b98e9a593c4"
+  },
+  {
+    "name": "codex/antigravity/SW-004-review-integration",
+    "head": "d0fa3d8786de33591fb05d5ff18ebd7f39ff3c44"
+  },
+  {
+    "name": "codex/antigravity/SW-011-correction",
+    "head": "eca6a06a50c57f22b0118137ffb0bb41a61aa2a1"
+  },
+  {
+    "name": "codex/antigravity/SW-013-second-round-review",
+    "head": "6d33d948eac764af37c188325814c020e10e6a7e"
+  },
+  {
+    "name": "codex/antigravity/review-queue-round3",
+    "head": "e147cfaf62ef2fd0bc27b1a836b6ccdfb956ed67"
+  },
+  {
+    "name": "codex/antigravity/review-queue-round4",
+    "head": "1f333966bcfd726389cbd1da0daa31d9e7080ad8"
+  },
+  {
+    "name": "codex/minimax/SW-002-clearing-lightshow",
+    "head": "e3d45ed59ce3dd1dc53bfe6b2e9b045ab889f42d"
+  },
+  {
+    "name": "codex/minimax/SW-014-r2",
+    "head": "bda0b74d53791c09a4c9b7a2858b9c32321bc862"
+  },
+  {
+    "name": "codex/minimax/SW-014-r3",
+    "head": "a50afebe892c6243c37dc3805a9ad3e2cf5330cd"
+  },
+  {
+    "name": "codex/minimax/SW-014-rainforest-preflight",
+    "head": "13d6c0d51261a467feb2c3a57705ae7820198e49"
+  },
+  {
+    "name": "codex/progress-plan-20261014",
+    "head": "614e18a82c40a169c723073715b2c33952f8cd3e"
+  },
+  {
+    "name": "codex/progress-plan-20261015",
+    "head": "30634f4716e99ff0588d5b406a9291d3006426e5"
+  },
+  {
+    "name": "codex/progress-plan-round3-20261014",
+    "head": "fea4ffd576f1b10d22b3707bb022d6602be9bdcf"
+  },
+  {
+    "name": "codex/progress-plan-round4-20261014",
+    "head": "40179c8dbec778dab182060b6ec350a1bd534d19"
+  },
+  {
+    "name": "codex/trae-design/SW-011-forest-visual-design",
+    "head": "9a68b99081158f38223efa7aa3dbd1580bedbb44"
+  },
+  {
+    "name": "codex/trae-design/SW-012-rainforest-visual-design",
+    "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac"
+  },
+  {
+    "name": "codex/zcode/SW-001-t06-reliability",
+    "head": "47c822a565edbb4eb29fdfbe1fce319b0b4c3ecc"
+  },
+  {
+    "name": "codex/zcode/SW-004-session-snapshot",
+    "head": "db1ec81e5bc4aad5bbc23ab74a1c29c1d3ce0651"
+  },
+  {
+    "name": "codex/zcode/SW-005-terrain",
+    "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36"
+  },
+  {
+    "name": "codex/zcode/SW-010-forest-lightshows",
+    "head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5"
+  },
+  {
+    "name": "main",
+    "head": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9"
+  }
+]

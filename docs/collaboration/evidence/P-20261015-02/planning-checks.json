@@ -1,0 +1,35 @@
+{
+  "kind": "bootstrap-plan-validation-not-product-acceptance",
+  "base_commit": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+  "checks": [
+    {
+      "command": "python3 tools/collaboration.py render",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/collaboration.py check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -q",
+      "status": "passed",
+      "tests": 31,
+      "failures": 0,
+      "duration_seconds": 23.658
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "HTMLParser: docs/plan.html unique IDs and internal fragment resolution",
+      "status": "passed"
+    },
+    {
+      "command": "audit_sources.py --out source-results.json --author-xml <author SW005 worktree test-results>",
+      "status": "passed",
+      "note": "53 manifest hashes/bytes match; no UI gait/hint consumers; archived appendix differs; raw author XML296/0, not executed by this audit"
+    }
+  ],
+  "scope": "Only living planning docs/registry plus new decision/evidence; no app, author state, old handoff/review/evidence/decision changes"
+}
