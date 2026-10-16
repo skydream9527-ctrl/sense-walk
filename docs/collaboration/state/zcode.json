@@ -4,10 +4,10 @@
   "current_task": "SW-005",
   "status": "handoff_ready",
   "branch": "codex/zcode/SW-005-terrain",
-  "head_commit": "669498a147a7a56387d3d5ed3d4df83ed4072161",
+  "head_commit": "b92144e07f9318f1e14f7f18e0a1a28b0115f0d7",
   "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
   "updated_on": "2026-10-16",
-  "note": "SW-005 R2 已交付（UI 闭环+死区边界+302 单测+提示实测）；R1 已收到 R-SW-005-R1 changes_requested，R2 为响应交付。SW-010 门禁已修待集成。SW-007 仍等 SW-005/SW-006。",
+  "note": "SW-005 R2 已交付（UI 闭环+死区边界+P-02 同局提示一次，303 单测+提示实测铁证）；响应 R-SW-005-R1 全部三个 finding。SW-010 门禁已修待集成。SW-007 仍等 SW-005/SW-006。",
   "deliveries": {
     "SW-001": {
       "branch": "codex/zcode/SW-001-t06-reliability",
@@ -35,7 +35,7 @@
     },
     "SW-005": {
       "branch": "codex/zcode/SW-005-terrain",
-      "business_head": "669498a147a7a56387d3d5ed3d4df83ed4072161",
+      "business_head": "b92144e07f9318f1e14f7f18e0a1a28b0115f0d7",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
       "status": "R2 delivered (UI closure + deadzone), awaiting review"
