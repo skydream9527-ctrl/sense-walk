@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.phase.PhaseSchedulerTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-10-15T12:53:54" hostname="yunhedeMacBook-Pro.local" time="0.004">
+  <properties/>
+  <testcase name="未触发视觉层 opacity 为 0" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="每个相位只触发一次" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="米数回落的 update 不触发也不回退" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.001"/>
+  <testcase name="振动规则在对应米数出现" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="黑幕层 fadeMeters 缺省为阶跃" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="S4 opacity 是米数纯函数 - meters 不变输出不变" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="S9 单次进度跨多个阈值不漏相位" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="同距离多通道相位在同一次 update 全部触发" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.001"/>
+  <testcase name="音频目标只含已触发层" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="初始化 update 0 触发黑幕相位" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="S9 恢复 - 预置已触发相位不重播事件" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="NaN 米数不触发不崩溃" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="全部相位按配置顺序最终各触发一次" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.001"/>
+  <testcase name="S9 恢复 - 感官目标按当前米数直接重建静态值" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.0"/>
+  <testcase name="视觉 opacity 按 fadeMeters smoothstep 展开" classname="com.sensewalk.app.domain.phase.PhaseSchedulerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,20 +1,19 @@
 # 后续协同路线
 
-2026-10-15核查基准main=6104e3d。可靠性/快照、森林设计、素材预检R3已accepted；SW-005/SW-012已ready，新增SW-015真实规格联调ready。SW-010已approved但尚未集成，build-109不含两层正式接图。详见 [本轮报告](evidence/P-20261015-01/README.md)。不按任务数或CI绿推算M1/M2/MVP验收百分比。
+2026-10-15核查main=904ab01。详见 [P-20261015-02](evidence/P-20261015-02/README.md)；不按任务数量或CI绿推算MVP百分比。
 
-| 阶段 | 任务与负责者 | 当前状态/前置 | 退出条件 |
-| --- | --- | --- | --- |
-| 已完成代码阶段 | SW-001可靠性、SW-004快照 / ZCode+QA | accepted/已合入 | 保留真机计步/锁屏/跨boot恢复Pending；不重复初版 |
-| 已完成参考/工具阶段 | SW-011森林设计 / Trae，SW-014 R3 / MiniMax | accepted/已合入 | 设计53文件共享、工具原18fixture/6探针通过；参考不自动入包 |
-| 当前收口 | SW-010森林正式接图 / ZCode+Antigravity | approved，PR #3作者state冲突 | 同步/复核新head/CI后集成并交含恢复+接图的组合包 |
-| 当前开发主线 | SW-005站稳/自动轻跳 / ZCode+QA | ready，SW-004 accepted | .72阈值、3m接近、1.2s站稳不刷距，恢复/reduceMotion/800m回归 |
-| 当前视觉主线 | SW-012雨林设计 / Trae+QA | ready，SW-011 accepted | 900m湿绿阔叶/雾/藤蔓、canonical字段、阶段/比例/局部/逐层prompt，冻结供下游消费 |
-| 当前素材工具主线 | SW-015真实规格预检联调 / MiniMax+QA | ready，SW-011/SW-014 accepted | 真实id/type五层解析、空/冲突规格和空候选拒绝，0 API，独立批准 |
-| 下一批素材 | SW-006雨林候选 / MiniMax+QA | queued，另等SW-012/SW-015 accepted | 精确design_ref/新批准预检入口、实际候选/hash/验图，原总8次尝试 |
-| 下一批应用 | SW-007雨林双模式 / ZCode+QA | queued，等SW-005/SW-006 | 900m配置/专属真实声景/素材、复用门禁/恢复/服务，双模式回归 |
-| 后续扩景 | SW-008城市/沙漠 / 四角色 | queued，等SW-007/SW-010 | 激活前拆各景设计→候选→接入子任务，逐景独立审核 |
-| 持续与最终 | SW-009实体/真人内测 / Antigravity组织 | 可提前核查设备项，最终依赖SW-008 | 计步/锁屏/耳机来电/物理重启/真机视觉，5–8人内测与严重问题关闭 |
+| 阶段 | 任务/负责者 | 当前事实与退出条件 |
+| --- | --- | --- |
+| 已验收 | SW001可靠性/SW004快照，SW011森林设计/SW014 R3 | accepted/入main；真机项Pending，设计不是正式素材 |
+| 收口接图 | SW010 / ZCode→Antigravity | PR3原approved、冲突已解；修旧交接改写导致的协作红，QA复验新head/hash/CI后合入 |
+| 补齐地形 | SW005 / ZCode→Antigravity | PR14核心+22测试已交、CI绿；rework R2接UI提示/步态/减少动效/恢复，不能等SW007才做 |
+| 雨林审稿 | SW012 / Trae→Antigravity | PR15/53文件hash匹配、CI绿；补消费说明，QA用精确spec hash冻结参数，实质改动Trae R2 |
+| 当前关键接口 | SW015 / MiniMax→Antigravity | ready、未见远端交付；0API真实id/type与严格非空/批准链/账本自动测试 |
+| 雨林素材 | SW006 / MiniMax→Antigravity | queued；SW012+SW015都accepted/集成后启用原总8次尝试预算，候选/验图独立 |
+| 雨林应用 | SW007 / ZCode→Antigravity | queued，等SW005+SW006；900m双模式、真实专属声景、批准素材、门禁/恢复/实际App |
+| 四景 | SW008 / 四角色 | queued；雨林稳定后，激活前拆城市/沙漠设计→候选→接入子任务及预算 |
+| 持续设备/最终 | SW009 / Antigravity组织 | 可提前执行设备矩阵；最后5–8人体验与严重问题关闭，不伪造真人/物理结果 |
 
-SW-003/SW-013协调任务已accepted，Antigravity持续维护 [验收队列](queues/antigravity.md)，不重复创建启动任务。三个可并行交付是SW-005、SW-012、SW-015；SW-010先顺序处理作者分支同步和QA集成。各角色state滞后由本人更新，中心登记和正式review由协调者维护。
+沿用现有四角色独立worktree、registry、handoff/review/evidence和 [常驻验收队列](queues/antigravity.md)。当前并行的是ZCode收口、MiniMax接口、Trae待审说明、Antigravity审稿/集成；任务accepted由独立review和实际merge决定。共享checkout只读，private state由本人维护，不新增调度器/自动消息/重复协调ID。
 
-当前测试包 [build-109-6104e3d](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d) 绑定274项JVM/lint/debug build；原始XML与APK hash已核查。接图合入后再发布新的组合main版本，后续每次功能集成按必要回归出包。设备/真人缺失保留Pending，不阻塞独立开发，也不宣称最终验收完成。无需在本地完善Android环境。
+只从实际合入main出GitHub测试Release。已确认 [build109](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d) 含可靠性/快照，未含接图/地形；下一组合包绑定实际commit/APK/source/hash。无需完善本地Android环境。

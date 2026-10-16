@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.TerrainMotorTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-15T12:53:54" hostname="yunhedeMacBook-Pro.local" time="0.006">
+  <properties/>
+  <testcase name="跳跃中越过坎尾 - 回自由态" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.002"/>
+  <testcase name="站稳 1_2 秒后自动轻跳 - 无需操作" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.002"/>
+  <testcase name="站稳期间不刷距 - holdZero 持续整段" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="终态吸收 - abandon 后一切 normal" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="紧张区接近 - 先减速进入站稳" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.001"/>
+  <testcase name="站稳中松手 - 回自由态不保留计时" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="步态映射 - 站稳tense 跳hop 上坡climb" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="无坎时始终 normal" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="接近途中放慢到舒适区 - 立即轻跳不等站稳" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="恢复落入坎段内 - 直接跳过不卡死" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.001"/>
+  <testcase name="暂停帧冻结 - holdZero 不推进站稳计时" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="首局站稳提示只发一次" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <testcase name="舒适区接近 - 直接轻跳" classname="com.sensewalk.app.domain.walk.TerrainMotorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
