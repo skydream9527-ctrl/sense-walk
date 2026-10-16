@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-005-R1",
+  "task_id": "SW-005",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
+  "reviewed_commit": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
+  "delivery_head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+  "verdict": "changes_requested",
+  "report": "docs/collaboration/reviews/R-SW-005-R1.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "TerrainMotor 纯 Kotlin 状态机核心与 296 项 JVM 单测核查",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261015-02/author-junit/TEST-com.sensewalk.app.domain.walk.TerrainMotorTest.xml",
+        "docs/collaboration/evidence/P-20261015-02/author-junit/TEST-com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest.xml"
+      ]
+    },
+    {
+      "name": "云端 CI 构建通过 (PR #14 run 38744519423)",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261015-02/source-snapshot.json"
+      ]
+    },
+    {
+      "name": "快照兼容性决策与不新增持久字段核查",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-005-R1.md"
+      ]
+    },
+    {
+      "name": "表现层与用户可见规则接线审查 (提示、步态、UI消费者)",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261015-02/source-results.json"
+      ]
+    },
+    {
+      "name": "同局恢复下首次遇到坎提示一次语义审查",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261015-02/source-results.json",
+        "docs/collaboration/handoffs/zcode/H-SW-005-R1.md"
+      ]
+    },
+    {
+      "name": "摇杆死区边缘输入自动化动作与速度帽边界审查",
+      "type": "source",
+      "status": "failed",
+      "evidence": [
+        "docs/collaboration/evidence/P-20261015-02/source-results.json",
+        "docs/collaboration/evidence/H-SW-005-R1/emulator-walkthrough.txt"
+      ]
+    },
+    {
+      "name": "真机物理越坎与触感验收",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "P-01",
+      "severity": "P1",
+      "file": "app/src/main/java/com/sensewalk/app/ui/session/SessionViewModel.kt, app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt, app/src/main/java/com/sensewalk/app/ui/forest/ForestShell.kt",
+      "summary": "DEVELOPMENT §5.6/5.7 明确要求首局首坎温和站稳提示（首次遇到坎提示一次，之后不再提示）、站稳视觉/步态、自动轻跳/攀坡。PR #14 生产改动仅局限在 domain 层的 TerrainMotor.kt 与 VirtualWalkController.kt，UI 层无 consumeStabilizeHint、TerrainMotor.Gait、snapshot.gait/snap.gait 的任何消费者。作者在交接自检中亦将'站稳提示的 UI 呈现'列为 pending，但此为 SW-005 自身不可缺少的表现层功能，不能挪到后续 queued 任务。"
+    },
+    {
+      "id": "P-02",
+      "severity": "P2",
+      "file": "app/src/main/java/com/sensewalk/app/domain/walk/VirtualWalkController.kt, app/src/main/java/com/sensewalk/app/domain/session/SessionStateMachine.kt",
+      "summary": "同 sessionId 快照恢复提示生命周期：若同一局在首坎已消费过站稳提示，在后台/暂停/进程恢复后重建 controller，不得因重建状态机再次向用户弹出首坎提示；需明确恢复时保持同局一次语义。"
+    },
+    {
+      "id": "P-03",
+      "severity": "P2",
+      "file": "app/src/main/java/com/sensewalk/app/domain/walk/TerrainMotor.kt",
+      "summary": "摇杆死区边缘输入边界行为：需补齐当摇杆输入位移极小（处于死区边缘 d=0.01..0.08）且接近坎时的自动化行为单测，确保自动轻跳/攀坡规则严格遵守速度帽和输入要求，松手即止，不产生非预期位移刷新。"
+    }
+  ],
+  "pending": [
+    "真机触感验证与物理越坎体验走查（physical-device）",
+    "真实传感器与物理计步越坎（physical-device 待后续阶段）"
+  ]
+}

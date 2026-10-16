@@ -1,0 +1,20 @@
+SW-005 R1 本地验证（worktree sensewalk-zcode-sw005）
+
+$ ./gradlew :app:testDebugUnitTest
+  296 tests / 0 failures / 0 errors（main 基线 274 + 新增 22：
+   TerrainMotorTest +13：舒适接近直接跳/紧张接近先钳速/站稳1.2s自动跳/
+     站稳不刷距holdZero/首局提示一次/松手回FREE不保留计时/途中放慢立即跳/
+     越坎尾回FREE/恢复落坎内直接跳/暂停冻结计时/终态吸收/无坎normal/步态映射；
+   TerrainWalkIntegrationTest +9：舒适过真实forest坎(hop步态)/紧张过坎必通过/
+     站稳期meters冻结/站稳中暂停恢复不补缺口/松手取消无自动跳进(漂移<1m)/
+     终态迟到帧不推进/全程800m紧张输入也通关/快照恢复落坎内不卡死/
+     跳跃推进受速度帽(30m坎需≥25s真实时间)）
+
+$ ./gradlew :app:lintDebug :app:assembleDebug
+  BUILD SUCCESSFUL；app-debug.apk 即 emulator-walkthrough.txt 所装构建
+
+修复过程中发现的实现缺陷（测试驱动捕获）：
+- 首版 HOP 推进不依赖输入——松手后惯性滑入坎内触发自动跳跃持续刷距
+  （实测漂移 9.9m）。修复：无输入不进入/中止 HOP，回 FREE 等新输入。
+- 首版 holdZero 只把目标速度设 0，惯性残余仍在滑行。修复：站稳帧
+  完全跳过 accumulator.advance（绝对冻结）。
