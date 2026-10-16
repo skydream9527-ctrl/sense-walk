@@ -3,9 +3,9 @@
   "agent": "antigravity",
   "current_task": null,
   "status": "idle",
-  "branch": "codex/antigravity/SW-011-correction",
-  "head_commit": "7c2a3b7d644337a2e30a3f194a19ea16a9c75cdf",
+  "branch": "codex/antigravity/review-integration-round6",
+  "head_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
   "latest_handoff": null,
   "updated_on": "2026-10-15",
-  "note": "队列跟踪：SW-010 R1 approved 等待 ZCode 分支同步解决 state 冲突；SW-015/SW-012/SW-005 ready 随到随审；追加 R-SW-011-R1-correction.md 勘误合并 SHA。"
+  "note": "队列跟踪：SW-015 R1 与 SW-005 R2 均已独立审核 approved 并集成合入 main；SW-006 雨林素材制作前置门禁达成，状态正式激活为 ready。"
 }

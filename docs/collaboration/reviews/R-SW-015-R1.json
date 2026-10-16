@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-015-R1",
+  "task_id": "SW-015",
+  "reviewer": "antigravity",
+  "producer": "minimax",
+  "handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
+  "reviewed_commit": "81fbf2d21e7cdc3131618f9ba6450109a3420f58",
+  "delivery_head": "9c4ef5a8f4cffb0948cbb391306b4bdafd3c64c1",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-015-R1.md",
+  "artifact_hashes": {
+    "design/assets/rainforest/preflight/SW-015/r1/scripts/spec_reader.py": "199b3a75a6bd9348f951d91c5b2e8ac5e2f291395abf17e551f0e66c533c4e5e",
+    "design/assets/rainforest/preflight/SW-015/r1/scripts/build_fixtures.py": "ae131cb23ff6807ab8d83f9efa5cb72c2f28a151f2e4820017a4e3b8e5f9f96f",
+    "design/assets/rainforest/preflight/SW-015/r1/scripts/preflight.py": "8aa883272c63314bde87c8671a5f981ab4c729895003bb81f5a2769e4dec224e",
+    "design/assets/rainforest/preflight/SW-015/r1/scripts/dry_run.py": "3fe33dfe02dd10e76b326156dd6a1eb09342dd6c11d926e1d97b622ae0e0138b",
+    "design/assets/rainforest/preflight/SW-015/r1/scripts/probe_r1_reproduction.py": "ba8580330c48a22006de33cfeef27e09a65cf988b9f406b2babc2a4931fe9614",
+    "design/assets/rainforest/preflight/SW-015/r1/records/probe-results.json": "f96f22a5f5e38d18f362a981338414114f2bf73ab21b183606857333b5a0b9f1",
+    "design/assets/rainforest/preflight/SW-015/r1/README.md": "4ce693ebd821a4471f67c5399b305cdb7059be82b2ed0515e06e9c4ab2b9e1f0"
+  },
+  "checks": [
+    {
+      "name": "spec id/type 解析与 legacy alias 归一化实测",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/spec_reader.py",
+        "design/05-visual-design/SW-011/r1/design-spec.json",
+        "design/05-visual-design/SW-012/r1/design-spec.json"
+      ]
+    },
+    {
+      "name": "spec 强校验与负例防御",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/records/probe-results.json",
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/probe_r1_reproduction.py"
+      ]
+    },
+    {
+      "name": "SW-014 R3 资产预检入口兼容",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/preflight.py",
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/dry_run.py"
+      ]
+    },
+    {
+      "name": "API 预算与消耗控制",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/state/minimax.json"
+      ]
+    },
+    {
+      "name": "交付物 SHA-256 完整性",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/README.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "SW-006 雨林正式素材制作激活后，由 MiniMax 按批准规格调用生图 API"
+  ]
+}
