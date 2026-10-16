@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-012",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "layers": [
+    {
+      "id": "mist",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 90,
+      "to_opacity": 0.55,
+      "fade_meters": 20,
+      "id_status": "proposed"
+    },
+    {
+      "id": "trunks_canopy",
+      "type": "parallax",
+      "parallax": 0.3,
+      "at_meters": 270,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "id_status": "proposed"
+    },
+    {
+      "id": "vines_light",
+      "type": "parallax",
+      "parallax": 0.6,
+      "at_meters": 450,
+      "to_opacity": 1.0,
+      "fade_meters": 25,
+      "id_status": "proposed"
+    },
+    {
+      "id": "distant_glow",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 675,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "id_status": "proposed"
+    },
+    {
+      "id": "glade",
+      "type": "overlay",
+      "parallax": 0.0,
+      "at_meters": 855,
+      "to_opacity": 0.9,
+      "fade_meters": 20,
+      "id_status": "proposed"
+    }
+  ]
+}

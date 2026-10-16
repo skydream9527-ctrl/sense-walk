@@ -1,11 +1,48 @@
 {
   "schema_version": 1,
   "agent": "minimax",
-  "current_task": "SW-002",
+  "current_task": "SW-015",
+  "previous_task": "SW-002",
   "status": "handoff_ready",
-  "branch": "codex/minimax/SW-002-clearing-lightshow",
-  "head_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
-  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
-  "updated_on": "2026-10-13",
-  "note": "SW-002 r1 候选已交付: design/assets/forest/candidates/SW-002/r1/ 含 clearing (程序化径向渐变, 复用 v5) + light_shows (程序化三束斜光+2 只飞鸟). 零 API 调用, 累计 14. 等待 Antigravity 独立审核 (R-SW-002-R1). 通过后由 ZCode 在 SW-010 单独入包."
+  "branch": "codex/minimax/SW-015-r1",
+  "head_commit": "81fbf2d21e7cdc3131618f9ba6450109a3420f58",
+  "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
+  "latest_review": {
+    "id": "R-SW-002-R1",
+    "verdict": "approved",
+    "reviewer": "antigravity",
+    "reviewed_commit": "f512d20316fab8cec588f2a7c6d94cec20979614",
+    "report": "docs/collaboration/reviews/R-SW-002-R1.md"
+  },
+  "sw002_integration_observed": {
+    "integrated_commit": "a5ad6dd634ab",
+    "integrated_commit_message": "feat(asset): integrate SW-002 r1 forest clearing and light shows candidates",
+    "registry_status_as_of_now": "accepted (registry SW-002.integrated_commit = a5ad6dd634ab); SW-010 已合入 main (PR #3, integrated commit 2b47f01)",
+    "sw010_registry_status": "handoff_ready (registry SW-010.status=handoff_ready)"
+  },
+  "sw014_r3_observed": {
+    "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a",
+    "verdict": "approved",
+    "review_file": "docs/collaboration/reviews/R-SW-014-R3.json"
+  },
+  "cumulative_attempts": 14,
+  "cumulative_attempts_note": "project lifetime baseline (SW-002 R1 全部 14 次, 已尽). 任何更新不得重置或从缺字段退回 0.",
+  "sw006_attempts": 0,
+  "sw006_attempts_limit": 8,
+  "sw006_attempts_note": "SW-006 单任务总 8 次尝试预算, 与 project lifetime 分开; SW-006 queued 未启动付费调用.",
+  "sw015_attempts": 0,
+  "sw015_attempts_limit": 0,
+  "sw015_attempts_note": "SW-015 R1 零 API 工具研发.",
+  "sw014_attempts": 0,
+  "sw014_attempts_note": "SW-014 R1/R2/R3 全部 0 API 工具研发 (累计 baseline 仍 14).",
+  "next_actionable_tasks": [
+    "SW-006 (queued, depends_on SW-002 ✓accepted, SW-003 ✓accepted, SW-012 handoff_ready 但未集成, SW-014 ✓accepted, SW-015 handoff_ready 等审核)",
+    "等 Antigravity 集成 SW-012 (registry 改 accepted) + R-SW-015-R1 approved 后, SW-006 由 Antigravity 激活"
+  ],
+  "blocked_on": [
+    "R-SW-015-R1 待 Antigravity 独立审核 (changes_requested → R2, approved → registry SW-015 = accepted)",
+    "SW-012 在 registry 仍 handoff_ready (latest_handoff=null), Antigravity 尚未集成"
+  ],
+  "updated_on": "2026-10-15",
+  "note": "SW-015 R1 已交付: design/assets/rainforest/preflight/SW-015/r1/ 含 spec_reader/preflight/dry_run/build_fixtures/probe_r1 5 脚本 + 8 fixture + README + probe-results. 零 API, 累计 baseline 14 + SW-006 单独 8 次保留. SW-014 R3 复用. SW-006 仍 queued, 等 SW-012 + SW-015 集成."
 }

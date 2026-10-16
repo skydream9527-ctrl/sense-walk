@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "mist",
+      "render_role": "background",
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_trunks_canopy.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 38160,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "trunks_canopy",
+      "render_role": "parallax",
+      "sha256": "289dac70ee4090b3d8cf733cc36d3ec652476e90d7c88993f5c61b2ba3842f63",
+      "checks": [
+        "checks/alpha_mask/rainforest_trunks_canopy.png",
+        "checks/black/rainforest_trunks_canopy.jpg",
+        "checks/white/rainforest_trunks_canopy.jpg",
+        "checks/magenta/rainforest_trunks_canopy.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_negative_unknown_type/_design/H-SW-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_negative_unknown_type/_design/spec.json",
+    "spec_sha256": "aecfe4bf5ff7072d95eabc70e8d72832753a25769082dbcce51e4813b1a94fe0"
+  }
+}
