@@ -5,7 +5,7 @@
 
 ## 一、森林视觉素材（MiniMax 生成，v1/v2/v3/v4 四批交付）
 
-**状态：v4「五层复验合格」结论已撤回——两个 overlay 层（light_shows/clearing）存在问题纹理，已程序降级待 MiniMax 重制；outline/trunks/leaf_path 三层真实图入包。**
+**状态（2026-10-14，SW-010）：light_shows/clearing 两层改用 SW-002 R1 批准候选逐字节入包（哈希一致，无棋盘格/AI生图瑕疵）；outline/trunks/leaf_path 三层真实图继续入包。但两层候选素材 alpha 偏低，真实游玩画面可见度弱，详见下方「SW-010 入包记录」，不冒称视觉验收满分。**
 
 **撤回经过（2026-10-13，T06 前定点修复）**：a235bf1 曾依据程序化统计（8px 相位差、块交替率、四边 alpha）判定 v4 五层合格。用户以实际图像复核指出 785m 合成图**中央仍有明显棋盘格**——统计阈值未能替代图像检查（此前的检验只针对 8px 周期与符号交替，漏掉了 **32px 周期对角纹理**）。补充频域检验：合成图中心 32px 对角分量能量 26.65%；逐层隔离后 **light_shows 55.10%**（16px 谐波 11.3%，v2 起沿用未重制）、移除后 785m（新增 clearing）仍 21.78%；而仅含 outline/trunks/leaf_path 的 265–630m 阶段为 0.46%（干净）。据此两个 overlay 层判定为问题层，从 forest.json 移除 asset 走程序降级（`drawLightShows`/`drawClearingGlow`），**不以降透明度隐藏问题**；等 MiniMax 新修复稿后按本节标准重新验收候选与入包文件并重生成六阶段合成。角色维持程序绘制正式方案。
 
@@ -15,13 +15,39 @@
 | tree_outline | v4 真实图，覆盖 49% | **入包**（对角能量 ≤5%，内容带干净） |
 | tree_trunks | v4 真实图，覆盖 80%（32px 轴向条纹为树干自然结构，非棋盘） | **入包** |
 | leaf_path | v4 真实图，覆盖 32% | **入包** |
-| light_shows | **程序降级**（v4 真实图撤出：中心 32px 对角能量 55%） | **待 MiniMax 重制** |
-| clearing | **程序降级**（v4 真实图撤出：785m 阶段对角能量 21.8% 且为其唯一新增层） | **待 MiniMax 重制** |
+| light_shows | SW-002 R1 候选真实图入包（哈希一致，三束斜光+2鸟剪影，程序算法生成非AI生图） | **入包**（**但 alpha 峰值仅 54.9%，可见度弱，见下方记录**） |
+| clearing | SW-002 R1 候选真实图入包（哈希一致，径向渐变光斑，程序算法生成非AI生图） | **入包**（**但 alpha 峰值仅 29.8%，可见度弱，见下方记录**） |
 | traveler_idle | v1–v3 均 81% 满帧不合格 | **程序绘制为正式方案**（合格静态角色也不冒充动画） |
 | style_ref / connectivity_test | 参考/连通性测试，非游戏层 | 不入包 |
 
-- **六阶段合成（重新生成，不复用旧截图）**：`.local-verify/t6fix/stages/stage_{000,100,265,425,630,785}m.png`——按入包文件与 SensoryState smoothstep 透明度合成，问题层按程序渲染语义省略；265m 起各阶段中心对角能量均 0.46%（干净），100m 为 5.8%（淡入低反差噪声），0m 纯黑幕。
-- **复验方法备忘（下轮修复稿验收用）**：① 实际图像目检（不可只用统计阈值）；② 8px 与 **32px** 双周期相位/频域检验；③ 逐层内容带中心而非图像几何中心（clearing 带外曾致漏检）；④ 候选与入包文件逐字节一致；⑤ 六阶段合成重生成。
+- **六阶段合成（T06 修复稿，历史记录）**：`.local-verify/t6fix/stages/stage_{000,100,265,425,630,785}m.png`——265m 起各阶段中心对角能量均 0.46%（干净），100m 为 5.8%（淡入低反差噪声），0m 纯黑幕。
+- **复验方法备忘**：① 实际图像目检（不可只用统计阈值）；② 8px 与 **32px** 双周期相位/频域检验；③ 逐层内容带中心而非图像几何中心（clearing 带外曾致漏检）；④ 候选与入包文件逐字节一致；⑤ 真机/模拟器六阶段合成重生成。
+
+### SW-010 入包记录（2026-10-14）
+
+将 SW-002 R1 批准候选逐字节复制入 `app/src/main/assets/visual/`，forest.json 的
+`light_shows`/`clearing` 两个 overlay 层补回 `asset` 字段（相位 atMeters/toOpacity/
+fadeMeters 等产品参数未改动）。模拟器真实展示（emulator-5554，冒烟注入驱动真实
+RealWalkEngine/RealWalkController/ForestShell 渲染链，非截图伪造）六阶段
+0/100/265/425/630/785m 全程无棋盘格、无接缝暴露、停止后画面逐像素冻结
+（见 evidence/H-SW-010-R1/stages/freeze-a.png 与 freeze-b.png，画面主体哈希一致，
+仅状态栏时钟像素有差异）。
+
+**哈希核对**（候选 manifest ↔ 正式入包文件，sha256 完全一致）：
+- `forest_clearing.webp`：`1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33`
+- `forest_light_shows.webp`：`1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0`
+
+**但发现视觉强度问题**（evidence/H-SW-010-R1/alpha-visibility-analysis.txt 完整数据）：
+两张候选素材自身 alpha 峰值偏低（light_shows 54.9%、clearing 29.8%，均为候选设计
+阶段的保守取值，非本轮引入），叠加 forest.json 相位目标 toOpacity（0.65/0.9）后，
+合成透明度峰值约 35.7%/26.8%。实机对比 630m（light_shows 早已满淡入）与 785m
+（clearing 刚满淡入）两张截图，画面主体区域逐像素差异 mean=1.4%、max=12.5%——
+连续游玩时该变化并不显著，玩家大概率察觉不到两层新内容的揭示。
+
+这不是棋盘格/AI生图瑕疵类问题，是候选素材本身视觉强度是否达标的产品判断，
+**本轮不自行判定合格或打回**，留给 Antigravity 独立复验裁定（可能结论：接受当前
+强度 / 要求 MiniMax 提高 alpha 后出新候选 / 调整 forest.json 的 toOpacity 作为临时
+缓解，但后者属产品参数变更需先登记契约差异，不在本次任务范围内擅自改动）。
 - **视觉包体**：真实图 3 层 webp 共 214 KB（预算 ≤2 MB/景 ✓）。
 - **渲染方式**（`ForestShell`）：带 `asset` 的层解码一次、按高度 cover 铺满、
   透明度严格来自 SensoryState（米数纯函数）、parallax 层在图片超出屏幕的
