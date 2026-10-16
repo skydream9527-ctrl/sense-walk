@@ -1,0 +1,238 @@
+{
+  "kind": "bootstrap-observation-not-independent-review",
+  "date": "2026-10-15",
+  "main": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+  "prs": [
+    {
+      "number": 14,
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "base": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+      "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+      "title": "SW-005: T07B 自动越坎与站稳规则（TerrainMotor）"
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/15",
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "base": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+      "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+      "title": "SW-012 R1 雨林900m图片设计（trae-design → antigravity 审核）"
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3",
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "base": "7c2a3b7d644337a2e30a3f194a19ea16a9c75cdf",
+      "head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5",
+      "title": "SW-010: 森林 light_shows/clearing 批准候选入包"
+    }
+  ],
+  "runs": [
+    {
+      "id": 38745576397,
+      "name": "Android build and package",
+      "event": "pull_request",
+      "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+      "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38745576397",
+      "created_at": "2026-10-15T13:46:32Z"
+    },
+    {
+      "id": 38745575973,
+      "name": "Collaboration handoff checks",
+      "event": "pull_request",
+      "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+      "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38745575973",
+      "created_at": "2026-10-15T13:46:32Z"
+    },
+    {
+      "id": 38745443288,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+      "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38745443288",
+      "created_at": "2026-10-15T13:45:36Z"
+    },
+    {
+      "id": 38745443189,
+      "name": "Android build and package",
+      "event": "push",
+      "branch": "codex/trae-design/SW-012-rainforest-visual-design",
+      "head": "c723048116fd2c36a7c19f2ab6c926f47b78beac",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38745443189",
+      "created_at": "2026-10-15T13:45:36Z"
+    },
+    {
+      "id": 38744519566,
+      "name": "Collaboration handoff checks",
+      "event": "pull_request",
+      "branch": "codex/zcode/SW-005-terrain",
+      "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38744519566",
+      "created_at": "2026-10-15T13:39:10Z"
+    },
+    {
+      "id": 38744519423,
+      "name": "Android build and package",
+      "event": "pull_request",
+      "branch": "codex/zcode/SW-005-terrain",
+      "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38744519423",
+      "created_at": "2026-10-15T13:39:10Z"
+    },
+    {
+      "id": 38744510493,
+      "name": "Android build and package",
+      "event": "push",
+      "branch": "codex/zcode/SW-005-terrain",
+      "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38744510493",
+      "created_at": "2026-10-15T13:39:06Z"
+    },
+    {
+      "id": 38744510438,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "branch": "codex/zcode/SW-005-terrain",
+      "head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38744510438",
+      "created_at": "2026-10-15T13:39:06Z"
+    },
+    {
+      "id": 38737405983,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "branch": "main",
+      "head": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737405983",
+      "created_at": "2026-10-15T12:47:57Z"
+    },
+    {
+      "id": 38737405972,
+      "name": "Android build and package",
+      "event": "push",
+      "branch": "main",
+      "head": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737405972",
+      "created_at": "2026-10-15T12:47:57Z"
+    },
+    {
+      "id": 38737360601,
+      "name": "Collaboration handoff checks",
+      "event": "pull_request",
+      "branch": "codex/antigravity/SW-011-correction",
+      "head": "eca6a06a50c57f22b0118137ffb0bb41a61aa2a1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737360601",
+      "created_at": "2026-10-15T12:47:35Z"
+    },
+    {
+      "id": 38737360496,
+      "name": "Android build and package",
+      "event": "pull_request",
+      "branch": "codex/antigravity/SW-011-correction",
+      "head": "eca6a06a50c57f22b0118137ffb0bb41a61aa2a1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737360496",
+      "created_at": "2026-10-15T12:47:35Z"
+    },
+    {
+      "id": 38737336699,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "branch": "codex/antigravity/SW-011-correction",
+      "head": "eca6a06a50c57f22b0118137ffb0bb41a61aa2a1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737336699",
+      "created_at": "2026-10-15T12:47:24Z"
+    },
+    {
+      "id": 38737336686,
+      "name": "Android build and package",
+      "event": "push",
+      "branch": "codex/antigravity/SW-011-correction",
+      "head": "eca6a06a50c57f22b0118137ffb0bb41a61aa2a1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38737336686",
+      "created_at": "2026-10-15T12:47:24Z"
+    },
+    {
+      "id": 38736953424,
+      "name": "Android build and package",
+      "event": "pull_request",
+      "branch": "codex/zcode/SW-010-forest-lightshows",
+      "head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38736953424",
+      "created_at": "2026-10-15T12:44:26Z"
+    },
+    {
+      "id": 38736953399,
+      "name": "Collaboration handoff checks",
+      "event": "pull_request",
+      "branch": "codex/zcode/SW-010-forest-lightshows",
+      "head": "e7441a2fb9ba04178e806a0675fa584e04ba90e5",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38736953399",
+      "created_at": "2026-10-15T12:44:26Z"
+    }
+  ],
+  "release": {
+    "tag": "build-109-6104e3d",
+    "commit": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+    "published_at": "2026-10-15T09:41:36Z",
+    "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d",
+    "assets": [
+      {
+        "name": "app-debug.apk",
+        "bytes": 20246962,
+        "digest": "sha256:ae84c3de620e0cd96b2ae975a9bc8ec1795ba3d7bcd1032db5c9758f3137e8b0"
+      },
+      {
+        "name": "sensewalk-source-6104e3d.zip",
+        "bytes": 197870645,
+        "digest": "sha256:85f0616c1abc0cd16cea7d635b3ed4b46f5989904874d274710907792a7c93ca"
+      }
+    ]
+  },
+  "sw010_failure_excerpt": [
+    "2026-10-15T12:44:37.3808182Z   TASK_CHECK_BASE: 7c2a3b7d644337a2e30a3f194a19ea16a9c75cdf",
+    "2026-10-15T12:44:37.6828657Z history: existing record changed/deleted docs/collaboration/handoffs/zcode/H-SW-010-R1-appendix-sizes.md; add a new revision/correction instead",
+    "2026-10-15T12:44:37.6918587Z ##[error]Process completed with exit code 1."
+  ]
+}

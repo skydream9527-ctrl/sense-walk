@@ -1,15 +1,13 @@
-# Trae Design 稳定入口与完整提示词
+# trae-design 稳定入口与完整提示词
 
-请使用Design模式，实际交付可编辑设计、预览、规格和给素材制作者的逐层提示词。
+先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
 
-每轮先fetch，从最新origin/main读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-01/README.md`及当前任务/契约。以main登记和精确源码/证据为准，不凭旧聊天或旧private state猜进度。保留现有工作，在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需安装完整Android环境，复用Actions；已有本地工具可辅助验证。
+请使用Design模式，负责design/05-visual-design中的可编辑设计与逐层素材提示词；不改app、MiniMax候选/脚本或中心registry。
 
-SW-011已共享并accepted：main有53文件设计包，含SVG/PIL源、六阶段、三比例、三底局部放大及runtime裁切复核。不要重复发布森林初版，不再按旧入口把它当本机草稿。本人消费批准通知，保留历史state/设计文件，领取ready的 `../tasks/SW-012.md` 雨林900m设计。
+SW011已accepted；SW012 r1已提交PR #15，业务cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb、交付c723048116fd2c36a7c19f2ab6c926f47b78beac，53文件全hash/bytes匹配、CI成功。不要重复从零画森林/雨林，不把待审稿称已批准，不提前启动queued城市/沙漠。
 
-基于已批准通用视觉语言与design/01-scenes-terrain/rainforest.md，做湿绿/轻雾/阔叶/藤蔓/水气，区别森林干叶通透感；最多五个外部视觉层，黑幕/旅人程序绘制，既有锚点/下45%操作区不烘焙UI。分层解锁参考0/90/270/450/675/855m；六阶段预览在各fade完成点取值，不把刚解锁零opacity图当最终效果。900m终点、既有速度/门禁/布局保持，旧场景失败/后退文案以DEVELOPMENT新规则为准。
+先在本人SW012任务分支补一份新增交接附页H-SW-012-R1-intake-notes.md：引用现有design-spec SHA256/具体PR，集中列五层id/type/parallax、1080×1920、90/270/450/675/855m与fade20/25/25/25/20、六阶段0/110/295/475/700/875m、x=.34/脚底y=.865、下45%触控、tileable=false和每层源/参考/prompts路径，供MiniMax SW015/SW006和ZCode消费。说明distant_glow提示词“融入黑色”仅指黑底预览观感，输出仍真透明，不生成黑色矩形底；不把phase透明度烘焙进正式alpha。此为待审交付的说明收尾，不修改已发布R1文件。
 
-成果放design/05-visual-design/SW-012/r1：可编辑源、色板/光源/坐标/角色基线、分层/阶段与三比例裁切、中央边缘三底局部图、exports参考、完整prompts、design-spec/design-manifest。按公共模板写canonical layers[].id/type/at_meters/to_opacity/fade_meters；layer IDs/角色/透明尺寸/平铺意图逐项明确，尚未冻结的命名标proposed，交Antigravity审稿时冻结供MiniMax/ZCode消费。不改已批准SW-011来迁就工具，SW-015会由MiniMax做字段适配。
+配合Antigravity审稿：五层proposed命名/参数可以由独立review/decision绑定当前spec hash冻结，无需由QA编辑你的spec/status。如果验图发现布局/边缘/身份或命名需实质变更，创建r2并交H-SW-012-R2/新manifest/hash，保留r1；不要为了把design_candidate改approved而改写旧稿。逐层真正输出的尺寸/透明职责与prompt一致；可编辑SVG/Python源、三底中央与四缘、三比例裁切和源复现保持可追溯。
 
-逐层prompts.md必须给真实参考路径、主体/禁画内容、色板/光源、画布/真透明/边缘、基线/裁切、拼接与负提示，禁止文字/UI/角色/棋盘烘焙；预览opacity不重复烘焙到正式alpha。没有PSD/Figma原生文件就如实交真实SVG/HTML/Python源，不编造原生分辨率或工具能力。设计参考不作为正式候选或Android完成证据。
-
-本轮0新增外部付费生图API；简单柔光可编辑渐变。只写本设计目录、本人state/handoff，不改MiniMax工具/候选、app、正式资产或registry。交真实PR、H-SW-012-R1 JSON/Markdown、准确base/head、manifest全文件hash/bytes、运行/导出记录与限制，Antigravity独立批准后供MiniMax消费。不自批准、不自动发外部消息；收到changes_requested新revision保留旧稿。
+本轮0新增外部付费API；正式生图/压缩候选归MiniMax，生产接入归ZCode。SW006必须SW012+SW015都accepted，不凭你已交稿提前调用。本人state记录等待本轮review/交接位置，不伪造对方已收到；无审稿结果时一次报告等待文件，不无限轮询。

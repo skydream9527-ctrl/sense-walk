@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.stick.ComfortStickMapperTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-15T12:53:54" hostname="yunhedeMacBook-Pro.local" time="0.004">
+  <properties/>
+  <testcase name="左推不产生前进目标速度" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="S1 分段保形无过冲 - 段内值不越过端点范围" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.003"/>
+  <testcase name="S1 拉满明显慢于甜点" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="NaN 输入返回 0 且不污染后续求值" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="死区在 0_08 内无速度" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="S1 曲线连续 - 密集采样相邻差小于 0_05" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="控制点精确求值" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="S1 全程速度不超过 1_4 硬顶且峰值就是 1_18" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.001"/>
+  <testcase name="整条曲线先升后降" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <testcase name="超出 1 的偏转钳制到端点" classname="com.sensewalk.app.domain.stick.ComfortStickMapperTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

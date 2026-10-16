@@ -1148,3 +1148,7 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 本轮 [P-20261015-01](./docs/collaboration/evidence/P-20261015-01/README.md) 基准main6104e3d：SW-001可靠性、SW-004快照、SW-011森林53文件设计与SW-014预检R3均accepted/合入；build-109已发布，26份原始JUnit共274项全通过，APK hash核对一致。SW-010已approved但PR #3仍在作者state冲突，尚未入main/测试包；由ZCode同步、Antigravity复核新head/CI后集成。
 
 本轮并行：ZCode SW-005地形/站稳/自动轻跳；Trae SW-012雨林900m设计；MiniMax新增SW-015零API真实规格联调（已批准id/type设计被R3读为空集合，空候选误放行）；Antigravity持续集成/验收及组合出包。SW-006增加SW-015前置，设计和联调均独立批准后才启用原8次尝试制作。已冻结快照字段已对齐契约摘要，旧批准/历史记录保持，private state由各角色本人消费。规则依据 [D-007](./docs/collaboration/decisions/D-007-next-stage-and-design-intake.md)。真机/真人仍Pending，无本地完整Android环境前置，不自动向外部工具发消息。
+
+### 21.9 交付收口与雨林审稿（2026-10-15）
+
+核查main904ab01，详见 [P-20261015-02](./docs/collaboration/evidence/P-20261015-02/README.md)。ZCode地形PR14核心已交/云端CI绿，作者local XML296/0，提示与gait无UI消费者，登记rework要求R2补齐当前用户可见规则；森林接图PR3冲突已解，但协作CI因改写旧交接附录失败，先恢复归档字节并新增说明。Trae雨林PR15已交/53文件hash匹配/CI绿，待独立审稿与精确spec hash冻结；MiniMax SW015未见远端交付，保持ready/0API。Antigravity纠错PR13已完成，应继续集成/审稿队列。SW006仍等SW012+SW015都accepted，SW007等SW005+SW006，不把当期必需UI延期混入雨林。规则见 [D-008](./docs/collaboration/decisions/D-008-close-current-deliveries.md)，角色入口已更新。当前main/已确认build109不含未合PR功能，真机/真人仍Pending。
