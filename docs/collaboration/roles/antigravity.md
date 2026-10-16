@@ -1,16 +1,14 @@
 # antigravity 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
+先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
 
-你负责独立QA、registry/BOARD、顺序集成与测试发布。读 `../queues/antigravity.md` 常驻消费，不重复建协调启动任务。
+你负责持续独立QA、registry/BOARD、顺序集成和GitHub测试发布，读取 `../queues/antigravity.md`，不重复创建协调启动任务。
 
-先检查本规划是否已发布；尚未发布时先读 `../PUBLISH-PLAN-20261015.md`，从现成Codex规划分支/交付包导入已验证文档，在本人独立worktree标准PR/全CI后集成，不重做审计。
+1. 上轮规划已由PR16合入bcb1bfb；本轮尚未发布时先读 `../PUBLISH-PLAN-20261016.md`，导入现成Codex规划提交/包，正常PR/全CI后合入；更新活动发布提示，保留历史记录，不把规划合入当产品approved。
+2. 已收口SW010/PR3、SW005R2/PR14、SW012/PR15+19、SW015/PR18，原approved/accepted保持，不再安排旧返工。当前main2339333 Android run38847512206、协作38847512200成功，303作者本地XML全通过；云端报告/APK/source artifacts已出，但Release仍build109旧组合。按实际最新已集成main触发测试预发布并验证可下载APK/source/commit/真实APK SHA256，不能拿artifact ZIP digest当APK hash。
+3. 源码/UI已经接提示，但bootstrap抽读H-SW-005-R2/hint-shown.png未见报告所述卡片。新增真实提示出现→约3s消失/同局恢复不重播的同步视频或短间隔截图+UI hierarchy，记录精确APK/head/输入/时序；只读作者截图不是你运行模拟器，不能凭文件名或代码delay叫实测通过。不能运行则Pending；本项补证不自动撤销已accepted代码。旧报告任何纠正追加文件。
+4. MiniMax SW006 ready，先消费本轮实际生产反例：旧入口放行768x1376和9次声明，--strict-design误拒D009批准原字节。检查其任务内新production_guard/自动断言/默认入口，不要求改Trae旧spec或重开多轮大工具任务。核对请求前ledger/跨revision任务总8次/项目历史14，任何未通过保护不得付费。随到独立验图真实1080x1920/透明/四检查图/六阶段/裁切/≤400K层2MB景/来源/hash/design_ref，不能把原预检绿等同像素合格。
+5. 新SW016底座/声景准备和SW017应用验图参照已ready可并行。分别审真实Kotlin/900m与加载可用性/双模式复用/快照、音频来源与听辨，以及设计模拟是否明确/引用SW012原规范。SW017不成为素材新前置；SW007只在SW006+SW016+SW005 accepted后激活，最终组合实际App/双模式/声景验收，城市/沙漠仍后续。
+6. R-SW-015-R1.json与.md delivery_head记成9c4ef5a8f4cffb0948cbb391306b4bdafd3c64c1，实际PR18交付9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846；业务reviewed_commit 81fbf2d正确。新增correction说明，不覆盖旧审计文件。
 
-SW011勘误PR #13已合入904ab01；SW001/SW004/SW011/SW014原批准保持。当前SW010 Git冲突已解决，实际挡点是CI归档改写；SW005核心已交但UI缺失；SW012已交；SW015尚未见远端交付。bootstrap的rework不是你写的正式review。
-
-1. 先收口SW010 PR #3：原R1 approved/hash保留。协作run38736953399失败的精确原因是作者修改H-SW-010-R1-appendix-sizes.md；退回作者恢复main旧字节、新文件记录同步，不代写其private state或禁用历史检查。新head比较相对main完整delta/原批准hash和全部CI，满足条件依分支保护集成、记录merge并accepted。Android绿不能跳过协作红。
-2. 现在审SW012 PR #15业务cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb/交付c723048116fd2c36a7c19f2ab6c926f47b78beac：53文件hash/source、五层、0/110/295/475/700/875m、三比例/三底/局部/运行裁切及森林身份差异实际验图。冻结mist/trunks_canopy/vines_light/distant_glow/glade及type/parallax/尺寸/相位，用新review/decision绑定精确spec hash，不能改Trae原spec/manifest。实质改动退回Trae R2。批准设计只算设计accepted，SW006仍等SW015。
-3. 对SW005 R1/后续R2正式审稿：当前PR14 head9541f62；云端CI成功，作者local XML296/0已核读，但提示/gait未接UI。要求作者R2补用户可见规则，不因296项通过或800m截图而跳过表现层。复验站稳不刷距、提示首局一次、自动轻跳/攀坡、reduceMotion、无输入/死区、暂停/后台/取消/恢复/终态/800m；核对同sessionId恢复提示语义及快照v1提案。不要自己改生产代码然后自批准。
-4. 随到审SW015：真实SW011/雨林id/type五层解析、空/重复/冲突spec和空/错候选拒绝；默认preflight/dry-run批准链、alpha/四检查图、账本/总尝试保护及自动断言。临时批准fixture与真实批准隔离。独立批准集成后，与SW012都accepted才激活SW006；SW007等SW005+SW006。
-
-任务/审核/证据记录精确业务head、交付head、reviewed_commit、merge、CI/APK hash，旧记录只追加。生产者state由本人消费。可先收口接图出组合包，后续地形合入再按必要回归更新；只从实际已集成main出测试Release，不能把未合PR功能写进包说明。已有build109含可靠性/快照，不含本轮未合功能。真实JVM/作者XML、源码、作者模拟器证据读取、自己模拟器、physical-device/human分开；缺真机/真人Pending，不阻塞独立代码验收、不宣称M1/M2/MVP完成。不发布应用商店。
+源码/作者本地XML/云端CI与原始artifact、作者模拟器证据读取、本人模拟器、physical-device、人测分开记；真机计步/锁屏/重启/耳机来电与5–8真人仍Pending，不宣称M1/M2/MVP最终完成。中心登记本人顺序写，作者state本人消费，你不代改生产/候选/设计后自批。不自动发消息/发布应用商店，无新交付一次报告等待文件。

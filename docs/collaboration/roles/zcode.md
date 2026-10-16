@@ -1,14 +1,13 @@
 # zcode 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
+先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
 
-你负责生产代码/领域测试、正式素材接线与业务CI，实际完成交接。
+你负责app/领域测试/业务CI/正式素材与ASSETS映射。SW001/SW004/SW010/SW005R2已accepted并合入，不再修旧接图冲突/重交地形初版。
 
-当前SW001可靠性/SW004快照已accepted；不重做。SW010与SW005均有实际PR，本轮登记rework来自bootstrap观察，仍由Antigravity写正式review。
+领取ready的 `../tasks/SW-016.md`，从最新main独立分支实现雨林900m运行时底座与真实声景准备，可与MiniMax素材并行，不提前领取queued SW007。按D009/SW012精确五层id/type/parallax/里程与fade、x=.34/y=.865、有限视差与reduceMotion接渲染；为当前硬编码forest层名的入口做必要最小抽象，保留森林批准表现。
 
-1. **先修SW010 PR #3协作门禁**：观察head e7441a2fb9ba04178e806a0675fa584e04ba90e5。Git/state冲突已解决，不能再按旧入口重复解决冲突。Android run38736953424成功，协作run38736953399因你改写已归档H-SW-010-R1-appendix-sizes.md失败。在自己的SW010分支将该文件恢复为最新main原字节，把20261015同步说明保存到新增H-SW-010-R1-sync-20261015.md；追加提交，不reset/强推、不禁用历史检查。原两张批准WebP/hash、forest产品参数保留，新head全CI绿交QA复核集成。原R1已approved，不重做已裁定柔光；产品变更才新revision。
-2. **补SW005 R2用户可见闭环**：读 `../tasks/SW-005.md` 和PR #14/H-SW-005-R1，观察head9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36。TerrainMotor/控制器+22单测已交，但consumeStabilizeHint与snapshot.gait没有UI消费者。将提示/步态经ViewModel接到SessionScreen/ForestShell，落实DEVELOPMENT §5.6/5.7站稳、轻跳、攀坡、不平路表现、首局“慢一点，站稳再跳。”，不能把当期必需功能推给queued SW007。UI只消费状态，动画不改s_pos/meters/s_best；reduceMotion关闭非必要抖动/视差/起伏，提示仍可理解，无新QTE/自动刷距。
-3. 核心3m/.72/.4m/s/1.2s规则、松手/暂停/取消/后台/恢复/终态/800m保持；补死区d=.01/.08边界实际Kotlin验证。按冻结快照契约保留v1字段和真实计步基线/感官不补播。R1无新增字段提案由QA裁定；恢复仍同sessionId，首局提示是否重复明确处理，不能自称恢复等于新局来绕过语义。
-4. 新业务commit后写H-SW-005-R2 JSON+Markdown、追加兼容说明、完整变更文件（含UI）/实际测试/云端run/截图或视频与base/head。提供舒适跳、紧张站稳首提示/二坎不重复、停走冻结、reduceMotion/暂停恢复的实际App证据；作者本地/云端/模拟器/真机类型分开，不改R1记录。业务作者不自批准。
+候选未到时只用显式测试输入验证接口，不能把Trae exports/旧森林重命名成生产图，不让不完整rainforest.json被自动枚举为完成场景或破坏loadAll。可先把900m配置置app/src/test/resources，生产入口要有明确可用性门禁。复用已有虚走/真实计步/Service/门禁/恢复，不复制引擎；可选stabilizeHintShown旧档false、同session恢复不重复提示，快照v1保持。
 
-两任务分别维护本人分支/state/deliveries，同步main时保留SW001/SW004/双方交付信息，不把未审业务混进其他任务。SW007仍queued，等SW005/SW006 accepted后才雨林；不改Trae/MiniMax/QA/中心registry。无可执行动作报告等待的review，不提前扩城市/沙漠或安装完整环境。
+准备合法真实湿叶步伐/滴水阔叶环境音与来源/许可/署名/处理/听辨/峰值时长/字节/hash。无素材如实Pending，不用stub或重命名森林冒称独立声景；本轮0新增付费服务。覆盖配置单位/900m/路径/缺层/双模式与恢复的实际Kotlin测试、云端test-lint-build，实际App证据与模型/单测分开。交H-SW-016-R1 JSON+Markdown、业务base/head/文件与接口清单、真实音频来源/Pending，QA独立审核。
+
+SW007仍等SW006候选及SW016均accepted后最终接正式图、生产配置/选景可用性和900m双模式；底座accepted不等于雨林完成。收到Trae SW017应用参照可消费，但生产规格仍以SW012/D009为准。你不改Trae/MiniMax/QA/registry或他人state；本人消费accepted通知并更新自身state/交付索引。无可执行动作一次报告等待文件，不自动发外部消息。

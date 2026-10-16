@@ -1,0 +1,40 @@
+{
+  "kind": "bootstrap-planning-validation-not-product-acceptance",
+  "base_commit": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+  "checks": [
+    {
+      "command": "python3 tools/collaboration.py render",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/collaboration.py check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -q",
+      "status": "passed",
+      "tests": 31,
+      "duration_seconds": 29.112
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "HTMLParser unique IDs/internal anchors/local links",
+      "status": "passed"
+    },
+    {
+      "command": "probe_production_gate.py . --out production-gate-results.json",
+      "status": "completed",
+      "actual_api_calls": 0,
+      "observations": "1 real default design pass; strict flag false reject; wrong size + budget combined false accepts; isolated budget function false accepts"
+    }
+  ],
+  "scope": "No app/production asset/author state/old handoff-review-evidence-decision edits. Actual Android/JVM not executed here; main cloud success and303 author-local XML separately archived.",
+  "publication": {
+    "status": "not_published",
+    "reason": "Terminal GitHub DNS unreachable; connector create_branch403 Resource not accessible by integration",
+    "handoff": "PUBLISH-PLAN-20261016.md + portable bundle/patch/files"
+  }
+}

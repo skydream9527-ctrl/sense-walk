@@ -1,0 +1,1035 @@
+{
+  "kind": "bootstrap-read-only-source-audit",
+  "main": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+  "designs": {
+    "SW-011": {
+      "files": [
+        {
+          "path": "design/05-visual-design/SW-011/r1/README.md",
+          "bytes": 8549,
+          "sha256": "3e88ecc28805cc48e1ef4962175efabe3092d063486c5f421491d1367ad1feb4",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/design-spec.json",
+          "bytes": 12624,
+          "sha256": "f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/exports/forest_clearing.png",
+          "bytes": 127737,
+          "sha256": "bb75a4811e3d4dac88d197ed837ea510f51936e3eccc22a783e86fbc6b040b08",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/exports/forest_leaf_path.png",
+          "bytes": 98473,
+          "sha256": "0d799cfa3f2d34b9bdfe7adc0bed95f7454f410be4cb415edebcf419a029e83b",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/exports/forest_light_shows.png",
+          "bytes": 244104,
+          "sha256": "c42cdafb481cadfe6c1e76aec521c2f24c48ba42be180cc4a17ab3d16fc4b076",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/exports/forest_tree_outline.png",
+          "bytes": 51367,
+          "sha256": "2f065531680c749d82dd5fabe76c29df70ab57728303f0886ad79e3dc4566d3b",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/exports/forest_tree_trunks.png",
+          "bytes": 189766,
+          "sha256": "17fcdf23b4ac14349011559491a3dbeafb4a58e4458bbad54cdcfed50aad5195",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/composition_guide.png",
+          "bytes": 475735,
+          "sha256": "eb1e167167df7f9839a97b9653dc8439b0b808753d74af3db3f0cf1164573261",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x1920.png",
+          "bytes": 464201,
+          "sha256": "95c2fc9a6f804ba100882c0cd03c0b80bb185c2513862d433de6639f03e1eed8",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_1080x2400.png",
+          "bytes": 525720,
+          "sha256": "4f4023bff5256da78ef37cb97313f37ee8df54b11366a40ab84b91dcc6c93228",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/crops/crop_390x844.png",
+          "bytes": 141298,
+          "sha256": "e081083a5ab3245930e0a876c347d298e2ba244420c70115d8a9feb86231507b",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/forest_style_reference.png",
+          "bytes": 432171,
+          "sha256": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_black.jpg",
+          "bytes": 12987,
+          "sha256": "cc5fcf07707d01a01a67f612242a0ae329ef33727a713f14e332bc983417bc4a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_magenta.jpg",
+          "bytes": 12825,
+          "sha256": "91f1a938d7029c433234e9843abd8c8d1de5de270ea55061d5c61ec43cd83003",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_clearing_white.jpg",
+          "bytes": 11106,
+          "sha256": "a3fadb25fccdf3ae54c1ce37e6329d675774d363816d30848a8ee7f38f8c8645",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_black.jpg",
+          "bytes": 15901,
+          "sha256": "2b7021fb9dfdf4b904f7722c41155c5e7a20d69f88a450cbbd198fd8a4920740",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_magenta.jpg",
+          "bytes": 16260,
+          "sha256": "d21d1266150cd26489482009aefe77cfe7696989514b2a06e712876be7e65c37",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_leaf_path_white.jpg",
+          "bytes": 16915,
+          "sha256": "e1a0fc873417a44549231f1abb7f4f1cf5025d30f0b6f01d44406555c83477a4",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_black.jpg",
+          "bytes": 11571,
+          "sha256": "9c67860492d53674bb52641cfe81c33ebdc058008d8b71c904e6b67e1dbf38d7",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_magenta.jpg",
+          "bytes": 11564,
+          "sha256": "59e6c44e37b87a40fdaa4f617899a37ec1ce2387a5510fd864b46a4fe889b587",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_light_shows_white.jpg",
+          "bytes": 10083,
+          "sha256": "3e7f5f47c7a375e0ceb1e2fd66a3caefe0e646b62bac406d3c0d6ba92ded4515",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_black.jpg",
+          "bytes": 14124,
+          "sha256": "b2884930ddf1da1ef01bbc84357ff37361ee490be60921c48ace08c0cdf36fb0",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_magenta.jpg",
+          "bytes": 18369,
+          "sha256": "fd4c900ce7b39e3288d63c0f9b04f2aa813cdc6ab74e23e0af16de283948baf8",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_outline_white.jpg",
+          "bytes": 18598,
+          "sha256": "bbcce01bdb2d21f4f2dcf31959af8d0b11b395a8ebe41dedd510c29c5b2cc6e6",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_black.jpg",
+          "bytes": 36432,
+          "sha256": "a0b886a4c651a12fab1d132841a93c5ebc51fcff7b079907100e2d6a4ef011e3",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_magenta.jpg",
+          "bytes": 48344,
+          "sha256": "8f0377d1e44fdaa8f28664d5976c69c8ca929f1ed567fab550ea031cc9f6329f",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_checks/forest_tree_trunks_white.jpg",
+          "bytes": 45183,
+          "sha256": "05efb82074777137ffbcda4f42d78bd0c4bf1b3970223f01058bd6a0fdd3df80",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/layer_map.png",
+          "bytes": 173349,
+          "sha256": "776ccbfde34f4632ea790abb75d74722b9d66c6c63974474aa7c03f191f43479",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime-crop-check.json",
+          "bytes": 4655,
+          "sha256": "f2f56f9d505b90b462f6fe08a9e93340a9ed9cca613fa58b935c97b029cf29e8",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_parallax_max_390x844.png",
+          "bytes": 191268,
+          "sha256": "75b822aaacb90a7dec4073b3f906169216c8de456be4b3d06c95372e2c923aeb",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_rest_390x844.png",
+          "bytes": 183784,
+          "sha256": "c0018545ce02f37e1a1a699ee89b46cc22bdc61b1101007bc8b4a89cfe03190c",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/runtime_crop/runtime_viewport_map.png",
+          "bytes": 272905,
+          "sha256": "f0eaacb913cdb0796eb5685ad94ce2074481241e0a0ddd6bd48499628fd208c9",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_000m.png",
+          "bytes": 15175,
+          "sha256": "3bd56d41a0ed270b0de8c3125e9bd4cb4d0f38a7ebc5441f1d7a93d3f568b8d7",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_100m.png",
+          "bytes": 40301,
+          "sha256": "a68fab6ba3f4ca05f3f140fb478ef5acd599fd6eabbdb4777c895e1d7a53219f",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_265m.png",
+          "bytes": 151195,
+          "sha256": "d5767af9a5ece174124e9e71405a2403a16363b77e3a465a3002612c8ee2e3cd",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_425m.png",
+          "bytes": 226631,
+          "sha256": "ed86500d39aa577a76dcf05e7b1fdddf0df9db32348ad270cc29976495870399",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_630m.png",
+          "bytes": 337758,
+          "sha256": "2bd53b192f3f1e9f5eb8c37a31b4e82e0995bd5094a0520e620d3115563a304e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/stages/stage_785m.png",
+          "bytes": 432171,
+          "sha256": "b4c34ad288799d6dad324bc44f55b9be40f5bbe78bfcd2e17a6cd904cb31f902",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_clearing_zoom.png",
+          "bytes": 211462,
+          "sha256": "c26a956a5c2b6db6a82f024d5367b56f2f76ec91f8cf974e0af8e4705b2e701b",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_leaf_path_zoom.png",
+          "bytes": 183569,
+          "sha256": "783925830fe71876f2f88fbddf20facb7431c2a2c37a3d9d95f43a1a6f57ecd9",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_light_shows_zoom.png",
+          "bytes": 297750,
+          "sha256": "2d0f318e39766217fc9da6c72aba041f1ce4db141b6e59c7db0b643e476dad40",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_outline_zoom.png",
+          "bytes": 165058,
+          "sha256": "213b25fbc4947c443e6e3fb92fa71945e9f45f12a240f1a470e957fe67d729ee",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/previews/zoom/forest_tree_trunks_zoom.png",
+          "bytes": 188747,
+          "sha256": "63ecdb71f5b1403e67e16b364f7507869ff40d0d72cfc2a5b163d82f52f508a0",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/prompts.md",
+          "bytes": 10549,
+          "sha256": "33f7407328fda1d5234cd33f4480eac6e6fb8b61200d80487c1b9ac7f2ec102a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_clearing.svg",
+          "bytes": 730,
+          "sha256": "b80150131df2c11c2334dfcaf634a5383d305add28132d36845f38484216bbaa",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_leaf_path.svg",
+          "bytes": 10726,
+          "sha256": "91150182afe1a2b91813386e8c67f64d34bb07e6ee61f3f0c04ebecc98a70182",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_light_shows.svg",
+          "bytes": 3308,
+          "sha256": "e6c144e15e9b9c08d3153c4b2803f2d2eca3860d2ab876e308f585efe9347894",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_master.svg",
+          "bytes": 1014,
+          "sha256": "ce3c6baaa022d0d83da6ac77cd61cd73ef5c7ebf8eb1b048d4f63dec879be343",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_tree_outline.svg",
+          "bytes": 12250,
+          "sha256": "f00569d715d513137b394aa39e0e9b4a95584e9a684a9d3dda7c8399f193f570",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/svg/forest_tree_trunks.svg",
+          "bytes": 7599,
+          "sha256": "a92f2ef96518aabff6b824cc3d06ed94018f5f9624c461c2d38e19f485e8c45e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/sw011_model.py",
+          "bytes": 12879,
+          "sha256": "a0d36dc3ef99ba4b9526feb929fb5205ef1b0abc1151d73fd8546cf6e01a1969",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/sw011_render.py",
+          "bytes": 31157,
+          "sha256": "e37a38767c0b57486b8e75e4672d42d610565cf01f00f875cf712e47900ce66a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-011/r1/source/sw011_supplement.py",
+          "bytes": 16801,
+          "sha256": "f6aae5c053be00634ee71651338688840e67e2fbab8476c07c60e86d4af4c2d5",
+          "matches": true
+        }
+      ],
+      "all_match": true,
+      "spec_file": "design/05-visual-design/SW-011/r1/design-spec.json",
+      "spec_sha256": "f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414"
+    },
+    "SW-012": {
+      "files": [
+        {
+          "path": "design/05-visual-design/SW-012/r1/README.md",
+          "bytes": 8359,
+          "sha256": "b294ca3dd608bc743f65c4b1c312064ea84e0ddb67d459ded723984e4a2bad88",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/design-spec.json",
+          "bytes": 16177,
+          "sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png",
+          "bytes": 122588,
+          "sha256": "32d0176495ffa0a2dba7a8beb408ff6dedb1d7a9ce103cb9a1830c2aaf7b2d8e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png",
+          "bytes": 209656,
+          "sha256": "5e7832770e2f475e3a778c20f0a94c0bd8bd36e3bc560884a9ead2fe851ed007",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png",
+          "bytes": 242738,
+          "sha256": "17f312b805ff171eb9a3a4d58bd594871860046b782180073bfce9e2f0444c78",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png",
+          "bytes": 152268,
+          "sha256": "24fa2c4ea55991910eca01da332791801ce947d499e0d67c1b1994590a32005f",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png",
+          "bytes": 403091,
+          "sha256": "a6a6b8073118cc7aa9472330492eadb703811e9fc90e6d02fe0bbfdb5cdbb595",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/composition_guide.png",
+          "bytes": 569162,
+          "sha256": "8cfcb24381b2e1aee9d0395c3cd79f679dc1b6327e4fe4f8a4a2f4037b9ae35f",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x1920.png",
+          "bytes": 637567,
+          "sha256": "fa8f00bb47ba0d53ed6b35d650887cb38f786c4bea15acda6e4af30102d487a6",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/crops/crop_1080x2400.png",
+          "bytes": 785486,
+          "sha256": "a6f0063d61b83a1d38886b437327e9d7da7f13b755ae096c52f3d6b07cd5fa01",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/crops/crop_390x844.png",
+          "bytes": 185936,
+          "sha256": "a58ad2fccab9cc48c7b206be10ce5262bc1ade0a544fdc7539c8207d15479d29",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_black.jpg",
+          "bytes": 11501,
+          "sha256": "fb6892bd10a5f79a6a45c36154ecfb7a61ba36ac1b33f339239bad77fd769797",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_magenta.jpg",
+          "bytes": 12096,
+          "sha256": "47076bb66ae7e0e208df3b20df58b634fd3738d98891ae5990ed15ed492b80e3",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_distant_glow_white.jpg",
+          "bytes": 11724,
+          "sha256": "d36830ba6c141e2bc0a962f06ad41aa63028d13eba5e0709fd896587e43b0a60",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_black.jpg",
+          "bytes": 12677,
+          "sha256": "fbe01f7315389ae2f375f45b69facd1ebd4a725e7e5e38a624d1ce4bfeedd0f6",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_magenta.jpg",
+          "bytes": 13439,
+          "sha256": "fd376943b3f8511aa1c252a5a23bb1d010bdb599e92afd0c59bfe3127cbe0c0e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_glade_white.jpg",
+          "bytes": 12643,
+          "sha256": "8dadfb5bfd9a4b6bd1e18b99f477a29da2f2c0ce4a560c542fd9be1905847fcb",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_black.jpg",
+          "bytes": 11730,
+          "sha256": "104c4256fb1864461edef5c0021de8311a77d6c872273e264ca8c1d7b08c16e1",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_magenta.jpg",
+          "bytes": 14937,
+          "sha256": "38c7c7bb5b54137cc3d504d615f9230181426f907b4686c8002e66cc8293c40a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_mist_white.jpg",
+          "bytes": 16279,
+          "sha256": "bb795aa7b8aa50d33e822422e427657b754e6187d02a3cb970ab2925191690c7",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_black.jpg",
+          "bytes": 30677,
+          "sha256": "32f0354792baf5c903fe43ddd38a2763a9bc5ac0eaf085a0f7ccb32b8965d101",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_magenta.jpg",
+          "bytes": 40578,
+          "sha256": "cee7d0af0917e4e4595eb568b35da54f2fd05111057dcda7e02b2124458ec004",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_trunks_canopy_white.jpg",
+          "bytes": 39669,
+          "sha256": "d4fdfe71f94a306adf15ea236d29d61c9d3509aa2c76145a99f354008aefbdf7",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_black.jpg",
+          "bytes": 22741,
+          "sha256": "1e20be85762ab35394533775d8727da4f0c17e9503db27a0e7e836d7e363bbe3",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_magenta.jpg",
+          "bytes": 24241,
+          "sha256": "d43029d0a87516009ca57a32ad90291abef68fbc302fda7252b58af3568bdfad",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_checks/rainforest_vines_light_white.jpg",
+          "bytes": 26923,
+          "sha256": "0e3a4b82032fa846feab970cb6dd51854aa8e6bb9a41f7d5823e2eef1fd807b6",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/layer_map.png",
+          "bytes": 211637,
+          "sha256": "234e40c0141bc81425ec92d33f9b8e44c3b00a36f5ec45abca28ce98563ba14e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/rainforest_style_reference.png",
+          "bytes": 607858,
+          "sha256": "7c55547d28bf21c5a0309ef748061b7feec0c1b98c200de0df699ebe36454187",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime-crop-check.json",
+          "bytes": 6332,
+          "sha256": "7ea16648fc8473091b13cec4eb7ae95c87e4672a624050ada9327220ba47a194",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_parallax_max_390x844.png",
+          "bytes": 238890,
+          "sha256": "a6cba4c1e9faf07fa902a65e202ac523c01c7bdd849cdaf3496acea53326f8fa",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_rest_390x844.png",
+          "bytes": 239645,
+          "sha256": "8de4ce9d3fd26406cdbd1f36a802856fc8c3d7b8e785924cb2ecf642ad4e7793",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/runtime_crop/runtime_viewport_map.png",
+          "bytes": 330584,
+          "sha256": "265222aa78dbeb0b73e33e5caf93499838061353c9905c3520a40a3bcb0f2f83",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_000m.png",
+          "bytes": 15164,
+          "sha256": "ef21f5d063d29b19cb1fbbae6de5077ca256ae130f21c55e5c7a5f72442d9fbc",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_110m.png",
+          "bytes": 96291,
+          "sha256": "7c1afb99956376907814cd67fa3a15989daf777a34c09d503dc2128a3d5cc068",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_295m.png",
+          "bytes": 188957,
+          "sha256": "830e2c9f4ada402878558a82c9c69856d77594471d956483ca807b0c6fce844f",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_475m.png",
+          "bytes": 424256,
+          "sha256": "8a199a100edf7b4995165263f31a65812486089297d1f2245bb993d9f6e2719e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_700m.png",
+          "bytes": 489558,
+          "sha256": "86ad59ac5d3a59b3b988ac2694bba85a13b5d96327953b4d301f3bd64b4a2bfa",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/stages/stage_875m.png",
+          "bytes": 607858,
+          "sha256": "7c55547d28bf21c5a0309ef748061b7feec0c1b98c200de0df699ebe36454187",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_distant_glow_zoom.png",
+          "bytes": 288648,
+          "sha256": "a3f1c0d8a4e98885523b3e363812dff179a6c1765fb8703bcc82dfab231bd61e",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_glade_zoom.png",
+          "bytes": 436784,
+          "sha256": "485c98c2206d90ac82541f49475be7331ea4450a967220de1de368f05fb5c0ea",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_mist_zoom.png",
+          "bytes": 353022,
+          "sha256": "fc05b8bcdd84f87a754141a707a073f36c2bcc9f7703ca3e0e8be5dbfa4c8907",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_trunks_canopy_zoom.png",
+          "bytes": 264859,
+          "sha256": "91c14b68067002943ba4f7ea1fd442c151be30f50f4545eb28d77ec4d96b9c77",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/previews/zoom/rainforest_vines_light_zoom.png",
+          "bytes": 500800,
+          "sha256": "134ef719da128ffe18a6c0ef4843829818f43f420abf6793b7e6f2b6b97b3e2a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/prompts.md",
+          "bytes": 13105,
+          "sha256": "7b19d3f99513436d42f00e9333ff755e0ef89cce9324f820273464df1d478be6",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_distant_glow.svg",
+          "bytes": 2536,
+          "sha256": "9e6ea6886659b346e2cc0949b904b43074109a69b02af8b9a18394da21945082",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_glade.svg",
+          "bytes": 1776,
+          "sha256": "744764388b73a4d59f109665174a39efbf71ee26c98045f667367f0fc28d0ff2",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_master.svg",
+          "bytes": 1030,
+          "sha256": "595a2f5c981703fc865afd1e9c7af90fec7130ed60d7d301a4f3a16e2865caa2",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_mist.svg",
+          "bytes": 1828,
+          "sha256": "16019c680a2be5f726783a52b0f6ee3ece380378a3269a5c15124c292ed5ac8a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_trunks_canopy.svg",
+          "bytes": 37274,
+          "sha256": "36890887c5375085573aeae8213ab58ca613a1ff0a367e563e6d70ddd4f127c0",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/svg/rainforest_vines_light.svg",
+          "bytes": 9478,
+          "sha256": "6ba97a7d8e13089c5d42a35a88c960d78162da9f33de1b13971c43e6492cd80b",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/sw012_model.py",
+          "bytes": 16976,
+          "sha256": "5c851c9042a6f4b3f568d92ab647f988f3a5b04b1147b622cffd920716188a7c",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/sw012_render.py",
+          "bytes": 31380,
+          "sha256": "aa7cc51cbd0285ddfa9fe14104c70c3896e942d30287ec837a7e6bab1f24359a",
+          "matches": true
+        },
+        {
+          "path": "design/05-visual-design/SW-012/r1/source/sw012_supplement.py",
+          "bytes": 16345,
+          "sha256": "e996f8b40835523e0b8f1b48629d6fb5600e9a321a8f676b421816c6b2b50f87",
+          "matches": true
+        }
+      ],
+      "all_match": true,
+      "spec_file": "design/05-visual-design/SW-012/r1/design-spec.json",
+      "spec_sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320"
+    }
+  },
+  "accepted": [
+    {
+      "id": "SW-001",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-001-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-001-R2.json",
+      "integrated_commit": "1e238812c62c97486e96fa68c2eecbf450e160a0"
+    },
+    {
+      "id": "SW-002",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-002-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-002-R1.json",
+      "integrated_commit": "a5ad6dd634abcbe4868dcc9eaf6e57ca6a2a48ec"
+    },
+    {
+      "id": "SW-003",
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-003-R1.json",
+      "latest_review": null,
+      "integrated_commit": "af816246611e9e996e679a0f17cd87784af397bb"
+    },
+    {
+      "id": "SW-011",
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-011-R1.json",
+      "integrated_commit": "256d7e3b3fb426a03401c19e8495eacbd93048b2"
+    },
+    {
+      "id": "SW-010",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-010-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-010-R1.json",
+      "integrated_commit": "2b47f01aa64262433b52c1a071ddfec2ba4ee249"
+    },
+    {
+      "id": "SW-004",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-004-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-004-R1.json",
+      "integrated_commit": "814fc78f72017c643ce43cbf4b3ced6d89c1f5bd"
+    },
+    {
+      "id": "SW-012",
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-012-R1.json",
+      "integrated_commit": "bb05b035f1109d974790a9e576a77a539c2e43ed"
+    },
+    {
+      "id": "SW-005",
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-005-R2.json",
+      "integrated_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436"
+    },
+    {
+      "id": "SW-013",
+      "latest_handoff": "docs/collaboration/handoffs/antigravity/H-SW-013-R1.json",
+      "latest_review": null,
+      "integrated_commit": "ce320ae0fd07ff4f59680b77251d16ed5c66c3fb"
+    },
+    {
+      "id": "SW-014",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-014-R3.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-014-R3.json",
+      "integrated_commit": "3ea89c16815ff93677cda00ed6e04d41728b998a"
+    },
+    {
+      "id": "SW-015",
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-015-R1.json",
+      "integrated_commit": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5"
+    }
+  ],
+  "production_forest_assets": [
+    {
+      "path": "app/src/main/assets/visual/forest_clearing.webp",
+      "bytes": 26312,
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33"
+    },
+    {
+      "path": "app/src/main/assets/visual/forest_light_shows.webp",
+      "bytes": 34414,
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0"
+    }
+  ],
+  "rainforest_runtime_config_exists": false,
+  "sw006_candidate_exists": false,
+  "author_local_junit": {
+    "counts": {
+      "tests": 303,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suites": [
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.phase.PhaseSchedulerTest.xml",
+        "sha256": "a26fb8a9c8294f2f81d7d2db208b30a6d2e16f39a059033919777ab1148a0889",
+        "counts": {
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.progress.CompletionGateTest.xml",
+        "sha256": "f2a8c44afeba7aa910b0a590de54e58bc4b3618eabac83ae90fd1093440cbbf8",
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.progress.ProgressAccumulatorTest.xml",
+        "sha256": "87e9abe3a5072b61a17c8a6b951d3bad793a9fc3c2bc940ad781bc77001aba7d",
+        "counts": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.scene.MigratedSceneConfigsTest.xml",
+        "sha256": "94a8314d48c6499b9a2d49c9cf8de6df74d2780b00077b60120c4452a63bbd72",
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.scene.SceneDurationEstimatorTest.xml",
+        "sha256": "18c77a32d3af8aa546e098a48991858ef2b2158d30b2561e4dbeffc960c1f273",
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.scene.SceneJsonParserTest.xml",
+        "sha256": "de9219113962d47142f104d044767eeb15febcca6860721d553e3ec01a6271f6",
+        "counts": {
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.scene.SceneLoaderTest.xml",
+        "sha256": "4dea4408a0e8262fe987c33fa84b8f3b31c96b8a2ac8d5df59e956a0c7ce4632",
+        "counts": {
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.scene.SceneValidatorTest.xml",
+        "sha256": "b29425747f19c68ce44320bdca8fc185613467f4c2d7e828d2e72b7885dcfe4a",
+        "counts": {
+          "tests": 29,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.sensory.AudioFocusChainTest.xml",
+        "sha256": "038d60702c89b6f9a0ef77b970348c0ef9acf9b7b893e22fa472b3354a5f7ea0",
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.sensory.PlaybackSupportTest.xml",
+        "sha256": "b545f62c9703dfb34c065707f310ca7827b567f90bf15384282eef283fb6c2fd",
+        "counts": {
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.sensory.SensoryCoordinatorTest.xml",
+        "sha256": "d6b907670bf89026eb1c4858f7a5fe0f7e996324c4bde2a8dad6349ef13faacc",
+        "counts": {
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.sensory.SensoryRestoreTest.xml",
+        "sha256": "745a4a15827bea86e7d77b774b94bf923b25907cd5a34fa681a8159b15564c66",
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.session.SessionSnapshotValidatorTest.xml",
+        "sha256": "7839d94bfecd3f032fcf08089041edc0f920bdba2b50bbcd9444cb56beb88a6e",
+        "counts": {
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.session.SessionStateMachineTest.xml",
+        "sha256": "1b6296227fe5cf1c3fb53d2550971e0bd03c849b89787dfba8f4c660fa8222e0",
+        "counts": {
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.session.VirtualWalkIntegrationTest.xml",
+        "sha256": "f7d0b45029c5f2692b9d9058b6b811a3ba91779e8207c3dc4b1e3765239b4f11",
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.stick.ComfortStickMapperTest.xml",
+        "sha256": "5570ff847ff875a30aa25305ac3cfc61d8f50dc557d71ef7186c13cd5a7d093b",
+        "counts": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.stick.VelocityInertiaTest.xml",
+        "sha256": "69735f016bd8770130cf11462abe9c2ef0f0660368ec4e140e2045fa55abd1d0",
+        "counts": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.ForestFullWalkTest.xml",
+        "sha256": "fabfdac46e3552867ac78091f110671563fade3621ce3b2a9434cc06d912c740",
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.RealWalkControllerTest.xml",
+        "sha256": "cb8898e7c584c0e0318b12b4c66d65ccdc791c5bac79cf3511cb2173658ca465",
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.RealWalkEngineTest.xml",
+        "sha256": "02a65906b3e462042692deb2c7ba1c40eb8d3cd05f2a7de00aee7c52ebe4050f",
+        "counts": {
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.RealWalkRestoreTest.xml",
+        "sha256": "f73ff10cdd1f04aa58f629f837f0d42812c694983f84eb28a5ae5128bec8a6f8",
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.TerrainMotorTest.xml",
+        "sha256": "ac90e386ce4b59ec0fdd8d0c0e52a75750b46c7c6071a84207eaa7dcd9a4a98e",
+        "counts": {
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest.xml",
+        "sha256": "a25f4406ff164719a88bf3768a90dc43512525f8fd29ef28be7532b71214d205",
+        "counts": {
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.VirtualWalkControllerTest.xml",
+        "sha256": "81fee710cc2ef0701bfa8d9feee1dd8b3a0e110fd86ee89ccef0e46a7d653634",
+        "counts": {
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.domain.walk.VirtualWalkRestoreTest.xml",
+        "sha256": "f5b978c1bd18b9b4ea562ec95b7aafa7e2ef795e0bf7e092702da3b2984abb7f",
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.engine.sensor.StepSensorSourceTest.xml",
+        "sha256": "c0fcfe4844fa76c83cec4bc96bb81c72bccafc71d9995818c1c0341a8c79a1a9",
+        "counts": {
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.service.SensorCueWiringTest.xml",
+        "sha256": "27b6dc500f8659ffa5061f652ebe166f3f4f3c445fb195d392dbe9c26ef12872",
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "file": "docs/collaboration/evidence/P-20261016-01/author-junit/TEST-com.sensewalk.app.service.SessionArbiterTest.xml",
+        "sha256": "7a35e889c2eb7dc074d41727f5d68e7cced66d4ad9340fb104c6cf2be22810bb",
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    ],
+    "source_note": "Read existing author SW005 worktree reports, not executed this turn; cloud run success separately queried, cloud ZIP not downloaded"
+  },
+  "review_metadata_correction_needed": {
+    "path": "docs/collaboration/reviews/R-SW-015-R1.json",
+    "actual_business_head": "81fbf2d21e7cdc3131618f9ba6450109a3420f58",
+    "declared_delivery_head": "9c4ef5a8f4cffb0948cbb391306b4bdafd3c64c1",
+    "actual_delivery_head": "9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846"
+  }
+}

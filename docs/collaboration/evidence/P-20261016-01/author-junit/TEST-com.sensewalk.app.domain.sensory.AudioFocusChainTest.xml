@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.sensory.AudioFocusChainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-16T03:19:41" hostname="yunhedeMacBook-Pro.local" time="0.036">
+  <properties/>
+  <testcase name="协调器终态后放开许可也不得启动待启层" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.012"/>
+  <testcase name="准备期焦点丢失 - 迟到 onPrepared 不自动播放" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.0"/>
+  <testcase name="中断后重申请被拒 - 继续行走不新增脚步也不启动环境层" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.007"/>
+  <testcase name="准备期终态释放 - 迟到 onPrepared 与后续请求全部吸收" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.0"/>
+  <testcase name="首次焦点被拒 - 跨脚步与环境解锁门仍完全静默，距离相位照常推进" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.01"/>
+  <testcase name="获准后只播新步伐不补播 - 待启环境层按当前淡入进度启动且只创建一次" classname="com.sensewalk.app.domain.sensory.AudioFocusChainTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

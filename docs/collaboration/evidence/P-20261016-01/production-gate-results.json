@@ -1,0 +1,1057 @@
+{
+  "kind": "bootstrap-zero-api-observation-not-independent-review",
+  "source_head": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+    "spec_file": "design/05-visual-design/SW-012/r1/design-spec.json",
+    "spec_sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320"
+  },
+  "scripts": {
+    "dry_run.py": "3fe33dfe02dd10e76b326156dd6a1eb09342dd6c11d926e1d97b622ae0e0138b",
+    "spec_reader.py": "199b3a75a6bd9348f951d91c5b2e8ac5e2f291395abf17e551f0e66c533c4e5e",
+    "build_fixtures.py": "ae131cb23ff6807ab8d83f9efa5cb72c2f28a151f2e4820017a4e3b8e5f9f96f",
+    "probe_r1_reproduction.py": "ba8580330c48a22006de33cfeef27e09a65cf988b9f406b2babc2a4931fe9614",
+    "preflight.py": "8aa883272c63314bde87c8671a5f981ab4c729895003bb81f5a2769e4dec224e"
+  },
+  "cases": [
+    {
+      "name": "real-approved-default-design",
+      "expected_status": "ok",
+      "exit_code": 0,
+      "context": "Actual main registry/review/D-009-approved immutable spec, no synthetic approval",
+      "result": {
+        "ok": true,
+        "reason": "全部 11 项通过",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head",
+            "detail": "cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "accepted"
+          },
+          {
+            "ok": true,
+            "name": "approval_chain_handoff_head",
+            "detail": "匹配 cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "approval_review_head",
+            "detail": "匹配 cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_sha",
+            "detail": "匹配 643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_validation",
+            "detail": "spec 通过 canonical/legacy/empty/duplicate/type 全部校验"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_expected_layers",
+            "detail": "expected 5 层: ['mist', 'trunks_canopy', 'vines_light', 'distant_glow', 'glade']"
+          }
+        ]
+      }
+    },
+    {
+      "name": "real-approved-strict-design",
+      "expected_status": "ok",
+      "exit_code": 1,
+      "context": "Same accepted spec retained proposed source text by D-009; strict flag should not override actual independent approval",
+      "result": {
+        "ok": false,
+        "reason": "失败: sw015_spec_validation",
+        "checks": [
+          {
+            "ok": true,
+            "name": "task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "handoff_head",
+            "detail": "cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "spec_sha",
+            "detail": "643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "registry_status",
+            "detail": "accepted"
+          },
+          {
+            "ok": true,
+            "name": "approval_chain_handoff_head",
+            "detail": "匹配 cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "approval_review_head",
+            "detail": "匹配 cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_sha",
+            "detail": "匹配 643e77b1ba7574c9"
+          },
+          {
+            "ok": false,
+            "name": "sw015_spec_validation",
+            "detail": "spec 校验失败 5 项: layer[0] 'mist' id_status=proposed 不允许作为真实批准层; layer[1] 'trunks_canopy' id_status=proposed 不允许作为真实批准层; layer[2] 'vines_light' id_status=proposed 不允许作为真实批准层..."
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_expected_layers",
+            "detail": "expected 5 层: ['mist', 'trunks_canopy', 'vines_light', 'distant_glow', 'glade']"
+          }
+        ]
+      }
+    },
+    {
+      "name": "wrong-size-default-preflight",
+      "expected_status": "failed",
+      "exit_code": 0,
+      "context": {
+        "fixture_images_copied_unmodified": true,
+        "decoded_source_dimensions": [
+          768,
+          1376
+        ],
+        "approved_canvas": [
+          1080,
+          1920
+        ],
+        "manifest_api_attempts_this_revision": 0,
+        "manifest_project_attempts_total": 14,
+        "task_budget": 8,
+        "actual_api_calls": 0
+      },
+      "result": {
+        "status": "ok",
+        "manifest": "/Users/yunhegong/.codex/worktrees/progress-planning-20261014/sense-walk/.local-verify/production-gate-probe-4ps9cw4a/wrong-size-sample/manifest.json",
+        "contract_version": "visual-assets v1",
+        "fixture_mode": false,
+        "allow_proposed": true,
+        "summary": {
+          "total": 80,
+          "passed": 80,
+          "failed": 0,
+          "total_bytes": 189688,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "design_spec_dynamic_read",
+            "detail": "spec layers=[]"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "37878"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "def2c04a9d722022"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "37878 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_mist.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_black",
+            "detail": "存在: checks/black/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_white",
+            "detail": "存在: checks/white/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "38160"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "289dac70ee4090b3"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "38160 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_trunks_canopy.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_black",
+            "detail": "存在: checks/black/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_white",
+            "detail": "存在: checks/white/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "37884"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "d0db6720a4601f3d"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "37884 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_vines_light.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_black",
+            "detail": "存在: checks/black/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_white",
+            "detail": "存在: checks/white/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_bytes",
+            "detail": "37882"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_sha256",
+            "detail": "2dfe91d5053a10be"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_budget",
+            "detail": "37882 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_distant_glow.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_black",
+            "detail": "存在: checks/black/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_white",
+            "detail": "存在: checks/white/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_bytes",
+            "detail": "37884"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_sha256",
+            "detail": "d0db6720a4601f3d"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_budget",
+            "detail": "37884 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_glade.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_black",
+            "detail": "存在: checks/black/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_white",
+            "detail": "存在: checks/white/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "189688 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_head",
+            "detail": "cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_chain_handoff_head",
+            "detail": "匹配 approved handoff head cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_head",
+            "detail": "匹配 reviewed_commit cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "14"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "api_cumulative_check",
+            "detail": "累计=14, 历史=14, 本轮=0"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_sha",
+            "detail": "匹配 643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_validation",
+            "detail": "spec 通过 canonical/legacy/empty/duplicate/type 全部校验"
+          },
+          {
+            "ok": true,
+            "name": "sw015_manifest_spec_consistency",
+            "detail": "manifest 5 层与 spec 严格匹配 (canvas 1080x1920)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "nine-task-attempts-default-preflight",
+      "expected_status": "failed",
+      "exit_code": 0,
+      "context": {
+        "fixture_images_copied_unmodified": true,
+        "decoded_source_dimensions": [
+          768,
+          1376
+        ],
+        "approved_canvas": [
+          1080,
+          1920
+        ],
+        "manifest_api_attempts_this_revision": 9,
+        "manifest_project_attempts_total": 23,
+        "task_budget": 8,
+        "actual_api_calls": 0
+      },
+      "result": {
+        "status": "ok",
+        "manifest": "/Users/yunhegong/.codex/worktrees/progress-planning-20261014/sense-walk/.local-verify/production-gate-probe-4ps9cw4a/wrong-size-sample/manifest.json",
+        "contract_version": "visual-assets v1",
+        "fixture_mode": false,
+        "allow_proposed": true,
+        "summary": {
+          "total": 80,
+          "passed": 80,
+          "failed": 0,
+          "total_bytes": 189688,
+          "layer_count": 5
+        },
+        "checks": [
+          {
+            "ok": true,
+            "name": "schema_version",
+            "detail": "1"
+          },
+          {
+            "ok": true,
+            "name": "field_producer",
+            "detail": "minimax"
+          },
+          {
+            "ok": true,
+            "name": "task_scene",
+            "detail": "SW-006 + rainforest"
+          },
+          {
+            "ok": true,
+            "name": "design_spec_dynamic_read",
+            "detail": "spec layers=[]"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_bytes",
+            "detail": "37878"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_sha256",
+            "detail": "def2c04a9d722022"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_budget",
+            "detail": "37878 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_mist.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_black",
+            "detail": "存在: checks/black/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_white",
+            "detail": "存在: checks/white/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_mist_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_mist.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_bytes",
+            "detail": "38160"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_sha256",
+            "detail": "289dac70ee4090b3"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_budget",
+            "detail": "38160 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_trunks_canopy.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_black",
+            "detail": "存在: checks/black/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_white",
+            "detail": "存在: checks/white/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_trunks_canopy_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_trunks_canopy.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_bytes",
+            "detail": "37884"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_sha256",
+            "detail": "d0db6720a4601f3d"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_budget",
+            "detail": "37884 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_vines_light.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_black",
+            "detail": "存在: checks/black/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_white",
+            "detail": "存在: checks/white/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_vines_light_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_vines_light.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_bytes",
+            "detail": "37882"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_sha256",
+            "detail": "2dfe91d5053a10be"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_budget",
+            "detail": "37882 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_distant_glow.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_black",
+            "detail": "存在: checks/black/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_white",
+            "detail": "存在: checks/white/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_distant_glow_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_distant_glow.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_bytes",
+            "detail": "37884"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_sha256",
+            "detail": "d0db6720a4601f3d"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_decode",
+            "detail": "RGBA 768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_size",
+            "detail": "768x1376"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_budget",
+            "detail": "37884 <= 400 KB"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_alpha_channel",
+            "detail": "true"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_alpha_pixels",
+            "detail": "半透明 95.69% (alpha<127)"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_alpha_mask",
+            "detail": "存在: checks/alpha_mask/rainforest_glade.png"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_black",
+            "detail": "存在: checks/black/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_white",
+            "detail": "存在: checks/white/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "layer_glade_check_magenta",
+            "detail": "存在: checks/magenta/rainforest_glade.jpg"
+          },
+          {
+            "ok": true,
+            "name": "scene_budget",
+            "detail": "189688 <= 2 MB"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_task_id",
+            "detail": "SW-012"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_producer",
+            "detail": "trae-design"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_handoff_head",
+            "detail": "cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_spec_sha",
+            "detail": "643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_chain_handoff_head",
+            "detail": "匹配 approved handoff head cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_verdict",
+            "detail": "approved"
+          },
+          {
+            "ok": true,
+            "name": "design_ref_approval_review_head",
+            "detail": "匹配 reviewed_commit cab78f6eecf9"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "9"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "23"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "unknown"
+          },
+          {
+            "ok": true,
+            "name": "api_cumulative_check",
+            "detail": "累计=23, 历史=14, 本轮=9"
+          },
+          {
+            "ok": true,
+            "name": "cc0_check",
+            "detail": "origin 字段无 CC0 标记"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_sha",
+            "detail": "匹配 643e77b1ba7574c9"
+          },
+          {
+            "ok": true,
+            "name": "sw015_spec_validation",
+            "detail": "spec 通过 canonical/legacy/empty/duplicate/type 全部校验"
+          },
+          {
+            "ok": true,
+            "name": "sw015_manifest_spec_consistency",
+            "detail": "manifest 5 层与 spec 严格匹配 (canvas 1080x1920)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "budget-only-nine-task-attempts",
+      "expected_status": "failed",
+      "exit_code": null,
+      "context": "Direct budget function, actual main history14, no images or other failing dimensions, zero real API calls",
+      "result": {
+        "status": "ok",
+        "checks": [
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_this_revision",
+            "detail": "9"
+          },
+          {
+            "ok": true,
+            "name": "api_field_api_attempts_total",
+            "detail": "23"
+          },
+          {
+            "ok": true,
+            "name": "api_field_cost",
+            "detail": "0"
+          },
+          {
+            "ok": true,
+            "name": "api_cumulative_check",
+            "detail": "累计=23, 历史=14, 本轮=9"
+          }
+        ]
+      }
+    }
+  ],
+  "actual_api_calls": 0
+}

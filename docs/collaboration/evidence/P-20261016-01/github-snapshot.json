@@ -1,0 +1,503 @@
+{
+  "kind": "bootstrap-source-observation-not-product-approval",
+  "client_date": "2026-10-16",
+  "main": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+  "tree": "443f61137307ab8039adbdb477f3252b993e76a5",
+  "open_prs": [],
+  "recent_prs": [
+    {
+      "number": 20,
+      "title": "review(qa): review SW-015 R1 (approved), SW-005 R2 (approved), activate SW-006 gate to ready",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/20"
+    },
+    {
+      "number": 14,
+      "title": "SW-005 R2: T07B 越坎完整闭环（UI+死区+P-02 同局提示一次）",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14"
+    },
+    {
+      "number": 18,
+      "title": "SW-015 R1 雨林预检真实设计规格联调 (spec 解析+5 校验+8 fixture+probe_r1 复用 R3)",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/18"
+    },
+    {
+      "number": 19,
+      "title": "SW-012 R1 下游消费附页（trae-design，无 R1 字节改动）",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/19"
+    },
+    {
+      "number": 17,
+      "title": "SW-QA: SW-012 R1 独立审核 (approved) / SW-005 R1 审稿 (changes_requested) / 集成收口",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/17"
+    },
+    {
+      "number": 15,
+      "title": "SW-012 R1 雨林900m图片设计（trae-design → antigravity 审核）",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/15"
+    },
+    {
+      "number": 3,
+      "title": "SW-010: 森林 light_shows/clearing 批准候选入包",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/3"
+    },
+    {
+      "number": 16,
+      "title": "docs: 导入并发布本轮规划 (P-20261015-02)",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/16"
+    },
+    {
+      "number": 13,
+      "title": "docs(qa): SW-011 R1 评审报告合并 SHA 笔误纠正",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/13"
+    },
+    {
+      "number": 12,
+      "title": "docs: 进入地形与雨林设计阶段，补真实素材接口联调",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/12"
+    }
+  ],
+  "runs": [
+    {
+      "id": 38847512206,
+      "name": "Android build and package",
+      "event": "push",
+      "head": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847512206"
+    },
+    {
+      "id": 38847512200,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "head": "2339333afe447fddd0ef34c50cfc42f886da3b46",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847512200"
+    },
+    {
+      "id": 38847276829,
+      "name": "Android build and package",
+      "event": "pull_request",
+      "head": "4c6b38b4e3a5ccea0a458a028ce1bede716464e4",
+      "branch": "codex/antigravity/review-integration-round6",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847276829"
+    },
+    {
+      "id": 38847276776,
+      "name": "Collaboration handoff checks",
+      "event": "pull_request",
+      "head": "4c6b38b4e3a5ccea0a458a028ce1bede716464e4",
+      "branch": "codex/antigravity/review-integration-round6",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847276776"
+    },
+    {
+      "id": 38847260942,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "head": "4c6b38b4e3a5ccea0a458a028ce1bede716464e4",
+      "branch": "codex/antigravity/review-integration-round6",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847260942"
+    },
+    {
+      "id": 38847260922,
+      "name": "Android build and package",
+      "event": "push",
+      "head": "4c6b38b4e3a5ccea0a458a028ce1bede716464e4",
+      "branch": "codex/antigravity/review-integration-round6",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38847260922"
+    },
+    {
+      "id": 38846781887,
+      "name": "Android build and package",
+      "event": "push",
+      "head": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846781887"
+    },
+    {
+      "id": 38846781844,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "head": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846781844"
+    },
+    {
+      "id": 38846771903,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "head": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846771903"
+    },
+    {
+      "id": 38846771892,
+      "name": "Android build and package",
+      "event": "push",
+      "head": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846771892"
+    },
+    {
+      "id": 38846195784,
+      "name": "Android build and package",
+      "event": "push",
+      "head": "16f89867f0d192042438f7061b4adccbd16d714e",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846195784"
+    },
+    {
+      "id": 38846195687,
+      "name": "Collaboration handoff checks",
+      "event": "push",
+      "head": "16f89867f0d192042438f7061b4adccbd16d714e",
+      "branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/38846195687"
+    }
+  ],
+  "releases": [
+    {
+      "tag": "build-87-17a8663",
+      "commit": "17a8663b0b6f3312a4d2dcc1637458e9ed0fc799",
+      "date": "2026-10-15T02:43:11Z",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-87-17a8663",
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "bytes": 20214194,
+          "digest": "sha256:479be8d4a850a83e8399329d9d55d1248440d6a2e04ba71468d571454380aaaa"
+        },
+        {
+          "name": "sensewalk-source-17a8663.zip",
+          "bytes": 85195042,
+          "digest": "sha256:c09011161d82e169bba8b99da44f54f057da7592b9b7f008949f021d002ff98d"
+        }
+      ]
+    },
+    {
+      "tag": "build-109-6104e3d",
+      "commit": "6104e3d4967dcca64ed02a26c484bffc564b61f9",
+      "date": "2026-10-15T09:41:36Z",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d",
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "bytes": 20246962,
+          "digest": "sha256:ae84c3de620e0cd96b2ae975a9bc8ec1795ba3d7bcd1032db5c9758f3137e8b0"
+        },
+        {
+          "name": "sensewalk-source-6104e3d.zip",
+          "bytes": 197870645,
+          "digest": "sha256:85f0616c1abc0cd16cea7d635b3ed4b46f5989904874d274710907792a7c93ca"
+        }
+      ]
+    },
+    {
+      "tag": "build-41-8ef1446",
+      "commit": "8ef1446b93c12f7b7b9a768ea101c4ec1fd7b4b2",
+      "date": "2026-10-14T03:45:05Z",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-41-8ef1446",
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "bytes": 20214194,
+          "digest": "sha256:db1de8088fdd2aae677986f4b38baca4a67953114ff6ca0b8fbb1e46c9b25e38"
+        },
+        {
+          "name": "sensewalk-source-8ef1446.zip",
+          "bytes": 48798264,
+          "digest": "sha256:31eb51b1b6d7b3de10d63aab3e40588f46555fad59f6060bae5b769d8ce9724a"
+        }
+      ]
+    },
+    {
+      "tag": "build-39-0e1687b",
+      "commit": "0e1687b7c6ea263b7d7c173d4a7820e8aee5dcfd",
+      "date": "2026-10-14T03:14:24Z",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-39-0e1687b",
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "bytes": 20214194,
+          "digest": "sha256:f072b31e7d8b8d596386bc775ffec77a1f305606a989dc50e44c0bfa327bdd07"
+        },
+        {
+          "name": "sensewalk-source-0e1687b.zip",
+          "bytes": 48778629,
+          "digest": "sha256:cd13e952fe1c0021ee161825bfa04f1a967ffc1a343645e1b6ddde4255241529"
+        }
+      ]
+    },
+    {
+      "tag": "build-37-8056e11",
+      "commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
+      "date": "2026-10-14T02:41:05Z",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-37-8056e11",
+      "assets": [
+        {
+          "name": "app-debug.apk",
+          "bytes": 20214194,
+          "digest": "sha256:dd6db496eb2c10ef2105a5841e7cdf8e606f7797b7eeb347d8c9ddf385715725"
+        },
+        {
+          "name": "sensewalk-source-8056e11.zip",
+          "bytes": 48701916,
+          "digest": "sha256:7d68ae87aa0980a987e125c9c9327f76f5e0dd9370410951fc07528e188a1d95"
+        }
+      ]
+    }
+  ],
+  "main_jobs": [
+    {
+      "id": 116801281177,
+      "name": "Test, lint and debug APK",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38847512206,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Prepare Android SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Test, lint and build with repository wrapper",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Release manifest guard (SW-001 F-005)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Upload installable debug APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Upload test and lint reports",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Post Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        }
+      ]
+    },
+    {
+      "id": 116801281582,
+      "name": "Source and ZCode handoff",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38847512206,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Package tracked source and documentation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        }
+      ]
+    },
+    {
+      "id": 116801937287,
+      "name": "Optional GitHub prerelease",
+      "status": "completed",
+      "conclusion": "skipped",
+      "run_id": 38847512206,
+      "logs_url": null,
+      "steps": null
+    }
+  ],
+  "main_artifacts": [
+    {
+      "id": 12024086305,
+      "name": "sensewalk-reports-2339333afe447fddd0ef34c50cfc42f886da3b46",
+      "size_in_bytes": 126862,
+      "url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12024086305",
+      "archive_download_url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12024086305/zip",
+      "expired": false,
+      "created_at": "2026-10-16T03:52:53Z",
+      "expires_at": "2026-11-15T03:52:52Z",
+      "updated_at": "2026-10-16T03:52:53Z",
+      "digest": "sha256:5bca6ef734ece8e54890a93e23806ae8bc9bb1382238dd78b89bff6e1ea18f63",
+      "workflow_run": {
+        "id": 38847512206,
+        "repository_id": 1415063770,
+        "head_repository_id": 1415063770,
+        "head_branch": "main",
+        "head_sha": "2339333afe447fddd0ef34c50cfc42f886da3b46"
+      }
+    },
+    {
+      "id": 12023796959,
+      "name": "sensewalk-apk-2339333afe447fddd0ef34c50cfc42f886da3b46",
+      "size_in_bytes": 19659267,
+      "url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12023796959",
+      "archive_download_url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12023796959/zip",
+      "expired": false,
+      "created_at": "2026-10-16T03:52:52Z",
+      "expires_at": "2026-11-15T03:52:50Z",
+      "updated_at": "2026-10-16T03:52:52Z",
+      "digest": "sha256:db341dda6cff6e268351989260e2a3602af3a1de52b6b82d977bed9b205c2ab4",
+      "workflow_run": {
+        "id": 38847512206,
+        "repository_id": 1415063770,
+        "head_repository_id": 1415063770,
+        "head_branch": "main",
+        "head_sha": "2339333afe447fddd0ef34c50cfc42f886da3b46"
+      }
+    },
+    {
+      "id": 12023418851,
+      "name": "sensewalk-source-2339333afe447fddd0ef34c50cfc42f886da3b46",
+      "size_in_bytes": 214718655,
+      "url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12023418851",
+      "archive_download_url": "https://api.github.com/repos/skydream9527-ctrl/sense-walk/actions/artifacts/12023418851/zip",
+      "expired": false,
+      "created_at": "2026-10-16T03:50:46Z",
+      "expires_at": "2026-11-15T03:50:41Z",
+      "updated_at": "2026-10-16T03:50:46Z",
+      "digest": "sha256:066f7a111d8300314075d4818db7a8f2c30753b90665a59de4efa24aa308c438",
+      "workflow_run": {
+        "id": 38847512206,
+        "repository_id": 1415063770,
+        "head_repository_id": 1415063770,
+        "head_branch": "main",
+        "head_sha": "2339333afe447fddd0ef34c50cfc42f886da3b46"
+      }
+    }
+  ],
+  "previous_planning_publication": {
+    "url": "https://github.com/skydream9527-ctrl/sense-walk/pull/16",
+    "number": 16,
+    "state": "closed",
+    "merged": true,
+    "mergeable": false,
+    "draft": false,
+    "body": "由 Antigravity 依据 PUBLISH-PLAN-20261015.md 导入并发布 P-20261015-02 规划文件，更新角色入口、常驻队列与各任务当前状态。",
+    "title": "docs: 导入并发布本轮规划 (P-20261015-02)",
+    "base": "main",
+    "base_sha": "904ab019dbc31a9a84a00d410b85868c3ddfb9b9",
+    "head": "codex/antigravity/plan-sync-20261015",
+    "head_sha": "35bc8ee7ea5adb0d5d92c79eb8cd0f243f999496",
+    "head_repo_id": 1415063770,
+    "head_repo_full_name": "skydream9527-ctrl/sense-walk",
+    "merge_commit_sha": "bcb1bfbefc1cf80a9b4388930b25e7574fb6d634",
+    "user": {
+      "login": "skydream9527-ctrl",
+      "name": "skydream9527-ctrl",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/257976506?v=4",
+      "id": 257976506
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-16T02:02:58Z",
+    "updated_at": "2026-10-16T02:06:04Z",
+    "closed_at": "2026-10-16T02:06:03Z",
+    "merged_at": "2026-10-16T02:06:03Z",
+    "commits": 2,
+    "changed_files": 51,
+    "additions": 1810,
+    "deletions": 115,
+    "display_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/16",
+    "display_title": "docs: 导入并发布本轮规划 (P-20261015-02)"
+  }
+}

@@ -1,19 +1,27 @@
 # 后续协同路线
 
-2026-10-15核查main=904ab01。详见 [P-20261015-02](evidence/P-20261015-02/README.md)；不按任务数量或CI绿推算MVP百分比。
+2026-10-16基准main2339333；[实核报告](evidence/P-20261016-01/README.md)。可靠性、快照、森林正式接图、地形R2、森林/雨林设计、规格解析工具均accepted；不再重复安排这些开发，不用任务百分比代表MVP。
 
-| 阶段 | 任务/负责者 | 当前事实与退出条件 |
-| --- | --- | --- |
-| 已验收 | SW001可靠性/SW004快照，SW011森林设计/SW014 R3 | accepted/入main；真机项Pending，设计不是正式素材 |
-| 收口接图 | SW010 / ZCode→Antigravity | PR3原approved、冲突已解；修旧交接改写导致的协作红，QA复验新head/hash/CI后合入 |
-| 补齐地形 | SW005 / ZCode→Antigravity | PR14核心+22测试已交、CI绿；rework R2接UI提示/步态/减少动效/恢复，不能等SW007才做 |
-| 雨林审稿 | SW012 / Trae→Antigravity | PR15/53文件hash匹配、CI绿；补消费说明，QA用精确spec hash冻结参数，实质改动Trae R2 |
-| 当前关键接口 | SW015 / MiniMax→Antigravity | ready、未见远端交付；0API真实id/type与严格非空/批准链/账本自动测试 |
-| 雨林素材 | SW006 / MiniMax→Antigravity | queued；SW012+SW015都accepted/集成后启用原总8次尝试预算，候选/验图独立 |
-| 雨林应用 | SW007 / ZCode→Antigravity | queued，等SW005+SW006；900m双模式、真实专属声景、批准素材、门禁/恢复/实际App |
-| 四景 | SW008 / 四角色 | queued；雨林稳定后，激活前拆城市/沙漠设计→候选→接入子任务及预算 |
-| 持续设备/最终 | SW009 / Antigravity组织 | 可提前执行设备矩阵；最后5–8人体验与严重问题关闭，不伪造真人/物理结果 |
+```mermaid
+flowchart LR
+ A[已批准雨林设计 SW012/D009] --> M[MiniMax SW006 生产保护与候选]
+ A --> Z[ZCode SW016 运行时与声景准备]
+ A --> T[Trae SW017 应用验图参照]
+ M --> QM[QA 独立验图]
+ Z --> QZ[QA 代码与声音审查]
+ T --> QT[QA 参照审查]
+ QM --> I[SW007 最终雨林双模式接入]
+ QZ --> I
+ QT -.辅助验图，不增加素材前置.-> I
+ I --> C[城市/沙漠逐景设计→候选→接入]
+```
 
-沿用现有四角色独立worktree、registry、handoff/review/evidence和 [常驻验收队列](queues/antigravity.md)。当前并行的是ZCode收口、MiniMax接口、Trae待审说明、Antigravity审稿/集成；任务accepted由独立review和实际merge决定。共享checkout只读，private state由本人维护，不新增调度器/自动消息/重复协调ID。
+| 阶段 | 当前动作与退出条件 |
+| --- | --- |
+| 当下并行 | MiniMax SW006先0API生产尺寸/总预算/实际冻结批准保护，自检正确后按原总8次制图；ZCode SW016不等候选准备900m底座/合法声音；Trae SW017复用原设计做应用上下文参照 |
+| 持续QA | 从当前已合main发组合测试Release，核APK/source/hash；提示出现/约3s消失与恢复不重播补实际时序证据；独立审三路交付，不用设计模拟替App |
+| 雨林可用 | SW006与SW016各accepted后，SW007接批准图/实际声音/配置/可用性，两模式900m/恢复/停走/终态/多屏验证。此前不开放假完成入口 |
+| 四景MVP | 雨林稳定后，SW008激活前拆城市1000m/沙漠1200m各自设计、素材、接入/预算；四景音视地形身份独立 |
+| 实体/最终 | 设备矩阵可提前执行，锁屏15min/真实counter/重启/耳机来电/停止与最后5–8真实人体验；没有条件的项目Pending，严重问题关闭后RC |
 
-只从实际合入main出GitHub测试Release。已确认 [build109](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-109-6104e3d) 含可靠性/快照，未含接图/地形；下一组合包绑定实际commit/APK/source/hash。无需完善本地Android环境。
+SW017不改原SW012参数/素材design_ref，不成为额外付费制作门禁。SW003/SW013已完成，常驻验收职责不需新启动ID。所有权/独立worktree/handoff/精确review与merge不变，无自动消息或调度器。GitHub Actions是打包入口，不要求完善本地Android环境。主线App artifacts已有新版本，Release仍build109旧组合，QA需主动出准确组合包。较大source ZIP（约214.7MB）可作为后续独立打包优化，不混入本轮雨林功能。

@@ -1,13 +1,13 @@
 # minimax 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录中的`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261015-02/README.md`及任务/契约；执行前fetch最新origin/main核对实际新进展。若本轮规划尚未发布，保留这些更新指令，不用main旧同名入口覆盖；由Antigravity先按`../PUBLISH-PLAN-20261015.md`发布现成规划，再正常执行。以精确源码/交付/证据为准，保留现有工作。在本角色独立checkout/worktree和任务分支执行，不共用Git index，不reset/强推覆盖。无需完善本地Android环境，复用Actions。历史handoff/review/evidence/decision不可改写，追加新revision/correction；不自动发外部消息，不自标产品accepted。
+先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
 
-你负责design/assets范围的素材工具与候选，实际完成交接；不改app/正式资产、Trae源、QA或中心registry。
+你负责design/assets工具/候选及本人state/handoff。SW015 R1已accepted/集成，SW012设计已approved并由D009冻结；**SW006已ready，不再等旧审批或重交SW015初版。** 领取 `../tasks/SW-006.md`。
 
-SW002和SW014 R3已accepted；本轮远端未见SW015分支/PR/handoff，不代表知道你本机是否开工。消费最新main与本人state后，领取ready的 `../tasks/SW-015.md`，新增API预算0。不要重交旧R3，也不要直接生雨林图。
+先在本任务新SW006/r1/scripts目录做最低限度0API生产guard及自动断言，复用原预检而不覆盖R1/R3：实际registry/handoff/review业务head/spec hash+D009批准原字节；最终解码/声明/冻结canvas精确1080x1920；SW006跨revision总8尝试、请求前持久ledger、项目历史14与任务计数分开。旧入口真实实测会放行768x1376与9次声明，--strict-design又误拒保留proposed文字的批准spec，不能依赖这些误判或改Trae原字节来通过。用真实批准spec、错SHA/未批准/空缺层/错尺寸、8/9次/失败超时/跨revision计数反例自动断言和非零退出码；测试harness与真实生产授权隔离。
 
-成果放新design/assets/rainforest/preflight/SW-015/r1，保留已批准SW014 R3。兼容真实Trae layers[].id/type与必要legacy layer_id/render_role，ID冲突/重复/空/未知type、空/缺layers、空候选/缺层/多层/错尺寸必须明确失败，不能把空集合当“不必检查”。真实SW011五层/公共模板是只读正例；PR #15（headc723048116fd2c36a7c19f2ab6c926f47b78beac）的雨林五层也用于解析联调，但尚未批准，只能作样本，不能当生产批准链。canonical type overlay/parallax及canvas1080×1920正确映射，不要求Trae改设计迁就脚本。
+guard 0API自检正确后，按原授权**总8次尝试**制作雨林候选（统一参考、失败、超时、重试均计入，额度不强制用完、不随revision重置）；保护不通过不调用，不另建大工具项目或重复请求8次预算。凭据只host/env不入Git，缺服务/凭据如实0调用/Pending，不伪造图。
 
-原18fixture/6探针保护保留，新增真实字段/空集合/冲突/重复/错规格自动断言；用临时隔离registry/handoff/review验证完整入口，不修改真实中心登记。预检和dry-run默认都严格验证approved head/spec hash、真实alpha、alpha_mask+黑白洋红图、实际预算/累计账本。project lifetime历史14与SW006单任务总8次尝试分开，补本人state历史字段不得清零或从缺字段退回0。README给可运行严格入口/测试harness与退出码。交H-SW-015-R1 JSON+Markdown、真实base/head/script hash/执行结果/PR，本人state handoff_ready，等QA独立审核集成。
+消费SW012批准spec/hash `643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320`、D009、intake与逐层prompts。五层mist/trunks_canopy/vines_light/distant_glow/glade；湿绿阔叶/雾/藤蔓，真实透明无棋盘/黑底，phase opacity不烘焙。黑幕/旅人程序绘制，不直接把设计PNG/test fixture当生产候选。
 
-随后只有SW012/SW015及既有依赖全部accepted且SW006 ready后才制作雨林候选；读批准spec/prompts/design_ref，先零API预检，再按原总8次尝试预算（超时/失败计入）调用用户配置模型API，凭据仅host/env不入Git。真实PNG/WebP/三底/alpha/六阶段/尺寸/字节/hash/来源费用与账本齐备，层≤400KB、景≤2MB，程序旅人/黑幕不生图。候选获批不等于入包；像素验图不能靠alpha统计代替。无可执行任务一次报告等待文件。
+产出SW006/r1原稿/PNG/WebP、alpha_mask+黑白洋红、六阶段0/110/295/475/700/875m、中央/四缘局部和必要视差裁切，tileable=false如实保留；每层≤400KB/景≤2MB，尺寸/字节/hash/来源/费用/逐次ledger与精确design_ref齐备。交H-SW-006-R1 JSON+Markdown/真实业务base/head/PR/guard结果/限制，等Antigravity独立验图，再由ZCode SW007入包；不能自批或改app/Trae/QA/registry。SW017只是应用验图参照，不改生产design_ref或成为新付费前置。本人消费accepted并更新state；不自动外发消息。
