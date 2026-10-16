@@ -98,6 +98,12 @@ class CoordinationChecks(unittest.TestCase):
             (self.root / review_path).write_text(json.dumps(review))
             self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-012').update(
                 status='accepted', latest_handoff=relative, latest_review=review_path, integrated_commit='3'*40))
+        else:
+            review_path = f'docs/collaboration/reviews/R-SW-012-R{revision}.json'
+            (self.root / review_path).unlink(missing_ok=True)
+            (self.root / review_path.replace('.json', '.md')).unlink(missing_ok=True)
+            self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-012').update(
+                status='handoff_ready', latest_handoff=None, latest_review=None, integrated_commit=None))
         ref = dict(task_id='SW-012', handoff=relative, spec_file=manifest['spec_file'], spec_sha256=files[0]['sha256'])
         return relative, h, manifest_path, manifest, ref
 
