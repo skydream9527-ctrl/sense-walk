@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "mist",
+      "render_role": "overlay",
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_trunks_canopy.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 38160,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "trunks_canopy",
+      "render_role": "parallax",
+      "sha256": "289dac70ee4090b3d8cf733cc36d3ec652476e90d7c88993f5c61b2ba3842f63",
+      "checks": [
+        "checks/alpha_mask/rainforest_trunks_canopy.png",
+        "checks/black/rainforest_trunks_canopy.jpg",
+        "checks/white/rainforest_trunks_canopy.jpg",
+        "checks/magenta/rainforest_trunks_canopy.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_vines_light.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37884,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "vines_light",
+      "render_role": "parallax",
+      "sha256": "d0db6720a4601f3d8bcefe697e70b15480e460fe2f992447e5430ef34381f9b8",
+      "checks": [
+        "checks/alpha_mask/rainforest_vines_light.png",
+        "checks/black/rainforest_vines_light.jpg",
+        "checks/white/rainforest_vines_light.jpg",
+        "checks/magenta/rainforest_vines_light.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_distant_glow.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37882,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "distant_glow",
+      "render_role": "overlay",
+      "sha256": "2dfe91d5053a10bea70f0ea7cfe8c38bfb1f13e15d618f27c66f85523dd6cba1",
+      "checks": [
+        "checks/alpha_mask/rainforest_distant_glow.png",
+        "checks/black/rainforest_distant_glow.jpg",
+        "checks/white/rainforest_distant_glow.jpg",
+        "checks/magenta/rainforest_distant_glow.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_glade.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37884,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "glade",
+      "render_role": "overlay",
+      "sha256": "d0db6720a4601f3d8bcefe697e70b15480e460fe2f992447e5430ef34381f9b8",
+      "checks": [
+        "checks/alpha_mask/rainforest_glade.png",
+        "checks/black/rainforest_glade.jpg",
+        "checks/white/rainforest_glade.jpg",
+        "checks/magenta/rainforest_glade.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_positive_rainforest_canonical/_design/H-SW-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_positive_rainforest_canonical/_design/spec.json",
+    "spec_sha256": "e5036c2fab9aaf3f2595557b3f8148f64e1cc646aa49f6decbd54faa5c6229cf"
+  }
+}

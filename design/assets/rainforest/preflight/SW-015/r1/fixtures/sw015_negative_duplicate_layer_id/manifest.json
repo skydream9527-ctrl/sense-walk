@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "file": "webp/rainforest_mist.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37878,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "mist",
+      "render_role": "overlay",
+      "sha256": "def2c04a9d72202212947723c5c72fcb763319b450dccbe41802e30b5fe42e92",
+      "checks": [
+        "checks/alpha_mask/rainforest_mist.png",
+        "checks/black/rainforest_mist.jpg",
+        "checks/white/rainforest_mist.jpg",
+        "checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_trunks_canopy_dup.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 38160,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "trunks_canopy",
+      "render_role": "parallax",
+      "sha256": "289dac70ee4090b3d8cf733cc36d3ec652476e90d7c88993f5c61b2ba3842f63",
+      "checks": [
+        "checks/alpha_mask/rainforest_trunks_canopy_dup.png",
+        "checks/black/rainforest_trunks_canopy_dup.jpg",
+        "checks/white/rainforest_trunks_canopy_dup.jpg",
+        "checks/magenta/rainforest_trunks_canopy_dup.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/rainforest_vines_light.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37884,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "vines_light",
+      "render_role": "parallax",
+      "sha256": "d0db6720a4601f3d8bcefe697e70b15480e460fe2f992447e5430ef34381f9b8",
+      "checks": [
+        "checks/alpha_mask/rainforest_vines_light.png",
+        "checks/black/rainforest_vines_light.jpg",
+        "checks/white/rainforest_vines_light.jpg",
+        "checks/magenta/rainforest_vines_light.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_negative_duplicate_layer_id/_design/H-SW-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_negative_duplicate_layer_id/_design/spec.json",
+    "spec_sha256": "94ad1244d83f9e5ce87a5115f2d4b2de4cb99e4b03a02ac3ec49e77517c7d678"
+  }
+}

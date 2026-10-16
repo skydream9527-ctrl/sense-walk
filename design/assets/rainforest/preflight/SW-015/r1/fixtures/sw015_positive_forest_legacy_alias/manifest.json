@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-002",
+  "revision": 1,
+  "scene_id": "forest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "file": "webp/forest_tree_outline.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 38316,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "tree_outline",
+      "render_role": "parallax",
+      "sha256": "323b58d03e9dc88d02e58b1a4885f7d235651c637ad138c6d25519946b06d8da",
+      "checks": [
+        "checks/alpha_mask/forest_tree_outline.png",
+        "checks/black/forest_tree_outline.jpg",
+        "checks/white/forest_tree_outline.jpg",
+        "checks/magenta/forest_tree_outline.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/forest_tree_trunks.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37876,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "tree_trunks",
+      "render_role": "parallax",
+      "sha256": "0e1d7a15d05fa6a32ab963032dfd1deafb59d7eb9464eb3124e330150d1fea2e",
+      "checks": [
+        "checks/alpha_mask/forest_tree_trunks.png",
+        "checks/black/forest_tree_trunks.jpg",
+        "checks/white/forest_tree_trunks.jpg",
+        "checks/magenta/forest_tree_trunks.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/forest_leaf_path.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37882,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "leaf_path",
+      "render_role": "parallax",
+      "sha256": "01b30d95acf48879b5ac674a3d7d78ad08ab9404de13649920e8bf3c99be7d38",
+      "checks": [
+        "checks/alpha_mask/forest_leaf_path.png",
+        "checks/black/forest_leaf_path.jpg",
+        "checks/white/forest_leaf_path.jpg",
+        "checks/magenta/forest_leaf_path.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/forest_light_shows.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37886,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "light_shows",
+      "render_role": "overlay",
+      "sha256": "45f6865943d2fa882aaa7f7cd2b1cde9a3526c9065d6369a072f05d9d6db6a38",
+      "checks": [
+        "checks/alpha_mask/forest_light_shows.png",
+        "checks/black/forest_light_shows.jpg",
+        "checks/white/forest_light_shows.jpg",
+        "checks/magenta/forest_light_shows.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    },
+    {
+      "file": "webp/forest_clearing.webp",
+      "width": 768,
+      "height": 1376,
+      "bytes": 37886,
+      "alpha_channel": true,
+      "tileable": false,
+      "origin": "R15 fixture: PIL 程序化自制小样本",
+      "process": "make_rgba (SW-015 R1 build_fixtures.py)",
+      "layer_id": "clearing",
+      "render_role": "overlay",
+      "sha256": "637138704c38295fc3f4ec900c521c9a7a1db2dd79f71c7a549df3bb98c82693",
+      "checks": [
+        "checks/alpha_mask/forest_clearing.png",
+        "checks/black/forest_clearing.jpg",
+        "checks/white/forest_clearing.jpg",
+        "checks/magenta/forest_clearing.jpg"
+      ],
+      "limitations": [
+        "R15 fixture"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-011",
+    "handoff": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_positive_forest_legacy_alias/_design/H-SW-FAKE.json",
+    "spec_file": "design/assets/rainforest/preflight/SW-015/r1/fixtures/sw015_positive_forest_legacy_alias/_design/spec.json",
+    "spec_sha256": "409b6a00e4f3de4094e91f04724ee5907f6ac620907596c1442ccc91dd280a81"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-011",
+  "revision": 1,
+  "scene_id": "forest",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "layers": [
+    {
+      "id": "tree_outline",
+      "type": "parallax",
+      "at_meters": 80,
+      "to_opacity": 0.6,
+      "fade_meters": 20,
+      "id_status": "approved"
+    },
+    {
+      "id": "tree_trunks",
+      "type": "parallax",
+      "at_meters": 240,
+      "to_opacity": 0.7,
+      "fade_meters": 25,
+      "id_status": "approved"
+    },
+    {
+      "id": "leaf_path",
+      "type": "parallax",
+      "at_meters": 400,
+      "to_opacity": 0.8,
+      "fade_meters": 25,
+      "id_status": "approved"
+    },
+    {
+      "id": "light_shows",
+      "type": "overlay",
+      "at_meters": 600,
+      "to_opacity": 0.65,
+      "fade_meters": 30,
+      "id_status": "approved"
+    },
+    {
+      "id": "clearing",
+      "type": "overlay",
+      "at_meters": 760,
+      "to_opacity": 0.9,
+      "fade_meters": 25,
+      "id_status": "approved"
+    }
+  ]
+}

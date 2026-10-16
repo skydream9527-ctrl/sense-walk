@@ -1,0 +1,313 @@
+{
+  "kind": "minimax-r15-verification",
+  "source_head": "bb05b035f1109d974790a9e576a77a539c2e43ed",
+  "scripts": {
+    "build_fixtures.py": "ae131cb23ff6807ab8d83f9efa5cb72c2f28a151f2e4820017a4e3b8e5f9f96f",
+    "dry_run.py": "3fe33dfe02dd10e76b326156dd6a1eb09342dd6c11d926e1d97b622ae0e0138b",
+    "preflight.py": "8aa883272c63314bde87c8671a5f981ab4c729895003bb81f5a2769e4dec224e",
+    "probe_r1_reproduction.py": "ba8580330c48a22006de33cfeef27e09a65cf988b9f406b2babc2a4931fe9614",
+    "spec_reader.py": "199b3a75a6bd9348f951d91c5b2e8ac5e2f291395abf17e551f0e66c533c4e5e"
+  },
+  "fixture_mode_results": [
+    {
+      "name": "sw015_negative_duplicate_layer_id",
+      "status": "failed",
+      "passed": 52,
+      "total": 57,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 alpha_mask 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 black 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 white 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 magenta 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer id 'trunks_canopy' 重复..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_empty_spec",
+      "status": "failed",
+      "passed": 31,
+      "total": 33,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: spec.layers 为空..."
+        },
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'mist' 不在 spec 期望集合 []..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_layer_id_mismatch",
+      "status": "failed",
+      "passed": 56,
+      "total": 57,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'random_layer' 不在 spec 期望集合 ['mist', 'trunks_canopy']..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_legacy_alias_mismatch",
+      "status": "failed",
+      "passed": 44,
+      "total": 45,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'mist' render_role 'mist_layer' != spec 'overlay'..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_unknown_type",
+      "status": "failed",
+      "passed": 44,
+      "total": 45,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer[0] 'mist' type 'background' 不在 canonical ['overlay', 'parallax']..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_wrong_canvas",
+      "status": "failed",
+      "passed": 32,
+      "total": 33,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 2 项: canvas.width=768 != 1080; canvas.height=1376 != 1920..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_positive_forest_legacy_alias",
+      "status": "ok",
+      "passed": 81,
+      "total": 81,
+      "failed": 0,
+      "failed_checks": []
+    },
+    {
+      "name": "sw015_positive_rainforest_canonical",
+      "status": "ok",
+      "passed": 81,
+      "total": 81,
+      "failed": 0,
+      "failed_checks": []
+    }
+  ],
+  "strict_results": [
+    {
+      "name": "sw015_negative_duplicate_layer_id",
+      "status": "failed",
+      "passed": 51,
+      "total": 56,
+      "failed": 5,
+      "failed_checks": [
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 alpha_mask 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 black 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 white 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "layer_trunks_canopy_check_required_missing",
+          "detail": "缺必需 magenta 检查图 (按 visual-assets 合同/搜索)"
+        },
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer id 'trunks_canopy' 重复..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_empty_spec",
+      "status": "failed",
+      "passed": 30,
+      "total": 32,
+      "failed": 2,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: spec.layers 为空..."
+        },
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'mist' 不在 spec 期望集合 []..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_layer_id_mismatch",
+      "status": "failed",
+      "passed": 55,
+      "total": 56,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'random_layer' 不在 spec 期望集合 ['mist', 'trunks_canopy']..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_legacy_alias_mismatch",
+      "status": "failed",
+      "passed": 43,
+      "total": 44,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_manifest_spec_consistency",
+          "detail": "manifest 与 spec 不一致 1 项: manifest layer 'mist' render_role 'mist_layer' != spec 'overlay'..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_unknown_type",
+      "status": "failed",
+      "passed": 43,
+      "total": 44,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer[0] 'mist' type 'background' 不在 canonical ['overlay', 'parallax']..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_wrong_canvas",
+      "status": "failed",
+      "passed": 31,
+      "total": 32,
+      "failed": 1,
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 2 项: canvas.width=768 != 1080; canvas.height=1376 != 1920..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_positive_forest_legacy_alias",
+      "status": "ok",
+      "passed": 80,
+      "total": 80,
+      "failed": 0,
+      "failed_checks": []
+    },
+    {
+      "name": "sw015_positive_rainforest_canonical",
+      "status": "ok",
+      "passed": 80,
+      "total": 80,
+      "failed": 0,
+      "failed_checks": []
+    }
+  ],
+  "dry_run_results": [
+    {
+      "name": "sw015_negative_duplicate_layer_id",
+      "ok": false,
+      "reason": "失败: sw015_spec_validation",
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer id 'trunks_canopy' 重复..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_empty_spec",
+      "ok": false,
+      "reason": "失败: sw015_spec_validation",
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: spec.layers 为空..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_layer_id_mismatch",
+      "ok": true,
+      "reason": "全部 11 项通过",
+      "failed_checks": []
+    },
+    {
+      "name": "sw015_negative_legacy_alias_mismatch",
+      "ok": true,
+      "reason": "全部 11 项通过",
+      "failed_checks": []
+    },
+    {
+      "name": "sw015_negative_unknown_type",
+      "ok": false,
+      "reason": "失败: sw015_spec_validation",
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 1 项: layer[0] 'mist' type 'background' 不在 canonical ['overlay', 'parallax']..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_negative_wrong_canvas",
+      "ok": false,
+      "reason": "失败: sw015_spec_validation",
+      "failed_checks": [
+        {
+          "name": "sw015_spec_validation",
+          "detail": "spec 校验失败 2 项: canvas.width=768 != 1080; canvas.height=1376 != 1920..."
+        }
+      ]
+    },
+    {
+      "name": "sw015_positive_forest_legacy_alias",
+      "ok": true,
+      "reason": "全部 11 项通过",
+      "failed_checks": []
+    },
+    {
+      "name": "sw015_positive_rainforest_canonical",
+      "ok": true,
+      "reason": "全部 11 项通过",
+      "failed_checks": []
+    }
+  ]
+}
