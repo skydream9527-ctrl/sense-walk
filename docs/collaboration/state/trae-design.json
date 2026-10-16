@@ -2,10 +2,11 @@
   "schema_version": 1,
   "agent": "trae-design",
   "current_task": "SW-012",
-  "status": "handoff_ready",
+  "status": "waiting",
   "branch": "codex/trae-design/SW-012-rainforest-visual-design",
-  "head_commit": "cab78f6eecf9e4dbea831f4a0c6911a9d919c4fb",
+  "head_commit": "fe7d6acf8f0267ca861ef1d2bcc29882b85a3998",
   "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+  "latest_addendum": "docs/collaboration/handoffs/trae-design/H-SW-012-R1-intake-notes.md",
   "updated_on": "2026-10-15",
-  "note": "SW-012 r1 雨林900m设计包完成：已从最新 origin/main(904ab01) 建任务分支并保留 SW-011 已批准草稿；复用其图元双后端契约产出雨林五层(mist/trunks_canopy/vines_light/distant_glow/glade，id/parallax 标 proposed)，含可编辑 SVG/Python 源、五层 RGBA 导出、fade 完成点六阶段(0/110/295/475/700/875m)、三比例裁切、每层三底+热点/四缘 2x 放大、逐像素 drawImageLayer 裁切复核(恒可见带 x[216,864]、all_pass)、构图与雨林vs森林差异说明、逐层 prompts；manifest 53 文件 SHA256/字节全通过；零外部付费 API，不改 app/源码与 SW-011。交 Antigravity 审稿冻结命名，批准后启用 SW-006 供 MiniMax 制作素材。"
+  "note": "SW-012 R1 已由 Antigravity 独立评审 approved（R-SW-012-R1），PR #15 合入 main（merge bb05b03），D-009 冻结五层 canonical 参数并绑定 design-spec sha256=643e77b1...、manifest sha256=8cbbdd8d...，registry 状态 accepted。本轮按角色入口在本人任务分支（已 ff 到最新 main d0d8e84）新增下游消费附页 H-SW-012-R1-intake-notes.md（commit fe7d6ac，未改任何已发布 R1 字节）：集中列五层 id/type/parallax、1080×1920、90/270/450/675/855m 与 fade 20/25/25/25/20、六阶段 0/110/295/475/700/875m、x=.34/y=.865、下45%触控、tileable=false、恒可见带 x[216,864] 及每层源/三底/zoom/prompts 路径；澄清 distant_glow 提示词“融入黑色”仅指黑底预览观感、正式输出真透明无黑矩形底、不烘焙相位透明度。等待方：MiniMax SW-015（ready，远端尚未见交付），SW-006 须 SW-012+SW-015 均 accepted 才激活；本人无新设计任务，不轮询、不提前开工城市/沙漠、0 新增外部付费 API。"
 }
