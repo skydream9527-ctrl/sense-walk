@@ -128,7 +128,7 @@
       "title": "T07C 雨林候选素材批次",
       "owner": "minimax",
       "kind": "asset",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-002",
         "SW-003",
@@ -141,7 +141,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "等待 SW-015 真实规格预检联调 accepted，之后激活正式候选制作（SW-012 已 accepted 冻结规格；原 8 次 API 总尝试不重置）"
+        "门禁已激活：SW-012 视觉设计与 SW-015 规格预检联调均已 accepted。MiniMax 可动用 8 次独立预算启动正式雨林候选素材制作；需严格遵守 preflight/spec_reader 规范并输出 4 检查图。"
       ]
     },
     {
@@ -149,27 +149,18 @@
       "title": "T07B 自动越坎与站稳规则",
       "owner": "zcode",
       "kind": "code",
-      "status": "rework",
+      "status": "accepted",
       "depends_on": [
         "SW-004"
       ],
       "task_file": "docs/collaboration/tasks/SW-005.md",
-      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
-      "latest_review": "docs/collaboration/reviews/R-SW-005-R1.json",
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-005-R2.json",
+      "integrated_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
       "pending": [
-        "R1 changes_requested：核心 TerrainMotor 与 296 JVM 单测已过，但 UI 缺少 consumeStabilizeHint 与 gait 消费者，站稳提示未接表现层。",
-        "ZCode 产出 R2：将控制器状态/提示/步态接入 ViewModel/Compose，确保同一 sessionId 恢复不重复提示、死区边缘输入合规，提供真实 App 截图证据。"
-      ],
-      "observed_delivery": {
-        "revision": 1,
-        "branch": "codex/zcode/SW-005-terrain",
-        "branch_head": "9541f62e59e7dbff3c8b3105f4b7c5ecd0723e36",
-        "business_head": "9a791b55db032ce0d48b8762f146cc5c98cec23f",
-        "handoff_path": "docs/collaboration/handoffs/zcode/H-SW-005-R1.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/14",
-        "source_report": "docs/collaboration/reviews/R-SW-005-R1.md"
-      }
+        "3s 提示消失实测捕获（代码 delay+consume 保证，待 QA 复验）",
+        "真机触感（physical-device 保持 pending）"
+      ]
     },
     {
       "id": "SW-007",
@@ -256,19 +247,16 @@
       "title": "真实设计规格与素材预检联调（零API）",
       "owner": "minimax",
       "kind": "code",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-011",
         "SW-014"
       ],
       "task_file": "docs/collaboration/tasks/SW-015.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
-      "pending": [
-        "截至本轮远端分支/PR核查未见SW-015交付；保持ready，由MiniMax领取零API真实规格适配，不推断工具已开工或已接消息。",
-        "同时读取SW-011已批准规格与PR15雨林候选规格作只读schema样本；未批准PR15只能测试解析，不能授权生图。"
-      ]
+      "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-015-R1.json",
+      "integrated_commit": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5",
+      "pending": []
     }
   ],
   "physical_validation_pending": [

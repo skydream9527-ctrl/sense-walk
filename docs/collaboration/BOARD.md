@@ -13,22 +13,14 @@
 | SW-010 | [森林光效批准候选入包](tasks/SW-010.md) | zcode | accepted | SW-002, SW-003 | [H-SW-010-R1](handoffs/zcode/H-SW-010-R1.json) / [R-SW-010-R1](reviews/R-SW-010-R1.json) |
 | SW-004 | [T07A 会话快照与中断恢复](tasks/SW-004.md) | zcode | accepted | SW-001, SW-003 | [H-SW-004-R1](handoffs/zcode/H-SW-004-R1.json) / [R-SW-004-R1](reviews/R-SW-004-R1.json) |
 | SW-012 | [雨林图片设计包](tasks/SW-012.md) | trae-design | accepted | SW-011 | [H-SW-012-R1](handoffs/trae-design/H-SW-012-R1.json) / [R-SW-012-R1](reviews/R-SW-012-R1.json) |
-| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | queued | SW-002, SW-003, SW-012, SW-014, SW-015 | — / — |
-| SW-005 | [T07B 自动越坎与站稳规则](tasks/SW-005.md) | zcode | rework | SW-004 | [H-SW-005-R1](handoffs/zcode/H-SW-005-R1.json) / [R-SW-005-R1](reviews/R-SW-005-R1.json) |
+| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | ready | SW-002, SW-003, SW-012, SW-014, SW-015 | — / — |
+| SW-005 | [T07B 自动越坎与站稳规则](tasks/SW-005.md) | zcode | accepted | SW-004 | [H-SW-005-R2](handoffs/zcode/H-SW-005-R2.json) / [R-SW-005-R2](reviews/R-SW-005-R2.json) |
 | SW-007 | [T07C 雨林双模式与素材接入](tasks/SW-007.md) | zcode | queued | SW-005, SW-006 | — / — |
 | SW-008 | [T08 四景内容与一致性](tasks/SW-008.md) | zcode | queued | SW-007, SW-010 | — / — |
 | SW-009 | [T09 真机内测与发布候选验收](tasks/SW-009.md) | antigravity | queued | SW-008 | — / — |
 | SW-013 | [第二轮独立复验与交接收口](tasks/SW-013.md) | antigravity | accepted | SW-003 | [H-SW-013-R1](handoffs/antigravity/H-SW-013-R1.json) / — |
 | SW-014 | [雨林素材交付预检准备（零API）](tasks/SW-014.md) | minimax | accepted | SW-002, SW-003 | [H-SW-014-R3](handoffs/minimax/H-SW-014-R3.json) / [R-SW-014-R3](reviews/R-SW-014-R3.json) |
-| SW-015 | [真实设计规格与素材预检联调（零API）](tasks/SW-015.md) | minimax | ready | SW-011, SW-014 | — / — |
-
-## 远端交付观察（尚非独立批准）
-
-上表交付/审核指已入库记录；下面的新轮次由协调者消费后再更新正式指针。远端head变化须重新核对，不能从观察直接accepted。
-
-| 任务/轮次 | PR或分支 | 观察交付head | 来源 |
-| --- | --- | --- | --- |
-| SW-005 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/14) | `9541f62` | [R-SW-005-R1](reviews/R-SW-005-R1.md) |
+| SW-015 | [真实设计规格与素材预检联调（零API）](tasks/SW-015.md) | minimax | accepted | SW-011, SW-014 | [H-SW-015-R1](handoffs/minimax/H-SW-015-R1.json) / [R-SW-015-R1](reviews/R-SW-015-R1.json) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 

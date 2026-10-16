@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-005-R2",
+  "task_id": "SW-005",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-005-R2.json",
+  "reviewed_commit": "b92144e07f9318f1e14f7f18e0a1a28b0115f0d7",
+  "delivery_head": "c14958638d7d92c19e449ad151d1290cf8e087c2",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-005-R2.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "P-01 UI 闭环与步态消费实测",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/hint-shown.png",
+        "docs/collaboration/evidence/H-SW-005-R2/after-hint-389m.png"
+      ]
+    },
+    {
+      "name": "P-02 同局恢复提示仅一次 (快照持久化)",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/unit-lint-local.txt",
+        "docs/collaboration/handoffs/zcode/H-SW-005-R2.md"
+      ]
+    },
+    {
+      "name": "P-03 死区微输入边界测试",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/unit-lint-local.txt",
+        "docs/collaboration/handoffs/zcode/H-SW-005-R2.json"
+      ]
+    },
+    {
+      "name": "全量单测与构建验证",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/unit-lint-local.txt"
+      ]
+    },
+    {
+      "name": "真机触感（待真机验收）",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-005-R2/emulator-r2.txt"
+      ]
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "3s 提示消失实测捕获（代码 delay+consume 保证，待 QA 复验）",
+    "真机触感（physical-device 保持 pending）"
+  ]
+}
