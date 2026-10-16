@@ -37,6 +37,8 @@ data class SessionSnapshot(
     val lastCounterReading: Long? = null,
     /** 实走：最后 counter 事件的 monotonic 时间（跨 boot 作废） */
     val lastCounterEventMs: Long? = null,
+    /** 虚走：本局站稳提示已发过（P-02：同局恢复保持仅提示一次；可选，旧档缺省 false） */
+    val stabilizeHintShown: Boolean = false,
 ) {
     companion object {
         const val SNAPSHOT_VERSION = 1
@@ -64,6 +66,7 @@ data class SessionSnapshot(
                 put("elapsedActiveMs", s.elapsedActiveMs)
                 s.lastCounterReading?.let { put("lastCounterReading", it) }
                 s.lastCounterEventMs?.let { put("lastCounterEventMs", it) }
+                put("stabilizeHintShown", s.stabilizeHintShown)
             }
             return obj.toString()
         }
@@ -93,6 +96,7 @@ data class SessionSnapshot(
                 elapsedActiveMs = long("elapsedActiveMs") ?: 0L,
                 lastCounterReading = long("lastCounterReading"),
                 lastCounterEventMs = long("lastCounterEventMs"),
+                stabilizeHintShown = (obj["stabilizeHintShown"] as? kotlinx.serialization.json.JsonPrimitive)?.content == "true",
             )
         }.getOrNull()
     }

@@ -111,6 +111,7 @@ class SessionViewModel(
                                 ),
                                 firedPhaseIds = snap.firedPhaseIds.toSet(),
                                 elapsedActiveMs = snap.elapsedActiveMs,
+                                stabilizeHintShown = snap.stabilizeHintShown, // P-02：同局仅提示一次
                             )
                         }
                         val controller = VirtualWalkController(config, systemClock, restore)
@@ -179,6 +180,7 @@ class SessionViewModel(
                 sBest = acc.sBest,
                 firedPhaseIds = controller.scheduler.firedPhaseIds.toList(),
                 elapsedActiveMs = controller.stateMachine.elapsedActiveMs,
+                stabilizeHintShown = controller.terrainMotor.hintShown, // P-02：同局恢复不重复提示
             ),
         )
     }
@@ -192,8 +194,16 @@ class SessionViewModel(
 
     /** 唯一帧驱动入口：控制器步进 → 相位事件 → 感官协调器。
      *  快照无变化（静止/暂停/终态）时不推送，避免空闲期 60fps 全树重组。 */
+    private val _stabilizeHint = MutableStateFlow(false)
+    /** 本局首坎站稳提示（一次性事件：UI 消费后调 [consumeStabilizeHintDone]） */
+    val stabilizeHint: StateFlow<Boolean> = _stabilizeHint.asStateFlow()
+
+    fun consumeStabilizeHintDone() { _stabilizeHint.value = false }
+
     fun onFrame() = withController { controller ->
         val snapshot = controller.frame()
+        // T07B：首坎站稳提示（一次性；恢复局同 sessionId 提示可再发——见 R2 说明）
+        if (controller.consumeStabilizeHint()) _stabilizeHint.value = true
         coordinator?.let { sensory ->
             val events = controller.drainPhaseEvents()
             sensory.onPhaseEvents(events)

@@ -166,6 +166,7 @@ private fun SessionContent(
 ) {
     val session = walk?.session ?: SessionState.READY
     val sessionActive = session == SessionState.READY || session == SessionState.WALKING || session == SessionState.PAUSED
+    val stabilizeHint by vm.stabilizeHint.collectAsStateWithLifecycle()
 
     // 单帧循环：全页唯一的帧驱动，重组不会新增循环
     LaunchedEffect(vm) {
@@ -273,6 +274,7 @@ private fun SessionContent(
             terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
             reduceMotion = reduceMotion,
             imageLayers = imageLayers,
+            gait = walk?.gait ?: com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
         )
 
         // 上半区：轻触查看米数 + 放弃/暂停控件
@@ -356,6 +358,29 @@ private fun SessionContent(
                     enabled = sessionActive,
                     onHold = { vm.onStick(ComfortStickMapper.SWEET_SPOT_DEFLECTION) },
                     onRelease = { vm.onStickReleased() },
+                )
+            }
+        }
+
+        // T07B 首坎站稳提示（一次性，非 QTE）：3 秒自动消失
+        if (stabilizeHint && sessionActive && !showIntro) {
+            LaunchedEffect(stabilizeHint) {
+                delay(3000)
+                vm.consumeStabilizeHintDone()
+            }
+            Column(
+                Modifier
+                    .align(Alignment.Center)
+                    .padding(horizontal = 36.dp)
+                    .background(Color.White.copy(alpha = 0.10f), RoundedCornerShape(16.dp))
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "慢一点，站稳再跳。",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = SenseOnSurface,
+                    textAlign = TextAlign.Center,
                 )
             }
         }

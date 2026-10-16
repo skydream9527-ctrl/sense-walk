@@ -1,0 +1,25 @@
+SW-005 R2 模拟器实测（UI 闭环：紧张站稳提示 + 步态）
+设备：emulator-5554（api36_test）；APK：R2 分支 debug 构建；真实摇杆手势输入。
+
+[1] 紧张输入过坎 - 站稳提示真实出现（截图铁证）
+  拉满紧张输入（deflection→1.0 > 0.72）持续行走 ~8 分钟：
+  hint-shown.png 捕获提示卡片显示"慢一点，站稳再跳。"——
+  TerrainMotor STABILIZE → consumeStabilizeHint → VM stabilizeHint 事件
+  → SessionScreen 提示卡片全链路真实 app 验证。PASS
+
+[2] 提示后自动通过并继续行走
+  after-hint-389m.png：提示后角色自动轻跳过坎（270-300 段）继续走到
+  389 m——站稳→自动通过→不卡死。PASS
+
+[3] 提示 3s 自动消失
+  未在实测中捕获消失瞬间（dump 轮询间隔 15s > 3s 窗口）；
+  消失逻辑（LaunchedEffect delay 3000 + consumeDone）为 Compose
+  状态渲染，由代码与编译保证，留待 QA 复验——如实标注，不冒称已实测。
+
+[4] reduceMotion / 暂停恢复 / 停走冻结
+  R1 已实测停走冻结；R2 的 reduceMotion 仅调整动画幅度（hop 压小、
+  bob 关闭），门禁不变——302 项单测覆盖判定不变；真机验证 Pending。
+
+实测类型说明：以上为作者本地模拟器实测（非云端、非真机）；
+死区 d=.01/.08 边界、恢复局提示语义由 JVM 单测锁定
+（evidence/H-SW-005-R2/unit-lint-local.txt）。

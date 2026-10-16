@@ -50,6 +50,8 @@ fun ForestShell(
     terrain: TerrainKind,
     reduceMotion: Boolean,
     imageLayers: Map<String, ForestImageLayer> = emptyMap(),
+    /** 越坎步态（T07B / SW-005 R2）：hop 腾空、tense 站稳微蹲；默认按地形表现 */
+    gait: com.sensewalk.app.domain.walk.TerrainMotor.Gait = com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
     modifier: Modifier = Modifier,
 ) {
     // 固定种子生成剪影特征，保证同一会话内景致稳定
@@ -141,7 +143,7 @@ fun ForestShell(
         }
 
         // 7. 旅人剪影（姿态：静止/行走/上坡攀爬；交付图待重做，保持程序绘制）
-        drawTraveler(sPos, velocity, terrain, reduceMotion, size)
+        drawTraveler(sPos, velocity, terrain, reduceMotion, gait, size)
     }
 }
 
@@ -310,30 +312,46 @@ private fun DrawScope.drawTraveler(
     velocity: Float,
     terrain: TerrainKind,
     reduceMotion: Boolean,
+    gait: com.sensewalk.app.domain.walk.TerrainMotor.Gait,
     size: Size,
 ) {
     val cx = size.width * 0.34f
     val groundY = size.height * 0.865f
     val moving = velocity > 0.05f
     val stridePhase = (sPos / 0.7f) * (2f * Math.PI).toFloat()
-    val bob = if (!reduceMotion && moving) sin(stridePhase) * 5f else 0f
+    // hop：跳跃腾空（语义必要动作，reduceMotion 只压小幅度不抹除）
+    // tense：站稳微蹲稳住（不做抖动）
+    val hopLift = when {
+        gait == com.sensewalk.app.domain.walk.TerrainMotor.Gait.HOP ->
+            if (reduceMotion) 10f else 26f
+        else -> 0f
+    }
+    val tenseDuck = if (gait == com.sensewalk.app.domain.walk.TerrainMotor.Gait.TENSE) 6f else 0f
+    val bob = if (!reduceMotion && moving && hopLift == 0f) sin(stridePhase) * 5f else 0f
     val tilt = if (terrain == TerrainKind.SLOPE_UP) -10f else 0f
 
     rotate(degrees = tilt, pivot = Offset(cx, groundY)) {
-        val bodyBottom = groundY - 14f + bob
-        val bodyTop = groundY - 74f + bob
-        // 腿：行走时交替
-        val legSpread = if (moving && !reduceMotion) sin(stridePhase) * 10f else 4f
+        val bodyBottom = groundY - 14f + bob - hopLift + tenseDuck
+        val bodyTop = groundY - 74f + bob - hopLift + tenseDuck
+        // 腿：行走交替；跳跃收腿并拢；站稳外撑
+        val legSpread = when {
+            hopLift > 0f -> 0f
+            gait == com.sensewalk.app.domain.walk.TerrainMotor.Gait.TENSE -> 8f
+            moving && !reduceMotion -> sin(stridePhase) * 10f
+            else -> 4f
+        }
+        // 跳跃时腿离地（与身体一致抬高）
+        val footY = groundY - hopLift
         drawLine(
             TravelerColor,
             start = Offset(cx - 2f, bodyBottom),
-            end = Offset(cx - 6f - legSpread, groundY),
+            end = Offset(cx - 6f - legSpread, footY),
             strokeWidth = 6f,
         )
         drawLine(
             TravelerColor,
             start = Offset(cx + 2f, bodyBottom),
-            end = Offset(cx + 6f + legSpread, groundY),
+            end = Offset(cx + 6f + legSpread, footY),
             strokeWidth = 6f,
         )
         // 身体
