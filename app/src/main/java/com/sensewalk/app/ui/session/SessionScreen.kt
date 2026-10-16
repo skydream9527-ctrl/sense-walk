@@ -275,6 +275,7 @@ private fun SessionContent(
             reduceMotion = reduceMotion,
             imageLayers = imageLayers,
             gait = walk?.gait ?: com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
+            sceneId = config.id,
         )
 
         // 上半区：轻触查看米数 + 放弃/暂停控件

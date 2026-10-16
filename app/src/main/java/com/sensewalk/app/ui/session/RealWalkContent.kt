@@ -109,6 +109,7 @@ fun RealWalkContent(
                 velocity = walk?.velocity ?: 0f,
                 terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
                 reduceMotion = reduceMotion,
+                sceneId = cfg.id,
                 imageLayers = remember(cfg) {
                     buildMap {
                         cfg.visualLayers.forEach { (id, def) ->

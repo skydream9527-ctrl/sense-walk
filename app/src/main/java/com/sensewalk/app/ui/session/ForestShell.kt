@@ -52,8 +52,11 @@ fun ForestShell(
     imageLayers: Map<String, ForestImageLayer> = emptyMap(),
     /** 越坎步态（T07B / SW-005 R2）：hop 腾空、tense 站稳微蹲；默认按地形表现 */
     gait: com.sensewalk.app.domain.walk.TerrainMotor.Gait = com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
+    /** 场景标识（SW-016）：驱动色板与层降级分派；缺省森林保持既有表现 */
+    sceneId: String = "forest",
     modifier: Modifier = Modifier,
 ) {
+    val palette = ScenePalette.of(sceneId)
     // 固定种子生成剪影特征，保证同一会话内景致稳定
     val outlineTrees = remember {
         Random(42).let { r -> List(24) { Triple(r.nextFloat(), 0.5f + r.nextFloat() * 0.5f, 0.6f + r.nextFloat() * 0.4f) } }
@@ -85,7 +88,7 @@ fun ForestShell(
         }
 
         // 1. void 黑幕（起点即黑；其他层长出后仍然作为底色）
-        drawRect(VoidColor)
+        drawRect(palette.voidColor)
 
         // 2. tree_outline 远景树冠轮廓线（真实图层；无图回退程序剪影）
         val outlineAlpha = a("tree_outline")
@@ -142,8 +145,68 @@ fun ForestShell(
             }
         }
 
-        // 7. 旅人剪影（姿态：静止/行走/上坡攀爬；交付图待重做，保持程序绘制）
-        drawTraveler(sPos, velocity, terrain, reduceMotion, gait, size)
+        // 7. 非森林专用层（SW-016 雨林五层等）：真实图优先，无图走**通用程序降级**
+        //    （类型驱动：overlay 柔光带 / parallax 视差剪影带；米数纯函数、停走冻结不变）
+        for ((layerId, alpha) in sensory.visualOpacities) {
+            if (layerId == "void") continue
+            if (layerId in FOREST_SPECIFIC_LAYERS) continue
+            if (alpha <= 0.01f) continue
+            val bitmap = bitmaps[layerId]
+            val spec = imageLayers[layerId]
+            if (bitmap != null) {
+                drawImageLayer(bitmap, alpha, spec?.parallax?.let { parallaxOffset(sPos, it, reduceMotion) } ?: 0f)
+            } else {
+                drawGenericLayerFallback(layerId, alpha, spec?.parallax ?: 0f, sPos, reduceMotion, size, palette)
+            }
+        }
+
+        // 8. 旅人剪影（姿态：静止/行走/上坡攀爬；交付图待重做，保持程序绘制）
+        drawTraveler(sPos, velocity, terrain, reduceMotion, gait, palette.traveler, size)
+    }
+
+}
+
+/** 森林专用层（既有批准降级绘制逐一保留；这些层不再走 SW-016 通用绘制） */
+private val FOREST_SPECIFIC_LAYERS = setOf("tree_outline", "tree_trunks", "leaf_path", "light_shows", "clearing")
+
+/** 通用程序降级（SW-016）：overlay=柔和光带；parallax=竖向剪影带（带固定种子，会话内稳定） */
+private fun DrawScope.drawGenericLayerFallback(
+    layerId: String,
+    alpha: Float,
+    parallaxFactor: Float,
+    sPos: Float,
+    reduceMotion: Boolean,
+    size: Size,
+    palette: ScenePalette = ScenePalette.FOREST,
+) {
+    val seed = layerId.hashCode()
+    val rng = kotlin.random.Random(seed)
+    if (parallaxFactor > 0f) {
+        // 剪影带：若干竖条代表树干/藤蔓，随 sPos 视差横移（有限视差；reduceMotion 冻结）
+        val offset = if (reduceMotion) 0f else (sPos * parallaxFactor * 6f) % (size.width / 3f)
+        val bands = 6 + seed % 4
+        repeat(bands) { i ->
+            val x = ((i * size.width / bands + offset) % (size.width + 120f)) - 60f
+            val w = 24f + rng.nextFloat() * 40f
+            drawRect(
+                color = palette.silhouetteMid.copy(alpha = alpha * 0.5f),
+                topLeft = androidx.compose.ui.geometry.Offset(x, size.height * 0.25f),
+                size = Size(w, size.height * 0.62f),
+            )
+        }
+    } else {
+        // 柔光带：上部光晕（mist/distant_glow/glade 语义），中下部留白（触控保护区）
+        drawRect(
+            color = palette.glow.copy(alpha = alpha * 0.16f),
+            topLeft = androidx.compose.ui.geometry.Offset(0f, 0f),
+            size = Size(size.width, size.height * 0.55f),
+        )
+        val cx = size.width * (0.35f + (seed % 30) / 100f)
+        drawCircle(
+            color = palette.glow.copy(alpha = alpha * 0.22f),
+            radius = size.width * 0.42f,
+            center = androidx.compose.ui.geometry.Offset(cx, size.height * 0.34f),
+        )
     }
 }
 
@@ -313,6 +376,7 @@ private fun DrawScope.drawTraveler(
     terrain: TerrainKind,
     reduceMotion: Boolean,
     gait: com.sensewalk.app.domain.walk.TerrainMotor.Gait,
+    travelerColor: Color,
     size: Size,
 ) {
     val cx = size.width * 0.34f
@@ -343,30 +407,30 @@ private fun DrawScope.drawTraveler(
         // 跳跃时腿离地（与身体一致抬高）
         val footY = groundY - hopLift
         drawLine(
-            TravelerColor,
+            travelerColor,
             start = Offset(cx - 2f, bodyBottom),
             end = Offset(cx - 6f - legSpread, footY),
             strokeWidth = 6f,
         )
         drawLine(
-            TravelerColor,
+            travelerColor,
             start = Offset(cx + 2f, bodyBottom),
             end = Offset(cx + 6f + legSpread, footY),
             strokeWidth = 6f,
         )
         // 身体
         drawRoundRect(
-            TravelerColor,
+            travelerColor,
             topLeft = Offset(cx - 10f, bodyTop),
             size = Size(20f, bodyBottom - bodyTop),
             cornerRadius = androidx.compose.ui.geometry.CornerRadius(10f),
         )
         // 头
-        drawCircle(TravelerColor, radius = 9f, center = Offset(cx, bodyTop - 12f))
+        drawCircle(travelerColor, radius = 9f, center = Offset(cx, bodyTop - 12f))
         // 攀爬时前倾的手臂
         if (terrain == TerrainKind.SLOPE_UP) {
             drawLine(
-                TravelerColor,
+                travelerColor,
                 start = Offset(cx + 6f, bodyTop + 18f),
                 end = Offset(cx + 18f, bodyTop + 2f),
                 strokeWidth = 5f,
