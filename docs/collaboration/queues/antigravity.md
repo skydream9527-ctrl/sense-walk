@@ -1,15 +1,14 @@
 # Antigravity 常驻验收队列
 
-2026-10-16；main2339333，来源 [P-20261016-01](../evidence/P-20261016-01/README.md)。旧SW010/SW005R2/SW012/SW015已accepted，PR16也已发布，不重复做旧动作。
+2026-10-18；main当前推进至 `30780af`。最新规划 [P-20261016-01](../evidence/P-20261016-01/README.md)（PR #21）、预发布（build-153-15e000b）及审计补证（PR #22）均已合入，旧已接受任务（SW-001/SW-004/SW-005/SW-010/SW-011/SW-012/SW-014/SW-015）保持 accepted。
 
-| 优先级 | 当前动作 | 退出条件 |
+| 优先级 | 当前状态 | 退出条件 |
 | --- | --- | --- |
-| 当前组合包 | main云端38847512206/协作38847512200成功，APK/report/source artifact齐；Release仍build109 | 最新已合main测试预发布，真实可下载APK/source、commit/APK SHA256/实际验证范围；不以ZIP digest冒充APK hash |
-| 提示补证 | UI代码已接，作者hint-shown.png抽读未见所述卡片；约3s消失原记录也Pending | 同步录像/短间隔图+UI hierarchy、精确APK/head/步骤，出现→消失→同局恢复不重复；不能运行保持Pending，不撤销已批代码来替代补证 |
-| SW006 / MiniMax | ready，真实雨林候选 | 先核任务内0API生产guard：真实D009批准、实际1080x1920、跨revision总8/API前ledger；到稿后独立像素/alpha/四检查/阶段/裁切/预算/来源/hash，不信旧preflight单绿 |
-| SW016 / ZCode | ready，900m底座与真实声景准备 | 实际Kotlin/配置/渲染/两模式复用/快照；来源许可/声音听辨；不完整配置不使选景或loadAll假成功/整体失败；底座≠雨林完成 |
-| SW017 / Trae | ready，应用上下文参照 | 两模式/阶段/比例/状态、清单/可编辑源/hash；design模拟明确，不改D009/不替App，不成素材新前置 |
-| SW007激活 | queued，依赖SW005/SW006/SW016 | 后两项均accepted再ready，批准图正式入包+900m双模式/真实声景/组合App独立回归 |
-| 审计笔误 | R-SW-015-R1 JSON/MD delivery_head | 实际9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846；旧写9c4ef5a8f4cffb0948cbb391306b4bdafd3c64c1；新增correction，business81fbf2d正确 |
+| 最新组合包 | 已发布 [build-153-15e000b](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-153-15e000b)；真实APK SHA-256 (`6600f554...`) 与源码包已本地独立下载验证通过 | 产物与commit一致，真机计步/锁屏/重启与5-8人内测依协议仍保持Pending |
+| 审计与时序说明 | PR #22已合入；[R-SW-015-R1-correction.md](../reviews/R-SW-015-R1-correction.md) 校准交付SHA；[R-SW-005-R2-correction.md](../reviews/R-SW-005-R2-correction.md) 记录提示时序实测Pending | 归档说明已入库，不覆盖历史评审原文，不影响代码已accepted结论 |
+| SW-016 / ZCode | ready；作者本地工作区已有底座实现 `c87366d`（312项单测0失败/D-009参数精确核对/双模式/声景清单），等待作者完成交付与PR | 实际Kotlin/配置/渲染/两模式复用/快照；来源许可/声音听辨；底座≠雨林完成 |
+| SW-006 / MiniMax | ready；作者本地已有雨林候选生成草稿，正在进行0API生产guard与预检自测，等待作者完成交付与PR | 先核任务内0API生产guard：真实D009批准、实际1080x1920、跨revision总8次/API前ledger；到稿后独立像素/alpha/四检查/阶段/裁切/预算/来源/hash |
+| SW-017 / Trae | ready，应用上下文参照 | 两模式/阶段/比例/状态、清单/可编辑源/hash；design模拟明确，不改D009/不替App，不成素材新前置 |
+| SW-007激活 | queued，依赖SW-005(已完成)+SW-006(等待制作)+SW-016(等待交付) | 后两项均accepted再ready，批准图正式入包+900m双模式/真实声景/组合App独立回归 |
 
-新规划未发布时先按PUBLISH-PLAN-20261016.md导入已完成文档；标准PR/全CI/集成，更新活动发布提示但不改旧证据。作者state本人消费accepted，QA不代写。源码/已有XML/云端artifact与真正运行模拟器/实体/真人分开；无设备/人Pending，不宣称最终MVP。城市/沙漠继续queued，先雨林闭环再拆任务/预算。无新交付一次报告等待项，不无限轮询/自动发消息/商店发布。
+中心状态由QA维护，各作者state本人消费。源码/已有XML/云端artifact与真正运行模拟器/实体/真人分开；无设备/人Pending，不宣称最终MVP。城市/沙漠继续queued，先雨林闭环再拆任务/预算。无新交付一次报告等待项，不无限轮询/自动发消息/商店发布。

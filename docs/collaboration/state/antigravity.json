@@ -3,9 +3,9 @@
   "agent": "antigravity",
   "current_task": null,
   "status": "idle",
-  "branch": "codex/antigravity/review-integration-round6",
-  "head_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
+  "branch": "main",
+  "head_commit": "30780af2d4dbe7daa9323ae27ff76fb973d596a6",
   "latest_handoff": null,
-  "updated_on": "2026-10-15",
-  "note": "队列跟踪：SW-015 R1 与 SW-005 R2 均已独立审核 approved 并集成合入 main；SW-006 雨林素材制作前置门禁达成，状态正式激活为 ready。"
+  "updated_on": "2026-10-18",
+  "note": "队列跟踪：P-20261016-01 规划发布已合入 main (PR #21, merge 15e000b)；最新集成版已发布 GitHub Pre-release build-153-15e000b 并本地独立核验真实 APK SHA-256 (6600f554...)；R-SW-015-R1 交付分支 SHA 勘误与 R-SW-005-R2 视觉时序 Pending 说明已通过 PR #22 入库 (merge 30780af)。当前常驻监听 SW-006、SW-016、SW-017 交付。"
 }
