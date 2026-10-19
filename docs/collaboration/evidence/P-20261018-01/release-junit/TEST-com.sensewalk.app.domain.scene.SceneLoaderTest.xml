@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.SceneLoaderTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-19T02:21:19" hostname="runnervm8k3b6" time="0.035">
+  <properties/>
+  <testcase name="修复配置后重试进入 Ready" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.005"/>
+  <testcase name="场景 id 重复被拒绝" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.002"/>
+  <testcase name="校验失败汇总为 Error 不静默丢场景" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.001"/>
+  <testcase name="目录枚举失败修复后重试成功" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.002"/>
+  <testcase name="读取失败（文件缺失）给出可解释结果" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.007"/>
+  <testcase name="目录枚举异常转为可解释 Error" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.0"/>
+  <testcase name="空场景目录给出可解释错误" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.0"/>
+  <testcase name="全部合法时进入 Ready 并按距离升序" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.009"/>
+  <testcase name="坏 JSON 汇总为 Error 且指明场景" classname="com.sensewalk.app.domain.scene.SceneLoaderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

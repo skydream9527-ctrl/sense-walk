@@ -1,38 +1,25 @@
-# SenseWalk 多 agent 协作
+# SenseWalk 协作入口与阶段收口
 
-状态以registry为准，产品规则以DEVELOPMENT为准，源码/提交/实际证据高于完成声明。无需额外调度服务或完整本地Android环境。四角色独立worktree；用户转发入口，不自动发消息。
+2026-10-18：本轮先交**森林800m双模式阶段测试包**，再回收真实安装问题；雨林底座已入main，但正式候选和真实声景未齐，保持未开放。完整范围/包绑定commit/四方收尾见 [STAGE-CLOSEOUT](STAGE-CLOSEOUT.md)、[发布档案](../releases/2026-10-18-forest-beta/README.md) 与 [最新实核](evidence/P-20261018-01/README.md)。
 
-## 当前进展 · 2026-10-16
+## 四条稳定提示词
 
-main **2339333**：森林正式光效SW010、地形SW005 R2、雨林设计SW012及规格预检SW015均已独立验收合入；上轮规划也已由PR16发布，不再导入旧包。main云端构建/协作检查成功，作者已有28份XML共303项通过。雨林尚无正式候选与运行配置，测试Release仍旧build109。详见 [本轮核查](evidence/P-20261016-01/README.md)。
+- ZCode：`先fetch最新origin/main，读取并执行docs/collaboration/roles/zcode.md，保留现有工作。`
+- MiniMax Code：`先fetch最新origin/main，读取并执行docs/collaboration/roles/minimax.md，保留现有工作。`
+- Trae Design：`使用Design模式，先fetch最新origin/main，读取并执行docs/collaboration/roles/trae-design.md，保留已有设计稿。`
+- Antigravity：`先fetch最新origin/main，读取并执行docs/collaboration/roles/antigravity.md，保留现有工作。`
 
-本轮规划如尚未入main，Antigravity先按 [本轮发布交接](PUBLISH-PLAN-20261016.md) 导入现成提交/交付包；其余角色可直接读用户提供的本机入口。发布后沿用下面相同入口。
-
-## 四条稳定入口提示词
-
-- ZCode：`请先 fetch 最新 origin/main，读取并执行 docs/collaboration/roles/zcode.md，保留现有工作。`
-- MiniMax Code：`请先 fetch 最新 origin/main，读取并执行 docs/collaboration/roles/minimax.md，保留现有工作。`
-- Trae Design：`请使用 Design 模式，先 fetch 最新 origin/main，读取并执行 docs/collaboration/roles/trae-design.md，保留已有设计稿。`
-- Antigravity：`请先 fetch 最新 origin/main，读取并执行 docs/collaboration/roles/antigravity.md，保留现有工作。`
-
-| 角色 | 本轮可执行任务 | 交付去向 |
+| 角色 | 本轮收尾 | 下一阶段 |
 | --- | --- | --- |
-| ZCode | ready [SW016雨林运行时底座与真实声景准备](tasks/SW-016.md) | 900m接口/渲染/双模式复用/合法声音准备→QA；最终SW007另等候选 |
-| MiniMax | ready [SW006雨林候选](tasks/SW-006.md) | 先本任务内0API生产尺寸/冻结批准/总预算guard，再按原总8次制作→独立验图 |
-| Trae Design | ready [SW017应用验图参照](tasks/SW-017.md) | 两模式/阶段/尺寸/状态参考与验图清单→QA/ZCode；不重画生产五层 |
-| Antigravity | [常驻验收队列](queues/antigravity.md) | 当前main组合测试Release、提示时序补证、随到审三路交付；通过后启用SW007 |
+| ZCode | ready SW018安装/启动/森林双模式与确认的阻断缺陷；无缺陷可0源码交付 | 雨林真实声景与SW007最终组合 |
+| MiniMax | rework SW006草案/guard/交接；最新路径已修，QA fixture红交QA | 原总8次授权的正式雨林候选，不重置预算/重复索授权 |
+| Trae | ready SW017先当前森林App视觉清单/参照/问题标注 | 保留已有雨林应用参照后续续做 |
+| Antigravity | 现成阶段包/用户反馈、提示时序补证、独立回归与PR25 QA隔离 | 雨林候选+声音齐后独立组合验收 |
 
-既有批准保留；旧预检的768尺寸/9次声明误放行与strict-design误拒见真实0API反例，不能让工具绿替代实际契约。SW017不改SW012生产设计/素材前置；缺真机/真人仍Pending。
+主线已accepted：可靠性/恢复、正式森林光效、地形R2、雨林设计/规格工具/底座；不用重复开发或导入旧规划包。PR25仍未合/未批准，其零API占位不进入本阶段包。所有阶段设备/真人项如实Pending，阶段包可下载不等于最终MVP完成。
 
-## 文件导航
+## 事实与文件系统
 
-- [registry.json](registry.json) → [生成看板](BOARD.md)；[整体路线](ROADMAP.md)。
-- [协议](PROTOCOL.md)；[验收队列](queues/antigravity.md)；[本轮核查](evidence/P-20261016-01/README.md)。
-- [前轮核查](evidence/P-20261015-02/README.md)与其历史发布限制保留；后由PR16实际发布，不改旧事实。
-- [快照契约](contracts/session-snapshot.md)、[设计契约](contracts/visual-design.md)、[素材契约](contracts/visual-assets.md)、[雨林冻结D009](decisions/D-009-freeze-rainforest-design-spec.md)。
-- [交接模板](templates/HANDOFF.md)、[审核模板](templates/REVIEW.md)、[设计规格模板](templates/design-spec.json.example)。
-- [校验工具](../../tools/collaboration.py)：render生成BOARD，check只检结构/哈希/依赖/历史，不证明运行QA。
+registry是协调单写状态，BOARD由render生成，任务/角色入口/阶段范围说明安排；源码/commit/证据高于完成声明。独立worktree与单写角色所有权见 [PROTOCOL](PROTOCOL.md)，旧handoff/review/evidence/decision只追加。各作者state本人消费，不由协调者代写；用户转发文件提示词不等于工具已自动收到消息。
 
-## 文件系统与单写
-
-roles为稳定入口；tasks为每项完整要求；registry为协调单写事实；BOARD自动生成；state/handoffs由生产者本人写；reviews/evidence/decisions保存精确head/hash/检查与限制，旧归档不覆盖；contracts为跨角色接口。Trae拥有设计源/规范/prompts，MiniMax拥有候选/美术工具，ZCode拥有app/生产素材，Antigravity拥有独立QA/中心登记/集成发布。设计→候选→入包→App验收分开。
+[看板](BOARD.md) · [整体路线](ROADMAP.md) · [QA队列](queues/antigravity.md) · [快照契约](contracts/session-snapshot.md) · [设计契约](contracts/visual-design.md) · [素材契约](contracts/visual-assets.md) · [交接模板](templates/HANDOFF.md) · [审核模板](templates/REVIEW.md) · [校验工具](../../tools/collaboration.py)。历史阶段报告保持当时事实，旧网络发布交接文件无需重跑。

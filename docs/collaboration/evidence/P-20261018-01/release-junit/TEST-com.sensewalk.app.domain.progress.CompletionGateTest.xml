@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.progress.CompletionGateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-19T02:21:18" hostname="runnervm8k3b6" time="0.007">
+  <properties/>
+  <testcase name="非法门禁距离拒绝构造" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.001"/>
+  <testcase name="NaN 米数不触发" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.0"/>
+  <testcase name="越过满距触发一次" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.0"/>
+  <testcase name="恰好满距触发一次" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.0"/>
+  <testcase name="触发前米数回落再上涨只在真正满距时触发" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.0"/>
+  <testcase name="未满距不触发" classname="com.sensewalk.app.domain.progress.CompletionGateTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

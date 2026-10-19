@@ -379,17 +379,15 @@
 
     <section id="status">
       <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">2026-10-16：main2339333已合入森林正式光效、地形R2、雨林设计和规格预检，均accepted；main云端检查成功，作者已有303项JUnit通过。雨林正式候选和运行配置仍未入库，测试Release落后于main。</p>
-      <div class="callout"><strong>本轮并行：</strong>MiniMax SW006先0API补生产尺寸/总预算保护再制作；ZCode SW016准备900m运行时与真实声景；Trae SW017做应用验图参照；Antigravity发组合包、补提示时序证据并独立验收。</div>
-      <table><thead><tr><th>角色/模块</th><th>当前事实</th><th>下一步/退出条件</th></tr></thead><tbody>
-        <tr><td>ZCode</td><td>旧接图/地形已完成，不再重复返工</td><td>SW016底座/配置/双模式复用/合法声音准备；未获候选不开放假完成雨林</td></tr>
-        <tr><td>MiniMax</td><td>SW006 ready；旧预检误放行768尺寸与9次声明</td><td>本任务内先0API生产guard/请求前ledger；原跨revision总8次候选与逐层验图</td></tr>
-        <tr><td>Trae Design</td><td>SW012五层与附页已批准冻结</td><td>SW017两模式/多屏/阶段/代表状态验图参照；不改生产规范或素材前置</td></tr>
-        <tr><td>Antigravity</td><td>main有新APK artifact，Release仍旧组合；提示时序证据不足</td><td>准确main测试包/APK hash、独立补证、随到审三路交付</td></tr>
-        <tr><td>雨林最终接入</td><td>SW007仍queued</td><td>SW006+SW016各accepted后接正式图/真实声音/900m双模式</td></tr>
-        <tr><td>后续MVP</td><td>城市/沙漠与实体/真人仍未完成</td><td>先雨林闭环，再逐景拆分；设备矩阵与5–8人体验如实Passed/Failed/Pending</td></tr>
+      <p class="section-lead">2026-10-18：本轮收口为森林800m虚走/实走阶段测试版，冻结main aaa789b。主线云端312项通过；正式光效、地形、恢复已合入。雨林底座已集成但候选与真实声景不足，保持未开放。</p>
+      <div class="callout"><strong>先安装测试：</strong><a href="releases/2026-10-18-forest-beta/README.md">GitHub阶段包/准确哈希</a> · <a href="releases/2026-10-18-forest-beta/TESTING.md">测试步骤</a> · <a href="releases/2026-10-18-forest-beta/FEEDBACK.md">反馈模板</a>。设备与真人结果未到时保持Pending。</div>
+      <table><thead><tr><th>角色</th><th>本轮收尾</th><th>范围</th></tr></thead><tbody>
+        <tr><td>ZCode</td><td>SW018安装/启动/森林双模式及确认阻断缺陷</td><td>无缺陷交0源码核查；必要patch经QA后新包</td></tr>
+        <tr><td>MiniMax</td><td>SW006草案/guard/交接；PR25路径已修，剩余QA隔离红灯交QA</td><td>本轮0新增付费图；不将占位入阶段包，原8次授权后续沿用</td></tr>
+        <tr><td>Trae Design</td><td>SW017先森林App视觉清单/参照/有依据标注</td><td>实际截图与模拟分开，不重绘生产美术，保留雨林稿</td></tr>
+        <tr><td>Antigravity</td><td>准确包/反馈分级、提示时序补证、独立复验与QA fixture隔离</td><td>真机/真人Pending，不宣称MVP完成</td></tr>
       </tbody></table>
-      <p>见 <a href="collaboration/evidence/P-20261016-01/README.md">本轮核查</a>、<a href="collaboration/README.md">四条文件入口</a>、<a href="collaboration/ROADMAP.md">整体路线</a>、<a href="collaboration/queues/antigravity.md">验收队列</a>与<a href="collaboration/BOARD.md">看板</a>。本轮规划若尚未发布，先由Antigravity导入现成交付；云端CI/作者XML/设计模拟/实际App/实体真人分别记证据。</p>
+      <p>见 <a href="collaboration/STAGE-CLOSEOUT.md">阶段收口范围</a>、<a href="collaboration/evidence/P-20261018-01/README.md">本轮核查</a>、<a href="collaboration/README.md">四角色文件入口</a>与<a href="collaboration/BOARD.md">看板</a>。先回收森林安装问题，再正式雨林候选/真实声景/900m双模式，之后城市/沙漠。</p>
     </section>
 
     <section id="vision">
@@ -907,7 +905,7 @@
 
     <footer>
       <div>源码 <a href="../DEVELOPMENT.md">DEVELOPMENT.md</a> · <a href="https://github.com/skydream9527-ctrl/sense-walk">GitHub</a></div>
-      <div>v0.8 · 协作更新 2026-10-16 · 雨林制作 / 并行底座 / 应用验图</div>
+      <div>v0.8 · 阶段收口 2026-10-18 · 森林双模式安装测试</div>
     </footer>
   </main>
 </div>

@@ -1,13 +1,11 @@
 # minimax 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
+先fetch最新origin/main，读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../STAGE-CLOSEOUT.md`与当前任务。用户本轮要求阶段收口：固定森林800m双模式测试包，先回收安装/真机问题，再推进雨林。独立checkout/worktree/任务分支，保留已有工作；不操作他人index、不reset/强推覆盖。源码/精确commit/实际证据优先，历史handoff/review/evidence/decision只追加；无需完善本地Android环境，复用Actions。四个入口由用户转发，不自动外发消息。
 
-你负责design/assets工具/候选及本人state/handoff。SW015 R1已accepted/集成，SW012设计已approved并由D009冻结；**SW006已ready，不再等旧审批或重交SW015初版。** 领取 `../tasks/SW-006.md`。
+本轮优先收尾你自己的SW006草案交接，registry登记rework；不重画已批准森林，不往当前森林阶段包放雨林占位。
 
-先在本任务新SW006/r1/scripts目录做最低限度0API生产guard及自动断言，复用原预检而不覆盖R1/R3：实际registry/handoff/review业务head/spec hash+D009批准原字节；最终解码/声明/冻结canvas精确1080x1920；SW006跨revision总8尝试、请求前持久ledger、项目历史14与任务计数分开。旧入口真实实测会放行768x1376与9次声明，--strict-design又误拒保留proposed文字的批准spec，不能依赖这些误判或改Trae原字节来通过。用真实批准spec、错SHA/未批准/空缺层/错尺寸、8/9次/失败超时/跨revision计数反例自动断言和非零退出码；测试harness与真实生产授权隔离。
+先fetch并核PR25最新head，观察d71d6278860c3551b545bd3b476e38c77096622a。最新manifest file/checks已是仓库根相对、handoff evidence已无通配符、artifact哈希匹配；旧R-SW006R1针对更早tip，别再机械重复改同一问题。现在协作CI红在tools/qa/test_collaboration.py的隔离fixture（1failure/1error：真实SW006引用SW012，而测试替换设计导致spec hash错/缺design_manifest）；通过新增handoff告知Antigravity处理，自己不改QA、不禁严格设计hash检查。
 
-guard 0API自检正确后，按原授权**总8次尝试**制作雨林候选（统一参考、失败、超时、重试均计入，额度不强制用完、不随revision重置）；保护不通过不调用，不另建大工具项目或重复请求8次预算。凭据只host/env不入Git，缺服务/凭据如实0调用/Pending，不伪造图。
+保留R1与已有脚本/图，后续交R2，标清本阶段只是0API草案收尾，不自标生产候选approved。按SW006任务补最低生产guard/自动断言/真实冻结hash/解码1080x1920与总8次ledger边界，路径按仓库根、evidence逐文件、manifest与artifact hash同步，business变化更新head，不借“文档提交”保留旧head。R2交JSON+Markdown/命令/结果/限制/PR；等独立复核。程序图如是占位必须继续明确，不改名冒充真实生图或拷设计exports入包。
 
-消费SW012批准spec/hash `643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320`、D009、intake与逐层prompts。五层mist/trunks_canopy/vines_light/distant_glow/glade；湿绿阔叶/雾/藤蔓，真实透明无棋盘/黑底，phase opacity不烘焙。黑幕/旅人程序绘制，不直接把设计PNG/test fixture当生产候选。
-
-产出SW006/r1原稿/PNG/WebP、alpha_mask+黑白洋红、六阶段0/110/295/475/700/875m、中央/四缘局部和必要视差裁切，tileable=false如实保留；每层≤400KB/景≤2MB，尺寸/字节/hash/来源/费用/逐次ledger与精确design_ref齐备。交H-SW-006-R1 JSON+Markdown/真实业务base/head/PR/guard结果/限制，等Antigravity独立验图，再由ZCode SW007入包；不能自批或改app/Trae/QA/registry。SW017只是应用验图参照，不改生产design_ref或成为新付费前置。本人消费accepted并更新state；不自动外发消息。
+当前阶段不新增付费调用；下一阶段正式雨林制作继续沿既有总8次尝试授权（失败/超时/重试均计入、项目历史14分开、不重置），不用再向用户索要已给的授权。无可用服务/凭据如实Pending，不假称queued或缺授权。只写design/assets、本人state/handoff，不改app、Trae、QA、registry。

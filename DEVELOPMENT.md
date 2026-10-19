@@ -1156,3 +1156,7 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 ### 21.10 雨林制作、底座与应用验图并行（2026-10-16）
 
 实核main2339333：SW010/SW005R2/SW012/SW015均accepted/合入，SW006已ready；提示UI、死区与同局可选快照字段已接，作者已有303项XML通过，当前main云端成功，测试Release仍旧build109组合。旧角色入口须推进而非返工已完成内容。见 [P-20261016-01](./docs/collaboration/evidence/P-20261016-01/README.md)。本轮实测旧工具放行雨林768尺寸/9次声明、strict-design误拒D009原字节；MiniMax在SW006内先0API补最小生产guard/总账本，再原总8次制图，不新增大工具项目或重置额度。新增ready SW016由ZCode并行900m底座/双模式复用/合法声景准备，新增ready SW017由Trae做应用验图参照；最终SW007仍等候选与底座分别accepted，参照不是新生产规范。QA发准确main组合包、补提示显示/消失时序证据、独立审核与追加delivery SHA纠错；真机/真人仍Pending。决策见 [D010](./docs/collaboration/decisions/D-010-rainforest-parallel-production.md)。
+
+### 21.11 森林双模式阶段收口与安装测试（2026-10-18）
+
+本轮用户要求先收尾/打包：冻结main aaa789b3afd789d121eb6f0c96189fe9835d3e3c，交森林800m虚走/实走、正式光效、地形与恢复的GitHub阶段测试包；雨林底座已accepted但候选/真实声景不足，保持未开放。实际Release/哈希/云端312项原始XML/测试步骤见 [阶段档案](./docs/releases/2026-10-18-forest-beta/README.md)。四方按 [STAGE-CLOSEOUT](./docs/collaboration/STAGE-CLOSEOUT.md) 收尾：ZCode SW018具体安装/阻断缺陷；MiniMax SW006草案/guard/交接；Trae SW017先森林视觉清单；QA独立复验/提示时序/用户反馈。PR25最新路径/通配符已修，实际协作红灯在QA隔离fixture，原占位仍未批准。阶段包状态为交用户安装测试，不代表真机/真人通过或四景MVP。范围决策见 [D011](./docs/collaboration/decisions/D-011-stage-closeout-forest-beta.md)。
