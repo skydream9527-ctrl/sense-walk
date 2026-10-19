@@ -25,7 +25,7 @@
       "status": "passed",
       "evidence": [
         "docs/collaboration/evidence/H-SW-018-R1/verification-report.md",
-        "docs/collaboration/evidence/H-SW-018-R1/emulator-checklist.log",
+        "docs/collaboration/evidence/H-SW-018-R1/emulator-checklist.txt",
         "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-appear.png",
         "docs/collaboration/evidence/H-SW-018-R1/screens/F3-completed.png"
       ]
