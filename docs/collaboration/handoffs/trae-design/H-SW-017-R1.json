@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-017",
+  "revision": 1,
+  "producer": "trae-design",
+  "base_commit": "422451e25ba3dfa9b44c9421d00188f81944e2bc",
+  "head_commit": "90f79cef80478c30551a6dc41dc45f0550f01fba",
+  "changed_files": [
+    "design/05-visual-design/SW-017/r1/README.md",
+    "design/05-visual-design/SW-017/r1/checklist.md",
+    "design/05-visual-design/SW-017/r1/design-manifest.json",
+    "design/05-visual-design/SW-017/r1/integration-reference.json",
+    "design/05-visual-design/SW-017/r1/prompts.md",
+    "design/05-visual-design/SW-017/r1/source/sw017_context_sim.py",
+    "design/05-visual-design/SW-017/r1/source/sw017_edge_audit.py",
+    "design/05-visual-design/SW-017/r1/source/sw017_manifest.py",
+    "design/05-visual-design/SW-017/r1/previews/matrix/forest_virtual_six_stages.png",
+    "design/05-visual-design/SW-017/r1/previews/matrix/forest_real_six_stages.png",
+    "design/05-visual-design/SW-017/r1/previews/zones/virtual_zones_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/zones/real_zones_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/parallax/parallax_clamp_pair_1080x2400.png",
+    "design/05-visual-design/SW-017/r1/previews/findings/evidence_findings_sheet.png",
+    "design/05-visual-design/SW-017/r1/previews/findings/edge-audit.json",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_100m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_265m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_100m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_265m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_100m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_265m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_390x844_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_1080x1920_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_1080x2400_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_paused_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_intro_card_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_stabilize_hint_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_abandon_confirm_1080x1920.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_large_font_1080x2400.png",
+    "design/05-visual-design/SW-017/r1/previews/states/state_reduce_motion_390x844.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_000m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_100m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_265m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_425m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_630m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_freeze_a_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_freeze_b_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_size_720x1280_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_size_1080x2880_785m.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_hint_shown_no_card.png",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_after_hint_389m_no_card.png",
+    "docs/collaboration/handoffs/trae-design/H-SW-017-R1.json",
+    "docs/collaboration/handoffs/trae-design/H-SW-017-R1.md",
+    "docs/collaboration/state/trae-design.json"
+  ],
+  "artifacts": [],
+  "checks": [
+    {
+      "id": "source-fidelity-read-only",
+      "type": "source",
+      "summary": "合成输入全部只读当前 main：5 层入包 webp（SW-010 验收，sha256 与 H-SW-010-R1 记录逐一核对一致）、forest.json（sha 1cc6393e）与 7 个 UI/领域源码文件（ForestShell/SessionScreen/RealWalkContent/Joystick/AbandonControl/PhaseScheduler/Theme，sha 记入 integration-reference.json）；相位 80/240/400/600/760m 与 opacity .6/.7/.8/.65/.9、fade 20/25/25/30/25、parallax .3/.3/.6/0/0 逐值转录，opacity=target×smoothstep；cover scale=h/1376、offset=−sPos×parallax×6 钳制溢出宽；旅人 x=.34/脚底 y=.865、摇杆 56dp/22dp/甜点 .45–.65、放弃 72dp 进度条均逐行核对。未修改 app/、registry、他人 state。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/integration-reference.json",
+        "design/05-visual-design/SW-017/r1/source/sw017_context_sim.py"
+      ]
+    },
+    {
+      "id": "dual-mode-stage-matrix",
+      "type": "visual",
+      "summary": "虚走（下45%浮动摇杆、按住出现）与实走（下45%状态文案无摇杆）各六阶段 0/100/265/425/630/785m 矩阵；0m 纯 Void+旅人、785m 未到 800m 终点不切屏；米数 <400m 显示「轻触查看米数」；三比例 12 张裁切（390×844 在 @3x 物理空间渲染后降采样）；6 张关键状态（暂停/首局/站稳/放弃/大字号×1.5 仅 sp 放大/reduceMotion）+视差钳制对拍；24 张生成图全部带「设计模拟·非 App 截图」角标，不冒充真机证据。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/previews/matrix/forest_virtual_six_stages.png",
+        "design/05-visual-design/SW-017/r1/previews/matrix/forest_real_six_stages.png",
+        "design/05-visual-design/SW-017/r1/previews/zones/virtual_zones_1080x1920.png",
+        "design/05-visual-design/SW-017/r1/previews/zones/real_zones_1080x1920.png"
+      ]
+    },
+    {
+      "id": "f7-edge-void-band-pixel-audit",
+      "type": "source",
+      "summary": "独立可复跑像素审计（sw017_edge_audit.py，all_pass=true）：入包五层右缘全透明列为硬切——tree_outline/tree_trunks/leaf_path 各 30 列、light_shows 133 列、clearing 4 列（左缘分别 30/30/30/161/21）；1080×2400 cover scale=1.7442/溢出 259.53px，30 列≈52.3px，作者 stage-265m 截图（ROI y∈[.25,.62)h、逐通道容差 2）实测右缘 52px 纯 Void #060806、占比 1.0000；六阶段演变 265/425m=52px→630m 被光束遮至 12px→785m=0px（clearing 合成 alpha 峰值仅约 27%，终景右缘仍需目检）；1080×1920 cover 宽 1071.63<1080，overflow=0 视差失效且静态左≈42/右≈50px 暗带，无作者证据须设备取证。结论仅提交证据，修法属生产素材变更轮次，设计不自判。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/previews/findings/edge-audit.json",
+        "design/05-visual-design/SW-017/r1/previews/findings/evidence_findings_sheet.png",
+        "design/05-visual-design/SW-017/r1/source/sw017_edge_audit.py"
+      ]
+    },
+    {
+      "id": "evidence-copies-byte-identical",
+      "type": "source",
+      "summary": "12 张作者证据（H-SW-010-R1 六阶段/freeze-a/b/两种尺寸 10 张 + H-SW-005-R2 hint-shown/after-hint-389m 2 张）复制到 previews/real_captures/，逐文件 sha256 与 docs/collaboration/evidence 原件核对 12/12 一致，未改字节；文件改名只做语义化（capture_real_*），不伪造本轮设备证据。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_265m.png",
+        "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_785m.png",
+        "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_freeze_a_785m.png",
+        "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_hint_shown_no_card.png",
+        "design/05-visual-design/SW-017/r1/design-manifest.json"
+      ]
+    },
+    {
+      "id": "manifest-reproducibility",
+      "type": "source",
+      "summary": "design-manifest.json 列 44 个交付文件（24 preview/12 evidence-copy/3 source/2 doc/1 spec/1 prompt/1 audit）的仓库相对路径、sha256、字节、role；独立复算 0 处 hash/字节不符、目录无未列文件与幽灵条目；三个 Python 脚本纯本地 Pillow+numpy 确定性渲染（固定种子、固定字体候选），零网络、零付费/生图 API（prompts.md 中提示词本轮调用次数=0）；无 PSD/Figma 冒称，可编辑源为 Python 与 JSON/Markdown。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/design-manifest.json",
+        "design/05-visual-design/SW-017/r1/source/sw017_manifest.py"
+      ]
+    }
+  ],
+  "design_manifest": "design/05-visual-design/SW-017/r1/design-manifest.json",
+  "integration_reference": "design/05-visual-design/SW-017/r1/integration-reference.json",
+  "report": "docs/collaboration/handoffs/trae-design/H-SW-017-R1.md",
+  "pending_verification": [
+    "Antigravity 按协作契约独立目检/量检本参照包：双模式分区与六阶段矩阵是否可作验图基准、F1–F7 标注是否有据、F7 像素审计结论是否采纳；本包是集成参照不是生产设计，无 layer ID 需冻结，不改变 SW-011/SW-012/D-009，不成为 SW-006 design_ref",
+    "ZCode SW-018 按 checklist.md B 节在真实 App/模拟器逐项取证：P1–P3 proposed 运行时映射（钳满米数、1080×1920 视差失效与静态暗带、@3x 物理渲染）、F7 黑带在真机三档分辨率复现、F1 层缘硬分界多档确认、F3 文案大字号/高对比可读性、F2 站稳提示短视频/连拍+UI hierarchy 时序证据、虚走摇杆/暂停/首局/放弃/reduceMotion 全部补 App 截图",
+    "若裁定 F7/F1 需要生产素材修复：另写变更请求走新轮次（森林素材返工，不动 SW-012/D-009 雨林冻结参数）；SW-017 不要求 MiniMax 改 design_ref，也不替代素材与集成验收",
+    "雨林 900m 双模式应用验图参照（任务书第 1 条）按 registry pending 保留后续轮次补充，本轮不交付"
+  ]
+}

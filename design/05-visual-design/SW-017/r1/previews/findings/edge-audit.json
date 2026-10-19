@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-017",
+  "purpose": "F7 右缘 Void 黑带独立像素审计（只读生产素材与作者截图，不改任何文件）",
+  "void_rgb": [
+    6,
+    8,
+    6
+  ],
+  "void_match_tolerance_per_channel": 2,
+  "scan_roi": "y in [0.25h, 0.62h)（避开右上控件与底部文案），每 4 行采样",
+  "source_size": [
+    768,
+    1376
+  ],
+  "layers": {
+    "tree_outline": {
+      "file": "app/src/main/assets/visual/forest_tree_outline.webp",
+      "size": [
+        768,
+        1376
+      ],
+      "parallax": 0.3,
+      "left_transparent_columns": 30,
+      "right_transparent_columns": 30,
+      "right_soft_columns_alpha_lt_8": 30,
+      "right_soft_columns_alpha_lt_32": 30,
+      "right_soft_columns_alpha_lt_64": 30,
+      "edge_max_alpha_4px": {
+        "left": 0,
+        "right": 0
+      }
+    },
+    "tree_trunks": {
+      "file": "app/src/main/assets/visual/forest_tree_trunks.webp",
+      "size": [
+        768,
+        1376
+      ],
+      "parallax": 0.3,
+      "left_transparent_columns": 30,
+      "right_transparent_columns": 30,
+      "right_soft_columns_alpha_lt_8": 30,
+      "right_soft_columns_alpha_lt_32": 30,
+      "right_soft_columns_alpha_lt_64": 30,
+      "edge_max_alpha_4px": {
+        "left": 0,
+        "right": 0
+      }
+    },
+    "leaf_path": {
+      "file": "app/src/main/assets/visual/forest_leaf_path.webp",
+      "size": [
+        768,
+        1376
+      ],
+      "parallax": 0.6,
+      "left_transparent_columns": 30,
+      "right_transparent_columns": 30,
+      "right_soft_columns_alpha_lt_8": 30,
+      "right_soft_columns_alpha_lt_32": 30,
+      "right_soft_columns_alpha_lt_64": 30,
+      "edge_max_alpha_4px": {
+        "left": 0,
+        "right": 0
+      }
+    },
+    "light_shows": {
+      "file": "app/src/main/assets/visual/forest_light_shows.webp",
+      "size": [
+        768,
+        1376
+      ],
+      "parallax": 0.0,
+      "left_transparent_columns": 161,
+      "right_transparent_columns": 133,
+      "right_soft_columns_alpha_lt_8": 156,
+      "right_soft_columns_alpha_lt_32": 165,
+      "right_soft_columns_alpha_lt_64": 165,
+      "edge_max_alpha_4px": {
+        "left": 0,
+        "right": 0
+      }
+    },
+    "clearing": {
+      "file": "app/src/main/assets/visual/forest_clearing.webp",
+      "size": [
+        768,
+        1376
+      ],
+      "parallax": 0.0,
+      "left_transparent_columns": 21,
+      "right_transparent_columns": 4,
+      "right_soft_columns_alpha_lt_8": 27,
+      "right_soft_columns_alpha_lt_32": 76,
+      "right_soft_columns_alpha_lt_64": 201,
+      "edge_max_alpha_4px": {
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "cover_geometry": {
+    "1080x1920": {
+      "scale": 1.395349,
+      "dst_w": 1071.63,
+      "overflow": 0.0,
+      "uncovered_right": 8.37
+    },
+    "1080x2400": {
+      "scale": 1.744186,
+      "dst_w": 1339.53,
+      "overflow": 259.53,
+      "uncovered_right": 0.0
+    },
+    "390x844": {
+      "scale": 0.613372,
+      "dst_w": 471.07,
+      "overflow": 81.07,
+      "uncovered_right": 0.0
+    }
+  },
+  "band_estimates": [
+    {
+      "device": "1080x1920",
+      "layer": "tree_outline",
+      "static_band_px": 50.3,
+      "clamped_band_px": 41.9,
+      "clamp_after_meters_est": 0.0
+    },
+    {
+      "device": "1080x1920",
+      "layer": "tree_trunks",
+      "static_band_px": 50.3,
+      "clamped_band_px": 41.9,
+      "clamp_after_meters_est": 0.0
+    },
+    {
+      "device": "1080x1920",
+      "layer": "leaf_path",
+      "static_band_px": 50.3,
+      "clamped_band_px": 41.9,
+      "clamp_after_meters_est": 0.0
+    },
+    {
+      "device": "1080x2400",
+      "layer": "tree_outline",
+      "static_band_px": 52.3,
+      "clamped_band_px": 52.3,
+      "clamp_after_meters_est": 144.2
+    },
+    {
+      "device": "1080x2400",
+      "layer": "tree_trunks",
+      "static_band_px": 52.3,
+      "clamped_band_px": 52.3,
+      "clamp_after_meters_est": 144.2
+    },
+    {
+      "device": "1080x2400",
+      "layer": "leaf_path",
+      "static_band_px": 52.3,
+      "clamped_band_px": 52.3,
+      "clamp_after_meters_est": 72.1
+    },
+    {
+      "device": "390x844",
+      "layer": "tree_outline",
+      "static_band_px": 18.4,
+      "clamped_band_px": 18.4,
+      "clamp_after_meters_est": 45.0
+    },
+    {
+      "device": "390x844",
+      "layer": "tree_trunks",
+      "static_band_px": 18.4,
+      "clamped_band_px": 18.4,
+      "clamp_after_meters_est": 45.0
+    },
+    {
+      "device": "390x844",
+      "layer": "leaf_path",
+      "static_band_px": 18.4,
+      "clamped_band_px": 18.4,
+      "clamp_after_meters_est": 22.5
+    }
+  ],
+  "author_capture_265m": {
+    "capture": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-265m.png",
+    "capture_size": [
+      1080,
+      2400
+    ],
+    "scale": 1.7442,
+    "overflow": 259.53,
+    "offset_clamped": 259.53,
+    "clamped": true,
+    "estimated_band_x0": 1028,
+    "estimated_band_px": 52.3,
+    "measured_void_band_x0": 1028,
+    "measured_void_band_px": 52,
+    "void_fraction_in_estimated_band": 1.0,
+    "void_fraction_left_of_band_20px": 0.0,
+    "column_max_deviation_probe": {
+      "1008": 69,
+      "1009": 69,
+      "1010": 70,
+      "1011": 69,
+      "1012": 68,
+      "1013": 71,
+      "1014": 74,
+      "1015": 76,
+      "1016": 77,
+      "1017": 76,
+      "1018": 76,
+      "1019": 77,
+      "1020": 74,
+      "1021": 75,
+      "1022": 72,
+      "1023": 75,
+      "1024": 93,
+      "1025": 111,
+      "1026": 128,
+      "1027": 84,
+      "1028": 1,
+      "1035": 0,
+      "1042": 0,
+      "1049": 0,
+      "1056": 0,
+      "1063": 0,
+      "1070": 0,
+      "1077": 0
+    }
+  },
+  "author_stage_band_scan": {
+    "0m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-000m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 0,
+      "right_void_fraction": 0.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    },
+    "100m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-100m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 0,
+      "right_void_fraction": 0.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    },
+    "265m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-265m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 52,
+      "right_void_fraction": 1.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    },
+    "425m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-425m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 52,
+      "right_void_fraction": 1.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    },
+    "630m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-630m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 12,
+      "right_void_fraction": 1.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    },
+    "785m": {
+      "file": "docs/collaboration/evidence/H-SW-010-R1/stages/stage-785m.png",
+      "capture_size": [
+        1080,
+        2400
+      ],
+      "right_void_band_px": 0,
+      "right_void_fraction": 0.0,
+      "left_void_band_px": 0,
+      "left_void_fraction": 0.0
+    }
+  },
+  "all_pass": true
+}
