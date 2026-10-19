@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-016-R1",
+  "task_id": "SW-016",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-016-R1.json",
+  "reviewed_commit": "c87366d49de7c2d605d1e364b2ce077f21f299a5",
+  "delivery_head": "086eee3143f9a923cb8985fabf81399c5639f1ef",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-016-R1.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "D-009 冻结五层参数逐项核验",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md",
+        "docs/collaboration/decisions/D-009-freeze-rainforest-design-spec.md"
+      ]
+    },
+    {
+      "name": "875m 全显与 900m 终点不切屏及双模式验证",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "渲染最小抽象与生产白名单隔离",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "全量单测与 CI 构建验证 (312 项测试 0 失败)",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "真实声景准备与来源许可清单核验",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-016-R1/soundscape-preparation.md"
+      ]
+    },
+    {
+      "name": "真实声景获取与听辨 (阻塞 SW-007)",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-016-R1/soundscape-preparation.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "pending": [
+    "真实雨林声景获取/许可/处理/听辨（阻塞 SW-007 最终验收）",
+    "雨林生产开放（等 SW-006 候选 + SW-007 组合）"
+  ]
+}
