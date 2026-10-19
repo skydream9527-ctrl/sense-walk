@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-016-R1",
+  "task_id": "SW-016",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "30780af2d4dbe7daa9323ae27ff76fb973d596a6",
+  "head_commit": "c87366d49de7c2d605d1e364b2ce077f21f299a5",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-016-R1.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/ui/session/ScenePalette.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/RealWalkContent.kt",
+    "app/src/test/resources/scenes/rainforest.json",
+    "app/src/test/java/com/sensewalk/app/domain/scene/RainforestFoundationTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "全量 JVM 单测（本地，312/0/0，+9 雨林底座）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "lint + debug 构建（本地）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "云端 test/lint/build + validate（PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "模拟器/真机 App 实测（雨林无生产入口，无可测用户路径）",
+      "type": "emulator",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-016-R1.md"
+      ]
+    },
+    {
+      "name": "真实声景获取/处理/听辨",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-016-R1/soundscape-preparation.md"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "真实雨林声景获取/许可/处理/听辨（阻塞 SW-007 最终验收）",
+    "雨林生产开放（等 SW-006 候选 + SW-007 组合）"
+  ],
+  "requests": [
+    "审核 head c87366d（D-009 参数逐项核对见 RainforestFoundationTest）",
+    "通过后更新 registry"
+  ],
+  "design_manifest": null
+}
