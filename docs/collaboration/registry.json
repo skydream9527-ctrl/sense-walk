@@ -140,18 +140,18 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "PR25 R1仍是0API程序占位草案，未批准/未入包；最新d71d627已修manifest根路径及通配符，不能再按旧tip eac92e4重复退同一问题。",
-        "当前协作红位于31项QA隔离fixture：1failure/1error，涉及替换SW012后真实SW006引用和design_manifest缺失；Antigravity修QA隔离，MiniMax保留严格设计/哈希校验并交新revision。",
-        "阶段森林包不依赖本稿；本轮先交草案路径/hash/guard收尾，正式雨林图和声景属于下一阶段，既有总8次授权不重置也不重复索要。"
+        "PR25 R1仍是0API程序占位草案，未批准/未入包；最新d71d627已修manifest根路径及通配符，8e73b13提交supplement转交通知。",
+        "QA隔离fixture失败已由Antigravity修复闭环（tools/collaboration.py与test_collaboration.py 31/31单测全绿，严格批准链与哈希校验100%保留）；MiniMax生产候选稿未作篡改。",
+        "阶段森林包不依赖本稿；本轮草案路径/hash/guard与CI隔离收尾完成，正式雨林图和声景属于下一阶段，既有总8次授权下阶段沿用、不重置也不重复索要。"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/minimax/SW-006-r1",
-        "branch_head": "d71d6278860c3551b545bd3b476e38c77096622a",
+        "branch_head": "8e73b13c432fb8b003c960d1706bc09b22814533",
         "business_head": "6ba654c5ba761ab25d94d121e985c5298d2d3d8a",
         "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
-        "source_report": "docs/collaboration/evidence/P-20261018-01/README.md"
+        "source_report": "docs/collaboration/reviews/R-SW-006-R1-correction.md"
       }
     },
     {
