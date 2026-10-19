@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-018-R1",
+  "task_id": "SW-018",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "422451e",
+  "head_commit": "PLACEHOLDER",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/zcode/H-SW-018-R1.md",
+  "changed_files": [],
+  "checks": [
+    {
+      "name": "发布包哈希核对（APK sha256 与 SHA256SUMS 一致）",
+      "type": "source",
+      "status": "passed",
+      "evidence": ["docs/collaboration/evidence/H-SW-018-R1/verification-report.md"]
+    },
+    {
+      "name": "模拟器核查×12（发布包安装：冷启动/双模式/权限回退/停稳/暂停/放弃/恢复/800m通关/站稳提示出现消失）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md",
+        "docs/collaboration/evidence/H-SW-018-R1/emulator-checklist.log",
+        "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-appear.png",
+        "docs/collaboration/evidence/H-SW-018-R1/screens/F3-completed.png"
+      ]
+    },
+    {
+      "name": "真实计步/锁屏15min/耳机来电/缺sensor设备/真机项",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": ["docs/collaboration/evidence/H-SW-018-R1/verification-report.md"]
+    },
+    {
+      "name": "云端 CI（文档-only 变更；PR 推送后）",
+      "type": "cloud-build",
+      "status": "pending",
+      "evidence": ["docs/collaboration/handoffs/zcode/H-SW-018-R1.md"]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "用户/QA 真机安装反馈（未到达）",
+    "真实计步精度/锁屏15min/耳机来电/缺sensor设备路径",
+    "签名稳定性方案实施（提案已交，等 QA 掐板排期）"
+  ],
+  "requests": [
+    "审核核查报告（0 源码改动交付）与签名方案提案",
+    "用户反馈到达后按 STAGE-CLOSEOUT 走最小 patch 流程"
+  ],
+  "design_manifest": null
+}

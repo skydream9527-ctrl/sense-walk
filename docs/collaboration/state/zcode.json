@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "agent": "zcode",
-  "current_task": "SW-016",
+  "current_task": "SW-018",
   "status": "handoff_ready",
-  "branch": "codex/zcode/SW-016-rainforest-foundation",
+  "branch": "codex/zcode/SW-018-forest-beta-close",
   "head_commit": "c87366d49de7c2d605d1e364b2ce077f21f299a5",
-  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-016-R1.json",
+  "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
   "updated_on": "2026-10-18",
-  "note": "SW-016 R1 已交付（900m 底座+渲染抽象+声景清单 Pending；312 单测）。SW-001/004/010/005R2 已 accepted；SW-007 等 SW-006+SW-016。",
+  "note": "SW-018 R1 已交付（0 源码改动核查：12 项全过含发布包 800m 通关与站稳提示证据；签名方案提案）。SW-016 accepted；SW-007 等 SW-006+SW-016（已满足其一）。",
   "deliveries": {
     "SW-001": {
       "branch": "codex/zcode/SW-001-t06-reliability",
@@ -47,6 +47,13 @@
       "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/23",
       "status": "awaiting independent review R1",
       "delivery_head": "125ef54"
+    },
+    "SW-018": {
+      "branch": "codex/zcode/SW-018-forest-beta-close",
+      "business_head": null,
+      "handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
+      "pr": null,
+      "status": "0-source-change verification delivered, awaiting review"
     }
   }
 }
