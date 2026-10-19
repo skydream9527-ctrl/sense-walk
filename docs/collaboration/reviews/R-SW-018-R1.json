@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-018-R1",
+  "task_id": "SW-018",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
+  "reviewed_commit": "65d921abc82d4b67be44e65cfbc050a30eace8ab",
+  "delivery_head": "4862adc7e73ba6cb2508669b19747c7fad296d20",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-018-R1.md",
+  "artifact_hashes": {},
+  "checks": [
+    {
+      "name": "阶段发布包 APK 哈希复核 (cbe827b... 匹配)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-018-R1.md",
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md"
+      ]
+    },
+    {
+      "name": "0 源码改动核验 (零冗余代码/零空测试)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-018-R1.md"
+      ]
+    },
+    {
+      "name": "模拟器 12 项核查复验与截图时间线",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md",
+        "docs/collaboration/evidence/H-SW-018-R1/emulator-checklist.txt"
+      ]
+    },
+    {
+      "name": "站稳提示出现及约3s消失时序补证 (H2-hint-appear/gone.png)",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-appear.png",
+        "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-gone.png"
+      ]
+    },
+    {
+      "name": "虚走 800m 真实手势完整局通关验证 (F3-completed.png)",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/screens/F3-completed.png"
+      ]
+    },
+    {
+      "name": "物理真机与实体传感器项如实 Pending 保留",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md"
+      ]
+    }
+  ]
+}
