@@ -44,8 +44,9 @@
       "branch": "codex/zcode/SW-016-rainforest-foundation",
       "business_head": "c87366d49de7c2d605d1e364b2ce077f21f299a5",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-016-R1.json",
-      "pr": null,
-      "status": "awaiting independent review R1"
+      "pr": "https://github.com/skydream9527-ctrl/sense-walk/pull/23",
+      "status": "awaiting independent review R1",
+      "delivery_head": "125ef54"
     }
   }
 }
