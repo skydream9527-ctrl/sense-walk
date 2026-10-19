@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "source": "Actual downloaded GitHub Actions main JUnit XML; not a new local Android run",
+  "run_id": 39188818031,
+  "run_url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/39188818031",
+  "head_commit": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+  "counts": {
+    "tests": 312,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.phase.PhaseSchedulerTest.xml",
+      "sha256": "068cc53cc789dc2a02bb011fe18dc8d96b2e0db71f0e12b3bf7c61c5f27879a6",
+      "counts": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.progress.CompletionGateTest.xml",
+      "sha256": "aafc34e788c4e376ad6411e96239cefc45e0adcc05d698359639165a5ff9a16d",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.progress.ProgressAccumulatorTest.xml",
+      "sha256": "d98c41da426ad3072a29f53d98ee112abffa15a3786adf283e29d7ddbd3de759",
+      "counts": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.MigratedSceneConfigsTest.xml",
+      "sha256": "a5596474c82f2bf316f121d8aa521e9379e0ac291d4788bd07a25944f2127861",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.RainforestFoundationTest.xml",
+      "sha256": "58c92357db987bfd0ce776b70f84d376a66c1d48bf9d771aeb5d6b2e94ece31f",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.SceneDurationEstimatorTest.xml",
+      "sha256": "4c028ab266cb90aad7a2136001624a42a1bffe586dbfa4f876c18af288cd4e94",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.SceneJsonParserTest.xml",
+      "sha256": "da1ec02120153442836a267d3b93c7c14a543363f799ebb22a9e46ae7f13cff0",
+      "counts": {
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.SceneLoaderTest.xml",
+      "sha256": "82bf39441e16286dabf29f1f6fc3b97f27a7cc658d980aa50a85338d994eef9b",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.scene.SceneValidatorTest.xml",
+      "sha256": "38d40d6a501baac3e0af990b227cf67721e99ed9ac2a47ccf6ff93397b9e86fc",
+      "counts": {
+        "tests": 29,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.sensory.AudioFocusChainTest.xml",
+      "sha256": "e0ac233cce6a008f8484f416d095669cd2616c9719a8bc84670c5209d47023d2",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.sensory.PlaybackSupportTest.xml",
+      "sha256": "9c81f43c56a40ee09d76df6874cf8cc00b0f336c4db71bac5f31736108383f20",
+      "counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.sensory.SensoryCoordinatorTest.xml",
+      "sha256": "3ace0edb320e6de22555f80bd94ee6b73d1f5bca768c88fc741dfeca0dea02b3",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.sensory.SensoryRestoreTest.xml",
+      "sha256": "2158d7af6ac39f18d8995ac11506b04b580b59689ce2819110ddce0830ae8ecd",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.session.SessionSnapshotValidatorTest.xml",
+      "sha256": "a18c2a4a71da2d4f455908ba5a124692c5ef7f21b5814a6f25265a58db579a7b",
+      "counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.session.SessionStateMachineTest.xml",
+      "sha256": "3bc47225e1f4a00e5130574e186d127265002389a909c5a31bf3199ce3203876",
+      "counts": {
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.session.VirtualWalkIntegrationTest.xml",
+      "sha256": "a4321299f10a4026ad38d7d41213658af9f26bfce78fffc2c7abebdf909b1e24",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.stick.ComfortStickMapperTest.xml",
+      "sha256": "03e097eb5ae6062656608becfab10253c9622e37dd09e04df37dcf7d1a943a04",
+      "counts": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.stick.VelocityInertiaTest.xml",
+      "sha256": "9dedb590d97c4a319ae4522961c68ce5bf3c9fe0036ac68a05e25720ee71ae75",
+      "counts": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.ForestFullWalkTest.xml",
+      "sha256": "de7742663ac5f25be983edaf616487ee8d941af07e893a89db77732c14ad06ce",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.RealWalkControllerTest.xml",
+      "sha256": "1d65a0bd8c96335b5cdca217e3e816babd789596e4260c33a58e0fc7c1dac79c",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.RealWalkEngineTest.xml",
+      "sha256": "6fd66a29e29cf4be076b9a86e49f6c739b52022fdd5788a696a87a0642f58088",
+      "counts": {
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.RealWalkRestoreTest.xml",
+      "sha256": "d4e04d2aa5d0e03b5c7d6bbea82acfdf2f88f7fda2e808d0e65b7de3dd9300e0",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.TerrainMotorTest.xml",
+      "sha256": "68486c79d7e75aa5299bf013e2936cf327ae119d3f3faad46d918c1969daa6fc",
+      "counts": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest.xml",
+      "sha256": "2d9bfbdd0cccbfcb8759948a81f5e62ee2e338aafb0ff19d4af6c71b99951c2c",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.VirtualWalkControllerTest.xml",
+      "sha256": "0e95c02f0fcdc5daee93b9e5824c5b62969820331d408085903513095007dd42",
+      "counts": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.domain.walk.VirtualWalkRestoreTest.xml",
+      "sha256": "9ee9b18034eefcac97fa0a9939b0385d8a6c84166e43f1f0e60fe0845605b269",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.engine.sensor.StepSensorSourceTest.xml",
+      "sha256": "724fa6e99f5a3febf77d1c207de34f3bf5f366181a50b913bd8c619c589520a8",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.service.SensorCueWiringTest.xml",
+      "sha256": "4de664df7080ba72474d6550274959ce059e6a362acfe47f1ab37646fa4dc235",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "file": "docs/collaboration/evidence/P-20261018-01/junit/TEST-com.sensewalk.app.service.SessionArbiterTest.xml",
+      "sha256": "37211f2954aba4cea45607c4c3efece085c414a65afe53aa83097c901bb4e341",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ]
+}

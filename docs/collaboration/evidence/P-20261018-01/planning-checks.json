@@ -1,0 +1,46 @@
+{
+  "kind": "bootstrap-release-and-stage-planning-not-independent-product-approval",
+  "base_commit": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+  "checks": [
+    {
+      "command": "python3 tools/collaboration.py render",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/collaboration.py check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -q",
+      "status": "passed",
+      "tests": 31,
+      "seconds": 30.887
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "HTMLParser unique IDs/local links/fragments",
+      "status": "passed"
+    },
+    {
+      "command": "workflow_dispatch android.yml publish_release=true",
+      "status": "passed",
+      "run_id": 39189446098,
+      "product_junit": 312,
+      "lint": "passed",
+      "debug_build": "passed",
+      "release_manifest_guard": "passed"
+    },
+    {
+      "command": "Downloaded APK sha256/GitHub digest/ZIP integrity/5forest asset bytes",
+      "status": "passed"
+    },
+    {
+      "command": "Downloaded source ZIP sha256/ZIP integrity/git archive commit/key source entries",
+      "status": "passed"
+    }
+  ],
+  "scope": "Only living docs/registry/task plan/new evidence/decision; no production app code, author state, old audit record or unapproved candidate modifications. No local Android/emulator/physical/human execution; actual cloud312 originals archived separately from31 protocol tests."
+}

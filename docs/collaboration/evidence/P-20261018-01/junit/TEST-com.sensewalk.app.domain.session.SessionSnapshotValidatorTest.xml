@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-19T02:13:05" hostname="runnervm8k3b6" time="0.046">
+  <properties/>
+  <testcase name="终态快照不是恢复候选 - Incompatible" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.005"/>
+  <testcase name="负进度与超终点 - Corrupted" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.001"/>
+  <testcase name="场景不存在 - Incompatible" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="场景 schemaVersion 变化 - Incompatible 不盲目迁移" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="NaN 与 Infinity - Corrupted 不钳制" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="s_best 小于 s_pos - Corrupted 不半修复" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="未知相位 - Corrupted" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.001"/>
+  <testcase name="有效快照 - Valid 且同 boot 不标跨启动" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.02"/>
+  <testcase name="30 分钟整点内有效 - 超过 1ms 过期" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.002"/>
+  <testcase name="未知模式与负时长 - Corrupted" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="无快照 - Incompatible 而非崩溃" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="JSON 序列化往返无损 - 兼容未知字段与损坏输入" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.01"/>
+  <testcase name="快照版本不符 - Incompatible 可解释" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <testcase name="跨 boot - 仍 Valid 但 acrossBoot 为真（虚走照常恢复，实走重建基线）" classname="com.sensewalk.app.domain.session.SessionSnapshotValidatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

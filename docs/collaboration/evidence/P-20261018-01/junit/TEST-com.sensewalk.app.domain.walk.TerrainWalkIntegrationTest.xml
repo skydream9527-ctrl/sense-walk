@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-19T02:13:05" hostname="runnervm8k3b6" time="0.205">
+  <properties/>
+  <testcase name="P02 同局恢复提示不重复 - hintShown 随快照保持" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.044"/>
+  <testcase name="站稳期间 meters 不增加" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.024"/>
+  <testcase name="快照恢复落入坎内 - 不卡死能通过" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.02"/>
+  <testcase name="P02 新局提示正常 - 未发过时恢复仍可提示" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.002"/>
+  <testcase name="跳跃推进受速度帽约束 - 无免费米数" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.009"/>
+  <testcase name="全森林 800m 紧张输入也能通关 - 站稳只费时不失败" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.032"/>
+  <testcase name="紧张输入过坎 - 站稳后自动通过且不卡死" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.011"/>
+  <testcase name="松手取消接近 - 不发生自动跳进" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.008"/>
+  <testcase name="舒适速度接近真实 forest 坎 - 自动通过且步态经 hop" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.005"/>
+  <testcase name="暂停发生在站稳中 - 恢复后不补算缺口且能继续过坎" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.01"/>
+  <testcase name="通关终态后迟到帧不推进 - motor 吸收" classname="com.sensewalk.app.domain.walk.TerrainWalkIntegrationTest" time="0.039"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

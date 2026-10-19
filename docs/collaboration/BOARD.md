@@ -2,7 +2,7 @@
 
 > 自动生成：仅编辑 registry.json，再执行 python3 tools/collaboration.py render。状态是交付登记，不是产品最终验收。
 
-基线：`8056e11` · 更新日期：2026-10-16 · 协调者：antigravity
+基线：`8056e11` · 更新日期：2026-10-18 · 协调者：antigravity
 
 | ID | 任务 | 负责者 | 状态 | 前置 | 已入库交付 / 审核 |
 | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,7 @@
 | SW-010 | [森林光效批准候选入包](tasks/SW-010.md) | zcode | accepted | SW-002, SW-003 | [H-SW-010-R1](handoffs/zcode/H-SW-010-R1.json) / [R-SW-010-R1](reviews/R-SW-010-R1.json) |
 | SW-004 | [T07A 会话快照与中断恢复](tasks/SW-004.md) | zcode | accepted | SW-001, SW-003 | [H-SW-004-R1](handoffs/zcode/H-SW-004-R1.json) / [R-SW-004-R1](reviews/R-SW-004-R1.json) |
 | SW-012 | [雨林图片设计包](tasks/SW-012.md) | trae-design | accepted | SW-011 | [H-SW-012-R1](handoffs/trae-design/H-SW-012-R1.json) / [R-SW-012-R1](reviews/R-SW-012-R1.json) |
-| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | ready | SW-002, SW-003, SW-012, SW-014, SW-015 | — / — |
+| SW-006 | [T07C 雨林候选素材批次](tasks/SW-006.md) | minimax | rework | SW-002, SW-003, SW-012, SW-014, SW-015 | — / — |
 | SW-005 | [T07B 自动越坎与站稳规则](tasks/SW-005.md) | zcode | accepted | SW-004 | [H-SW-005-R2](handoffs/zcode/H-SW-005-R2.json) / [R-SW-005-R2](reviews/R-SW-005-R2.json) |
 | SW-007 | [T07C 雨林双模式与素材接入](tasks/SW-007.md) | zcode | queued | SW-005, SW-006, SW-016 | — / — |
 | SW-008 | [T08 四景内容与一致性](tasks/SW-008.md) | zcode | queued | SW-007, SW-010 | — / — |
@@ -22,7 +22,8 @@
 | SW-014 | [雨林素材交付预检准备（零API）](tasks/SW-014.md) | minimax | accepted | SW-002, SW-003 | [H-SW-014-R3](handoffs/minimax/H-SW-014-R3.json) / [R-SW-014-R3](reviews/R-SW-014-R3.json) |
 | SW-015 | [真实设计规格与素材预检联调（零API）](tasks/SW-015.md) | minimax | accepted | SW-011, SW-014 | [H-SW-015-R1](handoffs/minimax/H-SW-015-R1.json) / [R-SW-015-R1](reviews/R-SW-015-R1.json) |
 | SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | accepted | SW-005, SW-012 | [H-SW-016-R1](handoffs/zcode/H-SW-016-R1.json) / [R-SW-016-R1](reviews/R-SW-016-R1.json) |
-| SW-017 | [雨林双模式应用验图参照与交接标准](tasks/SW-017.md) | trae-design | ready | SW-012 | — / — |
+| SW-017 | [应用验图参照与森林阶段视觉收口](tasks/SW-017.md) | trae-design | ready | SW-011, SW-012, SW-005, SW-010 | — / — |
+| SW-018 | [森林阶段安装测试与缺陷收尾](tasks/SW-018.md) | zcode | ready | SW-001, SW-004, SW-005, SW-010 | — / — |
 
 ## 远端交付观察（尚非独立批准）
 
@@ -30,7 +31,7 @@
 
 | 任务/轮次 | PR或分支 | 观察交付head | 来源 |
 | --- | --- | --- | --- |
-| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `eac92e4` | [R-SW-006-R1](reviews/R-SW-006-R1.md) |
+| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `d71d627` | [README](evidence/P-20261018-01/README.md) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 

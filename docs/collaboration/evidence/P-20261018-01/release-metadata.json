@@ -1,0 +1,52 @@
+{
+  "release": {
+    "tag_name": "build-176-aaa789b",
+    "target_commitish": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+    "published_at": "2026-10-19T02:22:46Z",
+    "html_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-176-aaa789b"
+  },
+  "assets": [
+    {
+      "name": "app-debug.apk",
+      "bytes": 20277802,
+      "sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-176-aaa789b/app-debug.apk"
+    },
+    {
+      "name": "sensewalk-source-aaa789b.zip",
+      "bytes": 215887996,
+      "sha256": "1082b4355085fb2283990c64ef54d0c05817e5a2d9143ec717120579a7a66dd0",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-176-aaa789b/sensewalk-source-aaa789b.zip"
+    }
+  ],
+  "apk_verified": {
+    "path": ".local-verify/20261018/release/app-debug.apk",
+    "bytes": 20277802,
+    "sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+    "github_digest_matches": true,
+    "zip_integrity": "passed",
+    "signature_certificate": {
+      "scheme_id": "0x7109871a",
+      "certificate_sha256": "11905416fceb404d2453fc906cd2fbfed5608b1904d49ac36cb42fe79adbc87b"
+    },
+    "prior_release_certificate": {
+      "scheme_id": "0x7109871a",
+      "certificate_sha256": "fb9387341a00883329ddc0034ee3c89fa38327d6f5524c172d4148612ccf024c"
+    },
+    "same_certificate_as_build153": false
+  },
+  "source_zip_verified": {
+    "status": "passed",
+    "bytes": 215887996,
+    "sha256": "1082b4355085fb2283990c64ef54d0c05817e5a2d9143ec717120579a7a66dd0",
+    "github_digest_matches": true,
+    "zip_integrity": "passed",
+    "git_archive_commit_comment": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+    "key_source_entries_match_frozen_git": [
+      "app/src/main/assets/scenes/forest.json",
+      "app/src/main/java/com/sensewalk/app/ui/mode/ModeScreen.kt",
+      "app/src/main/java/com/sensewalk/app/ui/session/ScenePalette.kt",
+      ".github/workflows/android.yml"
+    ]
+  }
+}

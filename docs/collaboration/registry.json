@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-16",
+  "updated_on": "2026-10-18",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -127,7 +127,7 @@
       "title": "T07C 雨林候选素材批次",
       "owner": "minimax",
       "kind": "asset",
-      "status": "ready",
+      "status": "rework",
       "depends_on": [
         "SW-002",
         "SW-003",
@@ -140,16 +140,18 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "远端 PR #25 协作门禁失败（manifest.json 中的 file/checks 缺少仓库根相对路径前缀，且 checks.evidence 不可使用通配符）；且 R1 明确声明为 0 API 占位草案，等待 MiniMax 修正路径并在 8 次尝试预算内启动真实雨林素材制作产出 R2。"
+        "PR25 R1仍是0API程序占位草案，未批准/未入包；最新d71d627已修manifest根路径及通配符，不能再按旧tip eac92e4重复退同一问题。",
+        "当前协作红位于31项QA隔离fixture：1failure/1error，涉及替换SW012后真实SW006引用和design_manifest缺失；Antigravity修QA隔离，MiniMax保留严格设计/哈希校验并交新revision。",
+        "阶段森林包不依赖本稿；本轮先交草案路径/hash/guard收尾，正式雨林图和声景属于下一阶段，既有总8次授权不重置也不重复索要。"
       ],
       "observed_delivery": {
         "revision": 1,
         "branch": "codex/minimax/SW-006-r1",
-        "branch_head": "eac92e43b586a2c2dc1b02e83db0ee61aa629081",
+        "branch_head": "d71d6278860c3551b545bd3b476e38c77096622a",
         "business_head": "6ba654c5ba761ab25d94d121e985c5298d2d3d8a",
         "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
         "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
-        "source_report": "docs/collaboration/reviews/R-SW-006-R1.md"
+        "source_report": "docs/collaboration/evidence/P-20261018-01/README.md"
       }
     },
     {
@@ -268,8 +270,8 @@
       "latest_review": "docs/collaboration/reviews/R-SW-015-R1.json",
       "integrated_commit": "a235f7376f6103c6c02bef3f4c4306dd6f0cc3d5",
       "pending": [
-        "R1原批准保留；本轮实测默认预检放行雨林768x1376与9次任务声明，strict-design误拒D009冻结原字节。SW006制作内先补0API生产guard/自动断言，不改已批准R1/spec。",
-        "R-SW-015-R1.json的delivery_head疑似笔误：实际9c4ef5a8f9691b6de8ff5038d146a4afb5eaf846；QA新增correction，原business reviewed_commit正确。"
+        "原R1批准保留；交付SHA勘误已由PR22新增correction归档，不重复纠错。",
+        "实际生产尺寸/总预算检查缺口仍由MiniMax在SW006内补；不影响本次已批准森林包。"
       ]
     },
     {
@@ -287,25 +289,47 @@
       "latest_review": "docs/collaboration/reviews/R-SW-016-R1.json",
       "integrated_commit": "b4d4000f238a10ba2edd5508918a39254051ed0b",
       "pending": [
-        "真实雨林声景获取/许可/处理/听辨（阻塞 SW-007 最终验收）",
-        "雨林生产开放（等 SW-006 候选 + SW-007 组合）"
+        "底座accepted/已入main，不重复实现；真实雨林声音/正式生产开放仍缺，留下一阶段SW007并明确阻塞雨林最终验收。"
       ]
     },
     {
       "id": "SW-017",
-      "title": "雨林双模式应用验图参照与交接标准",
+      "title": "应用验图参照与森林阶段视觉收口",
       "owner": "trae-design",
       "kind": "design",
       "status": "ready",
       "depends_on": [
-        "SW-012"
+        "SW-011",
+        "SW-012",
+        "SW-005",
+        "SW-010"
       ],
       "task_file": "docs/collaboration/tasks/SW-017.md",
       "latest_handoff": null,
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "0外部付费API，复用已批准SW012原字节制作App上下文参照/验图矩阵；不是新生产层设计，不改变D009，也不替代真实App证据。"
+        "本轮优先森林双模式阶段包的实际视觉走查清单/问题标注；保留已有雨林参照草稿，后续再补，不新增生产美术或付费调用。"
+      ]
+    },
+    {
+      "id": "SW-018",
+      "title": "森林阶段安装测试与缺陷收尾",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-001",
+        "SW-004",
+        "SW-005",
+        "SW-010"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-018.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "只处理阶段包安装/启动/森林双模式/暂停恢复/终态的已复现阻断缺陷，交可追溯报告；无缺陷可交0源码改动，不为凑任务重构或写空测试。"
       ]
     }
   ],
@@ -317,5 +341,18 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261016-01/README.md"
+  "latest_progress_report": "docs/collaboration/evidence/P-20261018-01/README.md",
+  "stage_closeout": {
+    "id": "S-20261018-forest-beta",
+    "status": "released_for_installation_test",
+    "owner": "antigravity",
+    "source_commit": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+    "report": "docs/collaboration/STAGE-CLOSEOUT.md",
+    "release_tag": "build-176-aaa789b",
+    "release_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-176-aaa789b",
+    "scope": "Forest800m virtual/real, approved light effects, terrain, persistence/recovery; rainforest foundation internal only",
+    "physical_validation": "pending_user_installation_test",
+    "apk_sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+    "cloud_test_count": 312
+  }
 }

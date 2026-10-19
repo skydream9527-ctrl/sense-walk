@@ -1,0 +1,8 @@
+PR #25 head d71d6278860c3551b545bd3b476e38c77096622a; run39188385684, coordination structure check passed; protocol fixture tests failed.
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2550431Z ERROR: test_design_without_manifest_is_rejected (test_collaboration.CoordinationChecks.test_design_without_manifest_is_rejected)
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2559848Z KeyError: 'design_manifest'
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2561416Z FAIL: test_design_accepted_with_exact_independent_hashes_is_valid (test_collaboration.CoordinationChecks.test_design_accepted_with_exact_independent_hashes_is_valid)
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2567597Z AssertionError: Lists differ: [] != ['H-SW-006-R1.json: design_ref spec hash mismatch']
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2569396Z 'H-SW-006-R1.json: design_ref spec hash mismatch'
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2570732Z + ['H-SW-006-R1.json: design_ref spec hash mismatch']
+validate	Exercise protocol rejection cases in disposable repositories	2026-10-19T02:07:04.2573112Z FAILED (failures=1, errors=1)

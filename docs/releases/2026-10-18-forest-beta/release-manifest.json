@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "stage_id": "S-20261018-forest-beta",
+  "status": "released_for_installation_test",
+  "client_date": "2026-10-18",
+  "release_tag": "build-176-aaa789b",
+  "release_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-176-aaa789b",
+  "published_at_utc": "2026-10-19T02:22:46Z",
+  "source_commit": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+  "run_id": 39189446098,
+  "run_url": "https://github.com/skydream9527-ctrl/sense-walk/actions/runs/39189446098",
+  "app": {
+    "application_id": "com.sensewalk.app",
+    "min_sdk": 26,
+    "min_android": "8.0",
+    "version_code": 1,
+    "version_name": "0.1.0-week1",
+    "build_type": "debug"
+  },
+  "scope": {
+    "available": [
+      "forest800m virtual",
+      "forest800m real",
+      "approved forest light effects",
+      "terrain/stabilize/hop",
+      "pause/abandon/complete",
+      "passive interruption recovery"
+    ],
+    "not_available": [
+      "production rainforest",
+      "city/desert completion",
+      "final physical/human acceptance"
+    ]
+  },
+  "cloud_checks": {
+    "junit_suites": 29,
+    "tests": 312,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "lint": "passed",
+    "debug_build": "passed",
+    "release_manifest_guard": "passed",
+    "prerelease": "passed"
+  },
+  "assets": [
+    {
+      "name": "app-debug.apk",
+      "bytes": 20277802,
+      "sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-176-aaa789b/app-debug.apk"
+    },
+    {
+      "name": "sensewalk-source-aaa789b.zip",
+      "bytes": 215887996,
+      "sha256": "1082b4355085fb2283990c64ef54d0c05817e5a2d9143ec717120579a7a66dd0",
+      "url": "https://github.com/skydream9527-ctrl/sense-walk/releases/download/build-176-aaa789b/sensewalk-source-aaa789b.zip"
+    }
+  ],
+  "apk_verification": {
+    "path": ".local-verify/20261018/release/app-debug.apk",
+    "bytes": 20277802,
+    "sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+    "github_digest_matches": true,
+    "zip_integrity": "passed",
+    "signature_certificate": {
+      "scheme_id": "0x7109871a",
+      "certificate_sha256": "11905416fceb404d2453fc906cd2fbfed5608b1904d49ac36cb42fe79adbc87b"
+    },
+    "prior_release_certificate": {
+      "scheme_id": "0x7109871a",
+      "certificate_sha256": "fb9387341a00883329ddc0034ee3c89fa38327d6f5524c172d4148612ccf024c"
+    },
+    "same_certificate_as_build153": false
+  },
+  "source_zip_verification": {
+    "status": "passed",
+    "bytes": 215887996,
+    "sha256": "1082b4355085fb2283990c64ef54d0c05817e5a2d9143ec717120579a7a66dd0",
+    "github_digest_matches": true,
+    "zip_integrity": "passed",
+    "git_archive_commit_comment": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+    "key_source_entries_match_frozen_git": [
+      "app/src/main/assets/scenes/forest.json",
+      "app/src/main/java/com/sensewalk/app/ui/mode/ModeScreen.kt",
+      "app/src/main/java/com/sensewalk/app/ui/session/ScenePalette.kt",
+      ".github/workflows/android.yml"
+    ]
+  },
+  "device_validation": "pending, no physical installation or new emulator run performed by this audit",
+  "issues": "KNOWN-ISSUES.md",
+  "testing": "TESTING.md",
+  "feedback": "FEEDBACK.md",
+  "documentation_delivery": "Stage notes/roles are delivered separately after source commit; source ZIP remains exact frozen commit, not rewritten.",
+  "production_forest_assets_verified": [
+    {
+      "apk_entry": "assets/visual/forest_tree_outline.webp",
+      "sha256": "614a41a8a37b57b9ad2912a11b6adbd845d8202dca963fcefb8ba1dbc98c511c",
+      "bytes": 65614,
+      "matches_source": true
+    },
+    {
+      "apk_entry": "assets/visual/forest_tree_trunks.webp",
+      "sha256": "6bfb59f4918e1a787a4b1c832fa8b04a3a521d33e9ed93b2cc6ea9cd03eae810",
+      "bytes": 84546,
+      "matches_source": true
+    },
+    {
+      "apk_entry": "assets/visual/forest_leaf_path.webp",
+      "sha256": "1ff9f61ebb0105cfbc1dafc5f9e43da7ea7e5bd46dd23be17b721b0664e5de8d",
+      "bytes": 63314,
+      "matches_source": true
+    },
+    {
+      "apk_entry": "assets/visual/forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "bytes": 34414,
+      "matches_source": true
+    },
+    {
+      "apk_entry": "assets/visual/forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "bytes": 26312,
+      "matches_source": true
+    }
+  ]
+}

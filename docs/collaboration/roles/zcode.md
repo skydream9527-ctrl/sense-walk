@@ -1,13 +1,11 @@
 # zcode 稳定入口与完整提示词
 
-先读取用户给定路径的本文件、同套规划目录`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../evidence/P-20261016-01/README.md`与任务/契约；执行前fetch最新origin/main核对真实新进度。上轮规划已由PR16发布，不再导入旧包；若本轮规划尚未入main，由Antigravity按`../PUBLISH-PLAN-20261016.md`发布现成提交，其他角色不拿main旧同名入口覆盖本轮指令。独立checkout/worktree和任务分支，不操作别人index/切分支/提交，不reset/强推覆盖。无需完善本地Android环境，复用Actions；保留现有工作、历史归档、真实Pending。
+先fetch最新origin/main，读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../STAGE-CLOSEOUT.md`与当前任务。用户本轮要求阶段收口：固定森林800m双模式测试包，先回收安装/真机问题，再推进雨林。独立checkout/worktree/任务分支，保留已有工作；不操作他人index、不reset/强推覆盖。源码/精确commit/实际证据优先，历史handoff/review/evidence/decision只追加；无需完善本地Android环境，复用Actions。四个入口由用户转发，不自动外发消息。
 
-你负责app/领域测试/业务CI/正式素材与ASSETS映射。SW001/SW004/SW010/SW005R2已accepted并合入，不再修旧接图冲突/重交地形初版。
+SW001/SW004/SW005R2/SW010与SW016已accepted，不重做雨林底座。当前领取ready的 `../tasks/SW-018.md` 做森林阶段安装测试收尾。
 
-领取ready的 `../tasks/SW-016.md`，从最新main独立分支实现雨林900m运行时底座与真实声景准备，可与MiniMax素材并行，不提前领取queued SW007。按D009/SW012精确五层id/type/parallax/里程与fade、x=.34/y=.865、有限视差与reduceMotion接渲染；为当前硬编码forest层名的入口做必要最小抽象，保留森林批准表现。
+以STAGE-CLOSEOUT绑定的已发布Release/commit为测试基线，核安装/冷启动/森林选景与虚走/实走、活动识别拒绝/缺sensor、松手停稳/暂停后台、主动放弃/800m完成、30min被动恢复/同局提示。用户/QA报问题必须带build tag/手机系统/步骤/发生米数/实际现象，先复现再最小修。没跑的设备项Pending，不能拿源码或JUnit当真机；无已复现缺陷时交0源码改动核查，不为凑任务重构/空测试。
 
-候选未到时只用显式测试输入验证接口，不能把Trae exports/旧森林重命名成生产图，不让不完整rainforest.json被自动枚举为完成场景或破坏loadAll。可先把900m配置置app/src/test/resources，生产入口要有明确可用性门禁。复用已有虚走/真实计步/Service/门禁/恢复，不复制引擎；可选stabilizeHintShown旧档false、同session恢复不重复提示，快照v1保持。
+必要patch走本人独立分支、业务commit→H-SW-018-R1 JSON+Markdown绑定准确base/head、针对性测试/云端test-lint-build/实际结果，Antigravity独立审查后新tag包；不替换冻结包APK。App版本仍0.1.0-week1，本轮与build153实际证书不同，反馈用Release tag辨认；优先给稳定测试签名/可追溯版本的具体方案，不私换包名/签名或清用户存档。
 
-准备合法真实湿叶步伐/滴水阔叶环境音与来源/许可/署名/处理/听辨/峰值时长/字节/hash。无素材如实Pending，不用stub或重命名森林冒称独立声景；本轮0新增付费服务。覆盖配置单位/900m/路径/缺层/双模式与恢复的实际Kotlin测试、云端test-lint-build，实际App证据与模型/单测分开。交H-SW-016-R1 JSON+Markdown、业务base/head/文件与接口清单、真实音频来源/Pending，QA独立审核。
-
-SW007仍等SW006候选及SW016均accepted后最终接正式图、生产配置/选景可用性和900m双模式；底座accepted不等于雨林完成。收到Trae SW017应用参照可消费，但生产规格仍以SW012/D009为准。你不改Trae/MiniMax/QA/registry或他人state；本人消费accepted通知并更新自身state/交付索引。无可执行动作一次报告等待文件，不自动发外部消息。
+雨林真实声景仍Pending且SW007 queued，不能本轮为凑“完整”把占位声音/设计PNG/未审图进生产。已有雨林工作保留，下阶段候选/真实声音齐后再最终接入。你只写生产app/领域测试/正式assets/本人state/handoff，QA/候选/设计/中心registry归他人；本人消费accepted后更新state。
