@@ -105,6 +105,31 @@ class CoordinationChecks(unittest.TestCase):
             self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-012').update(
                 status='handoff_ready', latest_handoff=None, latest_review=None, integrated_commit=None))
         ref = dict(task_id='SW-012', handoff=relative, spec_file=manifest['spec_file'], spec_sha256=files[0]['sha256'])
+        for m_path in self.root.glob('design/assets/**/manifest*.json'):
+            if not m_path.is_file(): continue
+            try:
+                m_data = json.loads(m_path.read_text())
+                d_ref = m_data.get('design_ref')
+                if d_ref and d_ref.get('task_id') == 'SW-012' and d_ref.get('handoff') == relative:
+                    d_ref['spec_file'] = manifest['spec_file']
+                    d_ref['spec_sha256'] = files[0]['sha256']
+                    m_path.write_text(json.dumps(m_data, indent=2))
+                    new_m_hash = hashlib.sha256(m_path.read_bytes()).hexdigest()
+                    rel_m_path = str(m_path.relative_to(self.root))
+                    for h_path in (self.base / 'handoffs').rglob('*.json'):
+                        try:
+                            h_data = json.loads(h_path.read_text())
+                            updated = False
+                            for art in h_data.get('artifacts', []):
+                                if art.get('path') == rel_m_path:
+                                    art['sha256'] = new_m_hash
+                                    updated = True
+                            if updated:
+                                h_path.write_text(json.dumps(h_data, indent=2))
+                        except Exception:
+                            pass
+            except Exception:
+                pass
         return relative, h, manifest_path, manifest, ref
 
     def asset_delivery(self, design_ref=None, revision=1):

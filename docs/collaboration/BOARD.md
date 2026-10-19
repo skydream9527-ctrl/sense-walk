@@ -31,7 +31,7 @@
 
 | 任务/轮次 | PR或分支 | 观察交付head | 来源 |
 | --- | --- | --- | --- |
-| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `d71d627` | [README](evidence/P-20261018-01/README.md) |
+| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `8e73b13` | [R-SW-006-R1-correction](reviews/R-SW-006-R1-correction.md) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 
