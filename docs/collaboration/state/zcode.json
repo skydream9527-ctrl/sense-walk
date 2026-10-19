@@ -4,7 +4,7 @@
   "current_task": "SW-018",
   "status": "handoff_ready",
   "branch": "codex/zcode/SW-018-forest-beta-close",
-  "head_commit": "6b0caa809bdd628ec018ede6e1c8078261736eae",
+  "head_commit": "62f790130f13140f37c5f9238f91ff6f0652a4bf",
   "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
   "updated_on": "2026-10-18",
   "note": "SW-018 R1 已交付（0 源码改动核查：12 项全过含发布包 800m 通关与站稳提示证据；签名方案提案）。SW-016 accepted；SW-007 等 SW-006+SW-016（已满足其一）。",
@@ -50,7 +50,7 @@
     },
     "SW-018": {
       "branch": "codex/zcode/SW-018-forest-beta-close",
-      "business_head": "6b0caa809bdd628ec018ede6e1c8078261736eae",
+      "business_head": "62f790130f13140f37c5f9238f91ff6f0652a4bf",
       "handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
       "pr": null,
       "status": "0-source-change verification delivered, awaiting review"
