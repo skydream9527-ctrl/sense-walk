@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-017",
+  "revision": 1,
+  "kind": "integration_reference",
+  "title": "森林 800m 双模式应用验图参照 · 集成引用",
+  "producer": "trae-design",
+  "base_commit": "422451e25ba3dfa9b44c9421d00188f81944e2bc",
+  "scope_note": "本轮按 registry pending 优先交付森林 800m 双模式阶段包；任务书第 1 条的雨林 900m 双模式参照保留后续轮次补充。本文件不是新生产设计，不冻结任何 layer ID，不改变 SW-011/SW-012/D-009，不成为 SW-006 的新 design_ref 前置。",
+  "source_design_ref": {
+    "forest_design_handoff": {
+      "handoff": "docs/collaboration/handoffs/trae-design/H-SW-011-R1.json",
+      "handoff_sha256": "8134e9250838014c4534ea75f2b1f59d93096f86aa52ae823d53a365d6b081d3",
+      "design_spec": "design/05-visual-design/SW-011/r1/design-spec.json",
+      "design_spec_sha256": "f1dc9f2a73cba5a8c9e9363e419cfd851e4a643f598bd999d2d674c758cb5414",
+      "status": "accepted"
+    },
+    "rainforest_design_handoff": {
+      "handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+      "handoff_sha256": "89314772db42b8b2fcb7f3e79f91e57360585a923d54ea1a1ae4de347f13b082",
+      "design_spec": "design/05-visual-design/SW-012/r1/design-spec.json",
+      "design_spec_sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320",
+      "design_manifest_sha256": "8cbbdd8d374ace50e71756a410482596592d0e8c61d595207521c841399872ac",
+      "status": "accepted"
+    },
+    "freeze_decision": {
+      "decision": "docs/collaboration/decisions/D-009-freeze-rainforest-design-spec.md",
+      "sha256": "09231cb341717ad26f8e15c574cafaa453cf6c5f44991e0f1b62653329950362"
+    },
+    "note": "SW-017 不修改以上任何已发布字节；森林参照以 SW-011 设计意图 + 当前入包生产素材（SW-010 验收）为双输入，差异在 findings F4 记录。"
+  },
+  "production_inputs": {
+    "scene_config": {
+      "file": "app/src/main/assets/scenes/forest.json",
+      "sha256": "1cc6393e39f1a614ee7ffe338a0bba4ac977b30fd3a625580d9b8656508e9d90",
+      "requiredDistanceMeters": 800,
+      "void_color": "#060806"
+    },
+    "visual_assets": [
+      {"layer": "tree_outline", "file": "app/src/main/assets/visual/forest_tree_outline.webp", "sha256": "614a41a8a37b57b9ad2912a11b6adbd845d8202dca963fcefb8ba1dbc98c511c", "bytes": 65614, "size": [768, 1376], "parallax": 0.3},
+      {"layer": "tree_trunks", "file": "app/src/main/assets/visual/forest_tree_trunks.webp", "sha256": "6bfb59f4918e1a787a4b1c832fa8b04a3a521d33e9ed93b2cc6ea9cd03eae810", "bytes": 84546, "size": [768, 1376], "parallax": 0.3},
+      {"layer": "leaf_path", "file": "app/src/main/assets/visual/forest_leaf_path.webp", "sha256": "1ff9f61ebb0105cfbc1dafc5f9e43da7ea7e5bd46dd23be17b721b0664e5de8d", "bytes": 63314, "size": [768, 1376], "parallax": 0.6},
+      {"layer": "light_shows", "file": "app/src/main/assets/visual/forest_light_shows.webp", "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0", "bytes": 34414, "size": [768, 1376], "parallax": 0.0, "type": "overlay"},
+      {"layer": "clearing", "file": "app/src/main/assets/visual/forest_clearing.webp", "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33", "bytes": 26312, "size": [768, 1376], "parallax": 0.0, "type": "overlay"}
+    ],
+    "source_code_readonly": [
+      {"file": "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt", "sha256": "4e1c303048b0050096a2da04c6260b28c9f0e9484ddff6b16e9a00a6a1d54ee", "used_for": "cover 几何/视差钳制/opacity 传入/旅人锚点"},
+      {"file": "app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt", "sha256": "bd8e8863f44db3ff5ac8e84ebd80ff0a111cb2936b87e3334eb52da6d301d4af", "used_for": "虚走上55%/下45% 摇杆区、米数轻触、首局卡片"},
+      {"file": "app/src/main/java/com/sensewalk/app/ui/session/RealWalkContent.kt", "sha256": "280dc7e2c0670be51ef367cbae2467fa6d4ea40831e477a2a2fe4a3433853e9e", "used_for": "实走下45% 状态文案（无摇杆）"},
+      {"file": "app/src/main/java/com/sensewalk/app/ui/session/Joystick.kt", "sha256": "b1a5ceaf70b2b0de487ad408e7b75042deff281c5a086c1258277c821037eed6", "used_for": "底座56dp/拇指22dp/甜点0.45–0.65/rhythmHint 变色"},
+      {"file": "app/src/main/java/com/sensewalk/app/ui/session/AbandonControl.kt", "sha256": "48cea7a2b23eeda0d83353f9a4158a6d4f9c127cbf6a73500d8d8175ead515d8", "used_for": "长按放弃 + 72dp 进度条"},
+      {"file": "app/src/main/java/com/sensewalk/app/domain/phase/PhaseScheduler.kt", "sha256": "0832fa7db7bc76c39d7498bf13605b6310fd2496dc0f600c4d0cca91d7801a12", "used_for": "opacity=toOpacity×smoothstep((m-at)/fade) 纯函数"},
+      {"file": "app/src/main/java/com/sensewalk/app/ui/theme/Theme.kt", "sha256": "16da4d0a9413cfa100b1b6f8506393cd69267788adbf9af47e2030e2710b36df", "used_for": "SenseBlack/OnSurface/Muted/AccentSoft 色值"}
+    ]
+  },
+  "phase_mapping": {
+    "formula": "opacity(m) = toOpacity × smoothstep(clamp((m − atMeters)/fadeMeters, 0, 1)); smoothstep=t²(3−2t)",
+    "freeze_note": "以下为 forest.json 已上线参数的只读转录，SW-017 不提议修改",
+    "visual_phases": [
+      {"layer": "tree_outline", "at_meters": 80, "to_opacity": 0.60, "fade_meters": 20, "parallax": 0.3},
+      {"layer": "tree_trunks", "at_meters": 240, "to_opacity": 0.70, "fade_meters": 25, "parallax": 0.3},
+      {"layer": "leaf_path", "at_meters": 400, "to_opacity": 0.80, "fade_meters": 25, "parallax": 0.6},
+      {"layer": "light_shows", "at_meters": 600, "to_opacity": 0.65, "fade_meters": 30, "parallax": 0.0},
+      {"layer": "clearing", "at_meters": 760, "to_opacity": 0.90, "fade_meters": 25, "parallax": 0.0}
+    ],
+    "preview_stage_meters": [0, 100, 265, 425, 630, 785],
+    "stage_rationale": "0=纯 void+旅人；100=outline 满淡入；265=trunks 满淡入（对齐作者截图）；425=leaf_path 满淡入；630=light_shows 满淡入；785=clearing 满淡入且未到 800m 终点（不切屏）"
+  },
+  "geometry_mapping": {
+    "cover_rule": "scale=screenH/srcH(1376)；dstW=768×scale；按高铺满、左对齐；视差 offset=−(sPos×parallax×6px/m) 钳制在 [0, dstW−screenW]",
+    "traveler_anchor": {"x_fraction": 0.34, "feet_y_fraction": 0.865, "renderer": "ForestShell.drawTraveler 程序绘制，素材不含人"},
+    "zones": {"top_55pct": "轻触切换米数（≥400m 才显示）+ 右上暂停/长按放弃", "bottom_45pct_virtual": "浮动摇杆（按住出现）：底座56dp/拇指22dp/甜点0.45–0.65，rhythmHint=true 时甜点变 #A8C5A0", "bottom_45pct_real": "状态文案居中（ready/slow/good/paused），无摇杆"},
+    "devices": [
+      {"label": "基准", "screen_px": [1080, 1920], "ratio": "9:16", "density": 3.0, "scale": 1.395349, "dst_w": 1071.63, "overflow_px": 0.0, "uncovered_right_px": 8.37},
+      {"label": "小屏（dp 点框，@3x 物理渲染后降采样）", "screen_px": [390, 844], "ratio": "≈9:19.5", "density": 3.0, "scale": 0.613372, "dst_w": 471.07, "overflow_px": 81.07, "uncovered_right_px": 0.0},
+      {"label": "长屏（同作者证据分辨率）", "screen_px": [1080, 2400], "ratio": "20:9", "density": 3.0, "scale": 1.744186, "dst_w": 1339.53, "overflow_px": 259.53, "uncovered_right_px": 0.0}
+    ]
+  },
+  "proposed_runtime_notes_for_zcode": [
+    {"id": "P1", "statement": "1080×2400 下视差 sPos 钳满点：tree_outline/tree_trunks 约 144m、leaf_path 约 72m（offset=overflow 259.53px）；钳满后右缘 30 个硬切全透明源列（≈52px）对齐屏右缘露出 Void", "status": "proposed", "basis": "previews/findings/edge-audit.json + 作者 H-SW-010-R1 stage-265m/425m 像素实测 52px", "needs_device_verification": true},
+    {"id": "P2", "statement": "1080×1920 cover 宽 1071.63<1080：overflow=0 导致视差全程无横移，且静态即存在左≈42px/右≈50px 暗带（30 透明列×1.395+8.37px 无图区）", "status": "proposed", "basis": "edge-audit.json cover_geometry；作者证据无 1080×1920 分辨率", "needs_device_verification": true},
+    {"id": "P3", "statement": "390×844（dp 点）固定 px 几何（旅人 74px、6px/m）必须在物理像素空间渲染：模拟器按 @3x 1170×2532 渲染后降采样才可与 App 观感一致", "status": "proposed", "basis": "Joystick/ForestShell 使用原始 px 常量", "needs_device_verification": true}
+  ],
+  "outputs_mapping": {
+    "matrix": {"virtual": "previews/matrix/forest_virtual_six_stages.png", "real": "previews/matrix/forest_real_six_stages.png"},
+    "zones": {"virtual": "previews/zones/virtual_zones_1080x1920.png", "real": "previews/zones/real_zones_1080x1920.png"},
+    "crops": "previews/crops/{virtual|real}_{390x844|1080x1920|1080x2400}_{785m|100m|265m}.png（12 张）",
+    "states": "previews/states/state_{paused,intro_card,stabilize_hint,abandon_confirm,large_font,reduce_motion}_*.png（6 张）",
+    "parallax": "previews/parallax/parallax_clamp_pair_1080x2400.png",
+    "findings": {"sheet": "previews/findings/evidence_findings_sheet.png", "quantitative_audit": "previews/findings/edge-audit.json"},
+    "real_captures": "previews/real_captures/capture_real_*.png（12 张，逐字节复制自 docs/collaboration/evidence/H-SW-010-R1 与 H-SW-005-R2，未改字节）",
+    "simulation_disclaimer": "除 real_captures 外全部输出带「设计模拟 · 非 App 截图」角标；状态栏/Home 指示条为几何避让示意，非精确系统 UI"
+  },
+  "new_production_layers": [],
+  "forbidden_changes": [
+    "不修改 app/ 任何源码、forest.json 与入包 webp",
+    "不新增/重画生产美术层，不新增付费或生图 API（纯本地 Python PIL+numpy）",
+    "不改变 SW-011/SW-012 已发布交付字节与 D-009 冻结参数",
+    "不替代 MiniMax 候选验收与 Antigravity/QA 设备判定"
+  ]
+}
