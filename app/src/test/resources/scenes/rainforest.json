@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 2,
+  "id": "rainforest",
+  "name": "雨林",
+  "mood": "潮湿、幽绿、缓慢展开",
+  "themeColor": "#1A3326",
+  "requiredDistanceMeters": 900,
+  "stickCurveId": "comfort_v1",
+  "phases": [
+    { "id": "void", "atMeters": 0, "channel": "visual", "layer": "void", "toOpacity": 1.0 },
+    { "id": "steps_placeholder", "atMeters": 90, "channel": "audio", "layer": "footsteps_placeholder", "toVolume": 0.25, "fadeMs": 8000 },
+    { "id": "mist", "atMeters": 90, "channel": "visual", "layer": "mist", "toOpacity": 0.55, "fadeMeters": 20 },
+    { "id": "ambience_placeholder", "atMeters": 270, "channel": "audio", "layer": "ambience_placeholder", "toVolume": 0.30, "fadeMs": 12000 },
+    { "id": "trunks_canopy", "atMeters": 270, "channel": "visual", "layer": "trunks_canopy", "toOpacity": 0.85, "fadeMeters": 25 },
+    { "id": "haptic_steps", "atMeters": 450, "channel": "haptic", "pattern": "footstep_soft", "everyNSteps": 2 },
+    { "id": "vines_light", "atMeters": 450, "channel": "visual", "layer": "vines_light", "toOpacity": 1.0, "fadeMeters": 25 },
+    { "id": "deep_placeholder", "atMeters": 675, "channel": "audio", "layer": "deep_placeholder", "toVolume": 0.20, "fadeMs": 10000 },
+    { "id": "distant_glow", "atMeters": 675, "channel": "visual", "layer": "distant_glow", "toOpacity": 0.85, "fadeMeters": 25 },
+    { "id": "glade", "atMeters": 855, "channel": "visual", "layer": "glade", "toOpacity": 0.90, "fadeMeters": 20 }
+  ],
+  "pathProfile": {
+    "segments": [
+      { "from": 0, "to": 900, "kind": "flat" }
+    ]
+  },
+  "layers": {
+    "footsteps_placeholder": { "type": "stepOneShot", "files": ["audio/forest_step_01.ogg", "audio/forest_step_02.ogg", "audio/forest_step_03.ogg", "audio/forest_step_04.ogg", "audio/forest_step_05.ogg", "audio/forest_step_06.ogg"] },
+    "ambience_placeholder": { "type": "loop", "file": "audio/forest_insects.ogg" },
+    "deep_placeholder": { "type": "loop", "file": "audio/forest_birds.ogg" }
+  },
+  "visualLayers": {
+    "void": { "type": "solid", "color": "#0A1410" },
+    "mist": { "type": "overlay" },
+    "trunks_canopy": { "type": "parallax", "parallax": 0.30 },
+    "vines_light": { "type": "parallax", "parallax": 0.60 },
+    "distant_glow": { "type": "overlay" },
+    "glade": { "type": "overlay" }
+  }
+}
