@@ -5,8 +5,8 @@
   "revision": 1,
   "producer": "zcode",
   "recipient": "antigravity",
-  "base_commit": "422451e",
-  "head_commit": "PLACEHOLDER",
+  "base_commit": "e02b2e8d124d226933d440e4617c6c40be7353a8",
+  "head_commit": null,
   "pr_url": null,
   "report": "docs/collaboration/handoffs/zcode/H-SW-018-R1.md",
   "changed_files": [],
@@ -15,7 +15,9 @@
       "name": "发布包哈希核对（APK sha256 与 SHA256SUMS 一致）",
       "type": "source",
       "status": "passed",
-      "evidence": ["docs/collaboration/evidence/H-SW-018-R1/verification-report.md"]
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md"
+      ]
     },
     {
       "name": "模拟器核查×12（发布包安装：冷启动/双模式/权限回退/停稳/暂停/放弃/恢复/800m通关/站稳提示出现消失）",
@@ -32,13 +34,17 @@
       "name": "真实计步/锁屏15min/耳机来电/缺sensor设备/真机项",
       "type": "physical-device",
       "status": "pending",
-      "evidence": ["docs/collaboration/evidence/H-SW-018-R1/verification-report.md"]
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-018-R1/verification-report.md"
+      ]
     },
     {
       "name": "云端 CI（文档-only 变更；PR 推送后）",
       "type": "cloud-build",
       "status": "pending",
-      "evidence": ["docs/collaboration/handoffs/zcode/H-SW-018-R1.md"]
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-018-R1.md"
+      ]
     }
   ],
   "artifacts": [],
