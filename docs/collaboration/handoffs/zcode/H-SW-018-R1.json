@@ -6,7 +6,7 @@
   "producer": "zcode",
   "recipient": "antigravity",
   "base_commit": "e02b2e8d124d226933d440e4617c6c40be7353a8",
-  "head_commit": "62f790130f13140f37c5f9238f91ff6f0652a4bf",
+  "head_commit": "65d921abc82d4b67be44e65cfbc050a30eace8ab",
   "pr_url": null,
   "report": "docs/collaboration/handoffs/zcode/H-SW-018-R1.md",
   "changed_files": [],
