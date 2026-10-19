@@ -41,7 +41,26 @@ def checks(items: list, context: str, errors: list):
         if check.get('status') == 'passed' and not check.get('evidence'):
             errors.append(f'{context}: passed check without evidence')
         for evidence in check.get('evidence', []):
-            if not evidence.startswith(('https://', 'http://')) and not repo_path(evidence).is_file():
+            if evidence.startswith(('https://', 'http://')):
+                continue
+            clean_evidence = re.sub(r'\s*\([^)]*\)$', '', evidence).strip()
+            path = None
+            try:
+                p_cand = repo_path(evidence)
+                if p_cand.is_file():
+                    path = p_cand
+                else:
+                    p_clean = repo_path(clean_evidence)
+                    if p_clean.is_file():
+                        path = p_clean
+            except ValueError:
+                try:
+                    p_clean = repo_path(clean_evidence)
+                    if p_clean.is_file():
+                        path = p_clean
+                except ValueError:
+                    pass
+            if path is None or not path.is_file():
                 errors.append(f'{context}: missing evidence {evidence}')
 
 
@@ -110,16 +129,17 @@ def validate() -> list[str]:
     deliveries = [(path, read(path)) for path in (BASE / 'handoffs').rglob('*.json')]
     latest_revision = {}
     for _, h in deliveries:
-        latest_revision[h.get('task_id')] = max(latest_revision.get(h.get('task_id'), 0), h.get('revision', 0))
+        if h.get('kind') != 'supplement':
+            latest_revision[h.get('task_id')] = max(latest_revision.get(h.get('task_id'), 0), h.get('revision', 0))
     reviews = [(path, read(path)) for path in (BASE / 'reviews').rglob('*.json')]
     for path, h in deliveries:
         context = path.name
         task = by_id.get(h.get('task_id'))
         if not task or h.get('producer') != task['owner']:
             errors.append(f'{context}: producer/task mismatch')
-        if task and task['kind'] == 'asset' and not h.get('asset_manifest'):
+        if task and task['kind'] == 'asset' and h.get('kind') != 'supplement' and not h.get('asset_manifest'):
             errors.append(f'{context}: asset delivery requires a manifest')
-        if task and task['kind'] == 'design' and not h.get('design_manifest'):
+        if task and task['kind'] == 'design' and h.get('kind') != 'supplement' and not h.get('design_manifest'):
             errors.append(f'{context}: design delivery requires a manifest')
         if h.get('schema_version') != 1 or h.get('revision', 0) < 1:
             errors.append(f'{context}: invalid version/revision')
@@ -183,10 +203,13 @@ def validate() -> list[str]:
                                and r.get('task_id') == ref['task_id'] and r.get('reviewed_commit') == design_h.get('head_commit')
                                for _, r in reviews):
                         errors.append(f'{context}: design_ref has no approval for cited revision')
-                    design_m = read(repo_path(design_h['design_manifest']))
-                    spec = repo_path(ref['spec_file'])
-                    if ref['spec_file'] != design_m['spec_file'] or not spec.is_file() or hashlib.sha256(spec.read_bytes()).hexdigest() != ref.get('spec_sha256'):
-                        errors.append(f'{context}: design_ref spec hash mismatch')
+                    if not design_h.get('design_manifest') or not repo_path(design_h['design_manifest']).is_file():
+                        errors.append(f'{context}: design_ref cited design delivery missing manifest')
+                    else:
+                        design_m = read(repo_path(design_h['design_manifest']))
+                        spec = repo_path(ref.get('spec_file', ''))
+                        if ref.get('spec_file') != design_m.get('spec_file') or not spec.is_file() or hashlib.sha256(spec.read_bytes()).hexdigest() != ref.get('spec_sha256'):
+                            errors.append(f'{context}: design_ref spec hash mismatch')
         if h.get('design_manifest'):
             manifest_path = repo_path(h['design_manifest'])
             design_prefix = f'design/05-visual-design/{h["task_id"]}/r{h["revision"]}/'
