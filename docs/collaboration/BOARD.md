@@ -22,8 +22,8 @@
 | SW-014 | [雨林素材交付预检准备（零API）](tasks/SW-014.md) | minimax | accepted | SW-002, SW-003 | [H-SW-014-R3](handoffs/minimax/H-SW-014-R3.json) / [R-SW-014-R3](reviews/R-SW-014-R3.json) |
 | SW-015 | [真实设计规格与素材预检联调（零API）](tasks/SW-015.md) | minimax | accepted | SW-011, SW-014 | [H-SW-015-R1](handoffs/minimax/H-SW-015-R1.json) / [R-SW-015-R1](reviews/R-SW-015-R1.json) |
 | SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | accepted | SW-005, SW-012 | [H-SW-016-R1](handoffs/zcode/H-SW-016-R1.json) / [R-SW-016-R1](reviews/R-SW-016-R1.json) |
-| SW-017 | [应用验图参照与森林阶段视觉收口](tasks/SW-017.md) | trae-design | ready | SW-011, SW-012, SW-005, SW-010 | — / — |
-| SW-018 | [森林阶段安装测试与缺陷收尾](tasks/SW-018.md) | zcode | ready | SW-001, SW-004, SW-005, SW-010 | — / — |
+| SW-017 | [应用验图参照与森林阶段视觉收口](tasks/SW-017.md) | trae-design | accepted | SW-011, SW-012, SW-005, SW-010 | [H-SW-017-R1](handoffs/trae-design/H-SW-017-R1.json) / [R-SW-017-R1](reviews/R-SW-017-R1.json) |
+| SW-018 | [森林阶段安装测试与缺陷收尾](tasks/SW-018.md) | zcode | accepted | SW-001, SW-004, SW-005, SW-010 | [H-SW-018-R1](handoffs/zcode/H-SW-018-R1.json) / [R-SW-018-R1](reviews/R-SW-018-R1.json) |
 
 ## 远端交付观察（尚非独立批准）
 

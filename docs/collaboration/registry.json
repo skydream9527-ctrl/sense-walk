@@ -297,7 +297,7 @@
       "title": "应用验图参照与森林阶段视觉收口",
       "owner": "trae-design",
       "kind": "design",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-011",
         "SW-012",
@@ -305,11 +305,11 @@
         "SW-010"
       ],
       "task_file": "docs/collaboration/tasks/SW-017.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-017-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-017-R1.json",
+      "integrated_commit": "0d050bc7273e973d7c6660edb497176dc0f9d781",
       "pending": [
-        "本轮优先森林双模式阶段包的实际视觉走查清单/问题标注；保留已有雨林参照草稿，后续再补，不新增生产美术或付费调用。"
+        "双模式应用验图矩阵与走查清单已 accepted 归档（44 文件哈希核验一致，F7 Void 黑带完成量化审计）；雨林 900m 验图参照按规划留待下一阶段产出。"
       ]
     },
     {
@@ -317,7 +317,7 @@
       "title": "森林阶段安装测试与缺陷收尾",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-001",
         "SW-004",
@@ -325,11 +325,11 @@
         "SW-010"
       ],
       "task_file": "docs/collaboration/tasks/SW-018.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-018-R1.json",
+      "integrated_commit": "d27b7104c217e43d431004d31ffd0c55ca39d41e",
       "pending": [
-        "只处理阶段包安装/启动/森林双模式/暂停恢复/终态的已复现阻断缺陷，交可追溯报告；无缺陷可交0源码改动，不为凑任务重构或写空测试。"
+        "阶段包安装测试核查已 accepted 归档（12 项模拟器核查通过，0 源码改动，闭环站稳提示卡片时序截图证据）；真机计步/锁屏15min/物理设备项如实 Pending 保留。"
       ]
     }
   ],

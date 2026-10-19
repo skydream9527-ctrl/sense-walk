@@ -3,9 +3,9 @@
   "agent": "antigravity",
   "current_task": null,
   "status": "idle",
-  "branch": "codex/antigravity/stage-closeout-qa-fix",
-  "head_commit": "422451e25ba3dfa9b44c9421d00188f81944e2bc",
+  "branch": "codex/antigravity/review-sw017-sw018",
+  "head_commit": "d3de57c8690401a7f86859699ff79852fc52f80e",
   "latest_handoff": null,
   "updated_on": "2026-10-18",
-  "note": "阶段收口跟踪：森林双模式测试版 build-176-aaa789b (312 JUnit全绿, 真实APK cbe827b...) 已冻结发布并完成独立验真，状态 released_for_installation_test；已完成 PR25 协议 fixture 隔离与缺失字段防御修复 (tools/collaboration.py, test_collaboration.py 31/31全绿)；产出 R-SW-006-R1-correction.md 记录 d71d627 路径修复与 8e73b13 supplement 转交闭环；SW-018 / SW-017 ready 待命随到随审。"
+  "note": "阶段收口跟踪：森林双模式测试版 build-176-aaa789b (312 JUnit全绿, 真实APK cbe827b...) 已冻结发布并完成独立验真，状态 released_for_installation_test；PR25 fixture 隔离与防御性修复已并入 main (PR#28)；SW-017（森林视觉走查）与 SW-018（森林阶段安装测试与缺陷收尾）已独立审核并全绿合入 main (PR#30, PR#29)，中心看板与评审报告已同步 accepted；持续保持物理设备与真人体验 Pending，待命接收用户 FEEDBACK。"
 }

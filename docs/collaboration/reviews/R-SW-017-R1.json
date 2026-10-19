@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-017-R1",
+  "task_id": "SW-017",
+  "reviewer": "antigravity",
+  "producer": "trae-design",
+  "handoff": "docs/collaboration/handoffs/trae-design/H-SW-017-R1.json",
+  "reviewed_commit": "90f79cef80478c30551a6dc41dc45f0550f01fba",
+  "delivery_head": "5da86c478a238622f3b92f763aa87b280145c2f5",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-017-R1.md",
+  "artifact_hashes": {
+    "design/05-visual-design/SW-017/r1/README.md": "eb043756e53f95d0450e53423eed478e339ccdddd1a3c6d6b90da37563cc7a19",
+    "design/05-visual-design/SW-017/r1/checklist.md": "766ee06036ec3e083a3ba96ab52ec6ada535194696dbe26544265d2d0cce5310",
+    "design/05-visual-design/SW-017/r1/integration-reference.json": "b0ba01a8f46bc6955ba4da6da3c0c8adf953ab7b5ef97d6e3f48d0a297d7ab35",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_100m.png": "513510ca917f8663f385e703493726f45bd009cd2f215cb1eb4b950696bace61",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_265m.png": "0d0d78f14a62d49804735c96354e3db9c68789139eedbc060052f816b41f9090",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x1920_785m.png": "a9effd112e3e2cd5332ee4085f9b53238c8eca009f31e3467a09918413c59f11",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_100m.png": "cf38c051b5a18846ad56510f551aca22bbd05ae98f2f07492da5b80b5d1cfa3d",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_265m.png": "1eee60a855c5f59b59988f5012986c728720851e403325b7130704ffb776d428",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_1080x2400_785m.png": "f2a6741107af4e5239d3ed36896115f9cb16104f6f047288ed158f65bd860ba3",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_100m.png": "5ae80686e08e45f424ce22e03e35d2c1b01867ea3292c278daadb29d9ee7adc5",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_265m.png": "ca3b58e215e54aa47506901b75511152df12aca24e9b9414c8999a2883aa73b5",
+    "design/05-visual-design/SW-017/r1/previews/crops/real_390x844_785m.png": "1b24bfbcea590f63b89a2e570df9c0803479916f2c429a76cc193a98290ea715",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_1080x1920_785m.png": "20437d238230542cf64de11612a48126b0d2fa4e0b5665103f976cbb4caa3765",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_1080x2400_785m.png": "67d6455db18ee07e9e02157faa22734d2e163964770c6d8c01bcde108bb647d4",
+    "design/05-visual-design/SW-017/r1/previews/crops/virtual_390x844_785m.png": "088e9dea0498a6d6809b62970a851fd8f3c29f98cf441575f94ff2582e7e7749",
+    "design/05-visual-design/SW-017/r1/previews/findings/edge-audit.json": "0512d5b9ba2e89e83603b831f514c55d7a87ab4b43021c9499cc0139946e487b",
+    "design/05-visual-design/SW-017/r1/previews/findings/evidence_findings_sheet.png": "105afe91046e1e357e78fa49df00702c944d23df7f6747faffda0e1ed9cd5c2b",
+    "design/05-visual-design/SW-017/r1/previews/matrix/forest_real_six_stages.png": "3d94d4bd9eee6fcdcee4e6990deeda11a059c32cf5aae4b66b569213f8466042",
+    "design/05-visual-design/SW-017/r1/previews/matrix/forest_virtual_six_stages.png": "ecceee96e3f8fe65b247adda4c260e00a3684b21c9346b6621e66db232dfaeea",
+    "design/05-visual-design/SW-017/r1/previews/parallax/parallax_clamp_pair_1080x2400.png": "7549dee3e03eab68e39aa8fbd0d139370fdf25019ca210b17b49b0b2974e9bd6",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_after_hint_389m_no_card.png": "da8acc748196817d184672981b4a17bcd46cc8bba3ef2e71b27369631647273a",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_freeze_a_785m.png": "708fba634bb3a5423c1f8634aba706d2992c0a0322732360443fe52ba0b333c2",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_freeze_b_785m.png": "ecd5f1a2c3afc9251014576866c19b525fe76f40d04101f4cb059d6ff8adcdaf",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_hint_shown_no_card.png": "ad3094e91c3b1b752d18fb1bc52d07531bb775d36e7007ea712b641c71badf27",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_size_1080x2880_785m.png": "bdfb90c9b713550a27ae7e239cc311f9063406d53e285b10651269353c7394e0",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_size_720x1280_785m.png": "a0cc72f19a01c0aca734d50705ec3fcbdcefdbc1b793e7a2902ee5c60744e0b1",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_000m.png": "1a56000dbe38b8b660c139e41efe900ef8795daf9e507819cce6a9c49c9c8aea",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_100m.png": "0453f0fa7e74c71562e85323930f889e364eb99385fe22e8bfc8b33aa767e0c3",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_265m.png": "4495b939a865b44727cea7bcf041cba0aa6a2a2ccd5c901db6dcc473f28e04a5",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_425m.png": "a5d203e3e5409826517532107194d50d68837166469007e368e06b1d8fcc6c5b",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_630m.png": "878366720c5834dac0b0999f89bd9b3c5bf2cd6008c3446c3c29136538ac7a42",
+    "design/05-visual-design/SW-017/r1/previews/real_captures/capture_real_stage_785m.png": "0180277c17bb47ce3ce17ddcf7ff3ada6879e3d5359235063c5345fa2e630559",
+    "design/05-visual-design/SW-017/r1/previews/states/state_abandon_confirm_1080x1920.png": "8b6aa7f1b8c18750a84180a787ec52c1e87f98fe6181c14da0120428e0b8860a",
+    "design/05-visual-design/SW-017/r1/previews/states/state_intro_card_1080x1920.png": "8985e1c0d1215c887d7befb187da45c74a0f4c56c34a2c71461b6884b07b5d04",
+    "design/05-visual-design/SW-017/r1/previews/states/state_large_font_1080x2400.png": "020759962754424b6f36bd34a126f4166b2403a2b1de72d186ec0dbea5191209",
+    "design/05-visual-design/SW-017/r1/previews/states/state_paused_1080x1920.png": "cd439f5798900cca53ce07af4b83df573bfd4b9b1e49959d243fac26550355df",
+    "design/05-visual-design/SW-017/r1/previews/states/state_reduce_motion_390x844.png": "47aeb442b3cde23d913bcd6c15036839e6e3aec7a66600afc0742d93cec5f4fa",
+    "design/05-visual-design/SW-017/r1/previews/states/state_stabilize_hint_1080x1920.png": "c173a08c10d03f0627121a6f0859e9367a741b23f1b43fbb6b4779614bfca811",
+    "design/05-visual-design/SW-017/r1/previews/zones/real_zones_1080x1920.png": "5d2bdedf17a9562276fdab7a04ba010527b1430bc6071fab342bc9f376989cc1",
+    "design/05-visual-design/SW-017/r1/previews/zones/virtual_zones_1080x1920.png": "fbaf267572bf1cca2a3f082af60674a378000a872f1e2ab5dc1afe70de14e74a",
+    "design/05-visual-design/SW-017/r1/prompts.md": "eca845be69868b95ae3f14d7e705bc091063c9493a4bbb86696429ff0e117d88",
+    "design/05-visual-design/SW-017/r1/source/sw017_context_sim.py": "a4dd2fbc3b5f120042135c373e427f4a2963e8aa80edb138339a18052978bccc",
+    "design/05-visual-design/SW-017/r1/source/sw017_edge_audit.py": "cd0409dd063babaee3c5c0742180beccffe9b64e52a146a3a9d571993938afe1",
+    "design/05-visual-design/SW-017/r1/source/sw017_manifest.py": "5578665c07e9da3b7a64763af333e31d0dbec3ccf3a297b59b439254503f3046"
+  },
+  "checks": [
+    {
+      "name": "设计清单完整性核验 (44 文件哈希及字节完全一致)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/trae-design/H-SW-017-R1.md",
+        "design/05-visual-design/SW-017/r1/design-manifest.json"
+      ]
+    },
+    {
+      "name": "双模式六阶段/三比例/关键状态设计模拟角标与真实截图隔离核验",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/trae-design/H-SW-017-R1.md",
+        "design/05-visual-design/SW-017/r1/integration-reference.json"
+      ]
+    },
+    {
+      "name": "F7 边缘 Void 黑带独立量化审计复核",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-017/r1/previews/findings/edge-audit.json"
+      ]
+    },
+    {
+      "name": "生产规范边界核验 (0生产层改动，0付费API，未改D-009)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/trae-design/H-SW-017-R1.md"
+      ]
+    }
+  ]
+}
