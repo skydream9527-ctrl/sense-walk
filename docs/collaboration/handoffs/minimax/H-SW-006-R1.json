@@ -126,13 +126,13 @@
     {
       "kind": "candidate-script",
       "path": "design/assets/rainforest/candidates/SW-006/r1/scripts/build_r1.py",
-      "sha256": "d15a7330621a4209d79c2d56436037141dd3efcf6ecbf7f59cb77a8671b76e3b",
+      "sha256": "7eba40496e6ea234ce7b7c60aa95726d6f2ab88fea8c330cbe6aa706bca9ff45",
       "role": "r1-candidate-generator"
     },
     {
       "kind": "candidate-manifest",
       "path": "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
-      "sha256": "f1f29902ebcf50b78eb2701771b41b0a0cfb37155d9be0b007a6af43952176c6",
+      "sha256": "f5f06c9c67d7bb3c0c60477ad500eff6abb9d43473145206ece3d522e4524fbd",
       "role": "r1-candidate-manifest"
     },
     {
