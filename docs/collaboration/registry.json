@@ -140,9 +140,17 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "ready：SW012/SW015已accepted。MiniMax在本任务内先0API补生产guard（真实冻结批准/严格1080x1920/任务跨revision总8次/累计账本），自测正确后按既有授权制作候选；保护不通过不调用。",
-        "原8次总尝试预算包括统一参考/重试/失败/超时，不能解释为每轮8次；project历史14与SW006计数分开。"
-      ]
+        "远端 PR #25 协作门禁失败（manifest.json 中的 file/checks 缺少仓库根相对路径前缀，且 checks.evidence 不可使用通配符）；且 R1 明确声明为 0 API 占位草案，等待 MiniMax 修正路径并在 8 次尝试预算内启动真实雨林素材制作产出 R2。"
+      ],
+      "observed_delivery": {
+        "revision": 1,
+        "branch": "codex/minimax/SW-006-r1",
+        "branch_head": "eac92e43b586a2c2dc1b02e83db0ee61aa629081",
+        "business_head": "6ba654c5ba761ab25d94d121e985c5298d2d3d8a",
+        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
+        "source_report": "docs/collaboration/reviews/R-SW-006-R1.md"
+      }
     },
     {
       "id": "SW-005",
@@ -269,17 +277,18 @@
       "title": "雨林运行时底座与真实声景准备",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-005",
         "SW-012"
       ],
       "task_file": "docs/collaboration/tasks/SW-016.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-016-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-016-R1.json",
+      "integrated_commit": "b4d4000f238a10ba2edd5508918a39254051ed0b",
       "pending": [
-        "独立可并行，不等SW006素材：900m schema/按冻结五层渲染/双模式复用/声景来源与音频准备；未完成候选前不宣称雨林可玩或用设计PNG入包。"
+        "真实雨林声景获取/许可/处理/听辨（阻塞 SW-007 最终验收）",
+        "雨林生产开放（等 SW-006 候选 + SW-007 组合）"
       ]
     },
     {

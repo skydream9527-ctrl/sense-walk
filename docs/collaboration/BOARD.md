@@ -21,8 +21,16 @@
 | SW-013 | [第二轮独立复验与交接收口](tasks/SW-013.md) | antigravity | accepted | SW-003 | [H-SW-013-R1](handoffs/antigravity/H-SW-013-R1.json) / — |
 | SW-014 | [雨林素材交付预检准备（零API）](tasks/SW-014.md) | minimax | accepted | SW-002, SW-003 | [H-SW-014-R3](handoffs/minimax/H-SW-014-R3.json) / [R-SW-014-R3](reviews/R-SW-014-R3.json) |
 | SW-015 | [真实设计规格与素材预检联调（零API）](tasks/SW-015.md) | minimax | accepted | SW-011, SW-014 | [H-SW-015-R1](handoffs/minimax/H-SW-015-R1.json) / [R-SW-015-R1](reviews/R-SW-015-R1.json) |
-| SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | ready | SW-005, SW-012 | — / — |
+| SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | accepted | SW-005, SW-012 | [H-SW-016-R1](handoffs/zcode/H-SW-016-R1.json) / [R-SW-016-R1](reviews/R-SW-016-R1.json) |
 | SW-017 | [雨林双模式应用验图参照与交接标准](tasks/SW-017.md) | trae-design | ready | SW-012 | — / — |
+
+## 远端交付观察（尚非独立批准）
+
+上表交付/审核指已入库记录；下面的新轮次由协调者消费后再更新正式指针。远端head变化须重新核对，不能从观察直接accepted。
+
+| 任务/轮次 | PR或分支 | 观察交付head | 来源 |
+| --- | --- | --- | --- |
+| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `eac92e4` | [R-SW-006-R1](reviews/R-SW-006-R1.md) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 
