@@ -10,7 +10,7 @@
   "layers": [
     {
       "layer_id": "mist",
-      "file": "webp/rainforest_mist.webp",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
       "width": 1080,
       "height": 1920,
       "bytes": 37368,
@@ -21,10 +21,10 @@
       "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
       "process": "build_r1.py (SW-006 R1 candidate generator)",
       "checks": [
-        "checks/alpha_mask/rainforest_mist.png",
-        "checks/black/rainforest_mist.jpg",
-        "checks/white/rainforest_mist.jpg",
-        "checks/magenta/rainforest_mist.jpg"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_mist.jpg"
       ],
       "limitations": [
         "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
@@ -33,7 +33,7 @@
     },
     {
       "layer_id": "trunks_canopy",
-      "file": "webp/rainforest_trunks_canopy.webp",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
       "width": 1080,
       "height": 1920,
       "bytes": 7304,
@@ -44,10 +44,10 @@
       "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
       "process": "build_r1.py (SW-006 R1 candidate generator)",
       "checks": [
-        "checks/alpha_mask/rainforest_trunks_canopy.png",
-        "checks/black/rainforest_trunks_canopy.jpg",
-        "checks/white/rainforest_trunks_canopy.jpg",
-        "checks/magenta/rainforest_trunks_canopy.jpg"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_trunks_canopy.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_trunks_canopy.jpg"
       ],
       "limitations": [
         "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
@@ -56,7 +56,7 @@
     },
     {
       "layer_id": "vines_light",
-      "file": "webp/rainforest_vines_light.webp",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp",
       "width": 1080,
       "height": 1920,
       "bytes": 20344,
@@ -67,10 +67,10 @@
       "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
       "process": "build_r1.py (SW-006 R1 candidate generator)",
       "checks": [
-        "checks/alpha_mask/rainforest_vines_light.png",
-        "checks/black/rainforest_vines_light.jpg",
-        "checks/white/rainforest_vines_light.jpg",
-        "checks/magenta/rainforest_vines_light.jpg"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_vines_light.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_vines_light.jpg"
       ],
       "limitations": [
         "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
@@ -79,7 +79,7 @@
     },
     {
       "layer_id": "distant_glow",
-      "file": "webp/rainforest_distant_glow.webp",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
       "width": 1080,
       "height": 1920,
       "bytes": 25716,
@@ -90,10 +90,10 @@
       "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
       "process": "build_r1.py (SW-006 R1 candidate generator)",
       "checks": [
-        "checks/alpha_mask/rainforest_distant_glow.png",
-        "checks/black/rainforest_distant_glow.jpg",
-        "checks/white/rainforest_distant_glow.jpg",
-        "checks/magenta/rainforest_distant_glow.jpg"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_distant_glow.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_distant_glow.jpg"
       ],
       "limitations": [
         "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
@@ -102,7 +102,7 @@
     },
     {
       "layer_id": "glade",
-      "file": "webp/rainforest_glade.webp",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
       "width": 1080,
       "height": 1920,
       "bytes": 33510,
@@ -113,10 +113,10 @@
       "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
       "process": "build_r1.py (SW-006 R1 candidate generator)",
       "checks": [
-        "checks/alpha_mask/rainforest_glade.png",
-        "checks/black/rainforest_glade.jpg",
-        "checks/white/rainforest_glade.jpg",
-        "checks/magenta/rainforest_glade.jpg"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_glade.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_glade.jpg"
       ],
       "limitations": [
         "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",

@@ -71,7 +71,11 @@
       "status": "passed",
       "evidence": [
         "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
-        "design/assets/rainforest/candidates/SW-006/r1/webp/*.webp"
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp"
       ]
     },
     {
@@ -79,7 +83,10 @@
       "type": "source",
       "status": "passed",
       "evidence": [
-        "design/assets/rainforest/candidates/SW-006/r1/checks/"
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_mist.jpg"
       ]
     },
     {

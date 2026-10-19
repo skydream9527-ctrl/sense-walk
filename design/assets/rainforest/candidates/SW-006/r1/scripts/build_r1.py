@@ -79,7 +79,7 @@ def write_layer_artifacts(layer_id: str, rgba: np.ndarray) -> dict:
         Image.fromarray(composed, "RGB").save(R1 / f"checks/{bg_name}" / f"rainforest_{layer_id}.jpg", "JPEG", quality=90, optimize=True)
     return {
         "layer_id": layer_id,
-        "file": f"webp/rainforest_{layer_id}.webp",
+        "file": f"design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_{layer_id}.webp",
         "width": rgba.shape[1],
         "height": rgba.shape[0],
         "bytes": webp_path.stat().st_size,
@@ -325,10 +325,10 @@ def main() -> int:
                 "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
                 "process": "build_r1.py (SW-006 R1 candidate generator)",
                 "checks": [
-                    f"checks/alpha_mask/rainforest_{m['layer_id']}.png",
-                    f"checks/black/rainforest_{m['layer_id']}.jpg",
-                    f"checks/white/rainforest_{m['layer_id']}.jpg",
-                    f"checks/magenta/rainforest_{m['layer_id']}.jpg",
+                    f"design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_{m['layer_id']}.png",
+                    f"design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_{m['layer_id']}.jpg",
+                    f"design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_{m['layer_id']}.jpg",
+                    f"design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_{m['layer_id']}.jpg",
                 ],
                 "limitations": [
                     "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
