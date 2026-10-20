@@ -7,7 +7,7 @@
   "recipient": "antigravity",
   "base_commit": "a2d727f8a6eb565d67a7f76a73a789dab7aaa1fa",
   "head_commit": "511adf5bc7cd0a80be23b431fbe6a4c3b72efa52",
-  "pr_url": null,
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/35",
   "report": "docs/collaboration/handoffs/minimax/H-SW-006-R2.md",
   "changed_files": [
     "design/assets/rainforest/candidates/SW-006/api_ledger.json",
