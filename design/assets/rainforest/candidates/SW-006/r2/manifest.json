@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 2,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 8,
+  "api_attempts_total": 22,
+  "cost": "unknown (托管服务未按次返回费用数值)",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "layers": [
+    {
+      "layer_id": "mist",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_mist.webp",
+      "png_file": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_mist.png",
+      "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_mist.png",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 145032,
+      "sha256": "ab2e0b8d836724ecd22f275972382175f48a4c1c86a5127c17f65428ad3071c7",
+      "png_sha256": "5a15d7e0b5ea30a7a3f6396dc1d9400a634d08f324a63a93d0b1ef9fb41dfeed",
+      "source_resolution": "1536x2752",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "parallax": 0.0,
+      "at_meters": 90,
+      "to_opacity": 0.55,
+      "fade_meters": 20,
+      "tileable": false,
+      "origin": "mcode-tools connector__matrix__generate_image (MiniMax matrix 托管生图服务) 生成的单层素材 (image-to-image, 参考 SW-012 批准 export); 非公有领域素材, 条款: host-managed 托管服务, 凭据仅 host/env, 不入 Git; 单次调用消耗 SW-006 任务预算 1 次",
+      "process": "postprocess_r2.py: 可分离洋红底反解混合方程求 alpha (bg=[255.0, 0.0, 255.0], F=[37.2, 56.9, 55.8]) -> 等比 LANCZOS 缩放并中心裁切至 1080x1920 (LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920, 来源 1536x2752) -> alpha 密度标定到 SW-012 批准 design 实测统计 (gamma=3.2, 目标最大 alpha=0.5647) -> 色域收敛到批准色板统计 (只取批准 export 的色彩/明度分布统计量, 未复制任何 design 像素) -> alpha 量化 64 级 + 3x3 中值去噪 -> PNG(RGBA) + WebP(quality=86)",
+      "quality_status": "candidate",
+      "call": {
+        "service": "connector__matrix__generate_image",
+        "model_family": "MiniMax matrix 托管生图",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#mist (派生自 design/05-visual-design/SW-012/r1/prompts.md §1, 仅背景改写为可分离洋红底)",
+        "reference_input": "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png",
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "returned_resolution": "1536x2752",
+        "ledger_seq": 4
+      },
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/alpha_mask/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/black/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/white/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_mist_zoom.png"
+      ],
+      "measurements": {
+        "alpha_max": 0.5647058823529412,
+        "semi_transparent_fraction": 0.6992086226851851,
+        "transparent_fraction": 0.3007913773148148,
+        "edge_strip4_max_alpha": {
+          "top": 3.316809804387298e-05,
+          "bottom": 3.316809804387298e-05,
+          "left": 9.06209351557241e-06,
+          "right": 3.316809804387298e-05
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.3010464482043488,
+        "max_alpha_gradient_y": 0.1667044920512849,
+        "has_hard_edge": false,
+        "webp_bytes": 145032,
+        "webp_quality": 86,
+        "palette_transfer": {
+          "applied": true,
+          "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png",
+          "reference_stats": {
+            "hue": 114.51,
+            "sat": 108.0,
+            "v_p50": 48.0,
+            "v_p95": 63.0
+          },
+          "generated_stats": {
+            "hue": 101.5,
+            "sat": 168.0,
+            "v_p50": 115.0,
+            "v_p95": 255.0
+          },
+          "v_p50_before": 115.0,
+          "v_p50_after": 48.0
+        }
+      },
+      "limitations": [
+        "候选, 未入包; 需 Antigravity 独立审核后由 ZCode 按单独入包任务接线",
+        "tileable=false: 当前渲染语义仅右侧溢出宽度内有限横向滑动, 未做无缝平铺, 不宣称可平铺",
+        "来源分辨率 1536x2752, 经等比缩放+中心裁切得到 1080x1920, 非原生 1080",
+        "alpha 由洋红可分离底反解得到, 边缘为反解软边, 极细发丝处可能有 1-2px 精度损失"
+      ]
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_trunks_canopy.webp",
+      "png_file": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_trunks_canopy.png",
+      "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_trunks_canopy.png",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 245458,
+      "sha256": "20940b39b150d2f320aae7faba76ee9dcff64414ec27c545c752b9c8a5edcacb",
+      "png_sha256": "1d31af60dc2186a1a6020c9268f17695b97a6680b5040f6d9c3af58fbbe000d0",
+      "source_resolution": "1536x2752",
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "parallax": 0.3,
+      "at_meters": 270,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "tileable": false,
+      "origin": "mcode-tools connector__matrix__generate_image (MiniMax matrix 托管生图服务) 生成的单层素材 (image-to-image, 参考 SW-012 批准 export); 非公有领域素材, 条款: host-managed 托管服务, 凭据仅 host/env, 不入 Git; 单次调用消耗 SW-006 任务预算 1 次",
+      "process": "postprocess_r2.py: 可分离洋红底反解混合方程求 alpha (bg=[255.0, 0.0, 255.0], F=[17.4, 36.9, 30.6]) -> 等比 LANCZOS 缩放并中心裁切至 1080x1920 (LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920, 来源 1536x2752) -> alpha 密度标定到 SW-012 批准 design 实测统计 (gamma=1.633, 目标最大 alpha=1.0) -> 色域收敛到批准色板统计 (只取批准 export 的色彩/明度分布统计量, 未复制任何 design 像素) -> alpha 量化 64 级 + 3x3 中值去噪 -> PNG(RGBA) + WebP(quality=86)",
+      "quality_status": "candidate",
+      "call": {
+        "service": "connector__matrix__generate_image",
+        "model_family": "MiniMax matrix 托管生图",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy (派生自 design/05-visual-design/SW-012/r1/prompts.md §2, 仅背景改写为可分离洋红底)",
+        "reference_input": "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png",
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "returned_resolution": "1536x2752",
+        "ledger_seq": 8
+      },
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_trunks_canopy.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/alpha_mask/rainforest_trunks_canopy.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/black/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/white/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_trunks_canopy_zoom.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_rest_1080x1920.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_parallax_max_1080x1920.png"
+      ],
+      "measurements": {
+        "alpha_max": 1.0,
+        "semi_transparent_fraction": 0.8178891782407407,
+        "transparent_fraction": 0.17055217978395062,
+        "edge_strip4_max_alpha": {
+          "top": 0.9742099462466038,
+          "bottom": 1.0,
+          "left": 1.0,
+          "right": 0.9742099462466038
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.598042984770536,
+        "max_alpha_gradient_y": 0.5121403943231775,
+        "has_hard_edge": false,
+        "webp_bytes": 245458,
+        "webp_quality": 86,
+        "palette_transfer": {
+          "applied": true,
+          "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png",
+          "reference_stats": {
+            "hue": 113.85,
+            "sat": 132.0,
+            "v_p50": 59.0,
+            "v_p95": 102.0
+          },
+          "generated_stats": {
+            "hue": 101.05,
+            "sat": 198.0,
+            "v_p50": 68.0,
+            "v_p95": 136.0
+          },
+          "v_p50_before": 68.0,
+          "v_p50_after": 59.0
+        }
+      },
+      "limitations": [
+        "候选, 未入包; 需 Antigravity 独立审核后由 ZCode 按单独入包任务接线",
+        "tileable=false: 当前渲染语义仅右侧溢出宽度内有限横向滑动, 未做无缝平铺, 不宣称可平铺",
+        "来源分辨率 1536x2752, 经等比缩放+中心裁切得到 1080x1920, 非原生 1080",
+        "alpha 由洋红可分离底反解得到, 边缘为反解软边, 极细发丝处可能有 1-2px 精度损失"
+      ]
+    },
+    {
+      "layer_id": "vines_light",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_vines_light.webp",
+      "png_file": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_vines_light.png",
+      "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_vines_light.png",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 406320,
+      "sha256": "d1031bc1d97c1eabd94978275df9d7f63568abd39a5f449dffaf242ced0fd19a",
+      "png_sha256": "fc12a37e628e2285069d3e367a7618ba3305bac2cc01129039c22c849b74109d",
+      "source_resolution": "1536x2752",
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "parallax": 0.6,
+      "at_meters": 450,
+      "to_opacity": 1.0,
+      "fade_meters": 25,
+      "tileable": false,
+      "origin": "mcode-tools connector__matrix__generate_image (MiniMax matrix 托管生图服务) 生成的单层素材 (image-to-image, 参考 SW-012 批准 export); 非公有领域素材, 条款: host-managed 托管服务, 凭据仅 host/env, 不入 Git; 单次调用消耗 SW-006 任务预算 1 次",
+      "process": "postprocess_r2.py: 可分离洋红底反解混合方程求 alpha (bg=[255.0, 0.0, 248.0], F=[68.3, 97.3, 69.9]) -> 等比 LANCZOS 缩放并中心裁切至 1080x1920 (LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920, 来源 1536x2752) -> alpha 密度标定到 SW-012 批准 design 实测统计 (gamma=2.6, 目标最大 alpha=1.0) -> 色域收敛到批准色板统计 (只取批准 export 的色彩/明度分布统计量, 未复制任何 design 像素) -> alpha 量化 64 级 + 3x3 中值去噪 -> PNG(RGBA) + WebP(quality=80)",
+      "quality_status": "candidate",
+      "call": {
+        "service": "connector__matrix__generate_image",
+        "model_family": "MiniMax matrix 托管生图",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#vines_light (派生自 design/05-visual-design/SW-012/r1/prompts.md §3, 仅背景改写为可分离洋红底)",
+        "reference_input": "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png",
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "returned_resolution": "1536x2752",
+        "ledger_seq": 5
+      },
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_vines_light.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/alpha_mask/rainforest_vines_light.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/black/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/white/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_vines_light_zoom.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_rest_1080x1920.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_parallax_max_1080x1920.png"
+      ],
+      "measurements": {
+        "alpha_max": 1.0,
+        "semi_transparent_fraction": 0.3673654513888889,
+        "transparent_fraction": 0.6269873649691358,
+        "edge_strip4_max_alpha": {
+          "top": 1.0,
+          "bottom": 0.0003649470300437779,
+          "left": 1.0,
+          "right": 0.7708842917379337
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.7874203678857874,
+        "max_alpha_gradient_y": 0.8090691402204203,
+        "has_hard_edge": false,
+        "webp_bytes": 406320,
+        "webp_quality": 80,
+        "palette_transfer": {
+          "applied": true,
+          "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png",
+          "reference_stats": {
+            "hue": 66.7,
+            "sat": 56.0,
+            "v_p50": 92.0,
+            "v_p95": 197.0
+          },
+          "generated_stats": {
+            "hue": 74.79,
+            "sat": 121.0,
+            "v_p50": 142.0,
+            "v_p95": 255.0
+          },
+          "v_p50_before": 142.0,
+          "v_p50_after": 92.0
+        }
+      },
+      "limitations": [
+        "候选, 未入包; 需 Antigravity 独立审核后由 ZCode 按单独入包任务接线",
+        "tileable=false: 当前渲染语义仅右侧溢出宽度内有限横向滑动, 未做无缝平铺, 不宣称可平铺",
+        "来源分辨率 1536x2752, 经等比缩放+中心裁切得到 1080x1920, 非原生 1080",
+        "alpha 由洋红可分离底反解得到, 边缘为反解软边, 极细发丝处可能有 1-2px 精度损失"
+      ]
+    },
+    {
+      "layer_id": "distant_glow",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_distant_glow.webp",
+      "png_file": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_distant_glow.png",
+      "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_distant_glow.png",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 254702,
+      "sha256": "63e09c78f337b31ea9853634db4e190c73aaaac7284b879010fde9017674da74",
+      "png_sha256": "a82f51fcd98d54627835bd8b7f436ceebe96029b76297db2e037b200e57aec3d",
+      "source_resolution": "1536x2752",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "parallax": 0.0,
+      "at_meters": 675,
+      "to_opacity": 0.85,
+      "fade_meters": 25,
+      "tileable": false,
+      "origin": "mcode-tools connector__matrix__generate_image (MiniMax matrix 托管生图服务) 生成的单层素材 (image-to-image, 参考 SW-012 批准 export); 非公有领域素材, 条款: host-managed 托管服务, 凭据仅 host/env, 不入 Git; 单次调用消耗 SW-006 任务预算 1 次",
+      "process": "postprocess_r2.py: 可分离洋红底反解混合方程求 alpha (bg=[255.0, 0.0, 255.0], F=[191.0, 225.9, 208.9]) -> 等比 LANCZOS 缩放并中心裁切至 1080x1920 (LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920, 来源 1536x2752) -> alpha 密度标定到 SW-012 批准 design 实测统计 (gamma=3.2, 目标最大 alpha=0.2235) -> 色域收敛到批准色板统计 (只取批准 export 的色彩/明度分布统计量, 未复制任何 design 像素) -> alpha 量化 64 级 + 3x3 中值去噪 -> PNG(RGBA) + WebP(quality=86)",
+      "quality_status": "candidate",
+      "call": {
+        "service": "connector__matrix__generate_image",
+        "model_family": "MiniMax matrix 托管生图",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#distant_glow (派生自 design/05-visual-design/SW-012/r1/prompts.md §4, 仅背景改写为可分离洋红底)",
+        "reference_input": "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png",
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "returned_resolution": "1536x2752",
+        "ledger_seq": 6
+      },
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_distant_glow.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/alpha_mask/rainforest_distant_glow.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/black/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/white/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_distant_glow_zoom.png"
+      ],
+      "measurements": {
+        "alpha_max": 0.2235294117647059,
+        "semi_transparent_fraction": 0.6045886381172839,
+        "transparent_fraction": 0.39541136188271603,
+        "edge_strip4_max_alpha": {
+          "top": 0.14474565083390792,
+          "bottom": 6.732074770410012e-05,
+          "left": 0.037291763339396496,
+          "right": 0.011610554054886741
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.011156890302932432,
+        "max_alpha_gradient_y": 0.011156890302932432,
+        "has_hard_edge": false,
+        "webp_bytes": 254702,
+        "webp_quality": 86,
+        "palette_transfer": {
+          "applied": true,
+          "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png",
+          "reference_stats": {
+            "hue": 97.72,
+            "sat": 51.0,
+            "v_p50": 194.0,
+            "v_p95": 204.0
+          },
+          "generated_stats": {
+            "hue": 73.21,
+            "sat": 37.0,
+            "v_p50": 226.0,
+            "v_p95": 234.0
+          },
+          "v_p50_before": 226.0,
+          "v_p50_after": 194.0
+        }
+      },
+      "limitations": [
+        "候选, 未入包; 需 Antigravity 独立审核后由 ZCode 按单独入包任务接线",
+        "tileable=false: 当前渲染语义仅右侧溢出宽度内有限横向滑动, 未做无缝平铺, 不宣称可平铺",
+        "来源分辨率 1536x2752, 经等比缩放+中心裁切得到 1080x1920, 非原生 1080",
+        "alpha 由洋红可分离底反解得到, 边缘为反解软边, 极细发丝处可能有 1-2px 精度损失"
+      ]
+    },
+    {
+      "layer_id": "glade",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_glade.webp",
+      "png_file": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_glade.png",
+      "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_glade.png",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 252440,
+      "sha256": "428e75759f4b986d425bdf05eb0149fb5c0428ef0bb38ee246228a97a697dc13",
+      "png_sha256": "980b6e8e44d815af0a23601f54d7006cec4505b0ea14f72548050ac9ff0270b6",
+      "source_resolution": "1536x2752",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "parallax": 0.0,
+      "at_meters": 855,
+      "to_opacity": 0.9,
+      "fade_meters": 20,
+      "tileable": false,
+      "origin": "mcode-tools connector__matrix__generate_image (MiniMax matrix 托管生图服务) 生成的单层素材 (image-to-image, 参考 SW-012 批准 export); 非公有领域素材, 条款: host-managed 托管服务, 凭据仅 host/env, 不入 Git; 单次调用消耗 SW-006 任务预算 1 次",
+      "process": "postprocess_r2.py: 可分离洋红底反解混合方程求 alpha (bg=[255.0, 0.0, 248.0], F=[22.2, 74.6, 55.4]) -> 等比 LANCZOS 缩放并中心裁切至 1080x1920 (LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920, 来源 1536x2752) -> alpha 密度标定到 SW-012 批准 design 实测统计 (gamma=2.6, 目标最大 alpha=0.9294) -> 色域收敛到批准色板统计 (只取批准 export 的色彩/明度分布统计量, 未复制任何 design 像素) -> alpha 量化 64 级 + 3x3 中值去噪 -> PNG(RGBA) + WebP(quality=86)",
+      "quality_status": "candidate",
+      "call": {
+        "service": "connector__matrix__generate_image",
+        "model_family": "MiniMax matrix 托管生图",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#glade (派生自 design/05-visual-design/SW-012/r1/prompts.md §5, 仅背景改写为可分离洋红底)",
+        "reference_input": "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png",
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "returned_resolution": "1536x2752",
+        "ledger_seq": 7
+      },
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_glade.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/alpha_mask/rainforest_glade.png",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/black/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/white/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_glade_zoom.png"
+      ],
+      "measurements": {
+        "alpha_max": 0.9294117647058824,
+        "semi_transparent_fraction": 0.4094854359567901,
+        "transparent_fraction": 0.5905145640432099,
+        "edge_strip4_max_alpha": {
+          "top": 0.00011819544109108967,
+          "bottom": 0.00011819544109108967,
+          "left": 0.0003391860632171583,
+          "right": 0.0007166031525910738
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.43118022478405676,
+        "max_alpha_gradient_y": 0.4454091677032509,
+        "has_hard_edge": false,
+        "webp_bytes": 252440,
+        "webp_quality": 86,
+        "palette_transfer": {
+          "applied": true,
+          "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png",
+          "reference_stats": {
+            "hue": 88.35,
+            "sat": 54.0,
+            "v_p50": 189.0,
+            "v_p95": 197.0
+          },
+          "generated_stats": {
+            "hue": 91.13,
+            "sat": 174.0,
+            "v_p50": 255.0,
+            "v_p95": 255.0
+          },
+          "v_p50_before": 255.0,
+          "v_p50_after": 189.0
+        }
+      },
+      "limitations": [
+        "候选, 未入包; 需 Antigravity 独立审核后由 ZCode 按单独入包任务接线",
+        "tileable=false: 当前渲染语义仅右侧溢出宽度内有限横向滑动, 未做无缝平铺, 不宣称可平铺",
+        "来源分辨率 1536x2752, 经等比缩放+中心裁切得到 1080x1920, 非原生 1080",
+        "alpha 由洋红可分离底反解得到, 边缘为反解软边, 极细发丝处可能有 1-2px 精度损失"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+    "spec_file": "design/05-visual-design/SW-012/r1/design-spec.json",
+    "spec_sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320",
+    "decision": "docs/collaboration/decisions/D-009-freeze-rainforest-design-spec.md"
+  },
+  "api_ledger": {
+    "ledger_file": "design/assets/rainforest/candidates/SW-006/api_ledger.json",
+    "sw006_attempts_used": 8,
+    "sw006_attempts_limit": 8,
+    "project_lifetime_baseline": 14,
+    "project_lifetime_attempts": 22,
+    "outcomes": {
+      "success": 6,
+      "failed": 2,
+      "timeout": 0
+    },
+    "entries": [
+      {
+        "seq": 1,
+        "revision": "r2",
+        "layer_id": "probe_reference",
+        "outcome": "failed",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:23:03Z",
+        "settled_at": "2026-10-20T13:27:37Z",
+        "note": "probe: 生图成功但产出整幅森林场景(底色仅出现在天空缺口), 非可分离孤立层, 该候选被拒; 尝试仍计入预算"
+      },
+      {
+        "seq": 2,
+        "revision": "r2",
+        "layer_id": "trunks_canopy",
+        "outcome": "failed",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:31:59Z",
+        "settled_at": "2026-10-20T13:43:45Z",
+        "note": "a2: 纯文生图, 底色仅出现在天空缺口, 四周仍是暗绿场景, 非可分离孤立层, 该候选被拒"
+      },
+      {
+        "seq": 3,
+        "revision": "r2",
+        "layer_id": "trunks_canopy",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy (image-to-image, 参考 design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:36:11Z",
+        "settled_at": "2026-10-20T13:44:24Z",
+        "note": "a3: image-to-image(SW-012 批准 export 贴洋红底) 得到可分离孤立层; 但模型画成贴纸卡片, 内容缩进一圈形成矩形硬边, 按逐层边缘语义需重做",
+        "actual_resolution": "1536x2752"
+      },
+      {
+        "seq": 4,
+        "revision": "r2",
+        "layer_id": "mist",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#mist (image-to-image, 参考 SW-012 批准 export)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:46:24Z",
+        "settled_at": "2026-10-20T14:26:39Z",
+        "note": "mist: image-to-image 成功, 洋红可分离底; 后处理反解 alpha + 色域收敛到批准色板统计",
+        "actual_resolution": "1536x2752"
+      },
+      {
+        "seq": 5,
+        "revision": "r2",
+        "layer_id": "vines_light",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#vines_light (image-to-image, 参考 SW-012 批准 export)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:46:25Z",
+        "settled_at": "2026-10-20T14:26:39Z",
+        "note": "trunks_canopy: 批量 image-to-image 成功; 铺满画布, 顶/左右出血",
+        "actual_resolution": "1536x2752"
+      },
+      {
+        "seq": 6,
+        "revision": "r2",
+        "layer_id": "distant_glow",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#distant_glow (image-to-image, 参考 SW-012 批准 export)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:46:25Z",
+        "settled_at": "2026-10-20T14:26:39Z",
+        "note": "vines_light: 批量 image-to-image 成功",
+        "actual_resolution": "1536x2752"
+      },
+      {
+        "seq": 7,
+        "revision": "r2",
+        "layer_id": "glade",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#glade (image-to-image, 参考 SW-012 批准 export)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:46:25Z",
+        "settled_at": "2026-10-20T14:26:39Z",
+        "note": "distant_glow: 批量 image-to-image 成功",
+        "actual_resolution": "1536x2752"
+      },
+      {
+        "seq": 8,
+        "revision": "r2",
+        "layer_id": "trunks_canopy",
+        "outcome": "success",
+        "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy (image-to-image, 参考 SW-012 批准 export, 重做铺满画布)",
+        "source_resolution": "requested:2K/9:16",
+        "reserved_at": "2026-10-20T13:47:28Z",
+        "settled_at": "2026-10-20T14:26:39Z",
+        "note": "glade: 批量 image-to-image 成功",
+        "actual_resolution": "1536x2752"
+      }
+    ]
+  },
+  "stage_checks": [
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_000m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_110m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_295m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_475m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_700m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_875m.png"
+  ],
+  "parallax_checks": [
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_rest_1080x1920.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_parallax_max_1080x1920.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_rest_1080x1920.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_parallax_max_1080x1920.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_1080x2400_rest.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_1080x2400_parallax_max.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_390x844_rest.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_390x844_parallax_max.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime-parallax-check.json"
+  ],
+  "limitations": [
+    "本轮 SW-006 共 8 次尝试预算已用尽 (含 2 次被拒的探针与 1 次需重做的卡片式构图); 账本逐次可追溯",
+    "未做真机/模拟器/Android 渲染验证; 候选仅在本地像素级与阶段合成层验证",
+    "不声明 approved_candidate / integrated / app_verified; 审核与入包由 Antigravity / ZCode 负责"
+  ]
+}
