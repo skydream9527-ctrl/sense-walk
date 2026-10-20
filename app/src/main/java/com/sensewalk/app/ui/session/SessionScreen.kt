@@ -25,6 +25,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -87,7 +89,8 @@ fun SessionScreen(
         },
     )
     val uiState by vm.uiState.collectAsStateWithLifecycle()
-    val walk by vm.walk.collectAsStateWithLifecycle()
+    // 高频快照只持有 State，不在此读取：读取下沉到绘制期与低频派生态（SW-019 #3）
+    val walkState = vm.walk.collectAsStateWithLifecycle()
     val settings by vm.settings.collectAsStateWithLifecycle()
 
     when (val state = uiState) {
@@ -121,7 +124,6 @@ fun SessionScreen(
         }
 
         is SessionViewModel.UiState.Ready -> {
-            val session = walk?.session ?: SessionState.READY
             if (mode != NavRoutes.Mode.VIRTUAL) {
                 // 双保险：导航参数异常时不进入会话
                 Column(
@@ -144,7 +146,7 @@ fun SessionScreen(
             SessionContent(
                 vm = vm,
                 config = state.controller.config,
-                walk = walk,
+                walkState = walkState,
                 reduceMotion = settings.reduceMotion,
                 rhythmHint = settings.rhythmHint,
                 holdToWalk = settings.holdToWalk,
@@ -158,13 +160,14 @@ fun SessionScreen(
 private fun SessionContent(
     vm: SessionViewModel,
     config: com.sensewalk.app.domain.scene.SceneConfig,
-    walk: com.sensewalk.app.domain.walk.VirtualWalkController.Snapshot?,
+    walkState: State<com.sensewalk.app.domain.walk.VirtualWalkController.Snapshot?>,
     reduceMotion: Boolean,
     rhythmHint: Boolean,
     holdToWalk: Boolean,
     onFinished: (outcome: String, meters: Int, elapsedMs: Long) -> Unit,
 ) {
-    val session = walk?.session ?: SessionState.READY
+    // 低频派生：只在会话状态真正变化时使读者失效；每帧快照更新不再重组本函数
+    val session by remember(walkState) { derivedStateOf { walkState.value?.session ?: SessionState.READY } }
     val sessionActive = session == SessionState.READY || session == SessionState.WALKING || session == SessionState.PAUSED
     val stabilizeHint by vm.stabilizeHint.collectAsStateWithLifecycle()
 
@@ -224,7 +227,7 @@ private fun SessionContent(
     LaunchedEffect(session) {
         if (!navigated && (session == SessionState.COMPLETED || session == SessionState.ABANDONED)) {
             navigated = true
-            val snapshot = walk ?: return@LaunchedEffect
+            val snapshot = walkState.value ?: return@LaunchedEffect
             onFinished(
                 if (session == SessionState.COMPLETED) NavRoutes.Outcome.COMPLETED else NavRoutes.Outcome.ABANDONED,
                 snapshot.meters.toInt(),
@@ -239,8 +242,9 @@ private fun SessionContent(
         delay(8_000)
         showIntro = false
     }
-    LaunchedEffect(walk?.deflection) {
-        if ((walk?.deflection ?: 0f) > 0.05f) showIntro = false
+    val inputStarted by remember(walkState) { derivedStateOf { (walkState.value?.deflection ?: 0f) > 0.05f } }
+    LaunchedEffect(inputStarted) {
+        if (inputStarted) showIntro = false
     }
 
     // 轻触查看米数（可信米数 = 领域累计值）
@@ -251,30 +255,13 @@ private fun SessionContent(
             .fillMaxSize()
             .background(SenseBlack),
     ) {
-        // 森林视觉：黑幕起，按 SensoryState 揭示；带 asset 的层渲染真实图片，其余程序降级
-        val imageLayers = remember(config) {
-            buildMap {
-                config.visualLayers.forEach { (id, def) ->
-                    val asset = when (def) {
-                        is com.sensewalk.app.domain.scene.VisualLayerDef.Parallax -> def.asset
-                        is com.sensewalk.app.domain.scene.VisualLayerDef.Overlay -> def.asset
-                        is com.sensewalk.app.domain.scene.VisualLayerDef.Solid -> null
-                    }
-                    if (asset != null) {
-                        val parallax = (def as? com.sensewalk.app.domain.scene.VisualLayerDef.Parallax)?.parallax ?: 0f
-                        put(id, ForestImageLayer(asset, parallax))
-                    }
-                }
-            }
-        }
+        // 森林视觉：黑幕起，按 SensoryState 揭示；带 asset 的层渲染真实图片，其余程序降级。
+        // 快照只在 ForestShell 绘制期读取，每帧变化不重组本容器内的文字/弹框/操作区。
+        val imageLayers = remember(config) { ForestImageLayer.fromConfig(config) }
         ForestShell(
-            sensory = walk?.sensory ?: com.sensewalk.app.domain.phase.SensoryState(emptyMap(), emptyMap(), emptyList()),
-            sPos = walk?.sPos ?: 0f,
-            velocity = walk?.velocity ?: 0f,
-            terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
+            walk = { walkState.value },
             reduceMotion = reduceMotion,
             imageLayers = imageLayers,
-            gait = walk?.gait ?: com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
             sceneId = config.id,
         )
 
@@ -287,34 +274,13 @@ private fun SessionContent(
                     detectTapGestures { showMeters = !showMeters }
                 },
         ) {
-            Column(
-                Modifier
+            MetersReadout(
+                showMeters = showMeters,
+                walkState = walkState,
+                modifier = Modifier
                     .align(Alignment.TopCenter)
-                    .padding(top = 64.dp)
-                    .semantics { contentDescription = if (showMeters) "已走 ${walk?.meters?.toInt() ?: 0} 米" else "轻触查看已走米数" },
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                if (showMeters && walk != null) {
-                    Text(
-                        text = "${walk.meters.toInt()} m",
-                        style = MaterialTheme.typography.displayMedium,
-                        fontWeight = FontWeight.Light,
-                        color = SenseOnSurface.copy(alpha = 0.9f),
-                    )
-                    Text(
-                        text = "已走",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = SenseMuted,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-                } else {
-                    Text(
-                        text = "轻触查看米数",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = SenseMuted.copy(alpha = 0.5f),
-                    )
-                }
-            }
+                    .padding(top = 64.dp),
+            )
 
             Column(
                 Modifier
@@ -448,6 +414,51 @@ private fun SessionContent(
                     Text("继续走", style = MaterialTheme.typography.titleMedium)
                 }
             }
+        }
+    }
+}
+
+/**
+ * 米数读出（虚走/实走共用）：整数米只在显示时读取，且派生态仅整数变化时失效；
+ * 隐藏时完全不订阅快照——绘制位移不会让顶端文字无谓重组。
+ */
+@Composable
+internal fun MetersReadout(
+    showMeters: Boolean,
+    walkState: State<com.sensewalk.app.domain.walk.VirtualWalkController.Snapshot?>,
+    modifier: Modifier = Modifier,
+) {
+    val metersInt: Int? = if (showMeters) {
+        val meters by remember(walkState) { derivedStateOf { walkState.value?.meters?.toInt() } }
+        meters
+    } else {
+        null
+    }
+    Column(
+        modifier.semantics {
+            contentDescription = if (showMeters) "已走 ${metersInt ?: 0} 米" else "轻触查看已走米数"
+        },
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        if (metersInt != null) {
+            Text(
+                text = "$metersInt m",
+                style = MaterialTheme.typography.displayMedium,
+                fontWeight = FontWeight.Light,
+                color = SenseOnSurface.copy(alpha = 0.9f),
+            )
+            Text(
+                text = "已走",
+                style = MaterialTheme.typography.labelSmall,
+                color = SenseMuted,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+        } else {
+            Text(
+                text = "轻触查看米数",
+                style = MaterialTheme.typography.labelSmall,
+                color = SenseMuted.copy(alpha = 0.5f),
+            )
         }
     }
 }

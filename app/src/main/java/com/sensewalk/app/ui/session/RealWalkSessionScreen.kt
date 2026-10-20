@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
@@ -189,7 +190,8 @@ fun RealWalkSessionScreen(
     onBack: () -> Unit,
 ) {
     val uiState by vm.uiState.collectAsState()
-    val walk by vm.walk.collectAsState()
+    // 高频快照只持有 State；读取下沉到绘制期与低频派生态（SW-019 #3）
+    val walkState = vm.walk.collectAsState()
     val settings by vm.settings.collectAsState()
 
     when (val state = uiState) {
@@ -253,15 +255,16 @@ fun RealWalkSessionScreen(
         }
 
         is RealWalkViewModel.UiState.Ready -> {
-            // 终态导航（与虚走同型）
+            // 终态导航（与虚走同型）：只订阅会话状态的变化
             var navigated by remember { mutableStateOf(false) }
-            LaunchedEffect(walk?.session) {
-                val session = walk?.session ?: return@LaunchedEffect
-                if (!navigated && (session == SessionState.COMPLETED || session == SessionState.ABANDONED)) {
+            val session by remember(walkState) { derivedStateOf { walkState.value?.session } }
+            LaunchedEffect(session) {
+                val current = session ?: return@LaunchedEffect
+                if (!navigated && (current == SessionState.COMPLETED || current == SessionState.ABANDONED)) {
                     navigated = true
-                    val snap = walk ?: return@LaunchedEffect
+                    val snap = walkState.value ?: return@LaunchedEffect
                     onFinished(
-                        if (session == SessionState.COMPLETED) {
+                        if (current == SessionState.COMPLETED) {
                             com.sensewalk.app.ui.navigation.NavRoutes.Outcome.COMPLETED
                         } else {
                             com.sensewalk.app.ui.navigation.NavRoutes.Outcome.ABANDONED
@@ -275,7 +278,7 @@ fun RealWalkSessionScreen(
             // 页面离开（回首页/系统返回）时若仍在走，暂停会话（交由通知栏恢复/停止）
             DisposableEffect(Unit) {
                 onDispose {
-                    if (walk?.session == SessionState.WALKING) vm.pauseForDialog()
+                    if (walkState.value?.session == SessionState.WALKING) vm.pauseForDialog()
                 }
             }
 
@@ -283,7 +286,7 @@ fun RealWalkSessionScreen(
                 vm = vm,
                 sceneId = sceneId,
                 sceneName = state.sceneName,
-                walk = walk,
+                walkState = walkState,
                 reduceMotion = settings.reduceMotion,
             )
         }

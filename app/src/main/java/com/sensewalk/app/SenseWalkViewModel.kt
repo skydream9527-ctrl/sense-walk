@@ -3,7 +3,7 @@ package com.sensewalk.app
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.sensewalk.app.data.SceneRepository
+import com.sensewalk.app.data.SceneCatalog
 import com.sensewalk.app.data.SettingsRepository
 import com.sensewalk.app.data.UserSettings
 import com.sensewalk.app.domain.scene.SceneLoadState
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class SenseWalkViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val sceneRepository = SceneRepository(application)
+    private val app = application
     private val settingsRepository = SettingsRepository(application)
 
     private val _sceneState = MutableStateFlow<SceneLoadState>(SceneLoadState.Loading)
@@ -26,18 +26,18 @@ class SenseWalkViewModel(application: Application) : AndroidViewModel(applicatio
         .stateIn(viewModelScope, SharingStarted.Eagerly, UserSettings())
 
     init {
-        loadScenes()
+        loadScenes(force = false)
     }
 
-    /** 首页错误态的重试入口：重新走一遍 读取→解析→校验 */
+    /** 首页错误态的重试入口：重新走一遍 读取→解析→校验（绕过已缓存结果） */
     fun retrySceneLoad() {
-        loadScenes()
+        loadScenes(force = true)
     }
 
-    private fun loadScenes() {
+    private fun loadScenes(force: Boolean) {
         viewModelScope.launch {
             _sceneState.value = SceneLoadState.Loading
-            _sceneState.value = sceneRepository.loadAll()
+            _sceneState.value = if (force) SceneCatalog.reload(app) else SceneCatalog.load(app)
         }
     }
 

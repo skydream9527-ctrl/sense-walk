@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,10 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.sensewalk.app.data.SceneCatalog
+import com.sensewalk.app.domain.scene.SceneLoadState
 import com.sensewalk.app.domain.session.SessionState
 import com.sensewalk.app.domain.walk.VirtualWalkController
 import com.sensewalk.app.ui.theme.SenseBlack
@@ -28,43 +30,36 @@ import com.sensewalk.app.ui.theme.SenseMuted
 import com.sensewalk.app.ui.theme.SenseOnSurface
 import androidx.compose.foundation.gestures.detectTapGestures
 
-/** 实走页视觉配置只读缓存（服务持有会话；UI 只需要 ForestShell 的层定义） */
-private object RealWalkVisualCache {
-    private val cache = mutableMapOf<String, com.sensewalk.app.domain.scene.SceneConfig?>()
-
-    fun load(context: android.content.Context, sceneId: String): com.sensewalk.app.domain.scene.SceneConfig? =
-        synchronized(cache) {
-            cache.getOrPut(sceneId) {
-                // loadAll 是挂起函数；服务已就绪说明仓库此刻可读——用阻塞读取（一次性，IO 线程池）
-                kotlinx.coroutines.runBlocking {
-                    (com.sensewalk.app.data.SceneRepository(context).loadAll()
-                        as? com.sensewalk.app.domain.scene.SceneLoadState.Ready)
-                        ?.scenes
-                        ?.firstOrNull { it.id == sceneId }
-                }
-            }
-        }
-}
-
 /**
  * 实走会话主体（T06）：视觉层/米数/放弃/暂停复用虚走组件；
  * 下半区为「收进口袋走吧」状态区（实走无摇杆，计步由服务驱动）。
+ *
+ * SW-019：场景配置来自进程级 [SceneCatalog]（服务装配时已加载，组合期同步命中；
+ * 未命中则异步加载），不再 runBlocking 阻塞 UI 线程；高频快照只在绘制期/派生态读取。
  */
 @Composable
 fun RealWalkContent(
     vm: RealWalkViewModel,
     sceneId: String,
     sceneName: String,
-    walk: VirtualWalkController.Snapshot?,
+    walkState: State<VirtualWalkController.Snapshot?>,
     reduceMotion: Boolean,
 ) {
-    val session = walk?.session ?: SessionState.READY
+    val session by remember(walkState) { derivedStateOf { walkState.value?.session ?: SessionState.READY } }
     val sessionActive =
         session == SessionState.READY || session == SessionState.WALKING || session == SessionState.PAUSED
 
-    // 场景配置只为视觉层（ForestShell）取一次；计距/相位全在服务里
+    // 场景配置只为视觉层（ForestShell）；计距/相位全在服务里。
+    // remember 以 sceneId 为键：先同步命中进程缓存（服务装配时已加载），未命中才异步兜底，不阻塞 UI 线程
     val context = androidx.compose.ui.platform.LocalContext.current
-    val visualConfig = remember(sceneId) { RealWalkVisualCache.load(context, sceneId) }
+    val visualConfig = remember(sceneId) { mutableStateOf(SceneCatalog.peekScene(context, sceneId)) }
+    LaunchedEffect(sceneId) {
+        if (visualConfig.value == null) {
+            visualConfig.value = (SceneCatalog.load(context) as? SceneLoadState.Ready)
+                ?.scenes
+                ?.firstOrNull { it.id == sceneId }
+        }
+    }
 
     var showMeters by remember { mutableStateOf(false) }
     var showConfirm by remember { mutableStateOf(false) }
@@ -102,30 +97,12 @@ fun RealWalkContent(
             .fillMaxSize()
             .background(SenseBlack),
     ) {
-        visualConfig?.let { cfg ->
+        visualConfig.value?.let { cfg ->
             ForestShell(
-                sensory = walk?.sensory ?: com.sensewalk.app.domain.phase.SensoryState(emptyMap(), emptyMap(), emptyList()),
-                sPos = walk?.sPos ?: 0f,
-                velocity = walk?.velocity ?: 0f,
-                terrain = walk?.terrain ?: com.sensewalk.app.domain.scene.TerrainKind.FLAT,
+                walk = { walkState.value },
                 reduceMotion = reduceMotion,
+                imageLayers = remember(cfg) { ForestImageLayer.fromConfig(cfg) },
                 sceneId = cfg.id,
-                imageLayers = remember(cfg) {
-                    buildMap {
-                        cfg.visualLayers.forEach { (id, def) ->
-                            val asset = when (def) {
-                                is com.sensewalk.app.domain.scene.VisualLayerDef.Parallax -> def.asset
-                                is com.sensewalk.app.domain.scene.VisualLayerDef.Overlay -> def.asset
-                                is com.sensewalk.app.domain.scene.VisualLayerDef.Solid -> null
-                            }
-                            if (asset != null) {
-                                val parallax =
-                                    (def as? com.sensewalk.app.domain.scene.VisualLayerDef.Parallax)?.parallax ?: 0f
-                                put(id, ForestImageLayer(asset, parallax))
-                            }
-                        }
-                    }
-                },
             )
         }
 
@@ -136,37 +113,13 @@ fun RealWalkContent(
                 .fillMaxHeight(0.55f)
                 .pointerInput(Unit) { detectTapGestures { showMeters = !showMeters } },
         ) {
-            Column(
-                Modifier
+            MetersReadout(
+                showMeters = showMeters,
+                walkState = walkState,
+                modifier = Modifier
                     .align(Alignment.TopCenter)
-                    .padding(top = 64.dp)
-                    .semantics {
-                        contentDescription =
-                            if (showMeters) "已走 ${walk?.meters?.toInt() ?: 0} 米" else "轻触查看已走米数"
-                    },
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                if (showMeters && walk != null) {
-                    Text(
-                        text = "${walk.meters.toInt()} m",
-                        style = MaterialTheme.typography.displayMedium,
-                        fontWeight = FontWeight.Light,
-                        color = SenseOnSurface.copy(alpha = 0.9f),
-                    )
-                    Text(
-                        text = "已走",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = SenseMuted,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-                } else {
-                    Text(
-                        text = "轻触查看米数",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = SenseMuted.copy(alpha = 0.5f),
-                    )
-                }
-            }
+                    .padding(top = 64.dp),
+            )
 
             Column(
                 Modifier
@@ -199,11 +152,12 @@ fun RealWalkContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
         ) {
+            // 速度只派生成"是否在动"的布尔，文案不随每帧速度浮动失效
+            val moving by remember(walkState) { derivedStateOf { (walkState.value?.velocity ?: 0f) > 0.05f } }
             Text(
                 text = when {
                     session == SessionState.PAUSED -> "已暂停 · 走动时点「继续走」"
-                    session == SessionState.WALKING && (walk?.velocity ?: 0f) > 0.05f ->
-                        "走得刚刚好 · 就这样"
+                    session == SessionState.WALKING && moving -> "走得刚刚好 · 就这样"
                     session == SessionState.WALKING -> "在走了 · 手机收好"
                     else -> "收进口袋，走吧"
                 },

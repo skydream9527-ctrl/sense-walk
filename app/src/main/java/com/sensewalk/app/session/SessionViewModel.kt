@@ -11,7 +11,7 @@ import android.media.AudioManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.core.content.ContextCompat
-import com.sensewalk.app.data.SceneRepository
+import com.sensewalk.app.data.SceneCatalog
 import com.sensewalk.app.data.SessionSnapshotStore
 import com.sensewalk.app.domain.session.SessionSnapshot
 import com.sensewalk.app.data.SettingsRepository
@@ -54,7 +54,6 @@ class SessionViewModel(
     }
 
     private val app = application
-    private val sceneRepository = SceneRepository(application)
     private val settingsRepository = SettingsRepository(application)
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
@@ -93,7 +92,8 @@ class SessionViewModel(
 
     init {
         viewModelScope.launch {
-            when (val state = sceneRepository.loadAll()) {
+            // 进程级目录缓存：首页已加载则直接命中，不重复读 assets（SW-019 #2）
+            when (val state = SceneCatalog.load(app)) {
                 is SceneLoadState.Error -> _uiState.value = UiState.Error(
                     "场景配置加载失败：\n" + state.diagnostics.joinToString("\n"),
                 )
