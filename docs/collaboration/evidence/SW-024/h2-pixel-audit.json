@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "audit_id": "SW-024-H2-PIXEL-AUDIT",
+  "audited_on": "2026-10-20",
+  "auditor": "antigravity",
+  "baseline_commit": "321060e945b512f3f6b8b038543eb3b9d16a58bc",
+  "release_tag": "build-176-aaa789b",
+  "apk_sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
+  "target_handoff": "docs/collaboration/handoffs/zcode/H-SW-018-R1.json",
+  "correction_report": "docs/collaboration/reviews/R-SW-018-R1-correction.md",
+  "reference_geometry": {
+    "canvas_size": [1080, 2400],
+    "ground_y_px": 2076,
+    "traveler_color_rgb": [122, 133, 124],
+    "expected_idle_walk_y_range": [1981, 2076],
+    "expected_tense_duck_y_range": [1987, 2076],
+    "expected_hop_lift_y_range": [1955, 2050],
+    "center_card_roi": {
+      "x_min": 100,
+      "x_max": 980,
+      "y_min": 950,
+      "y_max": 1450
+    }
+  },
+  "screens": {
+    "02-virtual-session.png": {
+      "path": "docs/collaboration/evidence/H-SW-018-R1/screens/02-virtual-session.png",
+      "bytes": 85932,
+      "sha256": "5c8aa48a2a35c88a67032308d07c6ea4386d6c2e25fbd3aa9a4e89c2c79be979",
+      "dimensions": [1080, 2400],
+      "traveler_bbox": {
+        "x_min": 355,
+        "x_max": 378,
+        "y_min": 1981,
+        "y_max": 2076
+      },
+      "inferred_gait": "IDLE",
+      "center_card_region_x100_980_y950_1450": {
+        "bright_pixel_count_rgb_gt_100": 14056,
+        "max_rgb": [232, 228, 217],
+        "card_text_visible": true
+      },
+      "right_edge_52px_void_ratio_y1000_1500": 1.0
+    },
+    "03-walking.png": {
+      "path": "docs/collaboration/evidence/H-SW-018-R1/screens/03-walking.png",
+      "bytes": 46027,
+      "sha256": "ebf87bd10fbad57589c695b0b78cb301c4e732dab033bd737e17a6dbab3b8ebf",
+      "dimensions": [1080, 2400],
+      "traveler_bbox": {
+        "x_min": 355,
+        "x_max": 378,
+        "y_min": 1981,
+        "y_max": 2076
+      },
+      "inferred_gait": "IDLE_OR_WALK_ZERO_PHASE",
+      "center_card_region_x100_980_y950_1450": {
+        "bright_pixel_count_rgb_gt_100": 0,
+        "max_rgb": [6, 8, 6],
+        "card_text_visible": false
+      },
+      "right_edge_52px_void_ratio_y1000_1500": 1.0
+    },
+    "H2-hint-appear.png": {
+      "path": "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-appear.png",
+      "bytes": 385913,
+      "sha256": "96faa8faa8261c8a210c404a0077327440723be01786be990920eee3bcf4f3d6",
+      "dimensions": [1080, 2400],
+      "traveler_bbox": {
+        "x_min": 339,
+        "x_max": 370,
+        "y_min": 1957,
+        "y_max": 2050
+      },
+      "inferred_gait": "HOP_ON_SLOPE_UP_237_TO_240M",
+      "center_card_region_x100_980_y950_1450": {
+        "bright_pixel_count_rgb_gt_100": 0,
+        "max_rgb": [33, 46, 40],
+        "card_text_visible": false
+      },
+      "right_edge_52px_void_ratio_y1000_1500": 1.0
+    },
+    "H2-hint-gone.png": {
+      "path": "docs/collaboration/evidence/H-SW-018-R1/screens/H2-hint-gone.png",
+      "bytes": 420127,
+      "sha256": "8a3762ebb47b4e1f80d049c00a44e3cfcb490097e1c8d2b4e16e2eb056970993",
+      "dimensions": [1080, 2400],
+      "traveler_bbox": {
+        "x_min": 358,
+        "x_max": 376,
+        "y_min": 1955,
+        "y_max": 2049
+      },
+      "inferred_gait": "HOP_ON_GAP_240_TO_270M",
+      "center_card_region_x100_980_y950_1450": {
+        "bright_pixel_count_rgb_gt_100": 0,
+        "max_rgb": [36, 49, 42],
+        "card_text_visible": false
+      },
+      "right_edge_52px_void_ratio_y1000_1500": 1.0
+    },
+    "F3-completed.png": {
+      "path": "docs/collaboration/evidence/H-SW-018-R1/screens/F3-completed.png",
+      "bytes": 55052,
+      "sha256": "2a5550b3936e276ef96253d0af3a7a03b752e55674387128c85d7d1089dfb6eb",
+      "dimensions": [1080, 2400],
+      "traveler_bbox": {
+        "x_min": null,
+        "x_max": null,
+        "y_min": null,
+        "y_max": null
+      },
+      "inferred_gait": "RESULT_SCREEN_COMPLETED_800M",
+      "center_card_region_x100_980_y950_1450": {
+        "bright_pixel_count_rgb_gt_100": 119926,
+        "max_rgb": [232, 228, 217],
+        "card_text_visible": true
+      },
+      "right_edge_52px_void_ratio_y1000_1500": 0.0
+    }
+  },
+  "verdict": {
+    "h2_hint_text_visible_in_screenshot": false,
+    "f3_800m_completion_visible": true,
+    "runtime_sync_hint_evidence_status": "pending"
+  }
+}
