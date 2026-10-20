@@ -35,7 +35,11 @@ class CoordinationChecks(unittest.TestCase):
                 target = (p.parent / url.split('#', 1)[0]).resolve()
                 if target.is_relative_to(self.root) and not target.exists():
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_text('fixture link target')
+                    src = REPO / target.relative_to(self.root)
+                    if src.is_file():
+                        shutil.copy2(src, target)
+                    else:
+                        target.write_text('fixture link target')
         self.registry = self.base / 'registry.json'
 
     def tearDown(self):
