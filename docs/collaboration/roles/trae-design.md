@@ -1,11 +1,11 @@
 # trae-design 稳定入口与完整提示词
 
-先fetch最新origin/main，读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../STAGE-CLOSEOUT.md`与当前任务。用户本轮要求阶段收口：固定森林800m双模式测试包，先回收安装/真机问题，再推进雨林。独立checkout/worktree/任务分支，保留已有工作；不操作他人index、不reset/强推覆盖。源码/精确commit/实际证据优先，历史handoff/review/evidence/decision只追加；无需完善本地Android环境，复用Actions。四个入口由用户转发，不自动外发消息。
+先fetch最新origin/main，在自己的独立checkout/worktree读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`和`../plans/2026-10-20/README.md`，再读对应task及最新handoff/review。用户要求从三份计划筛选合理部分安排开发；当前状态以registry与实际证据为准，不凭旧聊天重做。保留自己的未提交工作，不操作共享checkout的index、不reset/强推。无需补完整本地Android环境，复用Actions。历史handoff/review/evidence/decision只追加；本人state本人消费，不能自判产品accepted或代改他人范围。提示词由用户转发，不表示已自动派发。
 
-请使用Design模式。SW011/SW012/D009与附页已accepted，保留原稿和已做的雨林草稿。当前ready SW017更新为“应用验图参照与森林阶段视觉收口”，先按当前森林测试包交必要成果，雨林大矩阵后续继续。
+使用Design模式，领取ready SW021。SW011/012/017已accepted，保留原文件/已批准hash和已有草稿。本轮新目录design/05-visual-design/SW-021/r1，输出森林连续视差与界面精修设计，分别给MiniMax候选制作与ZCode生产接线消费，不直接改app或候选。
 
-只写design/05-visual-design/SW-017/r1及本人state/handoff。读已发布森林双模式App/已有准确截图：黑幕→80/240/400/600/760m相位与fade完成点0/100/265/425/630/785m、小/长屏裁切、下45%虚走操作区/实走无摇杆、暂停/站稳提示/减少动效/大字号，给一份逐项走查清单和有依据的问题标注。没有本轮设备截图只能读作者旧图，写明来源/head与Pending，不能用设计模拟冒充安装/真机验证。
+重点是解锁后构图、三层可平铺设计与接缝、跨屏旅人、排版/mood/颜色、暗色确认/环形长按/≥3s结果退暗/署名。0m仍近黑，五层ID/米数/opacity不变，不加绕过距离门禁的基础天空或雾；原光效/空地沿用。旅人8–12%不是硬要求，先比较方案；单/双列服从小屏/大字号和清晰禁用说明。
 
-提示出现/约3s消失缺同步App证据，旧hint-shown文件名不证明画面确有提示；配合QA指出真实图中能看到/看不到的内容，不自填通过。先交最小必要参照/标注/检查步骤，不新增生产美术、不改冻结五层/相位、0付费API。
+给真实可编辑源、design-spec、覆盖所有实际文件的manifest、逐层提示词和三比例/六阶段/接缝预览。App截图标来源/hash，设计模拟明确标注。当前0付费API，给零API消费路线与限制，不指示MiniMax借用雨林8次预算。SW012/D009雨林tileable=false不变，本次森林新设计不冒替其design_ref。
 
-沿原SW017 manifest要求交可编辑source/spec/prompt/preview/hash/bytes；integration-reference.json明确kind=integration_reference并分别引用SW011森林/保留SW012雨林源的精确hash和范围，不成为SW006新design_ref/前置。H-SW-017-R1 JSON+Markdown绑定真实base/head/实际检查/限制，由Antigravity独立审稿。必要生产修改写具体发现交ZCode/MiniMax，自己不改app、候选、QA或registry。
+H-SW021-R1 JSON+Markdown记录实际base/head/预览/输入/限制，只声明design_candidate。Antigravity独立批准后才开启SW022。只写design/05-visual-design和自己的state/handoff，不改QA/registry。

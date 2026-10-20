@@ -1160,3 +1160,9 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 ### 21.11 森林双模式阶段收口与安装测试（2026-10-18）
 
 本轮用户要求先收尾/打包：冻结main aaa789b3afd789d121eb6f0c96189fe9835d3e3c，交森林800m虚走/实走、正式光效、地形与恢复的GitHub阶段测试包；雨林底座已accepted但候选/真实声景不足，保持未开放。实际Release/哈希/云端312项原始XML/测试步骤见 [阶段档案](./docs/releases/2026-10-18-forest-beta/README.md)。四方按 [STAGE-CLOSEOUT](./docs/collaboration/STAGE-CLOSEOUT.md) 收尾：ZCode SW018具体安装/阻断缺陷；MiniMax SW006草案/guard/交接；Trae SW017先森林视觉清单；QA独立复验/提示时序/用户反馈。PR25最新路径/通配符已修，实际协作红灯在QA隔离fixture，原占位仍未批准。阶段包状态为交用户安装测试，不代表真机/真人通过或四景MVP。范围决策见 [D011](./docs/collaboration/decisions/D-011-stage-closeout-forest-beta.md)。
+
+### 21.12 合并三份优化计划（2026-10-20）
+
+用户要求阅读目录下三份开发建议，筛选合理内容并给四角色开发提示词。逐字输入/哈希、逐项取舍、完整任务与分工见[本轮合并计划](docs/collaboration/plans/2026-10-20/README.md)、[采纳审阅](docs/collaboration/plans/2026-10-20/SOURCE-REVIEW.md)与[提示词](docs/collaboration/plans/2026-10-20/PROMPTS.md)，决策D012。基线main321060e，现有build176不换包；SW001/004/005/010/016/017/018 accepted保留。新增SW019–025为bootstrap安排，ready/queued不代表作者已开工。
+
+第一批异步加载/高频绘制读取、安全区/步长/每局触感和版本追溯；第二批森林设计→零付费平铺候选→正式入包/界面精修。0m近黑、原里程/相位/comfort_v1、30分钟被动恢复和未开放景门禁不变。缺真机不阻塞独立开发，也不作为已验证；提示截图缺证交SW024追加独立复核。雨林SW012/D009与原总8次授权保留、不挪用为森林图；GPS等仍后置。

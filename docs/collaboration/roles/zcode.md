@@ -1,11 +1,11 @@
 # zcode 稳定入口与完整提示词
 
-先fetch最新origin/main，读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`、`../STAGE-CLOSEOUT.md`与当前任务。用户本轮要求阶段收口：固定森林800m双模式测试包，先回收安装/真机问题，再推进雨林。独立checkout/worktree/任务分支，保留已有工作；不操作他人index、不reset/强推覆盖。源码/精确commit/实际证据优先，历史handoff/review/evidence/decision只追加；无需完善本地Android环境，复用Actions。四个入口由用户转发，不自动外发消息。
+先fetch最新origin/main，在自己的独立checkout/worktree读取本文件、`../README.md`、`../PROTOCOL.md`、`../registry.json`和`../plans/2026-10-20/README.md`，再读对应task及最新handoff/review。用户要求从三份计划筛选合理部分安排开发；当前状态以registry与实际证据为准，不凭旧聊天重做。保留自己的未提交工作，不操作共享checkout的index、不reset/强推。无需补完整本地Android环境，复用Actions。历史handoff/review/evidence/decision只追加；本人state本人消费，不能自判产品accepted或代改他人范围。提示词由用户转发，不表示已自动派发。
 
-SW001/SW004/SW005R2/SW010与SW016已accepted，不重做雨林底座。当前领取ready的 `../tasks/SW-018.md` 做森林阶段安装测试收尾。
+本轮先领取SW019渲染/异步加载。独立审核合入后按启用状态顺序做SW020安全区/步长/一次性触感、SW025构建追溯；每项独立PR，不把三项一次塞进大改。第一批测试包无需等森林新图。SW023等SW019/020/021/022均accepted才做，消费准确设计与候选hash。
 
-以STAGE-CLOSEOUT绑定的已发布Release/commit为测试基线，核安装/冷启动/森林选景与虚走/实走、活动识别拒绝/缺sensor、松手停稳/暂停后台、主动放弃/800m完成、30min被动恢复/同局提示。用户/QA报问题必须带build tag/手机系统/步骤/发生米数/实际现象，先复现再最小修。没跑的设备项Pending，不能拿源码或JUnit当真机；无已复现缺陷时交0源码改动核查，不为凑任务重构/空测试。
+SW001/004/005/010/016/017/018已accepted，不重复实现恢复/越坎/森林光效/雨林底座。当前生产图层主线程解码、RealWalkVisualCache同步等待与高频读取确有优化空间；先测后改，不能用丢帧、降低计距精度或丢音频事件换性能。IO异步完成也不能提前揭示未解锁图层。
 
-必要patch走本人独立分支、业务commit→H-SW-018-R1 JSON+Markdown绑定准确base/head、针对性测试/云端test-lint-build/实际结果，Antigravity独立审查后新tag包；不替换冻结包APK。App版本仍0.1.0-week1，本轮与build153实际证书不同，反馈用Release tag辨认；优先给稳定测试签名/可追溯版本的具体方案，不私换包名/签名或清用户存档。
+SW020必须把步长从设置真正传到服务引擎；同局冻结，恢复与旧快照兼容。触感标记按sessionId，每局各一次并服从开关。insets只保护控件/手势，背景继续全屏。SW025只实现版本可追溯，不生成/更换签名密钥或包名，版本递增不等于解决证书冲突。
 
-雨林真实声景仍Pending且SW007 queued，不能本轮为凑“完整”把占位声音/设计PNG/未审图进生产。已有雨林工作保留，下阶段候选/真实声音齐后再最终接入。你只写生产app/领域测试/正式assets/本人state/handoff，QA/候选/设计/中心registry归他人；本人消费accepted后更新state。
+只改app、业务构建/领域测试、正式assets及自己的state/handoff；QA测试/registry/设计/候选归其他角色。每项业务commit后H-SWxxx-R1 JSON+Markdown绑定实际base/head、测试/设备/限制。源码/云端通过不等于真机；新patch由QA批准后新tag，不覆盖build176。雨林仍按SW012/D009与原任务，当前优化不强开入口。
