@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "agent": "trae-design",
-  "current_task": "SW-017",
+  "current_task": "SW-021",
   "status": "handoff_ready",
-  "branch": "codex/trae-design/SW-017-forest-stage-visual-closeout",
-  "head_commit": "90f79cef80478c30551a6dc41dc45f0550f01fba",
-  "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-017-R1.json",
+  "branch": "codex/trae-design/SW-021-forest-polish",
+  "head_commit": "28ef82c7f1e28eb4c48c98843d9bdc6a09959341",
+  "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-021-R1.json",
   "latest_addendum": null,
-  "updated_on": "2026-10-18",
-  "note": "SW-017 R1 森林 800m 双模式应用验图参照已交 Antigravity 评审（base 422451e，业务 head 90f79ce）：只读当前 main 入包五层 webp（SW-010 验收，sha 与 forest.json/7 个 UI 源码逐行核对）合成两模式六阶段矩阵、三比例 12 裁切、6 关键状态、视差对拍，24 张生成图全带设计模拟角标；12 张作者证据（H-SW-010-R1/H-SW-005-R2）逐字节复制。F1–F7 走查标注；F7 右缘 Void 带独立像素审计 all_pass=true（outline/trunks/leaf_path 右缘 30 列硬切全透明，1080×2400 钳满露 52px，作者 265/425m 实测占比 1.0，630m 遮至 12px，785m clearing 遮盖但合成 alpha 峰值仅约 27%；1080×1920 overflow=0 视差失效+静态左42/右50px 待设备取证）。checklist 区分 [素材] 候选核对与 [设备] 真机取证；proposed P1–P3 供 ZCode SW-018。未改 app/registry/他人 state，未改 SW-011/SW-012/D-009，非 SW-006 design_ref，零付费 API。雨林 900m 双模式参照按 registry pending 留后续轮次。等待方：Antigravity 独立评审；不轮询、不提前开工。"
+  "updated_on": "2026-10-20",
+  "note": "SW-021 R1 森林连续横移视差与界面精修设计已交 Antigravity 评审（base 4f57659，业务 head 28ef82c，35 文件）：tree_outline/tree_trunks/leaf_path 三层重设计为 1080x1920 原生 repeat-x 数学无缝 tile（3W 折叠法，缝差均值 trunks .025/leaf .003/outline .218 与自然差同量级），五层 ID/米数/opacity/fade/parallax 全冻结，light_shows/clearing 逐字节复用，0m 仍近黑无天空雾旁路；三比例六阶段黑带恒 0，对拍旧 cover 0m 670px/265m 52px 与 SW-017 F7 一致。旅人 x=.34/y=.865 不变，7%/9% 两方案推荐 9% 待真机定稿。UI 9 张模拟+token：首页单列/禁用原因常驻/themeColor 卡/暗色底部放弃确认/长按 1.5s 环形不产距/reduceMotion/结果≥3s 退暗+用时折叠/关于页三条真实音频署名/8 级字阶。design-spec+prompts（含 MiniMax 逐层提示词与零 API 路线）+manifest 34 文件哈希复算 0 不符。零付费 API；未改 app/forest.json/入包 webp/雨林 SW-012/D-009/registry/他人 state。等待方：Antigravity 独立评审；批准前 MiniMax 不开 SW-022，ZCode SW-023 未就绪。"
 }
