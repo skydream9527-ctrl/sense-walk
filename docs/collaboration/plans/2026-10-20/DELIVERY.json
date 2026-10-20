@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "id": "O-20261020",
+  "kind": "bootstrap-planning",
+  "created_on": "2026-10-20",
+  "base_commit": "321060e945b512f3f6b8b038543eb3b9d16a58bc",
+  "head_commit": "d7ee350c160227a0588007030c83972597ed5d1d",
+  "report": "docs/collaboration/plans/2026-10-20/VALIDATION.md",
+  "source_inputs": "docs/collaboration/plans/2026-10-20/inputs/index.json",
+  "new_tasks": [
+    "SW-019",
+    "SW-020",
+    "SW-021",
+    "SW-022",
+    "SW-023",
+    "SW-024",
+    "SW-025"
+  ],
+  "agent_dispatch": "not_sent; user forwards file prompts",
+  "production_code_changed": false,
+  "historical_approvals_changed": false,
+  "private_states_changed": false,
+  "checks": [
+    {
+      "name": "collaboration structure, links, dependency, hashes and immutable records",
+      "command": "python3 tools/collaboration.py check --base-ref 321060e945b512f3f6b8b038543eb3b9d16a58bc",
+      "status": "passed"
+    },
+    {
+      "name": "protocol rejection regression",
+      "command": "python3 -m unittest discover -s tools/qa -p 'test_collaboration.py' -v",
+      "status": "passed",
+      "tests": 31,
+      "seconds": 34.283
+    },
+    {
+      "name": "three source files byte identity and SHA256",
+      "status": "passed"
+    },
+    {
+      "name": "previous statuses, owner, kind, delivery/review/integration pointers preserved",
+      "status": "passed"
+    },
+    {
+      "name": "private states and previous audit/product/asset files untouched",
+      "status": "passed"
+    },
+    {
+      "name": "plan HTML IDs and local links",
+      "status": "passed"
+    },
+    {
+      "name": "maintained-file whitespace, excluding verbatim input text snapshots",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "No new Android or physical device performance measurements performed in this planning change.",
+    "Input text snapshots retain three original Markdown hard-break trailing spaces; full unfiltered git diff --check reports those lines.",
+    "Cloud PR checks are collected separately by GitHub Actions; local tests are not Android or independent functional acceptance."
+  ],
+  "screenshot_identity": {
+    "H2-hint-appear.png": "96faa8faa8261c8a210c404a0077327440723be01786be990920eee3bcf4f3d6",
+    "H2-hint-gone.png": "8a3762ebb47b4e1f80d049c00a44e3cfcb490097e1c8d2b4e16e2eb056970993",
+    "F3-completed.png": "2a5550b3936e276ef96253d0af3a7a03b752e55674387128c85d7d1089dfb6eb"
+  }
+}
