@@ -1,0 +1,207 @@
+# 慢行 · SenseWalk 全局优化与演进计划
+
+> **文档定位**：基于当前主干代码（T01–T06 已合入，基线 `8056e11`）、产品宪章 [`DEVELOPMENT.md`](./DEVELOPMENT.md) 与多角色协作登记 [`docs/collaboration/registry.json`](./docs/collaboration/registry.json) 的全景评审与可执行优化路线图。  
+> **核心前提**：一切优化必须严格遵守产品四大底线——**进度=有效距离（非时间）、不可跳过/不可加速、黑幕起笔按距揭示、温柔诚实不制造焦虑**。
+
+---
+
+## 目录
+
+1. [现状总览与核心问题诊断](#1-现状总览与核心问题诊断)
+2. [维度一：运行流畅度与性能优化（Performance & Smoothness）](#2-维度一运行流畅度与性能优化performance--smoothness)
+3. [维度二：代码架构与工程框架（Architecture & Engineering Framework）](#3-维度二代码架构与工程框架architecture--engineering-framework)
+4. [维度三：页面美观度与感官交互打磨（UI/UX Aesthetics & Sensory Polish）](#4-维度三页面美观度与感官交互打磨uiux-aesthetics--sensory-polish)
+5. [维度四：APP 后续功能完善与长期演进方向（Product & Feature Roadmap）](#5-维度四app-后续功能完善与长期演进方向product--feature-roadmap)
+6. [分阶段执行排期与多角色分工矩阵](#6-分阶段执行排期与多角色分工矩阵)
+
+---
+
+## 1. 现状总览与核心问题诊断
+
+| 模块领域 | 当前优势 | 待优化的核心痛点 |
+| :--- | :--- | :--- |
+| **运行流畅度** | 虚走单帧 `withFrameNanos` 驱动，静止期不重复发射相同 `Snapshot` | 行走期 60/120fps 触发全屏 Composable 重组；`ForestShell` 在主线程同步解码大图；`RealWalkVisualCache` 使用 `runBlocking` 阻塞主线程；`Canvas` 每帧分配 `Path`/`Brush` |
+| **工程架构** | `domain` 层纯 Kotlin 无 Android 依赖，217 个 JVM 单元测试覆盖核心算法 | 缺少应用级依赖容器（各页面/服务重复实例化 `SceneRepository`/`SettingsRepository`）；音频焦点与耳机断连逻辑在 VM 与 Service 中重复近百行；实走借用 `VirtualWalkController.Snapshot`；存在 `SW-001` 识别的 4 项边界可靠性风险 |
+| **视觉与交互** | 暗色极简基调统一，浮动摇杆与长按放弃具备完善的触摸取消保护 | 未开启 Edge-to-Edge 全屏沉浸；`SceneCard` 漏展示 `mood` 情绪词；`ModeCard` 硬编码森林色；摇杆缺少平滑颜色过渡与甜点/紧张区轻触觉反馈；长按放弃为横条而非环形进度；背景图滑到底后视差停止；通关切页缺少 3s 退暗过渡 |
+| **功能完备度** | 森林 800m 虚走与实走（硬件计步 + 前台服务）主链路跑通 | 进程被杀后的会话快照恢复（T07A）、地形自动越坎与站稳（T07B）、雨林/沙漠/城市/夜径完整内容（T07C/T08）、步长自定义与实走过快提醒等尚未闭环 |
+
+---
+
+## 2. 维度一：运行流畅度与性能优化（Performance & Smoothness）
+
+### 2.1 下沉高频帧状态读取（消除 60/120fps 全树重组）
+- **问题定位**：
+  - [`SessionScreen.kt`](app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt) 顶层通过 `val walk by vm.walk.collectAsStateWithLifecycle()` 订阅帧快照并传给 `SessionContent`。
+  - 当角色处于 `WALKING` 状态时，每帧（16.6ms / 8.3ms）`sPos`、`meters`、`velocity` 都会改变，导致包含弹窗判断、顶部提示文字、暂停/放弃容器在内的整个 `SessionContent` 频繁重组（Recomposition）。
+- **优化方案**：
+  1. **Lambda / State 传递**：将 `SessionContent` 和 `ForestShell` 的高频参数改为 `walkProvider: () -> VirtualWalkController.Snapshot?`（或直接传入 `State<Snapshot?>`）。
+  2. **Draw 阶段直读**：在 [`ForestShell.kt`](app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt) 的 `Canvas { ... }` 内部读取 `walkProvider()`，使每帧位移与透明度变化仅触发 **Draw 阶段**，完全跳过 Compose 的 **Composition** 与 **Layout** 阶段。
+  3. **`derivedStateOf` 降频米数 UI**：顶部米数文本使用 `remember { derivedStateOf { walk?.meters?.toInt() ?: 0 } }`，仅在整数米数变化（约每 0.8~1 秒一次）且 `showMeters == true` 时触发文本重组。
+
+### 2.2 消除主线程 I/O 与同步 Bitmap 解码
+- **问题定位**：
+  - [`ForestShell.kt:68-76`](app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt) 在 `remember(imageLayers)` 块中直接调用 `BitmapFactory.decodeStream(input)` 同步解码 5 张 WebP 图层，阻塞首帧组合。
+  - [`RealWalkContent.kt:39`](app/src/main/java/com/sensewalk/app/ui/session/RealWalkContent.kt) 在 `RealWalkVisualCache.load()` 中使用 `kotlinx.coroutines.runBlocking` 在 UI 线程读取并解析 JSON。
+- **优化方案**：
+  1. **异步预加载图层**：在 `SessionViewModel` / `RealWalkViewModel` 初始化阶段（`Dispatchers.IO`）预解码当前场景的 `ImageBitmap` 字典，或使用 `produceState` 异步解码，配合黑幕期（0~80m 为纯黑 `void`）天然掩盖解码耗时。
+  2. **按屏幕高度降采样**：解码时根据设备屏幕像素高度计算 `inSampleSize`，避免在低分辨率设备上加载超大原图占用过多 Graphic Buffer 内存。
+  3. **移除 `runBlocking`**：废除 `RealWalkVisualCache`，直接从应用级共享的 `SceneRepository` 内存缓存读取 `SceneConfig`。
+
+### 2.3 零分配 Canvas 绘制与音频 IPC 节流
+- **问题定位**：
+  - [`ForestShell.kt:181-305`](app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt) 的程序降级函数（`drawTreeline`、`drawLightShows`、`drawLeafGround`）在每帧绘制循环中创建 `Path()`、`Brush.verticalGradient()` 与 `Brush.radialGradient()`，增加 GC 压力。
+  - [`AndroidSensoryBackend.kt:131-137`](app/src/main/java/com/sensewalk/app/engine/sensory/AndroidSensoryBackend.kt) 在环境音淡入期间（8~12 秒），每帧调用 `MediaPlayer.setVolume()` 发起跨进程 Binder 调用。
+- **优化方案**：
+  1. 在 `ForestShell` 中 `remember { Path() }` 并在绘制时通过 `path.reset()` 复用。
+  2. 在 `AndroidSensoryBackend.setLoopGain` 中加入增益变化阈值过滤：`if (abs(clampedGain - lastAppliedGain) < 0.005f && clampedGain != 0f && clampedGain != 1f) return`，将每秒 60 次 IPC 调用降至 ~5–10 次。
+
+### 2.4 开启 R8 收缩与构建优化
+- **问题定位**：[`app/build.gradle.kts:22`](app/build.gradle.kts) 中 `release` 构建 `isMinifyEnabled = false`。
+- **优化方案**：开启 `isMinifyEnabled = true` 与 `isShrinkResources = true`，补充 `kotlinx.serialization` 与音频/传感器相关的 ProGuard 规则，显著提升 Compose Release 包的启动速度与帧率稳定性。
+
+---
+
+## 3. 维度二：代码架构与工程框架（Architecture & Engineering Framework）
+
+```mermaid
+flowchart TD
+    subgraph App["SenseWalkApplication (AppContainer 单例容器)"]
+        SR["SceneRepository (内存缓存 + IO 加载)"]
+        StR["SettingsRepository (单实例 DataStore)"]
+        SnapR["SessionSnapshotRepository (T07A 快照持久化)"]
+        AIM["AudioInterruptionManager (焦点 + 耳机断连统一管理)"]
+    end
+
+    subgraph Domain["domain 层 (纯 Kotlin · JVM 100% 可测)"]
+        VWC["VirtualWalkController"]
+        RWC["RealWalkController / RealWalkEngine"]
+        TM["TerrainMotor (坡/坎/站稳状态机)"]
+        PS["PhaseScheduler & SensoryCoordinator"]
+        WS["WalkSessionSnapshot (统一快照模型)"]
+    end
+
+    subgraph UI_Service["UI 与系统服务层"]
+        SVM["SessionViewModel (虚走)"]
+        WFS["WalkForegroundService (实走唯一持有者)"]
+        RWVM["RealWalkViewModel (Binder 镜像桥)"]
+    end
+
+    App --> SVM
+    App --> WFS
+    App --> RWVM
+    SVM --> VWC
+    WFS --> RWC
+    VWC --> WS
+    RWC --> WS
+```
+
+### 3.1 引入轻量级 `AppContainer`，消除多处重复实例化
+- **现状痛点**：`SenseWalkViewModel`、`SessionViewModel`、`RealWalkViewModel`、`WalkForegroundService`、`RealWalkVisualCache` 各自 `new SceneRepository(context)` 和 `new SettingsRepository(context)`。每次切换页面或启动服务都会重新扫描 `assets/scenes` 并跑一遍 JSON 解析与校验。
+- **改造方案**：
+  - 新增 `SenseWalkApplication : Application()`，内部持有轻量级 `AppContainer`（无需引入 Hilt/Koin 等重型框架，保持编译轻快）。
+  - `SceneRepository` 内部增加 `Mutex` + 内存缓存 `cachedState: SceneLoadState.Ready?`，首次加载成功后全局复用，`retrySceneLoad()` 时才强制刷新。
+
+### 3.2 抽离统一的 `AudioInterruptionManager`
+- **现状痛点**：[`SessionViewModel.kt:196-291`](app/src/main/java/com/sensewalk/app/session/SessionViewModel.kt) 与 [`WalkForegroundService.kt:300-372`](app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt) 存在高度重复的 `AudioFocusRequest` 构建、`AudioFocusGate` 状态同步以及 `ACTION_AUDIO_BECOMING_NOISY` 广播注册/注销代码。
+- **改造方案**：
+  - 在 `engine/sensory/` 下提取 `AudioInterruptionManager(context, focusGate, onInterruption)`，统一管理焦点申请、丢失回调、耳机拔出广播与安全注销，虚走 ViewModel 与实走 Service 仅通过 3 行委托调用接入。
+
+### 3.3 解耦实走与虚走的 `Snapshot` 类型
+- **现状痛点**：[`RealWalkController`](app/src/main/java/com/sensewalk/app/domain/walk/RealWalkController.kt) 返回的是 `VirtualWalkController.Snapshot`，导致实走模块在命名与类型上耦合虚走控制器。
+- **改造方案**：在 `domain/session/` 下提取独立的 `WalkSessionSnapshot` 数据类，作为虚走与实走共用的只读 UI 状态契约。
+
+### 3.4 闭环 P1/P2 核心可靠性缺陷（对齐 `SW-001`）
+1. **修复零时间间隔刷距离漏洞（F-001）**：
+   - [`RealWalkEngine.kt:85`](app/src/main/java/com/sensewalk/app/domain/walk/RealWalkEngine.kt) 当 `intervalMs <= 0` 时不应对单步放行 `strideMeters`，应严格遵守 $\Delta d \le 1.4 \times \Delta t$（即零或负间隔 $\Delta d = 0$，仅更新或保留合法基线），防止传感器同刻批量回调绕过速度帽。
+2. **修复 `START_STICKY` 空重启残留常驻通知（F-002）**：
+   - [`WalkForegroundService.kt:120-128`](app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt) 在 `intent == null` 或无 `sceneId` 且无有效恢复快照时，应立即调用 `stopSelfClean()` 退出并移除前台通知，避免留下无控制器的僵尸通知。
+3. **修复传感器注册返回值忽略问题（F-003）**：
+   - [`StepSensorSource.kt:40-46`](app/src/main/java/com/sensewalk/app/engine/sensor/StepSensorSource.kt) 检查 `sensorManager.registerListener(...)` 的布尔返回值；若 `counter` 注册失败，清理部分注册状态并向 UI 返回明确的可解释错误与虚走回退入口。
+4. **消除异步装配期的重入竞态（F-004）**：
+   - 在 `WalkForegroundService.setupSession` 引入 `startingSession` 布尔锁或协程 `Job` 守卫，防止 `SceneRepository.loadAll()` 挂起期间收到第二次 `onStartCommand` 启动双份引擎与播放器。
+
+### 3.5 环境音循环无缝化升级（MediaPlayer → Media3 ExoPlayer）
+- **现状痛点**：Android 原生 `MediaPlayer.isLooping = true` 对 OGG 文件循环尾首衔接在部分芯片平台上存在 ~20–40ms 停顿或微弱爆音。
+- **改造方案**：按 [`DEVELOPMENT.md §12.1`](./DEVELOPMENT.md#L586) 规划接入 `androidx.media3:media3-exoplayer`（`RepeatMode.REPEAT_MODE_ONE`）或采用双播放器微交叉淡入（Crossfade Loop），实现环境声场 100% 无缝循环。
+
+---
+
+## 4. 维度三：页面美观度与感官交互打磨（UI/UX Aesthetics & Sensory Polish）
+
+### 4.1 全屏沉浸式体验（Edge-to-Edge & 系统栏消隐）
+- **现状**：状态栏与导航栏仍占据固定系统边界，会话开局的「黑幕（`#060806`）」与系统纯黑栏之间有割裂感。
+- **优化建议**：
+  - 在 [`MainActivity.kt`](app/src/main/java/com/sensewalk/app/MainActivity.kt) 调用 `enableEdgeToEdge()`。
+  - 进入会话页（`SessionScreen` / `RealWalkSessionScreen`）时，利用 `WindowInsetsControllerCompat` 弱化或隐藏状态栏图标（`BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE`），让画面从彻底纯净的暗夜黑幕开始生长。
+
+### 4.2 首页场景卡与模式卡的氛围感升级
+- **现状问题**：
+  - [`HomeScreen.kt:228-287`](app/src/main/java/com/sensewalk/app/ui/home/HomeScreen.kt) 的 `SceneCard` 未展示 `SceneConfig.mood`（如「树荫、清爽、生命感」），视觉信息过于干瘪。
+  - [`ModeScreen.kt:192`](app/src/main/java/com/sensewalk/app/ui/mode/ModeScreen.kt) 的 `ModeCard` 背景色硬编码了 `sceneTint("forest")`；[`Theme.kt:37-42`](app/src/main/java/com/sensewalk/app/ui/theme/Theme.kt) 缺少 `rainforest` 和 `city` 的色调映射。
+- **优化建议**：
+  1. **补齐情绪词与微光渐变**：在 `SceneCard` 标题下方展示 `scene.mood`；卡片背景用 `Brush.linearGradient`（由 `SenseSurface` 过渡到 `sceneTint(scene.id).copy(alpha = 0.45f)`），选中态增加 `animateColorAsState` 柔和边框呼吸过渡。
+  2. **动态场景色贯穿**：修复 `ModeCard` 传入 `sceneTint(scene.id)`；在 `Theme.kt` 中解析 `scene.themeColor`（或补齐 `RainforestTint`、`CityTint`），让每个场景从选景到开步拥有一致的色彩心境。
+
+### 4.3 浮动摇杆与长按放弃的微交互精修
+- **浮动摇杆（[`Joystick.kt`](app/src/main/java/com/sensewalk/app/ui/session/Joystick.kt)）**：
+  - **视觉过渡**：将拇指圆点进入甜点区（`0.45..0.65`）的颜色变化包裹在 `animateColorAsState(tween(300))` 中；在甜点区为圆点增加一层极淡的外扩光晕（`alpha = 0.15f`）；进入紧张区（`d > 0.72`）时底座外圈微微收紧并降低透明度，视觉化传达「用力过猛反而紧绷」。
+  - **触觉与轻提示闭环（对齐 [`DEVELOPMENT.md §4.3.3 & §4.4`](./DEVELOPMENT.md#L207)）**：
+    - 每局首次进入甜点区触发一次极轻的 `EFFECT_TICK`；首次进入紧张区触发一次低沉短振（每局各限一次，不反复打扰）。
+    - 若用户连续拉满（`d > 0.85`）超过 4 秒，在屏幕上方温和浮现一行淡入淡出提示：「紧绷时脚步反而变沉。」
+- **长按放弃控件（[`AbandonControl.kt`](app/src/main/java/com/sensewalk/app/ui/session/AbandonControl.kt)）**：
+  - 将当前的水平进度条改为环绕胶囊/圆环的描边进度（`drawArc` 或 `CircularProgressIndicator`），长按满 1.5s 触发放弃瞬间给予一次轻柔触觉确认。
+
+### 4.4 视差图层无缝平铺（Seamless Tiling）与通关 3 秒退暗
+- **视差滚屏不断流**：
+  - 当前 [`ForestShell.kt:149-163`](app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt) 的 `drawImageLayer` 在 `parallaxPx > overflow` 后停止移动（约走到 200m 后远中景图片滑到底便静止不动）。
+  - 优化 `drawImageLayer` 支持模运算循环平铺（`xOffset = -(parallaxPx % dstW)`，同时绘制主图与右侧衔接图 `xOffset + dstW`），配合无缝边缘素材（`SW-011`/`SW-012` 规范），实现全程 800m–1200m 连续流动的林间漫步感。
+- **通关页温和落幕（对齐 [`DEVELOPMENT.md §11.2`](./DEVELOPMENT.md#L545)）**：
+  - 达到 `requiredDistanceMeters` 时，不立即硬切到纯黑结果页，而是先在当前完整风景画面上用 3 秒缓缓降低背景明度、浮现「走到了 · 走完 800 m」与折叠的用时标签，避免瞬间切屏破坏沉浸余韵。
+
+---
+
+## 5. 维度四：APP 后续功能完善与长期演进方向（Product & Feature Roadmap）
+
+### 5.1 近期核心功能补齐（M1/M2 收尾与 T07–T08）
+1. **会话快照持久化与 30 分钟中断恢复（`SW-004` / T07A）**
+   - 严格按 [`docs/collaboration/contracts/session-snapshot.md`](./docs/collaboration/contracts/session-snapshot.md) 在每 5 秒及跨越相位时向 DataStore 写入 `{sessionId, sceneId, mode, state, meters, sPos, sBest, firedPhaseIds, elapsedActiveMs, savedAt, stepBaseline}`。
+   - 进程被系统回收后 30 分钟内重开 App，首页底部温和提示「有一段未走完的森林路（320 m），要接着走吗？」，恢复后音画用 2 秒淡入到已赚取的进度。
+2. **地形联动：自动越坎与「站稳再跳」（`SW-005` / T07B）**
+   - 落地 `TerrainMotor`：在 `gap_hop` 前 3m 进入接近区；若 `d <= 0.72`（放松节奏）则顺畅轻跳通过；若 `d > 0.72`（急躁拉满）则自动减速至 `0.4 m/s`、停顿 `1.2s` 站稳后再跳，首次触发提示「慢一点，站稳再跳」，将产品哲学「急无用」融进地形交互。
+3. **四主场景 + 夜径内容全面开放（`SW-006` ~ `SW-008`）**
+   - 完成森林 `light_shows` / `clearing` 正式图层替换（`SW-002` / `SW-010`）。
+   - 依次交付 **雨林（900m）**、**沙漠（1200m）**、**城市（1000m）** 与 **夜径（700m）** 的专属音景（软泥滴水、风沙低鸣、夜晚街角、石板夜虫）、分层视觉与地形剖面。
+4. **实走（Real Walk）专属体验细化**
+   - **设置页步长与身高校准**：在 [`SettingsScreen.kt`](app/src/main/java/com/sensewalk/app/ui/settings/SettingsScreen.kt) 增加步长设置（默认 `0.70m`，支持输入身高按 `身高 × 0.415` 自动估算）。
+   - **过快步频平静提醒**：实走连续 20s 步频 > 140 步/分时，触发一次极轻振动与文案「放慢一点」（可关闭，不扣减距离）。
+   - **亮屏 2–3s 视觉渐显**：实走锁屏期间仅推进 `PhaseScheduler` 不渲染 UI；用户亮屏回到会话页时，景色从黑幕用 2.5s 平滑淡入至当前米数对应层次，并支持 75% / 95% 相位的轻提示音（「可以拿出来看看」）。
+
+### 5.2 中长期正念产品演进方向（M3+ 创新构想）
+
+> 以下拓展方向均遵循**「无社交攀比、无连续打卡焦虑、纯本地隐私优先」**原则：
+
+1. **「散步手账 · 感官明信片」（替代打卡与排行榜）**
+   - 传统运动 App 的「连续打卡 N 天 / 消耗卡路里」极易诱发断签焦虑，与慢行定位相悖。
+   - **方案**：每次通关后，可将当次解锁的最终场景画面生成一张带日期、天气/时间意象与米数的**静态感官明信片**，用户可随手记录一句当下的思绪（纯本地存储）。回看历史时是一本安静的「走过的路」画册，而非枯燥的统计报表。
+2. **同景「时辰与微气候」动态变体**
+   - 当用户在某个场景（如森林或城市）走完过标准距离后，再次进入该场景可根据手机本地时辰（清晨薄雾 / 午后暖光 / 傍晚暮色 / 深夜微雨）对图层施加柔和的色温滤镜（`ColorFilter`）并叠加一层稀有环境音变体，大幅提升复走的新鲜感。
+3. **双声道微空间声场（Binaural / Stereo Panning）与呼吸引导**
+   - 为远鸟（`deep_birds`）、林风、远雷等环境音效增加缓慢的正弦左右声道平衡微移，佩戴耳机时营造立体的空间包裹感。
+   - 实走模式提供可选的「步伐呼吸节拍」（如 4 步吸气、4 步呼气的微弱触觉脉动），帮助高压人群在散步中平复心率。
+4. **极简桌面微光小组件（Compose Glance Widget）**
+   - 在手机桌面提供一个不含任何数字 KPI 的 2×2 暗色微光小组件，仅显示一句随时间变化的温和文案（如「傍晚了，去林子里走走吗？」），点击直达对应场景模式选择页，将冷启动到开步缩短至 **2 次点击**。
+5. **Android Health Connect 单向本地同步（可选）**
+   - 实走结束后支持将本局有效步数与步行时长单向写入系统 `Health Connect`（默认关闭，纯设备端权限，不上传云端），兼顾用户日常健康记录需求。
+
+---
+
+## 6. 分阶段执行排期与多角色分工矩阵
+
+结合 [`docs/collaboration/PROTOCOL.md`](./docs/collaboration/PROTOCOL.md) 的多角色职责边界，建议按以下四个波次推进：
+
+| 阶段 | 核心目标 | ZCode（生产代码/配置） | Trae Design（设计规范/源稿） | MiniMax（候选素材生成/修图） | Antigravity（独立验收/集成） |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Phase 1：基线稳固与流畅度优化** | 闭环 P1 缺陷、消除卡顿与重复代码 | 执行 `SW-001`（修 F-001~F-004）；抽离 `AppContainer` 与 `AudioInterruptionManager`；下沉 `SessionScreen` 帧状态读取与异步解码 Bitmap | 执行 `SW-011`（森林图片设计规范与无缝平铺标准） | 执行 `SW-002`（森林 `clearing` / `light_shows` 候选收尾） | 执行 `SW-003` 基线独立复验；编写 F-001~F-003 独立单测/仪器测试；审核并合入 Phase 1 PR |
+| **Phase 2：T07 核心机制闭环** | 快照恢复、地形越坎、雨林新场景上线 | 执行 `SW-010`（森林图层入包）、`SW-004`（T07A 快照恢复）、`SW-005`（T07B 自动越坎与站稳）、`SW-007`（T07C 雨林双模式接入） | 执行 `SW-012`（雨林 900m 视觉设计包与逐层提示词） | 执行 `SW-006`（按批准的 `SW-012` 制作雨林候选素材） | 独立审查设计包与候选素材哈希/透明通道；复验快照恢复与越坎规则 |
+| **Phase 3：UI 精修与四景齐备** | 沉浸感打磨、沙漠/城市/夜径补齐 | 执行 `SW-008`（T08 四景内容一致性）；落地 Edge-to-Edge、`SceneCard` 情绪词、摇杆平滑过渡与触觉提示、视差无缝平铺、通关 3s 退暗 | 输出沙漠、城市、夜径视觉设计包 | 制作沙漠、城市、夜径正式视觉与音频候选素材 | 全场景 Schema 校验、跨场景视觉合成走查与集成发布 |
+| **Phase 4：真机内测与 M3 拓展** | 真机闭环、手账与小组件演进 | 补齐步长设置、实走亮屏渐显、Media3 无缝循环；规划散步手账与小组件 | 设计感官明信片与桌面小组件视觉规范 | 补充时辰变体与环境音微调素材 | 执行 `SW-009`（T09 真机计步/锁屏 15min/耳机来电/真人内测验收），发布候选版 |

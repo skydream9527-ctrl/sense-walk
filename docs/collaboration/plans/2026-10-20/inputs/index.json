@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-20",
+  "reviewed_main_commit": "321060e945b512f3f6b8b038543eb3b9d16a58bc",
+  "authority": "historical input proposals; registry and DEVELOPMENT take precedence",
+  "files": [
+    {
+      "original_path": "OPTIMIZATION_PLAN.md",
+      "snapshot_path": "docs/collaboration/plans/2026-10-20/inputs/OPTIMIZATION_PLAN.txt",
+      "sha256": "321deaf9553562d4076d054c304f4135c618cba87b0dfa3f253944a88d6a8579",
+      "bytes": 22211,
+      "source": "user-supplied untracked file in shared checkout; copied verbatim"
+    },
+    {
+      "original_path": "优化计划.md",
+      "snapshot_path": "docs/collaboration/plans/2026-10-20/inputs/优化计划.txt",
+      "sha256": "42bf8db6464ba9c4a312049accd8d1bca13b26b5c4953b0a488d7983caadbcec",
+      "bytes": 16749,
+      "source": "user-supplied untracked file in shared checkout; copied verbatim"
+    },
+    {
+      "original_path": "技术优化建议-20261020.md",
+      "snapshot_path": "docs/collaboration/plans/2026-10-20/inputs/技术优化建议-20261020.txt",
+      "sha256": "1cc774c72ba893be63b4670810d2199b41deada989f216a153b7a6a6288661b0",
+      "bytes": 26914,
+      "source": "user-supplied untracked file in shared checkout; copied verbatim"
+    }
+  ],
+  "snapshot_format": "verbatim UTF-8 text; original relative links are interpreted from repository root, not the archive folder"
+}

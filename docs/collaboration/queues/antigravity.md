@@ -1,15 +1,16 @@
-# Antigravity 阶段收口队列
+# Antigravity 当前独立验收队列
 
-2026-10-18；先读STAGE-CLOSEOUT与实际发布档案。本轮已打包冻结的森林双模式main，既有accepted保留；不用重复发布同一包或重做SW016。
+2026-10-20；先读[合并计划](../plans/2026-10-20/README.md)、[采纳审阅](../plans/2026-10-20/SOURCE-REVIEW.md)和registry。本轮不覆盖历史评审，不代写作者state。
 
-| 顺序 | 入口 | 退出条件 |
+| 顺序 | 对象 | 退出条件 |
 | --- | --- | --- |
-| 安装测试包 | 发布档案/Release准确tag、commit、APK/source/hash/云端原XML | 交用户可下载、范围/已知项/步骤齐备；用户安装/实体结果到前Pending |
-| 阶段问题 | ZCode SW018 / 用户FEEDBACK | SW-018已accepted合入main(d27b710)，补齐时序缺证，0源码改动；待命接收用户FEEDBACK |
-| 提示补证 | 已有源码/旧hint-shown未证明显示 | ZCode实测截获H2-hint-appear与H2-hint-gone闭环时序；同局恢复不重复已由单测保障 |
-| PR25 QA红灯 | 最新d71d627根路径/通配符已修，8e73b13 supplement转交CI红灯 | PR#28已合入main(e02b2e8)，测试隔离与防御校验全绿(31/31)；产出R-SW-006-R1-correction |
-| 素材草案 | SW006 rework R2 | 0API草案观察收尾，等待下一阶段沿用8次授权执行真实生图R2，不入当前森林包 |
-| 视觉收口 | Trae SW017 ready | SW-017已accepted合入main(0d050bc)，44项哈希全符，量化审计F7 Void黑带52px成因 |
-| 后续雨林 | SW016底座accepted，SW007仍queued | 森林安装测试收口后启动SW-006 R2真实候选与真实声景，再激活SW-007组合 |
+| 1 | SW024：提示证据与基准 | 亲自看H2提示两图，追加correction及实际补证或Pending；固定可复现比较条件/原始结果，不凭文件名闭环 |
+| 2 | SW019→SW020→SW025 | 分别审核准确head、线程/缓存/状态读取、计距不变、安全区/步长/触感/快照兼容、APK可见版本 |
+| 3 | 第一批测试发布 | 前述代码独立通过，Actions/test/lint/build与声明范围回归；新tag、APK/source/hash/版本/证书及真实限制齐备；不等新图 |
+| 4 | SW021设计 | 原米数/五层/黑幕不变，平铺尺寸/三比例/接缝/UI规范与全文件hash有效；approved后启用SW022 |
+| 5 | SW022候选 | design_ref准确、0新付费、三层实际源尺寸、三底/接缝/offset/阶段与五层预算；未合格继续rework |
+| 6 | SW023生产入包与第二批测试包 | cover/tile区分、旧配置兼容、候选hash=入包、800m末段位移/停稳冻结、UI与结果、实际Android证据 |
+| 7 | SW006零API R2 | PR25的路径问题已修；PR28 fixture问题已修。新guard/账本/尺寸拒绝与准确声明独立验，0API占位不当正式雨林批准 |
+| 8 | 后续雨林 | 原SW012/D009和8次预算，真实候选/声景未齐继续queued，不用森林平铺要求改雨林设计 |
 
-实体counter/锁屏15min/耳机来电/物理重启与真人体验仍Pending。中心registry/BOARD/review/必要发布由QA顺序维护，各作者state本人消费。没有新交付一次报告等待项，无无限轮询/自动消息/商店发布。
+SW017/018已accepted且保留；H2提示截图的可见范围疑点见新SOURCE-REVIEW，不能继续把原closed文案当复核结论。真实counter/锁屏15min/实体耳机来电/重启/触觉与5–8真人继续各自Pending，收到用户反馈先记录build/设备/步骤/严重度/owner并回归。无新交付一次报告待文件，无无限轮询、自动外发或商店发布。

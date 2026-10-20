@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-18",
+  "updated_on": "2026-10-20",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -142,7 +142,7 @@
       "pending": [
         "PR25 R1仍是0API程序占位草案，未批准/未入包；最新d71d627已修manifest根路径及通配符，8e73b13提交supplement转交通知。",
         "QA隔离fixture失败已由Antigravity修复闭环（tools/collaboration.py与test_collaboration.py 31/31单测全绿，严格批准链与哈希校验100%保留）；MiniMax生产候选稿未作篡改。",
-        "阶段森林包不依赖本稿；本轮草案路径/hash/guard与CI隔离收尾完成，正式雨林图和声景属于下一阶段，既有总8次授权下阶段沿用、不重置也不重复索要。"
+        "2026-10-20继续零API production guard与准确R2交接；完成与否由新head/断言/独立验收证明。正式雨林图和声景仍下一阶段，既有总8次授权沿用，不重置或重复索要。"
       ],
       "observed_delivery": {
         "revision": 1,
@@ -168,8 +168,8 @@
       "latest_review": "docs/collaboration/reviews/R-SW-005-R2.json",
       "integrated_commit": "70ebfc7587cf4e8e07dc4979ee0c18deb1616436",
       "pending": [
-        "提示出现/约3s消失的同步App证据需QA补录：bootstrap抽读hint-shown.png未见所述卡片，不以文件名代替验图；源/UI已接，代码accepted保留。",
-        "真机触感与reduceMotion视觉复核（physical-device仍Pending）"
+        "真机触感与reduceMotion视觉复核（physical-device仍Pending）",
+        "SW018历史审核保留；bootstrap实看H2-hint-appear仍未见提示文案，时序/同局恢复证据由SW024追加复核，见plans/2026-10-20/SOURCE-REVIEW.md。"
       ]
     },
     {
@@ -329,7 +329,131 @@
       "latest_review": "docs/collaboration/reviews/R-SW-018-R1.json",
       "integrated_commit": "d27b7104c217e43d431004d31ffd0c55ca39d41e",
       "pending": [
-        "阶段包安装测试核查已 accepted 归档（12 项模拟器核查通过，0 源码改动，闭环站稳提示卡片时序截图证据）；真机计步/锁屏15min/物理设备项如实 Pending 保留。"
+        "阶段包核查accepted/集成与0源码改动事实保留；800m通关截图有效。提示卡片原闭环声明与可见截图存在范围疑点，转SW024追加correction，不覆盖原review。",
+        "真机计步/锁屏15min/物理设备与真人项仍Pending；无新用户安装结果。"
+      ]
+    },
+    {
+      "id": "SW-019",
+      "title": "会话渲染与异步加载",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "ready",
+      "depends_on": [
+        "SW-018"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-019.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-020",
+      "title": "安全操作区、步长设置与一次性触感",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-019"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-020.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-021",
+      "title": "森林连续视差与界面精修设计",
+      "owner": "trae-design",
+      "kind": "design",
+      "status": "ready",
+      "depends_on": [
+        "SW-017"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-021.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-022",
+      "title": "森林平铺候选制作",
+      "owner": "minimax",
+      "kind": "asset",
+      "status": "queued",
+      "depends_on": [
+        "SW-021"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-022.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-023",
+      "title": "森林视觉入包与界面精修",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-019",
+        "SW-020",
+        "SW-021",
+        "SW-022"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-023.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-024",
+      "title": "独立基准、提示证据复核与回归入口",
+      "owner": "antigravity",
+      "kind": "coordination",
+      "status": "ready",
+      "depends_on": [
+        "SW-017",
+        "SW-018"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-024.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+      ]
+    },
+    {
+      "id": "SW-025",
+      "title": "可追溯测试构建身份",
+      "owner": "zcode",
+      "kind": "code",
+      "status": "queued",
+      "depends_on": [
+        "SW-020"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-025.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
       ]
     }
   ],
@@ -341,7 +465,7 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/evidence/P-20261018-01/README.md",
+  "latest_progress_report": "docs/collaboration/plans/2026-10-20/SOURCE-REVIEW.md",
   "stage_closeout": {
     "id": "S-20261018-forest-beta",
     "status": "released_for_installation_test",
@@ -354,5 +478,26 @@
     "physical_validation": "pending_user_installation_test",
     "apk_sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
     "cloud_test_count": 312
+  },
+  "optimization_plan": {
+    "id": "O-20261020",
+    "source_commit": "321060e945b512f3f6b8b038543eb3b9d16a58bc",
+    "status": "planned",
+    "plan": "docs/collaboration/plans/2026-10-20/README.md",
+    "source_review": "docs/collaboration/plans/2026-10-20/SOURCE-REVIEW.md",
+    "prompts": "docs/collaboration/plans/2026-10-20/PROMPTS.md",
+    "input_index": "docs/collaboration/plans/2026-10-20/inputs/index.json",
+    "first_release_tasks": [
+      "SW-019",
+      "SW-020",
+      "SW-025"
+    ],
+    "second_release_tasks": [
+      "SW-021",
+      "SW-022",
+      "SW-023"
+    ],
+    "paid_api_budget_new_forest": 0,
+    "dispatch": "manual user forwarding; no agent has been messaged by this planning change"
   }
 }

@@ -2,7 +2,7 @@
 
 > 自动生成：仅编辑 registry.json，再执行 python3 tools/collaboration.py render。状态是交付登记，不是产品最终验收。
 
-基线：`8056e11` · 更新日期：2026-10-18 · 协调者：antigravity
+基线：`8056e11` · 更新日期：2026-10-20 · 协调者：antigravity
 
 | ID | 任务 | 负责者 | 状态 | 前置 | 已入库交付 / 审核 |
 | --- | --- | --- | --- | --- | --- |
@@ -24,6 +24,13 @@
 | SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | accepted | SW-005, SW-012 | [H-SW-016-R1](handoffs/zcode/H-SW-016-R1.json) / [R-SW-016-R1](reviews/R-SW-016-R1.json) |
 | SW-017 | [应用验图参照与森林阶段视觉收口](tasks/SW-017.md) | trae-design | accepted | SW-011, SW-012, SW-005, SW-010 | [H-SW-017-R1](handoffs/trae-design/H-SW-017-R1.json) / [R-SW-017-R1](reviews/R-SW-017-R1.json) |
 | SW-018 | [森林阶段安装测试与缺陷收尾](tasks/SW-018.md) | zcode | accepted | SW-001, SW-004, SW-005, SW-010 | [H-SW-018-R1](handoffs/zcode/H-SW-018-R1.json) / [R-SW-018-R1](reviews/R-SW-018-R1.json) |
+| SW-019 | [会话渲染与异步加载](tasks/SW-019.md) | zcode | ready | SW-018 | — / — |
+| SW-020 | [安全操作区、步长设置与一次性触感](tasks/SW-020.md) | zcode | queued | SW-019 | — / — |
+| SW-021 | [森林连续视差与界面精修设计](tasks/SW-021.md) | trae-design | ready | SW-017 | — / — |
+| SW-022 | [森林平铺候选制作](tasks/SW-022.md) | minimax | queued | SW-021 | — / — |
+| SW-023 | [森林视觉入包与界面精修](tasks/SW-023.md) | zcode | queued | SW-019, SW-020, SW-021, SW-022 | — / — |
+| SW-024 | [独立基准、提示证据复核与回归入口](tasks/SW-024.md) | antigravity | ready | SW-017, SW-018 | — / — |
+| SW-025 | [可追溯测试构建身份](tasks/SW-025.md) | zcode | queued | SW-020 | — / — |
 
 ## 远端交付观察（尚非独立批准）
 

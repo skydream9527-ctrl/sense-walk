@@ -1,0 +1,458 @@
+# 慢行 · SenseWalk 技术优化建议
+
+> 文档性质：2026-10-20 对仓库源码的全面技术评审记录，覆盖运行流畅度、框架、页面美观度与后续功能方向。
+> **权威关系**：产品规则以 `DEVELOPMENT.md` v0.8 为准；任务状态以 `docs/collaboration/registry.json` 为准；素材状态以 `ASSETS.md` 为准。本文是**技术建议与排序**，不改米数、不改门禁、不改甜点曲线，也不把任何任务标成已完成。
+> **评审基线**：`origin/main`（`321060e`）。文中所有行号均以 main 为准，已逐条核对。
+> **与 `优化计划.md` 的关系**：该文件是同日生成的产品/协作视角改进计划（阶段 A–G）。本文是**技术视角的补充**，在其基础上补齐了可定位到源码行的证据、量化推算与验收判据。两文结论不冲突；若有分歧，以 `DEVELOPMENT.md` 为准。
+
+---
+
+## 0. 总体判断
+
+这是一个**工程纪律远强于产品完成度**的项目。
+
+已经做扎实的部分：领域层纯 Kotlin 且零 Android 依赖、217 项 JVM 单测覆盖曲线/门禁/计步/相位不变量、四角色协作带证据链与审核门禁、T01–T06 真实落地而非文档冒充、诚实回退（无传感器/无权限）而不是假装成功。
+
+核心判断：**问题不在"没写完"，而在三类可验证的偏差**——
+
+1. **实现与已有 PRD 规格之间存在缺口**（甜点区触感、步长设置、GPS 校准、跑步/车载识别均已在 `DEVELOPMENT.md` 明文规定，但代码里查不到）；
+2. **渲染层尚未被工程化对待**（每帧分配、主线程解码、视差在 800m 行程前 18% 就耗尽）；
+3. **视觉构图存在结构性空洞**（画面上下半长期为空）。
+
+骨架可以保留。**不建议**为当前规模引入多模块、依赖注入框架或游戏引擎——分层 Canvas 与"黑幕按米数长出"的机制是匹配的。
+
+---
+
+## 1. 运行流畅度
+
+### 1.1 【P0】视差在 800m 行程的前 ~18% 就耗尽
+
+**位置**：`app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt:214-226`（`drawImageLayer`）、`:241`（`PX_PER_METER`）
+
+**量化推算**（森林，1080×2400 屏，素材 768×1376）：
+
+```
+scale    = size.height / image.height = 2400 / 1376 = 1.744
+dstW     = 768 × 1.744 = 1339 px
+overflow = dstW - size.width = 1339 - 1080 = 259 px      ← 视差可用行程上限
+xOffset  = -parallaxPx.coerceIn(0f, overflow)           ← 滑满即钳死
+```
+
+| 图层 | parallax 系数 | 每米位移 | 耗尽 259px 所需距离 |
+| --- | --- | --- | --- |
+| `tree_outline` | 0.3 | 1.8 px/m | **约 144 m** |
+| `tree_trunks` | 0.3 | 1.8 px/m | **约 144 m** |
+| `leaf_path` | 0.6 | 3.6 px/m | **约 72 m** |
+
+森林要求 800m。**后 656m 的背景完全静止**——这与"景色层层展开、越走越有景"的核心体验直接冲突。
+
+代码注释（`ForestShell.kt` 类 KDoc）诚实记录了这一点："单图非无缝，视差滑动范围钳制在图片超出屏幕的宽度内，滑满后保持静态"。但契约 `docs/collaboration/contracts/visual-assets.md:14` 本身要求 `tileable` 必须提供三次拼接与多个偏移预览——**素材端与渲染端同时缺位**。
+
+**建议**：
+- 渲染层支持横向平铺（Compose `Image` 的 `ContentScale.FillWidth` + `Modifier.offset` 循环，或自绘 `drawImage` 重复绘制），使位移量不再受 `overflow` 限制；
+- 素材端按"可平铺长条"重新交付远景/中景，而不是"一张滑完即停的封面"；
+- 位移继续使用 `sPos × parallax`（路程函数），**不用墙钟时间动画**——这样"停下则景色不再长"的产品规则自然保持；
+- 为不同层引入不同的纵向缩放比例制造纵深，而非所有层都 cover 到全屏。
+
+**验收**：800m 末段背景仍有缓慢位移；松手停稳后像素不再变化；`reduceMotion` 打开时位移为 0。
+
+---
+
+### 1.2 【P0】首帧在主线程解码 5 张图，约 20 MiB
+
+**位置**：`ForestShell.kt:73-80`
+
+```kotlin
+val bitmaps = remember(imageLayers) {
+    imageLayers.mapValues { (_, spec) ->
+        runCatching {
+            context.assets.open(spec.assetPath).use { input ->
+                BitmapFactory.decodeStream(input)?.asImageBitmap()   // ← :77 主线程
+            }
+        }.getOrNull()
+    }
+}
+```
+
+`remember{}` 的计算在**组合期主线程**执行。768×1376 ARGB_8888 = 每张 4.03 MiB，5 层合计 **约 20 MiB**，外加 5 次同步 WebP 解码耗时。这就是进入森林会话瞬间卡顿的直接来源。
+
+**建议**：
+- 解码移到 IO 协程（`produceState` + `withContext(Dispatchers.IO)`），解码完成前走现有程序剪影降级，**不留空白层**；
+- 按实际显示尺寸做 `BitmapFactory.Options.inSampleSize` 采样，进入会话前缩到屏幕尺寸；
+- 会话内只改透明度与短距离视差偏移，不每帧重缩放原图。
+
+**验收**：首次进入森林会话无明显卡顿；解码失败继续回退程序剪影；透明度仍只来自 `SensoryState`。
+
+---
+
+### 1.3 【P0】每帧整棵会话子树重组
+
+**位置**：`SessionScreen.kt:90`
+
+```kotlin
+val walk by vm.walk.collectAsStateWithLifecycle()
+```
+
+顶层读取整个 `Snapshot`。而 `Snapshot` 每帧因 `meters` 变化而与上一帧不等（`SessionViewModel.onFrame()` 中的 `if (snapshot != _walk.value)`），导致 `SessionContent` 整棵子树每秒重组 60 次——米数文案、Column、AlertDialog 作用域、摇杆容器全在其中。
+
+**建议**：
+- 帧遥测（`frameDtMs`、`metersDelta`）留在控制器内部，直接交给 `SensoryCoordinator.onFrame`，**不放进 Compose 收集的状态**；
+- 另建一份"画面状态"，仅当 `sPos`、速度、地形或 `visualOpacities` 出现可见变化时才更新；
+- 米数文案使用点击后才展示的领域累计值，不参与每帧重组。
+
+**验收**：行走时会话页的文字、对话框与摇杆容器不再随帧重组（需有重组计数或帧耗时证据，不只凭体感）；黑幕起点、点按才显示米数、终态只导航一次三条保持不变。
+
+---
+
+### 1.4 【P1】每帧 8–12 次堆分配
+
+**位置**：`PhaseScheduler.kt:64-83`、`VirtualWalkController.kt:102-108`、`:229-232`
+
+`PhaseScheduler.sensoryState()` 每次调用新建 2 个 `mutableMapOf` + 1 个 `mutableListOf` + N 个 `AudioTarget`/`HapticRule` + `SensoryState`；`VirtualWalkController.snapshot()` 再包一层 `Snapshot`；`drainPhaseEvents()` 每次 `pendingEvents = mutableListOf()` 重建。
+
+60fps 下约 **600 次/秒**的 GC 压力。
+
+**建议**：
+- `sensoryState` 是米数的纯函数，**缓存**——仅在跨越相位阈值或处于淡入区间内才重算；
+- `drainPhaseEvents` 改为复用缓冲区（`pendingEvents.clear()` 而非重建），或仅在有事件时才分配。
+
+**验收**：连续行走 5 分钟，GC 次数与分配速率显著下降；领域单测全部保持通过（`sensoryState` 的纯函数语义不得改变）。
+
+---
+
+### 1.5 【P1】前景"旅人"是 3 像素宽的小人，且不随屏幕密度缩放
+
+**位置**：`ForestShell.kt:373+`（`drawTraveler`）
+
+使用**裸像素**写死：身体宽 20px、高 60px，在 1080×2400 屏上仅占屏高 **2.5%**（实测截图确认为一个小圆棍）。在 1440×3200 设备上按 px 不变，占比更小、更不搭。
+
+`design/02-characters/traveler.md` 已有完整规格（3/4 侧视、单件外套/斗篷下摆、旅行靴、1px 弱光边缘 `#c4d4a8` @ 20%），但实现未跟上。
+
+**建议**：按 `density` 缩放；至少做到剪影轮廓可辨识（头身比 1:3.2–3.5、斗篷下摆轮廓、边缘弱光）；不要做成与照片层风格割裂的卡通角色。
+
+**验收**：在 1080×2400 与 1440×3200 两种分辨率下，旅人高度均在屏高 8%–12% 区间，且与所在色板明度一致。
+
+---
+
+### 1.6 【P1】全项目零 WindowInsets 处理
+
+**事实**：`MainActivity.kt:13-14` 开启了 `enableEdgeToEdge()` + `setDecorFitsSystemWindows(false)`，但 `app/src/main/java/com/sensewalk/app/ui/` 下 grep 不到任何 `WindowInsets` / `safeDrawing` 引用。
+
+后果：
+- 首页/设置页使用 `Scaffold`，Material3 默认会消费 insets，影响较小；
+- **会话页与结果页是裸 `Box` / `Column`**，会绘制到状态栏与导航栏之下；
+- `SessionScreen.kt:293` 的 `padding(top = 64.dp)` 与 `:356` 的 `padding(bottom = 48.dp)` 是**写死值**，在刘海屏/挖孔机上必然与系统栏打架。
+
+**建议**：会话页与结果页统一接入 `Modifier.windowInsetsPadding(WindowInsets.safeDrawing)`，或改用 `Scaffold` 承接；写死的 64dp/48dp 改为由 insets 决定。
+
+**验收**：在挖孔屏与手势导航设备上，米数、放弃/暂停控件、摇杆区域均不被系统栏遮挡或误触。
+
+---
+
+### 1.7 【P2】其它性能项
+
+| 项 | 位置 | 说明 |
+| --- | --- | --- |
+| 地形系数线性扫描 | `VirtualWalkController.kt:242` | 每帧 `segments.indexOfFirst`（森林 8 段），可预计算索引或二分 |
+| 传感器差分在主线程 | `WalkForegroundService.kt:84` scope 为 `Dispatchers.Main` | 差分与快照构造移至后台更稳妥 |
+| 淡入期逐帧 `setVolume` | `SensoryCoordinator.onFrame` → `AndroidSensoryBackend.setLoopGain` | 两路 MediaPlayer × 12s 淡入期每帧调用，可降频 |
+| 无 R8 收缩 | `app/build.gradle.kts` | `isMinifyEnabled = false`，见 §2.5 |
+
+---
+
+## 2. 框架
+
+### 2.1 【P0】领域层已零 Android 依赖，却仍与 UI 同模块
+
+**事实**：`app/src/main/java/com/sensewalk/app/domain/` 下的 import 只有 `kotlinx.serialization.json` 与 `kotlin.math`——**零 `android.*` 依赖**（已用 grep 全量核验）。
+
+同时 `app/src/main/java/com/sensewalk/app/ui/theme/Theme.kt:37` 的 `sceneTint()` 仍是 `when(sceneId)` 硬编码，而 `SceneJsonParser.kt:98` 已解析 `themeColor`、三个场景 JSON 都写了值——**`themeColor` 在 `ui/` 下 0 处引用，是死字段**。
+
+**建议**（按性价比排序）：
+1. **让 `themeColor` 真正生效**：`sceneTint()` 改为读取场景配置的 `themeColor`，`ScenePalette` 同样从配置取色或与之对齐。改动极小，立刻解决"雨林/城市落到通用表面色"的问题。
+2. **场景门禁配置化**：`HomeScreen.kt:59` `OPEN_VIRTUAL_SCENES = setOf("forest")` 与 `ModeScreen.kt:91` `scene.id == "forest"` 硬编码在 Kotlin 里，每加一景要改两处。应改为 schema v2 的 `availableModes` 字段（`SceneValidator` 同步校验），让"哪些景可虚走/可实走"由数据决定。
+3. **领域层独立模块**：拆 `:domain` 纯 JVM 模块。收益是编译期强制依赖方向、领域测试跑得更快、UI 崩溃不可能污染领域层。**注意**：这是手段不是目的；若当前阶段节奏紧张，此项可排在功能缺口之后。
+
+---
+
+### 2.2 【P1】音频焦点逻辑完整复制了两份
+
+| 位置 | 方法 | 行数 |
+| --- | --- | --- |
+| `session/SessionViewModel.kt` | `setupAudioInterruptionHandling` :293 / `attemptAudioResume` :350 / `teardownAudioInterruptionHandling` :381 | ~95 行 |
+| `service/WalkForegroundService.kt` | `setupAudioFocus` :452 / `attemptAudioResume` :501 / `teardownAudioFocus` :519 | ~90 行 |
+
+两者是近乎逐行的重复：同样的 `AudioFocusGate`、同样的 `ACTION_AUDIO_BECOMING_NOISY` receiver、同样的三段式恢复逻辑（`audioResumed` 标记 + `setAudioAllowed` 顺序）。改一处漏一处必然发生。
+
+**建议**：抽 `engine/sensory/AudioFocusSession`，两处注入同一实例。
+
+**验收**：虚走与实走的音频中断行为由**同一份**代码决定；现有 `AudioFocusChainTest` / `PlaybackSupportTest` 保持通过并覆盖抽出的类。
+
+---
+
+### 2.3 【P1】`VirtualWalkController.Snapshot` 被当作实走的快照类型
+
+**位置**：`WalkForegroundService.kt:72`、`:86`
+
+```kotlin
+val walk: StateFlow<VirtualWalkController.Snapshot?> get() = ...
+private val walk = MutableStateFlow<VirtualWalkController.Snapshot?>(null)
+```
+
+但服务实际装的是 `RealWalkController`（`:184`）。类型语义是错的——实走会话对外暴露"虚走快照"类型。
+
+**建议**：在 domain 提取公共 `WalkSnapshot`，`VirtualWalkController` 与 `RealWalkController` 各自产出它。UI 层（`SessionScreen` / `RealWalkContent`）随后统一消费同一类型。
+
+**验收**：`ui/session/` 下不再出现 `VirtualWalkController.Snapshot` 字样；两种模式的 UI 消费路径一致。
+
+---
+
+### 2.4 【P1】`runBlocking` 在主线程读文件
+
+**位置**：`RealWalkContent.kt:32-47`
+
+```kotlin
+private object RealWalkVisualCache {
+    fun load(context: Context, sceneId: String) = synchronized(cache) {
+        cache.getOrPut(sceneId) {
+            kotlinx.coroutines.runBlocking {          // ← :39
+                (SceneRepository(context).loadAll() as? SceneLoadState.Ready)
+                    ?.scenes?.firstOrNull { it.id == sceneId }
+            }
+        }
+    }
+}
+// 调用点：RealWalkContent.kt:67  remember(sceneId) { RealWalkVisualCache.load(context, sceneId) }
+```
+
+`remember{}` 在组合期执行，`runBlocking` 因此在**主线程**同步读 assets + 解析 JSON + 校验。这是 ANR 风险写法，目前只被缓存掩盖了首次之外的代价。
+
+**建议**：改为 `produceState` + `withContext(Dispatchers.IO)`；或直接由前台服务（已持有 `SceneConfig`）通过 Binder 传给 UI，避免二次加载。
+
+**验收**：进入实走会话首帧不阻塞主线程；`SceneRepository` 的解析结果有进程级缓存（见 2.5）。
+
+---
+
+### 2.5 【P2】依赖、包体与构建纪律
+
+- `SceneRepository.loadAll()` 每次都重新读盘 + 重新解析 + 重新校验，被 `SessionViewModel`、`WalkForegroundService`、`RealWalkVisualCache` 三处各调一次 → 加进程级单例缓存。
+- `app/build.gradle.kts`：`isMinifyEnabled = false`；`versionCode = 1`；`versionName = "0.1.0-week1"`（应改为与实际里程碑一致）。
+- `app/src/androidTest` **一个文件都没有**，但 `build.gradle.kts` 配了 `testInstrumentationRunner`。30 个 JVM 测试文件覆盖领域，UI 层零自动化保护。
+- `themes.xml` parent 为 `android:Theme.Material.Light.NoActionBar`，而应用是全暗色 → 改 `Theme.Material.NoActionBar` 可消除系统控件白闪。
+- Compose BOM `2024.10.01` 与配套 lifecycle/navigation 可在功能边界稳定后单独提交升级，先看云端测试与 lint。
+- 建议补 **Baseline Profile**（首页 + 会话首帧），并为 release 开 R8 时确认调试注入入口（`DebugStepReceiver` / `DebugWalkSmoke`）不进入发布包。
+
+---
+
+### 2.6 【P2】测试补强
+
+- **Compose UI 测试**：黑幕起点、点按才显示米数、终态只跳转一次、返回键确认期间不累计。
+- **视觉回归**：按里程合成的阶段图（现有 0 / 100 / 265 / 425 / 630 / 785 m 方法可沿用），**同时看 8px 与 32px 周期，并且用人眼看图**——统计阈值不能单独放行（`ASSETS.md:24` 已记录 8px 阈值漏检 32px 对角纹理的教训）。
+- 真机、模拟器注入、JVM 单测在报告中分开写；注入步数不称为真实计步。
+
+---
+
+### 2.7 【P1】设置项缺口与文案失真
+
+| 位置 | 现状 |
+| --- | --- |
+| `ui/settings/SettingsScreen.kt` | 振动副标题仍写"真实振动引擎将在下一版接入"——**引擎早已接入**（`AndroidSensoryBackend.vibrate`），文案失真应立即改 |
+| `data/SettingsRepository.kt` | 无 `strideMeters` 字段。`RealWalkEngine` 恒用默认 0.70 m，而 `DEVELOPMENT.md` §3.2.1 规定步长可配 0.45–0.95 m、并可按身高 × 0.415 估算 |
+| `data/SettingsRepository.kt` | 无 GPS 辅助开关（保持默认关闭，符合"只建议、用户确认才写入"的定稿） |
+
+**建议**：补步长设置项，保存前展示换算结果；修正振动文案。
+
+---
+
+## 3. 页面美观度
+
+### 3.1 【P0】画面上下半长期为空
+
+**实测**（对 `.local-verify/fr-04-117m.png` 做像素采样，1080×2400）：
+
+```
+y = 40 ~ 90    (6, 8, 6)      纯 void
+y = 120        (23, 41, 36)   树线层开始
+y = 400        (23, 41, 36)
+y = 1000       (22, 40, 36)
+y = 1300       (7, 12, 8)     回到近黑
+y = 1600~2350  (6, 8, 6)      纯 void
+```
+
+树冠带只占据 y≈750–1300。**上方 1/3 与下方 1/2 均为纯黑**。在 117m（仅解锁一层）时这是"按距揭示"的合理结果；问题在于 80m 之前是 100% 纯黑，80–240m 区间长期只有一条悬浮于画面中部的窄带，**读起来像"没做完"而非"森林"**。
+
+**建议**：
+- 增加**不受距离门禁约束的基础环境层**：天空渐变 + 地面基面 + 远景雾。这不违反"不可提前揭示"（它不是进度内容，是环境底），却能让全程画面都有底。
+- 重构树线层为有明确地平线构图的全幅素材，让树线落在画面下三分之一而非中部窄带。
+
+**验收**：0m 处画面不再是 100% 纯黑（可有极弱雾与天光）；任意解锁阶段画面上下不再出现大面积空洞。
+
+---
+
+### 3.2 【P0】素材被拉伸导致模糊
+
+**位置**：`ForestShell.kt:216` `val scale = size.height / image.height`
+
+768 宽的源被 cover 到 1339px 宽，源分辨率不足以支撑全幅铺满，边缘必然发软。
+
+契约 `docs/collaboration/contracts/visual-assets.md:13` 已规定"目标宽 1080、每层 ≤400KB、每景五个外部视觉层 ≤2MB"，并明确当前 768×1376 是**已记录偏差**——"收尾不通过单纯放大冒称原生1080"。
+
+**建议**：按契约规格重制（1080 宽 + 可平铺），不要单纯放大。
+
+---
+
+### 3.3 【P1】调色板双轨（部分已收敛）
+
+**已修正的判断**：main 上 `ForestShell` 已有 `ScenePalette` 抽象（`ui/session/ScenePalette.kt`，含 `FOREST` 与 `RAINFOREST` 两套），森林六色与既有值逐字节一致。**"ForestShell 与 Theme 各持一套色板"的批评对 main 不成立**，此处更正。
+
+**仍然成立的问题**：`ScenePalette` 是 `ui/session/` 下的私有常量，`Theme.kt` 的 `sceneTint()` 仍按 `when(sceneId)` 硬编码、且与 `ScenePalette` 无关联；`themeColor` 配置字段仍是死字段。三处需要统一为单一来源。
+
+**建议**：确立单一色源——场景配置 (`themeColor` + 场景色板字段) → `ScenePalette` → `Theme` 与 `ForestShell` 共用。`ScenePalette` 上移到 `ui/theme/` 或 domain 层更合适。
+
+---
+
+### 3.4 【P1】缺少排版系统
+
+`ui/theme/Theme.kt` **未定义 `Typography`**，全走 Material3 默认 Roboto 默认字号阶梯。对一个"安静、克制、留白"的产品，默认阶梯偏重；实测截图中 `displayMedium` 用于米数显示，与页面其余部分比例失衡（117m 的数字压过了整个构图）。
+
+**建议**：建立显式 `Typography`——更小的 display、更松的 lineHeight、统一 `LetterSpacing`；首页、模式、结果共用同一套字号。`design/04-interaction-mockups/screens.md` 已提出"「慢行」和通关句用一根安静的衬线；正文保持无衬线"，可作为依据。
+
+---
+
+### 3.5 【P1】无过渡动画
+
+`SenseWalkApp.kt` 的 `NavHost` 没有任何 `enterTransition` / `exitTransition`，页面切换是硬切。对一个以"慢"为核心定位的应用，导航节奏应与产品调性一致。
+
+**建议**：为会话进入/退出配 300–400ms 柔和淡入淡出，**并与 `reduceMotion` 联动**（`reduceMotion` 打开时退化为即时切换）。
+
+**验收**：页面切换无硬切；`reduceMotion` 打开时无过渡动画。
+
+---
+
+### 3.6 【P2】其它视觉项
+
+- `screenOrientation="portrait"` 硬锁 + lint `LockedOrientationActivity` 警告——横屏与折叠屏未适配。
+- 缺 `MonochromeLauncherIcon`（Android 13+ 主题图标）。
+- 前台服务通知用 `android.R.drawable.ic_menu_directions` 作为小图标（系统图标，风格不统一，且非专用素材）。
+- `SessionScreen.kt:285`/`:348` 用 `fillMaxHeight(0.55f)` / `0.45f` 划分上下区，配合 1.1 硬编码 padding，缺少 insets 适配（见 1.6）。
+
+---
+
+## 4. 后续功能完善方向
+
+### 4.1 【第一梯队】把已有 PRD 规格补齐（不是新功能，是实现缺口）
+
+以下在 `DEVELOPMENT.md` 中已明文规定，但代码中查不到：
+
+| 规格出处 | 规定内容 | 现状（已核验） |
+| --- | --- | --- |
+| §4.3.3 | "第一次进入甜点区给一次很轻的 tick；第一次进入紧张区给一次很轻的闷振动；每局各一次" | **UI 层零 haptic 代码**。`Joystick.kt:116-119` 只改拇指颜色。**甜点区是本产品核心手感，缺触感等于缺一半** |
+| §3.2.1 | 设置里可配 `strideMeters`（0.45–0.95 m，可按身高 × 0.415 估算） | `SettingsRepository` 无该字段，`RealWalkEngine` 恒用 0.70 |
+| §3.2.1 | GPS 辅助：结束一局后按 GPS 距离校准步长，需用户确认 | 全项目零 GPS 代码 |
+| §3.2.1 | 车载判断（GPS > 3 m/s 且步频 < 60 持续 10s → 暂停累计并提示） | 未实现 |
+| §3.2.1 | 跑步识别（步频 > 140 持续 20s → 平静提示"放慢一点"） | 未实现 |
+
+**甜点区 haptic 是性价比最高的一条**——直接服务"找到舒适节奏"这一产品核心，实现成本极低（一次 `LocalHapticFeedback` 或 `HapticFeedbackType.TextHandleMove` + 每局一次的"已提示"标记）。
+
+---
+
+### 4.2 【第二梯队】让实走模式真正可信
+
+当前实走仅靠 `TYPE_STEP_COUNTER`，精度受步长假设限制。可信度提升路径（按依赖顺序）：
+
+1. **步长可配 + 按身高估算**（4.1 的规格缺口，先做）
+2. **GPS 校准步长**——一次性建议，用户确认才写入，不计入进度
+3. **车载 / 跑步识别**——避免把通勤误计为散步
+4. **GPS 距离作为参考值展示**——只做合理性提示，不计入进度，契合"诚实"原则
+
+---
+
+### 4.3 【第三梯队】产品纵深（目前没有任何留存闭环）
+
+应用现在**每次会话结束就归零**，没有"回来"的理由。建议：
+
+- **本地行走档案**：累计里程、走过天数、每景最远距离。**不做排行榜、不做评分**（契合"无社交排行"原则），只是自己的记录。
+- **续走引导**：实走中断后能接着走——`SessionSnapshot` 机制与 `PendingRestore` 已在 main 就绪，**差的是首页/模式页的用户可见入口与文案**。
+- **夜间/睡前模式**：现有音频素材天然适合，配"更慢、更暗、更少提示"的变体是自然延伸。
+
+---
+
+### 4.4 【第四梯队】声音与氛围纵深
+
+当前只有 6 个脚步变体 + 2 条环境循环。低感知成本、高收益的增量：
+
+- **脚步音随地形变化**——`TerrainKind` 已有 5 种（flat / slope_up / slope_down / gap_hop / uneven），音频层完全不感知地形；
+- 脚步音量与音高随速度/节奏轻微变化；
+- 场景间淡入淡出而非硬切。
+
+---
+
+### 4.5 【持续项】无障碍
+
+- 摇杆在 TalkBack 下基本不可用。`holdToWalk` 是等价替代，但**默认关闭且藏在设置里**——应作为 TalkBack 场景下的**主动提示**，而非设置项。
+- 已做好的部分应保持：`JoystickZone`、`AbandonControl`、`HoldToWalkButton`、`SceneCard` 均有 `contentDescription`，`HomeScreen` 的 `semantics` 已说明能否进入。
+- `DEVELOPMENT.md` §20.3 已列"TalkBack 能开始、暂停、查看进度、放弃"——建议纳入验收清单。
+
+---
+
+## 5. 建议落地顺序
+
+### 第一批（3 项，直接改善核心体验）
+
+| # | 事项 | 覆盖章节 |
+| --- | --- | --- |
+| 1 | **修视差平铺 + 增加基础环境层** | 1.1、3.1 |
+| 2 | **解码移出主线程 + 帧数据延迟读取** | 1.2、1.3、1.4 |
+| 3 | **补甜点区 haptic + stride 设置** | 4.1、2.7 |
+
+第 1 项同时解决"800m 里 650m 背景不动"和"画面 2/3 是黑的"两个最刺眼的问题。
+
+### 第二批（框架与健壮性）
+
+`WindowInsets` 全面接入 → 音频焦点去重 → `themeColor` 与 `ScenePalette` 统一 → 场景门禁配置化 → `WalkSnapshot` 类型修正 → `runBlocking` 异步化 → `SceneRepository` 缓存 → 设置文案修正。
+
+### 第三批（深度与质量）
+
+领域层模块化（可选）→ Compose UI 测试 → 视觉回归流水线 → R8 + Baseline Profile → 步长/GPS/车载/跑步 → 行走档案 → 地形音频 → 过渡动画 → 排版系统。
+
+---
+
+## 6. 与协作登记的对应关系
+
+本文建议与 `docs/collaboration/registry.json` 中既有任务的关系（**不改变任务状态，仅标注重叠**）：
+
+| 任务 | 状态 | 与本文关系 |
+| --- | --- | --- |
+| SW-002 → SW-010 | accepted | 覆盖 §3.2 素材规格、§1.1 平铺交付要求 |
+| SW-001 | accepted | 真机可靠性，与 §1.6、§4.2 相关 |
+| SW-004（快照）/ SW-005（越坎） | accepted | 支撑 §4.3 续走引导 |
+| SW-006 | **rework** | 雨林素材批次——§1.1 平铺要求应写入其交付契约 |
+| SW-007 / SW-008 / SW-009 | queued / queued / queued | 后续功能方向的后续落地载体 |
+
+**协作纪律提醒**：
+- 本文为**技术建议**，不构成任务派发。任何实现应走既有协作链（设计/代码各改自己范围 → 独立审核 → 才算完成），**作者不自判 accepted**。
+- 本文提到的素材重制（平铺长条、1080 宽）属于 `design/assets/` 与 `assets/visual/` 范畴，按 `AGENTS.md` 由 Trae 单写设计、MiniMax 制作候选、ZCode 入包，**不应由单方直接改包内文件**。
+- 当前工作区存在未跟踪的 `design/assets/rainforest/` 目录，按所有权规则属 Trae 范围，建议先确认归属再动。
+
+---
+
+## 7. 明确不做
+
+- 不改米数、门禁、`comfort_v1` 甜点曲线——这些是产品定稿，不是优化项。
+- 不把任何协作任务标记为已完成，不覆盖他人负责的文件。
+- 不为了"架构完整"引入多模块或依赖注入框架（除非 §2.1 第 3 条在功能稳定后仍值得）。
+- 不用统计阈值单独放行视觉素材（`ASSETS.md:24` 已记录 8px 阈值漏检 32px 纹理的教训）。
+- 不把 HTML demo 或模拟器注入步数写成 Android 完成证据。
+
+---
+
+## 附：核验方式说明
+
+本文所有结论均基于对 `origin/main`（`321060e`）的实际源码读取与命令核验，包括：
+
+- `git grep` / `grep` 全量检索（`WindowInsets`、`themeColor`、`runBlocking`、`haptic`、`GPS`、`stride`、`androidTest`、`WindowInsets` 等）；
+- 对 `app/src/main/java/com/sensewalk/app/domain/` 的 import 全量列举，确认零 Android 依赖；
+- 对 `.local-verify/fr-04-117m.png` 的像素采样（Python 标准库读取 PNG，逐行取值）；
+- 对视差耗尽距离、位图内存占用的**算术推算**（推导过程见 §1.1、§1.2）。
+
+**未经真机验证的项目**（锁屏 15 分钟、来电/耳机中断、真实计步、耗电）在本文件中一律按待验证处理，不作结论。
