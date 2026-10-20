@@ -29,7 +29,7 @@
 | SW-021 | [森林连续视差与界面精修设计](tasks/SW-021.md) | trae-design | ready | SW-017 | — / — |
 | SW-022 | [森林平铺候选制作](tasks/SW-022.md) | minimax | queued | SW-021 | — / — |
 | SW-023 | [森林视觉入包与界面精修](tasks/SW-023.md) | zcode | queued | SW-019, SW-020, SW-021, SW-022 | — / — |
-| SW-024 | [独立基准、提示证据复核与回归入口](tasks/SW-024.md) | antigravity | ready | SW-017, SW-018 | — / — |
+| SW-024 | [独立基准、提示证据复核与回归入口](tasks/SW-024.md) | antigravity | accepted | SW-017, SW-018 | [H-SW-024-R1](handoffs/antigravity/H-SW-024-R1.json) / — |
 | SW-025 | [可追溯测试构建身份](tasks/SW-025.md) | zcode | queued | SW-020 | — / — |
 
 ## 远端交付观察（尚非独立批准）

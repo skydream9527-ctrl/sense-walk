@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-024-R1",
+  "task_id": "SW-024",
+  "revision": 1,
+  "producer": "antigravity",
+  "recipient": "zcode",
+  "base_commit": "4f57659e00e0267be03a0a7b966cacba8387c5ee",
+  "head_commit": "f596c8f81c8b8f1df9e8d1b22aab848a79559f9f",
+  "pr_url": null,
+  "report": "docs/collaboration/handoffs/antigravity/H-SW-024-R1.md",
+  "changed_files": [
+    "app/src/androidTest/java/com/sensewalk/app/qa/SenseWalkRegressionInstrumentationTest.kt",
+    "docs/collaboration/evidence/SW-024/README.md",
+    "docs/collaboration/evidence/SW-024/defect-and-release-checklist.md",
+    "docs/collaboration/evidence/SW-024/h2-pixel-audit.json",
+    "docs/collaboration/evidence/SW-024/performance-benchmark-protocol.md",
+    "docs/collaboration/reviews/R-SW-018-R1-correction.md",
+    "tools/qa/test_sw024_ui_regression_entrypoints.py"
+  ],
+  "checks": [
+    {
+      "name": "H-SW-018-R1 H2 站稳提示两图与 F3 800m 通关图亲自实看与像素量化复核",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/reviews/R-SW-018-R1-correction.md",
+        "docs/collaboration/evidence/SW-024/h2-pixel-audit.json"
+      ]
+    },
+    {
+      "name": "同环境性能前后比较协议固定（build-176 / main 321060e 参照与 S0-S6 采样点）",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/SW-024/performance-benchmark-protocol.md"
+      ]
+    },
+    {
+      "name": "7 项 UI 与领域回归入口及协作校验测试套件（9 + 31 项全绿）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "tools/qa/test_sw024_ui_regression_entrypoints.py",
+        "tools/qa/test_collaboration.py"
+      ]
+    },
+    {
+      "name": "AndroidTest 回归入口编译与 testDebugUnitTest / lintDebug / assembleDebug 验证",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "app/src/androidTest/java/com/sensewalk/app/qa/SenseWalkRegressionInstrumentationTest.kt",
+        "docs/collaboration/evidence/SW-024/defect-and-release-checklist.md"
+      ]
+    },
+    {
+      "name": "AndroidTest 仪器测试设备运行及 237m 站稳提示 400ms 连续抓拍同步取证",
+      "type": "emulator",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/reviews/R-SW-018-R1-correction.md"
+      ]
+    },
+    {
+      "name": "同环境运行前后帧时间（gfxinfo）/ 解码耗时 / 内存 / 重组计数对拍",
+      "type": "emulator",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/SW-024/performance-benchmark-protocol.md"
+      ]
+    },
+    {
+      "name": "真机计步、锁屏 15 分钟、实体耳机来电、物理重启与 5-8 人真人体感验证",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/SW-024/defect-and-release-checklist.md"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/collaboration/reviews/R-SW-018-R1-correction.md",
+      "sha256": "6c6eb99c36631ab815f1714d0b02924e2fed73ecf50cbaa5dff0fd63b2be6e25"
+    },
+    {
+      "path": "docs/collaboration/evidence/SW-024/README.md",
+      "sha256": "344ad4be022518f07219c7fd5bd6ee11174afd76b30231855cbda03a8c6e5b17"
+    },
+    {
+      "path": "docs/collaboration/evidence/SW-024/h2-pixel-audit.json",
+      "sha256": "3030af9d7cf8395168be24af31191afb7462a2f2a4bc4384aaa30f2b7a4ee579"
+    },
+    {
+      "path": "docs/collaboration/evidence/SW-024/performance-benchmark-protocol.md",
+      "sha256": "ac437e17b27cfaa7ed16ae9da3c3c4a5d3a8a4f16bad0a8f6bcb42cbf4d71a3c"
+    },
+    {
+      "path": "docs/collaboration/evidence/SW-024/defect-and-release-checklist.md",
+      "sha256": "56b3d8afb24daf37b5ef0a2ac5c22977c8b91a99d7133360e5c03ddfcd1252dd"
+    },
+    {
+      "path": "tools/qa/test_sw024_ui_regression_entrypoints.py",
+      "sha256": "1ba4102bf4889b7447d44bcfc0a680bcd2b8ffcf63ebf8fc152329efb03b2d6f"
+    },
+    {
+      "path": "app/src/androidTest/java/com/sensewalk/app/qa/SenseWalkRegressionInstrumentationTest.kt",
+      "sha256": "e91ba094d05b87a09cb0e2fed485ee5ffe4c30690f84ccfa05927f015520392c"
+    }
+  ],
+  "asset_manifest": null,
+  "pending": [
+    "首次站稳提示在 sPos ∈ [237, 240) 出现（可读「慢一点，站稳再跳。」画面 + Gait.TENSE 姿态）→ 约 3s 消失 → 同 sessionId 恢复不重播的同步帧序列保持 Pending",
+    "同环境运行前后帧时间（dumpsys gfxinfo）、解码耗时、内存与可观察重组计数对拍保持 Pending（未采集前不宣称帧率/省电提升百分比）",
+    "SenseWalkRegressionInstrumentationTest 设备/模拟器运行时执行保持 Pending（当前仅验证编译与 lint 通过，未伪造 passed）",
+    "真实计步（TYPE_STEP_COUNTER）、锁屏 15 分钟持续计距/播放、实体耳机/来电中断、物理重启恢复及 5–8 人真人体验继续保持 Pending"
+  ],
+  "requests": [
+    "ZCode：按 SW-019 交付后台图层解码、移除 RealWalkVisualCache.runBlocking 与高频状态读取下沉（附 H-SW-019-R1）；审核通过后依次启用并推进 SW-020 与 SW-025，第一批功能改进通过后即发布新测试包，不等平铺素材",
+    "ZCode（可选测试配置建议 D-SW024-08）：app/build.gradle.kts 目前未声明 androidTestImplementation(junit / androidx.test:runner / ui-test-junit4)，后续可在所属任务中按需补齐",
+    "Trae Design：按 SW-021 交付森林连续视差（tree_outline/tree_trunks/leaf_path 平铺规范，复用已批准光效/空地）与 UI 精修设计包（0 付费 API，附 H-SW-021-R1），获批后启用 SW-022",
+    "MiniMax：继续完成 SW-006 R2 零 API 生产尺寸/总预算 guard 与准确交接；等待 SW-021 独立批准后再启动 SW-022"
+  ],
+  "design_manifest": null
+}
