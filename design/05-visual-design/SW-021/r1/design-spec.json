@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-021",
+  "revision": 1,
+  "scene_id": "forest",
+  "status": "design_candidate",
+  "title": "森林连续横移视差（三层可平铺候选）与界面精修设计",
+  "producer": "trae-design",
+  "basis": {
+    "base_commit": "4f57659e00e0267be03a0a7b966cacba8387c5ee",
+    "base_note": "origin/main 于 2026-10-20 fetch；分支 codex/trae-design/SW-021-forest-polish 独立 worktree。head SHA 见 handoff（spec/manifest 在提交前定稿，故此处只记 base）。",
+    "scene_config": "app/src/main/assets/scenes/forest.json",
+    "renderer_readonly": "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "theme_readonly": "app/src/main/java/com/sensewalk/app/ui/theme/Theme.kt",
+    "prior_accepted_design": {
+      "forest_five_layers": "design/05-visual-design/SW-011/r1/design-spec.json (accepted)",
+      "edge_audit": "design/05-visual-design/SW-017/r1/integration-reference.json (accepted)"
+    },
+    "product_rules": "DEVELOPMENT.md §9（距离门禁/0m 近黑）、§11.2（结果退暗 ≥3s）；docs/collaboration/contracts/visual-design.md v1"
+  },
+  "canvas": {
+    "design_reference": {"width": 1080, "height": 1920},
+    "tile_canvas": {
+      "width": 1080,
+      "height": 1920,
+      "repeat_axis": "x",
+      "wrap": "repeat-x",
+      "seam_safe_px": 96,
+      "native_drawing_note": "三层 tile 全部以 1080×1920 原生参数绘制（Python PIL 矢量栅格化 + 同步 SVG 双后端），不是 768×1376 旧 webp 放大；导出生产素材时按 visual-assets 预算另行编码，不得反向放大冒称原生。"
+    },
+    "coordinate_system": "normalized_0_to_1",
+    "crop_previews": [
+      {"width": 1080, "height": 1920, "ratio": "9:16"},
+      {"width": 1080, "height": 2400, "ratio": "20:9"},
+      {"width": 390, "height": 844, "ratio": "≈9:19.5", "render_note": "dp 点框；App 在物理像素空间渲染，预览按 @3x 语义生成后降采样示意"}
+    ],
+    "scale_and_position": {
+      "rule": "tile 按高铺满（scale = screenH / 1920）；repeat-x 周期宽度 period_px = 1080 × scale；用至少两份拷贝铺满屏宽，水平偏移 x_shift = mod(meters × K × scale × parallax, period_px)",
+      "difference_from_current_shell": "当前 ForestShell.drawImageLayer 是 cover/左对齐 + offset 钳制 [0, dstW-screenW] 的有限滑动，不支持 repeat-x；SW-022 需新增平铺绘制路径（建议 BitmapShader CLAMP/REPEAT 或双份 drawImage），本设计不假定壳已支持。",
+      "period_vs_screen": {
+        "1080x1920": {"scale": 1.0, "period_px": 1080.0, "screen_w": 1080, "period_covers_screen": true},
+        "1080x2400": {"scale": 1.25, "period_px": 1350.0, "screen_w": 1080, "period_covers_screen": true},
+        "390x844": {"scale": 0.8792, "period_px": 949.5, "screen_w_at_3x": 1170, "period_covers_screen_at_3x": true, "note": "390dp 点宽 780px@2x / 1170px@3x，周期均不短于视口"}
+      },
+      "void_band_guarantee": "repeat-x 下任意米数画面恒被 ≥1 个完整周期覆盖，黑带像素宽度恒为 0；旧 cover 在 1080×2400 的 265/425/630m 实测右缘 52px 黑带（见 previews/sw021_preview_checks.json 与 SW-017 edge-audit）。"
+    },
+    "safe_area_notes": "底部 45%（y=.55–1.00）为摇杆/实走状态触摸区，三层 tile 在该区保持低对比、无硬边纹理；状态栏/手势条为系统 inset，素材不烘焙避让块；标注框仅存在于预览图，导出素材不含。"
+  },
+  "anchors": {
+    "traveler_x": 0.34,
+    "ground_y": 0.865,
+    "joystick_area_bottom_fraction": 0.45,
+    "frozen_note": "与 SW-011/SW-017 一致，本轮不移动锚点；旅人仍由 ForestShell 程序绘制，任何素材层不得画人。",
+    "traveler_size_options": {
+      "option_a": {"height_fraction_of_screen_h": 0.07, "label": "7% 屏高（现状近似）"},
+      "option_b": {"height_fraction_of_screen_h": 0.09, "label": "9% 屏高（推荐）"},
+      "comparison_preview": "previews/traveler/traveler_size_compare.png",
+      "recommendation": "推荐 9%：在 390×844 小屏与低亮度林冠背景下剪影辨识度明显更好，仍远离 8–12% 区间上限、不遮挡操作区；7% 在 1080×2400 清楚但小屏融入暗部。两方案都不构成硬产品标准，由 QA 在 SW-022 真机目检后定稿。",
+      "constraints": "尺寸变化只改程序绘制归一高度；宽度等比，脚底仍锚定 y=.865；下 45% 操作留白不被侵占。"
+    }
+  },
+  "palette": {
+    "contract_colors": {
+      "void": "#060806",
+      "outline": "#1A2820",
+      "trunks": "#2D4A3E",
+      "light": "#8FA87A",
+      "leaf": "#6B8F71",
+      "warm": "#A89060"
+    },
+    "derived_colors_used_by_tiles": {
+      "outline_back": "#22332A",
+      "outline_lit": "#26382E",
+      "trunk_dark": "#244036",
+      "trunk_foreground": "#243A30",
+      "earth_top": "#4A4030",
+      "earth_mid": "#3A3226",
+      "earth_bottom": "#312A1F",
+      "path_earth": "#6A5B42",
+      "twig": "#5A4E38",
+      "clearing_glow": "#A8C5A0",
+      "light_beam": "#DDE7C4"
+    },
+    "ui_colors_existing": {
+      "sense_black": "#0A0A0A",
+      "surface": "#141414",
+      "on_surface": "#E8E4D9",
+      "muted": "#8A8680",
+      "accent_soft": "#A8C5A0",
+      "forest_theme_color": "#1F2A22"
+    },
+    "ui_new_proposal": {
+      "danger_action": "#C94A3E",
+      "danger_on": "#FFECE6",
+      "hairline": "rgba(255,255,255,0.10)",
+      "card_fill_on_black": "rgba(31,42,34,0.47)",
+      "card_fill_on_surface": "rgba(255,255,255,0.05)",
+      "usage_rule": "场景 themeColor #1F2A22 只作场景卡/模式卡低透明强调底与选中描边语义色，不替代 Theme 六色板，不全屏铺色；危险动作唯一使用 #C94A3E；雨林/夜径卡用各自 neutral 容器色，不硬套 forest。"
+    }
+  },
+  "phase_mapping_frozen": {
+    "formula": "opacity(m) = toOpacity × smoothstep(clamp((m − atMeters)/fadeMeters, 0, 1)); smoothstep=t²(3−2t)",
+    "note": "以下为 forest.json 已上线参数只读转录，SW-021 不提议改任何 ID/米数/opacity/fade/parallax；预览合成严格使用该公式。",
+    "visual_phases": [
+      {"layer": "tree_outline", "at_meters": 80, "to_opacity": 0.60, "fade_meters": 20, "parallax": 0.3},
+      {"layer": "tree_trunks", "at_meters": 240, "to_opacity": 0.70, "fade_meters": 25, "parallax": 0.3},
+      {"layer": "leaf_path", "at_meters": 400, "to_opacity": 0.80, "fade_meters": 25, "parallax": 0.6},
+      {"layer": "light_shows", "at_meters": 600, "to_opacity": 0.65, "fade_meters": 30, "parallax": 0.0},
+      {"layer": "clearing", "at_meters": 760, "to_opacity": 0.90, "fade_meters": 25, "parallax": 0.0}
+    ],
+    "void": {"color": "#060806", "rule": "0m 仍近黑；只有程序旅人弱轮廓与操作说明；禁止新增基础天空/雾/地面层绕过距离门禁。"}
+  },
+  "layers": [
+    {
+      "id": "tree_outline",
+      "type": "parallax",
+      "at_meters": 80,
+      "to_opacity": 0.6,
+      "fade_meters": 20,
+      "parallax": 0.3,
+      "tileable": true,
+      "asset_status": "redesign_candidate",
+      "export_reference": "previews/tiles/forest_tree_outline_tile.png",
+      "editable_source": ["source/sw021_tile_model.py", "source/svg/forest_tree_outline_tile.svg"],
+      "design_notes": "远处落叶林冠线两排（后排 #22332A 更冷虚，前排 #1A2820/#26382E 略实）；团簇数量较旧稿减少、前后高低差加大，破除平直云墙；保留两处明确大林窗。同色团簇用 union mask 整体着色、lit 受光以 group clip 叠加柔光，消除半透明重叠的深浅泡泡边界。冠线只占中下部横向带，上方与下缘真透明。",
+      "seam": "3W 折叠法：在 3 个 tile 宽画布上绘制全部 wrap 图元（x∈[-W,2W]），再把三段 over 回中央 tile；缝差均值 0.218（≤内部自然差 0.194 同量级，个别抗锯齿像素最大差 255 但不形成可见缝），三次拼接目检无冠线缺口。"
+    },
+    {
+      "id": "tree_trunks",
+      "type": "parallax",
+      "at_meters": 240,
+      "to_opacity": 0.7,
+      "fade_meters": 25,
+      "parallax": 0.3,
+      "tileable": true,
+      "asset_status": "redesign_candidate",
+      "export_reference": "previews/tiles/forest_tree_trunks_tile.png",
+      "editable_source": ["source/sw021_tile_model.py", "source/svg/forest_tree_trunks_tile.svg"],
+      "design_notes": "每周期 5 根树干（旧稿等距等高蜡烛感已废）：全部从屏外伸入，顶端无硬切口、由黑暗渐变进入，底部在地面上缘前淡出且不画地面；粗细差约 5:1、微锥、轻微摆幅，保留 2 处大林窗；含 1 棵完整跨缝巨树（左右边缘各露半棵，3W 折叠后拼回完整）。右上细边光 #8FA87A 低 alpha。旧 webp 烘焙了奶白终景圆盘，结构性无法平铺，必须重画而非修图。",
+      "seam": "缝差均值 0.025、最大 1，与内部自然差 0.077 同量级；跨缝巨树在 repeat3 预览中完整闭合。"
+    },
+    {
+      "id": "leaf_path",
+      "type": "parallax",
+      "at_meters": 400,
+      "to_opacity": 0.8,
+      "fade_meters": 25,
+      "parallax": 0.6,
+      "tileable": true,
+      "asset_status": "redesign_candidate",
+      "export_reference": "previews/tiles/forest_leaf_path_tile.png",
+      "editable_source": ["source/sw021_tile_model.py", "source/svg/forest_leaf_path_tile.svg"],
+      "design_notes": "下部干叶土坡：地面上缘用整周期正弦（1/2 周每 tile，首尾 y 与斜率连续）保证横向无高差跳变；#4A4030→#312A1F 竖向渐变，中央极弱土路弥散光；干叶/细枝用确定性 LCG 分布（跨 PIL/SVG 后端坐标一致），中央触控带 x≈.28–.71 与旅人脚底附近刻意稀疏；地面上缘以上全透明。",
+      "seam": "缝差均值 0.003、最大 3；叶斑在 3W 画布 wrap 发射，缝两侧密度连续。"
+    },
+    {
+      "id": "light_shows",
+      "type": "overlay",
+      "at_meters": 600,
+      "to_opacity": 0.65,
+      "fade_meters": 30,
+      "parallax": 0.0,
+      "tileable": false,
+      "asset_status": "reuse_accepted_unchanged",
+      "production_asset": "app/src/main/assets/visual/forest_light_shows.webp",
+      "design_notes": "复用 SW-010 已验收入包文件（三束柔体积光 + 三只远鸟），本轮不重画、不改字节；overlay 不参与横移。"
+    },
+    {
+      "id": "clearing",
+      "type": "overlay",
+      "at_meters": 760,
+      "to_opacity": 0.9,
+      "fade_meters": 25,
+      "parallax": 0.0,
+      "tileable": false,
+      "asset_status": "reuse_accepted_unchanged",
+      "production_asset": "app/src/main/assets/visual/forest_clearing.webp",
+      "design_notes": "复用 SW-010 已验收入包单一径向辉光，本轮不重画、不改字节；终景亮度由该层与三层新 tile 共同构成，任何 tile 不得烘焙终景亮盘。"
+    }
+  ],
+  "tile_rendering_contract_for_zcode": {
+    "repeat_rule": "drawLayer_repeat(layer, meters): scale=H/1920; period=1080*scale; shift=mod(meters*6.0*scale*parallax, period)（PX_PER_METER=6.0 为现壳常量，设备校正见下）；以两份（必要时三份）tile 从 x=-shift 起逐 period 排布，覆盖全屏宽。",
+    "k_calibration": {
+      "K_ref_px_per_m_at_1080x2400": 6.0,
+      "status": "proposed_pending_device_correction",
+      "basis": "沿用 ForestShell PX_PER_METER=6.0；SW-017 实测旧 cover 259px 溢出在 p=.3 约 144m 钳满，与该常量自洽。",
+      "note": "repeat-x 后不再有钳满死区，但 K 的真实物理映射仍需 ZCode/QA 在 SW-022 用设备复核；K 变化只影响走完 800m 的总滚动周期数，不影响接缝与黑带保证。"
+    },
+    "vertical": "按高铺满、底对齐地面基线；leaf_path 地面上缘与 clearing/光效层的垂直配准沿用 SW-011 同一 1920 画布坐标。",
+    "alpha": "tile 以全不透明度语义出图，运行时再乘 PhaseScheduler opacity；禁止把六阶段预览衰减烘焙进素材。",
+    "budget": "每层导出 ≤400KB、五层合计 ≤2MB（visual-assets 契约）；本 r1 的 PNG tile 是设计参考，不是入包素材，不放进 app/assets。"
+  },
+  "ui_specification": {
+    "mood_words": ["树荫", "清爽", "生命感", "安静", "克制"],
+    "type_scale": [
+      {"token": "display", "sp": 56, "weight": "semibold", "line_height": 1.25, "use": "结果页主信息「走完 800m」"},
+      {"token": "title-1", "sp": 46, "weight": "semibold", "line_height": 1.3, "use": "放弃确认标题"},
+      {"token": "title-2", "sp": 40, "weight": "medium", "line_height": 1.35, "use": "页面标题（慢行/怎么走）"},
+      {"token": "title-3", "sp": 34, "weight": "medium", "line_height": 1.4, "use": "卡片标题"},
+      {"token": "body", "sp": 28, "weight": "regular", "line_height": 1.5, "use": "正文/副说明"},
+      {"token": "body-s", "sp": 26, "weight": "regular", "line_height": 1.45, "use": "卡片辅助信息"},
+      {"token": "caption", "sp": 24, "weight": "regular", "line_height": 1.4, "letter_spacing_sp": 0.5, "use": "不可用原因/注释"},
+      {"token": "label", "sp": 22, "weight": "medium", "line_height": 1.3, "letter_spacing_sp": 1.0, "use": "徽章/许可标签"}
+    ],
+    "type_rules": [
+      "中文正文行高 ≥1.45；caption/label 在暗底上加 0.5–1sp 字距。",
+      "系统大字号 ×1.5 时首页保持单列，卡片高度自适应增高，信息不得截断（见 ui_home_largefont 预览）。"
+    ],
+    "home": {
+      "layout": "单列场景卡，全宽，卡高 ≥240dp 语义；禁止双列：390×844 下双列导致米数/分钟截断、不可用原因无处放置、触控高度不足（ui_home_small 对比图）。",
+      "available_card": "themeColor 低透明底 + accent 1.5dp 选中描边 + 勾选；副信息「800m · 约14分钟」。",
+      "unavailable_card": "保留卡位（不删除雨林/夜径），卡内直接写不可用原因（雨林：声音与地形仍在准备；夜径：夜间安全路线未完成验收），不靠 Toast；按钮给描边禁用态，文字保持 muted 可读对比。",
+      "footer": "主按钮「下一步 · 怎么走」；下方文字入口「素材署名与许可」「关于 SenseWalk」。",
+      "no_spoiler": "首页不出现完整终景/clearing 亮盘，只用克制色壳。"
+    },
+    "mode_select": {
+      "card_tint": "虚走可用卡用 forest themeColor 低透明；场景切换时 tint 随该场景 palette，不全局硬套 forest。",
+      "disabled_real_walk": "实走卡保留可见、置灰并在卡内常驻原因「当前版本先在虚走里体验；实走在完成权限与计步验收后开放」；底部开始按钮禁用时用描边 + muted 文字，禁止深灰底深灰字。"
+    },
+    "abandon_confirm": {
+      "container": "底部 sheet，圆角顶，scrim 为黑色 alpha≈0.59 真正压暗画面（不是灰色替换）。",
+      "copy": "标题「放弃这趟森林？」；正文说明已走距离不计入、不解锁声音、每趟重新计算。",
+      "actions": "主危险按钮 #C94A3E + #FFECE6 文字「放弃这趟」；次按钮描边「继续走」。危险动作色全 App 唯一。"
+    },
+    "long_press_ring": {
+      "duration_ms": 1500,
+      "visual": "按住点出现圆环：轨道为白色 alpha .16 细环，进度用 accent #A8C5A0 从 12 点方向顺时针填充，满环显示勾并在同一时刻触发一次轻触觉；松开即取消、环消失。",
+      "semantic_guard": "环形只表达按住确认，不产生任何距离，不得成为计距捷径；触发后距离推进仍只由摇杆节奏/计步给出。",
+      "reduce_motion": "Settings 减少动态效果时不显示环上动画，改为静态文字「按住确认行走」+ 满 1.5s 后文字变「已确认」，触觉保留。"
+    },
+    "result_finale": {
+      "freeze_first": "到达 800m 立即冻结输入并释放行走引擎，再开始揭示。",
+      "dim_duration_ms": 3000,
+      "dim_easing": "画面在 ≥3s 内缓慢压暗（scrim 0→约 alpha .66，缓出），终景 clearing 光同时按既有 phase 呈现，禁止 1–2s 快切。",
+      "stats_collapsed": "结果卡先只显示「走完 800m」+ 一句 mood 文案；用时/步幅折叠为一行（右侧 chevron），用户展开才显示数值，减少成绩感。",
+      "primary_action": "「再走一趟」accent 实心按钮；reduceMotion 下退暗改为即时静态暗化 + 淡入卡片，不延长计距。"
+    },
+    "about_credits": {
+      "entry": "首页文字入口进入；关于页列版本与「声音素材署名」分区。",
+      "entries": [
+        {"title": "脚步 · Walking through leaves / leaves and sticks", "author": "Gravity Sound (gravitysound.studio)", "license": "CC BY 4.0", "source": "Wikimedia Commons", "processing": "已切分与响度处理"},
+        {"title": "环境虫鸣 · Waidachswald Oberschefflenz Abend", "author": "User:Karlunun", "license": "CC0", "source": "Wikimedia Commons", "processing": "60s 无缝循环"},
+        {"title": "远处鸟鸣 · Dawn chorus at Glencairnie", "author": "DivyaCM", "license": "CC BY 4.0", "source": "Wikimedia Commons", "processing": "取温和段"}
+      ],
+      "license_rule": "CC BY 4.0 必须保留署名；完整链接与许可证文本放在「素材署名与许可」页；ZCode 接线时需与 app 实际打包音频逐一核对文件名/作者/许可，本条为设计文案，真实元数据以入库素材 manifest 为准。"
+    }
+  },
+  "preview_meters": [0, 100, 265, 425, 630, 785],
+  "outputs": {
+    "tiles": "previews/tiles/forest_{tree_outline,tree_trunks,leaf_path}_tile.png（1080×1920 RGBA 设计参考）",
+    "tile_checks": "previews/tiles/checks/forest_*_check3.png（黑/白/洋红三底）",
+    "tile_repeat": "previews/tiles/repeat/forest_*_repeat3.png（三次拼接）",
+    "seam_probe": "previews/tiles/seam/forest_seam_probe_sheet.png",
+    "composites": "previews/composite/forest_tiled_matrix_{1080x1920,1080x2400,390x844}.png（六阶段×比例）与 forest_continuous_compare_1080x2400.png（新 tile vs 旧 cover 对拍）",
+    "traveler": "previews/traveler/traveler_size_compare.png（7% vs 9%）",
+    "ui_mocks": "previews/ui/ui_*.png（9 张，均标注「设计模拟 · 非 App 截图」）",
+    "quantitative": "previews/sw021_preview_checks.json"
+  },
+  "source_files": [
+    "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py",
+    "design/05-visual-design/SW-021/r1/source/sw021_previews.py",
+    "design/05-visual-design/SW-021/r1/source/sw021_ui_mocks.py",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_outline_tile.svg",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_trunks_tile.svg",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_leaf_path_tile.svg"
+  ],
+  "proposed_changes_for_downstream": [
+    {"id": "SW022-1", "for": "zcode", "change": "ForestShell 新增 repeat-x 平铺绘制路径（仅 tree_outline/tree_trunks/leaf_path 三层），替换 cover+钳制；light_shows/clearing 维持 overlay。"},
+    {"id": "SW022-2", "for": "zcode", "change": "旅人程序绘制高度提供 7%/9% 可配置项，QA 真机目检定稿，默认按本 spec 推荐 9%。"},
+    {"id": "SW022-3", "for": "zcode", "change": "首页单列卡片 + 卡内不可用原因 + themeColor tint、模式卡禁用原因常驻、放弃底部 sheet、长按 1.5s 环形、结果 ≥3s 退暗与用时折叠、关于页署名。"},
+    {"id": "CAND-1", "for": "minimax", "change": "按 prompts.md 制作三层可平铺正式素材候选（每层 ≤400KB webp/png），复用已批准 light_shows/clearing，不动雨林。"}
+  ],
+  "forbidden": [
+    "不改 app/ 任何源码、forest.json 与入包 webp；本轮只交付设计",
+    "不改五层 ID/80/240/400/600/760m/opacity/fadeMeters/parallax",
+    "不在 0m 增加天空/雾/地面等绕过距离门禁的基底，不提前揭示终景",
+    "不重画 light_shows/clearing，不改 SW-011/SW-012/SW-017 与 D-009 已发布字节",
+    "不碰雨林（SW-012/D-009 tileable=false 维持），不借雨林 8 次付费授权",
+    "0 新增付费 API；素材层不烘焙文字/UI/按钮/人物/棋盘"
+  ],
+  "limitations": [
+    "全部图像为本地 Python(PIL)+SVG 设计模拟，标注「设计模拟 · 非 App 截图」，不是真机证据；K=6px/m 与 9% 旅人待 SW-022 设备校正/目检。",
+    "tree_outline 缝差审计存在个别抗锯齿像素 max=255（均值 0.218 与自然差同量级），目检三次拼接无可见缝；MiniMax 正式素材仍须独立过接缝目检。",
+    "音频署名三条依据 SW-017 时期入包音频记录，ZCode 接线时须以实际打包文件 manifest 复核。",
+    "PNG tile 为设计参考而非入包素材，正式素材编码与预算由 MiniMax 候选 + visual-assets 验收完成。"
+  ]
+}
