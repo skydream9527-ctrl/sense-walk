@@ -20,7 +20,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.sensewalk.app.MainActivity
-import com.sensewalk.app.data.SceneRepository
+import com.sensewalk.app.data.SceneCatalog
 import com.sensewalk.app.data.SessionSnapshotStore
 import com.sensewalk.app.domain.session.SessionSnapshot
 import com.sensewalk.app.data.SettingsRepository
@@ -158,7 +158,8 @@ class WalkForegroundService : android.app.Service() {
     private fun setupSession(sceneId: String, restoreJson: String? = null) {
         val app = applicationContext
         scope.launch {
-            when (val state = SceneRepository(app).loadAll()) {
+            // 进程级目录缓存（SW-019 #2）：与 UI 共用同一 SceneConfig 实例，实走视觉层无需再读
+            when (val state = SceneCatalog.load(app)) {
                 is SceneLoadState.Ready -> {
                     val config = state.scenes.firstOrNull { it.id == sceneId }
                     if (config == null) {

@@ -1,9 +1,11 @@
 package com.sensewalk.app.ui.session
 
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -12,20 +14,42 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import com.sensewalk.app.domain.phase.SensoryState
+import com.sensewalk.app.domain.scene.SceneConfig
 import com.sensewalk.app.domain.scene.TerrainKind
+import com.sensewalk.app.domain.scene.VisualLayerDef
+import com.sensewalk.app.domain.walk.TerrainMotor
+import com.sensewalk.app.domain.walk.VirtualWalkController
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.random.Random
 
 /** 已交付的真实视觉层（asset 路径 + 视差因子；overlay 为 0） */
-data class ForestImageLayer(val assetPath: String, val parallax: Float)
+data class ForestImageLayer(val assetPath: String, val parallax: Float) {
+    companion object {
+        /** 从场景配置提取带 asset 的层；placeholder/solid 层不在列，保持程序降级 */
+        fun fromConfig(config: SceneConfig): Map<String, ForestImageLayer> = buildMap {
+            config.visualLayers.forEach { (id, def) ->
+                val asset = when (def) {
+                    is VisualLayerDef.Parallax -> def.asset
+                    is VisualLayerDef.Overlay -> def.asset
+                    is VisualLayerDef.Solid -> null
+                }
+                if (asset != null) {
+                    put(id, ForestImageLayer(asset, (def as? VisualLayerDef.Parallax)?.parallax ?: 0f))
+                }
+            }
+        }
+    }
+}
+
+private val EMPTY_SENSORY = SensoryState(emptyMap(), emptyMap(), emptyList())
 
 /**
  * 森林 VisualShell：分层景色（T04 程序剪影 + T05 真实图层接入）。
@@ -39,22 +63,24 @@ data class ForestImageLayer(val assetPath: String, val parallax: Float)
  * - 视差按 sPos × parallax 横移（图片层在可用溢出范围内滑动）；
  *   reduceMotion 时冻结视差与角色起伏。
  *
+ * 读取与加载（SW-019）：
+ * - [walk] 是快照提供者，只在 Canvas 绘制期调用——每帧快照变化只触发本层重绘，
+ *   不重组任何上层文字/弹框/操作容器；
+ * - 图层位图在 IO 线程异步解码并按层就绪逐个发布（[ForestLayerImages]）；
+ *   未就绪前该层走程序降级，就绪与否不影响可见性——可见性仍由 opacity 门控，
+ *   图片晚到不会提前揭示；场景/层/尺寸键变化即丢弃旧请求结果，不串场景。
+ *
  * 图片层已知限制（待素材方提供可平铺版本后完善）：单图非无缝，
  * 视差滑动范围钳制在图片超出屏幕的宽度内，滑满后保持静态。
  */
 @Composable
 fun ForestShell(
-    sensory: SensoryState,
-    sPos: Float,
-    velocity: Float,
-    terrain: TerrainKind,
+    walk: () -> VirtualWalkController.Snapshot?,
     reduceMotion: Boolean,
+    modifier: Modifier = Modifier,
     imageLayers: Map<String, ForestImageLayer> = emptyMap(),
-    /** 越坎步态（T07B / SW-005 R2）：hop 腾空、tense 站稳微蹲；默认按地形表现 */
-    gait: com.sensewalk.app.domain.walk.TerrainMotor.Gait = com.sensewalk.app.domain.walk.TerrainMotor.Gait.IDLE,
     /** 场景标识（SW-016）：驱动色板与层降级分派；缺省森林保持既有表现 */
     sceneId: String = "forest",
-    modifier: Modifier = Modifier,
 ) {
     val palette = ScenePalette.of(sceneId)
     // 固定种子生成剪影特征，保证同一会话内景致稳定
@@ -67,103 +93,118 @@ fun ForestShell(
     val leaves = remember {
         Random(11).let { r -> List(40) { Triple(r.nextFloat(), r.nextFloat(), r.nextFloat()) } }
     }
-
-    // 真实图层：从 assets 解码一次；解码失败自动回退程序渲染
     val context = LocalContext.current
-    val bitmaps = remember(imageLayers) {
-        imageLayers.mapValues { (_, spec) ->
-            runCatching {
-                context.assets.open(spec.assetPath).use { input ->
-                    BitmapFactory.decodeStream(input)?.asImageBitmap()
+
+    BoxWithConstraints(modifier.fillMaxSize()) {
+        // cover 按高度铺满，目标高度决定采样率；无界约束按原图采样
+        val targetHeightPx = if (constraints.hasBoundedHeight) constraints.maxHeight else 0
+        // 真实图层：IO 线程异步解码，按层就绪逐个发布；remember 以场景/层/尺寸为键，
+        // 键变化即重建空 State 并取消旧加载，旧场景/旧尺寸的层不残留
+        val layerBitmaps = remember(sceneId, imageLayers, targetHeightPx) {
+            mutableStateOf<Map<String, ImageBitmap>>(emptyMap())
+        }
+        LaunchedEffect(sceneId, imageLayers, targetHeightPx) {
+            for ((layerId, spec) in imageLayers) {
+                launch {
+                    val bitmap = ForestLayerImages.load(context, sceneId, spec.assetPath, targetHeightPx)
+                    if (bitmap != null) layerBitmaps.value = layerBitmaps.value + (layerId to bitmap)
                 }
-            }.getOrNull()
+            }
+        }
+
+        Canvas(Modifier.fillMaxSize()) {
+            // 高频状态只在绘制期读取
+            val snap = walk()
+            val sensory = snap?.sensory ?: EMPTY_SENSORY
+            val sPos = snap?.sPos ?: 0f
+            val velocity = snap?.velocity ?: 0f
+            val terrain = snap?.terrain ?: TerrainKind.FLAT
+            val gait = snap?.gait ?: TerrainMotor.Gait.IDLE
+            val bitmaps = layerBitmaps.value
+
+            fun a(layer: String): Float = sensory.visualOpacities[layer] ?: 0f
+            fun imageParallaxPx(layerId: String): Float {
+                val spec = imageLayers[layerId] ?: return 0f
+                return if (spec.parallax > 0f) parallaxOffset(sPos, spec.parallax, reduceMotion) else 0f
+            }
+
+            // 1. void 黑幕（起点即黑；其他层长出后仍然作为底色）
+            drawRect(palette.voidColor)
+
+            // 2. tree_outline 远景树冠轮廓线（真实图层；无图回退程序剪影）
+            val outlineAlpha = a("tree_outline")
+            if (outlineAlpha > 0.01f) {
+                val bitmap = bitmaps["tree_outline"]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, outlineAlpha, imageParallaxPx("tree_outline"))
+                } else {
+                    drawTreeline(outlineTrees, outlineAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
+                }
+            }
+
+            // 3. tree_trunks 树干与林间光（真实图层；无图回退程序剪影）
+            val trunkAlpha = a("tree_trunks")
+            if (trunkAlpha > 0.01f) {
+                val bitmap = bitmaps["tree_trunks"]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, trunkAlpha, imageParallaxPx("tree_trunks"))
+                } else {
+                    drawTrunks(trunks, trunkAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
+                }
+            }
+
+            // 4. leaf_path 落叶与路径细节（真实图层；无图回退程序近景）
+            val pathAlpha = a("leaf_path")
+            if (pathAlpha > 0.01f) {
+                val bitmap = bitmaps["leaf_path"]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, pathAlpha, imageParallaxPx("leaf_path"))
+                } else {
+                    drawLeafGround(leaves, pathAlpha, parallaxOffset(sPos, 0.6f, reduceMotion), size)
+                }
+            }
+
+            // 5. light_shows 飞鸟剪影与透光光柱（真实图层；无图回退程序绘制）
+            val lightAlpha = a("light_shows")
+            if (lightAlpha > 0.01f) {
+                val bitmap = bitmaps["light_shows"]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, lightAlpha, 0f)
+                } else {
+                    drawLightShows(lightAlpha, size)
+                }
+            }
+
+            // 6. clearing 林间空地微光（真实图层；无图回退程序渐变）
+            val clearingAlpha = a("clearing")
+            if (clearingAlpha > 0.01f) {
+                val bitmap = bitmaps["clearing"]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, clearingAlpha, 0f)
+                } else {
+                    drawClearingGlow(clearingAlpha, size)
+                }
+            }
+
+            // 7. 非森林专用层（SW-016 雨林五层等）：真实图优先，无图走**通用程序降级**
+            //    （类型驱动：overlay 柔光带 / parallax 视差剪影带；米数纯函数、停走冻结不变）
+            for ((layerId, alpha) in sensory.visualOpacities) {
+                if (layerId == "void") continue
+                if (layerId in FOREST_SPECIFIC_LAYERS) continue
+                if (alpha <= 0.01f) continue
+                val bitmap = bitmaps[layerId]
+                val spec = imageLayers[layerId]
+                if (bitmap != null) {
+                    drawImageLayer(bitmap, alpha, spec?.parallax?.let { parallaxOffset(sPos, it, reduceMotion) } ?: 0f)
+                } else {
+                    drawGenericLayerFallback(layerId, alpha, spec?.parallax ?: 0f, sPos, reduceMotion, size, palette)
+                }
+            }
+
+            // 8. 旅人剪影（姿态：静止/行走/上坡攀爬；交付图待重做，保持程序绘制）
+            drawTraveler(sPos, velocity, terrain, reduceMotion, gait, palette.traveler, size)
         }
     }
-
-    Canvas(modifier.fillMaxSize()) {
-        fun a(layer: String): Float = sensory.visualOpacities[layer] ?: 0f
-        fun imageParallaxPx(layerId: String): Float {
-            val spec = imageLayers[layerId] ?: return 0f
-            return if (spec.parallax > 0f) parallaxOffset(sPos, spec.parallax, reduceMotion) else 0f
-        }
-
-        // 1. void 黑幕（起点即黑；其他层长出后仍然作为底色）
-        drawRect(palette.voidColor)
-
-        // 2. tree_outline 远景树冠轮廓线（真实图层；无图回退程序剪影）
-        val outlineAlpha = a("tree_outline")
-        if (outlineAlpha > 0.01f) {
-            val bitmap = bitmaps["tree_outline"]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, outlineAlpha, imageParallaxPx("tree_outline"))
-            } else {
-                drawTreeline(outlineTrees, outlineAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
-            }
-        }
-
-        // 3. tree_trunks 树干与林间光（真实图层；无图回退程序剪影）
-        val trunkAlpha = a("tree_trunks")
-        if (trunkAlpha > 0.01f) {
-            val bitmap = bitmaps["tree_trunks"]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, trunkAlpha, imageParallaxPx("tree_trunks"))
-            } else {
-                drawTrunks(trunks, trunkAlpha, parallaxOffset(sPos, 0.3f, reduceMotion), size)
-            }
-        }
-
-        // 4. leaf_path 落叶与路径细节（真实图层；无图回退程序近景）
-        val pathAlpha = a("leaf_path")
-        if (pathAlpha > 0.01f) {
-            val bitmap = bitmaps["leaf_path"]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, pathAlpha, imageParallaxPx("leaf_path"))
-            } else {
-                drawLeafGround(leaves, pathAlpha, parallaxOffset(sPos, 0.6f, reduceMotion), size)
-            }
-        }
-
-        // 5. light_shows 飞鸟剪影与透光光柱（真实图层；无图回退程序绘制）
-        val lightAlpha = a("light_shows")
-        if (lightAlpha > 0.01f) {
-            val bitmap = bitmaps["light_shows"]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, lightAlpha, 0f)
-            } else {
-                drawLightShows(lightAlpha, size)
-            }
-        }
-
-        // 6. clearing 林间空地微光（真实图层；无图回退程序渐变）
-        val clearingAlpha = a("clearing")
-        if (clearingAlpha > 0.01f) {
-            val bitmap = bitmaps["clearing"]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, clearingAlpha, 0f)
-            } else {
-                drawClearingGlow(clearingAlpha, size)
-            }
-        }
-
-        // 7. 非森林专用层（SW-016 雨林五层等）：真实图优先，无图走**通用程序降级**
-        //    （类型驱动：overlay 柔光带 / parallax 视差剪影带；米数纯函数、停走冻结不变）
-        for ((layerId, alpha) in sensory.visualOpacities) {
-            if (layerId == "void") continue
-            if (layerId in FOREST_SPECIFIC_LAYERS) continue
-            if (alpha <= 0.01f) continue
-            val bitmap = bitmaps[layerId]
-            val spec = imageLayers[layerId]
-            if (bitmap != null) {
-                drawImageLayer(bitmap, alpha, spec?.parallax?.let { parallaxOffset(sPos, it, reduceMotion) } ?: 0f)
-            } else {
-                drawGenericLayerFallback(layerId, alpha, spec?.parallax ?: 0f, sPos, reduceMotion, size, palette)
-            }
-        }
-
-        // 8. 旅人剪影（姿态：静止/行走/上坡攀爬；交付图待重做，保持程序绘制）
-        drawTraveler(sPos, velocity, terrain, reduceMotion, gait, palette.traveler, size)
-    }
-
 }
 
 /** 森林专用层（既有批准降级绘制逐一保留；这些层不再走 SW-016 通用绘制） */
