@@ -1166,3 +1166,9 @@ SW-004仍等SW-001批准；SW-006仍等SW-012/SW-014批准，原总8次API尝试
 用户要求阅读目录下三份开发建议，筛选合理内容并给四角色开发提示词。逐字输入/哈希、逐项取舍、完整任务与分工见[本轮合并计划](docs/collaboration/plans/2026-10-20/README.md)、[采纳审阅](docs/collaboration/plans/2026-10-20/SOURCE-REVIEW.md)与[提示词](docs/collaboration/plans/2026-10-20/PROMPTS.md)，决策D012。基线main321060e，现有build176不换包；SW001/004/005/010/016/017/018 accepted保留。新增SW019–025为bootstrap安排，ready/queued不代表作者已开工。
 
 第一批异步加载/高频绘制读取、安全区/步长/每局触感和版本追溯；第二批森林设计→零付费平铺候选→正式入包/界面精修。0m近黑、原里程/相位/comfort_v1、30分钟被动恢复和未开放景门禁不变。缺真机不阻塞独立开发，也不作为已验证；提示截图缺证交SW024追加独立复核。雨林SW012/D009与原总8次授权保留、不挪用为森林图；GPS等仍后置。
+
+### 21.13 森林渲染测试阶段收口（2026-10-21）
+
+用户要求先打包安装，并继续交ZCode/MiniMax/Antigravity三方。冻结main2e6f266，经run39561811899发布build224，329原JUnit通过。SW019异步加载/缓存/读取下沉已批准入包；SW021设计/024协调accepted，但SW020/025/022/023仍未交付，不纳入本包完成声明。D013明确缩小原等待范围先交现成包，不更改黑幕/距离/恢复等产品规则。
+
+[发布档案](docs/releases/2026-10-21-forest-render-beta/README.md) · [实际核查](docs/collaboration/evidence/P-20261021-01/README.md) · [三方安排/提示词](docs/collaboration/plans/2026-10-21/README.md)。本轮不新增Trae任务、不改批准设计；MiniMax森林0新付费，雨林8/8用尽后只本地R3返工。新旧包证书实测不同，安装说明需清楚记录；设备与真人/性能收益不因云端通过而自动完成。

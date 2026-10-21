@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "stage_id": "S-20261021-forest-render-beta",
+  "created_on": "2026-10-21",
+  "status": "released_for_installation_test",
+  "release_tag": "build-224-2e6f266",
+  "release_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-224-2e6f266",
+  "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "workflow_run": 39561811899,
+  "workflow_run_number": 224,
+  "app_identity_from_frozen_source": {
+    "application_id": "com.sensewalk.app",
+    "version_name": "0.1.0-week1",
+    "version_code": 1,
+    "min_sdk": 26
+  },
+  "included": [
+    "Forest 800m virtual and real modes",
+    "Approved five visual assets and prior terrain/recovery",
+    "SW019 async loading, bounded 32MiB bitmap cache, single-flight, shared scene catalog and draw-state reads"
+  ],
+  "excluded": [
+    "SW020 safe area/stride/haptics",
+    "SW025 build identity",
+    "SW022/023 tiles and UI integration",
+    "rainforest production and remaining scenes"
+  ],
+  "junit": {
+    "run_id": 39561811899,
+    "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+    "xml_files": 31,
+    "tests": 329,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "assets": [
+    {
+      "name": "app-debug.apk",
+      "bytes": 20294186,
+      "sha256": "eca9a854a1908643ff00123edd3a4a0e6fed97f2df43288ae6fd8d937f9e675a",
+      "verification": "downloaded, GitHub digest/ZIP CRC/5 formal asset matches checked"
+    },
+    {
+      "name": "sensewalk-source-2e6f266.zip",
+      "bytes": 261844977,
+      "sha256": "fc42d1c08d1ea36c2dae000380575d764dbd4a9149c07ca95125a2fd69e1f1d0",
+      "verification": "reproduced UTC CI archive matches GitHub uploaded byte digest; full reproduced CRC and key source checks passed"
+    }
+  ],
+  "signature": {
+    "certificate_sha256": "ab4e88f072779579d2141f2c1276a76801de59c60a79dd9c5e3697890854485c",
+    "matches_build176": false,
+    "verification_scope": "Parsed APK signing block certificate fingerprint only; not a full apksigner cryptographic verification.",
+    "installation_note": "Certificate differs from build176. Uninstall/reinstall clears local progress and settings; preserve test records first."
+  },
+  "pending": [
+    "new physical device installation",
+    "real steps, screen off 15min, headset/call, physical reboot",
+    "readable first stabilize hint timing and same-session restore",
+    "hardware performance/energy/low-RAM behavior",
+    "human testing"
+  ],
+  "document_bundle_note": "Frozen source ZIP contains exactly source_commit. New closeout instructions are added afterward and attached separately; bundle content commit is recorded in planning DELIVERY.json."
+}

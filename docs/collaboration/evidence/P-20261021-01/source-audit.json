@@ -1,0 +1,64 @@
+{
+  "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "pr35_tip": "9bcfbaba356269ed43b6944d44c7fc1c531788d4",
+  "pr35_business_head": "33dd824566e65cc68cbfeeeed42f416e1092793c",
+  "handoff_head": "511adf5bc7cd0a80be23b431fbe6a4c3b72efa52",
+  "asset_manifest_present": true,
+  "artifacts_field_present": true,
+  "ledger_entries": 8,
+  "task_budget": 8,
+  "project_baseline": 14,
+  "manifest_attempts_total": 22,
+  "layers": [
+    {
+      "layer": "mist",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_mist.webp",
+      "bytes": 75804,
+      "sha256": "d78c1850cee39bbb2a10186b7787f03ebe5d487a46979ac9868cdbbbff33b9e7",
+      "manifest_hash_matches": true,
+      "over_400000_bytes": false
+    },
+    {
+      "layer": "trunks_canopy",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_trunks_canopy.webp",
+      "bytes": 245458,
+      "sha256": "20940b39b150d2f320aae7faba76ee9dcff64414ec27c545c752b9c8a5edcacb",
+      "manifest_hash_matches": true,
+      "over_400000_bytes": false
+    },
+    {
+      "layer": "vines_light",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_vines_light.webp",
+      "bytes": 406320,
+      "sha256": "d1031bc1d97c1eabd94978275df9d7f63568abd39a5f449dffaf242ced0fd19a",
+      "manifest_hash_matches": true,
+      "over_400000_bytes": true
+    },
+    {
+      "layer": "distant_glow",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_distant_glow.webp",
+      "bytes": 193552,
+      "sha256": "9dddeb743010826931ff4382ed2bad84906c8b146ee2e45d8f2712145e04cd35",
+      "manifest_hash_matches": true,
+      "over_400000_bytes": false
+    },
+    {
+      "layer": "glade",
+      "file": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_glade.webp",
+      "bytes": 99402,
+      "sha256": "6c3330d4837128ea7fa9faef50be233514f70153fdf0ee15d5f12694e7279b75",
+      "manifest_hash_matches": true,
+      "over_400000_bytes": false
+    }
+  ],
+  "qa_reported_guard_path_exists": false,
+  "actual_guard": "design/assets/rainforest/candidates/SW-006/r2/scripts/production_guard.py",
+  "sw021": {
+    "approved_business_head": "28ef82c7f1e28eb4c48c98843d9bdc6a09959341",
+    "spec_sha256": "86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90",
+    "recorded_delivery_head": "cf2f9aa893ca5ae57a939e4095c7fa326dfeb106",
+    "actual_delivery_head": "cf2f9aa15fc7955ac8754b356dfccb3b5fd0f961",
+    "manifest_file_count": 34,
+    "manifest_hashes_verified": 34
+  }
+}

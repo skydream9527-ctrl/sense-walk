@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-10-20",
+  "updated_on": "2026-10-21",
   "coordinator": "antigravity",
   "baseline_id": "B-20261013-01",
   "baseline_commit": "8056e11b2b366d958132dfa0d5674dbaa8577db1",
@@ -140,8 +140,8 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "PR35 R2（9bcfbab/33dd824）已真实生图（8/8 API封存）并通过production_guard 122/122；QA已修复test_collaboration.py在存在R2+时asset_delivery(revision=1)的沙箱隔离（31/31通过）。",
-        "R2存在3项阻断需以0API本地重处理+新修订H-SW-006-R3闭环（见reviews/R-SW-006-R2-correction.md）：1) 33dd824重跑postprocess后H-SW-006-R2.json仍停留511adf5旧hash且缺asset_manifest；2) vines_light.webp 406,320B超400,000B契约上限；3) stage_110m(mist)近全黑、stage_875m(glade)呈对称双灰斑。"
+        "PR35 R2已真实生成8/8，实际SW006/r2/scripts/production_guard.py独立重跑14/14自检、manifest122/122；原8次预算已用尽，后续0API。",
+        "2026-10-21实核纠正旧评审：asset_manifest存在，artifacts数组为空，不存在所称4项artifact旧hash；实际head/文字统计失步、vines_light406320B超400000B及mist/glade视觉仍需R3修正。详见evidence/P-20261021-01/README.md；R3必须配revision3新manifest，不覆盖R2。"
       ],
       "observed_delivery": {
         "revision": 2,
@@ -364,7 +364,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "前置SW-019已accepted入main（b59da1b），SW-020已激活为ready；等待ZCode提交H-SW-020-R1，通过后即激活SW-025并出第一批功能测试包。"
+        "ready；本轮先发布已批准SW019的森林渲染包，不等待本任务完成。ZCode继续独立实现安全区/步长/一次性触感并接安装反馈；通过后启用SW025。"
       ]
     },
     {
@@ -382,7 +382,8 @@
       "integrated_commit": "7d77ff100dbea4f9055cdbf3e97ec5dcf2082b13",
       "pending": [
         "34项设计清单SHA-256 100%复核通过并入main（7d77ff1）；批准spec sha256为86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90，已激活SW-022。",
-        "K=6px/m、旅人9%屏高及真实音频署名接线留待SW-022/SW-023及真机走查验证。"
+        "K=6px/m、旅人9%屏高及真实音频署名接线留待SW-022/SW-023及真机走查验证。",
+        "2026-10-21实核：34文件/spec/业务head匹配，accepted保留；review delivery_head误写，实际cf2f9aa15fc7955ac8754b356dfccb3b5fd0f961，由QA追加correction。"
       ]
     },
     {
@@ -399,7 +400,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "前置SW-021已accepted入main（7d77ff1），SW-022已激活为ready；请引用批准spec（86f8a19f...）以0新增付费API制作森林三层repeat-x平铺WebP候选（单层≤400,000B）。"
+        "ready；MiniMax优先按SW021批准spec制作森林三层0新付费平铺候选，与SW006雨林R3分支/交付分开；实际入包仍SW023。"
       ]
     },
     {
@@ -438,7 +439,8 @@
       "integrated_commit": "f596c8f81c8b8f1df9e8d1b22aab848a79559f9f",
       "pending": [
         "H2提示截图像素复核与R-SW-018-R1-correction.md、同环境性能比较协议、7项UI回归入口及两批发布清单已交付；本任务完成不代表提前批准未来产品代码或素材。",
-        "237m首次站稳提示同步画面/时间线、同环境前后运行性能数据（gfxinfo/解码耗时/内存/重组计数）、AndroidTest设备运行及真机/真人项继续保持Pending。"
+        "237m首次站稳提示同步画面/时间线、同环境前后运行性能数据（gfxinfo/解码耗时/内存/重组计数）、AndroidTest设备运行及真机/真人项继续保持Pending。",
+        "2026-10-21能力复核：现有Python主要结构断言，AndroidTest为object/runAll领域草案，未接通可发现真实UI入口；显距自等断言不证明点击。后续QA新revision接通并实际运行，依赖交ZCode，未完成保持Pending。"
       ]
     },
     {
@@ -457,6 +459,24 @@
       "pending": [
         "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
       ]
+    },
+    {
+      "id": "SW-026",
+      "title": "最小真实UI回归与验收证据复核",
+      "owner": "antigravity",
+      "kind": "coordination",
+      "status": "ready",
+      "depends_on": [
+        "SW-019",
+        "SW-024"
+      ],
+      "task_file": "docs/collaboration/tasks/SW-026.md",
+      "latest_handoff": null,
+      "latest_review": null,
+      "integrated_commit": null,
+      "pending": [
+        "按用户追加能力评估启用；先事实修正，再接通3个可发现、真实操作UI的测试；没有设备执行就Pending，不把草案/字符串断言算UI通过。"
+      ]
     }
   ],
   "physical_validation_pending": [
@@ -467,19 +487,22 @@
     "最终5–8人内测"
   ],
   "review_queue": "docs/collaboration/queues/antigravity.md",
-  "latest_progress_report": "docs/collaboration/plans/2026-10-20/SOURCE-REVIEW.md",
+  "latest_progress_report": "docs/collaboration/evidence/P-20261021-01/README.md",
   "stage_closeout": {
-    "id": "S-20261018-forest-beta",
+    "id": "S-20261021-forest-render-beta",
     "status": "released_for_installation_test",
     "owner": "antigravity",
-    "source_commit": "aaa789b3afd789d121eb6f0c96189fe9835d3e3c",
+    "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
     "report": "docs/collaboration/STAGE-CLOSEOUT.md",
-    "release_tag": "build-176-aaa789b",
-    "release_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-176-aaa789b",
-    "scope": "Forest800m virtual/real, approved light effects, terrain, persistence/recovery; rainforest foundation internal only",
+    "release_tag": "build-224-2e6f266",
+    "release_url": "https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-224-2e6f266",
+    "scope": "Forest 800m virtual/real with approved SW019 async loading/cache/draw-state changes; SW020/025/022/023 not included; rainforest closed",
     "physical_validation": "pending_user_installation_test",
-    "apk_sha256": "cbe827bfff555939871e94e0b785bd89ac2780275d8a1c5fe81320fdc3c40a67",
-    "cloud_test_count": 312
+    "apk_sha256": "eca9a854a1908643ff00123edd3a4a0e6fed97f2df43288ae6fd8d937f9e675a",
+    "cloud_test_count": 329,
+    "release_run_id": 39561811899,
+    "previous_release_tag": "build-176-aaa789b",
+    "signing_matches_previous": false
   },
   "optimization_plan": {
     "id": "O-20261020",
@@ -501,5 +524,7 @@
     ],
     "paid_api_budget_new_forest": 0,
     "dispatch": "manual user forwarding; no agent has been messaged by this planning change"
-  }
+  },
+  "current_plan": "docs/collaboration/plans/2026-10-21/README.md",
+  "agent_assessment": "docs/collaboration/plans/2026-10-21/AGENT-ASSESSMENT.md"
 }

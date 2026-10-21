@@ -2,7 +2,7 @@
 
 > 自动生成：仅编辑 registry.json，再执行 python3 tools/collaboration.py render。状态是交付登记，不是产品最终验收。
 
-基线：`8056e11` · 更新日期：2026-10-20 · 协调者：antigravity
+基线：`8056e11` · 更新日期：2026-10-21 · 协调者：antigravity
 
 | ID | 任务 | 负责者 | 状态 | 前置 | 已入库交付 / 审核 |
 | --- | --- | --- | --- | --- | --- |
@@ -31,6 +31,7 @@
 | SW-023 | [森林视觉入包与界面精修](tasks/SW-023.md) | zcode | queued | SW-019, SW-020, SW-021, SW-022 | — / — |
 | SW-024 | [独立基准、提示证据复核与回归入口](tasks/SW-024.md) | antigravity | accepted | SW-017, SW-018 | [H-SW-024-R1](handoffs/antigravity/H-SW-024-R1.json) / — |
 | SW-025 | [可追溯测试构建身份](tasks/SW-025.md) | zcode | queued | SW-020 | — / — |
+| SW-026 | [最小真实UI回归与验收证据复核](tasks/SW-026.md) | antigravity | ready | SW-019, SW-024 | — / — |
 
 ## 远端交付观察（尚非独立批准）
 

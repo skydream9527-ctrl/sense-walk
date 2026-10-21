@@ -378,17 +378,11 @@
     </header>
 
     <section id="status">
-      <div class="callout"><strong>2026-10-20 新规划：</strong><a href="collaboration/plans/2026-10-20/README.md">三份建议筛选与两批开发路线</a> · <a href="collaboration/plans/2026-10-20/SOURCE-REVIEW.md">采纳/修正</a> · <a href="collaboration/plans/2026-10-20/PROMPTS.md">四份提示词</a>。SW019/021/024可启动；SW020/022/023/025按依赖启用。下方18日表格为历史阶段安排，SW017/018现已accepted，QA隔离已修；提示截图仍交SW024复核。0m黑幕和现有测试包保持。</div>
-      <h2>0. 当前进度 · 源码核查</h2>
-      <p class="section-lead">2026-10-18：本轮收口为森林800m虚走/实走阶段测试版，冻结main aaa789b。主线云端312项通过；正式光效、地形、恢复已合入。雨林底座已集成但候选与真实声景不足，保持未开放。</p>
-      <div class="callout"><strong>先安装测试：</strong><a href="releases/2026-10-18-forest-beta/README.md">GitHub阶段包/准确哈希</a> · <a href="releases/2026-10-18-forest-beta/TESTING.md">测试步骤</a> · <a href="releases/2026-10-18-forest-beta/FEEDBACK.md">反馈模板</a>。设备与真人结果未到时保持Pending。</div>
-      <table><thead><tr><th>角色</th><th>本轮收尾</th><th>范围</th></tr></thead><tbody>
-        <tr><td>ZCode</td><td>SW018安装/启动/森林双模式及确认阻断缺陷</td><td>无缺陷交0源码核查；必要patch经QA后新包</td></tr>
-        <tr><td>MiniMax</td><td>SW006草案/guard/交接；PR25路径已修，剩余QA隔离红灯交QA</td><td>本轮0新增付费图；不将占位入阶段包，原8次授权后续沿用</td></tr>
-        <tr><td>Trae Design</td><td>SW017先森林App视觉清单/参照/有依据标注</td><td>实际截图与模拟分开，不重绘生产美术，保留雨林稿</td></tr>
-        <tr><td>Antigravity</td><td>准确包/反馈分级、提示时序补证、独立复验与QA fixture隔离</td><td>真机/真人Pending，不宣称MVP完成</td></tr>
-      </tbody></table>
-      <p>见 <a href="collaboration/STAGE-CLOSEOUT.md">阶段收口范围</a>、<a href="collaboration/evidence/P-20261018-01/README.md">本轮核查</a>、<a href="collaboration/README.md">四角色文件入口</a>与<a href="collaboration/BOARD.md">看板</a>。先回收森林安装问题，再正式雨林候选/真实声景/900m双模式，之后城市/沙漠。</p>
+      <h2>0. 当前阶段收口（2026-10-21）</h2>
+      <p class="section-lead">森林800m双模式渲染加载测试版 build224 已发布，冻结源码2e6f266，329项云端测试通过。SW019异步解码/缓存/绘制读取已入包；SW020/025/022/023未交付，雨林保持未开放。</p>
+      <div class="callout"><a href="releases/2026-10-21-forest-render-beta/README.md">下载APK/真实哈希</a> · <a href="releases/2026-10-21-forest-render-beta/TESTING.md">安装测试</a> · <a href="collaboration/plans/2026-10-21/README.md">三方分工</a> · <a href="collaboration/plans/2026-10-21/PROMPTS.md">三份提示词</a></div>
+      <table><thead><tr><th>角色</th><th>下一步</th></tr></thead><tbody><tr><td>ZCode</td><td>SW020与安装反馈，批准后SW025；不重做SW019</td></tr><tr><td>MiniMax</td><td>SW022森林平铺候选；雨林R3独立零API返工</td></tr><tr><td>Antigravity</td><td>实际新head独立审核、补证、反馈与必要新tag</td></tr></tbody></table>
+      <p>Trae设计已获批，本轮无新任务。与build176签名不同，覆盖安装冲突需保存记录后卸载重装（会清本地数据）。真机/真人、提示同步画面及性能收益保持Pending。<a href="collaboration/evidence/P-20261021-01/README.md">实核证据</a> · <a href="collaboration/BOARD.md">当前看板</a>。</p>
     </section>
 
     <section id="vision">

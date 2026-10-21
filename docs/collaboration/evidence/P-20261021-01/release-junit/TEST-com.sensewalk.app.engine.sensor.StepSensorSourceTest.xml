@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.engine.sensor.StepSensorSourceTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:26:34" hostname="runnervmxehtw" time="0.005">
+  <properties/>
+  <testcase name="counter 注册失败 - 返回 false 且不留任何监听" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.002"/>
+  <testcase name="counter 失败 detector 成功 - 部分注册被清理" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="P01 detector 硬件在但注册失败 - cue 回退距离驱动" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="P01 stop 重置 detector 注册态 - 不残留上次的注册结果" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="注册成功后回调链路保持 - counter 事件到达监听" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.001"/>
+  <testcase name="detector 注册失败 - counter-only 仍可实走" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.001"/>
+  <testcase name="重复 stop 幂等 - 只注销一次" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="P01 无 detector 硬件 - counter-only 同样距离驱动" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="P01 detector 注册成功 - cue 由 detector 驱动" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="无 counter 硬件 - 直接不可计距且不触碰注册" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <testcase name="权限变化场景 - 曾成功的注册失败后提供 false 而非沿用存在性" classname="com.sensewalk.app.engine.sensor.StepSensorSourceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

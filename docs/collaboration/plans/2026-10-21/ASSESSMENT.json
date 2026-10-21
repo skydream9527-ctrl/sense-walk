@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-10-21",
+  "kind": "observed_agent_capability_and_assignment",
+  "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "prior_document_commit": "c4a0bc7b7065f13874bba680d8cf4c099a73739f",
+  "pr35_tip": "9bcfbaba356269ed43b6944d44c7fc1c531788d4",
+  "report": "docs/collaboration/plans/2026-10-21/AGENT-ASSESSMENT.md",
+  "correction": "docs/collaboration/evidence/P-20261021-01/CORRECTION-01.md",
+  "scope": "Observed deliveries in this repository; not model-brand ranking or a global capability certification.",
+  "roles": {
+    "zcode": {
+      "strength": "core implementation, concurrency debugging, meaningful regression",
+      "boundary": "UI screenshot interpretation and unmeasured physical performance need independent checks",
+      "next": [
+        "SW020 in three observable stages",
+        "SW025 after approval",
+        "SW023 after candidate approvals"
+      ]
+    },
+    "minimax": {
+      "strength": "asset engineering, deterministic processing, counterexample-driven tooling",
+      "boundary": "visual approval and final handoff synchronization need strict evidence",
+      "next": [
+        "SW022 one layer calibration then three-layer batch",
+        "SW006 R3 separately, zero API"
+      ]
+    },
+    "antigravity": {
+      "strength": "coordination, deterministic checks, evidence collection and correction",
+      "boundary": "fact accuracy and actual UI execution are not reliable enough for sole release decision",
+      "next": [
+        "append factual corrections",
+        "connect discoverable and real UI tests with ZCode dependency support",
+        "raw-evidence review and second non-author check before claiming full visual/release validation"
+      ]
+    },
+    "trae-design": {
+      "strength": "editable design package and repeatable references",
+      "boundary": "product numbers and dp/px/runtime ownership require implementation cross-check",
+      "next": [
+        "reuse accepted SW021; no new design task this stage"
+      ]
+    }
+  },
+  "qualification": "No device measurement does not imply lack of ability. Prior approval pointers and source code are unchanged.",
+  "external_dispatch": "none; user forwards prompts",
+  "new_coordination_task": "SW-026"
+}

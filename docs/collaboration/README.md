@@ -1,29 +1,23 @@
-# SenseWalk 四角色开发入口
+# SenseWalk 当前三方收口入口
 
-2026-10-20：已阅读并逐条筛选三份计划，当前执行[合并开发计划](plans/2026-10-20/README.md)。[采纳与修正](plans/2026-10-20/SOURCE-REVIEW.md) · [原文与哈希](plans/2026-10-20/inputs/index.json) · [四份完整提示词](plans/2026-10-20/PROMPTS.md)。这是任务安排，尚未自动向外部agent发消息。
+2026-10-21：已交[森林渲染改进测试包build224](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-224-2e6f266)。[本轮范围与分工](plans/2026-10-21/README.md) · [实核证据](evidence/P-20261021-01/README.md) · [三份完整提示词](plans/2026-10-21/PROMPTS.md) · [安装步骤](../releases/2026-10-21-forest-render-beta/TESTING.md)。新包329云端测试；未完成项不强塞入包。
 
-## 四条稳定入口
+| 角色 | 当前动作 | 后续 |
+| --- | --- | --- |
+| ZCode | SW019 accepted后继续ready SW020；安装阻断优先复现 | SW020批准→SW025，SW023等批准森林候选 |
+| MiniMax Code | ready SW022森林三层0新付费平铺候选 | SW006另分支R3零API返工，8/8额度不重置 |
+| Antigravity | SW026事实修正/可执行UI最小集，安装反馈与实际新head复验 | 审SW020/022/025/雨林R3、维护依赖、集成与必要新tag |
+
+Trae SW021已accepted，设计由三方只读消费，本轮无新设计任务。SW019加载改造已入包；SW020/025/022/023未交付，雨林未开放。真机/真人和性能收益保持Pending；提示旧H2缺证尚未补录，不以文件名闭环。
+
+先看[能力评估与任务匹配](plans/2026-10-21/AGENT-ASSESSMENT.md)：主程/素材工程/流程证据分别发挥长项；交付拆小，关键验收用原始内容与非作者复核，不按品牌或通过数量排名。
+
+## 只需转发三个文件入口
 
 - ZCode：`先fetch最新origin/main，在独立checkout读取并执行docs/collaboration/roles/zcode.md。`
-- MiniMax Code：`先fetch最新origin/main，在独立checkout读取并执行docs/collaboration/roles/minimax.md。`
-- Trae Design：`使用Design模式，先fetch最新origin/main，在独立checkout读取并执行docs/collaboration/roles/trae-design.md。`
+- MiniMax：`先fetch最新origin/main，在独立checkout读取并执行docs/collaboration/roles/minimax.md。`
 - Antigravity：`先fetch最新origin/main，在独立checkout读取并执行docs/collaboration/roles/antigravity.md。`
 
-## 现在做什么
+完整要求在角色入口/task/最新registry与handoff。作者state本人消费，源码/精确head/哈希/实际证据高于完成声明。[BOARD](BOARD.md)由registry生成，[PROTOCOL](PROTOCOL.md)规定独立checkout/所有权与历史只追加。用户转发文件不代表本系统自动发消息或调度agent。
 
-| 角色 | 当前可执行 | 后续按依赖开启 |
-| --- | --- | --- |
-| ZCode | SW019渲染与异步加载 | SW020安全区/步长/触感→SW025构建追溯；SW023等批准设计/候选 |
-| Trae Design | SW021森林连续视差与界面精修设计 | 给MiniMax和ZCode分别交准确规范，不改冻结雨林设计 |
-| MiniMax Code | SW006原有零API保护/准确R2交接 | SW021 accepted后SW022森林平铺候选；本轮森林0付费 |
-| Antigravity | SW024独立基准/提示缺证复核 | 持续独立审核、启用queued、分两批集成/测试发布 |
-
-SW017/018已accepted，旧入口的ready安排已过时；不重做快照/越坎/光效/雨林底座。SW018提示截图仍有证据范围疑点，交SW024追加correction，不抹掉历史approved或虚构真机通过。PR28的QA隔离已修，PR25程序占位仍未approved/入包。
-
-现有[森林800m双模式测试包](https://github.com/skydream9527-ctrl/sense-walk/releases/tag/build-176-aaa789b)继续可安装；312项云端测试。第一批性能/操作/构建身份改进不等新美术，第二批才接平铺与UI设计。真实计步、锁屏15min和真人仍Pending。完整旧阶段范围见[STAGE-CLOSEOUT](STAGE-CLOSEOUT.md)。
-
-## 规则与导航
-
-registry是协调单写状态，[BOARD](BOARD.md)由render生成；实际源码/head/哈希/证据高于完成声明。产品规则以DEVELOPMENT为准。独立worktree、所有权、历史不可覆盖与交接要求见[PROTOCOL](PROTOCOL.md)。无完整本地Android环境也可通过Actions开发验证。
-
-[ROADMAP](ROADMAP.md) · [QA队列](queues/antigravity.md) · [快照契约](contracts/session-snapshot.md) · [设计契约](contracts/visual-design.md) · [素材契约](contracts/visual-assets.md) · [交接模板](templates/HANDOFF.md) · [审核模板](templates/REVIEW.md) · [校验工具](../../tools/collaboration.py)。各作者state本人维护；此系统不自动调度、发信或唤醒agent。
+[当前收口](STAGE-CLOSEOUT.md) · [路线](ROADMAP.md) · [QA队列](queues/antigravity.md) · [此前三份计划取舍](plans/2026-10-20/README.md) · [设计契约](contracts/visual-design.md) · [素材契约](contracts/visual-assets.md) · [交付模板](templates/HANDOFF.md)。本地无需完整Android环境，复用GitHub Actions；不发布应用商店。

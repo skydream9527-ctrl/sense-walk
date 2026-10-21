@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "S-20261021-forest-render-beta",
+  "kind": "bootstrap-closeout-and-test-release",
+  "created_on": "2026-10-21",
+  "base_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "head_commit": "f4a73af1875bf03ae862759cfa7d52c444ae475a",
+  "frozen_apk_source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "release_tag": "build-224-2e6f266",
+  "release_run_id": 39561811899,
+  "report": "docs/collaboration/plans/2026-10-21/VALIDATION.md",
+  "progress_report": "docs/collaboration/evidence/P-20261021-01/README.md",
+  "documentation_asset": {
+    "name": "stage-closeout-docs.zip",
+    "sha256": "d2c0081a540fce7f0040e76d96bea2ebf45dd8b71585c117c914ea706ed0b4ff",
+    "bytes": 121587,
+    "files": 93,
+    "content_commit": "f4a73af1875bf03ae862759cfa7d52c444ae475a",
+    "crc": "passed",
+    "note": "Contains business documentation at content_commit; this delivery metadata and checksum file were appended afterward and are attached separately."
+  },
+  "checks": {
+    "cloud_jvm_tests": 329,
+    "cloud_failures": 0,
+    "local_protocol_tests": 31,
+    "local_protocol_seconds": 37.003,
+    "guard_selftest": {
+      "passed": 14,
+      "failed": 0
+    },
+    "guard_manifest": {
+      "passed": 122,
+      "failed": 0
+    },
+    "apk": "downloaded; digest/CRC/formal assets matched",
+    "source_zip": "UTC reproduction matches uploaded GitHub digest/size; reproduced CRC and key entries checked",
+    "history_structure_dependencies_hashes": "passed",
+    "existing_approval_pointers_and_task_states_preserved": true,
+    "private_states_written": false,
+    "production_code_assets_ci_changed": false
+  },
+  "pending": [
+    "new device installation",
+    "physical step/lockscreen/headset/call/haptics/reboot/human validation",
+    "readable stabilize hint timing evidence",
+    "hardware performance and energy gain"
+  ],
+  "external_agent_dispatch": "not_sent; user forwards the three role prompts",
+  "paid_api_calls_by_this_work": 0
+}
