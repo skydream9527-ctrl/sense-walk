@@ -2,6 +2,8 @@
 
 用户本轮要求：检查进展、先收尾并在GitHub交安装包，后续交ZCode、MiniMax Code、Antigravity继续开发。本轮不新增设计任务，消费Trae已经获批的SW021；不转移或改写设计所有权。此文件安排不表示外部agent已被自动通知。
 
+先读[Agent能力评估与任务匹配](AGENT-ASSESSMENT.md)：ZCode主程、MiniMax素材工程、Antigravity流程/证据与独立检查；关键视觉/发布证据增加非作者复核。评价依据本项目交付，不按品牌排名。
+
 ## 本次包的范围
 
 冻结源码`2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d`，即SW019/021独立审核已入主干的时点。实际APK/源码/哈希/测试结果见[发布档案](../../../releases/2026-10-21-forest-render-beta/README.md)，检查证据见[本轮实核](../../evidence/P-20261021-01/README.md)。
@@ -18,7 +20,7 @@ SW020安全区/步长/每局触感、SW025版本追溯、SW022平铺候选、SW0
 | --- | --- | --- |
 | ZCode | 消费SW019 accepted，领取ready SW020；收到本次安装反馈时先复现、修阻断 | SW020获批后SW025；SW023等SW020与SW022获批。各任务独立PR/handoff，不重做SW019，不强开雨林 |
 | MiniMax Code | 优先ready SW022，按SW021精确批准spec制作森林三层平铺候选，0新增付费 | SW006另分支做R3零API返工，8/8账本不重置；两批候选分开，不让雨林阻断森林，不改Trae源稿或生产assets |
-| Antigravity | 核对本次包与安装反馈；独立审核后续SW020/022/025 | 消费SW024 accepted，不重复造基准任务；追加修正本轮指出的评审路径/SHA/字段事实，提示同步画面与真机保持Pending |
+| Antigravity | 领取SW026，事实复核与最小真实UI测试；核对本次包与安装反馈，独立审后续交付 | 消费SW024 accepted，不重复造基准任务；追加修正本轮指出的评审路径/SHA/字段事实，提示同步画面与真机保持Pending |
 
 每个角色使用独立checkout/worktree；不要为了同步文件在共享checkout reset/切分支。本人state本人维护，中心registry/BOARD由QA顺序维护。作者不能自判accepted，功能/素材head变化重新审核。
 
@@ -26,7 +28,13 @@ SW020安全区/步长/每局触感、SW025版本追溯、SW022平铺候选、SW0
 
 森林SW022引用SW021 spec `86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90`，只制作tree_outline/tree_trunks/leaf_path；原light_shows与clearing复用。0新付费，真实源尺寸/alpha/hash、三底/三次拼接/多偏移/六阶段/三比例与五层总预算交齐。每层≤400000B，不用409600B冒十进制上限。设计里的运行时代码建议只作需求：SW022不写app，重复绘制由ZCode在SW023实现。
 
-雨林SW006 R2当前`asset_manifest`字段**已经存在**、`artifacts`没有列旧哈希数组；不要照旧评审重复“补缺失字段/四个artifact mismatch”。真实问题是handoff业务head及文字/尺寸摘要未随33dd824后处理同步，vines_light 406320B超限，薄雾/空地视觉须依据原图重验。新交H-SW006-R3 + **r3/manifest.json且revision=3**，引用最终业务SHA和真实哈希。不能把R3 handoff直接指向revision=2的R2 manifest，不能原地覆盖旧交付。重编码/透明处理只用封存原图；账本8次、项目累计22保留，不再调用生图。
+雨林SW006 R2当前`asset_manifest`字段**已经存在**、`artifacts`是空数组[]，没有旧哈希条目；不要照旧评审重复“补缺失字段/四个artifact mismatch”。真实问题是handoff业务head及文字/尺寸摘要未随33dd824后处理同步，vines_light 406320B超限，薄雾/空地视觉须依据原图重验。新交H-SW006-R3 + **r3/manifest.json且revision=3**，引用最终业务SHA和真实哈希。不能把R3 handoff直接指向revision=2的R2 manifest，不能原地覆盖旧交付。重编码/透明处理只用封存原图；账本8次、项目累计22保留，不再调用生图。
+
+## 按能力拆小交付
+
+ZCode将SW020分成安全区、步长/旧快照兼容、一次性触感三个可核对阶段，任务全部完成才accepted。MiniMax在SW022先交一层和实际接缝预览校准，再扩三层；脚本统一导出/manifest/最终handoff摘要。Antigravity先修事实、接通可发现且实际操作App的UI测试，不把字符串断言或object/runAll草案算成UI通过；Gradle依赖交ZCode。素材视觉由QA实看且ZCode以非候选作者身份补只读接线反馈，发布原始证据另交协调方复核。没有新设备证据就继续Pending，不引入额外用户审批。
+
+SW021预览夜径800m与正式700m、390dp表混用像素及误派App代码给SW022的问题，接线前按产品配置与统一单位校对；不修改批准spec原字节。新增勘误见[CORRECTION-01](../../evidence/P-20261021-01/CORRECTION-01.md)。
 
 ## QA收口条件
 

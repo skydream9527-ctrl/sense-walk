@@ -15,3 +15,5 @@
 本次签名证书与build176**实际不同**；装过176时覆盖安装会发生证书冲突。先保存需要的记录，卸载旧包后再装；卸载清除本地进度/设置。App内版本仍0.1.0-week1/versionCode1，反馈用Release tag识别，不以版本文字判断新旧。
 
 实际下载与证据见[本轮核查](../../collaboration/evidence/P-20261021-01/README.md)、[发布元数据](release-manifest.json)。后续三方任务与提示词见[收口规划](../../collaboration/plans/2026-10-21/README.md)。旧build176仍保留，新修复另发新tag。
+
+用户追加的[Agent能力评估](../../collaboration/plans/2026-10-21/AGENT-ASSESSMENT.md)和[报告勘误](../../collaboration/evidence/P-20261021-01/CORRECTION-01.md)在首版文档包之后新增，另附Release文件；不替换冻结APK、源码或首版文档ZIP。
