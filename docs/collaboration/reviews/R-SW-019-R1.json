@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-019-R1",
+  "task_id": "SW-019",
+  "reviewer": "antigravity",
+  "producer": "zcode",
+  "handoff": "docs/collaboration/handoffs/zcode/H-SW-019-R1.json",
+  "reviewed_commit": "a666b76793a77039df9e435d7877bb6fd55a4aec",
+  "delivery_head": "5611ac7801d6f143bd02b3311d2ee0d3263440c0",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-019-R1.md",
+  "artifact_hashes": {
+    "docs/collaboration/evidence/H-SW-019-R1/screens/R0-entry-0m.png": "7c30db885419513aae5531f455942d78182778ea8f4ef3f4bd433b74bd5fe5c9",
+    "docs/collaboration/evidence/H-SW-019-R1/screens/S1-130m-outline.jpg": "6f1660976285ee5899d11974befa60cdd2445127ef4603a8c64147a1bdae82ba",
+    "docs/collaboration/evidence/H-SW-019-R1/screens/S2-280m-trunks.jpg": "1b3884515329c6b9a708583f1add8b347fb8d4549645f8b2d6e81d1b045783fa"
+  },
+  "checks": [
+    {
+      "name": "独立本地全量单测、Lint、Debug 构建与 Release 清单校验 (329 项 JVM 单测全绿 / 0 Lint Error)",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-019-R1.md",
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md"
+      ]
+    },
+    {
+      "name": "图层异步解码、32MiB LRU 缓存与 Single-Flight 竞态修复源码审计 (a666b76)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-019-R1.md",
+        "docs/collaboration/reviews/R-SW-019-R1.md"
+      ]
+    },
+    {
+      "name": "场景目录缓存与高频重组读取下沉审计 (rememberUpdatedState / graphicsLayer lambda / 预格式化文本)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/zcode/H-SW-019-R1.md",
+        "docs/collaboration/reviews/R-SW-019-R1.md"
+      ]
+    },
+    {
+      "name": "模拟器阶段截图哈希与目视复核 (0m 暗幕 / 134m tree_outline / 288m tree_trunks)",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/screens/R0-entry-0m.png",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S1-130m-outline.jpg",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S2-280m-trunks.jpg"
+      ]
+    },
+    {
+      "name": "设备级帧率收益与物理真机项如实保留 Pending",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/measure-clean-gfxinfo.txt",
+        "docs/collaboration/evidence/SW-024/performance-benchmark-protocol.md"
+      ]
+    }
+  ]
+}

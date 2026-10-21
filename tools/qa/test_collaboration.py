@@ -137,6 +137,15 @@ class CoordinationChecks(unittest.TestCase):
         return relative, h, manifest_path, manifest, ref
 
     def asset_delivery(self, design_ref=None, revision=1):
+        if revision == 1:
+            for p in (self.base / 'handoffs/minimax').glob('H-SW-006-R*.json'):
+                if re.match(r'^H-SW-006-R([2-9]|\d{2,})\.json$', p.name):
+                    p.unlink(missing_ok=True)
+            for p in (self.base / 'reviews').glob('R-SW-006-R*.json'):
+                if re.match(r'^R-SW-006-R([2-9]|\d{2,})\.json$', p.name):
+                    p.unlink(missing_ok=True)
+            self.change_registry(lambda data: next(t for t in data['tasks'] if t['id'] == 'SW-006').update(
+                latest_handoff=None, latest_review=None, integrated_commit=None))
         relative, h = self.handoff('SW-006', 'minimax', revision)
         folder = self.root / f'design/assets/rainforest/candidates/fixture/r{revision}'
         folder.mkdir(parents=True, exist_ok=True)

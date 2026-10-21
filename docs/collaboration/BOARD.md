@@ -24,10 +24,10 @@
 | SW-016 | [雨林运行时底座与真实声景准备](tasks/SW-016.md) | zcode | accepted | SW-005, SW-012 | [H-SW-016-R1](handoffs/zcode/H-SW-016-R1.json) / [R-SW-016-R1](reviews/R-SW-016-R1.json) |
 | SW-017 | [应用验图参照与森林阶段视觉收口](tasks/SW-017.md) | trae-design | accepted | SW-011, SW-012, SW-005, SW-010 | [H-SW-017-R1](handoffs/trae-design/H-SW-017-R1.json) / [R-SW-017-R1](reviews/R-SW-017-R1.json) |
 | SW-018 | [森林阶段安装测试与缺陷收尾](tasks/SW-018.md) | zcode | accepted | SW-001, SW-004, SW-005, SW-010 | [H-SW-018-R1](handoffs/zcode/H-SW-018-R1.json) / [R-SW-018-R1](reviews/R-SW-018-R1.json) |
-| SW-019 | [会话渲染与异步加载](tasks/SW-019.md) | zcode | ready | SW-018 | — / — |
-| SW-020 | [安全操作区、步长设置与一次性触感](tasks/SW-020.md) | zcode | queued | SW-019 | — / — |
-| SW-021 | [森林连续视差与界面精修设计](tasks/SW-021.md) | trae-design | ready | SW-017 | — / — |
-| SW-022 | [森林平铺候选制作](tasks/SW-022.md) | minimax | queued | SW-021 | — / — |
+| SW-019 | [会话渲染与异步加载](tasks/SW-019.md) | zcode | accepted | SW-018 | [H-SW-019-R1](handoffs/zcode/H-SW-019-R1.json) / [R-SW-019-R1](reviews/R-SW-019-R1.json) |
+| SW-020 | [安全操作区、步长设置与一次性触感](tasks/SW-020.md) | zcode | ready | SW-019 | — / — |
+| SW-021 | [森林连续视差与界面精修设计](tasks/SW-021.md) | trae-design | accepted | SW-017 | [H-SW-021-R1](handoffs/trae-design/H-SW-021-R1.json) / [R-SW-021-R1](reviews/R-SW-021-R1.json) |
+| SW-022 | [森林平铺候选制作](tasks/SW-022.md) | minimax | ready | SW-021 | — / — |
 | SW-023 | [森林视觉入包与界面精修](tasks/SW-023.md) | zcode | queued | SW-019, SW-020, SW-021, SW-022 | — / — |
 | SW-024 | [独立基准、提示证据复核与回归入口](tasks/SW-024.md) | antigravity | accepted | SW-017, SW-018 | [H-SW-024-R1](handoffs/antigravity/H-SW-024-R1.json) / — |
 | SW-025 | [可追溯测试构建身份](tasks/SW-025.md) | zcode | queued | SW-020 | — / — |
@@ -38,7 +38,7 @@
 
 | 任务/轮次 | PR或分支 | 观察交付head | 来源 |
 | --- | --- | --- | --- |
-| SW-006 R1 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/25) | `8e73b13` | [R-SW-006-R1-correction](reviews/R-SW-006-R1-correction.md) |
+| SW-006 R2 | [PR](https://github.com/skydream9527-ctrl/sense-walk/pull/35) | `9bcfbab` | [R-SW-006-R2-correction](reviews/R-SW-006-R2-correction.md) |
 
 持续审稿与下一步：[antigravity](queues/antigravity.md)。协调轮完成不等于产品验收完成。
 
