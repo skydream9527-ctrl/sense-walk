@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-021",
+  "revision": 1,
+  "producer": "trae-design",
+  "base_commit": "4f57659e00e0267be03a0a7b966cacba8387c5ee",
+  "head_commit": "28ef82c7f1e28eb4c48c98843d9bdc6a09959341",
+  "branch": "codex/trae-design/SW-021-forest-polish",
+  "deliverable_status": "design_candidate",
+  "changed_files": [
+    "design/05-visual-design/SW-021/r1/README.md",
+    "design/05-visual-design/SW-021/r1/design-spec.json",
+    "design/05-visual-design/SW-021/r1/design-manifest.json",
+    "design/05-visual-design/SW-021/r1/prompts.md",
+    "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py",
+    "design/05-visual-design/SW-021/r1/source/sw021_previews.py",
+    "design/05-visual-design/SW-021/r1/source/sw021_ui_mocks.py",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_outline_tile.svg",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_trunks_tile.svg",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_leaf_path_tile.svg",
+    "design/05-visual-design/SW-021/r1/previews/sw021_preview_checks.json",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_outline_tile.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_trunks_tile.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_leaf_path_tile.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_outline_check3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_trunks_check3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_leaf_path_check3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_outline_repeat3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_trunks_repeat3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_leaf_path_repeat3.png",
+    "design/05-visual-design/SW-021/r1/previews/tiles/seam/forest_seam_probe_sheet.png",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x1920.png",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_390x844.png",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_continuous_compare_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/traveler/traveler_size_compare.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_layout_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_small_390x844.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_largefont_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_mode_cards_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_abandon_confirm_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_longpress_ring_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_result_dim_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_about_credits_1080x2400.png",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_type_scale_1080x2400.png",
+    "docs/collaboration/handoffs/trae-design/H-SW-021-R1.json",
+    "docs/collaboration/handoffs/trae-design/H-SW-021-R1.md",
+    "docs/collaboration/state/trae-design.json"
+  ],
+  "artifacts": [],
+  "summary": "森林连续横移视差与界面精修设计候选：tree_outline/tree_trunks/leaf_path 三层重新设计为 1080x1920 原生 repeat-x 数学无缝 tile（3W 折叠法），五层 ID/80/240/400/600/760m/opacity/fadeMeters/parallax 全部冻结，light_shows/clearing 逐字节复用已批准 webp；0m 仍近黑、无天空/雾旁路；结构性消除旧 cover 钳满后 52px 右缘黑带。旅人保持 x=.34/y=.865，给 7%/9% 屏高两方案并推荐 9%。UI 给 9 张精修模拟与完整 token 规范（首页单列/禁用原因常驻/themeColor 强调/暗色底部放弃确认/长按 1.5s 环形不产距/结果 ≥3s 退暗+用时折叠/关于页真实音频署名/字阶）。零新增付费 API；不改 app、forest.json、入包 webp、雨林与任何已发布字节。",
+  "consumers": {
+    "minimax": "按 prompts.md 只制作三层可平铺正式候选（每层 ≤400KB webp），携带 design_ref（SW-021 + 批准后 spec sha256）；light_shows/clearing 不重画；雨林不碰；零 API 路线见 prompts §4，不得借用雨林 8 次授权。任务 SW-022 依赖本设计 approved。",
+    "zcode": "SW-023 按 design-spec tile_rendering_contract_for_zcode 给 ForestShell 增加 repeat-x 平铺绘制路径后再替换三层 webp；forest.json 无需改；旅人 9% 待 QA 真机定稿；UI 规范按 ui_specification 接线。当前壳不支持平铺，禁止把 tile 塞进 cover 路径。"
+  },
+  "checks": [
+    {
+      "id": "phase-and-layer-freeze",
+      "type": "source",
+      "summary": "只读核对 base 4f57659 的 app/src/main/assets/scenes/forest.json：五层 ID、80/240/400/600/760m、opacity .60/.70/.80/.65/.90、fadeMeters 20/25/25/30/25、parallax .3/.3/.6/0/0、void #060806 逐值转录进 design-spec，合成脚本严格按 opacity=toOpacity×smoothstep((m-at)/fade)；本轮 0 提议修改。light_shows/clearing 仅以入包 webp 参与合成、不改字节。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/design-spec.json",
+        "design/05-visual-design/SW-021/r1/source/sw021_previews.py"
+      ]
+    },
+    {
+      "id": "tile-seam-math-and-pixel-audit",
+      "type": "source",
+      "summary": "三层 tile 在 3240 宽（3W）画布绘制全部 wrap 图元后三段 over 折叠回 1080 中央 tile，任意跨缝树干/团块/叶斑完整拼回；冠线 union mask 整体着色；地面上缘整周期正弦。可复跑像素审计：tree_trunks 缝差均值 0.025/最大 1（内部自然差 0.077），leaf_path 0.003/最大 3（自然差 0.023），tree_outline 0.218/个别抗锯齿像素最大 255（自然差 0.194，三连拼目检无可见缝）。三底检查、三连拼、接缝探针、四偏移视口均产出并目检。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/sw021_preview_checks.json",
+        "design/05-visual-design/SW-021/r1/previews/tiles/seam/forest_seam_probe_sheet.png",
+        "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_trunks_repeat3.png",
+        "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py"
+      ]
+    },
+    {
+      "id": "void-band-elimination-three-ratios",
+      "type": "visual",
+      "summary": "repeat-x 渲染模型下三比例（1080x1920 周期1080、1080x2400 周期1350、390x844 周期949.5）周期宽度恒 ≥ 视口，0/100/265/425/630/785m 黑带像素恒为 0；同脚本对拍旧 cover：1080x2400 0m 露 670px、265/425/630m 露 52px（与 SW-017 edge-audit 一致），新 tile 全程 0。六阶段×三比例矩阵与新旧对拍均带设计模拟角标。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/composite/forest_continuous_compare_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x1920.png",
+        "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_390x844.png"
+      ]
+    },
+    {
+      "id": "traveler-size-comparison",
+      "type": "visual",
+      "summary": "旅人锚点 x=.34/脚底 y=.865 不变，程序绘制语义；7% 与 9% 屏高两方案在三档背景密度下对比，9% 在小屏暗部辨识更好且不侵下 45% 操作区，推荐 9%，不把 8–12% 当硬标准，最终由 QA SW-023 真机目检。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/traveler/traveler_size_compare.png"
+      ]
+    },
+    {
+      "id": "ui-polish-mocks-and-tokens",
+      "type": "visual",
+      "summary": "9 张 UI 模拟（均标注设计模拟）：首页现状vs提案单列、390x844 单列vs双列否决、大字号x1.5 不截断、模式卡禁用原因常驻+可读禁用按钮、暗色 scrim 底部放弃确认（危险色 #C94A3E 唯一）、长按 1.5s 环形三帧（只确认不产距+reduceMotion 静态替代）、结果先冻结再 ≥3s 退暗+用时折叠、关于页三条真实音频署名（CC BY 4.0/CC0/CC BY 4.0）、8 级字阶 token。色值实采 Theme.kt 与 forest.json themeColor。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_home_layout_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_home_small_390x844.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_home_largefont_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_mode_cards_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_abandon_confirm_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_longpress_ring_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_result_dim_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_about_credits_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_type_scale_1080x2400.png"
+      ]
+    },
+    {
+      "id": "manifest-reproducibility",
+      "type": "source",
+      "summary": "design-manifest.json 列 34 个交付文件（25 preview/6 source/1 spec/1 prompt/1 doc/1 data）的仓库相对路径、sha256、字节、role；独立复算 0 处 hash/字节不符、目录无未列文件与幽灵条目；清单不列自身哈希。三个 Python 脚本纯本地 Pillow 确定性渲染（固定 LCG 种子、系统中文字体），零网络、零付费/生图 API；无 PSD/Figma 冒称，可编辑源为 Python 与 SVG。",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/design-manifest.json",
+        "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py",
+        "design/05-visual-design/SW-021/r1/source/sw021_ui_mocks.py"
+      ]
+    }
+  ],
+  "design_spec": "design/05-visual-design/SW-021/r1/design-spec.json",
+  "design_manifest": "design/05-visual-design/SW-021/r1/design-manifest.json",
+  "prompts": "design/05-visual-design/SW-021/r1/prompts.md",
+  "report": "docs/collaboration/handoffs/trae-design/H-SW-021-R1.md",
+  "api_usage": {"paid_calls": 0, "image_generation_calls": 0, "note": "全部本地 Python(PIL)+手写 SVG；prompts.md 含零 API 路线。"},
+  "tests_actually_run": [
+    "python3 sw021_tile_model.py / sw021_previews.py / sw021_ui_mocks.py 三次完整渲染均退出码 0",
+    "design-spec.json / design-manifest.json 通过 python3 -m json.tool",
+    "manifest 34 文件 sha256/bytes 独立复算 0 不符、无未列文件",
+    "缝差/黑带数值审计 sw021_preview_checks.json；全部预览人工目检（含多轮 alpha 混合修复后复检）"
+  ],
+  "pending_verification": [
+    "Antigravity 独立审核业务 head 28ef82c 与 manifest 全部哈希：三层 tile 构图/接缝/三底/三连拼/六阶段是否达设计契约，UI 规范与署名是否采纳；批准前 SW-022 不得开工。",
+    "tree_outline 个别抗锯齿像素 max 差 255（均值与自然差同量级）：请在三底+三连拼+多偏移目检中确认无可见缝；MiniMax 正式素材同法复测。",
+    "K=6px/m 物理映射与旅人 9% 屏高：设计假设，待 ZCode SW-023 + QA 真机校正/目检定稿。",
+    "关于页三条音频署名依据现有入包音频记录，ZCode 接线前须与实际打包音频 manifest 逐一核对作者/许可/链接。",
+    "registry/BOARD 状态由协调方维护；作者不自判 accepted，不改 registry。"
+  ],
+  "out_of_scope": [
+    "不改 app/ 源码、forest.json、入包 webp 与任何正式 assets",
+    "不重画 light_shows/clearing，不碰雨林 SW-012/D-009（tileable=false 不变）",
+    "不写 MiniMax 候选、不替 QA 验收、不改 registry/他人 state",
+    "不伪造真机/真人计步/锁屏证据；未运行 Android 构建（设计阶段不适用）"
+  ]
+}

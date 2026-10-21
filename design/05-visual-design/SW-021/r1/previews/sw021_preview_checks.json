@@ -1,0 +1,89 @@
+{
+  "note": "SW-021 设计模拟几何/接缝检查；非 App 截图，非真机证据。",
+  "tile_canvas": {
+    "width": 1080,
+    "height": 1920,
+    "repeat_axis": "x",
+    "seam_safe_px": 96
+  },
+  "parallax_calibration_design_assumption": {
+    "K_ref_px_per_m_at_1080x2400": 6.0,
+    "basis": "SW-017 实测旧 cover 溢出 259px、p=.3 约 144m 钳满反推",
+    "status": "proposed_pending_zcode_device_correction",
+    "tile_formula": "x_shift = meters*K*(H/2400)*parallax mod (1080*H/1920)"
+  },
+  "screen_geometry": {
+    "1080x1920": {
+      "tile_scale_height_fill": 1.0,
+      "tile_period_px": 1080.0,
+      "screen_width_px": 1080,
+      "period_covers_screen": true
+    },
+    "1080x2400": {
+      "tile_scale_height_fill": 1.25,
+      "tile_period_px": 1350.0,
+      "screen_width_px": 1080,
+      "period_covers_screen": true
+    },
+    "390x844": {
+      "tile_scale_height_fill": 0.8792,
+      "tile_period_px": 949.5,
+      "screen_width_px": 780,
+      "period_covers_screen": true
+    }
+  },
+  "seam_pixel_checks": {
+    "tree_outline": {
+      "1080": {
+        "seam_max_abs_diff": 255,
+        "seam_mean_abs_diff": 0.218,
+        "natural_mean_abs_diff": 0.194
+      },
+      "2160": {
+        "seam_max_abs_diff": 255,
+        "seam_mean_abs_diff": 0.218,
+        "natural_mean_abs_diff": 0.194
+      }
+    },
+    "tree_trunks": {
+      "1080": {
+        "seam_max_abs_diff": 1,
+        "seam_mean_abs_diff": 0.025,
+        "natural_mean_abs_diff": 0.077
+      },
+      "2160": {
+        "seam_max_abs_diff": 1,
+        "seam_mean_abs_diff": 0.025,
+        "natural_mean_abs_diff": 0.077
+      }
+    },
+    "leaf_path": {
+      "1080": {
+        "seam_max_abs_diff": 3,
+        "seam_mean_abs_diff": 0.003,
+        "natural_mean_abs_diff": 0.023
+      },
+      "2160": {
+        "seam_max_abs_diff": 3,
+        "seam_mean_abs_diff": 0.003,
+        "natural_mean_abs_diff": 0.023
+      }
+    }
+  },
+  "old_cover_void_band_px_1080x2400": {
+    "0": 670,
+    "100": 0,
+    "265": 52,
+    "425": 52,
+    "630": 52,
+    "785": 0
+  },
+  "new_tile_void_band_px_1080x2400": {
+    "0": 0,
+    "100": 0,
+    "265": 0,
+    "425": 0,
+    "630": 0,
+    "785": 0
+  }
+}

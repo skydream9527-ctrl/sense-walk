@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-021",
+  "revision": 1,
+  "producer": "trae-design",
+  "created_on": "2026-10-20",
+  "updated_on": "2026-10-20",
+  "spec_file": "design/05-visual-design/SW-021/r1/design-spec.json",
+  "kind": "design_candidate",
+  "note": "森林连续横移视差三层可平铺候选 + UI 精修；png 均为带「设计模拟·非App截图」标注的设计稿；零付费/生图 API；light_shows/clearing 复用已批准 webp 不在本清单。",
+  "files": [
+    {
+      "path": "design/05-visual-design/SW-021/r1/README.md",
+      "sha256": "ab27efa3ac486fe1b988ac83b05ac80f8b1084a84476d2e33d822f71a54d3d98",
+      "bytes": 5945,
+      "role": "doc"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/design-spec.json",
+      "sha256": "86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90",
+      "bytes": 20877,
+      "role": "spec"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/prompts.md",
+      "sha256": "2f339f9e6f73b9c00df47d52165724cc50f0a3065ae1c3dc3166badeb04fcd09",
+      "bytes": 12997,
+      "role": "prompt"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/sw021_preview_checks.json",
+      "sha256": "ab4e975a5c03611dbf741d31a8aacee63689987c9eec596c8c4f069ce99b9c3f",
+      "bytes": 2186,
+      "role": "data"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/composite/forest_continuous_compare_1080x2400.png",
+      "sha256": "9546774f92977c1a6e0c7bab1933dd6481f727e63d9e66bd82ff76c527451c2c",
+      "bytes": 849679,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x1920.png",
+      "sha256": "e0a007123c3142ff546d97ae27c11a9e3f2da8eb13420a2724abf475d228d1b9",
+      "bytes": 288359,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x2400.png",
+      "sha256": "1f8b885337b8431d62447eff916988c405a6b907fb7a0f198eb06c102caf25a2",
+      "bytes": 340030,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_390x844.png",
+      "sha256": "122d4ca8833595e5198800c35351dedbad32ce911839fde4fc0b14108d1b7e81",
+      "bytes": 244117,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/forest_leaf_path_tile.png",
+      "sha256": "ca78976b92a11e6246923b17efabea62458ec13e1b5dec43460ec9dc8272bda8",
+      "bytes": 34077,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_outline_tile.png",
+      "sha256": "6da9adfdddbe0c3155074229abbca9cf497218be9956cb22589d901c7e3d1044",
+      "bytes": 30027,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_trunks_tile.png",
+      "sha256": "421d14f43aee51d2282f121022109f368ff14aad96fec793e2d57edc09431772",
+      "bytes": 279243,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_leaf_path_check3.png",
+      "sha256": "6b710262911e7f80f33e1509507923d77ff54462e099ac95c61f82d26dd37d17",
+      "bytes": 91032,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_outline_check3.png",
+      "sha256": "ad4ad504ec7e8cdbf2a87ac6b1c9a99359d025b507997e626b328760948ae1aa",
+      "bytes": 87055,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_trunks_check3.png",
+      "sha256": "2dc3f4ab679f8e507b31f5346c6dda1b08cc988e0a15f1d9083257edb4010d84",
+      "bytes": 244486,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_leaf_path_repeat3.png",
+      "sha256": "31f6092feec8c966ebacefb54ab585ac5dd57720916fbc25e41eb88f09e5a4b9",
+      "bytes": 54424,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_outline_repeat3.png",
+      "sha256": "836fa45cc0c713105bde97f24b1ba02daef019869e36541753bdad7393100e27",
+      "bytes": 66496,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_trunks_repeat3.png",
+      "sha256": "6815ad079958324eeabe8bdca56af2bb79aac02025a3ac962e5421fd5b282808",
+      "bytes": 114649,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/tiles/seam/forest_seam_probe_sheet.png",
+      "sha256": "dc2b574732a8d4261ea5d964302c2db3f12bc70f17def1feede5d5fba1ec3e0e",
+      "bytes": 181009,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/traveler/traveler_size_compare.png",
+      "sha256": "06be823b8a744084a8be4effe4c82cbdcb77fa7c034791a5691b24bf8f3be3ca",
+      "bytes": 291292,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_abandon_confirm_1080x2400.png",
+      "sha256": "878c2ee9f6599393ca2aa3c24ccfad9c84d9cf7a9c669aa51d21abd7fc49aa44",
+      "bytes": 83688,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_about_credits_1080x2400.png",
+      "sha256": "1ecb2b66d3d7be4672dd4ec7607e7899e88c5085455c9d90da0e45dca647c1f4",
+      "bytes": 124241,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_home_largefont_1080x2400.png",
+      "sha256": "5d0bce14f474bfcf22c84540bbb56681404d8aecbe63006f1eda49f0ca177483",
+      "bytes": 88793,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_home_layout_1080x2400.png",
+      "sha256": "69040eeceb27daa9f2f30c6a9f6dce1f5f016c1aa86e72292389f4b153bd4a57",
+      "bytes": 198561,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_home_small_390x844.png",
+      "sha256": "8254420a244c0f1eb4bbb434f9466f70a6a8d3438f2c266024f24bf91a03c66b",
+      "bytes": 112283,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_longpress_ring_1080x2400.png",
+      "sha256": "a0ab4aab9739111a4ff63d5cf65184d784966defca010597e5cda1c91160b3c4",
+      "bytes": 64074,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_mode_cards_1080x2400.png",
+      "sha256": "bd6f8dd02d70d3bd83c33679b2d715735b18812cbbdf8906f28cc00bf9692d5a",
+      "bytes": 93859,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_result_dim_1080x2400.png",
+      "sha256": "c981af2c8c91bc3e236a4d5355ed0c5f2a52f1c76bc8bb0c3aae5023e0a8db88",
+      "bytes": 57772,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/previews/ui/ui_type_scale_1080x2400.png",
+      "sha256": "eba5a121319dbb4cfe3d9e9b9f89e5ccc9c0601db471aeb0122b7b2254e6269f",
+      "bytes": 127724,
+      "role": "preview"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/sw021_previews.py",
+      "sha256": "f6fdd57495b74aa2c66eab908021125ff67fa09f955e2551d8d2a2f9860138e4",
+      "bytes": 22145,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py",
+      "sha256": "16569260294438b424c5c4c80f01a4f6dcecbbd5a73d4c72b8ba2c1761b7124d",
+      "bytes": 27085,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/sw021_ui_mocks.py",
+      "sha256": "8708ade3e704e46006fb81cdfa4e1c02d82d2f6c103a8876163a93cb6dc5862c",
+      "bytes": 23583,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/svg/forest_leaf_path_tile.svg",
+      "sha256": "83ae56cfeb9170e89545b98c002045c119fac384c93d7abee8d5869c09bd6405",
+      "bytes": 36641,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/svg/forest_tree_outline_tile.svg",
+      "sha256": "d644bca0db3335147c8e85e6fd8bb6ea9ae1e6eae567f937a098503f76f8e5a5",
+      "bytes": 13593,
+      "role": "source"
+    },
+    {
+      "path": "design/05-visual-design/SW-021/r1/source/svg/forest_tree_trunks_tile.svg",
+      "sha256": "8bff19eb232cd3e116fc7666d33a94d849a6d175c28f258be3900b95cefdaeac",
+      "bytes": 6516,
+      "role": "source"
+    }
+  ],
+  "limitations": [
+    "PNG tile 为 1080x1920 设计参考而非入包素材；正式素材由 MiniMax 候选 + visual-assets 验收产出。",
+    "全部预览非真机证据；K=6px/m 与旅人 9% 待 SW-022 设备验证。",
+    "清单不列自身哈希。"
+  ]
+}
