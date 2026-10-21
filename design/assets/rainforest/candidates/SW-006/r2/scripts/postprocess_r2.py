@@ -449,6 +449,82 @@ def build_zoom(layer_id: str, rgb: np.ndarray, alpha: np.ndarray) -> Dict[str, o
     return {"path": p, "spots": len(patches)}
 
 
+def edge_stats(alpha: np.ndarray) -> Dict[str, float]:
+    """逐行最大水平 alpha 梯度统计 (硬边指标)."""
+    if alpha.shape[1] < 2:
+        return {"max_gradient": 0.0, "hard_row_fraction": 0.0}
+    per_row = np.abs(np.diff(alpha, axis=1)).max(axis=0)
+    return {
+        "max_gradient": float(per_row.max()),
+        "hard_row_fraction": float((per_row > 0.25).mean()),
+    }
+
+
+def reference_edge_stats(layer_id: str) -> Optional[Dict[str, float]]:
+    """批准 design export 的同口径边缘统计 (作为羽化判据)."""
+    ref_rel = PALETTE_REFERENCE.get(layer_id)
+    if not ref_rel:
+        return None
+    p = REPO_ROOT / ref_rel
+    if not p.is_file():
+        return None
+    with Image.open(p) as im:
+        im.load()
+        a = np.asarray(im.convert("RGBA"))[..., 3].astype(np.float64) / 255.0
+    return edge_stats(a)
+
+
+def soften_hard_edges(alpha: np.ndarray, layer_id: str) -> Tuple[np.ndarray, Dict[str, object]]:
+    """把超出批准 design 边缘口径的硬边羽化掉 (确定性, 零 API).
+
+    依据 (SW-006 任务文件 + visual-assets 契约):
+    - glade 设计要求 "湿径上下缘都用纵向 mask 淡出", 批准 export 实测 max|dA/dx|=0.024.
+    - 生图模型把湿径画成了硬边锥形 (max|dA/dx|=0.369), 属 "硬边抠图", 契约明令禁止.
+    - 结构层 (trunks_canopy/vines_light) 的硬边是树廓/叶缘, 属正常, 不羽化.
+
+    做法: 用批准 export 的 max|dA/dx| 作上限, 二分出一个最小 sigma, 使羽化后
+    既达标又不过度模糊 (尽量保留形态). 羽化后重新标定 alpha 密度, 保证最大 alpha 与
+    半透明占比不因羽化而漂移.
+    """
+    cur = edge_stats(alpha)
+    ref = reference_edge_stats(layer_id)
+    diag: Dict[str, object] = {"before": cur, "reference": ref}
+    if ref is None:
+        diag["applied"] = False
+        return alpha, diag
+    target = max(float(ref["max_gradient"]), 0.02)
+    if cur["max_gradient"] <= target * 1.5:
+        diag["applied"] = False
+        diag["reason"] = f"当前 max|dA/dx|={cur['max_gradient']:.3f} 未显著超批准口径 {target:.3f}"
+        return alpha, diag
+
+    from PIL import ImageFilter
+
+    best = None
+    for sigma in (2, 3, 4, 6, 8, 10, 12, 16, 20):
+        blurred = np.asarray(
+            Image.fromarray((alpha * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(sigma))
+        ).astype(np.float64) / 255.0
+        st = edge_stats(blurred)
+        if st["max_gradient"] <= target * 1.5:
+            best = (sigma, blurred, st)
+            break
+    if best is None:
+        diag["applied"] = False
+        diag["reason"] = "羽化到最大 sigma 仍未达标"
+        return alpha, diag
+
+    sigma, blurred, st = best
+    out, adiag = normalize_alpha_density(blurred, layer_id)
+    diag.update({
+        "applied": True,
+        "sigma": sigma,
+        "after": edge_stats(out),
+        "alpha_renormalized": adiag,
+    })
+    return out, diag
+
+
 def measure(rgb: np.ndarray, alpha: np.ndarray, bg: np.ndarray) -> Dict[str, object]:
     """逐像素量检: 边缘 alpha, 底色残留, 半透明占比, 硬边."""
     a = alpha
@@ -581,6 +657,8 @@ def main() -> int:
         alpha = np.asarray(a_im).astype(np.float64) / 255.0
         # 量化 + 去噪 (视觉无损, 降熵改善 WebP 体积)
         alpha = quantize_alpha(alpha)
+        # 硬边羽化: 使边缘口径回到批准 design (确定性, 零 API)
+        alpha, edge_diag = soften_hard_edges(alpha, layer_id)
         # alpha 密度标定到批准 design 实测统计
         alpha, alpha_diag = normalize_alpha_density(alpha, layer_id)
         # 色域收敛到批准 design 色板统计 (只取统计量, 不复制 design 像素)
@@ -614,6 +692,7 @@ def main() -> int:
             "webp_quality": webp_q,
             "fit": fit_info,
             "key": key_diag,
+            "edge_soften": edge_diag,
             "alpha_normalize": alpha_diag,
             "palette_transfer": palette_diag,
             "measure": m,

@@ -5,8 +5,8 @@
       "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_mist.png",
       "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_mist.png",
       "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_mist.webp",
-      "png_bytes": 1547860,
-      "webp_bytes": 145032,
+      "png_bytes": 1440790,
+      "webp_bytes": 75804,
       "webp_quality": 86,
       "fit": {
         "source_resolution": "1536x2752",
@@ -26,11 +26,34 @@
         ],
         "unmix_residual": 0.5737531030323543
       },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.39682539682539686,
+          "hard_row_fraction": 0.0037071362372567192
+        },
+        "reference": {
+          "max_gradient": 0.011764705882352955,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 16,
+        "after": {
+          "max_gradient": 0.022995655159601613,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.5647,
+          "gamma": 3.2,
+          "opaque_fraction_before": 0.008,
+          "opaque_fraction_after": 0.0
+        }
+      },
       "alpha_normalize": {
-        "peak_before": 1.0,
+        "peak_before": 0.5647,
         "target_max_alpha": 0.5647,
         "gamma": 3.2,
-        "opaque_fraction_before": 0.0186,
+        "opaque_fraction_before": 0.0,
         "opaque_fraction_after": 0.0
       },
       "palette_transfer": {
@@ -43,27 +66,27 @@
           "v_p95": 63.0
         },
         "generated_stats": {
-          "hue": 101.5,
-          "sat": 168.0,
-          "v_p50": 115.0,
-          "v_p95": 255.0
+          "hue": 103.84,
+          "sat": 155.0,
+          "v_p50": 99.0,
+          "v_p95": 136.0
         },
-        "v_p50_before": 115.0,
+        "v_p50_before": 99.0,
         "v_p50_after": 48.0
       },
       "measure": {
         "alpha_max": 0.5647058823529412,
-        "semi_transparent_fraction": 0.6992086226851851,
-        "transparent_fraction": 0.3007913773148148,
+        "semi_transparent_fraction": 0.38936680169753085,
+        "transparent_fraction": 0.6106331983024691,
         "edge_strip4_max_alpha": {
-          "top": 3.316809804387298e-05,
-          "bottom": 3.316809804387298e-05,
-          "left": 9.06209351557241e-06,
-          "right": 3.316809804387298e-05
+          "top": 1.8790795892080127e-19,
+          "bottom": 1.8790795892080127e-19,
+          "left": 7.59091556416938e-16,
+          "right": 7.001675021192927e-14
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.3010464482043488,
-        "max_alpha_gradient_y": 0.1667044920512849,
+        "max_alpha_gradient_x": 0.0350755060502998,
+        "max_alpha_gradient_y": 0.022270360161742997,
         "has_hard_edge": false
       },
       "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_mist_zoom.png"
@@ -93,6 +116,18 @@
           30.6
         ],
         "unmix_residual": 0.3143330831627982
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.5238095238095238,
+          "hard_row_fraction": 0.5097312326227988
+        },
+        "reference": {
+          "max_gradient": 0.9372549019607843,
+          "hard_row_fraction": 0.7201112140871178
+        },
+        "applied": false,
+        "reason": "当前 max|dA/dx|=0.524 未显著超批准口径 0.937"
       },
       "alpha_normalize": {
         "peak_before": 1.0,
@@ -162,6 +197,18 @@
         ],
         "unmix_residual": 2.8795133688238077
       },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.5873015873015873,
+          "hard_row_fraction": 0.9990732159406858
+        },
+        "reference": {
+          "max_gradient": 0.9058823529411765,
+          "hard_row_fraction": 0.5227062094531975
+        },
+        "applied": false,
+        "reason": "当前 max|dA/dx|=0.587 未显著超批准口径 0.906"
+      },
       "alpha_normalize": {
         "peak_before": 1.0,
         "target_max_alpha": 1.0,
@@ -209,8 +256,8 @@
       "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_distant_glow.png",
       "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_distant_glow.png",
       "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_distant_glow.webp",
-      "png_bytes": 2749287,
-      "webp_bytes": 254702,
+      "png_bytes": 2674237,
+      "webp_bytes": 193552,
       "webp_quality": 86,
       "fit": {
         "source_resolution": "1536x2752",
@@ -230,11 +277,34 @@
         ],
         "unmix_residual": 0.2407207067557836
       },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.23809523809523808,
+          "hard_row_fraction": 0.0
+        },
+        "reference": {
+          "max_gradient": 0.003921568627450994,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 2,
+        "after": {
+          "max_gradient": 0.004470858483646617,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.2235,
+          "gamma": 3.2,
+          "opaque_fraction_before": 0.0236,
+          "opaque_fraction_after": 0.0
+        }
+      },
       "alpha_normalize": {
-        "peak_before": 1.0,
+        "peak_before": 0.2235,
         "target_max_alpha": 0.2235,
         "gamma": 3.2,
-        "opaque_fraction_before": 0.1096,
+        "opaque_fraction_before": 0.0,
         "opaque_fraction_after": 0.0
       },
       "palette_transfer": {
@@ -247,8 +317,8 @@
           "v_p95": 204.0
         },
         "generated_stats": {
-          "hue": 73.21,
-          "sat": 37.0,
+          "hue": 72.07,
+          "sat": 38.0,
           "v_p50": 226.0,
           "v_p95": 234.0
         },
@@ -257,17 +327,17 @@
       },
       "measure": {
         "alpha_max": 0.2235294117647059,
-        "semi_transparent_fraction": 0.6045886381172839,
-        "transparent_fraction": 0.39541136188271603,
+        "semi_transparent_fraction": 0.38818045910493826,
+        "transparent_fraction": 0.6118195408950617,
         "edge_strip4_max_alpha": {
-          "top": 0.14474565083390792,
-          "bottom": 6.732074770410012e-05,
-          "left": 0.037291763339396496,
-          "right": 0.011610554054886741
+          "top": 0.054077634477530875,
+          "bottom": 1.2976069268636957e-14,
+          "left": 0.0006898768480707594,
+          "right": 1.7006466782145427e-05
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.011156890302932432,
-        "max_alpha_gradient_y": 0.011156890302932432,
+        "max_alpha_gradient_x": 0.008815350897356605,
+        "max_alpha_gradient_y": 0.008815350897356605,
         "has_hard_edge": false
       },
       "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_distant_glow_zoom.png"
@@ -277,8 +347,8 @@
       "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_glade.png",
       "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_glade.png",
       "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_glade.webp",
-      "png_bytes": 2108361,
-      "webp_bytes": 252440,
+      "png_bytes": 1480413,
+      "webp_bytes": 99402,
       "webp_quality": 86,
       "fit": {
         "source_resolution": "1536x2752",
@@ -298,11 +368,34 @@
         ],
         "unmix_residual": 7.280106862276094
       },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.36507936507936506,
+          "hard_row_fraction": 0.07506950880444857
+        },
+        "reference": {
+          "max_gradient": 0.02352941176470591,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 8,
+        "after": {
+          "max_gradient": 0.027515420057338646,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.9294,
+          "gamma": 2.6,
+          "opaque_fraction_before": 0.0078,
+          "opaque_fraction_after": 0.0
+        }
+      },
       "alpha_normalize": {
-        "peak_before": 1.0,
+        "peak_before": 0.9294,
         "target_max_alpha": 0.9294,
         "gamma": 2.6,
-        "opaque_fraction_before": 0.0113,
+        "opaque_fraction_before": 0.0,
         "opaque_fraction_after": 0.0
       },
       "palette_transfer": {
@@ -315,27 +408,27 @@
           "v_p95": 197.0
         },
         "generated_stats": {
-          "hue": 91.13,
-          "sat": 174.0,
-          "v_p50": 255.0,
-          "v_p95": 255.0
+          "hue": 104.04,
+          "sat": 197.0,
+          "v_p50": 113.0,
+          "v_p95": 238.0
         },
-        "v_p50_before": 255.0,
+        "v_p50_before": 113.0,
         "v_p50_after": 189.0
       },
       "measure": {
         "alpha_max": 0.9294117647058824,
-        "semi_transparent_fraction": 0.4094854359567901,
-        "transparent_fraction": 0.5905145640432099,
+        "semi_transparent_fraction": 0.1147511574074074,
+        "transparent_fraction": 0.8852488425925926,
         "edge_strip4_max_alpha": {
-          "top": 0.00011819544109108967,
-          "bottom": 0.00011819544109108967,
-          "left": 0.0003391860632171583,
-          "right": 0.0007166031525910738
+          "top": 8.420467960941186e-14,
+          "bottom": 8.420467960941186e-14,
+          "left": 6.380942893558101e-11,
+          "right": 9.891491203760746e-10
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.43118022478405676,
-        "max_alpha_gradient_y": 0.4454091677032509,
+        "max_alpha_gradient_x": 0.031548739004860216,
+        "max_alpha_gradient_y": 0.039138388917749456,
         "has_hard_edge": false
       },
       "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_glade_zoom.png"

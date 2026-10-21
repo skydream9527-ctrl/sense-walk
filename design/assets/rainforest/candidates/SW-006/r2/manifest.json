@@ -19,9 +19,9 @@
       "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_mist.png",
       "width": 1080,
       "height": 1920,
-      "bytes": 145032,
-      "sha256": "ab2e0b8d836724ecd22f275972382175f48a4c1c86a5127c17f65428ad3071c7",
-      "png_sha256": "5a15d7e0b5ea30a7a3f6396dc1d9400a634d08f324a63a93d0b1ef9fb41dfeed",
+      "bytes": 75804,
+      "sha256": "d78c1850cee39bbb2a10186b7787f03ebe5d487a46979ac9868cdbbbff33b9e7",
+      "png_sha256": "3cca5a1f72438c436d37e737b29fd598d877d3f295eafa90690343d273f11898",
       "source_resolution": "1536x2752",
       "alpha_channel": true,
       "render_role": "overlay",
@@ -53,19 +53,19 @@
       ],
       "measurements": {
         "alpha_max": 0.5647058823529412,
-        "semi_transparent_fraction": 0.6992086226851851,
-        "transparent_fraction": 0.3007913773148148,
+        "semi_transparent_fraction": 0.38936680169753085,
+        "transparent_fraction": 0.6106331983024691,
         "edge_strip4_max_alpha": {
-          "top": 3.316809804387298e-05,
-          "bottom": 3.316809804387298e-05,
-          "left": 9.06209351557241e-06,
-          "right": 3.316809804387298e-05
+          "top": 1.8790795892080127e-19,
+          "bottom": 1.8790795892080127e-19,
+          "left": 7.59091556416938e-16,
+          "right": 7.001675021192927e-14
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.3010464482043488,
-        "max_alpha_gradient_y": 0.1667044920512849,
+        "max_alpha_gradient_x": 0.0350755060502998,
+        "max_alpha_gradient_y": 0.022270360161742997,
         "has_hard_edge": false,
-        "webp_bytes": 145032,
+        "webp_bytes": 75804,
         "webp_quality": 86,
         "palette_transfer": {
           "applied": true,
@@ -77,12 +77,12 @@
             "v_p95": 63.0
           },
           "generated_stats": {
-            "hue": 101.5,
-            "sat": 168.0,
-            "v_p50": 115.0,
-            "v_p95": 255.0
+            "hue": 103.84,
+            "sat": 155.0,
+            "v_p50": 99.0,
+            "v_p95": 136.0
           },
-          "v_p50_before": 115.0,
+          "v_p50_before": 99.0,
           "v_p50_after": 48.0
         }
       },
@@ -266,9 +266,9 @@
       "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_distant_glow.png",
       "width": 1080,
       "height": 1920,
-      "bytes": 254702,
-      "sha256": "63e09c78f337b31ea9853634db4e190c73aaaac7284b879010fde9017674da74",
-      "png_sha256": "a82f51fcd98d54627835bd8b7f436ceebe96029b76297db2e037b200e57aec3d",
+      "bytes": 193552,
+      "sha256": "9dddeb743010826931ff4382ed2bad84906c8b146ee2e45d8f2712145e04cd35",
+      "png_sha256": "c01c75cfdd628b24e20477133c655604a95d44efddfff8a68a4ae052c62c1af7",
       "source_resolution": "1536x2752",
       "alpha_channel": true,
       "render_role": "overlay",
@@ -300,19 +300,19 @@
       ],
       "measurements": {
         "alpha_max": 0.2235294117647059,
-        "semi_transparent_fraction": 0.6045886381172839,
-        "transparent_fraction": 0.39541136188271603,
+        "semi_transparent_fraction": 0.38818045910493826,
+        "transparent_fraction": 0.6118195408950617,
         "edge_strip4_max_alpha": {
-          "top": 0.14474565083390792,
-          "bottom": 6.732074770410012e-05,
-          "left": 0.037291763339396496,
-          "right": 0.011610554054886741
+          "top": 0.054077634477530875,
+          "bottom": 1.2976069268636957e-14,
+          "left": 0.0006898768480707594,
+          "right": 1.7006466782145427e-05
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.011156890302932432,
-        "max_alpha_gradient_y": 0.011156890302932432,
+        "max_alpha_gradient_x": 0.008815350897356605,
+        "max_alpha_gradient_y": 0.008815350897356605,
         "has_hard_edge": false,
-        "webp_bytes": 254702,
+        "webp_bytes": 193552,
         "webp_quality": 86,
         "palette_transfer": {
           "applied": true,
@@ -324,8 +324,8 @@
             "v_p95": 204.0
           },
           "generated_stats": {
-            "hue": 73.21,
-            "sat": 37.0,
+            "hue": 72.07,
+            "sat": 38.0,
             "v_p50": 226.0,
             "v_p95": 234.0
           },
@@ -347,9 +347,9 @@
       "source_file": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_glade.png",
       "width": 1080,
       "height": 1920,
-      "bytes": 252440,
-      "sha256": "428e75759f4b986d425bdf05eb0149fb5c0428ef0bb38ee246228a97a697dc13",
-      "png_sha256": "980b6e8e44d815af0a23601f54d7006cec4505b0ea14f72548050ac9ff0270b6",
+      "bytes": 99402,
+      "sha256": "6c3330d4837128ea7fa9faef50be233514f70153fdf0ee15d5f12694e7279b75",
+      "png_sha256": "8fc54f729c421ea0decf0ec4af6a814d88e31541a547ffbf366cc8639a16f33c",
       "source_resolution": "1536x2752",
       "alpha_channel": true,
       "render_role": "overlay",
@@ -381,19 +381,19 @@
       ],
       "measurements": {
         "alpha_max": 0.9294117647058824,
-        "semi_transparent_fraction": 0.4094854359567901,
-        "transparent_fraction": 0.5905145640432099,
+        "semi_transparent_fraction": 0.1147511574074074,
+        "transparent_fraction": 0.8852488425925926,
         "edge_strip4_max_alpha": {
-          "top": 0.00011819544109108967,
-          "bottom": 0.00011819544109108967,
-          "left": 0.0003391860632171583,
-          "right": 0.0007166031525910738
+          "top": 8.420467960941186e-14,
+          "bottom": 8.420467960941186e-14,
+          "left": 6.380942893558101e-11,
+          "right": 9.891491203760746e-10
         },
         "background_residual_fraction": 0.0,
-        "max_alpha_gradient_x": 0.43118022478405676,
-        "max_alpha_gradient_y": 0.4454091677032509,
+        "max_alpha_gradient_x": 0.031548739004860216,
+        "max_alpha_gradient_y": 0.039138388917749456,
         "has_hard_edge": false,
-        "webp_bytes": 252440,
+        "webp_bytes": 99402,
         "webp_quality": 86,
         "palette_transfer": {
           "applied": true,
@@ -405,12 +405,12 @@
             "v_p95": 197.0
           },
           "generated_stats": {
-            "hue": 91.13,
-            "sat": 174.0,
-            "v_p50": 255.0,
-            "v_p95": 255.0
+            "hue": 104.04,
+            "sat": 197.0,
+            "v_p50": 113.0,
+            "v_p95": 238.0
           },
-          "v_p50_before": 255.0,
+          "v_p50_before": 113.0,
           "v_p50_after": 189.0
         }
       },
