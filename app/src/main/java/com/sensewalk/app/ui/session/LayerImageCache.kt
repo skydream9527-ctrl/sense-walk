@@ -52,7 +52,10 @@ class LayerImageCache<V : Any>(
 
     private fun startOrJoin(key: LayerImageKey): Deferred<V?> = synchronized(lock) {
         entries[key]?.let { return CompletableDeferred<V?>(it) }
-        inFlight[key]?.let { return it }
+        // 只加入仍活跃的解码：Deferred 完成时先置终态后执行完成回调（清 inFlight），
+        // await 快路径可能在回调前返回——已完成的失败项不能被后来者重复加入
+        val existing = inFlight[key]
+        if (existing != null && existing.isActive) return existing
         val deferred = scope.async(start = CoroutineStart.LAZY) {
             val value = try {
                 decode(key)

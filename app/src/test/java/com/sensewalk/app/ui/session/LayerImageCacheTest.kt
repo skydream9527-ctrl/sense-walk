@@ -8,8 +8,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.yield
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -145,6 +147,40 @@ class LayerImageCacheTest {
         assertNotNull(cache.get(key))
         assertEquals(2, calls.get())
         assertEquals(1, cache.entryCount)
+    }
+
+    /**
+     * 回归锁（CI 实测偶发）：Deferred 完成时先置终态后执行清 inFlight 的完成回调，
+     * await 快路径可能在回调前返回——若加入方不检查 isActive，第二次 get 会重复加入
+     * 已完成的失败项，拿到 null 且不触发重试。修复前该序列在调度压力下数百轮内复现；
+     * 修复后 10 万轮零异常。此处保留压缩版（3 万轮 + 并发噪声）持续锁定。
+     */
+    @Test
+    fun failedDecodeRetriesUnderSchedulingPressure() = runBlocking {
+        val noiseCache = LayerImageCache<Fake>(budgetBytes = 1_000_000, scope = scope, sizeOf = { it.bytes }) { key ->
+            Fake(key.assetPath, 10)
+        }
+        val noise = launch(Dispatchers.Default) {
+            var i = 0
+            while (isActive) {
+                val key = LayerImageKey("noise", "n${i++ % 37}", 1)
+                launch { noiseCache.get(key) }
+                yield()
+            }
+        }
+
+        val rounds = 30_000
+        repeat(rounds) { r ->
+            val calls = AtomicInteger()
+            val cache = LayerImageCache<Fake>(budgetBytes = 10_000, scope = scope, sizeOf = { it.bytes }) { key ->
+                if (calls.incrementAndGet() == 1) null else Fake(key.assetPath, 10)
+            }
+            val key = LayerImageKey("s", "a", r)
+            assertNull(cache.get(key))
+            assertNotNull("round $r: 失败后重试必须得到新解码结果", cache.get(key))
+            assertEquals("round $r: 失败不缓存，第二次必须真正再解码", 2, calls.get())
+        }
+        noise.cancel()
     }
 
     @Test

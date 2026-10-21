@@ -40,7 +40,10 @@ class SceneCatalogCache(
 
     private fun startOrJoin(useReady: Boolean): Deferred<SceneLoadState> = synchronized(lock) {
         if (useReady) ready?.let { return CompletableDeferred<SceneLoadState>(it) }
-        inFlight?.let { return it }
+        // 只加入仍活跃的加载：Deferred 完成时先置终态后执行完成回调（清 inFlight），
+        // await 快路径可能在回调前返回——已完成的失败项不能被后来者重复加入
+        val existing = inFlight
+        if (existing != null && existing.isActive) return existing
         // LAZY：先登记再启动，保证完成回调清理时登记已存在（即便 dispatcher 立即执行）
         val deferred = scope.async(start = CoroutineStart.LAZY) { runLoader() }
         inFlight = deferred
