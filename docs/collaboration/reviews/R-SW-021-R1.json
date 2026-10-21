@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "id": "R-SW-021-R1",
+  "task_id": "SW-021",
+  "reviewer": "antigravity",
+  "producer": "trae-design",
+  "handoff": "docs/collaboration/handoffs/trae-design/H-SW-021-R1.json",
+  "reviewed_commit": "28ef82c7f1e28eb4c48c98843d9bdc6a09959341",
+  "delivery_head": "cf2f9aa893ca5ae57a939e4095c7fa326dfeb106",
+  "verdict": "approved",
+  "report": "docs/collaboration/reviews/R-SW-021-R1.md",
+  "artifact_hashes": {
+    "design/05-visual-design/SW-021/r1/README.md": "ab27efa3ac486fe1b988ac83b05ac80f8b1084a84476d2e33d822f71a54d3d98",
+    "design/05-visual-design/SW-021/r1/design-spec.json": "86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90",
+    "design/05-visual-design/SW-021/r1/prompts.md": "2f339f9e6f73b9c00df47d52165724cc50f0a3065ae1c3dc3166badeb04fcd09",
+    "design/05-visual-design/SW-021/r1/previews/sw021_preview_checks.json": "ab4e975a5c03611dbf741d31a8aacee63689987c9eec596c8c4f069ce99b9c3f",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_continuous_compare_1080x2400.png": "9546774f92977c1a6e0c7bab1933dd6481f727e63d9e66bd82ff76c527451c2c",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x1920.png": "e0a007123c3142ff546d97ae27c11a9e3f2da8eb13420a2724abf475d228d1b9",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_1080x2400.png": "1f8b885337b8431d62447eff916988c405a6b907fb7a0f198eb06c102caf25a2",
+    "design/05-visual-design/SW-021/r1/previews/composite/forest_tiled_matrix_390x844.png": "122d4ca8833595e5198800c35351dedbad32ce911839fde4fc0b14108d1b7e81",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_leaf_path_tile.png": "ca78976b92a11e6246923b17efabea62458ec13e1b5dec43460ec9dc8272bda8",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_outline_tile.png": "6da9adfdddbe0c3155074229abbca9cf497218be9956cb22589d901c7e3d1044",
+    "design/05-visual-design/SW-021/r1/previews/tiles/forest_tree_trunks_tile.png": "421d14f43aee51d2282f121022109f368ff14aad96fec793e2d57edc09431772",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_leaf_path_check3.png": "6b710262911e7f80f33e1509507923d77ff54462e099ac95c61f82d26dd37d17",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_outline_check3.png": "ad4ad504ec7e8cdbf2a87ac6b1c9a99359d025b507997e626b328760948ae1aa",
+    "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_trunks_check3.png": "2dc3f4ab679f8e507b31f5346c6dda1b08cc988e0a15f1d9083257edb4010d84",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_leaf_path_repeat3.png": "31f6092feec8c966ebacefb54ab585ac5dd57720916fbc25e41eb88f09e5a4b9",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_outline_repeat3.png": "836fa45cc0c713105bde97f24b1ba02daef019869e36541753bdad7393100e27",
+    "design/05-visual-design/SW-021/r1/previews/tiles/repeat/forest_tree_trunks_repeat3.png": "6815ad079958324eeabe8bdca56af2bb79aac02025a3ac962e5421fd5b282808",
+    "design/05-visual-design/SW-021/r1/previews/tiles/seam/forest_seam_probe_sheet.png": "dc2b574732a8d4261ea5d964302c2db3f12bc70f17def1feede5d5fba1ec3e0e",
+    "design/05-visual-design/SW-021/r1/previews/traveler/traveler_size_compare.png": "06be823b8a744084a8be4effe4c82cbdcb77fa7c034791a5691b24bf8f3be3ca",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_abandon_confirm_1080x2400.png": "878c2ee9f6599393ca2aa3c24ccfad9c84d9cf7a9c669aa51d21abd7fc49aa44",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_about_credits_1080x2400.png": "1ecb2b66d3d7be4672dd4ec7607e7899e88c5085455c9d90da0e45dca647c1f4",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_largefont_1080x2400.png": "5d0bce14f474bfcf22c84540bbb56681404d8aecbe63006f1eda49f0ca177483",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_layout_1080x2400.png": "69040eeceb27daa9f2f30c6a9f6dce1f5f016c1aa86e72292389f4b153bd4a57",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_home_small_390x844.png": "8254420a244c0f1eb4bbb434f9466f70a6a8d3438f2c266024f24bf91a03c66b",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_longpress_ring_1080x2400.png": "a0ab4aab9739111a4ff63d5cf65184d784966defca010597e5cda1c91160b3c4",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_mode_cards_1080x2400.png": "bd6f8dd02d70d3bd83c33679b2d715735b18812cbbdf8906f28cc00bf9692d5a",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_result_dim_1080x2400.png": "c981af2c8c91bc3e236a4d5355ed0c5f2a52f1c76bc8bb0c3aae5023e0a8db88",
+    "design/05-visual-design/SW-021/r1/previews/ui/ui_type_scale_1080x2400.png": "eba5a121319dbb4cfe3d9e9b9f89e5ccc9c0601db471aeb0122b7b2254e6269f",
+    "design/05-visual-design/SW-021/r1/source/sw021_previews.py": "f6fdd57495b74aa2c66eab908021125ff67fa09f955e2551d8d2a2f9860138e4",
+    "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py": "16569260294438b424c5c4c80f01a4f6dcecbbd5a73d4c72b8ba2c1761b7124d",
+    "design/05-visual-design/SW-021/r1/source/sw021_ui_mocks.py": "8708ade3e704e46006fb81cdfa4e1c02d82d2f6c103a8876163a93cb6dc5862c",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_leaf_path_tile.svg": "83ae56cfeb9170e89545b98c002045c119fac384c93d7abee8d5869c09bd6405",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_outline_tile.svg": "d644bca0db3335147c8e85e6fd8bb6ea9ae1e6eae567f937a098503f76f8e5a5",
+    "design/05-visual-design/SW-021/r1/source/svg/forest_tree_trunks_tile.svg": "8bff19eb232cd3e116fc7666d33a94d849a6d175c28f258be3900b95cefdaeac"
+  },
+  "checks": [
+    {
+      "name": "34 项设计清单 SHA-256 与字节数 100% 独立复算",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/design-manifest.json",
+        "design/05-visual-design/SW-021/r1/design-spec.json",
+        "design/05-visual-design/SW-021/r1/prompts.md"
+      ]
+    },
+    {
+      "name": "森林五层参数冻结与三层原生 repeat-x 平铺规范核验",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/design-spec.json",
+        "design/05-visual-design/SW-021/r1/source/sw021_tile_model.py"
+      ]
+    },
+    {
+      "name": "三层平铺三底检查、3×连拼、接缝探针与三比例六阶段矩阵目检",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_outline_check3.png",
+        "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_tree_trunks_check3.png",
+        "design/05-visual-design/SW-021/r1/previews/tiles/checks/forest_leaf_path_check3.png",
+        "design/05-visual-design/SW-021/r1/previews/tiles/seam/forest_seam_probe_sheet.png",
+        "design/05-visual-design/SW-021/r1/previews/composite/forest_continuous_compare_1080x2400.png"
+      ]
+    },
+    {
+      "name": "旅人 7% vs 9% 屏高对比与 9 张 UI 精修规范模拟目检",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "design/05-visual-design/SW-021/r1/previews/traveler/traveler_size_compare.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_home_layout_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_abandon_confirm_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_longpress_ring_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_result_dim_1080x2400.png",
+        "design/05-visual-design/SW-021/r1/previews/ui/ui_about_credits_1080x2400.png"
+      ]
+    }
+  ]
+}

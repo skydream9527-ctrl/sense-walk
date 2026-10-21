@@ -140,18 +140,17 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "PR25 R1仍是0API程序占位草案，未批准/未入包；最新d71d627已修manifest根路径及通配符，8e73b13提交supplement转交通知。",
-        "QA隔离fixture失败已由Antigravity修复闭环（tools/collaboration.py与test_collaboration.py 31/31单测全绿，严格批准链与哈希校验100%保留）；MiniMax生产候选稿未作篡改。",
-        "2026-10-20继续零API production guard与准确R2交接；完成与否由新head/断言/独立验收证明。正式雨林图和声景仍下一阶段，既有总8次授权沿用，不重置或重复索要。"
+        "PR35 R2（9bcfbab/33dd824）已真实生图（8/8 API封存）并通过production_guard 122/122；QA已修复test_collaboration.py在存在R2+时asset_delivery(revision=1)的沙箱隔离（31/31通过）。",
+        "R2存在3项阻断需以0API本地重处理+新修订H-SW-006-R3闭环（见reviews/R-SW-006-R2-correction.md）：1) 33dd824重跑postprocess后H-SW-006-R2.json仍停留511adf5旧hash且缺asset_manifest；2) vines_light.webp 406,320B超400,000B契约上限；3) stage_110m(mist)近全黑、stage_875m(glade)呈对称双灰斑。"
       ],
       "observed_delivery": {
-        "revision": 1,
-        "branch": "codex/minimax/SW-006-r1",
-        "branch_head": "8e73b13c432fb8b003c960d1706bc09b22814533",
-        "business_head": "6ba654c5ba761ab25d94d121e985c5298d2d3d8a",
-        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
-        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
-        "source_report": "docs/collaboration/reviews/R-SW-006-R1-correction.md"
+        "revision": 2,
+        "branch": "codex/minimax/SW-006-r2",
+        "branch_head": "9bcfbaba356269ed43b6944d44c7fc1c531788d4",
+        "business_head": "33dd824566e65cc68cbfeeeed42f416e1092793c",
+        "handoff_path": "docs/collaboration/handoffs/minimax/H-SW-006-R2.json",
+        "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/35",
+        "source_report": "docs/collaboration/reviews/R-SW-006-R2-correction.md"
       }
     },
     {
@@ -338,16 +337,17 @@
       "title": "会话渲染与异步加载",
       "owner": "zcode",
       "kind": "code",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-018"
       ],
       "task_file": "docs/collaboration/tasks/SW-019.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/zcode/H-SW-019-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-019-R1.json",
+      "integrated_commit": "b59da1b5fb586d27db42a9c568c3406bdc644b17",
       "pending": [
-        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+        "图层异步解码/32MiB缓存/single-flight竞态修复（a666b76）、场景目录缓存与高频读取下沉已独立审核通过并集成（329单测全绿/0 lint error）。",
+        "设备级前后帧率收益待与SW-024基准同真机/硬件加速环境对拍（模拟器gfxinfo两侧不可分辨）；lowRamDevice分级缓存留后续优化。"
       ]
     },
     {
@@ -355,7 +355,7 @@
       "title": "安全操作区、步长设置与一次性触感",
       "owner": "zcode",
       "kind": "code",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-019"
       ],
@@ -364,7 +364,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+        "前置SW-019已accepted入main（b59da1b），SW-020已激活为ready；等待ZCode提交H-SW-020-R1，通过后即激活SW-025并出第一批功能测试包。"
       ]
     },
     {
@@ -372,16 +372,17 @@
       "title": "森林连续视差与界面精修设计",
       "owner": "trae-design",
       "kind": "design",
-      "status": "ready",
+      "status": "accepted",
       "depends_on": [
         "SW-017"
       ],
       "task_file": "docs/collaboration/tasks/SW-021.md",
-      "latest_handoff": null,
-      "latest_review": null,
-      "integrated_commit": null,
+      "latest_handoff": "docs/collaboration/handoffs/trae-design/H-SW-021-R1.json",
+      "latest_review": "docs/collaboration/reviews/R-SW-021-R1.json",
+      "integrated_commit": "7d77ff100dbea4f9055cdbf3e97ec5dcf2082b13",
       "pending": [
-        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+        "34项设计清单SHA-256 100%复核通过并入main（7d77ff1）；批准spec sha256为86f8a19f39a481dfa21f74e543c10ecd96f05f2747d563a3da4936caf0b08d90，已激活SW-022。",
+        "K=6px/m、旅人9%屏高及真实音频署名接线留待SW-022/SW-023及真机走查验证。"
       ]
     },
     {
@@ -389,7 +390,7 @@
       "title": "森林平铺候选制作",
       "owner": "minimax",
       "kind": "asset",
-      "status": "queued",
+      "status": "ready",
       "depends_on": [
         "SW-021"
       ],
@@ -398,7 +399,7 @@
       "latest_review": null,
       "integrated_commit": null,
       "pending": [
-        "2026-10-20 bootstrap安排，尚无执行交付；按任务前置、所有权与实际证据推进。"
+        "前置SW-021已accepted入main（7d77ff1），SW-022已激活为ready；请引用批准spec（86f8a19f...）以0新增付费API制作森林三层repeat-x平铺WebP候选（单层≤400,000B）。"
       ]
     },
     {
