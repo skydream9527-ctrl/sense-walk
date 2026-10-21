@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-019-R1",
+  "task_id": "SW-019",
+  "revision": 1,
+  "producer": "zcode",
+  "recipient": "antigravity",
+  "base_commit": "4f57659e00e0267be03a0a7b966cacba8387c5ee",
+  "head_commit": "a666b76793a77039df9e435d7877bb6fd55a4aec",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/36",
+  "report": "docs/collaboration/handoffs/zcode/H-SW-019-R1.md",
+  "changed_files": [
+    "app/src/main/java/com/sensewalk/app/SenseWalkViewModel.kt",
+    "app/src/main/java/com/sensewalk/app/data/SceneCatalog.kt",
+    "app/src/main/java/com/sensewalk/app/data/SceneCatalogCache.kt",
+    "app/src/main/java/com/sensewalk/app/service/WalkForegroundService.kt",
+    "app/src/main/java/com/sensewalk/app/session/SessionViewModel.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/ForestLayerImages.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/LayerImageCache.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/RealWalkContent.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/RealWalkSessionScreen.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/SessionScreen.kt",
+    "app/src/test/java/com/sensewalk/app/data/SceneCatalogCacheTest.kt",
+    "app/src/test/java/com/sensewalk/app/ui/session/LayerImageCacheTest.kt"
+  ],
+  "checks": [
+    {
+      "name": "本地 JVM 全量（testDebugUnitTest 329 = base 312 + 新增 17）",
+      "type": "unit",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md"
+      ]
+    },
+    {
+      "name": "云端 CI（test/lint/assemble，a666b76 run 39535896841 与 39536480966 全绿；2f46993 run 39433774837 竞态失败已修复）",
+      "type": "cloud-build",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md"
+      ]
+    },
+    {
+      "name": "模拟器功能冒烟（新构建限速注入至 130m/288m，tree_outline/tree_trunks 位图质感揭示，米数读数正确）",
+      "type": "emulator",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/R0-entry-0m.png",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S1-130m-outline.jpg",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S2-280m-trunks.jpg"
+      ]
+    },
+    {
+      "name": "入场/检查点截图实看（0m 黑幕+旅人；134m 位图轮廓层；288m 树干层自然叠加无接缝）",
+      "type": "visual",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/screens/R0-entry-0m.png",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S1-130m-outline.jpg",
+        "docs/collaboration/evidence/H-SW-019-R1/screens/S2-280m-trunks.jpg",
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md"
+      ]
+    },
+    {
+      "name": "gfxinfo 前后对照（已执行：模拟器 GPU emulation 两侧 ~3-6fps/100% jank，不可分辨，不宣称收益；设备级对照待与 SW-024 基准同环境补测）",
+      "type": "physical-device",
+      "status": "pending",
+      "evidence": [
+        "docs/collaboration/evidence/H-SW-019-R1/measure-clean-gfxinfo.txt",
+        "docs/collaboration/evidence/H-SW-019-R1/measure-script.py",
+        "docs/collaboration/evidence/H-SW-019-R1/verification-report.md"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/collaboration/evidence/H-SW-019-R1/screens/R0-entry-0m.png",
+      "sha256": "7c30db885419513aae5531f455942d78182778ea8f4ef3f4bd433b74bd5fe5c9"
+    },
+    {
+      "path": "docs/collaboration/evidence/H-SW-019-R1/screens/S1-130m-outline.jpg",
+      "sha256": "6f1660976285ee5899d11974befa60cdd2445127ef4603a8c64147a1bdae82ba"
+    },
+    {
+      "path": "docs/collaboration/evidence/H-SW-019-R1/screens/S2-280m-trunks.jpg",
+      "sha256": "1b3884515329c6b9a708583f1add8b347fb8d4549645f8b2d6e81d1b045783fa"
+    }
+  ],
+  "asset_manifest": null,
+  "pending": [
+    "设备级前后帧指标（模拟器不可分辨；建议与 SW-024 性能基准任务同环境执行）",
+    "真机真实计步/锁屏15min/来电耳机/缺sensor路径（沿袭仓库全局 Pending，无回归证据）",
+    "32MiB 图层缓存未按 lowRamDevice 分级（后续任务建议）"
+  ],
+  "requests": [
+    "Antigravity 独立审核源码+证据+PR #36（功能作者不自判 accepted）",
+    "帧率收益裁定以 SW-024 基准环境为准；本交付模拟器数据仅证明无功能回归与异步路径出图"
+  ],
+  "design_manifest": null
+}
