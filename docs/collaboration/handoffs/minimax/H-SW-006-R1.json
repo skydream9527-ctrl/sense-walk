@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-006-R1",
+  "task_id": "SW-006",
+  "revision": 1,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "base_commit": "30780af2d4dbe7daa9323ae27ff76fb973d596a6",
+  "head_commit": "6ba654c5ba761ab25d94d121e985c5298d2d3d8a",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
+  "report": "docs/collaboration/handoffs/minimax/H-SW-006-R1.md",
+  "prior_handoff": null,
+  "prior_review": null,
+  "changed_files": [
+    "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_distant_glow.png",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_glade.png",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_mist.png",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_trunks_canopy.png",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_vines_light.png",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_distant_glow.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_glade.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_mist.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_trunks_canopy.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_vines_light.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_distant_glow.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_glade.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_mist.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_trunks_canopy.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_vines_light.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_distant_glow.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_glade.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_mist.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_trunks_canopy.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_vines_light.jpg",
+    "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+    "design/assets/rainforest/candidates/SW-006/r1/png/rainforest_distant_glow.png",
+    "design/assets/rainforest/candidates/SW-006/r1/png/rainforest_glade.png",
+    "design/assets/rainforest/candidates/SW-006/r1/png/rainforest_mist.png",
+    "design/assets/rainforest/candidates/SW-006/r1/png/rainforest_trunks_canopy.png",
+    "design/assets/rainforest/candidates/SW-006/r1/png/rainforest_vines_light.png",
+    "design/assets/rainforest/candidates/SW-006/r1/scripts/build_r1.py",
+    "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
+    "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
+    "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
+    "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
+    "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp",
+    "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
+    "docs/collaboration/handoffs/minimax/H-SW-006-R1.md"
+  ],
+  "checks": [
+    {
+      "name": "D-009 冻结 spec SHA256 精确匹配 (design_ref.spec_sha256 = 643e77b1... 真实文件 hash)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+        "docs/collaboration/decisions/D-009-freeze-rainforest-design-spec.md"
+      ]
+    },
+    {
+      "name": "5 层 canonical id 与 D-009 一致 (mist/trunks_canopy/vines_light/distant_glow/glade)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "每层 1080x1920 RGBA, webp bytes < 400KB, 全景 bytes < 2MB",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
+        "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp"
+      ]
+    },
+    {
+      "name": "每层 4 检查图 (alpha_mask+black+white+magenta) 全部存在",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_mist.jpg"
+      ]
+    },
+    {
+      "name": "SW-015 preflight 默认严格入口: 80/80 passed (0 failed)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/preflight.py"
+      ]
+    },
+    {
+      "name": "SW-015 dry_run 严格批准链: 11/11 passed (handoff producer/head/spec_sha + approved review chain 全部正确)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/dry_run.py"
+      ]
+    },
+    {
+      "name": "API 累计账本保留: api_attempts_total=14 (project baseline) + 0 API 增量",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/state/minimax.json",
+        "design/assets/rainforest/candidates/SW-006/r1/manifest.json"
+      ]
+    },
+    {
+      "name": "R1 零 API: PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换 (manifest 明确 limitations 声明)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/scripts/build_r1.py"
+      ]
+    },
+    {
+      "name": "Android 模拟器/真机走查",
+      "type": "physical-device",
+      "status": "not_applicable",
+      "evidence": []
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "candidate-script",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/scripts/build_r1.py",
+      "sha256": "7eba40496e6ea234ce7b7c60aa95726d6f2ab88fea8c330cbe6aa706bca9ff45",
+      "role": "r1-candidate-generator"
+    },
+    {
+      "kind": "candidate-manifest",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+      "sha256": "f5f06c9c67d7bb3c0c60477ad500eff6abb9d43473145206ece3d522e4524fbd",
+      "role": "r1-candidate-manifest"
+    },
+    {
+      "kind": "candidate-layer",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
+      "sha256": "de60174973b4306adc6012a48895e7911e1517f0b1fd76f558c4b15eac56dbea",
+      "role": "r1-mist-overlay"
+    },
+    {
+      "kind": "candidate-layer",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
+      "sha256": "93f1f8aa6201ef4622c9324b01ffabae0d4bcc83dee75332eac1f6fd64b75ee7",
+      "role": "r1-trunks-canopy-parallax"
+    },
+    {
+      "kind": "candidate-layer",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp",
+      "sha256": "cbcfb84a6e199cec380bd393246bb362dc184d4199360964f800bd8b7c6a560e",
+      "role": "r1-vines-light-parallax"
+    },
+    {
+      "kind": "candidate-layer",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
+      "sha256": "9ddcbd3bf1203147fcfea8320e9e1aba5499686c7bd9a964a81ae6bc3aca2c83",
+      "role": "r1-distant-glow-overlay"
+    },
+    {
+      "kind": "candidate-layer",
+      "path": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
+      "sha256": "c05c9c3d6cd779c84ea0a42a543c07d79c2d9c2112992ca01035565ebcf95a1d",
+      "role": "r1-glade-overlay"
+    }
+  ],
+  "asset_manifest": "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+  "pending": [
+    "等待 Antigravity 独立审核 R-SW-006-R1; 候选当前是 PIL 程序化占位, 不是真实 mcode-tools 8 次尝试预算内生图",
+    "用户必须明确授权启动 mcode-tools 付费 API 调用才能开始 SW-006 R2 (8 次预算: 6 正常 + 2 失败/质量修复)",
+    "SW-006 在 registry 仍 status=queued (antigravity pending 字段说 'ready' 语义但 status 字段未改); 协调者激活后 minimax 启动付费调用"
+  ],
+  "requests": [
+    "请按 PROTOCOL §独立审核 R-SW-006-R1 校验 SHA256 + 实际跑 preflight.py + dry_run.py 确认 80+11 项通过",
+    "通过 → 写 approved handoff, 改 registry SW-006 = accepted; minimax 在用户授权后启动 mcode-tools R2 真实生图",
+    "退回 → 写 changes_requested, 登记 rework, R2 不覆盖 R1"
+  ],
+  "design_manifest": null
+}

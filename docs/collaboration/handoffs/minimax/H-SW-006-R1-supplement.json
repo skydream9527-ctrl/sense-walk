@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-006-R1-supplement",
+  "task_id": "SW-006",
+  "revision": 1,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "kind": "supplement",
+  "base_commit": "422451e25ba3dfa9b44c9421d00188f81944e2bc",
+  "head_commit": "d71d6278860c3551b545bd3b476e38c77096622a",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/25",
+  "prior_handoff": "docs/collaboration/handoffs/minimax/H-SW-006-R1.json",
+  "prior_review": "docs/collaboration/reviews/R-SW-006-R1.md",
+  "report": "docs/collaboration/handoffs/minimax/H-SW-006-R1-supplement.md",
+  "summary": "针对 R-SW-006-R1 (changes_requested) 三个 finding 的修复状态追加观察 + 协作 CI 隔离 fixture 失败原因转交",
+  "changed_files": [
+    "docs/collaboration/handoffs/minimax/H-SW-006-R1-supplement.json",
+    "docs/collaboration/handoffs/minimax/H-SW-006-R1-supplement.md"
+  ],
+  "checks": [
+    {
+      "name": "F-01 manifest file/checks 路径已修 (仓库根相对)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r1/manifest.json",
+        "docs/collaboration/handoffs/minimax/H-SW-006-R1.json"
+      ]
+    },
+    {
+      "name": "F-02 handoff evidence 已展开为具体文件 (无通配符/无目录)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/minimax/H-SW-006-R1.json"
+      ]
+    },
+    {
+      "name": "协议校验 Coordination check: OK (d71d627 跑 base 30780af 全过)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/handoffs/minimax/H-SW-006-R1.json"
+      ]
+    },
+    {
+      "name": "SW-015 preflight 默认严格入口 80/80 passed (0 failed)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/preflight.py"
+      ]
+    },
+    {
+      "name": "SW-015 dry_run 严格批准链 11/11 passed (handoff producer/head/spec_sha/review verdict 全部正确)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "design/assets/rainforest/preflight/SW-015/r1/scripts/dry_run.py"
+      ]
+    },
+    {
+      "name": "F-03 0 API 占位: 当前阶段不新增付费调用 (按 minimax.md 阶段收口)",
+      "type": "source",
+      "status": "passed",
+      "evidence": [
+        "docs/collaboration/roles/minimax.md (origin/main 当前阶段收口版)"
+      ]
+    },
+    {
+      "name": "Android 模拟器/真机走查",
+      "type": "physical-device",
+      "status": "not_applicable",
+      "evidence": []
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending": [
+    "等 Antigravity 重新独立审核 R-SW-006-R1 (针对 d71d627 最新 tip, 旧 review 引用 eac92e4 已过时); 通过 → 改 registry SW-006 = accepted",
+    "协作 CI 红灯 tools/qa/test_collaboration.py 1 failure/1 error (隔离 fixture 替换 SW012 与真实 SW006 引用关系 + 缺 design_manifest 正常拒绝); 详见下方 collaboration_fixture_blocker 字段; 改测试超出 minimax 范围, 转交 Antigravity 处理",
+    "F-03 R2 真实生图调用按 minimax.md 阶段收口规定: 当前阶段不新增付费调用; 下一阶段正式雨林制作继续沿既有总 8 次尝试授权 (失败/超时/重试均计入, project 历史 14 分开, 不重置)"
+  ],
+  "requests": [
+    "请按 PROTOCOL §独立审核 R-SW-006-R1 重新观察, 实际跑 d71d627 commit 验证 F-01/F-02 修复",
+    "通过 → 改 registry SW-006 = accepted, 暂不重画已批准森林; R2 真实生图待下一阶段 minimax.md 释放阶段收口",
+    "退回 → 写新 changes_requested, 登记 rework, R2 不覆盖 R1; R1 草案与脚本/图保留",
+    "协作 CI test_collaboration.py 隔离 fixture 失败 (1 failure/1 error) 改测试超出 minimax 范围, 由 Antigravity 处理; minimax 不动 tools/qa/test_collaboration.py"
+  ],
+  "collaboration_fixture_blocker": {
+    "kind": "ci_fixture_blocker",
+    "description": "协作 CI tools/qa/test_collaboration.py 跑 1 failure/1 error, 根因: 隔离 fixture 替换 SW012 (伪造 reference) 与真实 SW006 引用 SW012 关系冲突, 且缺 design_manifest 应正常拒绝",
+    "minimax_action": "新增本 handoff 告知 Antigravity 处理; minimax 不动 tools/qa/test_collaboration.py, 不禁严格设计 hash 检查",
+    "antigravity_action_required": "按 minimax.md 入口 '通过新增 handoff 告知 Antigravity 处理, 自己不改 QA, 不禁严格设计 hash 检查'; 修复或跳过失败 fixture, 不 skip/禁严格批准 hash, 不代改作者候选"
+  },
+  "design_manifest": null
+}

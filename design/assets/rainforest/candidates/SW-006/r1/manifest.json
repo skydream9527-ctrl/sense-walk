@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "revision": 1,
+  "scene_id": "rainforest",
+  "producer": "minimax",
+  "api_attempts_this_revision": 0,
+  "api_attempts_total": 14,
+  "cost": "unknown",
+  "layers": [
+    {
+      "layer_id": "mist",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_mist.webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 37368,
+      "sha256": "de60174973b4306adc6012a48895e7911e1517f0b1fd76f558c4b15eac56dbea",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
+      "process": "build_r1.py (SW-006 R1 candidate generator)",
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_mist.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_mist.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_mist.jpg"
+      ],
+      "limitations": [
+        "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
+        "0 API 调用, 不声称生产级像素验图; 待 R2 用真实生图 API 替换"
+      ]
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_trunks_canopy.webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 7304,
+      "sha256": "93f1f8aa6201ef4622c9324b01ffabae0d4bcc83dee75332eac1f6fd64b75ee7",
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
+      "process": "build_r1.py (SW-006 R1 candidate generator)",
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_trunks_canopy.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_trunks_canopy.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_trunks_canopy.jpg"
+      ],
+      "limitations": [
+        "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
+        "0 API 调用, 不声称生产级像素验图; 待 R2 用真实生图 API 替换"
+      ]
+    },
+    {
+      "layer_id": "vines_light",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_vines_light.webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 20344,
+      "sha256": "cbcfb84a6e199cec380bd393246bb362dc184d4199360964f800bd8b7c6a560e",
+      "alpha_channel": true,
+      "render_role": "parallax",
+      "tileable": false,
+      "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
+      "process": "build_r1.py (SW-006 R1 candidate generator)",
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_vines_light.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_vines_light.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_vines_light.jpg"
+      ],
+      "limitations": [
+        "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
+        "0 API 调用, 不声称生产级像素验图; 待 R2 用真实生图 API 替换"
+      ]
+    },
+    {
+      "layer_id": "distant_glow",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_distant_glow.webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 25716,
+      "sha256": "9ddcbd3bf1203147fcfea8320e9e1aba5499686c7bd9a964a81ae6bc3aca2c83",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
+      "process": "build_r1.py (SW-006 R1 candidate generator)",
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_distant_glow.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_distant_glow.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_distant_glow.jpg"
+      ],
+      "limitations": [
+        "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
+        "0 API 调用, 不声称生产级像素验图; 待 R2 用真实生图 API 替换"
+      ]
+    },
+    {
+      "layer_id": "glade",
+      "file": "design/assets/rainforest/candidates/SW-006/r1/webp/rainforest_glade.webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 33510,
+      "sha256": "c05c9c3d6cd779c84ea0a42a543c07d79c2d9c2112992ca01035565ebcf95a1d",
+      "alpha_channel": true,
+      "render_role": "overlay",
+      "tileable": false,
+      "origin": "R1 candidate: PIL programmatic placeholder (zero API); SW-006 r1 零 API 预检交付, 不调用付费生图 API",
+      "process": "build_r1.py (SW-006 R1 candidate generator)",
+      "checks": [
+        "design/assets/rainforest/candidates/SW-006/r1/checks/alpha_mask/rainforest_glade.png",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/black/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/white/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r1/checks/magenta/rainforest_glade.jpg"
+      ],
+      "limitations": [
+        "PIL 程序化占位; 真实候选需在 mcode-tools 8 次尝试预算内替换",
+        "0 API 调用, 不声称生产级像素验图; 待 R2 用真实生图 API 替换"
+      ]
+    }
+  ],
+  "design_ref": {
+    "task_id": "SW-012",
+    "handoff": "docs/collaboration/handoffs/trae-design/H-SW-012-R1.json",
+    "handoff_sha256": "89314772db42b8b2fcb7f3e79f91e57360585a923d54ea1a1ae4de347f13b082",
+    "spec_file": "design/05-visual-design/SW-012/r1/design-spec.json",
+    "spec_sha256": "643e77b1ba7574c9b013dce485fde2797816096181feda91c2fa7920d042c320",
+    "design_manifest_sha256": "8cbbdd8d374ace50e71756a410482596592d0e8c61d595207521c841399872ac",
+    "freeze_decision": "docs/collaboration/decisions/D-009-freeze-rainforest-design-spec.md",
+    "freeze_decision_sha256": "09231cb341717ad26f8e15c574cafaa453cf6c5f44991e0f1b62653329950362",
+    "design_review": "docs/collaboration/reviews/R-SW-012-R1.json",
+    "design_review_sha256": "3e757ba3f754db7c40c930e48221c90f5d8abdf45f65a1ac65dde9ea25248c4c"
+  },
+  "notes": "R1 仅交付零 API 草案 (5 层程序化占位 + 4 检查图 + manifest + design_ref 指向 D-009 冻结 spec). R2 起按 SW-006 任务 8 次总预算调用 mcode-tools 真实生图 API."
+}
