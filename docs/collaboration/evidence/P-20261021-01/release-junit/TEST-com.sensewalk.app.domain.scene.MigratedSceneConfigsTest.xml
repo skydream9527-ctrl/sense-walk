@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:26:32" hostname="runnervmxehtw" time="0.275">
+  <properties/>
+  <testcase name="三景时长推导与 §6_1 校准表一致" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.098"/>
+  <testcase name="场景加载器对真实 assets 目录产出 Ready" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.121"/>
+  <testcase name="占位状态如实分层 - 森林全真实素材发布放行，其他景占位不放行" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.026"/>
+  <testcase name="沙漠 1200m 配置通过完整校验" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.008"/>
+  <testcase name="配置不再包含时间字段" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.004"/>
+  <testcase name="夜径 700m 配置通过完整校验" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.002"/>
+  <testcase name="森林 800m 配置通过完整校验" classname="com.sensewalk.app.domain.scene.MigratedSceneConfigsTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

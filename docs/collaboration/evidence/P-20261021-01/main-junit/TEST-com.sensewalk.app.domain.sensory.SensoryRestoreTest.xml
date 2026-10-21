@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.sensory.SensoryRestoreTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:00:12" hostname="runnervmxehtw" time="0.113">
+  <properties/>
+  <testcase name="restoreState 后 loop 直接落目标增益 - 不从零淡入" classname="com.sensewalk.app.domain.sensory.SensoryRestoreTest" time="0.046"/>
+  <testcase name="恢复层不被重复相位事件重启 - 与 onPhaseEvents 兼容" classname="com.sensewalk.app.domain.sensory.SensoryRestoreTest" time="0.047"/>
+  <testcase name="restoreState 不重播旧脚步 - 新前进才出声" classname="com.sensewalk.app.domain.sensory.SensoryRestoreTest" time="0.019"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

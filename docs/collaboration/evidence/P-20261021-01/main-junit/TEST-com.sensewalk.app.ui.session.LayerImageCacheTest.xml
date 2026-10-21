@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.ui.session.LayerImageCacheTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:00:13" hostname="runnervmxehtw" time="1.854">
+  <properties/>
+  <testcase name="evictsLeastRecentlyUsedWhenOverBudget" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.013"/>
+  <testcase name="decodeExceptionYieldsNullWithoutCaching" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.004"/>
+  <testcase name="oversizedValueIsReturnedButNotCached" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.002"/>
+  <testcase name="concurrentRequestsForSameKeyDecodeOnce" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.005"/>
+  <testcase name="sameAssetUnderDifferentScenesAreSeparateEntries" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.003"/>
+  <testcase name="clearDropsEntriesAndBytes" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.004"/>
+  <testcase name="sameAssetUnderDifferentSampleSizesAreSeparateEntries" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.002"/>
+  <testcase name="failedDecodeIsNotCachedAndRetriesOnNextRequest" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.004"/>
+  <testcase name="sampleSizeNeverUpscalesAndPicksLargestPowerOfTwoThatStillCovers" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.001"/>
+  <testcase name="cancellingWaiterKeepsDecodeAndCachesResult" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="0.002"/>
+  <testcase name="failedDecodeRetriesUnderSchedulingPressure" classname="com.sensewalk.app.ui.session.LayerImageCacheTest" time="1.812"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

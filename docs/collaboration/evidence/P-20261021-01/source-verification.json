@@ -1,0 +1,18 @@
+{
+  "asset": "sensewalk-source-2e6f266.zip",
+  "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "bytes": 261844977,
+  "sha256": "fc42d1c08d1ea36c2dae000380575d764dbd4a9149c07ca95125a2fd69e1f1d0",
+  "github_uploaded_digest_matches": true,
+  "verification_method": "Locally reproduced exact CI archive with TZ=UTC git archive --format=zip --prefix=sense-walk/; byte digest matches GitHub uploaded release asset. Full network ZIP download was not used.",
+  "reproduced_zip_crc": "passed",
+  "git_archive_comment": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "key_entries_match_frozen_source": [
+    "app/src/main/java/com/sensewalk/app/ui/session/ForestShell.kt",
+    "app/src/main/java/com/sensewalk/app/ui/session/LayerImageCache.kt",
+    "app/src/main/assets/scenes/forest.json",
+    ".github/workflows/android.yml"
+  ],
+  "initial_local_timezone_archive_digest": "c08ad101a8714778b62deadca9e9f860967c14656ea55b699e1c5fbb2141a27a",
+  "timezone_note": "ZIP DOS timestamps differ with local timezone; UTC reproduces Linux runner bytes exactly."
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.domain.scene.RainforestFoundationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:00:12" hostname="runnervmxehtw" time="0.243">
+  <properties/>
+  <testcase name="D009 五层 canonical 参数精确匹配 - 类型视差解锁透明淡入" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.005"/>
+  <testcase name="站稳提示快照字段兼容 - 旧档缺省 false 且同局恢复一次" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.009"/>
+  <testcase name="实走 900m - counter 计距与同一配置门禁" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.015"/>
+  <testcase name="全显达成点 875m - 900m 终点不切屏" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.0"/>
+  <testcase name="visual 相位引用未定义层 - 校验拒绝（不完整配置不进生产）" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.005"/>
+  <testcase name="生产场景目录不含雨林 - 可用性门禁保持关闭" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.001"/>
+  <testcase name="相位超终点被拒 - 875 淡入完成点合法 905 越界拒绝" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.018"/>
+  <testcase name="虚走 900m 全程通关 - 五层揭示有序" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.112"/>
+  <testcase name="450m 中点恢复 - fired 相位不重播且能走完" classname="com.sensewalk.app.domain.scene.RainforestFoundationTest" time="0.075"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

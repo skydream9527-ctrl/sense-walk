@@ -1,0 +1,47 @@
+{
+  "asset": "app-debug.apk",
+  "release_tag": "build-224-2e6f266",
+  "source_commit": "2e6f266aaf8f0e3aed3e47b4388cc84bf82ff68d",
+  "sha256": "eca9a854a1908643ff00123edd3a4a0e6fed97f2df43288ae6fd8d937f9e675a",
+  "bytes": 20294186,
+  "github_digest_matches": true,
+  "zip_crc": "passed",
+  "signature_certificate": {
+    "scheme_id": "0x7109871a",
+    "certificate_sha256": "ab4e88f072779579d2141f2c1276a76801de59c60a79dd9c5e3697890854485c"
+  },
+  "certificate_check_scope": "Parsed APK signing block certificate fingerprint only; not a full apksigner cryptographic verification.",
+  "prior_build176_certificate": {
+    "scheme_id": "0x7109871a",
+    "certificate_sha256": "11905416fceb404d2453fc906cd2fbfed5608b1904d49ac36cb42fe79adbc87b"
+  },
+  "same_certificate_as_build176": false,
+  "formal_forest_assets": [
+    {
+      "file": "forest_tree_outline.webp",
+      "sha256": "614a41a8a37b57b9ad2912a11b6adbd845d8202dca963fcefb8ba1dbc98c511c",
+      "matches_frozen_source": true
+    },
+    {
+      "file": "forest_tree_trunks.webp",
+      "sha256": "6bfb59f4918e1a787a4b1c832fa8b04a3a521d33e9ed93b2cc6ea9cd03eae810",
+      "matches_frozen_source": true
+    },
+    {
+      "file": "forest_leaf_path.webp",
+      "sha256": "1ff9f61ebb0105cfbc1dafc5f9e43da7ea7e5bd46dd23be17b721b0664e5de8d",
+      "matches_frozen_source": true
+    },
+    {
+      "file": "forest_light_shows.webp",
+      "sha256": "1973a1f594f1edd0a801e57251192c7629f7f802e621a2a95874328e257466f0",
+      "matches_frozen_source": true
+    },
+    {
+      "file": "forest_clearing.webp",
+      "sha256": "1dcda4f7b61b038f4f9fddfa3351dcfd5d0679167388148f47b841153169ca33",
+      "matches_frozen_source": true
+    }
+  ],
+  "new_device_installation": "not_performed"
+}

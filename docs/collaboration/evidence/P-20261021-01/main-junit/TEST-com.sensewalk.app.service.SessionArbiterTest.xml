@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sensewalk.app.service.SessionArbiterTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-21T07:00:13" hostname="runnervmxehtw" time="0.0">
+  <properties/>
+  <testcase name="debug 注入只在活动会话转发" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="F004 单飞 - 装配期间重复 start 一律 NONE" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="F002 空重启 - null Intent 无会话时干净退出而非空前台" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="装配失败上报 - 记终态不发布会话" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="F002 终态吸收 - 粘性重启与后续命令不再复活会话" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="F004 迟到协程 - 装配期间已停止则丢弃结果" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="F002 装配中 STOP - 未发布控制器也可放弃并使迟到装配丢弃" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <testcase name="正常启动 - 进前台装配并最终 active" classname="com.sensewalk.app.service.SessionArbiterTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

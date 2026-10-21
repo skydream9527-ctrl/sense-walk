@@ -1,0 +1,144 @@
+{
+  "kind": "sw006-r2-production-guard-selftest",
+  "passed": 14,
+  "failed": 0,
+  "total": 14,
+  "results": [
+    {
+      "name": "positive_real_approved_chain",
+      "expect": "ok",
+      "detail": "真实 SW-012 批准链 + 1080x1920 原字节应通过 (got ok, 122/122)",
+      "got": "ok",
+      "summary": {
+        "total": 122,
+        "passed": 122,
+        "failed": 0
+      },
+      "failed_checks": [],
+      "result": "passed"
+    },
+    {
+      "name": "regression_768_legacy_canvas",
+      "expect": "failed",
+      "detail": "768x1376 必须失败 (old_preflight=ok, new_guard=failed)",
+      "old_preflight_status": "ok",
+      "new_guard_status": "failed",
+      "failed_checks": [
+        "sw006_mist_no_legacy_forest_canvas",
+        "sw006_mist_no_upscale_claim",
+        "sw006_trunks_canopy_no_legacy_forest_canvas",
+        "sw006_trunks_canopy_no_upscale_claim",
+        "sw006_vines_light_no_legacy_forest_canvas",
+        "sw006_vines_light_no_upscale_claim",
+        "sw006_distant_glow_no_legacy_forest_canvas",
+        "sw006_distant_glow_no_upscale_claim",
+        "sw006_glade_no_legacy_forest_canvas",
+        "sw006_glade_no_upscale_claim"
+      ],
+      "result": "passed"
+    },
+    {
+      "name": "regression_api_over_task_limit",
+      "expect": "failed",
+      "detail": "this_revision=9/total=23 必须失败 (old_preflight=ok, new_guard=failed)",
+      "old_preflight_status": "ok",
+      "new_guard_status": "failed",
+      "failed_checks": [
+        "sw006_api_budget_within_limit"
+      ],
+      "result": "passed"
+    },
+    {
+      "name": "reject_wrong_spec_sha",
+      "expect": "failed",
+      "detail": "错 spec SHA 必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_unapproved_chain",
+      "expect": "failed",
+      "detail": "SW-012 未 accepted 必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_empty_layers",
+      "expect": "failed",
+      "detail": "空层必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_missing_layers",
+      "expect": "failed",
+      "detail": "缺层必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_non_integer_count",
+      "expect": "failed",
+      "detail": "非整数尝试计数必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_missing_count",
+      "expect": "failed",
+      "detail": "缺尝试计数必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    },
+    {
+      "name": "reject_sample_mode_call",
+      "expect": "rejected",
+      "detail": "样本模式必须拒绝生产调用 (rejected=True)",
+      "rejected": true,
+      "result": "passed"
+    },
+    {
+      "name": "budget_8_ok_9th_rejected",
+      "expect": "8 authorized / 9th rejected",
+      "detail": "实际: 8 次放行, 第 9 次 被拒",
+      "sequence": [
+        "authorized",
+        "authorized",
+        "authorized",
+        "authorized",
+        "authorized",
+        "authorized",
+        "authorized",
+        "authorized",
+        "rejected"
+      ],
+      "result": "passed"
+    },
+    {
+      "name": "budget_cross_revision_8_9",
+      "expect": "3 authorized / 4th rejected",
+      "detail": "实际: r1 已用 5, r2 放行 3 次, 第 4 次 被拒",
+      "sequence": [
+        "authorized",
+        "authorized",
+        "authorized",
+        "rejected"
+      ],
+      "result": "passed"
+    },
+    {
+      "name": "budget_counts_failures_and_timeouts",
+      "expect": "used=2",
+      "detail": "failed+timeout 仍占额度, 实际 used=2",
+      "used": 2,
+      "result": "passed"
+    },
+    {
+      "name": "reject_state_ledger_regression",
+      "expect": "failed",
+      "detail": "state 计数 > 账本 必须失败 (got failed)",
+      "new_guard_status": "failed",
+      "result": "passed"
+    }
+  ]
+}
