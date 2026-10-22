@@ -1,0 +1,23 @@
+{
+  "always_visible_source_band": [
+    216,
+    864
+  ],
+  "traveler_anchor_source_x": 367,
+  "1080x2400": {
+    "source_x_visible_at_max_parallax": [
+      0,
+      864
+    ],
+    "band_always_visible": true,
+    "traveler_anchor_visible": true
+  },
+  "390x844": {
+    "source_x_visible_at_max_parallax": [
+      0,
+      887
+    ],
+    "band_always_visible": true,
+    "traveler_anchor_visible": true
+  }
+}

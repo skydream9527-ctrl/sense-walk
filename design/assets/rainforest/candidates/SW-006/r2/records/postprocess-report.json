@@ -1,0 +1,499 @@
+{
+  "layers": [
+    {
+      "layer_id": "mist",
+      "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_mist.png",
+      "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_mist.png",
+      "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_mist.webp",
+      "png_bytes": 1440790,
+      "webp_bytes": 75804,
+      "webp_quality": 86,
+      "fit": {
+        "source_resolution": "1536x2752",
+        "source_to_canvas": "LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920",
+        "aspect": 0.55814
+      },
+      "key": {
+        "background_rgb": [
+          255.0,
+          0.0,
+          255.0
+        ],
+        "foreground_rgb": [
+          37.2,
+          56.9,
+          55.8
+        ],
+        "unmix_residual": 0.5737531030323543
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.39682539682539686,
+          "hard_row_fraction": 0.0037071362372567192
+        },
+        "reference": {
+          "max_gradient": 0.011764705882352955,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 16,
+        "after": {
+          "max_gradient": 0.022995655159601613,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.5647,
+          "gamma": 3.2,
+          "opaque_fraction_before": 0.008,
+          "opaque_fraction_after": 0.0
+        }
+      },
+      "alpha_normalize": {
+        "peak_before": 0.5647,
+        "target_max_alpha": 0.5647,
+        "gamma": 3.2,
+        "opaque_fraction_before": 0.0,
+        "opaque_fraction_after": 0.0
+      },
+      "palette_transfer": {
+        "applied": true,
+        "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_mist.png",
+        "reference_stats": {
+          "hue": 114.51,
+          "sat": 108.0,
+          "v_p50": 48.0,
+          "v_p95": 63.0
+        },
+        "generated_stats": {
+          "hue": 103.84,
+          "sat": 155.0,
+          "v_p50": 99.0,
+          "v_p95": 136.0
+        },
+        "v_p50_before": 99.0,
+        "v_p50_after": 48.0
+      },
+      "measure": {
+        "alpha_max": 0.5647058823529412,
+        "semi_transparent_fraction": 0.38936680169753085,
+        "transparent_fraction": 0.6106331983024691,
+        "edge_strip4_max_alpha": {
+          "top": 1.8790795892080127e-19,
+          "bottom": 1.8790795892080127e-19,
+          "left": 7.59091556416938e-16,
+          "right": 7.001675021192927e-14
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.0350755060502998,
+        "max_alpha_gradient_y": 0.022270360161742997,
+        "has_hard_edge": false
+      },
+      "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_mist_zoom.png"
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_trunks_canopy.png",
+      "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_trunks_canopy.png",
+      "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_trunks_canopy.webp",
+      "png_bytes": 1971593,
+      "webp_bytes": 245458,
+      "webp_quality": 86,
+      "fit": {
+        "source_resolution": "1536x2752",
+        "source_to_canvas": "LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920",
+        "aspect": 0.55814
+      },
+      "key": {
+        "background_rgb": [
+          255.0,
+          0.0,
+          255.0
+        ],
+        "foreground_rgb": [
+          17.4,
+          36.9,
+          30.6
+        ],
+        "unmix_residual": 0.3143330831627982
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.5238095238095238,
+          "hard_row_fraction": 0.5097312326227988
+        },
+        "reference": {
+          "max_gradient": 0.9372549019607843,
+          "hard_row_fraction": 0.7201112140871178
+        },
+        "applied": false,
+        "reason": "当前 max|dA/dx|=0.524 未显著超批准口径 0.937"
+      },
+      "alpha_normalize": {
+        "peak_before": 1.0,
+        "target_max_alpha": 1.0,
+        "gamma": 1.633,
+        "opaque_fraction_before": 0.2298,
+        "opaque_fraction_after": 0.0854
+      },
+      "palette_transfer": {
+        "applied": true,
+        "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png",
+        "reference_stats": {
+          "hue": 113.85,
+          "sat": 132.0,
+          "v_p50": 59.0,
+          "v_p95": 102.0
+        },
+        "generated_stats": {
+          "hue": 101.05,
+          "sat": 198.0,
+          "v_p50": 68.0,
+          "v_p95": 136.0
+        },
+        "v_p50_before": 68.0,
+        "v_p50_after": 59.0
+      },
+      "measure": {
+        "alpha_max": 1.0,
+        "semi_transparent_fraction": 0.8178891782407407,
+        "transparent_fraction": 0.17055217978395062,
+        "edge_strip4_max_alpha": {
+          "top": 0.9742099462466038,
+          "bottom": 1.0,
+          "left": 1.0,
+          "right": 0.9742099462466038
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.598042984770536,
+        "max_alpha_gradient_y": 0.5121403943231775,
+        "has_hard_edge": false
+      },
+      "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_trunks_canopy_zoom.png"
+    },
+    {
+      "layer_id": "vines_light",
+      "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_vines_light.png",
+      "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_vines_light.png",
+      "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_vines_light.webp",
+      "png_bytes": 2588204,
+      "webp_bytes": 406320,
+      "webp_quality": 80,
+      "fit": {
+        "source_resolution": "1536x2752",
+        "source_to_canvas": "LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920",
+        "aspect": 0.55814
+      },
+      "key": {
+        "background_rgb": [
+          255.0,
+          0.0,
+          248.0
+        ],
+        "foreground_rgb": [
+          68.3,
+          97.3,
+          69.9
+        ],
+        "unmix_residual": 2.8795133688238077
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.5873015873015873,
+          "hard_row_fraction": 0.9990732159406858
+        },
+        "reference": {
+          "max_gradient": 0.9058823529411765,
+          "hard_row_fraction": 0.5227062094531975
+        },
+        "applied": false,
+        "reason": "当前 max|dA/dx|=0.587 未显著超批准口径 0.906"
+      },
+      "alpha_normalize": {
+        "peak_before": 1.0,
+        "target_max_alpha": 1.0,
+        "gamma": 2.6,
+        "opaque_fraction_before": 0.0657,
+        "opaque_fraction_after": 0.0369
+      },
+      "palette_transfer": {
+        "applied": true,
+        "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_vines_light.png",
+        "reference_stats": {
+          "hue": 66.7,
+          "sat": 56.0,
+          "v_p50": 92.0,
+          "v_p95": 197.0
+        },
+        "generated_stats": {
+          "hue": 74.79,
+          "sat": 121.0,
+          "v_p50": 142.0,
+          "v_p95": 255.0
+        },
+        "v_p50_before": 142.0,
+        "v_p50_after": 92.0
+      },
+      "measure": {
+        "alpha_max": 1.0,
+        "semi_transparent_fraction": 0.3673654513888889,
+        "transparent_fraction": 0.6269873649691358,
+        "edge_strip4_max_alpha": {
+          "top": 1.0,
+          "bottom": 0.0003649470300437779,
+          "left": 1.0,
+          "right": 0.7708842917379337
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.7874203678857874,
+        "max_alpha_gradient_y": 0.8090691402204203,
+        "has_hard_edge": false
+      },
+      "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_vines_light_zoom.png"
+    },
+    {
+      "layer_id": "distant_glow",
+      "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_distant_glow.png",
+      "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_distant_glow.png",
+      "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_distant_glow.webp",
+      "png_bytes": 2674237,
+      "webp_bytes": 193552,
+      "webp_quality": 86,
+      "fit": {
+        "source_resolution": "1536x2752",
+        "source_to_canvas": "LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920",
+        "aspect": 0.55814
+      },
+      "key": {
+        "background_rgb": [
+          255.0,
+          0.0,
+          255.0
+        ],
+        "foreground_rgb": [
+          191.0,
+          225.9,
+          208.9
+        ],
+        "unmix_residual": 0.2407207067557836
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.23809523809523808,
+          "hard_row_fraction": 0.0
+        },
+        "reference": {
+          "max_gradient": 0.003921568627450994,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 2,
+        "after": {
+          "max_gradient": 0.004470858483646617,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.2235,
+          "gamma": 3.2,
+          "opaque_fraction_before": 0.0236,
+          "opaque_fraction_after": 0.0
+        }
+      },
+      "alpha_normalize": {
+        "peak_before": 0.2235,
+        "target_max_alpha": 0.2235,
+        "gamma": 3.2,
+        "opaque_fraction_before": 0.0,
+        "opaque_fraction_after": 0.0
+      },
+      "palette_transfer": {
+        "applied": true,
+        "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_distant_glow.png",
+        "reference_stats": {
+          "hue": 97.72,
+          "sat": 51.0,
+          "v_p50": 194.0,
+          "v_p95": 204.0
+        },
+        "generated_stats": {
+          "hue": 72.07,
+          "sat": 38.0,
+          "v_p50": 226.0,
+          "v_p95": 234.0
+        },
+        "v_p50_before": 226.0,
+        "v_p50_after": 194.0
+      },
+      "measure": {
+        "alpha_max": 0.2235294117647059,
+        "semi_transparent_fraction": 0.38818045910493826,
+        "transparent_fraction": 0.6118195408950617,
+        "edge_strip4_max_alpha": {
+          "top": 0.054077634477530875,
+          "bottom": 1.2976069268636957e-14,
+          "left": 0.0006898768480707594,
+          "right": 1.7006466782145427e-05
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.008815350897356605,
+        "max_alpha_gradient_y": 0.008815350897356605,
+        "has_hard_edge": false
+      },
+      "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_distant_glow_zoom.png"
+    },
+    {
+      "layer_id": "glade",
+      "source": "design/assets/rainforest/candidates/SW-006/r2/source/sw006_r2_glade.png",
+      "png": "design/assets/rainforest/candidates/SW-006/r2/png/rainforest_glade.png",
+      "webp": "design/assets/rainforest/candidates/SW-006/r2/webp/rainforest_glade.webp",
+      "png_bytes": 1480413,
+      "webp_bytes": 99402,
+      "webp_quality": 86,
+      "fit": {
+        "source_resolution": "1536x2752",
+        "source_to_canvas": "LANCZOS scale to width 1080 then center-crop 1080x1935->1080x1920",
+        "aspect": 0.55814
+      },
+      "key": {
+        "background_rgb": [
+          255.0,
+          0.0,
+          248.0
+        ],
+        "foreground_rgb": [
+          22.2,
+          74.6,
+          55.4
+        ],
+        "unmix_residual": 7.280106862276094
+      },
+      "edge_soften": {
+        "before": {
+          "max_gradient": 0.36507936507936506,
+          "hard_row_fraction": 0.07506950880444857
+        },
+        "reference": {
+          "max_gradient": 0.02352941176470591,
+          "hard_row_fraction": 0.0
+        },
+        "applied": true,
+        "sigma": 8,
+        "after": {
+          "max_gradient": 0.027515420057338646,
+          "hard_row_fraction": 0.0
+        },
+        "alpha_renormalized": {
+          "peak_before": 1.0,
+          "target_max_alpha": 0.9294,
+          "gamma": 2.6,
+          "opaque_fraction_before": 0.0078,
+          "opaque_fraction_after": 0.0
+        }
+      },
+      "alpha_normalize": {
+        "peak_before": 0.9294,
+        "target_max_alpha": 0.9294,
+        "gamma": 2.6,
+        "opaque_fraction_before": 0.0,
+        "opaque_fraction_after": 0.0
+      },
+      "palette_transfer": {
+        "applied": true,
+        "reference": "design/05-visual-design/SW-012/r1/exports/rainforest_glade.png",
+        "reference_stats": {
+          "hue": 88.35,
+          "sat": 54.0,
+          "v_p50": 189.0,
+          "v_p95": 197.0
+        },
+        "generated_stats": {
+          "hue": 104.04,
+          "sat": 197.0,
+          "v_p50": 113.0,
+          "v_p95": 238.0
+        },
+        "v_p50_before": 113.0,
+        "v_p50_after": 189.0
+      },
+      "measure": {
+        "alpha_max": 0.9294117647058824,
+        "semi_transparent_fraction": 0.1147511574074074,
+        "transparent_fraction": 0.8852488425925926,
+        "edge_strip4_max_alpha": {
+          "top": 8.420467960941186e-14,
+          "bottom": 8.420467960941186e-14,
+          "left": 6.380942893558101e-11,
+          "right": 9.891491203760746e-10
+        },
+        "background_residual_fraction": 0.0,
+        "max_alpha_gradient_x": 0.031548739004860216,
+        "max_alpha_gradient_y": 0.039138388917749456,
+        "has_hard_edge": false
+      },
+      "zoom": "design/assets/rainforest/candidates/SW-006/r2/checks/zoom/rainforest_glade_zoom.png"
+    }
+  ],
+  "stages": [
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_000m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_110m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_295m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_475m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_700m.png",
+    "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_875m.png"
+  ],
+  "parallax": [
+    {
+      "layer_id": "trunks_canopy",
+      "tag": "rest",
+      "size": "1080x1920",
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_rest_1080x1920.png"
+    },
+    {
+      "layer_id": "trunks_canopy",
+      "tag": "parallax_max",
+      "size": "1080x1920",
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_trunks_canopy_parallax_max_1080x1920.png"
+    },
+    {
+      "layer_id": "vines_light",
+      "tag": "rest",
+      "size": "1080x1920",
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_rest_1080x1920.png"
+    },
+    {
+      "layer_id": "vines_light",
+      "tag": "parallax_max",
+      "size": "1080x1920",
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/rainforest_vines_light_parallax_max_1080x1920.png"
+    },
+    {
+      "size": "1080x2400",
+      "tag": "rest",
+      "overflow_px": 270,
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_1080x2400_rest.png"
+    },
+    {
+      "size": "1080x2400",
+      "tag": "parallax_max",
+      "overflow_px": 270,
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_1080x2400_parallax_max.png"
+    },
+    {
+      "size": "390x844",
+      "tag": "rest",
+      "overflow_px": 85,
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_390x844_rest.png"
+    },
+    {
+      "size": "390x844",
+      "tag": "parallax_max",
+      "overflow_px": 85,
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime_390x844_parallax_max.png"
+    },
+    {
+      "path": "design/assets/rainforest/candidates/SW-006/r2/checks/parallax/runtime-parallax-check.json",
+      "kind": "runtime-parallax-check"
+    }
+  ]
+}

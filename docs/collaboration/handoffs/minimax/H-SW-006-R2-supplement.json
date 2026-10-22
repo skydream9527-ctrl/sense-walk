@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-006-R2-supplement",
+  "task_id": "SW-006",
+  "revision": 2,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "kind": "supplement",
+  "base_commit": "a2d727f8a6eb565d67a7f76a73a789dab7aaa1fa",
+  "head_commit": "511adf5bc7cd0a80be23b431fbe6a4c3b72efa52",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/35",
+  "prior_handoff": "docs/collaboration/handoffs/minimax/H-SW-006-R2.json",
+  "report": "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.md",
+  "summary": "SW-006 R2 交付后 CI 两处失败的成因定位与转交: (1) push 事件的 immutable-history 误报, 源于我把已推送的 H-SW-006-R2.json/.md 又改了一次 (补 PR 链接), 违反协议\"改写已入库 handoff 走新增 correction\"; (2) pull_request 事件的 QA fixture 隔离缺陷 —— tools/qa/test_collaboration.py 会把真实 docs/collaboration 整树复制进沙箱, 新增真实 H-SW-006-R2.json 后与 fixture 自造的 SW-006 R1 交付冲突, 导致 2 个协议测试失败. 第 (2) 项属 tools/** (Antigravity 写入范围), minimax 不代改, 已给出本地实测通过的最小修法.",
+  "changed_files": [
+    "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.json",
+    "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.md"
+  ],
+  "checks": [
+    {
+      "name": "PR #35 push 事件 validate 失败的成因定位 (immutable-history 误报)",
+      "type": "source",
+      "status": "passed",
+      "summary": "失败 run 39441667048 报 'history: existing record changed/deleted docs/collaboration/handoffs/minimax/H-SW-006-R2.json/.md'. 成因: 我在首次推送 b6d39f4 之后又提交 09307b7 修改了这两个已推送文件 (补 pr_url), push 事件的 TASK_CHECK_BASE 取 github.event.before=b6d39f4, 于是 diff 判定这两个 protected 路径为 M 而非 A. 按 PROTOCOL 第 69 条, 已入库 handoff 的修正应新增 correction 文件而非原地改写, 本轮改为新增 supplement 记录, 不再原地修改.",
+      "evidence": [
+        "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.md"
+      ]
+    },
+    {
+      "name": "PR #35 pull_request 事件 2 个协议测试失败的成因定位 (QA fixture 隔离)",
+      "type": "source",
+      "status": "passed",
+      "summary": "失败 run 39441674753 报 test_asset_cannot_substitute_other_approved_design 与 test_retired_asset_can_remain_visible_during_rework 失败, 错误为 'H-SW-006-R2.json: design_ref does not match required design task' 与 'design_ref is not the accepted design revision'. 成因: tools/qa/test_collaboration.py setUp 用 shutil.copytree 把 **真实** docs/collaboration 整树复制进一次性沙箱, 于是真实 H-SW-006-R2.json 被当作一条活的 SW-006 交付参与校验; 而 fixture 自造的是 H-SW-006-R1.json (revision=1), 校验器取 latest_revision[SW-006]=max(1,我的2)=2, 真实 R2 因而被当作 is_current, 再叠加该测试临时把 registry 的 SW-006 depends_on 改成 SW-011, 即触发 design_ref 两条报错. 属 fixture 自身隔离缺陷, 与本轮素材/门禁逻辑无关.",
+      "evidence": [
+        "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.md"
+      ]
+    },
+    {
+      "name": "隔离缺陷的因果复现与修法实测 (不改动 QA 源文件, 仅本地沙箱验证)",
+      "type": "unit",
+      "status": "passed",
+      "summary": "在临时副本上做三组对照: (a) 真实工作区当前状态 -> 2 failures; (b) 副本中删除真实 H-SW-006-R2.json -> 目标 2 个测试 OK; (c) 副本 setUp 追加\"复制后删除 fixture 自造任务的真实交付记录\"(4 行) -> 31/31 OK; (d) 另一等价变体\"复制后删除全部 handoffs/reviews 的 *.json\" -> 31/31 OK. 另在干净 origin/main worktree 上跑 tools/qa 全量 -> 31/31 OK, 证明该缺陷由新增真实交付触发, main 本身是绿的.",
+      "evidence": [
+        "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.md"
+      ]
+    },
+    {
+      "name": "本轮交付自身门禁与协议校验仍全绿 (与上述 fixture 缺陷无关)",
+      "type": "unit",
+      "status": "passed",
+      "summary": "production_guard.py 自检 14/14; r2 manifest 过自有门禁 122/122; SW-015 R1 批准预检 80/80; python3 tools/collaboration.py check -> Coordination check: OK. 四项均在本分支本地复跑通过, 与 CI 的 2 个 fixture 测试失败无因果关系.",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r2/manifest.json"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending_verification": [
+    "Antigravity 修复 tools/qa/test_collaboration.py 的 fixture 隔离 (tools/** 属 antigravity 写入范围, minimax 未代改): 建议在 setUp 复制 docs/collaboration 后, 删除 fixture 将要自造任务的真实交付记录, 或不继承真实 handoffs/reviews 的 *.json; 两种改法本地实测均 31/31 OK",
+    "修复后请重跑 PR #35 的 Collaboration handoff checks 确认绿",
+    "本次 push 事件的历史检查失败属我方流程问题: 已在 supplement 记录, 后续对本分支的 handoff 只新增不原地改写"
+  ],
+  "requests": [
+    "请 Antigravity 独立审核 H-SW-006-R2 (业务 head 511adf5bc7cd0a80be23b431fbe6a4c3b72efa52), 不自批准",
+    "请 Antigravity 修复 tools/qa/test_collaboration.py 的 fixture 隔离缺陷 (详见 pending_verification 与本报告 §CI 成因), 修复后重跑 PR #35 检查",
+    "审核通过后请在 registry.json 登记 SW-006 status=accepted 并同步 BOARD.md",
+    "SW-006 8 次付费预算已用尽并同步 state (sw006_attempts=8, cumulative_attempts=22); 若需新增尝试请另行明确授权",
+    "SW-022 依赖 SW-021 accepted, registry SW-021 当前为 ready 未交付, minimax 未领取 SW-022"
+  ],
+  "design_manifest": null
+}

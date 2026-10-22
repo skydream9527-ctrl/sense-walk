@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "task_id": "SW-006",
+  "sw006_attempts_limit": 8,
+  "project_lifetime_baseline": 14,
+  "entries": [
+    {
+      "seq": 1,
+      "revision": "r2",
+      "layer_id": "probe_reference",
+      "outcome": "failed",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:23:03Z",
+      "settled_at": "2026-10-20T13:27:37Z",
+      "note": "probe: 生图成功但产出整幅森林场景(底色仅出现在天空缺口), 非可分离孤立层, 该候选被拒; 尝试仍计入预算"
+    },
+    {
+      "seq": 2,
+      "revision": "r2",
+      "layer_id": "trunks_canopy",
+      "outcome": "failed",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:31:59Z",
+      "settled_at": "2026-10-20T13:43:45Z",
+      "note": "a2: 纯文生图, 底色仅出现在天空缺口, 四周仍是暗绿场景, 非可分离孤立层, 该候选被拒"
+    },
+    {
+      "seq": 3,
+      "revision": "r2",
+      "layer_id": "trunks_canopy",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy (image-to-image, 参考 design/05-visual-design/SW-012/r1/exports/rainforest_trunks_canopy.png)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:36:11Z",
+      "settled_at": "2026-10-20T13:44:24Z",
+      "note": "a3: image-to-image(SW-012 批准 export 贴洋红底) 得到可分离孤立层; 但模型画成贴纸卡片, 内容缩进一圈形成矩形硬边, 按逐层边缘语义需重做",
+      "actual_resolution": "1536x2752"
+    },
+    {
+      "seq": 4,
+      "revision": "r2",
+      "layer_id": "mist",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#mist (image-to-image, 参考 SW-012 批准 export)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:46:24Z",
+      "settled_at": "2026-10-20T14:26:39Z",
+      "note": "mist: image-to-image 成功, 洋红可分离底; 后处理反解 alpha + 色域收敛到批准色板统计",
+      "actual_resolution": "1536x2752"
+    },
+    {
+      "seq": 5,
+      "revision": "r2",
+      "layer_id": "vines_light",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#vines_light (image-to-image, 参考 SW-012 批准 export)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:46:25Z",
+      "settled_at": "2026-10-20T14:26:39Z",
+      "note": "trunks_canopy: 批量 image-to-image 成功; 铺满画布, 顶/左右出血",
+      "actual_resolution": "1536x2752"
+    },
+    {
+      "seq": 6,
+      "revision": "r2",
+      "layer_id": "distant_glow",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#distant_glow (image-to-image, 参考 SW-012 批准 export)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:46:25Z",
+      "settled_at": "2026-10-20T14:26:39Z",
+      "note": "vines_light: 批量 image-to-image 成功",
+      "actual_resolution": "1536x2752"
+    },
+    {
+      "seq": 7,
+      "revision": "r2",
+      "layer_id": "glade",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#glade (image-to-image, 参考 SW-012 批准 export)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:46:25Z",
+      "settled_at": "2026-10-20T14:26:39Z",
+      "note": "distant_glow: 批量 image-to-image 成功",
+      "actual_resolution": "1536x2752"
+    },
+    {
+      "seq": 8,
+      "revision": "r2",
+      "layer_id": "trunks_canopy",
+      "outcome": "success",
+      "prompt_ref": "design/assets/rainforest/candidates/SW-006/r2/scripts/prompts_r2.py#trunks_canopy (image-to-image, 参考 SW-012 批准 export, 重做铺满画布)",
+      "source_resolution": "requested:2K/9:16",
+      "reserved_at": "2026-10-20T13:47:28Z",
+      "settled_at": "2026-10-20T14:26:39Z",
+      "note": "glade: 批量 image-to-image 成功",
+      "actual_resolution": "1536x2752"
+    }
+  ]
+}

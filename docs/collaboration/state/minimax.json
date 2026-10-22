@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "agent": "minimax",
-  "current_task": "SW-015",
+  "current_task": "SW-006",
   "previous_task": "SW-002",
   "status": "handoff_ready",
-  "branch": "codex/minimax/SW-015-r1",
+  "branch": "codex/minimax/SW-006-r2",
   "head_commit": "81fbf2d21e7cdc3131618f9ba6450109a3420f58",
   "latest_handoff": "docs/collaboration/handoffs/minimax/H-SW-015-R1.json",
   "latest_review": {
@@ -25,9 +25,9 @@
     "verdict": "approved",
     "review_file": "docs/collaboration/reviews/R-SW-014-R3.json"
   },
-  "cumulative_attempts": 14,
+  "cumulative_attempts": 22,
   "cumulative_attempts_note": "project lifetime baseline (SW-002 R1 全部 14 次, 已尽). 任何更新不得重置或从缺字段退回 0.",
-  "sw006_attempts": 0,
+  "sw006_attempts": 8,
   "sw006_attempts_limit": 8,
   "sw006_attempts_note": "SW-006 单任务总 8 次尝试预算, 与 project lifetime 分开; SW-006 queued 未启动付费调用.",
   "sw015_attempts": 0,
@@ -36,13 +36,13 @@
   "sw014_attempts": 0,
   "sw014_attempts_note": "SW-014 R1/R2/R3 全部 0 API 工具研发 (累计 baseline 仍 14).",
   "next_actionable_tasks": [
-    "SW-006 (queued, depends_on SW-002 ✓accepted, SW-003 ✓accepted, SW-012 handoff_ready 但未集成, SW-014 ✓accepted, SW-015 handoff_ready 等审核)",
-    "等 Antigravity 集成 SW-012 (registry 改 accepted) + R-SW-015-R1 approved 后, SW-006 由 Antigravity 激活"
+    "SW-006 R2 已交付待 Antigravity 独立审核 (候选, 未入包)",
+    "SW-022 等待 SW-021 设计批准 (registry SW-021=ready, 归 trae-design)"
   ],
   "blocked_on": [
-    "R-SW-015-R1 待 Antigravity 独立审核 (changes_requested → R2, approved → registry SW-015 = accepted)",
-    "SW-012 在 registry 仍 handoff_ready (latest_handoff=null), Antigravity 尚未集成"
+    "SW-006 R2 需 Antigravity 独立审核并登记 accepted 后, 才能由 ZCode 按单独入包任务 (SW-007) 接线",
+    "SW-022 依赖 SW-021 accepted, 目前 SW-021=ready 未交付"
   ],
-  "updated_on": "2026-10-15",
-  "note": "SW-015 R1 已交付: design/assets/rainforest/preflight/SW-015/r1/ 含 spec_reader/preflight/dry_run/build_fixtures/probe_r1 5 脚本 + 8 fixture + README + probe-results. 零 API, 累计 baseline 14 + SW-006 单独 8 次保留. SW-014 R3 复用. SW-006 仍 queued, 等 SW-012 + SW-015 集成."
+  "updated_on": "2026-10-20",
+  "note": "SW-006 R2: 零 API 生产保护 (production_guard.py + api_ledger.py, 自检 14/14) + 8/8 次尝试真实生图五层候选 (真透明 1080x1920, 三底检查图/六阶段/局部放大), manifest 122/122 通过自有门禁, SW-015 批准预检 80/80 通过. 候选状态, 未入包."
 }

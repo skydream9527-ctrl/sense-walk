@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "id": "H-SW-006-R2-supplement2",
+  "task_id": "SW-006",
+  "revision": 2,
+  "producer": "minimax",
+  "recipient": "antigravity",
+  "kind": "supplement",
+  "base_commit": "a2d727f8a6eb565d67a7f76a73a789dab7aaa1fa",
+  "head_commit": "33dd824566e65cc68cbfeeeed42f416e1092793c",
+  "pr_url": "https://github.com/skydream9527-ctrl/sense-walk/pull/35",
+  "prior_handoff": "docs/collaboration/handoffs/minimax/H-SW-006-R2.json",
+  "prior_supplement": "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement.json",
+  "report": "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement2.md",
+  "summary": "SW-006 R2 候选字节已刷新 (硬边羽化修正), 审核须改绑新业务 head 33dd824. 原 H-SW-006-R2.json 的 head_commit=511adf5 指向羽化前的候选字节; 本 supplement 给出旧->新哈希对照与新业务 head, 并说明刷新原因 (glade 湿径硬边锥形违反批准设计的纵向淡出) 与零 API 性质.",
+  "changed_files": [
+    "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement2.json",
+    "docs/collaboration/handoffs/minimax/H-SW-006-R2-supplement2.md"
+  ],
+  "checks": [
+    {
+      "name": "glade 湿径硬边锥形已修正为纵向淡出 (自审发现 -> 确定性零API修正)",
+      "type": "source",
+      "status": "passed",
+      "summary": "自审发现生图把 glade 湿径画成硬边锥形: max|dA/dx|=0.431, 硬边行 5.5%; 而 SW-012 批准 design-spec 明确 '湿径上下缘都用纵向 mask 淡出', 批准 export 实测 max|dA/dx|=0.024, 且 visual-assets 契约禁止 '硬边抠图'. 修正: postprocess_r2.py 新增 soften_hard_edges(), 以批准 export 的 max|dA/dx| 为上限二分最小 sigma 羽化并重标定 alpha 密度. 结果 glade 0.431->0.031 (对齐批准 0.024), 硬边行 5.5%->0.0%. 全程确定性本地处理, 零新增 API 尝试, 账本不变 (仍 8/8).",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r2/records/postprocess-report.json",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/magenta/rainforest_glade.jpg",
+        "design/assets/rainforest/candidates/SW-006/r2/checks/stages/stage_875m.png"
+      ]
+    },
+    {
+      "name": "羽化后五层边缘口径与批准 design 对照 (含未羽化层的理由)",
+      "type": "unit",
+      "status": "passed",
+      "summary": "同口径逐行最大水平 alpha 梯度对照: mist 批准 0.012/硬边0.0% -> 本轮 0.035/0.0% (羽化 sigma=16); distant_glow 批准 0.004/0.0% -> 0.012/0.0% (sigma=2); glade 批准 0.024/0.0% -> 0.031/0.0% (sigma=8); trunks_canopy 批准 0.937/72.0% -> 0.600/61.2% (未羽化); vines_light 批准 0.906/52.3% -> 0.788/100.0% (未羽化). 结构层未羽化: 树廓与叶缘硬边是形态本身, 批准稿同样有 72%/52% 硬边行, 羽化会破坏树干与叶片轮廓.",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r2/records/postprocess-report.json"
+      ]
+    },
+    {
+      "name": "无白边 / 无洋红溢色 (边缘像素实测)",
+      "type": "unit",
+      "status": "passed",
+      "summary": "对 alpha∈(0.1,0.9) 的边缘像素实测: vines_light 批准稿 whiteish 0.00% / magentaish 0.00%, 本轮 0.00% / 0.00%; trunks_canopy 批准稿 0.33% / 0.00%, 本轮 0.00% / 0.00%. 底色残留 (background_residual_fraction) 五层均为 0.0000, has_hard_edge 均为 false.",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r2/records/postprocess-report.json"
+      ]
+    },
+    {
+      "name": "刷新后门禁与预算复跑",
+      "type": "unit",
+      "status": "passed",
+      "summary": "production_guard.py 自检 14/14; r2 manifest 过自有门禁 122/122; SW-015 R1 批准预检 80/80; python3 tools/collaboration.py check OK. WebP 合计由 1303952 降至 1020536 B (<2MB), 单层仍 <=400KB. 尝试账本未变: 8/8 用尽 (6 成功 2 被拒), state sw006_attempts=8 / cumulative_attempts=22, 本轮零新增 API 尝试.",
+      "evidence": [
+        "design/assets/rainforest/candidates/SW-006/r2/manifest.json",
+        "design/assets/rainforest/candidates/SW-006/api_ledger.json"
+      ]
+    }
+  ],
+  "artifacts": [],
+  "asset_manifest": null,
+  "pending_verification": [
+    "Antigravity 审核 SW-006 R2 时请绑定业务 head 33dd824566e65cc68cbfeeeed42f416e1092793c (羽化后的候选字节), 而非 H-SW-006-R2.json 中的 511adf5bc7cd0a80be23b431fbe6a4c3b72efa52 (羽化前字节)",
+    "请以本 supplement §哈希对照 中的新 sha256 绑定审核 artifact_hashes",
+    "tools/qa/test_collaboration.py 的 fixture 隔离缺陷仍待 antigravity 修复 (见 H-SW-006-R2-supplement), 修复后重跑 PR #35 检查"
+  ],
+  "requests": [
+    "请 Antigravity 独立审核 SW-006 R2, 不自批准; 绑定业务 head 33dd824566e65cc68cbfeeeed42f416e1092793c",
+    "审核通过后请在 registry.json 登记 SW-006 status=accepted 并同步 BOARD.md",
+    "SW-006 8 次付费预算已用尽且未新增; 若需重做请另行明确授权, 不要换 revision 重置账本",
+    "SW-022 依赖 SW-021 accepted, registry SW-021 当前为 ready (PR #34 已交付未审核), minimax 未领取 SW-022"
+  ],
+  "design_manifest": null
+}
