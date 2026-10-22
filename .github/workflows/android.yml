@@ -111,5 +111,16 @@ jobs:
           Source: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
           This is an implementation preview. Physical-device and user validation are reported separately in the development plan. A test task with no test sources does not establish behavioral coverage.
+
+          ## Audio credits
+
+          - Footsteps: "Walking through leaves" and "leaves and sticks" by gravitysound.studio — CC BY 4.0, via Wikimedia Commons (edited into 6 footstep variants).
+            - https://commons.wikimedia.org/wiki/File:Walking_through_leaves_(Gravity_Sound).wav
+            - https://commons.wikimedia.org/wiki/File:Walking_through_leaves_and_sticks_(Gravity_Sound).wav
+          - Deep birds: "Dawn chorus at Glencairnie" by DivyaCM — CC BY 4.0, via Wikimedia Commons (edited excerpt).
+            - https://commons.wikimedia.org/wiki/File:Dawn_chorus_at_Glencairnie_big_bungalow_Craigmore_DM.ogg
+          - Ambience: "Waidachswald Oberschefflenz Abend" by User:Karlunun — CC0, via Wikimedia Commons.
+            - https://commons.wikimedia.org/wiki/File:Waidachswald_Oberschefflenz_Abend_20250616_2005.ogg
+          - License: https://creativecommons.org/licenses/by/4.0/
           NOTES
           gh release create "$TASK_RELEASE_TAG" dist/*.apk dist/*.zip --target "$GITHUB_SHA" --prerelease --title "SenseWalk $TASK_RELEASE_TAG" --notes-file dist/release-notes.md
