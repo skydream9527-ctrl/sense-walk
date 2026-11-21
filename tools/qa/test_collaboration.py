@@ -242,7 +242,8 @@ class CoordinationChecks(unittest.TestCase):
         self.error_contains('artifact hash mismatch')
 
     def test_archived_junit_corruption_is_rejected(self):
-        p = next((self.base / 'evidence').rglob('TEST-*.xml'))
+        summary = module.read(self.base / 'evidence/B-20261013-01/test-summary.json')
+        p = self.root / summary['suites'][0]['file']
         p.write_bytes(p.read_bytes() + b'\n')
         self.error_contains('XML hash mismatch')
 

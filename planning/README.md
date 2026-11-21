@@ -1,4 +1,6 @@
-# planning · 规划与建议统一入口
+# planning · 历史规划与建议
+
+现行优先级见 [项目进展](../docs/CURRENT_STATUS.md)，执行方式见 [单 Agent 开发入口](../AGENTS.md)。
 
 本目录是慢行 · SenseWalk 全部规划与建议文档的统一入口。今后的整体审查、优化建议与阶段规划文档放入本目录，文件名统一用 `YYYY-MM-DD-HHMM-主题.md`（CST 时间）命名，以时间戳区分版本，新的不覆盖旧的。
 
