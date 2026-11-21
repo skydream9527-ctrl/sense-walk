@@ -59,3 +59,8 @@ __pycache__/
 
 # 各agent的本地隔离worktree，不进入源码包
 .worktrees/
+
+# 雨林历史预检的可恢复大样本
+/design/assets/rainforest/preflight/SW-014/r2/fixtures/negative_real_oversize/
+/design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_real_oversize_layer/
+/design/assets/rainforest/preflight/SW-014/r3/fixtures/negative_real_oversize_scene/

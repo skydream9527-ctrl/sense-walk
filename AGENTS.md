@@ -1,13 +1,9 @@
-# SenseWalk 协作入口
+# SenseWalk 单 Agent 开发入口
 
-本仓库由 ZCode、MiniMax Code、Trae Design、Antigravity 通过文件交接开发。用户直接指令优先。
-
-1. 先读 `docs/collaboration/README.md` 和 `docs/collaboration/PROTOCOL.md`。
-2. 按用户指定角色读取 `docs/collaboration/roles/zcode.md`、`minimax.md`、`trae-design.md` 或 `antigravity.md`；从该入口查当前任务，禁止凭旧聊天猜进度。
-3. 产品规则以 `DEVELOPMENT.md` 为准；任务状态以 `docs/collaboration/registry.json` 为准，`BOARD.md` 是生成视图。源码、提交与实际证据高于完成声明。
-4. 四个角色使用独立 checkout/worktree 与任务分支。禁止多个 agent 同时操作同一 checkout 的 Git index、切分支或提交。共享 checkout 只读审阅；不能因抢文件而 reset/覆盖已有工作。
-5. Trae 单写图片设计稿/规范/素材提示词；MiniMax 按批准设计制作候选；ZCode 接生产代码/正式素材；Antigravity 独立验收并集成。跨角色需求写入 handoff，不擅改别人拥有的文件。
-6. 交付必须填写 JSON 元数据和 Markdown 报告，精确记录 base/head SHA、实际测试、素材哈希、待验证项。功能/素材作者不能自判 accepted；协调任务完成语义见协议。
-7. 无需完善本地 Android 环境。复用 GitHub Actions；缺真机不阻塞独立开发，也不能伪造真实计步、锁屏或真人验收。
-8. 用户已授权项目提交/推送及 GitHub 测试预发布；遵守分支保护，不强推，不提交密钥，不发布应用商店。
-9. 协作文件系统的设计/维护属于 bootstrap 工作，不代表执行 agent 已经接到消息或开始任务。
+1. 开始前同步 GitHub 的 `main`，读取 [当前进展](docs/CURRENT_STATUS.md)、[产品规则](DEVELOPMENT.md) 和 [素材清单](ASSETS.md)。以源码、准确提交及实际测试证据确认进度。
+2. 一个 Agent 按当前进展中的优先级顺序负责实现、素材接入、测试、文档和交付。日常以 `main` 和一个 checkout 为基线。需要 PR 时使用短期 `codex/<task>` 分支，合入后回到 `main`。
+3. 产品核心是触屏控制旅人。保留选景、舒适摇杆曲线、800 米森林门禁、有效前进计距、按距离展开心境与声景、暂停恢复及 Android 实走。规格以 `DEVELOPMENT.md` 为准。
+4. 每批交付更新 [当前进展](docs/CURRENT_STATUS.md)，记录基线与交付 SHA、改动、实际命令、测试结果、构建链接及待验证项。素材入包记录来源、授权和 SHA-256。区分源码检查、单测、构建、模拟器、真机及真人证据。
+5. Android 优先复用 GitHub Actions。每次业务改动验证相应单测、Lint 和构建。真机、锁屏、计步、触感和真人验证缺证据时标待验证。GitHub 测试预发布沿用现有授权，按分支保护合入。
+6. [历史协作档案](docs/collaboration/README.md) 保留既有任务、验收结论与可追溯证据。历史记录保持原始字节，需要更正时追加记录。仍可运行 `python3 tools/collaboration.py check` 验证档案。
+7. 正式素材进入 `app/src/main/assets/` 前按场景规格验图、验声和核对授权。可重建的构建产物、大型生成样本和本地验证包放在忽略目录或 GitHub 测试工件中。将凭据与正式签名配置留在授权的私密环境。
